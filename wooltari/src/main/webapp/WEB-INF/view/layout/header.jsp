@@ -33,7 +33,7 @@
 							<li class="grid-demo">
 
 								<div class="row">
-									<div class="col-sm-2">맞춤스터디 찾기</div>
+									<div class="col-sm-2"><a href="<%=cp%>/bbs/list">맞춤스터디 찾기</a></div>
 									<div class="col-sm-2">스터디 만들기</div>
 									<div class="col-sm-2">스터디 홍보</div>
 									<div class="col-sm-2">스터디 어디서 하지</div>
