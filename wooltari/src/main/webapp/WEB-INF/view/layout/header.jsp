@@ -8,7 +8,7 @@
 			<a href=""> <img alt="" src="<%=cp%>/resource/img/logofi.png"></a>
 		</div>
 		<div class="member">
-			<a href=""> JOIN</a> &nbsp;|&nbsp; <a href="" class="glyphicon glyphicon-user"></a>
+			<a data-toggle="modal" href="#myModal">Login</a><%@ include file="../member/login.jsp"%> &nbsp;|&nbsp; <a href="" class="glyphicon glyphicon-user"></a>
 		</div>
 	</div>
 	<div class="navbar yamm navbar-info navbar" data-spy="affix"
