@@ -7,7 +7,27 @@ if(typeof String.prototype.trim !== 'function') {
         return this.replace(TRIM_PATTERN, "");
     };
 }
+/*// 로그인 폼 검사
+function sendLogin() {
+    var f = document.loginForm;
 
+	var str = f.userId.value;
+    if(!str) {
+        alert("아이디를 입력하세요. ");
+        f.userId.focus();
+        return;
+    }
+
+    str = f.userPwd.value;
+    if(!str) {
+        alert("패스워드를 입력하세요. ");
+        f.userPwd.focus();
+        return;
+    }
+
+    f.action = "<%=cp%>/member/login";
+    f.submit();
+}*/
 // 이메일 형식 검사
 function isValidEmail(data){
     var format = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
