@@ -1,0 +1,109 @@
+@CHARSET "UTF-8";
+body {
+	position: relative;
+}
+
+.affix {
+	top: 0;
+	width: 100%;
+	z-index: 9999 !important;
+}
+
+.navbar {
+	margin-bottom: 0px;
+	background-color:white;
+	border: none;
+
+	border-radius: 0px;
+	box-shadow: 0px 3px 3px #dcdcdd;
+}
+
+.nav>li>a {
+	color: #3e3a39;
+}
+
+.affix ~ .container-fluid {
+	position: relative;
+	top: 50px;
+}
+
+.grid-demo {
+	padding: 10px 30px;
+}
+
+.grid-demo [class*="col-"] {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-size: 1em;
+	text-align: center;
+	line-height: 2;
+	color: #3e3a39;
+}
+
+.mainlogo {
+	width: 1140px;
+	margin: 0px auto;
+	padding: 30px 0px 30px 0px;
+}
+
+.mainimg {
+	margin: 0px auto;
+	width: 300px;
+}
+
+.member {
+	float: right;
+	font-size: 14px;
+}
+
+a {
+	color: #717071;
+}
+
+.col-sm-2 {
+	background: none;
+	border: none;
+}
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+	background-color: #16a085;
+}
+
+.nav>li>a:hover {
+	background: #16a085;
+}
+
+.yamm .dropdown.yamm-fw .dropdown-menu {
+	background: #16a085;
+	border: none;
+
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+	background-color: #16a085;
+}
+.yamm .nav, .yamm .collapse, .yamm .dropup, .yamm .dropdown{
+padding: 0;
+}
+.container{
+width: 1140px;
+}
+.yamm .nav,
+.yamm .collapse,
+.yamm .dropup,
+.yamm .dropdown {
+  position: static;
+}
+.yamm .container {
+  position: relative;
+}
+.yamm .dropdown-menu {
+  left: auto;
+}
+.yamm .yamm-content {
+  padding: 20px 30px;
+}
+.yamm .dropdown.yamm-fw .dropdown-menu {
+  left: 0;
+  right: 0;
+}
