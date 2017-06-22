@@ -14,11 +14,25 @@
 <meta charset="UTF-8">
 <title>Wooltari</title>
 
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+<link rel="stylesheet" href="<%=cp%>/resource/css/bootstrap.css">
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="<%=cp%>/resource/css/header.css">
-<script type="text/javascript" src="<%=cp%>/resource/js/util.js"></script>
-<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/header.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/resource/fonts/font-awesome/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/style.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/prettyPhoto.css">
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
+
+
+
+
+<!-- Navigation CSS -->
+
+<link rel="stylesheet" href="<%=cp%>/resource/css/base.css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/css-classes.min.css">
 <script type="text/javascript">
 function sendLogin() {
     var f = document.loginForm;
@@ -49,7 +63,7 @@ function sendLogin() {
     <tiles:insertAttribute name="header"/>
 </div>
 	
-<div class="container">
+<div class="contentbody">
     <tiles:insertAttribute name="body"/>
 </div>
 
@@ -57,8 +71,21 @@ function sendLogin() {
     <tiles:insertAttribute name="footer"/>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+<script type="text/javascript" src="<%=cp%>/resource/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.ui.datepicker-ko.js"></script>
+<script type="text/javascript" src="<%=cp%>/resource/js/jquery.counterup.js"></script> 
+<script type="text/javascript" src="<%=cp%>/resource/js/jquery.prettyPhoto.js"></script> 
+<script type="text/javascript" src="<%=cp%>/resource/js/bootstrap.js"></script> 
+<script type="text/javascript" src="<%=cp%>/resource/js/util.js"></script>
+<script type="text/javascript" src="<%=cp%>/resource/js/SmoothScroll.js"></script> 
+<script type="text/javascript" src="<%=cp%>/resource/js/waypoints.js"></script> 
+<script type="text/javascript" src="<%=cp%>/resource/js/jquery.isotope.js"></script> 
+<script type="text/javascript" src="<%=cp%>/resource/js/jqBootstrapValidation.js"></script> 
+<script type="text/javascript" src="<%=cp%>/resource/js/contact_me.js"></script> 
+<script type="text/javascript" src="<%=cp%>/resource/js/main.js"></script>
+<script type="text/javascript" src="<%=cp%>/resource/js/modernizr.custom.js"></script>
 
 </body>
 </html>
