@@ -62,7 +62,7 @@
 			<mvc:mapping path="/**"/>
 			
 			<!-- 제외 -->
-			<mvc:exclude-mapping path="/"/>
+			<mvc:exclude-mapping path="/**"/>
 			<mvc:exclude-mapping path="/main/**"/>
 			<mvc:exclude-mapping path="/member/login"/>
 			<mvc:exclude-mapping path="/member/member"/>
