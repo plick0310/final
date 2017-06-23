@@ -1,21 +1,21 @@
-package com.wooltari.bbs;
+package com.wooltari.report;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller("bbs.boardController")
-public class BoardController {
+@Controller("help.report.reportController")
+public class ReportController {
 	
-	@RequestMapping(value="/bbs/list")
+	@RequestMapping(value="/help/report/list")
 	public String list() {
 
-		return ".bbs.list";
+		return ".help.report.list";
 	}
 	
-	@RequestMapping(value="/bbs/article")
+	@RequestMapping(value="/help/report/created")
 	public String article() {
 
-		return ".bbs.article";
+		return ".help.report.created";
 	}
 	
 	@RequestMapping(value="/bbs/created")

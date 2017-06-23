@@ -200,7 +200,6 @@ header {
 	background-size: cover;
 	color: #cfcfcf;
 	position: relative;
-	height: 100%;
 }
 header p {
 	color: rgba(255,255,255,0.8);
@@ -448,8 +447,6 @@ img.img-circle.team-img {
 }
 label {
 	font-size: 12px;
-	font-weight: 400;
-	font-family: 'Open Sans', sans-serif;
 	float: left;
 }
 #contact-section .form-control {
@@ -571,10 +568,10 @@ label {
 }
 @charset "utf-8";
 
-.__dotted{ width:3px; height:1px; background:url(dotted.jpg); display:inline-block; *display:inline; *zoom:1; vertical-align:middle; margin:0 5px; }
+.__dotted{ width:3px; height:1px; background:url(../images/dotted.jpg); display:inline-block; *display:inline; *zoom:1; vertical-align:middle; margin:0 5px; }
 
 .board_table{ border-top:2px solid #4b4b4b; border-bottom:1px solid #bcbcbc; width:100%; }
-.board_table thead th{ padding:7px 5px; background:#F5F5F5; font-size:14px; letter-spacing:-1px; }
+.board_table thead th{ padding:7px 5px; background:#F5F5F5; font-size:14px; letter-spacing:-1px; text-align: center; }
 .board_table thead th.informations{ padding:15px; height:28px; font-size:18px !important; }
 .board_table tbody th{ border-bottom:1px solid #EEEEEE; text-align:left; padding-left:15px; }
 .board_table tbody td{ padding:15px 5px; border-bottom:1px solid #EEEEEE; }
@@ -596,7 +593,7 @@ label {
 #array_form a.subject{ font-size:15px; font-weight:bold; color:#373737; }
 #array_form .info{ display:block; padding-top:7px; }
 #array_form .info *{ font-size:12px; color:#666; }
-#array_form .likes{ line-height:17px; position:absolute; top:-5px; right:10px; background:#fff; padding:9px 5px 5px 5px; display:block; width:45px; height:41px; text-align:center; font-size:12px; letter-spacing:-1px; color:#666666; font-weight:bold; }
+#array_form .likes{ line-height:23px; position:absolute; top:-8px; right:10px; background:#fff; padding:9px 5px 5px 5px; display:block; width:45px; height:41px; text-align:center; font-size:16px; letter-spacing:-1px; color:#666666; font-weight:bold; }
 #array_form .likes .num{ font-size:18px; color:#1abc9c; font-weight:bold; font-family:tahoma; }
 #array_form .comment{ display:inline-block; *display:inline; *zoom:1;  padding:5px 7px 7px 7px; margin-left:15px;  color:#fff; font-weight:bold; font-size:15px; line-height:8px; vertical-align:middle; }
 #array_form .settingArea{ position:relative; text-align:right; }
@@ -610,7 +607,7 @@ label {
 #array_form .scArea .keyword{ padding:3px; width:120px; height:36px; border:1px solid #000; border-right:none; border-left:none; background:#fff; }
 #array_form .scArea .submit,
 #array_form .scArea .cancel{ width:50px; height:36px; border:1px solid #000; border-left:none; background:#fff; font-weight:bold; }
-#array_form .scArea .submit{ width:40px; background:#fff url(search_btn.jpg) no-repeat center center; font-size:0; cursor:pointer; border-right-color:#000; }
+#array_form .scArea .submit{ width:40px; background:#fff url((../images/search_btn.jpg) no-repeat center center; font-size:0; cursor:pointer; border-right-color:#000; }
 #array_form .not_loop_span{ display:block; border-bottom:1px solid #eee; text-align:center; padding:10px; color:#666; }
 #array_form .category{ color:#900; font-weight:bold; }
 

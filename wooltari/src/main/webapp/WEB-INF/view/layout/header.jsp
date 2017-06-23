@@ -18,7 +18,7 @@
 					<span class="icon-bar"></span><span class="icon-bar"></span><span
 						class="icon-bar"></span>
 				</button>
-				<a href="#" class="fa fa-home"
+				<a href="<%=cp%>/" class="fa fa-home"
 					style="margin: 15px; font-size:20px;"></a>
 			</div>
 			<div id="navbar-collapse-1" class="navbar-collapse collapse">
@@ -84,7 +84,7 @@
 								<div class="row">
 									<div class="col-md-4"><a href="<%=cp%>">공지사항</a></div>
 									<div class="col-md-4"><a href="<%=cp%>">FAQ</a></div>
-									<div class="col-md-4"><a href="<%=cp%>">신고 / 건의</a></div>
+									<div class="col-md-4"><a href="<%=cp%>/help/report/list">신고 / 건의</a></div>
 								</div>
 							</li>
 						</ul></li>
@@ -117,39 +117,5 @@
 		</div>
 	</div>
 
-	<div class="jquery-script-ads" align="center">
-	
-		<script type="text/javascript"
-			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-			
-		</script>
-	</div>
-	
-	<script
-		src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script>
-		$(function() {
-			window.prettyPrint && prettyPrint()
-			$(document).on('click', '.yamm .dropdown-menu', function(e) {
-				e.stopPropagation()
-			})
-		})
-	</script>
-	<script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push([ '_setAccount', 'UA-36251023-1' ]);
-		_gaq.push([ '_setDomainName', 'jqueryscript.net' ]);
-		_gaq.push([ '_trackPageview' ]);
 
-		(function() {
-			var ga = document.createElement('script');
-			ga.type = 'text/javascript';
-			ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-					: 'http://www')
-					+ '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0];
-			s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
 </body>

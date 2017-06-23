@@ -65,11 +65,112 @@ body {
 	width: 1140px;
 	margin: 0px auto;
 }
+input[id=allCheck] {  
+    display: none;  
+}
 
+input[id=allCheck] + label{
+    display: inline-block;  
+    cursor: pointer;  
+    position: relative;  
+    padding-left: 25px;  
+    margin-right: 15px;  
+    font-size: 13px;
+}
 
+input[id=allCheck]+ label:before {     
+
+    content: "";  
+    display: inline-block;  
+  
+    width: 13px;  
+    height: 13px;  
+  
+    margin-right: 10px;  
+    position: absolute;  
+    left: 0;  
+    bottom: 1px;  
+    background-color: #ccc;  
+    border-radius: 16px; 
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);  
+}
+input[id=allCheck]:checked + label:before { 
+
+    
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  
+    font-size: 7px; 
+    font-weight:800; 
+    color: #fff;  
+    background:#1abc9c;
+    text-align: center;  
+    line-height: 15px;  
+
+} 
+
+input[class=chk1] {  
+    display: none;  
+}
+
+input[class=chk1] + label{
+    display: inline-block;  
+    cursor: pointer;  
+    position: relative;  
+
+    font-size: 13px;
+}
+
+input[class=chk1]+ label:before {     
+
+    content: "";  
+    display: inline-block;  
+  
+    width: 13px;  
+    height: 13px;  
+  
+
+    position: absolute;  
+
+   
+    background-color: #ccc;  
+    border-radius: 16px; 
+    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);  
+}
+input[class=chk1]:checked + label:before { 
+
+    
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  
+    font-size: 7px; 
+    font-weight:800; 
+    color: #fff;  
+    background:#1abc9c;
+    text-align: center;  
+    line-height: 15px;  
+
+} 
 
            
 </style>
+<script>
+$(document).ready(function(){
+    //최상단 체크박스 클릭
+  
+    $("#allCheck").click(function(){
+        //클릭되었으면
+        if($("#allCheck").prop("checked")){
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+            $("input[name=chk]").prop("checked",true);
+            //클릭이 안되있으면
+        }else{
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+            $("input[name=chk]").prop("checked",false);
+        }
+    });
+
+ 
+});
+
+
+</script>
 
 <div style="width: 900px; margin: 60px auto;">
 <form name="array_form" id="array_form" style="width: 900px;">
@@ -89,8 +190,8 @@ body {
 					
 					</ul>
 					<div style="position:absolute; bottom:10px; right:0; ">
-						
-						<label><input type="checkbox" name="cnum_allCheck" class="cnum_allCheck" />전체선택</label>
+						<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" /><label for="allCheck">전체선택</label>
+					
 						
 						
 					</div>
@@ -104,7 +205,7 @@ body {
 		
 			<tr>
 				
-				<td style="text-align:right; width:25px;"><input type="checkbox"></td>
+				<td style="text-align:right; width:50px; padding: 5px 18px;"><input type="checkbox" name="chk"  class="chk1"><label for="chk1"></label></td>
 				
 				<td class="___number">11</td>
 				<td>
@@ -131,93 +232,7 @@ body {
 					</div>
 				</td>
 			</tr>
-			<tr>
-				
-				<td style="text-align:right; width:25px;"><input type="checkbox"></td>
-				
-				<td class="___number">11</td>
-				<td>
-					<div style="position:relative;">
-						<!--[category_name]-->
-					
-						<a href="[link]" class="subject">제목입니다</a><span class="comment" style="background: #1abc9c;">[16]</span>
-						
-						<div class="info">
-							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">2017-06-19</span>
-							<span class="__dotted"></span>
-							<strong>작성자 </strong><span>홍길동</span>
-							<span class="__dotted"></span>
-							<strong>조회수 </strong><span>30</span>
-						</div>
-						
-						
-						<div class="likes">
-							25<br>
-							<span class="num" style="color: #1abc9c; ">추천</span>
-							<!--[unlikes]-->
-						</div>
-						
-					</div>
-				</td>
-			</tr>
-			<tr>
-				
-				<td style="text-align:right; width:25px;"><input type="checkbox"></td>
-				
-				<td class="___number">11</td>
-				<td>
-					<div style="position:relative;">
-						<!--[category_name]-->
-					
-						<a href="[link]" class="subject">제목입니다</a><span class="comment" style="background: #1abc9c;">[16]</span>
-						
-						<div class="info">
-							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">2017-06-19</span>
-							<span class="__dotted"></span>
-							<strong>작성자 </strong><span>홍길동</span>
-							<span class="__dotted"></span>
-							<strong>조회수 </strong><span>30</span>
-						</div>
-						
-						
-						<div class="likes">
-							25<br>
-							<span class="num" style="color: #1abc9c; ">추천</span>
-							<!--[unlikes]-->
-						</div>
-						
-					</div>
-				</td>
-			</tr>
-			<tr>
-				
-				<td style="text-align:right; width:25px;"><input type="checkbox"></td>
-				
-				<td class="___number">11</td>
-				<td>
-					<div style="position:relative;">
-						<!--[category_name]-->
-					
-						<a href="[link]" class="subject">제목입니다</a><span class="comment" style="background: #1abc9c;">[16]</span>
-						
-						<div class="info">
-							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">2017-06-19</span>
-							<span class="__dotted"></span>
-							<strong>작성자 </strong><span>홍길동</span>
-							<span class="__dotted"></span>
-							<strong>조회수 </strong><span>30</span>
-						</div>
-						
-						
-						<div class="likes">
-							25<br>
-							<span class="num" style="color: #1abc9c; ">추천</span>
-							<!--[unlikes]-->
-						</div>
-						
-					</div>
-				</td>
-			</tr>
+		
 			
 		</tbody>
 	</table>
@@ -228,7 +243,7 @@ body {
 
 	<div style="width: 900px; margin: 20px auto;text-align: center;">1 2 3</div>
 	<div class="btnArea">
-		<input type="button" value="글쓰기">
+		<input type="button" style="background-color: #1abc9c;" onclick="javascript:location.href='<%=cp%>/help/report/created';" value="글쓰기">
 	
 	</div>
 	<div class="scArea">
