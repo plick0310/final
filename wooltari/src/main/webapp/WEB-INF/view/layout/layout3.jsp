@@ -18,17 +18,13 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="<%=cp%>/resource/css/bootstrap.css">
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/header.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/resource/fonts/font-awesome/css/font-awesome.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/style.css">
-<link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/prettyPhoto.css">
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="<%=cp%>/resource/css/base.css">
-<link rel="stylesheet" href="<%=cp%>/resource/css/css-classes.min.css">
+
 <script type="text/javascript">
 function sendLogin() {
     var f = document.loginForm;
