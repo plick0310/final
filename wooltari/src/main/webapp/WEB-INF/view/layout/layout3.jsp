@@ -14,21 +14,39 @@
 <meta charset="UTF-8">
 <title>Wooltari</title>
 
-<link rel="stylesheet" href="<%=cp%>/resource/css/bootstrap.css">
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/header.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/resource/fonts/font-awesome/css/font-awesome.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/style.css">
-<link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/prettyPhoto.css">
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" href="<%=cp%>/resource/css/base.css">
-<link rel="stylesheet" href="<%=cp%>/resource/css/css-classes.min.css">
 
-<script src="<%=cp%>/resource/js/jquery.1.11.1.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+function sendLogin() {
+    var f = document.loginForm;
 
+	var str = f.userId.value;
+    if(!str) {
+        alert("아이디를 입력하세요. ");
+        f.userId.focus();
+        return;
+    }
 
+    str = f.userPwd.value;
+    if(!str) {
+        alert("패스워드를 입력하세요. ");
+        f.userPwd.focus();
+        return;
+    }
+
+    f.action = "<%=cp%>/member/login";
+    f.submit();
+}
+</script>
 </head>
 
 <body>
@@ -44,6 +62,9 @@
 <div class="footer">
     <tiles:insertAttribute name="footer"/>
 </div>
+
+
+
 
 </body>
 </html>
