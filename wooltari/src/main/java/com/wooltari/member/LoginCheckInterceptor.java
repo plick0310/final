@@ -19,17 +19,18 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		boolean result = false;
-		
 		try {
 			HttpSession session = request.getSession();
 			SessionInfo info = (SessionInfo)session.getAttribute("member");
 			String cp = request.getContextPath();
 			String uri = request.getRequestURI();
-			
 			if(info==null){
+				if(isAjaxRequest(request)){
+					response.sendError(403);
+					return false;
+				}
 				if(uri.indexOf(cp)==0)
 					uri=uri.substring(cp.length());
-				
 				//세션에 요청 주소를 저장
 				session.setAttribute("preLoginURI", uri);
 				response.sendRedirect(cp+"/member/login");
@@ -39,22 +40,23 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter{
 		} catch (Exception e) {
 			logger.info("pre => " + e.toString());
 		}
-		
 		return result;
 	}
-
+	//AJAX 처리
+	private boolean isAjaxRequest(HttpServletRequest req){
+		String h = req.getHeader("AJAX");
+		return h != null && h.equals("true");
+	}
 	//컨트롤러 요청 처리 후(예외가 발생해도 실행)
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 	}
-
 	//컨트롤러 요청 처리 후(예외가 발생하면 실행하지 않음)
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 	}
-
-	
-	
 }
+
+

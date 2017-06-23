@@ -2,7 +2,55 @@
 <%
    String cp = request.getContextPath();
 %>
-<body data-spy="scroll" data-target=".navbar" data-offset="80">
+
+<script type="text/javascript">
+//엔터 처리
+$(function(){
+	   $("input").not($(":button")).keypress(function (evt) {
+	        if (evt.keyCode == 13) {
+	            var fields = $(this).parents('form,body').find('button,input,textarea,select');
+	            var index = fields.index(this);
+	            if ( index > -1 && ( index + 1 ) < fields.length ) {
+	                fields.eq( index + 1 ).focus();
+	            }
+	            return false;
+	        }
+	     });
+});
+
+function dialogLogin() {
+	$("#modal-content").load("<%=cp%>/member/login");
+	$("#modalLogin").modal("show");	
+}
+
+function dialogJoin() {
+	$("#modal-content").load("<%=cp%>/member/join");
+}
+
+function sendLogin() {
+    var f = document.loginForm;
+
+	var str = f.userId.value;
+    if(!str) {
+        alert("아이디를 입력하세요. ");
+        f.userId.focus();
+        return;
+    }
+
+    str = f.userPwd.value;
+    if(!str) {
+        alert("패스워드를 입력하세요. ");
+        f.userPwd.focus();
+        return;
+    }
+
+    f.action = "<%=cp%>/member/login";
+    f.submit();
+}
+
+</script>
+
+<div data-spy="scroll" data-target=".navbar" data-offset="80">
 	<div class="mainlogo">
 		<div class="mainimg">
 			<a href="<%=cp%>/"> <img alt="" src="<%=cp%>/resource/images/logofifi.png"></a>
@@ -89,10 +137,6 @@
 							</li>
 						</ul></li>
 
-
-
-
-
 				</ul>
 				<div class="col-lg-4"
 					style="margin-left: 100px; padding-right: 0px; width: 245px;">
@@ -111,11 +155,18 @@
 					</form>				
 					</div>
 				<div class="member" style="margin: 14px 0;">
-			<a data-toggle="modal" href="#myModal">Login</a><%@ include file="../member/login.jsp" %> &nbsp;|&nbsp; <span class="fa fa-user" style="font-size: 17px;"></span>
+			<a href="javascript:dialogLogin();">Login</a> &nbsp;|&nbsp; <span class="fa fa-user" style="font-size: 17px;"></span>
 		</div>
 			</div>
 		</div>
 	</div>
+</div>
 
-
-</body>
+<!-- 모달 -->
+<div id="modalLogin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" id="modal-content">
+			<!-- jsp가 들어가는 곳 -->
+		</div>
+	</div>
+</div>
