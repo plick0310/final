@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study">
+	<!-- 스터디 카테고리 대분류 -->
+	<select id="listBigCategory" resultType="com.wooltari.study.StudyCategory">
+	    SELECT categoryNum, subject FROM studyCategory
+	          WHERE parent IS NULL
+	          ORDER BY categoryNum ASC
+	</select>
+	
+	<!-- 스터디 카테고리 중분류 -->
+	<select id="listSmallCategory" parameterType="Integer" resultType="com.wooltari.study.StudyCategory">
+	    SELECT categoryNum, subject, parent FROM studyCategory
+	          WHERE parent = #{parent}
+	          ORDER BY categoryNum ASC
+	</select>
+</mapper>
