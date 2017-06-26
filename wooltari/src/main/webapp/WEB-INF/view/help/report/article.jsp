@@ -14,7 +14,7 @@ background: none;
 
 <div  style=" margin: 60px auto; height:50px; font-size: 20px;text-align: center;">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
-			<span style="font-size: 25px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
+			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
 			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>W R I T E . . .</div>
 <table cellpadding="0" cellspacing="0" id="read_table" class="board_table" style="width: 900px; margin: -45px auto 0;">
 
