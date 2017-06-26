@@ -158,7 +158,7 @@ function logout(){
 							<li class="grid-demo">
 
 								<div class="row">
-									<div class="col-sm-2"><a href="<%=cp%>">모의 테스트</a></div>
+									<div class="col-sm-2"><a href="<%=cp%>/community/exam/list">모의 테스트</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>">한줄톡톡</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>">자유광장</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>">포톡스</a></div>
