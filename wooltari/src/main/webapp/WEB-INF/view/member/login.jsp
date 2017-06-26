@@ -20,15 +20,17 @@
 			<label class="control-label" for="modalUserPwd">패스워드</label>
 			<input class="form-control" id="modalUserPwd" name="userPwd" type="password" placeholder="패스워드">
 		</div>
-
-		<div class="form-group">
-			<button class="btn btn-lg btn-primary btn-block" type="button" onclick="modalSendLogin();">로그인 <span class="glyphicon glyphicon-ok"></span></button>
+		
+		<div class="msg" id="msg" style="text-align: center;">
 		</div>
-
+		
+		<div class="form-group">
+			<button class="btn btn-lg btn-primary btn-block" type="button" onclick="modalSendLogin();">로그인</button>
+		</div>
+		
 		<div style="text-align: center;">
 			<button type="button" class="btn btn-link" onclick="javascript:dialogJoin();">회원가입</button>
-			<button type="button" class="btn btn-link">아이디찾기</button>
-			<button type="button" class="btn btn-link">패스워드찾기</button>
+			<button type="button" class="btn btn-link">아이디/패스워드찾기</button>
 		</div>
 	</form>
 </div>
