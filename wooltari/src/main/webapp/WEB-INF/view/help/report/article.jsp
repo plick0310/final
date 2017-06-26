@@ -91,7 +91,9 @@ background: none;
 				
 		
 				<div class="commentBox">
-					<div class="_CALLING_COMMENT"><strong style="font-size: 18px;"><span class="glyphicon glyphicon-chevron-down"></span>리플입니다...</strong></div>
+					<div class="_CALLING_COMMENT"><strong style="font-size: 18px;">
+					<span style="font-size: 25px; color: #1abc9c; " class="glyphicon glyphicon-pencil"></span>리플입니다...</strong>
+					</div>
 					<div class="_CALLING_COMMENT">
 					<span class="inforArea">
 					<strong>작성일</strong> [datetime]

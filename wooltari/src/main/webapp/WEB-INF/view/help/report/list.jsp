@@ -220,7 +220,7 @@ $(document).ready(function(){
 
 	<div style="width: 900px; margin: 20px auto;text-align: center;">1 2 3</div>
 	<div class="btnArea">
-		<input type="button" class="clickbtn" style="left: 0;"
+		<input type="button" class="clickbtn" 
 		 onclick="javascript:location.href='<%=cp%>/help/report/delete';" value="삭제">
 		<input type="button" class="clickbtn"
 		 onclick="javascript:location.href='<%=cp%>/help/report/created';" value="글쓰기">
