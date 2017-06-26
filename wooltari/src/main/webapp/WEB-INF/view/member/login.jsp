@@ -7,7 +7,7 @@
 		<span aria-hidden="true">&times;</span>
 	</button>
 	<h2 id="myModalLabel" class="modal-title text-center fc-orange"
-		style="font-family: sans-serif, 나눔고딕, 맑은 고딕; font-weight: bold;">LogIn</h2>
+		style="font-family: sans-serif, 나눔고딕, 맑은 고딕; font-weight: bold;">Login</h2>
 </div>
 
 <div class="modal-body" id="modal-body">
@@ -20,7 +20,7 @@
 			<label class="control-label" for="modalUserPwd">패스워드</label>
 			<input class="form-control" id="modalUserPwd" name="userPwd" type="password" placeholder="패스워드">
 		</div>
-		
+
 		<div class="msg" id="msg" style="text-align: center;">
 		</div>
 		

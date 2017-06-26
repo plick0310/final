@@ -20,6 +20,10 @@
 			<label class="control-label" for="modalUserPwd">패스워드</label>
 			<input class="form-control" id="modalUserPwd" name="userPwd" type="password" placeholder="패스워드">
 		</div>
+		<div class="form-group">
+			<label class="control-label" for="modalUserPwd">패스워드확인</label>
+			<input class="form-control" id="modalUserPwd" name="userPwd" type="password" placeholder="패스워드">
+		</div>
 		
 		<div class="msg" id="msg" style="text-align: center;">
 		</div>
