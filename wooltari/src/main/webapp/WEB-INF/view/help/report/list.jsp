@@ -146,7 +146,7 @@ $(document).ready(function(){
 <div style="width: 900px; margin: 60px auto;">
 <div  style="height:50px; font-size: 20px;text-align: center; ">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
-			<span style="font-size: 25px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
+			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
 			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>R E P O R T</div> 
 <form name="array_form" id="array_form" style="width: 900px;"> 
 	<input type="hidden" name="article" value="[article_value]" />

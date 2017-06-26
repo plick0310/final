@@ -28,11 +28,11 @@ border: 1px solid #EAEAEA;
 
 }
 </style>
-<script type="text/javascript" src="HuskyEZCreator.js"></script>
+
 <form name="write_form" id="write_form" enctype="multipart/form-data" method="post" style="margin: 60px auto; width: 900px;">
 <div  style="height:50px; font-size: 20px;text-align: center; border-bottom: 1px solid #eee;">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
-			<span style="font-size: 25px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
+			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
 			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>W R I T E . . .</div>
 	<table cellpadding="0" cellspacing="0" id="read_table"
 		style="background-color:#F5F5F5; color: #353535; border-top: none;
@@ -69,7 +69,7 @@ border: 1px solid #EAEAEA;
 
 			<tr>
 				<td colspan="2"><textarea name="ment" id="ment" 
-						style="width: 100%; height: 300px;" smarteditor></textarea></td>
+						style="width: 100%; height: 300px;" ></textarea></td>
 			</tr>
 
 			<tr>
@@ -90,18 +90,7 @@ border: 1px solid #EAEAEA;
 
 		</tbody>
 	</table>
-	<script type="text/javascript">
-		oEditors = [];
-		nhn.husky.EZCreator.createInIFrame({
-			oAppRef : oEditors,
-			elPlaceHolder : "ment",
-			sSkinURI : "smartEditor/SmartEditor2Skin.html",
-			fCreator : "createSEditor2",
-			htParams : {
-				fOnBeforeUnload : smartEditor_remove_image
-			}
-		});
-	</script>
+	
 	<div class="read_btnArea">
 		<button class="clickbtn">등록하기</button>
 		<button class="clickbtn">돌아가기</button>
