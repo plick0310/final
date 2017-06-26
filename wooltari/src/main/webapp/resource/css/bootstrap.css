@@ -2230,9 +2230,9 @@ pre code {
   }
 }
 table {
-  background-color: transparent;
+  
 }
-caption {
+caption { 
   padding-top: 8px;
   padding-bottom: 8px;
   color: #777;

@@ -5,97 +5,112 @@
 <%
    String cp = request.getContextPath();
 %>
-
-<style type="text/css">
-.bbs-article .table {
-    margin-top: 15px;
-}
-.bbs-article .table thead tr, .bbs-article .table tbody tr {
-    height: 30px;
-}
-.bbs-article .table thead tr th, .bbs-article .table tbody tr td {
-    font-weight: normal;
-    border-top: none;
-    border-bottom: none;
-}
-.bbs-article .table thead tr {
-    border-top: #d5d5d5 solid 1px;
-    border-bottom: #dfdfdf solid 1px;
-} 
-.bbs-article .table tbody tr {
-    border-bottom: #dfdfdf solid 1px;
-}
-.bbs-article .table i {
-    background: #424951;
-    display: inline-block;
-    margin: 0 7px 0 7px;
-    position: relative;
-    top: 2px;
-    width: 1px;
-    height: 13px;    
+<style>
+.dnu{
+border: none;
+background: none;
 }
 </style>
 
-<div class="bodyFrame2">
-    <div class="body-title">
-          <h3><span class="glyphicon glyphicon-book"></span> 게시판 </h3>
-    </div>
-    
-    <div class="alert alert-info">
-        <i class="glyphicon glyphicon-info-sign"></i> 회원과 자유로이 토론할 수 있는 공간입니다.
-    </div>
-    
-    <div class="table-responsive" style="clear: both;">
-        <div class="bbs-article">
-            <table class="table">
-                 <thead>
-                     <tr>
-                         <th colspan="2" style="text-align: center;">
-                                 제목..
-                         </th>
-                     </tr>
-                <thead>
-                 <tbody>
-                     <tr>
-                         <td style="text-align: left;">
-                             이름 : 홍길동
-                         </td>
-                         <td style="text-align: right;">
-                          2015-02-02 10:10 <i></i>
-                              조회 : 100
-                         </td>
-                     </tr>
-                     <tr>
-                         <td colspan="2" style="height: 230px;">
-                              내용 ...
-                         </td>
-                     </tr>
-                     <tr>
-                         <td colspan="2">
-                              <span style="display: inline-block; min-width: 45px;">이전글</span> :
-                              작업중
-                         </td>
-                     </tr>
-                     <tr>
-                         <td colspan="2" style="border-bottom: #d5d5d5 solid 1px;">
-                              <span style="display: inline-block; min-width: 45px;">다음글</span> :
-                              작업중
-                         </td>
-                     </tr>                                          
-                </tbody>
-                <tfoot>
-                	<tr>
-                		<td>
-                		    <button type="button" class="btn btn-default btn-sm wbtn">수정</button>
-                		    <button type="button" class="btn btn-default btn-sm wbtn">삭제</button>
-                		</td>
-                		<td align="right">
-                		    <button type="button" class="btn btn-default btn-sm wbtn"> 목록으로 </button>
-                		</td>
-                	</tr>
-                </tfoot>
-            </table>
-       </div>
-      
-   </div>
+<div  style=" margin: 60px auto; height:50px; font-size: 20px;text-align: center;">
+			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
+			<span style="font-size: 25px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
+			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>W R I T E . . .</div>
+<table cellpadding="0" cellspacing="0" id="read_table" class="board_table" style="width: 900px; margin: -45px auto 0;">
+
+	<thead>
+		<tr>
+			<th class="informations">
+				제목입니다...
+				<span class="inforArea">
+					<strong>작성일</strong> [datetime]
+					<span class="__dotted"></span>
+					<strong>작성자</strong> [writer]
+					<span class="__dotted"></span>
+					<strong>조회수</strong> [hit]
+				</span>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="read_contArea">
+				<div id="board_memo_area">
+					
+				</div>
+		
+				<form name="read_likeAreaForm" class="_read_likesArea" ajaxAction="modules/board/read.likes.submit.php" ajaxType="html">
+					<input type="hidden" name="board_id" value="[board_id_value]" />
+					<input type="hidden" name="read_idno" value="[read_value]" />
+					<input type="hidden" name="mode" value="" />
+					<ul class="_read_likesArea" style="border-bottom: 1px solid #eee;">
+						<li class="_likes_btn">
+							<a href="#" title="">
+								13<br/>
+								<span class="__count" style="color: #1abc9c;">추천</span>
+							</a>
+						</li>
+						
+					</ul>
+				</form>
+<!-- 				<tr> -->
+<!-- 				<td> 이전글</td> -->
+<!-- 				</tr> -->
+				
+<!-- 				<tr> -->
+<!-- 				<td>다음글</td> -->
+<!-- 				</tr> -->
+				<ul>
+					
+					<li>
+						<strong>이전글 :</strong>
+					</li>
+		
+					
+					
+				</ul>
+				<ul>
+					
+					<li>
+						<strong>다음글 :</strong>
+					</li>
+		
+					
+					
+				</ul>
+				
+				<ul class="fileBox">
+					
+					<li>
+						<strong>첨부파일</strong>[file1]
+					</li>
+		
+					
+					
+				</ul>
+				
+		
+				<div class="commentBox">
+					<div class="_CALLING_COMMENT"><strong style="font-size: 18px;"><span class="glyphicon glyphicon-chevron-down"></span>리플입니다...</strong></div>
+					<div class="_CALLING_COMMENT">
+					<span class="inforArea">
+					<strong>작성일</strong> [datetime]
+					<span class="__dotted"></span>
+					<strong>작성자</strong> [writer]
+					<span class="__dotted"></span>
+					<strong>조회수</strong> [hit]
+					</span>
+					<div style="float: right;">
+					<input class="dnu" type="button" value="삭제">
+					<input class="dnu" type="button" value="수정">
+					</div>
+					</div>
+					
+				</div> 
+			</td>
+		</tr>
+	</tbody>
+</table>	
+<div class="read_btnArea">
+
 </div>

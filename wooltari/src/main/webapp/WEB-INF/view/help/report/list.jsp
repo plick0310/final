@@ -88,7 +88,8 @@ input[id=allCheck]+ label:before {
   
     margin-right: 10px;  
     position: absolute;  
-    left: 0;  
+    left: 0; 
+    top: 3px; 
     bottom: 1px;  
     background-color: #ccc;  
     border-radius: 16px; 
@@ -106,47 +107,18 @@ input[id=allCheck]:checked + label:before {
     line-height: 15px;  
 
 } 
+.clickbtn{
+background-color: white;
+border-style: solid;
+padding: 5px 20px;
 
-input[class=chk1] {  
-    display: none;  
+margin-right: 10px;
+border: 1px solid #EAEAEA;  
+
 }
 
-input[class=chk1] + label{
-    display: inline-block;  
-    cursor: pointer;  
-    position: relative;  
 
-    font-size: 13px;
-}
 
-input[class=chk1]+ label:before {     
-
-    content: "";  
-    display: inline-block;  
-  
-    width: 13px;  
-    height: 13px;  
-  
-
-    position: absolute;  
-
-   
-    background-color: #ccc;  
-    border-radius: 16px; 
-    box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);  
-}
-input[class=chk1]:checked + label:before { 
-
-    
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);  
-    font-size: 7px; 
-    font-weight:800; 
-    color: #fff;  
-    background:#1abc9c;
-    text-align: center;  
-    line-height: 15px;  
-
-} 
 
            
 </style>
@@ -166,14 +138,17 @@ $(document).ready(function(){
         }
     });
 
- 
 });
 
 
 </script>
 
 <div style="width: 900px; margin: 60px auto;">
-<form name="array_form" id="array_form" style="width: 900px;">
+<div  style="height:50px; font-size: 20px;text-align: center; ">
+			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
+			<span style="font-size: 25px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
+			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>R E P O R T</div> 
+<form name="array_form" id="array_form" style="width: 900px;"> 
 	<input type="hidden" name="article" value="[article_value]" />
 	<input type="hidden" name="category" value="[category_value]" />
 	<input type="hidden" name="board_id" value="[board_id_value]" />
@@ -189,7 +164,7 @@ $(document).ready(function(){
 						<li><a href="">게시판</a></li>
 					
 					</ul>
-					<div style="position:absolute; bottom:10px; right:0; ">
+					<div style="position:absolute; bottom:10px; right: -15px; top: 9px;">
 						<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" /><label for="allCheck">전체선택</label>
 					
 						
@@ -205,15 +180,15 @@ $(document).ready(function(){
 		
 			<tr>
 				
-				<td style="text-align:right; width:50px; padding: 5px 18px;"><input type="checkbox" name="chk"  class="chk1"><label for="chk1"></label></td>
+				<td style="text-align:right; width:65px; padding: 5px 18px;"><input type="checkbox" name="chk"></td>
 				
 				<td class="___number">11</td>
 				<td>
 					<div style="position:relative;">
 						<!--[category_name]-->
 					
-						<a href="[link]" class="subject">제목입니다</a><span class="comment" style="background: #1abc9c;">[16]</span>
-						
+						<a href="<%=cp%>/help/report/article" class="subject">제목입니다</a><span class="comment">[16]</span>
+					
 						<div class="info">
 							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">2017-06-19</span>
 							<span class="__dotted"></span>
@@ -232,6 +207,8 @@ $(document).ready(function(){
 					</div>
 				</td>
 			</tr>
+			
+			
 		
 			
 		</tbody>
@@ -243,8 +220,10 @@ $(document).ready(function(){
 
 	<div style="width: 900px; margin: 20px auto;text-align: center;">1 2 3</div>
 	<div class="btnArea">
-		<input type="button" style="background-color: #1abc9c;" onclick="javascript:location.href='<%=cp%>/help/report/created';" value="글쓰기">
-	
+		<input type="button" class="clickbtn" style="left: 0;"
+		 onclick="javascript:location.href='<%=cp%>/help/report/delete';" value="삭제">
+		<input type="button" class="clickbtn"
+		 onclick="javascript:location.href='<%=cp%>/help/report/created';" value="글쓰기">
 	</div>
 	<div class="scArea">
 		<select name="where" class="where">
@@ -252,7 +231,7 @@ $(document).ready(function(){
 			<option value="ment">내용</option>
 			<option value="writer">작성자</option>
 		</select>
-		<input type="text" name="keyword" class="keyword" value="검색" style="width:120px;"> <input type="button" class="submit">
+		<input type="text" name="keyword" class="keyword" placeholder="검색"  style="width:120px; "> <input type="button" class="submit">
 	</div>
 </form>
 </div>

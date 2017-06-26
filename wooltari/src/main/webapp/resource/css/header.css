@@ -13,7 +13,7 @@ body {
 	margin-bottom: 0px;
 	background-color:white;
 	border: none;
-
+    width: 100%;
 	border-radius: 0px;
 	
 }
@@ -81,7 +81,7 @@ a {
 }
 
 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
-	background-color: white;
+	background-color: #eee;
 }
 
 .nav>li>a:hover {

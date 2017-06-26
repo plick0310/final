@@ -18,9 +18,9 @@ public class ReportController {
 		return ".help.report.created";
 	}
 	
-	@RequestMapping(value="/bbs/created")
+	@RequestMapping(value="/help/report/article")
 	public String created() {
 
-		return ".bbs.created";
+		return ".help.report.article";
 	}
 }
