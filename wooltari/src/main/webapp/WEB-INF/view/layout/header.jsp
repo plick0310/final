@@ -27,20 +27,20 @@ function dialogJoin() {
 	$("#modal-content").load("<%=cp%>/member/join");
 }
 
-function sendLogin() {
-    var f = document.loginForm;
-
-	var str = f.userId.value;
+function modalSendLogin() {
+    var f = document.modalLoginForm;
+	var msg = document.getElementById('msg');
+	var str = f.modalUserId.value;
     if(!str) {
-        alert("아이디를 입력하세요. ");
-        f.userId.focus();
+    	msg.innerHTML="<strong>아이디를 입력해주세요.</strong>";
+        f.modalUserId.focus();
         return;
     }
 
-    str = f.userPwd.value;
+    str = f.modalUserPwd.value;
     if(!str) {
-        alert("패스워드를 입력하세요. ");
-        f.userPwd.focus();
+    	msg.innerHTML="<strong>패스워드를 입력하세요.</strong>";
+        f.modalUserPwd.focus();
         return;
     }
 
