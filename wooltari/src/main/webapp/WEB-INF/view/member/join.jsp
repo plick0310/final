@@ -13,17 +13,31 @@
 <div class="modal-body" id="modal-body">
 	<form name="modalLoginForm" method="post">
 		<div class="form-group">
-			<label class="control-label" for="modalUserId">아이디</label>
-			<input class="form-control" id="modalUserId" name="userId" type="text" placeholder="아이디">
+			<label class="control-label" for="modalUserId">이메일</label>
+			<input class="form-control" id="modalUserId" name="userId" type="text" placeholder="example@example.com">
 		</div>
 		<div class="form-group">
 			<label class="control-label" for="modalUserPwd">패스워드</label>
-			<input class="form-control" id="modalUserPwd" name="userPwd" type="password" placeholder="패스워드">
+			<input class="form-control" id="modalUserPwd" name="userPwd" type="password" placeholder="패스워드는 5~10자이며 하나 이상의 숫자나 특수문자가 포함되어야 합니다.">
 		</div>
 		<div class="form-group">
 			<label class="control-label" for="modalUserPwd">패스워드확인</label>
-			<input class="form-control" id="modalUserPwd" name="userPwd" type="password" placeholder="패스워드">
+			<input class="form-control" id="modalUserPwd" name="userPwd" type="password" placeholder="패스워드를 한번 더 입력해주세요.">
 		</div>
+		<div class="form-group">
+			<label class="control-label" for="modalUserId">성별</label><br>
+			<label class="radio-inline">
+			  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="0"> 남자
+			</label>
+			<label class="radio-inline">
+			  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="1"> 여자
+			</label>
+		</div>
+		<div class="form-group">
+			<img src="<%=cp%>/resource/img/noimg.png"/>
+			<label class="control-label" for="modalUserPwd">프로필 사진</label>
+		</div>
+		
 		
 		<div class="msg" id="msg" style="text-align: center;">
 		</div>

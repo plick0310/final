@@ -1,7 +1,64 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
    String cp = request.getContextPath();
 %>
+
+<!-- 카카오톡 로그인 -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type='text/javascript'>
+
+//<![CDATA[
+// 사용할 앱의 JavaScript 키를 설정해 주세요.
+Kakao.init('510168497a3434cba4caf707891b2cca');
+function loginWithKakao() {
+  // 로그인 창을 띄웁니다.
+  Kakao.Auth.login({
+    	persistAccessToken: true,
+		persistRefreshToken: true,
+    success: function(authObj) {
+    	getKakaoProfile();
+    },
+    fail: function(err) {
+      alert(JSON.stringify(err));
+    }
+  });
+};
+function getKakaoProfile(){
+	Kakao.API.request({
+		url: '/v1/user/me',
+		success: function(res) {
+			/* 
+			alert("인증여부 : " + res.kaccount_email_verified);
+			alert("이메일 : " + res.kaccount_email);
+			alert("닉네임 : " + res.properties.nickname);
+			alert("프로필이미지 : " + res.properties.profile_image);
+			 */
+			var userId = res.kaccount_email;
+			var nickName = res.properties.nickname;
+			var profileImg = res.properties.profile_image;
+			var json_data = {"userId":userId,"nickName":nickName,"profileImg":profileImg};
+			$.ajax({
+				type:"POST"
+				,url:"<%=cp%>/member/kakao"
+				,data:json_data
+				,dataType:"JSON"
+				,success:function(data) {
+					window.location.reload();
+				}
+				,error:function(e) {
+					alert(e.responseText);
+				}
+			});
+		},
+		fail: function(error) {
+			console.log(error);
+		}
+	});
+}
+
+//]]>
+</script>
 
 <script type="text/javascript">
 //엔터 처리
@@ -46,6 +103,10 @@ function modalSendLogin() {
 
     f.action = "<%=cp%>/member/login";
     f.submit();
+}
+function logout(){
+	Kakao.Auth.logout();
+	location.href="<%=cp%>/member/logout";
 }
 
 </script>
@@ -155,8 +216,14 @@ function modalSendLogin() {
 					</form>				
 					</div>
 				<div class="member" style="margin: 14px 0;">
-			<a href="javascript:dialogLogin();">Login</a> &nbsp;|&nbsp; <span class="fa fa-user" style="font-size: 17px;"></span>
-		</div>
+					<c:if test="${empty sessionScope.member}">
+					<a href="javascript:dialogLogin();">Login</a> &nbsp;|&nbsp; <span class="fa fa-user" style="font-size: 17px;"></span>
+					</c:if>
+					<c:if test="${not empty sessionScope.member}">
+					<a href="javascript:logout();">Logout</a> &nbsp;|&nbsp; <span class="fa fa-user" style="font-size: 17px;"></span>
+					</c:if>
+					
+				</div>
 			</div>
 		</div>
 	</div>

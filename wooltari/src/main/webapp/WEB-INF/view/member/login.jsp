@@ -13,19 +13,25 @@
 <div class="modal-body" id="modal-body">
 	<form name="modalLoginForm" method="post">
 		<div class="form-group">
-			<label class="control-label" for="modalUserId">아이디</label>
-			<input class="form-control" id="modalUserId" name="userId" type="text" placeholder="아이디">
+			<label class="control-label" for="modalUserId">이메일</label>
+			<input class="form-control" id="modalUserId" name="userId" type="text" placeholder="example@example.com">
 		</div>
 		<div class="form-group">
 			<label class="control-label" for="modalUserPwd">패스워드</label>
-			<input class="form-control" id="modalUserPwd" name="userPwd" type="password" placeholder="패스워드">
+			<input class="form-control" id="modalUserPwd" name="userPwd" type="password" placeholder="패스워드를 입력해주세요.">
 		</div>
 
 		<div class="msg" id="msg" style="text-align: center;">
 		</div>
 		
 		<div class="form-group">
-			<button class="btn btn-lg btn-primary btn-block" type="button" onclick="modalSendLogin();">로그인</button>
+			<button class="btn btn-lg btn-primary btn-block" type="button" onclick="modalSendLogin();">로그인</button>		
+		</div>
+		
+		<div class="form-group">
+			<a id="custom-login-btn" href="javascript:loginWithKakao()">
+			<img src="<%=cp%>/resource/img/kakao_btn.png" width="100%"/>
+			</a>
 		</div>
 		
 		<div style="text-align: center;">

@@ -3,7 +3,7 @@ package com.wooltari.member;
 public class SessionInfo {
 	private String userId;
 	private String userName;
-	private int memberLevel;
+	private String userImg;
 	
 	public String getUserId() {
 		return userId;
@@ -17,10 +17,10 @@ public class SessionInfo {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public int getMemberLevel() {
-		return memberLevel;
+	public String getUserImg() {
+		return userImg;
 	}
-	public void setMemberLevel(int memberLevel) {
-		this.memberLevel = memberLevel;
+	public void setUserImg(String userImg) {
+		this.userImg = userImg;
 	}
 }
