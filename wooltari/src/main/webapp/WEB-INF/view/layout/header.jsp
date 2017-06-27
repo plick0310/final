@@ -240,9 +240,9 @@ function modalSendLogin() {
 						<c:if test="${not empty sessionScope.member.userImg}">
 							<img src="${sessionScope.member.userImg}" class="img-thumbnail" width="100%" height="100%">
 						</c:if>
-						<li><a href="<%=cp%>/study/mylist">나의 스터디</a></li>
-						<li><a href="<%=cp%>/member/mypage">마이페이지</a></li>
-						<li><a href="javascript:logout();">로그아웃</a></li>
+							<li><a href="<%=cp%>/study/mylist">나의 스터디</a></li>
+							<li><a href="<%=cp%>/member/mypage">마이페이지</a></li>
+							<li><a href="javascript:logout();">로그아웃</a></li>
 						</ul>
 					<!-- <span class="fa fa-user" style="font-size: 17px;"></span> -->
 					</c:if>
