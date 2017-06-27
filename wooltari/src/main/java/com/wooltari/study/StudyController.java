@@ -43,6 +43,6 @@ public class StudyController {
 	@RequestMapping(value="/study/mylist")
 	   public String list(){
 	      
-	      return ".study.mystudy.mylist";
+	      return ".study.mystudylist.mylist";
 	}
 }

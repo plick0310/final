@@ -411,7 +411,10 @@ section .moccozyType, section .teacher-type, .topCategory-box,
                            class="selectField" style="width: 45%;" >
                            <option value="">:: 중분류 ::</option>
                         </select>
-                        <div id="select_category"></div>
+                        <div id="select_category">
+                        <div id='what' style='margin :8px;'>안뇨옹<img src="<%=cp%>/resource/img/delete.png" alt="..." width="4%"
+               height="4%"> </div>
+                        </div>
 
                      </div>
                   </div>
