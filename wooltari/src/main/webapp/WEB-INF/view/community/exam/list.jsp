@@ -181,8 +181,8 @@ $(document).ready(function(){
 				<td>
 					<div style="position:relative;">
 						<!--[category_name]-->
-					
-						<a href="<%=cp%>/help/report/article" class="subject" style="line-height: 27px; float: left; ">정보처리기사</a><span class="comment">[16]</span>
+					 
+						<a href="<%=cp%>/help/report/article" class="subject" style="line-height: 27px; float: left; line-height: 16px; ">정보처리기사</a><span class="comment">D-day 6</span>
 					
 						<div class="info" style="float: left;padding: 0;line-height: 25px;
     						margin-left: 32px; float: left; padding: none;">
@@ -209,7 +209,7 @@ $(document).ready(function(){
 					<div style="position:relative;">
 						<!--[category_name]-->
 					
-						<a href="<%=cp%>/help/report/article" class="subject" style="line-height: 27px; float: left; ">정보처리기사</a><span class="comment">[16]</span>
+						<a href="<%=cp%>/help/report/article" class="subject" style="line-height: 27px; float: left; ">정보처리기사</a>
 					
 						<div class="info" style="float: left;padding: 0;line-height: 25px;
     						margin-left: 32px; float: left; padding: none;">
