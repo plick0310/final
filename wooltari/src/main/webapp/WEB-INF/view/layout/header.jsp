@@ -7,7 +7,6 @@
 <!-- 카카오톡 로그인 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type='text/javascript'>
-
 //<![CDATA[
 // 사용할 앱의 JavaScript 키를 설정해 주세요.
 Kakao.init('510168497a3434cba4caf707891b2cca');
@@ -54,6 +53,14 @@ function getKakaoProfile(){
 		fail: function(error) {
 			console.log(error);
 		}
+	});
+}
+function logout(){
+	//var refreshToken = Kakao.Auth.getRefreshToken();
+	Kakao.Auth.logout(function(){
+		setTimeout(function(){
+			location.href="<%=cp%>/member/logout";
+		},10);
 	});
 }
 
@@ -104,11 +111,6 @@ function modalSendLogin() {
     f.action = "<%=cp%>/member/login";
     f.submit();
 }
-function logout(){
-	Kakao.Auth.logout();
-	location.href="<%=cp%>/member/logout";
-}
-
 </script>
 
 <div data-spy="scroll" data-target=".navbar" data-offset="80">
@@ -215,12 +217,33 @@ function logout(){
 				
 					</form>				
 					</div>
-				<div class="member" style="margin: 14px 0;">
+				<div class="member" style="margin: 8px 0;">
 					<c:if test="${empty sessionScope.member}">
-					<a href="javascript:dialogLogin();">Login</a> &nbsp;|&nbsp; <span class="fa fa-user" style="font-size: 17px;"></span>
+						<a href="javascript:dialogLogin();"><img src="<%=cp%>/resource/img/loginicon.png" alt="Login" class="img-circle" width="35px" height="35px"></a>
 					</c:if>
 					<c:if test="${not empty sessionScope.member}">
-					<a href="javascript:logout();">Logout</a> &nbsp;|&nbsp; <span class="fa fa-user" style="font-size: 17px;"></span>
+						<c:if test="${empty sessionScope.member.userImg}">
+							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c"> 
+							</a>
+						</c:if>
+						<c:if test="${not empty sessionScope.member.userImg}">
+							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+								<img src="${sessionScope.member.userImg}" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c">
+							</a>
+						</c:if>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<c:if test="${empty sessionScope.member.userImg}">
+							<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-thumbnail" width="100%" height="100%">
+						</c:if>
+						<c:if test="${not empty sessionScope.member.userImg}">
+							<img src="${sessionScope.member.userImg}" class="img-thumbnail" width="100%" height="100%">
+						</c:if>
+							<li><h3 style="text-align: center;"> ${sessionScope.member.userName} 님</h3></li>
+							<li><a href="<%=cp%>/study/mylist">나의 스터디</a></li>
+							<li><a href="<%=cp%>/member/mypage">마이페이지</a></li>
+							<li><a href="javascript:logout();">로그아웃</a></li>
+						</ul>
 					</c:if>
 					
 				</div>
