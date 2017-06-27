@@ -147,7 +147,7 @@ $(document).ready(function(){
 <div  style="height:50px; font-size: 20px;text-align: center; ">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
-			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>R E P O R T</div> 
+			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>정보요청게시판</div> 
 <form name="array_form" id="array_form" style="width: 900px;"> 
 	<input type="hidden" name="article" value="[article_value]" />
 	<input type="hidden" name="category" value="[category_value]" />
@@ -159,16 +159,12 @@ $(document).ready(function(){
 			<tr>
 				<td colspan="2" style="text-align:left;">
 					<ul id="category">
-						<li><a href="">게시판</a></li>
-						<li><a href="">게시판</a></li>
-						<li><a href="">게시판</a></li>
+						<li><a href="">게시판</a></li>						
 					
 					</ul>
 					<div style="position:absolute; bottom:10px; right: -15px; top: 9px;">
-						<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" /><label for="allCheck">전체선택</label>
-					
-						
-						
+						<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" /><label for="allCheck">전체선택</label>			
+										
 					</div>
 				</td>
 			</tr>
@@ -187,7 +183,7 @@ $(document).ready(function(){
 					<div style="position:relative;">
 						<!--[category_name]-->
 					
-						<a href="<%=cp%>/help/report/article" class="subject">제목입니다</a><span class="comment">[16]</span>
+						<a href="<%=cp%>/download/downloadBoard/article" class="subject">제목입니다</a><span class="comment">[16]</span>
 					
 						<div class="info">
 							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">2017-06-19</span>
@@ -218,12 +214,18 @@ $(document).ready(function(){
 	
 <!--------------------s:loop�쁺�뿭-------------------->
 
-	<div style="width: 900px; margin: 20px auto;text-align: center;">1 2 3</div>
+	<div style="width: 900px; margin: 20px auto;text-align: center;">
+		<c:if test="${dataCount==0 }">
+                            등록된 게시물이 없습니다.
+        </c:if>
+        <c:if test="${dataCount!=0 }">
+        	${paging}
+        </c:if></div>
 	<div class="btnArea">
 		<input type="button" class="clickbtn" 
-		 onclick="javascript:location.href='<%=cp%>/help/report/delete';" value="삭제">
+		 onclick="javascript:location.href='<%=cp%>/download/downloadBoard/delete';" value="삭제">
 		<input type="button" class="clickbtn"
-		 onclick="javascript:location.href='<%=cp%>/help/report/created';" value="글쓰기">
+		 onclick="javascript:location.href='<%=cp%>/download/downloadBoard/created';" value="글쓰기">
 	</div>
 	<div class="scArea">
 		<select name="where" class="where">

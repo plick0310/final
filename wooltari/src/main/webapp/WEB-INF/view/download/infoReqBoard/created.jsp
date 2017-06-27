@@ -42,8 +42,9 @@ border: 1px solid #EAEAEA;
 			<tr>
 				<th style="width: 100px; ">제목</th>
 				<td><input type="text" name="subject" 
-					class="subject" maxlength="100" style="width: 450px;" /></td>
+					class="subject" maxlength="100" style="width: 450px;" value="${dto.subject}"/></td>
 			</tr>
+			<!-- 
 			<tr>
 				<th>카테고리</th>
 				<td style=""><input type="checkbox" value="ww">
@@ -51,25 +52,27 @@ border: 1px solid #EAEAEA;
 					<input type="checkbox" value="ww">
 				</td>
 			</tr>
+			 -->
 			<tr>
 				<th>작성자</th>
 				<td><input type="text" name="writer" maxlength="8"
-					style="width: 200px;" /></td>
+					style="width: 200px;" />${sessionScope.member.userName}</td>
 			</tr>
+			<!-- 
 			<tr>
 				<th>패스워드</th>
 				<td><input type="password" name="password" maxlength="20"
 					style="width: 200px;"/><span style="font-size: 13px; font-weight:200;">&nbsp;&nbsp;글 삭제시 필요합니다.</span></td>
 			</tr>
-
+ 			-->
 			<tr>
 				<th>E-MAIL</th>
-				<td><input type="text" name="email" style="width: 300px;" /></td>
+				<td><input type="text" name="email" style="width: 300px;" />${sessionScope.member.email}</td>
 			</tr>
 
 			<tr>
 				<td colspan="2"><textarea name="ment" id="ment" 
-						style="width: 100%; height: 300px;" ></textarea></td>
+						style="width: 100%; height: 300px;" >${dto.content}</textarea></td>
 			</tr>
 
 			<tr>
@@ -92,7 +95,15 @@ border: 1px solid #EAEAEA;
 	</table>
 	
 	<div class="read_btnArea">
-		<button class="clickbtn">등록하기</button>
-		<button class="clickbtn">돌아가기</button>
+		<button type="submit" class="clickbtn">등록하기</button>
+		<button type="button" class="clickbtn" onclick="javascript:location.href='<%=cp%>/download/infoReqBoard/list';">돌아가기</button>
+		
+		 <c:if test="${mode=='update'}">
+           <input type="hidden" name="num" value="${dto.num}">
+              <input type="hidden" name="page" value="${page}">
+              <input type="hidden" name="saveFilename" value="${dto.saveFilename}">
+              <input type="hidden" name="originalFilename" value="${dto.originalFilename}">
+         </c:if>
+		
 	</div>
 </form>

@@ -187,7 +187,7 @@ $(document).ready(function(){
 					<div style="position:relative;">
 						<!--[category_name]-->
 					
-						<a href="<%=cp%>/help/report/article" class="subject">제목입니다</a><span class="comment">[16]</span>
+						<a href="<%=cp%>/studyMarket/studyMarketBoard/article" class="subject">제목입니다</a><span class="comment">[16]</span>
 					
 						<div class="info">
 							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">2017-06-19</span>
@@ -221,9 +221,9 @@ $(document).ready(function(){
 	<div style="width: 900px; margin: 20px auto;text-align: center;">1 2 3</div>
 	<div class="btnArea">
 		<input type="button" class="clickbtn" 
-		 onclick="javascript:location.href='<%=cp%>/help/report/delete';" value="삭제">
+		 onclick="javascript:location.href='<%=cp%>/studyMarket/studyMarketBoard/delete';" value="삭제">
 		<input type="button" class="clickbtn"
-		 onclick="javascript:location.href='<%=cp%>/help/report/created';" value="글쓰기">
+		 onclick="javascript:location.href='<%=cp%>/studyMarket/studyMarketBoard/created';" value="글쓰기">
 	</div>
 	<div class="scArea">
 		<select name="where" class="where">
