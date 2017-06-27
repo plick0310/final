@@ -39,4 +39,10 @@ public class StudyController {
 	
 		return model;
 	}
+	
+	@RequestMapping(value="/study/mylist")
+	   public String list(){
+	      
+	      return ".study.mystudy.mylist";
+	}
 }
