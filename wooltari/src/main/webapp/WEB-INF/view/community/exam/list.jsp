@@ -279,7 +279,7 @@ $(document).ready(function(){
 					<div style="position:relative;">
 						<!--[category_name]-->
 					
-						<a href="<%=cp%>/help/report/article" class="subject">정보처리기사</a><span class="comment">[16]</span>
+						<a href="<%=cp%>/help/report/article" class="subject">정보처리기사</a> 
 					
 						<div class="info">
 							<strong>등록일 </strong> <span class="dateWrap" title="[datetime]">2017-06-19</span>
