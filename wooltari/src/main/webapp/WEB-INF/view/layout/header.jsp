@@ -219,17 +219,17 @@ function modalSendLogin() {
 					</div>
 				<div class="member" style="margin: 8px 0;">
 					<c:if test="${empty sessionScope.member}">
-						<a href="javascript:dialogLogin();">Login</a>
+						<a href="javascript:dialogLogin();"><img src="<%=cp%>/resource/img/loginicon.png" alt="Login" class="img-circle" width="35px" height="35px"></a>
 					</c:if>
 					<c:if test="${not empty sessionScope.member}">
 						<c:if test="${empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="border: 1px solid #CDCDCD">
+								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c"> 
 							</a>
 						</c:if>
 						<c:if test="${not empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-								<img src="${sessionScope.member.userImg}" class="img-circle" width="35px" height="35px" style="border: 1px solid #CDCDCD">
+								<img src="${sessionScope.member.userImg}" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c">
 							</a>
 						</c:if>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
