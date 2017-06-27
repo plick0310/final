@@ -217,20 +217,19 @@ function modalSendLogin() {
 				
 					</form>				
 					</div>
-				<div class="member" style="margin: 14px 0;">
+				<div class="member" style="margin: 8px 0;">
 					<c:if test="${empty sessionScope.member}">
-					<a href="javascript:dialogLogin();">Login</a>
+						<a href="javascript:dialogLogin();">Login</a>
 					</c:if>
 					<c:if test="${not empty sessionScope.member}">
-					<a href="javascript:logout();">Logout</a> &nbsp;|&nbsp;
 						<c:if test="${empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="30px" height="30px">
+								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="border: 1px solid #CDCDCD">
 							</a>
 						</c:if>
 						<c:if test="${not empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-								<img src="${sessionScope.member.userImg}" class="img-circle" width="30px" height="30px">
+								<img src="${sessionScope.member.userImg}" class="img-circle" width="35px" height="35px" style="border: 1px solid #CDCDCD">
 							</a>
 						</c:if>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -245,7 +244,6 @@ function modalSendLogin() {
 							<li><a href="<%=cp%>/member/mypage">마이페이지</a></li>
 							<li><a href="javascript:logout();">로그아웃</a></li>
 						</ul>
-					<!-- <span class="fa fa-user" style="font-size: 17px;"></span> -->
 					</c:if>
 					
 				</div>
