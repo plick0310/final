@@ -294,7 +294,7 @@
 	<div id="team-section" class="text-center">
 		<div class="container">
 			<div class="section-title center">
-				<h2>Meet the Team</h2>
+				<h2>인기 스터디</h2>
 				<hr>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
 					sed dapibus leo nec ornare diamcommodo nibh ante facilisis.</p>
