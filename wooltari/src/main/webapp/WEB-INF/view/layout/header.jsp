@@ -7,7 +7,6 @@
 <!-- 카카오톡 로그인 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type='text/javascript'>
-
 //<![CDATA[
 // 사용할 앱의 JavaScript 키를 설정해 주세요.
 Kakao.init('510168497a3434cba4caf707891b2cca');
@@ -54,6 +53,14 @@ function getKakaoProfile(){
 		fail: function(error) {
 			console.log(error);
 		}
+	});
+}
+function logout(){
+	//var refreshToken = Kakao.Auth.getRefreshToken();
+	Kakao.Auth.logout(function(){
+		setTimeout(function(){
+			location.href="<%=cp%>/member/logout";
+		},10);
 	});
 }
 
@@ -104,11 +111,6 @@ function modalSendLogin() {
     f.action = "<%=cp%>/member/login";
     f.submit();
 }
-function logout(){
-	Kakao.Auth.logout();
-	location.href="<%=cp%>/member/logout";
-}
-
 </script>
 
 <div data-spy="scroll" data-target=".navbar" data-offset="80">
@@ -217,7 +219,7 @@ function logout(){
 					</div>
 				<div class="member" style="margin: 14px 0;">
 					<c:if test="${empty sessionScope.member}">
-					<a href="javascript:dialogLogin();">Login</a> &nbsp;|&nbsp; <span class="fa fa-user" style="font-size: 17px;"></span>
+					<a href="javascript:dialogLogin();">Login</a>
 					</c:if>
 					<c:if test="${not empty sessionScope.member}">
 					<a href="javascript:logout();">Logout</a> &nbsp;|&nbsp; <span class="fa fa-user" style="font-size: 17px;"></span>
