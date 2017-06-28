@@ -117,160 +117,43 @@ margin-right: 10px;
 border: 1px solid #EAEAEA;  
 
 }
-
+.panel-heading{
+border-radius: 0px;
+background-color: #eee;
+}
+.conttd td{
+margin: 0px 10px;
+} 
 
 
 
            
 </style>
-<script>
-$(document).ready(function(){
-    //최상단 체크박스 클릭
-  
-    $("#allCheck").click(function(){
-        //클릭되었으면
-        if($("#allCheck").prop("checked")){
-            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
-            $("input[name=chk]").prop("checked",true);
-            //클릭이 안되있으면
-        }else{
-            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
-            $("input[name=chk]").prop("checked",false);
-        }
-    });
-
-});
-
-
-</script>
-
-<div style="width: 900px; margin: 60px auto;">
-<div  style="height:50px; font-size: 20px;text-align: center; ">
+<div  style="height:50px; font-size: 20px;text-align: center; margin: 60px 0px;">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
-			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>R E P O R T</div> 
-<form name="array_form" id="array_form" style="width: 900px;"> 
-	<input type="hidden" name="article" value="[article_value]" />
-	<input type="hidden" name="category" value="[category_value]" />
-	<input type="hidden" name="board_id" value="[board_id_value]" />
-	<input type="hidden" name="page" value="[page_value]" />
-	
-	<!-- best study-->
-	<div  style="height:50px; font-size: 20px;text-align: left; ">
-	<span style="font-size: 10px; color: #1abc9c; " class="glyphicon glyphicon-heart"></span>
-   		<span>best study</span>
-   		<p class="lead">인기 강사들의 강의 동영상</p>
-	</div>
-		
-	 
-      <!-- 열들이 있는 행 예제 -->
-      <div class="row-fluid" >
-        <div class="span4">
-          <a href="#"><img src="img/portfolio/04.jpg" class="img-responsive" alt="Project Title"></a>
-          <h4>제목</h4>
-          <p>설명 </p>          
-        </div>
-        <div class="span4">
-          <a href="#"><img src="img/portfolio/04.jpg" class="img-responsive" alt="Project Title"></a>
-          <h4>제목</h4>
-          <p>설명 </p> 
-       </div>
-        <div class="span4">
-          <a href="#"><img src="img/portfolio/04.jpg" class="img-responsive" alt="Project Title"></a>
-          <h4>제목</h4>
-          <p>설명 </p> 
-        </div>
+			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>S T U D Y M A R K E T</div> 
+			<div style="margin-bottom: 60px;">
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width: 900px; margin: 0px auto;">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne" style="border-radius: 0px; background-color: #eee;">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+         <table class="conttd">
+         <tr>
+         <td style="padding-right: 20px;"><small>No.1</small></td>
+         <td style="padding-right: 20px;"><Strong>오세훈의 정보처리기사 필승전략</Strong></td>
+         <td style="padding-right: 20px;"><small>작성일 : 2017-06-28</small></td>
+         </tr>
+         </table>
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body"> 
+       	<div style="float: left;"><img alt="" src="http://via.placeholder.com/150x150"></div><div style="float: left; margin-left: 15px;"><strong>CONTENT</strong> : 안연하세요 오세훈입니다. 단기간 자격층 취득 필승전략 입니다 </div>
       </div>
-      <div class="span4">
-          <a href="#"><img src="img/portfolio/04.jpg" class="img-responsive" alt="Project Title"></a>
-          <h4>제목</h4>
-          <p>설명 </p> 
-        </div>
-      </div>
-     
-	
-	
-	
-	<!-- List Start-->
-	<div class="settingArea">
-		<table style="width:900px;" cellpadding="0" cellspacing="0" border="0">
-			<tr>
-				<td colspan="2" style="text-align:left;">
-					<ul id="category">
-						<li><a href="">게시판</a></li>
-						<li><a href="">게시판</a></li>
-						<li><a href="">게시판</a></li>
-					
-					</ul>
-					<div style="position:absolute; bottom:10px; right: -15px; top: 9px;">
-						<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" /><label for="allCheck">전체선택</label>
-					
-						
-						
-					</div>
-				</td>
-			</tr>
-		</table>
-	</div>
-	<table cellpadding="0" cellspacing="0" style="width:100%;" class="board_table array">
-		<tbody>
-
-		
-			<tr>
-				
-				<td style="text-align:right; width:65px; padding: 5px 18px;"><input type="checkbox" name="chk"></td>
-				
-				<td class="___number">11</td>
-				<td>
-					<div><a href=""><img src="img/portfolio/04.jpg" class="img-responsive" alt="Project Title"></a></div>
-					<div style="position:relative;">
-						<!--[category_name]-->
-					
-						<a href="<%=cp%>/studyMarket/studyMarketBoard/article" class="subject">제목입니다</a><span class="comment">[16]</span>
-					
-						<div class="info">
-							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">2017-06-19</span>
-							<span class="__dotted"></span>
-							<strong>작성자 </strong><span>홍길동</span>
-							<span class="__dotted"></span>
-							<strong>조회수 </strong><span>30</span>
-						</div>
-						
-						
-						<div class="likes">
-							25<br>
-							<span class="num" style="color: #1abc9c; ">추천</span>
-							<!--[unlikes]-->
-						</div>
-						
-					</div>
-				</td>
-			</tr>
-			
-			
-		
-			
-		</tbody>
-	</table>
-	
-	
-	
-<!--------------------s:loop�쁺�뿭-------------------->
-
-	<div style="width: 900px; margin: 20px auto;text-align: center;">1 2 3</div>
-	<div class="btnArea">
-		<input type="button" class="clickbtn" 
-		 onclick="javascript:location.href='<%=cp%>/studyMarket/studyMarketBoard/delete';" value="삭제">
-		<input type="button" class="clickbtn"
-		 onclick="javascript:location.href='<%=cp%>/studyMarket/studyMarketBoard/created';" value="글쓰기">
-	</div>
-	<div class="scArea">
-		<select name="where" class="where">
-			<option value="subject">제목</option>
-			<option value="ment">내용</option>
-			<option value="writer">작성자</option>
-		</select>
-		<input type="text" name="keyword" class="keyword" placeholder="검색"  style="width:120px; "> <input type="button" class="submit">
-	</div>
-</form>
+    </div>
+  </div>
+  </div>
 </div>
