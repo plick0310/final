@@ -219,7 +219,7 @@ function modalSendLogin() {
 				
 					</form>				
 					</div>
-				<div class="member" style="margin: 8px 0;">
+				<div class="member" style="margin: 7px 0;"> 
 					<c:if test="${empty sessionScope.member}">
 						<a href="javascript:dialogLogin();"><img src="<%=cp%>/resource/img/loginicon.png" alt="Login" class="img-circle" width="35px" height="35px"></a>
 					</c:if>
