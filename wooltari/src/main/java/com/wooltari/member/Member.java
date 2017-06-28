@@ -1,7 +1,7 @@
 package com.wooltari.member;
 
 public class Member {
-	private String userId, nickName, profileImg;
+	private String userId, userName, profileImg;
 
 	public String getUserId() {
 		return userId;
@@ -11,12 +11,12 @@ public class Member {
 		this.userId = userId;
 	}
 
-	public String getNickName() {
-		return nickName;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getProfileImg() {

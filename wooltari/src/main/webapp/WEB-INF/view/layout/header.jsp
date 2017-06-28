@@ -34,12 +34,12 @@ function getKakaoProfile(){
 			alert("프로필이미지 : " + res.properties.profile_image);
 			 */
 			var userId = res.kaccount_email;
-			var nickName = res.properties.nickname;
-			var profileImg = res.properties.profile_image;
-			var json_data = {"userId":userId,"nickName":nickName,"profileImg":profileImg};
+			var userName = res.properties.nickname;
+			var userImg = res.properties.profile_image;
+			var json_data = {"userId":userId,"userName":userName,"userImg":userImg};
 			$.ajax({
 				type:"POST"
-				,url:"<%=cp%>/member/kakao"
+				,url:"<%=cp%>/member/login_kakao"
 				,data:json_data
 				,dataType:"JSON"
 				,success:function(data) {
@@ -83,12 +83,12 @@ $(function(){
 });
 
 function dialogLogin() {
-	$("#modal-content").load("<%=cp%>/member/login");
+	$("#modal-content").load("<%=cp%>/member/login_m");
 	$("#modalLogin").modal("show");	
 }
 
 function dialogJoin() {
-	$("#modal-content").load("<%=cp%>/member/join");
+	$("#modal-content").load("<%=cp%>/member/join_m");
 }
 
 function modalSendLogin() {
@@ -108,7 +108,7 @@ function modalSendLogin() {
         return;
     }
 
-    f.action = "<%=cp%>/member/login";
+    f.action = "<%=cp%>/member/login_m";
     f.submit();
 }
 </script>

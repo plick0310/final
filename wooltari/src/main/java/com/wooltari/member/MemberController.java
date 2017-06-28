@@ -18,24 +18,24 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 
-	@RequestMapping(value="/member/join", method=RequestMethod.GET)
+	@RequestMapping(value="/member/join_m", method=RequestMethod.GET)
 	public String joinForm() throws Exception {
-		return "/member/join";
+		return "/member/join_m";
 	}
 	
-	@RequestMapping(value="/member/login", method=RequestMethod.GET)
+	@RequestMapping(value="/member/login_m", method=RequestMethod.GET)
 	public String loginForm() throws Exception {
-		return "/member/login";
+		return "/member/login_m";
 	}
 	
-	@RequestMapping(value="/member/kakao", method=RequestMethod.POST)
+	@RequestMapping(value="/member/login_kakao", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> kakaoLogin(@RequestParam String userId, @RequestParam String nickName, @RequestParam String profileImg, HttpSession session) throws Exception {
+	public Map<String, Object> Login_KAKAO(@RequestParam String userId, @RequestParam String userName, @RequestParam String userImg, HttpSession session) throws Exception {
 		SessionInfo info = new SessionInfo();
-		System.out.println(userId + " : " + nickName + " : " + profileImg);
+		System.out.println(userId + " : " + userName + " : " + userImg);
 		info.setUserId(userId);
-		info.setUserName(nickName);
-		info.setUserImg(profileImg);
+		info.setUserName(userName);
+		info.setUserImg(userImg);
 		session.setAttribute("member", info);
 		
 		// 작업 결과를 json으로 전송
