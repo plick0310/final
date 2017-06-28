@@ -2,15 +2,28 @@ package com.wooltari.member;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.wooltari.common.dao.CommonDAO;
+
 
 @Service("member.memberService")
 public class MemberServiceImpl implements MemberService {
-
+	@Autowired
+	private CommonDAO dao;
+	
 	@Override
 	public Member readMember(String userId) {
+		Member dto=null;
+		try {
+			dto=dao.getReadData("member.readMember", userId);
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
 		
-		return null;
+		return dto;
 	}
 
 	@Override
@@ -23,7 +36,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int updateLastLogin(String userId) {
-		return 0;
+		int result=0;
+		try {
+			result=dao.updateData("member.updateLastLogin", userId);
+		} catch (Exception e) {
+		}
+		return result;
 	}
 
 	@Override
@@ -32,13 +50,23 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int insertAuthority(Member dto) {
-		return 0;
+	public int insertAuthority(Member member) {
+		int result=0;
+		try {
+			result=dao.insertData("member.insertAuthority", member);
+		} catch (Exception e) {
+		}
+		return result;
 	}
 
 	@Override
 	public int updateAuthority(Member dto) {
-		return 0;
+		int result=0;
+		try {
+			result=dao.updateData("member.updateAuthority", dto);
+		} catch (Exception e) {
+		}
+		return result;
 	}
 
 	@Override

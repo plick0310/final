@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,19 +19,38 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 
+	@RequestMapping(value="/member/login", method=RequestMethod.GET)
+	public String loginForm(
+			String login_error, Model model
+			) {
+		
+		if(login_error!=null){
+			String s = "아이디 또는 패스워드를 잘못 입력 하셨습니다.";
+			model.addAttribute("message", s);
+		}
+		// 로그인 폼
+		return ".member.login";
+	}
+	
+	@RequestMapping(value="/member/noAuth")
+	public String noAuth(){
+		return ".member.noAuthorized";
+	}
+	
+	
 	@RequestMapping(value="/member/join_m", method=RequestMethod.GET)
 	public String joinForm() throws Exception {
-		return "/member/join_m";
+		return "member/join_m";
 	}
 	
 	@RequestMapping(value="/member/login_m", method=RequestMethod.GET)
 	public String loginForm() throws Exception {
-		return "/member/login_m";
+		return "member/login_m";
 	}
 	
 	@RequestMapping(value="/member/login_kakao", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> Login_KAKAO(@RequestParam String userId, @RequestParam String userName, @RequestParam String userImg, HttpSession session) throws Exception {
+	public Map<String, Object> Login_kakao(@RequestParam String userId, @RequestParam String userName, @RequestParam String userImg, HttpSession session) throws Exception {
 		SessionInfo info = new SessionInfo();
 		System.out.println(userId + " : " + userName + " : " + userImg);
 		info.setUserId(userId);
@@ -42,15 +62,6 @@ public class MemberController {
 		Map<String, Object> model = new HashMap<>();
 		model.put("userId", userId);
 		return model;
-	}
-	
-	@RequestMapping(value="/member/logout")
-	public String logout(HttpSession session) throws Exception {
-		// 로그인 정보를 세션에서 삭제 한다.
-		session.removeAttribute("member");
-		session.invalidate();
-		
-		return "redirect:/";
 	}
 	
 }

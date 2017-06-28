@@ -94,21 +94,21 @@ function dialogJoin() {
 function modalSendLogin() {
     var f = document.modalLoginForm;
 	var msg = document.getElementById('msg');
-	var str = f.modalUserId.value;
+	var str = f.userId.value;
     if(!str) {
     	msg.innerHTML="<strong>아이디를 입력해주세요.</strong>";
-        f.modalUserId.focus();
+        f.userId.focus();
         return;
     }
 
-    str = f.modalUserPwd.value;
+    str = f.userPwd.value;
     if(!str) {
     	msg.innerHTML="<strong>패스워드를 입력하세요.</strong>";
-        f.modalUserPwd.focus();
+        f.userPwd.focus();
         return;
     }
 
-    f.action = "<%=cp%>/member/login_m";
+    f.action = "<%=cp%>/member/login_check";
     f.submit();
 }
 </script>
@@ -220,6 +220,7 @@ function modalSendLogin() {
 					</form>				
 					</div>
 				<div class="member" style="margin: 7px 0;"> 
+					<strong style="margin-right: 5px">${sessionScope.member.userName}</strong>
 					<c:if test="${empty sessionScope.member}">
 						<a href="javascript:dialogLogin();"><img src="<%=cp%>/resource/img/loginicon.png" alt="Login" class="img-circle" width="35px" height="35px"></a>
 					</c:if>

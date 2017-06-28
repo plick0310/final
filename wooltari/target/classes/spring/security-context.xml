@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>  
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+
+
+	<context:component-scan base-package="com.wooltari"/>
+
+	<http pattern="/member/login_m" security="none"/>
+	<http pattern="/member/join_m" security="none"/>
+	
+	<http auto-config="true">
+		<!-- spring 4.x때 추가된 옵션으로 ssl을 사용하지 않을 경우 csrf는 disalbed=true로 설정. -->
+		<csrf disabled="true"/>
+		
+		<intercept-url pattern="/index.jsp" access="permitAll"/>
+		<intercept-url pattern="/main" access="permitAll"/>
+		
+		<intercept-url pattern="/member/login" access="permitAll"/>
+		<intercept-url pattern="/member/member" access="permitAll"/>
+		<intercept-url pattern="/member/userIdCheck" access="permitAll"/>
+		<intercept-url pattern="/resource/**" access="permitAll"/>
+
+		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+		
+		<!-- 폼태그 설정 -->
+		<form-login
+			login-page="/member/login"
+			login-processing-url="/member/login_check"
+			username-parameter="userId"
+			password-parameter="userPwd"
+			authentication-failure-url="/member/login?login_error"
+			default-target-url="/"
+			authentication-success-handler-ref="authSuccess"
+		/>
+		
+		<logout
+			logout-url="/member/logout"
+			invalidate-session="true"
+			logout-success-url="/"
+		/>
+		
+		<!-- 권한이 없는 경우 -->
+		<access-denied-handler error-page="/member/noAuth"/>
+	</http>
+	
+	<beans:bean id="authSuccess" class="com.wooltari.member.AuthSuccessHandler"/>
+    
+    <!-- JDBC 유저서비스 -->
+    <jdbc-user-service
+		data-source-ref="dataSource"
+		id="userService"
+		users-by-username-query="SELECT userId AS username, userPwd AS password, enabled FROM member WHERE userId=?"
+		authorities-by-username-query="SELECT userId AS username, auth FROM memberAuth WHERE userId=?"
+	/>
+	
+	<!--  -->
+	<authentication-manager>
+		<authentication-provider user-service-ref="userService">
+			<password-encoder hash="sha-256"/>
+		</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>

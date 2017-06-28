@@ -24,7 +24,7 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
       
       //로그인 날짜 수정(아이디:authentication.getName() )
       service.updateLastLogin(authentication.getName());
-      
+      System.out.println("로그인 성공?");
       Member dto=service.readMember(authentication.getName());
       SessionInfo info=new SessionInfo();
       info.setUserId(dto.getUserId());
