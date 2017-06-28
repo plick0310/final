@@ -19,6 +19,7 @@
 .fileBox .btn_file{display:inline-block; width:150px; height:25px; border:1px solid #ccc; font-size:12px; background:none; text-align:center; vertical-align:middle; line-height:25px; cursor:pointer}
 .fileBox input[type='file'], .fileBox input[type='button']{position:absolute; /*top:14px; left:202px;*/ width:1px; height:1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); border:0}
 
+
 </style>
 <script>
 //첨부파일
