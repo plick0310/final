@@ -15,8 +15,9 @@ body {
 }
 
 
-
-
+.span4{
+	float: left;
+}
 
 .d3 {
 	background: #F9F0DA;
@@ -153,9 +154,46 @@ $(document).ready(function(){
 	<input type="hidden" name="category" value="[category_value]" />
 	<input type="hidden" name="board_id" value="[board_id_value]" />
 	<input type="hidden" name="page" value="[page_value]" />
+	
+	<!-- best study-->
+	<div  style="height:50px; font-size: 20px;text-align: left; ">
+	<span style="font-size: 10px; color: #1abc9c; " class="glyphicon glyphicon-heart"></span>
+   		<span>best study</span>
+   		<p class="lead">인기 강사들의 강의 동영상</p>
+	</div>
+		
+	 
+      <!-- 열들이 있는 행 예제 -->
+      <div class="row-fluid" >
+        <div class="span4">
+          <a href="#"><img src="img/portfolio/04.jpg" class="img-responsive" alt="Project Title"></a>
+          <h4>제목</h4>
+          <p>설명 </p>          
+        </div>
+        <div class="span4">
+          <a href="#"><img src="img/portfolio/04.jpg" class="img-responsive" alt="Project Title"></a>
+          <h4>제목</h4>
+          <p>설명 </p> 
+       </div>
+        <div class="span4">
+          <a href="#"><img src="img/portfolio/04.jpg" class="img-responsive" alt="Project Title"></a>
+          <h4>제목</h4>
+          <p>설명 </p> 
+        </div>
+      </div>
+      <div class="span4">
+          <a href="#"><img src="img/portfolio/04.jpg" class="img-responsive" alt="Project Title"></a>
+          <h4>제목</h4>
+          <p>설명 </p> 
+        </div>
+      </div>
+     
+	
+	
+	
 	<!-- List Start-->
 	<div class="settingArea">
-		<table style="width:100%;" cellpadding="0" cellspacing="0" border="0">
+		<table style="width:900px;" cellpadding="0" cellspacing="0" border="0">
 			<tr>
 				<td colspan="2" style="text-align:left;">
 					<ul id="category">
@@ -184,6 +222,7 @@ $(document).ready(function(){
 				
 				<td class="___number">11</td>
 				<td>
+					<div><a href=""><img src="img/portfolio/04.jpg" class="img-responsive" alt="Project Title"></a></div>
 					<div style="position:relative;">
 						<!--[category_name]-->
 					

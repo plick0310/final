@@ -183,6 +183,7 @@ $(document).ready(function(){
 				<td style="text-align:right; width:65px; padding: 5px 18px;"><input type="checkbox" name="chk"></td>
 				
 				<td class="___number">11</td>
+				<td style="width: 17px;"><img src="img/portfolio/04.jpg" class="img-responsive" alt="Project Title"></td>
 				<td>
 					<div style="position:relative;">
 						<!--[category_name]-->

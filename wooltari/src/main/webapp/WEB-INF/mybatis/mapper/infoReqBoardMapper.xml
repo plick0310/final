@@ -2,19 +2,21 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="infoReqBoard">
-	<insert id="insertBoard" parameterType="com.wooltari.infoReqBoard.infoReqBoard">
+
+
+	<insert id="insertBoard" parameterType="com.wooltari.infoReqBoard.InfoReqBoard">
 		INSERT INTO infoReqBoard(num, subject, content, userId)
 		VALUES(infoReqBoard_seq.NEXTVAL, #{subject}, #{content}, #{userId})	
 	</insert>
 	
 	
-	<!-- sql 태그 -->
-	<!--
+	<!-- sql 태그
+	
        * LIKE 대신 INSTR() 함수를 사용하는 경우
           INSTR(content, #{searchValue}) &gt; 0
        * CLOB인 경우 검색(CLOB는 LIKE를 사용하면 성능 저하)
           DBMS_LOB.INSTR(content, #{searchValue}) &gt; 0 
-	-->
+	 -->
 	<sql id="where-list">
 	  <if test="searchKey=='userName'">
 	      userName=#{searchValue}
@@ -42,7 +44,7 @@
 	
 	<!-- 글리스트 -->
 	<select id="listBoard" parameterType="map"
-	            resultType="com.wooltari.infoReqBoard.infoReqBoard">
+	            resultType="com.wooltari.infoReqBoard.InfoReqBoard">
 		SELECT * FROM (
 		    SELECT ROWNUM rnum, tb.* FROM (
 			     SELECT num, i.userId, m.nickName, subject,TO_CHAR(m.created, 'YYYY-MM-DD') created,hitCount
@@ -57,7 +59,6 @@
 	        ) tb WHERE ROWNUM <= #{end}
 	    ) WHERE rnum >= #{start}
 	]]>
-	</select>
-	
-	
+	</select>	
+
 </mapper>

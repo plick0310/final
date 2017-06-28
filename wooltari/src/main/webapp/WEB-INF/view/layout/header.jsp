@@ -170,8 +170,10 @@ function modalSendLogin() {
 							</li>
 						</ul></li>
 
-					<li class="dropdown yamm-fw"><a href="#"
-						data-toggle="dropdown" class="dropdown-toggle">스터디 마켓<b></b></a>
+					<li class="dropdown yamm-fw"><a href="<%=cp%>/studyMarket/studyMarketBoard/list" class="dropdown-toggle">스터디 마켓<b></b></a>
+						
+						
+						
 					<li class="dropdown yamm-fw"><a href="#"
 						data-toggle="dropdown" class="dropdown-toggle">자료실<b
 							></b></a>
@@ -179,9 +181,9 @@ function modalSendLogin() {
 							<li class="grid-demo">
 
 								<div class="row">
-									<div class="col-md-6"><a href="<%=cp%>">정보요청</a></div>
+									<div class="col-md-6"><a href="<%=cp%>/download/infoReqBoard/list">정보요청</a></div>
 
-									<div class="col-md-6"><a href="<%=cp%>">자료다운</a></div>
+									<div class="col-md-6"><a href="<%=cp%>/download/downloadBoard/list">자료다운</a></div>
 								</div>
 							</li>
 						</ul></li>

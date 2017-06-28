@@ -56,7 +56,7 @@ border: 1px solid #EAEAEA;
 			<tr>
 				<th>작성자</th>
 				<td><input type="text" name="writer" maxlength="8"
-					style="width: 200px;" />${sessionScope.member.userName}</td>
+					style="width: 200px;" />${sessionScope.member.nickName}</td>
 			</tr>
 			<!-- 
 			<tr>
@@ -67,7 +67,7 @@ border: 1px solid #EAEAEA;
  			-->
 			<tr>
 				<th>E-MAIL</th>
-				<td><input type="text" name="email" style="width: 300px;" />${sessionScope.member.email}</td>
+				<td><input type="text" name="email" style="width: 300px;" />e-mail</td>
 			</tr>
 
 			<tr>
