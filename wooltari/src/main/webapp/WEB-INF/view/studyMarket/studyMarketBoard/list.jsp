@@ -15,48 +15,6 @@ body {
 }
 
 
-.span4{
-	float: left;
-}
-
-.d3 {
-	background: #F9F0DA;
-}
-
-.d3 form {
-	background: #3e3a39;
-	margin-top: 5px;
-}
-
-.d3 input, .d3 button {
-	border: none;
-	outline: none;
-	background: transparent;
-}
-
-.d3 input {
-	width: 100%;
-	height: 42px;
-	padding: 5px 0px 5px 15px;
-}
-
-.d3 button {
-	height: 42px;
-	width: 42px;
-	position: absolute;
-	top: 0;
-	right: 0;
-	cursor: pointer;
-}
-
-.d3 button:before {
-	content: "\f002";
-	font-family: FontAwesome;
-	font-size: 16px;
-	color: #F9F0DA;
-}
-
-
 
 .nav a, .nav a:link, .nav a:visited, .nav a:hover, .nav a:focus, span {
 	color: #3e3a39;
@@ -124,36 +82,103 @@ background-color: #eee;
 .conttd td{
 margin: 0px 10px;
 } 
+.bestbar{
+width: 900px;
+height: 200px;
+background: #eee;
+box-shadow: 0px 3px 12px 3px #eee;
+}
 
- 
+.bestbarsome{
+width: 150px;
+height: 150px;
+background-color: white;
+margin: 0 auto;
+padding: 40px;
+
+}
+.bestbar td{
+
+}
+
 
            
 </style>
-<div  style="height:50px; font-size: 20px;text-align: center; margin: 60px 0px;">
+<div style="width:900px; margin: 60px auto; ">
+<div  style="height:50px; font-size: 20px;text-align: center; margin: 60px 0px 20px;"> 
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
 			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>S T U D Y M A R K E T</div> 
-			<div style="margin-bottom: 60px;">
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width: 900px; margin: 0px auto;">
-  <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne" style="border-radius: 0px; background-color: #eee;">
+<strong style="font-size: 20px;"><span style="color:rgba(183, 183, 183, 0.65); font-size: 20px;">
+<i class="glyphicon glyphicon-align-left" style="color: #1abc9c; margin-bottom: 20px;"></i>&nbsp;&nbsp;B E S T</span> 스 터 디</strong>
+
+<table class="bestbar">
+<tr>
+<td><div class="bestbarsome">어러얼얼어</div></td>
+<td><div class="bestbarsome"></div></td>
+<td><div class="bestbarsome"></div></td>
+<td><div class="bestbarsome"></div></td>
+
+</tr>
+
+</table>
+
+
+
+
+
+
+<strong style="font-size: 20px;"><span style="color:rgba(183, 183, 183, 0.65); font-size: 20px;">
+<i class="glyphicon glyphicon-align-left" style="color: #1abc9c;margin-top:50px; margin-bottom: 20px;"></i>&nbsp;&nbsp;M A R K E T</span> L I S T</strong>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width: 900px; margin: 0px auto">
+  
+  <div class="panel panel">
+    <div class="panel-heading" role="tab" id="heading1">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-         <table class="conttd">
-         <tr>
-         <td style="padding-right: 20px;"><small>No.1</small></td>
-         <td style="padding-right: 20px;"><Strong>오세훈의 정보처리기사 필승전략</Strong></td>
-         <td style="padding-right: 20px;"><small>작성일 : 2017-06-28</small></td>
-         </tr>
-         </table>
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+        <span><small>No.1</small></span> &nbsp;&nbsp;&nbsp;<span>오세훈과 함께떠나는 자바여행</span>&nbsp;&nbsp;&nbsp;<small>작성일 : 2017-06-28</small>
         </a>
       </h4>
     </div>
-    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-      <div class="panel-body"> 
-       	<div style="float: left;"><img alt="" src="http://via.placeholder.com/150x150"></div><div style="float: left; margin-left: 15px;"><strong>CONTENT</strong> : 안연하세요 오세훈입니다. 단기간 자격층 취득 필승전략 입니다 </div>
+    <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
+      <div class="panel-body">
+        <div style="width: 150px;height: 150px;background-color: #eee;padding: 30px;float: left;"></div>
+        <div style="float: left; margin-left: 15px;">C O N T E N T : </div>
       </div>
     </div>
   </div>
+  
+  <div class="panel panel">
+    <div class="panel-heading" role="tab" id="heading2">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+          Collapsible Group Item #3
+        </a>
+      </h4>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
+      <div class="panel-body">
+        
+      </div>
+    </div>
   </div>
+  
+  <form action="" id="array_form">
+  <div style="width: 900px; margin: 20px auto;text-align: center;">1 2 3</div>
+	<div class="btnArea" style="float: right;">
+		<input type="button" class="clickbtn" 
+		 onclick="javascript:location.href='<%=cp%>/help/report/delete';" value="삭제">
+		<input type="button" class="clickbtn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"
+		 onclick="javascript:location.href='<%=cp%>/study/promoteList/created';" value="글쓰기">
+	</div>
+	<div class="scArea" style="margin: 30px 10px 30px 180px;"> 
+		<select name="where" class="where">
+			<option value="subject">제목</option>
+			<option value="ment">내용</option>
+			<option value="writer">작성자</option>
+		</select>
+		<input type="text" name="keyword" class="keyword" placeholder="검색"  style="width:120px; "> <input type="button" class="submit">
+	</div>
+	</form>
+</div>	
 </div>
