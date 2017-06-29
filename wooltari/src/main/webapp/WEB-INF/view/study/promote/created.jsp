@@ -29,6 +29,39 @@ border: 1px solid #EAEAEA;
 }
 </style>
 
+<script type="text/javascript">
+function insertBoard(){
+	var f=document.write_form;
+	
+	var str=f.subject.value;
+	if(!str){
+		f.subject.focus();
+		return false;
+	}
+	
+	str=f.ment.value;
+	if(!str){
+		f.ment.focus();
+		return false;
+	}
+	
+	if(f.file1.value==""){
+		
+		return true;
+		
+	}else if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.file1.value)) {	
+		alert('이미지 파일만 가능합니다.');
+		f.upload.focus();
+		return false;
+	}
+	
+	f.action="<%=cp%>/promote/created";
+	f.submit();
+	
+}
+
+</script>
+
 <form name="write_form" id="write_form" enctype="multipart/form-data" method="post" style="margin: 60px auto; width: 900px;">
 <div  style="height:50px; font-size: 20px;text-align: center; border-bottom: 1px solid #eee;">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
@@ -39,33 +72,32 @@ border: 1px solid #EAEAEA;
 		box-shadow: 60px 0px 100px -90px #000000, -60px 0px 100px -90px #000000;"class="board_table">
 	
 		<tbody>
+			
+		
 			<tr>
 				<th style="width: 100px; ">제목</th>
 				<td><input type="text" name="subject" 
 					class="subject" maxlength="100" style="width: 450px;" /></td>
 			</tr>
+			
 			<tr>
-				<th>카테고리</th>
-				<td style=""><input type="checkbox" value="ww">
-					<input type="checkbox" value="ww">
-					<input type="checkbox" value="ww">
+				<th>스터디</th>
+				<td>
+					<select style="width: 100px;">
+						<option value="">::</option>
+						
+						<option value="109">aa11</option>
+						
+					</select>
 				</td>
 			</tr>
+			
 			<tr>
 				<th>작성자</th>
 				<td><input type="text" name="writer" maxlength="8"
 					style="width: 200px;" /></td>
 			</tr>
-			<tr>
-				<th>패스워드</th>
-				<td><input type="password" name="password" maxlength="20"
-					style="width: 200px;"/><span style="font-size: 13px; font-weight:200;">&nbsp;&nbsp;글 삭제시 필요합니다.</span></td>
-			</tr>
-
-			<tr>
-				<th>E-MAIL</th>
-				<td><input type="text" name="email" style="width: 300px;" /></td>
-			</tr>
+			
 
 			<tr>
 				<td colspan="2"><textarea name="ment" id="ment" 
@@ -73,26 +105,17 @@ border: 1px solid #EAEAEA;
 			</tr>
 
 			<tr>
-				<th>첨부파일</th>
+				<th>이미지</th>
 				<td><input type="file" name="file1" id="file1" style="border: none;">
 				</td>
 			</tr>
-
-			<tr>
-				<th>파일이름</th>
-				<td><input type="checkbox"
-					name="file1_del" id="file1_del"><label for="file1_del"></label>
-				</td>
-			</tr>
-
-		
 
 
 		</tbody>
 	</table>
 	
 	<div class="read_btnArea">
-		<button class="clickbtn">등록하기</button>
-		<button class="clickbtn">돌아가기</button>
+		<button class="clickbtn" onclick="insertBoard();">등록하기</button>
+		<button class="clickbtn" onclick="javascript:location.href='<%=cp%>/promote/list';">돌아가기</button>
 	</div>
 </form>

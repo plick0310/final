@@ -223,7 +223,7 @@ $(document).ready(function(){
 		<input type="button" class="clickbtn" 
 		 onclick="javascript:location.href='<%=cp%>/help/report/delete';" value="삭제">
 		<input type="button" class="clickbtn"
-		 onclick="javascript:location.href='<%=cp%>/study/promoteList/created';" value="글쓰기">
+		 onclick="javascript:location.href='<%=cp%>/promote/created';" value="글쓰기">
 	</div>
 	<div class="scArea">
 		<select name="where" class="where">
