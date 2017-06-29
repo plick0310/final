@@ -31,7 +31,11 @@
 		<intercept-url pattern="/resource/**" access="permitAll"/>
 
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		
 		<!-- <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/> -->
+		
+		<!-- 권한을 두개 줄때 -->
+		<!-- <intercept-url pattern="/**/" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/> -->
 		
 		<!-- 폼태그 설정 -->
 		<form-login
@@ -52,8 +56,16 @@
 		
 		<!-- 권한이 없는 경우 -->
 		<access-denied-handler error-page="/member/noAuth"/>
+		
+		<!-- 1명만 로그인(기존 세션 만료) -->
+		<session-management>
+			<concurrency-control max-sessions="1"/>
+		</session-management>
+		
+		
 	</http>
 	
+	<!-- 권한 획득 핸들러 클래스 생성 -->
 	<beans:bean id="authSuccess" class="com.wooltari.member.AuthSuccessHandler"/>
     
     <!-- JDBC 유저서비스 -->
@@ -64,7 +76,7 @@
 		authorities-by-username-query="SELECT userId AS username, auth FROM memberAuth WHERE userId=?"
 	/>
 	
-	<!--  -->
+	<!-- SHA-256 (안전한 해시 알고리즘 : 미연방표준으로 64자리 암호로 구성) 암호화 -->
 	<authentication-manager>
 		<authentication-provider user-service-ref="userService">
 			<password-encoder hash="sha-256"/>
