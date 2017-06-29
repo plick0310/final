@@ -3,6 +3,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="infoReqBoard">
 
+	
+	<select id="maxNum" resultType="Integer">
+		SELECT NVL(MAX(num), 0) FROM infoReqBoard
+	</select>
 
 	<insert id="insertBoard" parameterType="com.wooltari.infoReqBoard.InfoReqBoard">
 		INSERT INTO infoReqBoard(num, subject, content, userId)
@@ -60,5 +64,13 @@
 	    ) WHERE rnum >= #{start}
 	]]>
 	</select>	
+	<!-- 파일 -->
+	
+	<insert id="insertFile" parameterType="com.wooltari.infoReqBoard.InfoReqBoard">
+		 INSERT INTO infoReqFile(fileNum, num, saveFilename, originalFilename)
+ 			 VALUES(infoReqFile_seq.NEXTVAL, #{num}, #{saveFilename}, #{originalFilename})
+	</insert>
+	
+	
 
 </mapper>
