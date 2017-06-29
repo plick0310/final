@@ -1,10 +1,10 @@
-package com.wooltari.community;
+package com.wooltari.exam;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller("community.exam.communityController")
-public class CommunityController {
+public class ExamController {
 	
 	@RequestMapping(value="/community/exam/list")
 	public String list() {
