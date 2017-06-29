@@ -22,8 +22,10 @@ public class StudyController {
 	public String StudyCratedForm(Model model) throws Exception{
 		
 		List<StudyCategory> listBigCategory=service.listBigCategory();
+		List<StudyCity> listBigCity = service.listBigCity();
 		
 		model.addAttribute("listBigCategory", listBigCategory);
+		model.addAttribute("listBigCity",listBigCity);
 		return "/study/manage/create";
 	}
 	
@@ -39,6 +41,20 @@ public class StudyController {
 	
 		return model;
 	}
+	
+	@RequestMapping(value="/study/getCity", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> CityList(@RequestParam int parent) throws Exception{
+		
+		List<StudyCity> listSmallCity = new ArrayList<>();
+		listSmallCity = service.listSmallCity(parent);
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("listSmallCity", listSmallCity);
+	
+		return model;
+	}
+	
 	
 	@RequestMapping(value="/study/mylist")
 	   public String list(){

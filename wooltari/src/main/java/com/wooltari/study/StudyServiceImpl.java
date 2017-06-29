@@ -36,4 +36,28 @@ public class StudyServiceImpl implements StudyService {
 		return list;
 	}
 
+	@Override
+	public List<StudyCity> listBigCity() {
+		List<StudyCity> list = new ArrayList<>();
+		try {
+			list =dao.getListData("study.listBigCity");
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	@Override
+	public List<StudyCity> listSmallCity(int parent) {
+		List<StudyCity> list = new ArrayList<>();
+		try {
+			list =dao.getListData("study.listSmallCity",parent);
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
 }

@@ -15,4 +15,18 @@
 	          WHERE parent = #{parent}
 	          ORDER BY categoryNum ASC
 	</select>
+	
+	<!-- 스터디 도시 대분류 -->
+	<select id="listBigCity" resultType="com.wooltari.study.StudyCity">
+	    SELECT cityNum, cityName FROM studyCity
+	          WHERE parent IS NULL
+	          ORDER BY cityNum ASC
+	</select>
+	
+	<!-- 스터디 도시 중분류 -->
+	<select id="listSmallCity" parameterType="Integer" resultType="com.wooltari.study.StudyCity">
+	    SELECT cityNum, cityName, parent FROM studyCity
+	          WHERE parent = #{parent}
+	          ORDER BY cityNum ASC
+	</select>
 </mapper>
