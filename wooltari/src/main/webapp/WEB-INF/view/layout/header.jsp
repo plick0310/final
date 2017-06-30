@@ -145,7 +145,7 @@ function modalSendLogin() {
 									<div class="col-sm-2"><a href="<%=cp%>/bbs/list">맞춤스터디 찾기</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/study/created">스터디 만들기</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/promote/list">스터디 홍보</a></div>
-									<div class="col-sm-2"><a href="<%=cp%>">스터디 어디서 하지</a></div>
+									<div class="col-sm-2"><a href="<%=cp%>/studyboard/studywhere/list">스터디 어디서 하지</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>">번개 스터디</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/review/list">스터디 후기</a></div>
 								</div>
