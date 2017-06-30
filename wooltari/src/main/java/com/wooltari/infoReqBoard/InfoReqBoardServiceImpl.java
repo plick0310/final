@@ -79,23 +79,56 @@ public class InfoReqBoardServiceImpl implements InfoReqBoardService {
 
 	@Override
 	public InfoReqBoard readBoard(int num) {
+		InfoReqBoard dto=null;		
+		try{			
+			dto=dao.getReadData("infoReqBoard.readBoard", num);			
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}		
 		return null;
 	}
 
 	@Override
 	public int updateHitCount(int num) {
-		return 0;
+		int result=0;		
+		try{			
+			result=dao.updateData("infoReqBoard.updateHitCount", num);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}		
+		return result;
 	}
 
 	@Override
 	public InfoReqBoard preReadBoard(Map<String, Object> map) {
-		return null;
+		InfoReqBoard dto=null;
+		
+		try{
+			dto=dao.getReadData("infoReqBoard.preReadBoard", map);
+			
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+		
+		return dto;
 	}
 
 	@Override
 	public InfoReqBoard nextReadBoard(Map<String, Object> map) {
-		return null;
+		InfoReqBoard dto=null;
+		
+		try{
+			dto=dao.getReadData("infoReqBoard.nextReadBoard", map);
+			
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+		
+		return dto;
 	}
+
 
 	@Override
 	public int updateBoard(InfoReqBoard dto, String pathname) {
@@ -179,19 +212,34 @@ public class InfoReqBoardServiceImpl implements InfoReqBoardService {
 
 	@Override
 	public List<InfoReqBoard> listFile(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		List<InfoReqBoard> listFile=null;
+		
+		try{
+			listFile=dao.getListData("", num);			
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+		
+		return listFile;
 	}
 
 	@Override
 	public InfoReqBoard readFile(int fileNum) {
-		// TODO Auto-generated method stub
-		return null;
+		InfoReqBoard dto=null;
+		
+		try{
+			dto=dao.getReadData("infoReqBoard.readFile", fileNum);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+		
+		return dto;
 	}
 
 	@Override
 	public int deleteFile(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
