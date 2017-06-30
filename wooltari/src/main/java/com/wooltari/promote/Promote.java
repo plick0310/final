@@ -1,10 +1,20 @@
 package com.wooltari.promote;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Promote {
 	private int num,listNum,s_num,hitCount;
-	private String subject,content,created;
+	private String subject,ment,created;
 	private String imageFileName;
 	private String userId,nickName;
+	private MultipartFile upload;
+	
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
 	public int getNum() {
 		return num;
 	}
@@ -35,11 +45,11 @@ public class Promote {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	public String getContent() {
-		return content;
+	public String getMent() {
+		return ment;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setMent(String ment) {
+		this.ment = ment;
 	}
 	public String getCreated() {
 		return created;

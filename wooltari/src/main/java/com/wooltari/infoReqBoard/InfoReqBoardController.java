@@ -2,6 +2,7 @@ package com.wooltari.infoReqBoard;
 
 import java.io.File;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+import com.wooltari.common.FileManager;
+import com.wooltari.common.MyUtil;
 import com.wooltari.member.SessionInfo;
 
 
@@ -22,10 +24,28 @@ public class InfoReqBoardController {
 	@Autowired
 	private InfoReqBoardService service;
 	
-
+	@Autowired
+	private MyUtil myUtil;
+	
+	@Autowired
+	private FileManager FileManager;
 		
 		@RequestMapping(value="/download/infoReqBoard/list")
-		public String list() {
+		public String list(
+				@RequestParam(value="page", defaultValue="1") int current_page,
+				@RequestParam(value="searchKey", defaultValue="subject") String searchKey,
+				@RequestParam(value="searchValue", defaultValue="") String searchValue,
+				Model model,
+				HttpServletRequest req				
+				) throws Exception {
+			
+			int rows=10;
+			int total_page=0;
+			int dataCount=0;
+			
+			
+			
+			
 
 			return ".download.infoReqBoard.list";
 		}
@@ -68,7 +88,7 @@ public class InfoReqBoardController {
 
 			return "redirect:/download/list?page="+page;
 		}
-	//첨부 파일 추가....................................................
+	
 		
 		
 }

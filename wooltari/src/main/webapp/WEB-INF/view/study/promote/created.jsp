@@ -83,10 +83,10 @@ function insertBoard(){
 			<tr>
 				<th>스터디</th>
 				<td>
-					<select style="width: 100px;">
-						<option value="">::</option>
+					<select style="width: 100px;" name="s_num">
+						<option value="1">::</option>
 						
-						<option value="109">aa11</option>
+						<option value="1">test</option>
 						
 					</select>
 				</td>
@@ -106,7 +106,7 @@ function insertBoard(){
 
 			<tr>
 				<th>이미지</th>
-				<td><input type="file" name="file1" id="file1" style="border: none;">
+				<td><input type="file" name="upload" id="file1" style="border: none;">
 				</td>
 			</tr>
 

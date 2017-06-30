@@ -185,11 +185,11 @@
 
 <style type="text/css">
 * {
-   box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-   margin: 0;
+	margin: 0;
 }
 
 .d3 {
@@ -230,52 +230,118 @@ body {
 }
 
 .nav a, .nav a:link, .nav a:visited, .nav a:hover, .nav a:focus, span {
-   color: #3e3a39;
+	color: #3e3a39;
 }
 
 .headerbody {
-   width: 1140px;
-   margin: 0px auto;
+	width: 1140px;
+	margin: 0px auto;
 }
 
 input[id=allCheck] {
-   display: none;
+	display: none;
 }
 
 input[id=allCheck]+label {
-   display: inline-block;
-   cursor: pointer;
-   position: relative;
-   padding-left: 25px;
-   margin-right: 15px;
-   font-size: 13px;
-   top: -33px;
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	padding-left: 25px;
+	font-size: 13px;
 }
 
 input[id=allCheck]+label:before {
-   content: "";
-   display: inline-block;
-   width: 13px;
-   height: 13px;
-   margin-right: 10px;
-   position: absolute;
-   left: 0;
-   top: 3px;
-   bottom: 1px;
-   background-color: #ccc;
-   border-radius: 16px;
-   box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px
-      rgba(255, 255, 255, .8);
+	content: "";
+	display: inline-block;
+	width: 13px;
+	height: 13px;
+	margin-right: 10px;
+	position: absolute;
+	left: 0;
+	top: 3px;
+	bottom: 1px;
+	background-color: #ccc;
+	border-radius: 16px;
+	box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px
+		rgba(255, 255, 255, .8);
 }
 
 input[id=allCheck]:checked+label:before {
-   text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
-   font-size: 7px;
-   font-weight: 800;
-   color: #fff;
-   background: #1abc9c;
-   text-align: center;
-   line-height: 15px;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+	font-size: 7px;
+	font-weight: 800;
+	color: #fff;
+	background: #1abc9c;
+	text-align: center;
+	line-height: 15px;
+}
+
+.clickbtn {
+	background-color: white;
+	border-style: solid;
+	padding: 5px 20px;
+	margin-right: 10px;
+	border: 1px solid #EAEAEA;
+}
+
+ul.tabs {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	height: 32px;
+	border-left: 1px solid #eee;
+	width: 900px;
+	font-family: "dotum";
+	font-size: 12px;
+	font-family: "dotum";
+}
+
+ul.tabs li {
+	float: left;
+	text-align: center;
+	cursor: pointer;
+	width: 82px;
+	height: 31px;
+	line-height: 31px;
+	border: 1px solid #eee;
+	border-left: none;
+	font-weight: bold;
+	background: #fafafa;
+	overflow: hidden;
+	position: relative;
+}
+
+ul.tabs li.active {
+	background: #FFFFFF;
+	border-bottom: 1px solid #FFFFFF;
+}
+
+.tab_container {
+	border-top: none;
+	clear: both;
+	float: left;
+	width: 900px;
+	background: #FFFFFF;
+}
+
+.tab_content {
+	font-size: 12px;
+	display: none;
+}
+
+.tab_container .tab_content ul {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+.tab_container .tab_content ul li {
+	list-style: none
+}
+
+.info {
+	padding-top: 7px;
 }
 
 .clickbtn {
@@ -293,12 +359,90 @@ input[id=allCheck]:checked+label:before {
 }
 
 </style>
-<script type="text/javascript" src="<%=cp%>/resource/js/front_js.js"></script>
-<script type="text/javascript"
-   src="<%=cp%>/resource/js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript"
-   src="<%=cp%>/resource/js/jquery-ui.min.js"></script>
 
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+
+
+<script>
+// 통계 처리 함수 - 첫번째
+$(function(){
+   var url="<%=cp%>/exam/firstChart";
+   $.getJSON(url, function (csv) {
+      $('#firstChart').highcharts({
+         chart: {
+               type: 'pie',
+               options3d: {
+                   enabled: true,
+                   depth: 100
+               }
+           },
+           title: {
+               text: '시간별 접속자 수',
+           },
+           plotOptions: {
+               pie: {
+                   innerSize: 100,
+                   depth: 45
+               }
+           },
+           series:csv
+      });
+   });
+});
+
+//통계 처리 함수 - 두번째
+$(function(){
+   var url="<%=cp%>/exam/secondChart";
+   $.getJSON(url, function (csv) {
+      $('#secondChart').highcharts({
+         chart: {
+               type: 'pie',
+               options3d: {
+                   enabled: true,
+                   alpha: 45
+               }
+           },         
+           title: {
+               text: '시간별 접속자 수',
+           },
+           plotOptions: {
+               pie: {
+                   innerSize: 100,
+                   depth: 45
+               }
+           },
+           series:csv
+      });
+   });
+});
+
+//통계 처리 함수 - 세번째
+$(function(){
+   var url="<%=cp%>/exam/lastChart";
+   $.getJSON(url, function (csv) {
+      $('#lastChart').highcharts({
+         chart: {
+               type: 'pie',
+               options3d: {
+                   enabled: true,
+                   alpha: 45
+               }
+           },         
+           title: {
+               text: '시간별 접속자 수',
+           },
+           plotOptions: {
+               pie: {
+                   innerSize: 100,
+                   depth: 45
+               }
+           },
+           series:csv
+      });
+   });
+});
+</script>
 <script>
 $(document).ready(function(){
     //최상단 체크박스 클릭
@@ -315,6 +459,21 @@ $(document).ready(function(){
         }
     });
 });
+
+$(function() {
+
+    $(".tab_content").hide();
+    $(".tab_content:first").show();
+
+    $("ul.tabs li").click(function() {
+       $("ul.tabs li").removeClass("active").css("color", "#333");
+       //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
+       $(this).addClass("active").css("color", "#1abc9c");
+       $(".tab_content").hide()
+       var activeTab = $(this).attr("rel");
+       $("#" + activeTab).fadeIn()
+    });
+ });
 
 $('#exampleModal').on('show.bs.modal', function (event) {
      var button = $(event.relatedTarget) // Button that triggered the modal
@@ -356,7 +515,6 @@ $('#exampleModal').on('show.bs.modal', function (event) {
       ,regional : "ko-KR"
    });
 });
-   
 </script>
 
 <script>
@@ -425,15 +583,20 @@ function deleteList() {
 
 </script>
 
-<!-- 새 창 띄우기-->
-<script>
-function openWin(){  
-    window.open("http://www.naver.net", "네이버새창", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );
-
+<script type="text/javascript">
+	function popupLink(popHeight,popWidth){ 
+	var winHeight = document.body.clientHeight;   // 현재창의 높이
+	var winWidth = document.body.clientWidth;   // 현재창의 너비
+	var winX = window.screenX || window.screenLeft || 0;   // 현재창의 x좌표
+	var winY = window.screenY || window.screenTop || 0;   // 현재창의 y좌표
+	
+	var popX = winX + (winWidth - popWidth)/2;
+	var popY = winY + (winHeight - popHeight)/2;
+	window.open("<%=cp%>/community/exam/examFiles","popup","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX);
+}
 </script>
 
-
-<div style="width: 900px; margin: 60px auto;">
+<div style="width: 900px; height:600px; margin: 60px auto;">
    <div style="height: 50px; font-size: 20px; text-align: center;">
       <span style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
          <span style="font-size: 19px; color: #1abc9c;"
@@ -455,7 +618,7 @@ function openWin(){
                <td colspan="2" style="text-align: left;">
 
                   <div
-                     style="position: absolute; bottom: 10px; right: -15px; top: 9px;">
+                     style="position: absolute;bottom: 10px;right: 1px;top: -22px;">
                      <input type="checkbox" id="allCheck" name="allCheck"
                         class="checkbox-style" /><label for="allCheck">전체선택</label>
 
@@ -525,59 +688,124 @@ function openWin(){
 
       <!-- ajax 탭 기능 소스 -->
 
-
    <form name="array_form" id="array_form" style="width: 900px;">
       <div style="margin-bottom: 5px;">
          <span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">
             문제은행</span>
       </div>
-      <!-- List Start-->
-      <div class="settingArea" id="tabmenu">
-         <table style="width: 100%;" cellpadding="0" cellspacing="0"
-            border="0">
-            <tr>
-               <td colspan="2" style="text-align: left;">
-                  <ul id="category">
-                     <li><a href="#link">문제</a></li>
-                        <ul>
-                           <table cellpadding="0" cellspacing="0" style="width: 100%;" class="board_table array">
-                              <tbody>
-                                 <tr>
-                                    <td class="___number">11</td>
-                                    <td>
-                                       <div style="position: relative;">
-                                          <!--[category_name]-->
-                                          <a href="#" class="subject">정보처리기사</a>
-                                          <div class="info">
-                                             <strong>등록일 </strong> <span class="dateWrap" title="[datetime]">2017-06-19</span>
-                                             <span class="__dotted"></span> <strong>출제일자 </strong><span>2017-06-19</span>
-                                             <span class="__dotted"></span> <strong>주최기관 </strong><span>큐넷</span>
-                                          </div>
-                                          
-                                          <div class="likes" style="font-size: 13px; width: 60px;">
-                                             	응시하기 <br>
-                             				    <!-- 여기에 응시하기 새창으로 만들기 -->
-                             				    
-                             				    <span class="num" style="color: #1abc9c;">
-	                             				    <a href="#" onClick="window.open('http://www.naver.com','네이버','top=100, left=350, width=800, height=600, toolbar=no, menubar=no, scrollbars=no, resizable=yes');return false;">
-	                             				    	<span class="glyphicon glyphicon-circle-arrow-right"></span>
-	                             				    </a>
-                                             	</span>
-                                          </div>
-                                       </div>
-                                    </td>
-                                 </tr>
-                              </tbody>
-                           </table>
-                           </ul>
-                     <li style="position:absolute; top: 0px; left: 65px;" ><a href="#link">응시내역</a>
-                         	두번째
-                     </li>
-                  </ul>
-               </td>
-            </tr>
-         </table>
-      </div>
+   	<div id="tabwrap" style="width: 900px; margin: 0px auto;">
+		<ul class="tabs">
+			<li class="active" rel="tab1">문제</li>
+			<li rel="tab2">응시내역</li>
+		</ul>
+		<div class="tab_container">
+			<div id="tab1" class="tab_content">
+
+				<table cellpadding="0" cellspacing="0" style="width: 100%;" class="board_table array">
+					<tbody>
+						<tr>
+							<td class="___number"
+								style="font-size: 11px; color: #666; text-align: center; font-weight: bold;">1</td>
+							<td style="padding: 9px 5px; border-bottom: 1px solid #EEEEEE;">
+								<div style="position: relative;">
+									<!--[category_name]-->
+	
+									<a href="#" class="subject"
+										style="font-size: 15px; font-weight: bold; color: #373737;">정보처리기사</a><span
+										class="comment"
+										style="display: inline-block; padding: 1px 7px 7px 7px; margin-left: 15px; color: #1abc9c; font-weight: bold; font-size: 15px; line-height: 8px; vertical-align: middle;">[ 17년 2회차 ]</span>
+	
+									<div class="info">
+										<strong>등록일 :</strong>&nbsp; <span class="dateWrap" title="[datetime]">2017-06-19</span>
+										<span class="__dotted"></span>
+										<strong>주최기관 :</strong> &nbsp;<span>큐넷(Q-net)</span>
+									</div>
+	
+	 								<div class="likes" style="font-size: 13px; width: 60px;">
+                                           	  응시하기<br> 
+                                           	 <span class="num" style="color: #1abc9c;">
+                                           	 	<a target="_blank" onclick="popupLink(550,1000)" style="width: 100px; height: 100px;">
+                                                   <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                                                </a>
+                                             </span>
+                                    </div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+			<!-- #tab1 -->
+			<div id="tab2" class="tab_content">
+			
+				<div style="margin-bottom: 5px;font-size: 15px;width: 100%;text-align: left;margin-top: 20px;">
+      				<span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">『 2017년 06월 29일 』</span>
+        			 을 기준으로 총 합격률은 80%입니다.<br>
+        			 <span style="font-size: 10px; color: red; margin-left: 236px;">(※최초 응시할 때의 응시 정보만 반영됩니다)</span>
+   				</div>
+				<br><br>
+				<span style="font-size: 20px; margin-left: 50px;"><strong>"응시 수가 많은 시험&nbsp;Best 3"</strong></span>
+				
+				
+				<br><br>
+				
+				<!-- 통계 처리하기 -->
+				<div style="clear:both;">
+					<div id="firstChart" style="width: 300px; height: 500px; float: left; margin: 10px;"></div>
+					
+					<div id="secondChart" style="width: 300px; height: 150px; float: left; margin: 10px;"></div>
+					
+					<div id="lastChart" style="width: 300px; height: 150px; float: left; margin: 10px;"></div>
+				</div>
+				
+				
+				
+				<br><br><br><br>
+						
+				
+				<table cellpadding="0" cellspacing="0" style="width: 100%;"
+					class="board_table array">
+					<tr>
+						<td class="___number"
+							style="font-size: 11px; color: #666; text-align: center; font-weight: bold;">11</td>
+						<td style="padding: 9px 5px; border-bottom: 1px solid #EEEEEE;">
+							<div style="position: relative;">
+								<!--[category_name]-->
+
+								<a href="<%=cp%>/help/report/article" class="subject"
+									style="font-size: 15px; font-weight: bold; color: #373737;">정보처리기사</a><span
+									class="comment"
+									style="display: inline-block; padding: 1px 7px 7px 7px; margin-left: 15px; color: #1abc9c; font-weight: bold; font-size: 15px; line-height: 8px; vertical-align: middle;">[17년 3회차]</span>
+
+								<div class="info">
+									<strong>응시일: &nbsp;&nbsp;</strong> <span class="dateWrap" title="[datetime]">2017-06-29</span>
+									<span class="__dotted"></span> <strong>주최기관: &nbsp;&nbsp;</strong><span>큐넷</span>
+									<span class="__dotted"></span> <strong>성적: &nbsp;&nbsp;</strong>
+									<span style="font-size: 20px;" >82점</span>&nbsp; 
+ 								</div>
+
+
+								<div class="likes"
+									style="line-height: 23px; position: absolute; top: -8px; right: 10px; background: #fff; padding: 9px 5px 5px 5px; display: block; width: 45px; height: 41px; text-align: center; font-size: 16px; letter-spacing: -1px; color: #666666; font-weight: bold;">
+									<br> <span class="num"
+										style="color: #1abc9c; font-size: 18px; font-weight: bold; font-family: tahoma;">합격</span>
+									<!--[unlikes]-->
+								</div>
+
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- #tab2 -->
+			<div id="tab3" class="tab_content"></div>
+			<!-- #tab3 -->
+		</div>
+		<!-- .tab_container -->
+	</div>
+	<!-- #container -->
 
 
 
@@ -626,7 +854,8 @@ function openWin(){
                      <div class="form-group"
                         style="margin-bottom: 28px; margin-top: 22px;">
                         <label for="recipient-name" class="control-label">시험명</label>
-                        &nbsp;&nbsp; <select id="examSelect">
+                        &nbsp;&nbsp; 
+                        <select id="examSelect" style="border: 1px solid #D4D4D4">
                            <option>시험 선택</option>
                            <option value="op1">정보처리기사</option>
                            <option value="op2">정보처리산업기사</option>
