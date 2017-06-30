@@ -184,12 +184,12 @@ function search(){
 				<td>
 					<div style="position:relative;">
 						
-						<a href="<%=cp%>/help/report/article" class="subject">IT/컴퓨터&nbsp;&nbsp;&nbsp;&nbsp;서울&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.subject}&nbsp;&nbsp; </a><span class="comment">[12]</span>
+						<a href="${articleUrl}&num=${dto.num}" class="subject">IT/컴퓨터&nbsp;&nbsp;&nbsp;&nbsp;서울&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.subject}&nbsp;&nbsp; </a><span class="comment">[12]</span>
 					
 						<div class="info">
 							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">${dto.created}</span>
 							<span class="__dotted"></span>
-							<strong>작성자 </strong><span>a</span>
+							<strong>작성자 </strong><span>${dto.userName }</span>
 							<span class="__dotted"></span>
 							<strong>조회수 </strong><span>${dto.hitCount}</span>
 						</div>

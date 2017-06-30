@@ -39,9 +39,9 @@ function insertBoard(){
 		return false;
 	}
 	
-	str=f.ment.value;
+	str=f.content.value;
 	if(!str){
-		f.ment.focus();
+		f.content.focus();
 		return false;
 	}
 	
@@ -94,13 +94,12 @@ function insertBoard(){
 			
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="writer" maxlength="8"
-					style="width: 200px;" /></td>
+				<td style="width: 200px;">${sessionScope.member.userName}</td>
 			</tr>
 			
 
 			<tr>
-				<td colspan="2"><textarea name="ment" id="ment" 
+				<td colspan="2"><textarea name="content" id="ment" 
 						style="width: 100%; height: 300px;" ></textarea></td>
 			</tr>
 

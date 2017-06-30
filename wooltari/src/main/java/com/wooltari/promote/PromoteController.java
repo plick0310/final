@@ -1,5 +1,7 @@
 package com.wooltari.promote;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -68,6 +70,7 @@ public class PromoteController {
 		
 		//글번호
 		int listNum,n =0;
+		
 		Iterator<Promote> it=list.iterator();
 		while(it.hasNext()){
 			Promote dto=it.next();
@@ -112,7 +115,7 @@ public class PromoteController {
 			return "redirect:/main";
 		
 		
-		return "/study/promote/created";
+		return ".study.promote.created";
 	}
 	
 	@RequestMapping(value="/promote/created",method=RequestMethod.POST )
@@ -133,8 +136,63 @@ public class PromoteController {
 		
 		service.insertBoard(dto, pathname);
 		
+		return "redirect:/promote/list";
+	}
+	
+	@RequestMapping(value="/promote/article")
+	public String article(
+				@RequestParam(value="num") int num,
+				@RequestParam(value="page") String page,
+				@RequestParam(value="searchKey",defaultValue="subject") String searchKey,
+				@RequestParam(value="searchValue",defaultValue="") String searchValue,
+				Model model, HttpSession session
+			)throws Exception{
 		
-		return ".study.promote.list";
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		if(info==null)
+			return "redirect:/main";
+		
+		service.updateHitCount(num);
+		
+		Promote dto=service.readBoard(num);
+		if(dto==null)
+			return "redirect:/promote/list?page="+page;
+		
+		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+		
+		String query = "page="+page;
+		if(searchValue.length()!=0) {
+			query += "&searchKey=" + searchKey + 
+		              "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");
+		}
+		
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("query", query);
+		model.addAttribute("page", page);
+		
+		return ".study.promote.article";
+	}
+	
+	@RequestMapping(value="/promote/delete")
+	public String delete(
+			@RequestParam int num,
+			@RequestParam String page,
+			HttpSession session
+			)throws Exception{
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		if(info==null)
+			return "redirect:/main";
+		
+		String root=session.getServletContext().getRealPath("/");
+		String pathname=root+File.separator+"uploads"+File.separator+"photo";
+		
+		Promote dto=service.readBoard(num);
+		
+		service.deleteBoard(num, dto.getImageFileName(), pathname);
+		
+		return "redirect:/promote/list?page="+page;
 	}
 	
 }

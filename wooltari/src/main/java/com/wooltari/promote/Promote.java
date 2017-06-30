@@ -4,9 +4,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Promote {
 	private int num,listNum,s_num,hitCount;
-	private String subject,ment,created;
+	private String subject,content,created;
 	private String imageFileName;
-	private String userId,nickName;
+	private String userId,userName;
 	private MultipartFile upload;
 	
 	public MultipartFile getUpload() {
@@ -45,11 +45,11 @@ public class Promote {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	public String getMent() {
-		return ment;
+	public String getContent() {
+		return content;
 	}
-	public void setMent(String ment) {
-		this.ment = ment;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public String getCreated() {
 		return created;
@@ -69,11 +69,11 @@ public class Promote {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getNickName() {
-		return nickName;
+	public String getUserName() {
+		return userName;
 	}
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 	
