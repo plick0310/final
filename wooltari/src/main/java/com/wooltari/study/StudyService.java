@@ -10,4 +10,11 @@ public interface StudyService {
 	public List<StudyCity> listBigCity();
 	public List<StudyCity> listSmallCity(int parent);
 	
+	public long maxS_num();
+	public void insertStudy(StudyInfo dto) throws Exception;
+	public void deleteStudy(long s_num) throws Exception;
+	
+	public void createStudyTable(long s_num) throws Exception;
+	public void dropStudyTable(long s_num) throws Exception;
+	
 }

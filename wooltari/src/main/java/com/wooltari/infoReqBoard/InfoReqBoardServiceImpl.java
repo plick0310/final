@@ -61,8 +61,6 @@ public class InfoReqBoardServiceImpl implements InfoReqBoardService {
 		} catch(Exception e) {
 			System.out.println(e.toString());
 		}
-		
-		
 		return list;
 	}
 

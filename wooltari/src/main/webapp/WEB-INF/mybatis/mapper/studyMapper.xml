@@ -4,29 +4,55 @@
 <mapper namespace="study">
 	<!-- 스터디 카테고리 대분류 -->
 	<select id="listBigCategory" resultType="com.wooltari.study.StudyCategory">
-	    SELECT categoryNum, subject FROM studyCategory
+	    SELECT categoryNum, subject FROM s_category
 	          WHERE parent IS NULL
 	          ORDER BY categoryNum ASC
 	</select>
 	
 	<!-- 스터디 카테고리 중분류 -->
 	<select id="listSmallCategory" parameterType="Integer" resultType="com.wooltari.study.StudyCategory">
-	    SELECT categoryNum, subject, parent FROM studyCategory
+	    SELECT categoryNum, subject, parent FROM s_category
 	          WHERE parent = #{parent}
 	          ORDER BY categoryNum ASC
 	</select>
 	
 	<!-- 스터디 도시 대분류 -->
 	<select id="listBigCity" resultType="com.wooltari.study.StudyCity">
-	    SELECT cityNum, cityName FROM studyCity
+	    SELECT cityNum, cityName FROM s_city
 	          WHERE parent IS NULL
 	          ORDER BY cityNum ASC
 	</select>
 	
 	<!-- 스터디 도시 중분류 -->
 	<select id="listSmallCity" parameterType="Integer" resultType="com.wooltari.study.StudyCity">
-	    SELECT cityNum, cityName, parent FROM studyCity
+	    SELECT cityNum, cityName, parent FROM s_city
 	          WHERE parent = #{parent}
 	          ORDER BY cityNum ASC
 	</select>
+	
+	<!-- 스터디번호 가져오기  -->
+	<select id="maxStudySeq" resultType="Long">
+		SELECT NVL(MAX(s_num),0) FROM study
+	</select>
+	
+	<!--스터디생성  -->
+	<insert id="insertStudy" parameterType="com.wooltari.study.StudyInfo">
+		INSERT INTO study (s_num, userId , studyName, study_Info, gender, recruit, range ,imageFileName) 
+		VALUES (#{s_num},#{userId},#{studyName},#{study_Info},#{gender},#{recruit},#{range},#{imageFileName, jdbcType=VARCHAR})
+  	</insert>
+  	
+  	<insert id="insertstudyCategory" parameterType="com.wooltari.study.StudyInfo">
+  		INSERT INTO studyCategory (s_num , choiceCategory) VALUES(#{s_num},#{category})
+  	</insert>
+  	
+  	<insert id="insertstudyCity" parameterType="com.wooltari.study.StudyInfo">
+  		INSERT INTO studyCity (s_num , choiceCity) VALUES(#{s_num},#{city})
+  	</insert>
+  	
+  	<insert id="insertstudyTarget" parameterType="com.wooltari.study.StudyInfo">
+  		INSERT INTO studyTarget (s_num , target) VALUES(#{s_num},#{s_target})
+  	</insert>
+  	
+  	
+  	
 </mapper>
