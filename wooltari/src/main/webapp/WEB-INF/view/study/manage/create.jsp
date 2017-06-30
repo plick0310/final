@@ -144,17 +144,15 @@ input#introTitle {
 }
 
 .upload-label {
-   width: 70%;
-   height: 300px;
-   border: 1px solid #ccc;
-   
-   background-image:
-      url(http://moccozy.blob.core.windows.net/icon/upload.png);
-   background-position: center;
-   background-repeat: no-repeat;
-   background-size: 20px 20px;
-   border-radius: 5px;
-   margin: 0 auto;
+    width: 300px;
+    height: 250px;
+    border: 1px solid #ccc;
+    background-image: url(http://moccozy.blob.core.windows.net/icon/upload.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    border-radius: 5px;
+    margin: 0 auto;
 }
 
 .uploadLabel {
@@ -248,22 +246,6 @@ background: black;
                </div>
 
 
-          <!--      <div class="section-question">
-                  <div class="question-title">스터디 대문이미지를 등록해 주세요</div>
-                  <div class="question-answer">
-                     <div class="upload-label">
-                        <div class="fileBox">
-                           <input type="file" name="imageFileName" id="uploadBtn" class="uploadBtn tts" >
-                           <label for="uploadBtn" class="btn btn-large uploadLabel "style="left: 120px; top: 104px; position: absolute;">사진올리기</label>
-                        </div>
-
-
-
-                     </div>
-
-                  </div>
-               </div> -->
-
 
                <div class="section-question">
                   <div class="question-title">스터디 한줄 소개를 입력해 주세요</div>
@@ -273,6 +255,22 @@ background: black;
                   </div>
                </div>
             </div>
+
+              <div class="section-question">
+                  <div class="question-title">스터디 대문이미지를 등록해 주세요</div>
+                  <div class="question-answer">
+                     <div class="upload-label">
+                        <div class="fileBox">
+                           <input type="file" name="upload" id="uploadBtn" class="uploadBtn tts" >
+                           <label for="uploadBtn" class="btn btn-large uploadLabel "style="left:80px; top: 80px; position: absolute;">사진올리기</label>
+                        </div>
+
+
+
+                     </div>
+
+                  </div>
+               </div> 
 
          </div>
          <!-- ------------------------------------1페이지 ------------------------------------------- -->
@@ -466,7 +464,7 @@ background: black;
                      <div class="row">
                         <div class="col-sm-6 col-md-4">
                            <div class="thumbnail">
-                              <label> <input type="radio" name="range" value="0" />
+                              <label> <input type="radio" name="range" value="0" id="range0"/>
                                  <img class="icon"src="<%=cp%>/resource/img/group.png" alt="..."> 
                               </label>
                               <div class="caption">
@@ -479,7 +477,7 @@ background: black;
 
                         <div class="col-sm-6 col-md-4">
                            <div class="thumbnail">
-                              <label> <input type="radio" name="range" value="1" />
+                              <label> <input type="radio" name="range" value="1" id="range1"/>
                                  <img class="icon" src="<%=cp%>/resource/img/user.png" alt="..." >
                               </label>
                               
@@ -492,9 +490,8 @@ background: black;
 
                         <div class="col-sm-6 col-md-4">
                            <div class="thumbnail">
-                              <label> <input type="radio" name="range" value="2" />
-
-                                 <img class="icon" src="<%=cp%>/resource/img/padlock.png" alt="...">
+                              <label> <input type="radio" name="range" value="2" id="range2"/>
+							    <img class="icon" src="<%=cp%>/resource/img/padlock.png" alt="...">
                               </label>
                               <div class="caption">
                                  <h4>비공개</h4>
@@ -562,6 +559,28 @@ background: black;
     /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	$(function() {
+		
+		 $("input:radio[name=range]").change(function () {
+			var $me =  $(this).parent().siblings();
+			var radioValue = $(this).val();
+			if (radioValue == "0") {
+				$("#range0").parent().siblings().css("color","#1abc9c");
+				$("#range1").parent().siblings().css("color","black");
+				$("#range2").parent().siblings().css("color","black");
+			} else if (radioValue == "1") {
+				$("#range0").parent().siblings().css("color","black");
+			 	$("#range1").parent().siblings().css("color","#1abc9c");
+				$("#range2").parent().siblings().css("color","black");
+			} else if (radioValue == "2") {
+				$("#range0").parent().siblings().css("color","black");
+			 	$("#range1").parent().siblings().css("color","black");
+				$("#range2").parent().siblings().css("color","#1abc9c");
+			}
+		
+		});
+		
+		
+		
          var cnt=0, vnt=0;
          $("#smallCategory").change(function() { //카테고리 선택하면 박스추가   
             if($("input[name='choiceCategory']").length>=3){
@@ -573,6 +592,22 @@ background: black;
             var index2 = $("#smallCategory option:selected");
             var s = index1.text() + "-" + index2.text();
 			var idx="my_category"+cnt;
+			
+			
+		     var state1=false;
+             $("input[name='choiceCategory']").each(function() {
+            	 if(index2.val() === this.value){
+            		 state1=true;
+             		alert("중복된 카테고리를 선택하였습니다.");
+            	 }
+            });
+
+			if(state1){
+				return;
+			}	
+
+			
+			
             $("#select_category").append(" <div id='"+idx+"' style='width: 536px; height: 40px; margin: 0 auto; background-color: #1abc9c;'>"
                     +"<div style='display: inline-block; font-size: 20px; line-height: 40px; color: white;'>"
                       +s+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"
@@ -582,17 +617,34 @@ background: black;
            
          });
       	
-         $("#smallCity").change(function() { //카테고리 선택하면 박스추가 및 제어 
-            
+         
+         $("#smallCity").change(function() { //도시 선택하면 박스추가 및 제어 
+     
         	 if($("input[name='choiceCity']").length>=3){
                 alert("3개이하만 선택 가능합니다.");
                 return;
              }
-         	vnt++;
-             var index3 = $("#bigCity option:selected");
+         	 vnt++;
+             
+         	 var index3 = $("#bigCity option:selected");
              var index4 = $("#smallCity option:selected");
              var s = index3.text() + "-" + index4.text();
              var vdx ="my_city"+vnt;
+             
+             var state2=false;
+             $("input[name='choiceCity']").each(function() {
+            	 if(index4.val() === this.value){
+            		 state2=true;
+             		alert("중복된 지역을 선택하였습니다.");
+            	 }
+            });
+
+			if(state2){
+				return;
+			}	
+
+            
+            	 
              $("#select_city").append(" <div id='"+vdx+"' style='width: 536px; height: 40px; margin: 0 auto; background-color: #1abc9c; '>"
                      +"<div style='display: inline-block; font-size: 20px; line-height: 40px; color: white;'>"
                        +s+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"

@@ -2,13 +2,14 @@ package com.wooltari.study;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class StudyInfo {
 	private long s_num;
 	private String userId;
-	private String studyName, study_Info, created; // 스터디명,스터디한줄소개,스터디생성일
-	private String imageFileName, gender;// 스터디사진,스터디성별
+	private String studyName, study_Info, created, gender; // 스터디명,스터디한줄소개,스터디생성일
 	private int recruit, range;// 모집인원 , 스터디 공개 범위
-
+	
 	private String[] target =null;// 모집대상
 	private String s_target;
 	
@@ -19,8 +20,29 @@ public class StudyInfo {
 	private String city;
 	
 	
+	private MultipartFile upload;
+	private String imageFileName;
+	
+
 	
 	
+	
+	public MultipartFile getUpload() {
+		return upload;
+	}
+
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
+
+	public String getImageFileName() {
+		return imageFileName;
+	}
+
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
+	}
+
 	public String getS_target() {
 		return s_target;
 	}
@@ -75,14 +97,6 @@ public class StudyInfo {
 
 	public void setCreated(String created) {
 		this.created = created;
-	}
-
-	public String getImageFileName() {
-		return imageFileName;
-	}
-
-	public void setImageFileName(String imageFileName) {
-		this.imageFileName = imageFileName;
 	}
 
 	public String getGender() {

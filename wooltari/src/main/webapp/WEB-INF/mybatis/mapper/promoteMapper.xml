@@ -4,7 +4,7 @@
 <mapper namespace="promote">
 	<!-- 홍보글 등록 -->
 	<insert id="insertBoard" parameterType="com.wooltari.promote.Promote">
-		insert into promotelist(num,subject,content,imagefilename,s_num,userId) values(promotenum_seq.nextval,#{subject},#{ment},#{imageFileName,jdbcType=VARCHAR},#{s_num},#{userId})		
+		insert into promotelist(num,subject,content,imagefilename,s_num,userId) values(promotenum_seq.nextval,#{subject},#{content},#{imageFileName,jdbcType=VARCHAR},#{s_num},#{userId})		
 	</insert>
 	
 	<sql id="where-list">
@@ -23,8 +23,8 @@
 	<select id="listBoard" parameterType="map" resultType="com.wooltari.promote.Promote">
 		select * from(
 			select rownum rnum, tb.* from(
-				select num,subject,content,hitcount,imagefilename,
-				to_char(created,'yyyy-mm-dd')created,s_num,username,p.userId
+				select num,subject,content,hitcount,imagefilename,userName,
+				to_char(created,'yyyy-mm-dd')created,s_num,p.userId
 				from promotelist p join member m on p.userId=m.userId
 			<where>
 				<if test="searchValue!=null and searchValue!=''">
@@ -37,6 +37,7 @@
 		)where rnum>=#{start}
 		]]>
 	</select>
+	
 	
 	<!-- 글 개수 -->
 	<select id="dataCount" resultType="Integer" parameterType="map">
@@ -56,10 +57,14 @@
 	
 	<!-- 글 보기 -->
 	<select id="readBoard" parameterType="map" resultType="com.wooltari.promote.Promote">
-		select num,subject,content,hitcount,created,imageFilename,s_num,p.userId,nickName from promotelist p
+		select num,subject,content,hitcount,created,imageFilename,s_num,p.userId,userName from promotelist p
 		join member m on p.userId=m.userId where num=#{num}
-	
 	</select>
+	
+	<!--이전글 -->
+	
+	
+	<!--다음글  -->
 	
 	<!-- 글 수정 -->
 	<update id="updateBoard" parameterType="com.wooltari.promote.Promote">
@@ -69,7 +74,7 @@
 	
 	<!-- 글 삭제 -->
 	<delete id="deleteBoard" parameterType="Integer">
-		delete table from promotelist where num=#{num}
+		delete promotelist where num=#{num}
 	</delete>
 	
 	<!-- 홍보글 댓글등록 -->

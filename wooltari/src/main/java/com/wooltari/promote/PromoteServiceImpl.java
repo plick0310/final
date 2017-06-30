@@ -63,16 +63,30 @@ public class PromoteServiceImpl implements PromoteService{
 		return result;
 	}
 
+	//글보기
 	@Override
 	public Promote readBoard(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		Promote dto=null;
+		try {
+			
+			dto=dao.getReadData("promote.readBoard",num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
 	}
 
+	//조회수증가
 	@Override
 	public int updateHitCount(int num) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		try {
+			result=dao.updateData("promote.updateHitCount", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
@@ -83,8 +97,16 @@ public class PromoteServiceImpl implements PromoteService{
 
 	@Override
 	public int deleteBoard(int num, String imageFileName, String pathname) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		try {
+			if(imageFileName!=null)
+				fileManager.doFileDelete(imageFileName, pathname);
+			
+			result=dao.deleteData("promote.deleteBoard",num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override

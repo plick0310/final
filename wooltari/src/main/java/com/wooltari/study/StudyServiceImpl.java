@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wooltari.common.FileManager;
 import com.wooltari.common.dao.CommonDAO;
 
 @Service("study.studyService")
@@ -13,6 +14,9 @@ public class StudyServiceImpl implements StudyService {
 
 	@Autowired
 	private CommonDAO dao;
+	
+	@Autowired
+	private FileManager fileManager;
 	
 	@Override
 	public List<StudyCategory> listBigCategory() {
@@ -75,7 +79,7 @@ public class StudyServiceImpl implements StudyService {
 	}
 
 	@Override
-	public void insertStudy(StudyInfo dto) throws Exception{
+	public void insertStudy(StudyInfo dto,String path) throws Exception{
 		
 		try {
 
@@ -83,7 +87,14 @@ public class StudyServiceImpl implements StudyService {
 			
 			dto.setS_num(s_num);
 			
-			dao.insertData("study.insertStudy",dto);
+			
+			if(dto.getUpload()!=null && ! dto.getUpload().isEmpty()) {
+				// 파일 업로드
+				String newFilename=fileManager.doFileUpload(dto.getUpload(), path);
+				dto.setImageFileName(newFilename);
+				
+				dao.insertData("study.insertStudy",dto);
+			}
 			
 			for(int i=0; i<dto.getChoiceCategory().size(); i++){
 				dto.setCategory(dto.getChoiceCategory().get(i));
@@ -99,7 +110,8 @@ public class StudyServiceImpl implements StudyService {
 				dto.setS_target(dto.getTarget()[i]);
 				dao.insertData("study.insertstudyTarget", dto);
 			}
-			//createStudyTable(s_num); //스터디게시판 동적생성
+			
+			createStudyTable(s_num); //스터디게시판 동적생성
 
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -115,9 +127,9 @@ public class StudyServiceImpl implements StudyService {
 	}
 
 	@Override
-	public void createStudyTable(long s_num) throws Exception {
-		
-		
+	public int createStudyTable(long s_num) {
+	
+		int result=0;
 		try {
 			
 			dao.updateData("study.createStudyBoard", s_num);
@@ -126,12 +138,13 @@ public class StudyServiceImpl implements StudyService {
 			dao.updateData("study.StudyBoardLike", s_num);
 			dao.updateData("study.createStudyCalendar", s_num);
 			dao.updateData("study.StudyCalendarReply", s_num);
-			
-			
+		
+			result=1;
 		} catch (Exception e) {
 			System.out.println(e.toString());
-			throw e;
+			
 		}
+		return result;
 	}
 
 	@Override
