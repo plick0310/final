@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class InfoReqBoard {
-	private int num;
+	private int listNum, num;
 	private String subject, content, userId, created;
 	private int hitCount;
 	
@@ -20,6 +20,12 @@ public class InfoReqBoard {
 	
 	
 	
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
 	public int getFileNum() {
 		return fileNum;
 	}

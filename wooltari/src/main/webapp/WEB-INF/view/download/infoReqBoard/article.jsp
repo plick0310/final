@@ -21,13 +21,13 @@ background: none;
 	<thead>
 		<tr>
 			<th class="informations">
-				제목입니다...
+				${dto.subject}
 				<span class="inforArea">
-					<strong>작성일</strong> [datetime]
+					<strong>작성일</strong> ${dto.created}
 					<span class="__dotted"></span>
-					<strong>작성자</strong> [writer]
+					<strong>작성자</strong> ${dto.userId}
 					<span class="__dotted"></span>
-					<strong>조회수</strong> [hit]
+					<strong>조회수</strong> ${dto.hitCount}
 				</span>
 			</th>
 		</tr>
@@ -36,7 +36,7 @@ background: none;
 		<tr>
 			<td class="read_contArea">
 				<div id="board_memo_area">
-					
+					${dto.content}
 				</div>
 		
 				<form name="read_likeAreaForm" class="_read_likesArea" ajaxAction="modules/board/read.likes.submit.php" ajaxType="html">

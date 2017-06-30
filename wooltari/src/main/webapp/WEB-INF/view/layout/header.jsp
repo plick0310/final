@@ -145,7 +145,7 @@ function modalSendLogin() {
 									<div class="col-sm-2"><a href="<%=cp%>/bbs/list">맞춤스터디 찾기</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/study/created">스터디 만들기</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/promote/list">스터디 홍보</a></div>
-									<div class="col-sm-2"><a href="<%=cp%>">스터디 어디서 하지</a></div>
+									<div class="col-sm-2"><a href="<%=cp%>/studyboard/studywhere/list">스터디 어디서 하지</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>">번개 스터디</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/review/list">스터디 후기</a></div>
 								</div>
@@ -258,7 +258,7 @@ function modalSendLogin() {
 <!-- 모달 -->
 <div id="modalLogin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-		<div class="modal-content" id="modal-content">
+		<div class="modal-content" id="modal-content" style="background: none;" >
 			<!-- jsp가 들어가는 곳 -->
 		</div>
 	</div>

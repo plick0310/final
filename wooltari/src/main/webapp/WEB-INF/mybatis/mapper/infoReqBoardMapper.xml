@@ -22,7 +22,7 @@
           DBMS_LOB.INSTR(content, #{searchValue}) &gt; 0 
 	 -->
 	<sql id="where-list">
-	  <if test="searchKey=='userName'">
+	  <if test="searchKey=='userId'">
 	      userName=#{searchValue}
 	  </if>
 	  <if test="searchKey=='subject'">
@@ -51,7 +51,7 @@
 	            resultType="com.wooltari.infoReqBoard.InfoReqBoard">
 		SELECT * FROM (
 		    SELECT ROWNUM rnum, tb.* FROM (
-			     SELECT num, i.userId, m.nickName, subject,TO_CHAR(m.created, 'YYYY-MM-DD') created,hitCount
+			     SELECT num, i.userId, subject, created,hitCount
 			        FROM infoReqBoard i JOIN member m ON i.userId=m.userId  
                     <where>
                          <if test="searchValue != null and searchValue != ''">
@@ -64,12 +64,62 @@
 	    ) WHERE rnum >= #{start}
 	]]>
 	</select>	
-	<!-- 파일 -->
 	
+	<!-- 글보기 -->
+	<select id="readBoard" resultType="com.wooltari.infoReqBoard.InfoReqBoard" parameterType="Integer">
+		SELECT num, subject, hitCount, created, i.userId FROM infoReqBoard i		
+		JOIN member m ON i.userId = m.userId WHERE num= #{num}	
+	</select>
+	
+	<!-- 조회수 증가  -->
+	<update id="updateHitCount" parameterType="Integer">
+		UPDATE infoReqBoard SET hitCount=hitCount+1 WHERE num=#{num}
+	</update>
+	
+	<!-- 이전글 -->
+	<select id="preReadBoard" resultType="com.wooltari.infoReqBoard.InfoReqBoard" parameterType="map">
+		SELECT tb.* FROM(SELECT num, i.userId FROM infoReqBoard i JOIN member m ON i.userId=m.userId
+		<where>
+			<if test="searchValue !=null and searchValue!=''">
+				<include refid="where-list"/>
+			</if>
+			<![CDATA[
+				AND (num > #{num})
+			]]>
+		</where>
+			ORDER BY num ASC
+		)tb WHERE ROWNUM=1
+	</select>
+	
+	<!-- 다음글 -->
+	<select id="nextReadBoard" resultType="com.wooltari.infoReqBoard.InfoReqBoard" parameterType="map">
+		SELECT tb.* FROM(SELECT num, i.userId FROM infoReqBoard i JOIN member m ON i.userId=m.userId
+		<where>
+			<if test="searchValue !=null and searchValue!=''">
+				<include refid="where-list"/>
+			</if>
+			<![CDATA[
+				AND (num < #{num})
+			]]>
+		</where>
+			ORDER BY num DESC
+		)tb WHERE ROWNUM=1
+	</select>
+	
+	<!-- 파일 -->	
 	<insert id="insertFile" parameterType="com.wooltari.infoReqBoard.InfoReqBoard">
 		 INSERT INTO infoReqFile(fileNum, num, saveFilename, originalFilename)
  			 VALUES(infoReqFile_seq.NEXTVAL, #{num}, #{saveFilename}, #{originalFilename})
 	</insert>
+	
+	<select id="listFile" parameterType="Integer" resultType="com.wooltari.infoReqBoard.InfoReqBoard">
+		SELECT fileNum, num, saveFilename, originalFilename FROM infoReqBoard WHERE num=#{num}	
+	</select>
+	
+	
+	<select id="readFile" parameterType="Integer" resultType="com.wooltari.infoReqBoard.InfoReqBoard">
+		SELECT fileNum, num, saveFilename, originalFilename FROM infoReqBoard WHERE fileNum=#{fileNum}	
+	</select>
 	
 	
 

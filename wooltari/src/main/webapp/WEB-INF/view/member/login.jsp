@@ -22,8 +22,6 @@
         <!-- Javascript -->
         <script src="<%=cp%>/resource/js/jquery-1.11.1.min.js"></script>
         <script src="<%=cp%>/resource/js/bootstrap.min.js"></script>
-        <script src="<%=cp%>/resource/js/jquery.backstretch.min.js"></script>
-        <%-- <script src="<%=cp%>/resource/js/login-scripts.js"></script> --%>
         
         <!--[if lt IE 10]>
             <script src="<%=cp%>/resource/js/placeholder.js"></script>
@@ -32,13 +30,9 @@
 		<!-- 카카오톡 로그인 -->
 		<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 		<script type='text/javascript'>
-		
+
 		$(document).ready(function() {
-		    /*
-		        Fullscreen background
-		    */
-		    $.backstretch("<%=cp%>/resource/img/login_background.jpg");
-		    
+			
 		    /*
 		        Form validation
 		    */
@@ -64,15 +58,14 @@
 				    f.submit();
 		    	}
 		    });
-		    
 		});
-		<%-- 
+
+		
 		function sendLogin() {
 			var f = document.loginform;
 		    f.action = "<%=cp%>/member/login_check";
 		    f.submit();
 		}
-		 --%>
 		
 		//<![CDATA[
 		// 사용할 앱의 JavaScript 키를 설정해 주세요.
@@ -127,73 +120,77 @@
 </head>
 
     <body>
-		<div class="body-container">
-		
-		    <!-- Top content -->
-		        <div class="top-content">
-		        	
-		            <div class="inner-bg">
-		                <div class="container">
-		                    <div class="row">
-		                        <div class="col-sm-8 col-sm-offset-2 text">
-		                            <div class="description"> 
-		                            	<p>${message}</p>
-		                            	<a href="<%=cp%>/member/findmember"><strong>로그인이 안 되시나요?</strong></a>
-		                            </div>
-		                        </div>
-		                    </div>
-		                    <div class="row">
-		                        <div class="col-sm-6 col-sm-offset-3 form-box">
-		                        	<div class="form-top">
-		                        		<div class="form-top-left"> 
-											<span style="font-size: 25px;color:#BDBDBD; font-weight: bold;"> 
-											<span style="font-size: 20px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
-											</span>&nbsp;&nbsp;&nbsp;W O O L T A R I&nbsp;&nbsp;&nbsp;</span>
-											<span style="font-size: 24px;"> L O G I N</span> 
-		                        		</div>
-		                            </div>
-		                            <div class="form-bottom">
-					                    <form name="loginform"  class="login-form" method="post" role="form" > 
-					                    	<div class="form-group">
-					                    		<label class="sr-only" for="form-username">Username</label>
-					                        	<input type="text" name="userId" placeholder="E-mail" class="form-username form-control" id="form-username">
-					                        </div>
-					                        <div class="form-group">
-					                        	<label class="sr-only" for="form-password">Password</label>
-					                        	<input type="password" name=userPwd placeholder="Password" class="form-password form-control" id="form-password">
-					                        </div>
-					                        <button type="submit" class="btn">로그인</button>
-					                        <div style="margin-top: 25px">  
-					                        <a href="<%=cp%>/member/findmember"><strong>아이디/비밀번호 찾기</strong></a> | 
-		                            		<a href="<%=cp%>/member/join"><strong> 회원 가입</strong></a>
-		                            		</div> 
-					                    </form>
-				                    </div>
-		                        </div>
-		                    </div>
-		                    <div class="row">
-		                        <div class="col-sm-6 col-sm-offset-3 social-login">
-		                        	<h3>소셜 계정 로그인</h3>
-		                        	<div class="social-login-buttons">
-			                        	<a class="btn btn-link-1 btn-link-1-kakaotalk" href="#">
-			                        		<i class="fa fa-comments"></i> KaKao
-			                        	</a>
-			                        	<a class="btn btn-link-1 btn-link-1-facebook" href="#">
-			                        		<i class="fa fa-facebook"></i> Facebook
-			                        	</a>
-			                        	<a class="btn btn-link-1 btn-link-1-twitter" href="#">
-			                        		<i class="fa fa-twitter"></i> Twitter
-			                        	</a>
-			                        	<a class="btn btn-link-1 btn-link-1-google-plus" href="#">
-			                        		<i class="fa fa-google-plus"></i> Google
-			                        	</a>
-		                        	</div>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
+	<div class="body-container">
+		<!-- Top content -->
+		<div class="top-content">
+			<div class="container1">
+			
+			
+				<div class="row">
+					<div class="text">
+						<div class="description">
+							<p>${message}</p>
+							<a href="<%=cp%>/member/findmember"><strong>로그인이 안되시나요?</strong></a>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="row">
+					<div class="form-box">
+						<div class="form-top">
+							<span style="font-size: 25px; color: #BDBDBD; font-weight: bold;">
+								<span style="font-size: 20px; color: #1abc9c;"
+								class="glyphicon glyphicon-pencil"> </span>&nbsp;&nbsp;&nbsp;W O O L T A R I&nbsp;&nbsp;&nbsp;
+							</span> <span style="font-size: 24px;"> L O G I N</span>
+						</div>
+						<div class="form-bottom">
+							<form name="loginform" class="login-form" method="post"
+								role="form">
+								<div class="form-group">
+									<label class="sr-only" for="form-username">Username</label> <input
+										type="text" name="userId" placeholder="E-mail"
+										class="form-username form-control" id="form-username">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="form-password">Password</label> <input
+										type="password" name=userPwd placeholder="Password"
+										class="form-password form-control" id="form-password">
+								</div>
+								<button type="submit" class="btn">로그인</button>
+								<div style="margin-top: 25px">
+									<a href="<%=cp%>/member/findmember"><strong>아이디/비밀번호
+											찾기</strong></a> | <a href="<%=cp%>/member/join"><strong> 회원
+											가입</strong></a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				<div class="row">
+					<div class="social-login">
+						<h3>소셜 계정 로그인</h3>
+						<div class="social-login-buttons">
+							<a class="btn btn-link-1 btn-link-1-kakaotalk"
+								href="javascript:loginWithKakao();"> <i
+								class="fa fa-comments"></i><strong> KaKao</strong>
+							</a> <a class="btn btn-link-1 btn-link-1-facebook" href="#"> <i
+								class="fa fa-facebook"></i><strong> Facebook</strong>
+							</a> <a class="btn btn-link-1 btn-link-1-google-plus" href="#"> <i
+								class="fa fa-google"></i><strong> Google</strong>
+							</a>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+			</div>
 		</div>
-    </body>
+	</div>
+</body>
 </html>
 		

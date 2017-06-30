@@ -55,8 +55,6 @@ body {
 	color: #F9F0DA;
 }
 
-
-
 .nav a, .nav a:link, .nav a:visited, .nav a:hover, .nav a:focus, span {
 	color: #3e3a39;
 }
@@ -116,13 +114,15 @@ margin-right: 10px;
 border: 1px solid #EAEAEA;  
 
 }
-
-
-
-
            
 </style>
 <script>
+function searchList() {
+	var f=document.searchForm;
+	f.action="<%=cp%>/download/infoReqBoard/list";
+	f.submit();
+}
+
 $(document).ready(function(){
     //최상단 체크박스 클릭
   
@@ -170,27 +170,28 @@ $(document).ready(function(){
 			</tr>
 		</table>
 	</div>
+	
 	<table cellpadding="0" cellspacing="0" style="width:100%;" class="board_table array">
 		<tbody>
 
-		
+	<c:forEach var="dto" items="${list}">
 			<tr>
 				
 				<td style="text-align:right; width:65px; padding: 5px 18px;"><input type="checkbox" name="chk"></td>
 				
-				<td class="___number">11</td>
+				<td class="___number">${dto.listNum}</td>
 				<td>
 					<div style="position:relative;">
 						<!--[category_name]-->
 					
-						<a href="<%=cp%>/download/infoReqBoard/article" class="subject">제목입니다</a><span class="comment">[16]</span>
+						<a href="${articleUrl}&num=${dto.num}" class="subject">${dto.subject}</a><span class="comment">[16]</span>
 					
 						<div class="info">
-							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">2017-06-19</span>
+							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">${dto.created}</span>
 							<span class="__dotted"></span>
-							<strong>작성자 </strong><span>홍길동</span>
+							<strong>작성자 </strong><span>${dto.userId}</span>
 							<span class="__dotted"></span>
-							<strong>조회수 </strong><span>30</span>
+							<strong>조회수 </strong><span>${dto.hitCount}</span>
 						</div>
 						
 						
@@ -203,18 +204,20 @@ $(document).ready(function(){
 					</div>
 				</td>
 			</tr>
+	</c:forEach>	
 			
 			
 		
 			
 		</tbody>
 	</table>
+
 	
-	
+</form>	
 	
 <!--------------------s:loop�쁺�뿭-------------------->
 
-	<div style="width: 900px; margin: 20px auto;text-align: center;">
+	<div class="paging" style="width: 900px; margin: 20px auto;text-align: center;">
 		<c:if test="${dataCount==0 }">
                             등록된 게시물이 없습니다.
         </c:if>
@@ -227,13 +230,15 @@ $(document).ready(function(){
 		<input type="button" class="clickbtn"
 		 onclick="javascript:location.href='<%=cp%>/download/infoReqBoard/created';" value="글쓰기">
 	</div>
+
+<form name="searchForm" method="post" >
 	<div class="scArea">
-		<select name="where" class="where">
+		<select class="where" name="searchKey">
 			<option value="subject">제목</option>
-			<option value="ment">내용</option>
-			<option value="writer">작성자</option>
+			<option value="content">내용</option>
+			<option value="userId">작성자</option>
 		</select>
-		<input type="text" name="keyword" class="keyword" placeholder="검색"  style="width:120px; "> <input type="button" class="submit">
+		<input type="text" name="searchValue" class="keyword" placeholder="검색"  style="width:120px; "> <input type="button" class="submit">
 	</div>
 </form>
 </div>

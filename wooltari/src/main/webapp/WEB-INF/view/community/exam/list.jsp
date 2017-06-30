@@ -370,21 +370,32 @@ $(function(){
    var url="<%=cp%>/exam/firstChart";
    $.getJSON(url, function (csv) {
       $('#firstChart').highcharts({
-         chart: {
+    	  colors: ['#FFBB00','#FF5E00','BLUE','#666666'],
+    	  chart: {
                type: 'pie',
-               options3d: {
-                   enabled: true,
-                   depth: 100
-               }
+               plotBackgroundColor:null,
+               plotBorderWidth:null,
+               plotShadow:false,
+               type:'pie'
            },
            title: {
-               text: '시간별 접속자 수',
+               text: '# 응시 수 <br> 1위: 정보처리기사 <br> [ 10 회 ]'
+           },
+           tooltip: {
+               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
            },
            plotOptions: {
                pie: {
-                   innerSize: 100,
-                   depth: 45
+                   allowPointSelect: true,
+                   cursor: 'pointer',
+                   dataLabels: {
+                       enabled: false
+                   },
+                   showInLegend: true
                }
+           },
+           credits:{
+        	 enabled:false  
            },
            series:csv
       });
@@ -396,21 +407,32 @@ $(function(){
    var url="<%=cp%>/exam/secondChart";
    $.getJSON(url, function (csv) {
       $('#secondChart').highcharts({
-         chart: {
+    	  colors: ['#FFBB00','#FF5E00','BLUE','#666666'],
+    	  chart: {
                type: 'pie',
-               options3d: {
-                   enabled: true,
-                   alpha: 45
-               }
-           },         
+               plotBackgroundColor:null,
+               plotBorderWidth:null,
+               plotShadow:false,
+               type:'pie'
+           },
            title: {
-               text: '시간별 접속자 수',
+               text: '# 합격률 <br> 1위: 정보처리기사 <br> [ 80% ]'
+           },
+           tooltip: {
+               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
            },
            plotOptions: {
                pie: {
-                   innerSize: 100,
-                   depth: 45
+                   allowPointSelect: true,
+                   cursor: 'pointer',
+                   dataLabels: {
+                       enabled: false
+                   },
+                   showInLegend: true
                }
+           },
+           credits:{
+        	 enabled:false  
            },
            series:csv
       });
@@ -422,21 +444,32 @@ $(function(){
    var url="<%=cp%>/exam/lastChart";
    $.getJSON(url, function (csv) {
       $('#lastChart').highcharts({
-         chart: {
+    	  colors: ['#FFBB00','#FF5E00','BLUE','#666666'],
+    	  chart: {
                type: 'pie',
-               options3d: {
-                   enabled: true,
-                   alpha: 45
-               }
-           },         
+               plotBackgroundColor:null,
+               plotBorderWidth:null,
+               plotShadow:false,
+               type:'pie'
+           },
            title: {
-               text: '시간별 접속자 수',
+               text: '# 오답율 <br> 1위: 한국사 능력 검정시험 <br> [ 40% ]'
+           },
+           tooltip: {
+               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
            },
            plotOptions: {
                pie: {
-                   innerSize: 100,
-                   depth: 45
+                   allowPointSelect: true,
+                   cursor: 'pointer',
+                   dataLabels: {
+                       enabled: false
+                   },
+                   showInLegend: true
                }
+           },
+           credits:{
+        	 enabled:false  
            },
            series:csv
       });
@@ -608,7 +641,6 @@ function deleteList() {
          홍길동&nbsp;&nbsp;</span>회원님의 응시할 시험 목록입니다.
    </div>
 
-
    <form name="array_form" id="array_form" style="width: 900px;">
       <!-- List Start-->
       <div class="settingArea">
@@ -751,12 +783,12 @@ function deleteList() {
 				<br><br>
 				
 				<!-- 통계 처리하기 -->
-				<div style="clear:both;">
+				<div style="clear:both; margin-left: 130px;">
 					<div id="firstChart" style="width: 300px; height: 500px; float: left; margin: 10px;"></div>
 					
-					<div id="secondChart" style="width: 300px; height: 150px; float: left; margin: 10px;"></div>
+					<div id="secondChart" style="width: 300px;height: 250px; float: left; margin: 66px 10px 30px;"></div>
 					
-					<div id="lastChart" style="width: 300px; height: 150px; float: left; margin: 10px;"></div>
+					<div id="lastChart" style="width: 300px; height: 250px; float: left; margin: 10px;"></div>
 				</div>
 				
 				
