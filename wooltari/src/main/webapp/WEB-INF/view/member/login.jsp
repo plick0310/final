@@ -5,103 +5,195 @@
 <%
    String cp = request.getContextPath();
 %>
-
-<style type="text/css">
-.lbl {
-   position:absolute; 
-   margin-left:15px; margin-top: 17px;
-   color: #999999; font-size: 11pt;
-}
-.loginTF {
-  width: 340px; height: 35px;
-  padding: 5px;
-  padding-left: 15px;
-  border:1px solid #999999;
-  color:#333333;
-  margin-top:5px; margin-bottom:5px;
-  font-size:14px;
-  border-radius:4px;
-}
-</style>
-
-<script type="text/javascript">
-function bgLabel(ob, id) {
-    if(!ob.value) {
-	    document.getElementById(id).style.display="";
-    } else {
-	    document.getElementById(id).style.display="none";
-    }
-}
-
-function sendLogin() {
-    var f = document.loginForm;
-
-	var str = f.userId.value;
-    if(!str) {
-        alert("아이디를 입력하세요. ");
-        f.userId.focus();
-        return;
-    }
-
-    str = f.userPwd.value;
-    if(!str) {
-        alert("패스워드를 입력하세요. ");
-        f.userPwd.focus();
-        return;
-    }
-
-    f.action = "<%=cp%>/member/login_check";
-    f.submit();
-}
-</script>
-
-<div class="body-container">
-
-    <div style="margin: 0px auto; padding-top:90px; width:360px;">
-    	<div style="text-align: center;">
-        	<span style="font-weight: bold; font-size:27px; color: #424951;">회원 로그인</span>
-        </div>
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>Wooltari</title>
+		<!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="<%=cp%>/resource/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<%=cp%>/resource/fonts/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="<%=cp%>/resource/css/login-form-elements.css">
+        <link rel="stylesheet" href="<%=cp%>/resource/css/login-style.css">
         
-		<form name="loginForm" method="post" action="">
-		  <table style="margin: 15px auto; width: 360px; border-spacing: 0px;">
-		  <tr align="center" height="60"> 
-		      <td> 
-                <label for="userId" id="lblUserId" class="lbl" >아이디</label>
-		        <input type="text" name="userId" id="userId" class="loginTF" maxlength="15"
-		                   tabindex="1"
-                           onfocus="document.getElementById('lblUserId').style.display='none';"
-                           onblur="bgLabel(this, 'lblUserId');">
-		      </td>
-		  </tr>
-		  <tr align="center" height="60"> 
-		      <td>
-		        <label for="userPwd" id="lblUserPwd" class="lbl" >패스워드</label>
-		        <input type="password" name="userPwd" id="userPwd" class="loginTF" maxlength="20" 
-		                   tabindex="2"
-                           onfocus="document.getElementById('lblUserPwd').style.display='none';"
-                           onblur="bgLabel(this, 'lblUserPwd');">
-		      </td>
-		  </tr>
-		  <tr align="center" height="65" > 
-		      <td>
-		        <button type="button" onclick="sendLogin();" class="btnConfirm">로그인</button>
-		      </td>
-		  </tr>
+        <!-- Javascript -->
+        <script src="<%=cp%>/resource/js/jquery-1.11.1.min.js"></script>
+        <script src="<%=cp%>/resource/js/bootstrap.min.js"></script>
+        <script src="<%=cp%>/resource/js/jquery.backstretch.min.js"></script>
+        <%-- <script src="<%=cp%>/resource/js/login-scripts.js"></script> --%>
+        
+        <!--[if lt IE 10]>
+            <script src="<%=cp%>/resource/js/placeholder.js"></script>
+        <![endif]-->
+        
+		<!-- 카카오톡 로그인 -->
+		<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+		<script type='text/javascript'>
+		
+		$(document).ready(function() {
+		    /*
+		        Fullscreen background
+		    */
+		    $.backstretch("<%=cp%>/resource/img/login_background.jpg");
+		    
+		    /*
+		        Form validation
+		    */
+		    $('.login-form input[type="text"], .login-form input[type="password"], .login-form textarea').on('focus', function() {
+		    	$(this).removeClass('input-error');
+		    });
+		    
+		    $('.login-form').on('submit', function(e) {
+		    	var flag = true;
+		    	$(this).find('input[type="text"], input[type="password"], textarea').each(function(){
+		    		if( $(this).val() == "" ) {
+		    			e.preventDefault();
+		    			$(this).addClass('input-error');
+		    			flag = false;
+		    		}
+		    		else {
+		    			$(this).removeClass('input-error');
+		    		}
+		    	});
+		    	if(flag){
+		    		var f = document.loginform;
+				    f.action = "<%=cp%>/member/login_check";
+				    f.submit();
+		    	}
+		    });
+		    
+		});
+		<%-- 
+		function sendLogin() {
+			var f = document.loginform;
+		    f.action = "<%=cp%>/member/login_check";
+		    f.submit();
+		}
+		 --%>
+		
+		//<![CDATA[
+		// 사용할 앱의 JavaScript 키를 설정해 주세요.
+		Kakao.init('510168497a3434cba4caf707891b2cca');
+		function loginWithKakao() {
+		  // 로그인 창을 띄웁니다.
+		  Kakao.Auth.login({
+		    	persistAccessToken: true,
+				persistRefreshToken: true,
+		    success: function(authObj) {
+		    	getKakaoProfile();
+		    },
+		    fail: function(err) {
+		      alert(JSON.stringify(err));
+		    }
+		  });
+		};
+		
+		function getKakaoProfile(){
+			Kakao.API.request({
+				url: '/v1/user/me',
+				success: function(res) {
+					/* 
+					alert("인증여부 : " + res.kaccount_email_verified);
+					alert("이메일 : " + res.kaccount_email);
+					alert("닉네임 : " + res.properties.nickname);
+					alert("프로필이미지 : " + res.properties.profile_image);
+					 */
+					var userId = res.kaccount_email;
+					var userName = res.properties.nickname;
+					var userImg = res.properties.profile_image;
+					var json_data = {"userId":userId,"userName":userName,"userImg":userImg};
+					$.ajax({
+						type:"POST"
+						,url:"<%=cp%>/member/login_kakao"
+						,data:json_data
+						,dataType:"JSON"
+						,success:function(data) {
+							window.location.reload();
+						}
+						,error:function(e) {
+							alert(e.responseText);
+						}
+					});
+				},
+				fail: function(error) {
+					console.log(error);
+				}
+			});
+		}
+		</script>
+</head>
 
-		  <tr align="center" height="45">
-		      <td>
-		       		<a href="<%=cp%>/">아이디찾기</a>&nbsp;&nbsp;&nbsp;
-		       		<a href="<%=cp%>/">패스워드찾기</a>&nbsp;&nbsp;&nbsp;
-		       		<a href="<%=cp%>/member/member">회원가입</a>
-		      </td>
-		  </tr>
-		  
-		  <tr align="center" height="40" >
-		    	<td><span style="color: blue;">${message}</span></td>
-		  </tr>
-		  
-		  </table>
-		</form>           
-	</div>
-
-</div>
+    <body>
+		<div class="body-container">
+		
+		    <!-- Top content -->
+		        <div class="top-content">
+		        	
+		            <div class="inner-bg">
+		                <div class="container">
+		                    <div class="row">
+		                        <div class="col-sm-8 col-sm-offset-2 text">
+		                            <div class="description"> 
+		                            	<p>${message}</p>
+		                            	<a href="<%=cp%>/member/findmember"><strong>로그인이 안 되시나요?</strong></a>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="row">
+		                        <div class="col-sm-6 col-sm-offset-3 form-box">
+		                        	<div class="form-top">
+		                        		<div class="form-top-left"> 
+											<span style="font-size: 25px;color:#BDBDBD; font-weight: bold;"> 
+											<span style="font-size: 20px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
+											</span>&nbsp;&nbsp;&nbsp;W O O L T A R I&nbsp;&nbsp;&nbsp;</span>
+											<span style="font-size: 24px;"> L O G I N</span> 
+		                        		</div>
+		                            </div>
+		                            <div class="form-bottom">
+					                    <form name="loginform"  class="login-form" method="post" role="form" > 
+					                    	<div class="form-group">
+					                    		<label class="sr-only" for="form-username">Username</label>
+					                        	<input type="text" name="userId" placeholder="E-mail" class="form-username form-control" id="form-username">
+					                        </div>
+					                        <div class="form-group">
+					                        	<label class="sr-only" for="form-password">Password</label>
+					                        	<input type="password" name=userPwd placeholder="Password" class="form-password form-control" id="form-password">
+					                        </div>
+					                        <button type="submit" class="btn">로그인</button>
+					                        <div style="margin-top: 25px">  
+					                        <a href="<%=cp%>/member/findmember"><strong>아이디/비밀번호 찾기</strong></a> | 
+		                            		<a href="<%=cp%>/member/join"><strong> 회원 가입</strong></a>
+		                            		</div> 
+					                    </form>
+				                    </div>
+		                        </div>
+		                    </div>
+		                    <div class="row">
+		                        <div class="col-sm-6 col-sm-offset-3 social-login">
+		                        	<h3>소셜 계정 로그인</h3>
+		                        	<div class="social-login-buttons">
+			                        	<a class="btn btn-link-1 btn-link-1-kakaotalk" href="#">
+			                        		<i class="fa fa-comments"></i> KaKao
+			                        	</a>
+			                        	<a class="btn btn-link-1 btn-link-1-facebook" href="#">
+			                        		<i class="fa fa-facebook"></i> Facebook
+			                        	</a>
+			                        	<a class="btn btn-link-1 btn-link-1-twitter" href="#">
+			                        		<i class="fa fa-twitter"></i> Twitter
+			                        	</a>
+			                        	<a class="btn btn-link-1 btn-link-1-google-plus" href="#">
+			                        		<i class="fa fa-google-plus"></i> Google
+			                        	</a>
+		                        	</div>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		</div>
+    </body>
+</html>
+		

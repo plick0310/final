@@ -25,11 +25,11 @@ public class MemberController {
 			) {
 		
 		if(login_error!=null){
-			String s = "아이디 또는 패스워드를 잘못 입력 하셨습니다.";
+			String s = "등록되지 않은 아이디이거나,<br>아이디 또는 비밀번호를 잘못 입력하셨습니다.";
 			model.addAttribute("message", s);
 		}
 		// 로그인 폼
-		return ".member.login";
+		return "member/login";
 	}
 	
 	@RequestMapping(value="/member/noAuth")
