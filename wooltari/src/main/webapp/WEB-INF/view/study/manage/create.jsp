@@ -194,7 +194,7 @@ input[type="checkbox"], input[type="radio"] {
 }
 
 input[name=style]:checked+label, input[name=isTestLesson]:checked+label,
-   input[name=speciality]:checked+label, input[name=target]:checked+label, input[name=target2]:checked+label,
+   input[name=speciality]:checked+label, input[name=target]:checked+label, input[name=gender]:checked+label,
    #what {
    background-color: #75ccbb;
    color: #fff;
@@ -230,7 +230,7 @@ background: black;
 <body>
    <!-- Swiper -->
    <form class="swiper-container" method="post"
-      enctype="multipart/form-data">
+      enctype="multipart/form-data" name="studyForm">
 
       <div class="swiper-wrapper">
          <div class="swiper-slide">
@@ -241,20 +241,19 @@ background: black;
                <div class="section-question">
                   <div class="question-title">스터디 명을 입력해 주세요</div>
                   <div class="question-answer">
-                     <input id="introTitle" name="title" type="text"
-                        class="form-control">
+                     <input id="introTitle" name="studyName" type="text" class="form-control">
 
 
                   </div>
                </div>
 
 
-               <div class="section-question">
+          <!--      <div class="section-question">
                   <div class="question-title">스터디 대문이미지를 등록해 주세요</div>
                   <div class="question-answer">
                      <div class="upload-label">
                         <div class="fileBox">
-                           <input type="file" id="uploadBtn" class="uploadBtn tts" >
+                           <input type="file" name="imageFileName" id="uploadBtn" class="uploadBtn tts" >
                            <label for="uploadBtn" class="btn btn-large uploadLabel "style="left: 120px; top: 104px; position: absolute;">사진올리기</label>
                         </div>
 
@@ -263,14 +262,14 @@ background: black;
                      </div>
 
                   </div>
-               </div>
+               </div> -->
 
 
                <div class="section-question">
                   <div class="question-title">스터디 한줄 소개를 입력해 주세요</div>
                   <div class="question-answer">
                      <textarea class="form-control"rows="10%" cols="80%" name="study_Info" id="study_Info"
-                        placeholder="40자 이내로 입력해주세요." onchange="study_InfoCheck();"></textarea>
+                        placeholder="40자 이내로 입력해주세요." onchange=""></textarea>
                   </div>
                </div>
             </div>
@@ -287,12 +286,12 @@ background: black;
                <div class="section-question">
                   <div class="question-title">스터디 인원을 입력해 주세요</div>
                   <div class="question-answer">
-                     <select>
-                        <option value="">2명</option>
-                        <option value="">3명</option>
-                        <option value="">4명</option>
-                        <option value="">5명</option>
-                        <option value="">6명 이상</option>
+                     <select name="recruit">
+                        <option value="2">2명</option>
+                        <option value="3">3명</option>
+                        <option value="4">4명</option>
+                        <option value="5">5명</option>
+                        <option value="6">6명 이상</option>
                      </select>
 
                   </div>
@@ -306,46 +305,46 @@ background: black;
 
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="checkbox" name="target" id="LTA00" value="LTA00" />
+                           <input type="checkbox" name="target" id="LTA00" value="초등학생" />
                            <label class="targetProperty" for="LTA00">초등학생</label>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="checkbox" name="target" id="LTA01" value="LTA01" />
+                           <input type="checkbox" name="target" id="LTA01" value="중학생" />
                            <label class="targetProperty" for="LTA01">중학생</label>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="checkbox" name="target" id="LTA02" value="LTA02" />
+                           <input type="checkbox" name="target" id="LTA02" value="고등학생" />
                            <label class="targetProperty" for="LTA02">고등학생</label>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="checkbox" name="target" id="LTA03" value="LTA03" />
+                           <input type="checkbox" name="target" id="LTA03" value="대학생" />
                            <label class="targetProperty" for="LTA03">대학생</label>
                         </div>
 
 
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="checkbox" name="target" id="LTA04" value="LTA04" />
+                           <input type="checkbox" name="target" id="LTA04" value="직장인" />
                            <label class="targetProperty" for="LTA04">직장인</label>
                         </div>
                         
                         
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="checkbox" name="target" id="LTA05" value="LTA05" />
+                           <input type="checkbox" name="target" id="LTA05" value="주부" />
                            <label class="targetProperty" for="LTA05">주부</label>
                         </div>
                         
                         
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="checkbox" name="target" id="LTA06" value="LTA06" />
+                           <input type="checkbox" name="target" id="LTA06" value="입시생" />
                            <label class="targetProperty" for="LTA06">입시생</label>
                         </div>
                         
@@ -363,19 +362,19 @@ background: black;
                      <div class="row targetWrap">
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="radio" name="target2" id="LTB00" value="LTB00" />
+                           <input type="radio" name="gender" id="LTB00" value="무관" />
                            <label class="targetProperty" for="LTB00">무관</label>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="radio" name="target2" id="LTB01" value="LTB01" />
+                           <input type="radio" name="gender" id="LTB01" value="여자" />
                            <label class="targetProperty" for="LTB01">여자</label>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="radio" name="target2" id="LTB02" value="LTB02" />
+                           <input type="radio" name="gender" id="LTB02" value="남자" />
                            <label class="targetProperty" for="LTB02">남자</label>
                         </div>
 
@@ -403,21 +402,20 @@ background: black;
                   <div class="question-answer">
                      <div class="row targetWrap">
 
-                        <select name="bigCategory" id="bigCategory" class="selectField"
-                           onchange="themeList();" style="width: 45%;">
+                        <select id="bigCategory" class="selectField" onchange="themeList();" style="width: 45%;">
                            <option value="">:: 대분류 ::</option>
                            <c:forEach var="vo" items="${listBigCategory}">
                               <option value="${vo.categoryNum}"
                                <%--   ${vo.categoryNum==dto.bigCategory ? "selected='selected'" : ""} --%>>${vo.subject}</option>
                            </c:forEach>
                         </select>
-                         <select name="smallCategory" id="smallCategory"
-                           class="selectField" style="width: 45%;" >
+                        
+                        <select  id="smallCategory" class="selectField" style="width: 45%;" >
                            <option value="">:: 중분류 ::</option>
                         </select>
+                        
                         <div id="select_category">
-                       <%--  <div id='what' style='margin :8px;'>안뇨옹<img src="<%=cp%>/resource/img/delete.png" alt="..." width="4%"
-               height="4%"> --%> </div>
+                       </div>
                         </div>
 
                      </div>
@@ -429,14 +427,13 @@ background: black;
                   <div class="question-answer">
                       <div class="row targetWrap">
 
-                        <select name="bigCity" id="bigCity" class="selectField"
-                           onchange="cityList();" style="width: 45%;">
+                        <select  id="bigCity" class="selectField" onchange="cityList();" style="width: 45%;">
                            <option value="">:: 대분류 ::</option>
                            <c:forEach var="vo" items="${listBigCity}">
                               <option value="${vo.cityNum}">${vo.cityName}</option>
                            </c:forEach>
-                        </select> <select name="smallCity" id="smallCity"
-                           class="selectField" style="width: 45%;">
+                        </select> 
+                        <select  id="smallCity" class="selectField" style="width: 45%;">
                            <option value="">:: 중분류 ::</option>
                         </select>
                         <div id="select_city">
@@ -469,7 +466,7 @@ background: black;
                      <div class="row">
                         <div class="col-sm-6 col-md-4">
                            <div class="thumbnail">
-                              <label> <input type="radio" name="fb" value="small" />
+                              <label> <input type="radio" name="range" value="0" />
                                  <img class="icon"src="<%=cp%>/resource/img/group.png" alt="..."> 
                               </label>
                               <div class="caption">
@@ -482,7 +479,7 @@ background: black;
 
                         <div class="col-sm-6 col-md-4">
                            <div class="thumbnail">
-                              <label> <input type="radio" name="fb" value="small" />
+                              <label> <input type="radio" name="range" value="1" />
                                  <img class="icon" src="<%=cp%>/resource/img/user.png" alt="..." >
                               </label>
                               
@@ -495,7 +492,7 @@ background: black;
 
                         <div class="col-sm-6 col-md-4">
                            <div class="thumbnail">
-                              <label> <input type="radio" name="fb" value="small" />
+                              <label> <input type="radio" name="range" value="2" />
 
                                  <img class="icon" src="<%=cp%>/resource/img/padlock.png" alt="...">
                               </label>
@@ -512,7 +509,7 @@ background: black;
             
             
                <div class="section-question" >
-                  <input type="button" id="uploadBtn2" class="uploadBtn tts">
+                  <input type="button" id="uploadBtn2" class="uploadBtn tts" onclick="insertStudy();" >
                   <label for="uploadBtn2" class="btn btn-large uploadLabel">스터디
                      만들기</label>
                   <input type="button" id="uploadBtn2" class="uploadBtn tts">
@@ -545,7 +542,13 @@ background: black;
    </script>
 
    <script>
-
+   function insertStudy(){
+	      var f=document.studyForm;
+	      
+	      f.action="<%=cp%>/study/created";
+	      f.submit();
+	   }
+	   
 	  
    function deleteCategory(item) {//x버튼 클릭시 제거
 		
@@ -575,9 +578,10 @@ background: black;
                       +s+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"
                         +" width='20px' height='20px' onclick='deleteCategory(\""+idx+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
                         	+"<input type='hidden' value='"+index2.val()+"' name='choiceCategory' id='choiceCategory'>");
-          
+        
+           
          });
-      
+      	
          $("#smallCity").change(function() { //카테고리 선택하면 박스추가 및 제어 
             
         	 if($("input[name='choiceCity']").length>=3){
@@ -595,7 +599,7 @@ background: black;
                          +" width='20px' height='20px' onclick='deleteCategory(\""+vdx+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
                          	+"<input type='hidden' value='"+index4.val()+"' name='choiceCity' id='choiceCity'>");
           });
-         
+       
          $('input[type=checkbox]').click(function() { //스터디대상3이하로 막기
             var count = $('input:checkbox[name="target"]:checked').length;
             if (count > 2) {

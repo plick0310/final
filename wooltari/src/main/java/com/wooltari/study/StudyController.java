@@ -29,6 +29,31 @@ public class StudyController {
 		return "/study/manage/create";
 	}
 	
+	
+	@RequestMapping(value="/study/created", method=RequestMethod.POST)
+	public String StudyCratedSubmit(
+			StudyInfo dto,  Model model ) throws Exception{
+		
+		
+		//SessionInfo info = (SessionInfo)session.getAttribute("member");
+	
+		/*	String root=session.getServletContext().getRealPath("/");
+		String pathname=root+File.separator+"uploads"+File.separator+"study"+
+				File.separator+info.getUserId();*/
+		
+		dto.setUserId("나야나");
+		service.insertStudy(dto);
+		
+		
+		System.out.println("ss");
+		return "redirect:/main";
+	}
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value="/study/getCategory", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> ThemeList(@RequestParam int parent) throws Exception{
@@ -54,6 +79,9 @@ public class StudyController {
 	
 		return model;
 	}
+	
+	
+	
 	
 	
 	@RequestMapping(value="/study/mylist")
