@@ -54,5 +54,105 @@
   	</insert>
   	
   	
+  	<!-- 스터디 내 게시판동적 생성 -->
+  	<!--자유게시판 -->
+	<update id="createStudyBoard" parameterType="Long">
+			CREATE TABLE s_${value}_Board(
+		   num number not null
+		   ,s_num number not null
+		   ,subject varchar2(200) not null
+		   ,content varchar2(2000) not null
+		   ,created date default sysdate
+		   ,hitCount number not null
+		   ,primary key(num)
+		   ,foreign key(s_num) references study(s_num) on delete cascade	  
+		)   
+	
+	</update>
+	
+	<update id="dropStudyBoard" parameterType="long">
+		drop table s_${value}_Board purge
+	</update>
+	
+	
+	<!--자유게시판 사진   -->
+	<update id="createStudyPhoto" parameterType="Long">
+		   CREATE TABLE s_${value}_Photo(
+		   pNum number not null
+		   ,num number not null
+		   ,imageFileName varchar2(1000) not null
+		   ,primary key(pNum)
+		   ,foreign key(num) references s_${value}_Board(num) on delete cascade
+		) 
+	</update>
+	
+	<update id="dropStudyPhoto" parameterType="long">
+		drop table s_${value}_Photo purge
+	</update>
+	
+	
+	<!--자유게시판 댓글  -->
+	<update id="StudyBoardReply" parameterType="Long">
+	CREATE TABLE s_${value}_BoardReply(
+   reNum number not null
+   ,num number not null
+   ,content varchar2(500) not null
+   ,primary key(reNum)
+   ,foreign key(num) references s_${value}_Board(num) on delete cascade
+	)
+	</update>
+	
+	<update id="dropBoardReply" parameterType="long">
+		drop table s_${value}_BoardReply purge
+	</update>
+	
+	
+	<!--자유게시판좋아요 -->
+	<update id="StudyBoardLike" parameterType="Long">
+	CREATE TABLE s_${value}_BoardLike(
+   num number not null
+   ,primary key(num)
+   ,foreign key(num) references s_${value}_Board(num) on delete cascade
+
+)
+	</update>
+	
+	<update id="dropBoardLike" parameterType="long">
+		drop table s_${value}_BoardLike purge
+	</update>
+	
+	
+	<!--일정게시판  -->
+	<update id="createStudyCalendar" parameterType="Long">
+	CREATE TABLE s_${value}_Calendar(
+   num number not null
+   ,s_num number not null
+   ,subject varchar2(100) not null
+   ,content varchar2(500)
+   ,sdate date not null
+   ,edate date
+   ,primary key(num)
+   ,foreign key(s_num) references study(s_num) on delete cascade
+)
+	</update>
+	
+	<update id="dropStudyCalendar" parameterType="long">
+		drop table s_${value}_Calendar purge
+	</update>
+	
+	<!--일정게시판 댓글  -->
+	<update id="StudyCalendarReply" parameterType="Long">
+	CREATE TABLE s_${value}_CalendarReply(
+   reNum number not null
+   ,num number not null
+   ,content varchar2(500) not null
+   ,primary key(reNum)
+   ,foreign key(num) references s_${value}_Calendar(num) on delete cascade
+)
+	</update>
+	
+	<update id="dropCalendarReply" parameterType="long">
+		drop table s_${value}_CalendarReply purge
+	</update>
   	
 </mapper>

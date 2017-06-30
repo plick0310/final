@@ -1,9 +1,12 @@
 package com.wooltari.study;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,17 +35,17 @@ public class StudyController {
 	
 	@RequestMapping(value="/study/created", method=RequestMethod.POST)
 	public String StudyCratedSubmit(
-			StudyInfo dto,  Model model ) throws Exception{
+			StudyInfo dto,  Model model ,HttpSession session) throws Exception{
 		
 		
 		//SessionInfo info = (SessionInfo)session.getAttribute("member");
 	
-		/*	String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"study"+
-				File.separator+info.getUserId();*/
+		String root=session.getServletContext().getRealPath("/");
+		String path=root+File.separator+"uploads"+File.separator+"study"+
+				File.separator+"studyMainimage";
 		
 		dto.setUserId("나야나");
-		service.insertStudy(dto);
+		service.insertStudy(dto ,path);
 		
 		
 		System.out.println("ss");
