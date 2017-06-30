@@ -84,8 +84,6 @@ background: none;
 					<li>
 						<strong>첨부파일</strong>[file1]
 					</li>
-		
-					
 					
 				</ul>
 				

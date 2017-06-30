@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="promote">
+	<!-- 홍보글 등록 -->
+	<insert id="insertBoard" parameterType="com.wooltari.promote.Promote">
+		insert into promotelist(num,subject,content,imagefilename,s_num,userId) values(promotenum_seq.nextval,#{subject},#{ment},#{imageFileName,jdbcType=VARCHAR},#{s_num},#{userId})		
+	</insert>
+	
+	<sql id="where-list">
+		<if test="searchKey=='userName'">
+			userName=#{searchValue}
+		</if>
+		<if test="searchKey=='subject'">
+			instr(subject,#{searchValue}) &gt; 0
+		</if>
+		<if test="searchKey=='content'">
+			 DBMS_LOB.INSTR(content,#{searchValue}) &gt; 0
+		</if>
+	</sql>
+	
+	<!-- 홍보글 리스트 -->
+	<select id="listBoard" parameterType="map" resultType="com.wooltari.promote.Promote">
+		select * from(
+			select rownum rnum, tb.* from(
+				select num,subject,content,hitcount,imagefilename,
+				to_char(created,'yyyy-mm-dd')created,s_num,username,p.userId
+				from promotelist p join member m on p.userId=m.userId
+			<where>
+				<if test="searchValue!=null and searchValue!=''">
+					<include refid="where-list"/>
+				</if>
+			</where>
+				order by num desc
+		<![CDATA[		
+			)tb where rownum <= #{end}
+		)where rnum>=#{start}
+		]]>
+	</select>
+	
+	<!-- 글 개수 -->
+	<select id="dataCount" resultType="Integer" parameterType="map">
+		select nvl(count(*),0) from promotelist p
+		join member m on p.userId=m.userId
+		<where>
+			<if test="searchValue!=null and searchValue!=''">
+				<include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateHitCount" parameterType="Integer">	
+		update promotelist set hitcount=hitcount+1 where num=#{num}
+	</update>
+	
+	<!-- 글 보기 -->
+	<select id="readBoard" parameterType="map" resultType="com.wooltari.promote.Promote">
+		select num,subject,content,hitcount,created,imageFilename,s_num,p.userId,nickName from promotelist p
+		join member m on p.userId=m.userId where num=#{num}
+	
+	</select>
+	
+	<!-- 글 수정 -->
+	<update id="updateBoard" parameterType="com.wooltari.promote.Promote">
+		update promotelist set subject=#{subject},content=#{content},imageFilename=#{imageFileName} where num=#{num}
+		
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteBoard" parameterType="Integer">
+		delete table from promotelist where num=#{num}
+	</delete>
+	
+	<!-- 홍보글 댓글등록 -->
+	<insert id="insertReply" parameterType="com.wooltari.promote.PromoteReply">
+	insert into promotereply(prnum,content,num,userId) values(promoterenum_seq.nextval,#{content},#{num},#{userId})
+	</insert>
+	
+	<!-- 홍보글 댓글 리스트 -->
+	
+	
+	<!-- 댓글 카운트 -->
+	<select id="replyCount" parameterType="map" resultType="Integer">
+		select nvl(count(*),0) from promotereply where num=#{num}
+	</select>
+	
+	<!-- 댓글삭제 -->
+	<delete id="deleteReply" parameterType="Integer">
+		delete from promotereply where prnum=#{prnum}
+	</delete>
+	
+</mapper>

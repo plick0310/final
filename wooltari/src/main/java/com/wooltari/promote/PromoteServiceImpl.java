@@ -6,20 +6,28 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wooltari.common.FileManager;
 import com.wooltari.common.dao.CommonDAO;
 
 @Service("promote.serviceImpl")
 public class PromoteServiceImpl implements PromoteService{
-
+	
+	@Autowired
+	private FileManager fileManager;
+	
 	@Autowired
 	private CommonDAO dao;
 	
+	//글추가
 	@Override
 	public int insertBoard(Promote dto, String pathname) {
 		int result=0;
 		try {
+			if(dto.getUpload()!=null){
+				String newFilename=fileManager.doFileUpload(dto.getUpload(), pathname);
+				dto.setImageFileName(newFilename);			
+			}
 			result=dao.insertData("promote.insertBoard", dto);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -27,16 +35,32 @@ public class PromoteServiceImpl implements PromoteService{
 		return result;
 	}
 
+	//전체리스트
 	@Override
 	public List<Promote> listBoard(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Promote> list=null;
+		
+		try {
+			list=dao.getListData("promote.listBoard", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 
+	//글개수
 	@Override
 	public int dataCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		
+		try {
+			result=dao.getIntValue("promote.dataCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	@Override
