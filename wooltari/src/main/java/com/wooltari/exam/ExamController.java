@@ -31,8 +31,10 @@ public class ExamController {
 	      ob.put("name", "응시 수");
 	      
 	      JSONArray ja=new JSONArray();
-	      ja.add("['합격', 10]");
-	      ja.add("['불합격', 2]");
+	      ja.add("['정보처리기사', 10]");
+	      ja.add("['정보처리산업기사', 8]");
+	      ja.add("['JLPT N1', 6]");
+	      ja.add("['한국사 검정 능력시험', 3]");
 	      ob.put("data", ja);
 	      
 	      arr.add(ob);
@@ -45,47 +47,45 @@ public class ExamController {
 	   @RequestMapping(value="/exam/secondChart", produces="application/json; charset=utf-8")
 	   @ResponseBody
 	   public String secondChart() throws Exception {
-	      JSONArray arr=new JSONArray();
-	      
-	      JSONObject ob=new JSONObject();
-	      ob.put("name", "접속자");
-	      
-	      JSONArray ja=new JSONArray();
-	      ja.add("['07-10시', 10]");
-	      ja.add("['10-13시', 30]");
-	      ja.add("['13-16시', 33]");
-	      ja.add("['16-19시', 20]");
-	      ja.add("['기타', 10]");
-	      ob.put("data", ja);
-	      
-	      arr.add(ob);
-	      
-	      System.out.println(arr.toString());
-	      
-	      return arr.toString();
-	   }
+		      JSONArray arr=new JSONArray();
+		      
+		      JSONObject ob=new JSONObject();
+		      ob.put("name", "백분율");
+		      
+		      JSONArray ja=new JSONArray();
+		      ja.add("['정보처리기사', 80]");
+		      ja.add("['정보처리산업기사', 60]");
+		      ja.add("['JLPT N1', 20]");
+		      ja.add("['한국사 검정 능력시험', 15]");
+		      ob.put("data", ja);
+		      
+		      arr.add(ob);
+		      
+		      System.out.println(arr.toString());
+		      
+		      return arr.toString();
+		   }
 	   
 	   @RequestMapping(value="/exam/lastChart", produces="application/json; charset=utf-8")
 	   @ResponseBody
 	   public String lastChart() throws Exception {
-	      JSONArray arr=new JSONArray();
-	      
-	      JSONObject ob=new JSONObject();
-	      ob.put("name", "접속자");
-	      
-	      JSONArray ja=new JSONArray();
-	      ja.add("['07-10시', 10]");
-	      ja.add("['10-13시', 30]");
-	      ja.add("['13-16시', 33]");
-	      ja.add("['16-19시', 20]");
-	      ja.add("['기타', 10]");
-	      ob.put("data", ja);
-	      
-	      arr.add(ob);
-	      
-	      System.out.println(arr.toString());
-	      
-	      return arr.toString();
+		      JSONArray arr=new JSONArray();
+		      
+		      JSONObject ob=new JSONObject();
+		      ob.put("name", "백분율");
+		      
+		      JSONArray ja=new JSONArray();
+		      ja.add("['한국사 검정 능력시험', 70]");
+		      ja.add("['정보처리산업기사', 50]");
+		      ja.add("['JLPT N1', 40]");
+		      ja.add("['정보처리기사', 10]");
+		      ob.put("data", ja);
+		      
+		      arr.add(ob);
+		      
+		      System.out.println(arr.toString());
+		      
+		      return arr.toString();
 	   }
 	
 /*	@RequestMapping(value="/community/report/created")
