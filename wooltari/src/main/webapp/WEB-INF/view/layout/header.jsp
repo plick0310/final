@@ -258,7 +258,7 @@ function modalSendLogin() {
 <!-- 모달 -->
 <div id="modalLogin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-		<div class="modal-content" id="modal-content">
+		<div class="modal-content" id="modal-content" style="background: none;" >
 			<!-- jsp가 들어가는 곳 -->
 		</div>
 	</div>

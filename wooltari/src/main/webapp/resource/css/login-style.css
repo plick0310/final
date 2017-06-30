@@ -13,9 +13,15 @@ body {
     background-color: #eeeeee; 
 }
 
+.modal-content{
+	box-shadow: none;
+	border: none; 
+}
+
 .body-container{
 	width:100%;
 	height:100%;
+	margin-top: 100px;
 }
 
 strong {
@@ -71,9 +77,9 @@ a, a:hover, a:focus {
 /***** Top content *****/
 .top-content {
 	margin: auto;
-	width: 1080px; 
-	height: 950px;
-	background: url('/wooltari/resource/img/login_background.png') no-repeat;
+	width: 500px; 
+	height: 700px; 
+	background: url('/wooltari/resource/img/login_note.png') no-repeat;
 }
 
 .top-content .text {
@@ -87,7 +93,7 @@ a, a:hover, a:focus {
 
 .row {
 	margin:auto;
-	width: 400px;
+	width: 400px; 
 	text-align:center;
 }
 .form-box {
@@ -111,7 +117,7 @@ a, a:hover, a:focus {
 }
 
 .description {
-	margin-top: 200px;
+	margin-top: 100px; 
 }
 .form-top {
 	margin-top: 50px;
