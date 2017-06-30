@@ -107,7 +107,7 @@ border: 1px solid #EAEAEA;
 		style="background-color:#F5F5F5; color: #353535; border-top: none;
 		box-shadow: 60px 0px 100px -90px #000000, -60px 0px 100px -90px #000000;"class="board_table">
 	
-		<tbody>
+		<tbody id="tb">
 			<tr>
 				<th style="width: 100px; ">제목</th>
 				<td><input type="text" name="subject" 
