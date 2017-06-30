@@ -641,7 +641,6 @@ function deleteList() {
          홍길동&nbsp;&nbsp;</span>회원님의 응시할 시험 목록입니다.
    </div>
 
-
    <form name="array_form" id="array_form" style="width: 900px;">
       <!-- List Start-->
       <div class="settingArea">

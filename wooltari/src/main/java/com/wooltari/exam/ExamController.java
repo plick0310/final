@@ -1,5 +1,6 @@
 package com.wooltari.exam;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -9,6 +10,7 @@ import net.sf.json.JSONObject;
 
 @Controller("community.exam.communityController")
 public class ExamController {
+
 	
 	@RequestMapping(value="/community/exam/list")
 	public String list() {
