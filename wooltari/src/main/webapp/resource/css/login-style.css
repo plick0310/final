@@ -1,37 +1,55 @@
-
-html {
-	height:100%;
-}
-
-body {
-	width:100%;
-	height:100%;
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 300; 
-    color: #bdbdbd;
-    background-color: #eeeeee; 
-}
-
 .modal-content{
 	box-shadow: none;
 	border: none; 
 }
 
-.body-container{
-	width:100%;
-	height:100%;
-	margin-top: 100px;
+.login-body{ 
+	width: 100%;
+	height: 100%; 
+    font-size: 14px; 
+    font-weight: 300; 
+    color: #777; 
+    background-color: #eeeeee; 
 }
 
-strong {
-	font-weight: 600;
+
+.login-container {
+	text-align:center;
+	width: 500px; 
+	height: 700px;
+	margin : 5% auto;
+	background: url('/wooltari/resource/img/login_note.png') no-repeat;
 }
 
-a, a:hover, a:focus {
+.login-container h3{
+	font-family: 'BareunDotum';
+	color: #aaaaaa; 
+}
+
+.login-container a, a:hover, a:focus {
 	color: #888888; 
-	text-decoration: none;
-    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+}
+.login-outer {
+}
+.login-inner {
+	padding-top: 70px; 
+	width: 400px;
+	margin: auto;
+}
+
+.form-bottom form button.login_btn {
+	font-weight: 600; 
+	width: 100%;
+} 
+
+.form-bottom form .input-error {
+	border: 2px solid #1abc9c;
+}
+.form-top, .form-bottom {
+	
+}
+.login-msg, .login-form, .login-social{
+	margin-top: 50px;
 }
 
 .btn-link-1 {
@@ -45,9 +63,8 @@ a, a:hover, a:focus {
 }
 .btn-link-1:hover, .btn-link-1:focus, .btn-link-1:active { outline: 0; opacity: 0.6; color: #ffffff; }
 
-.btn-link-1.btn-link-1-facebook { background: #4862a3; }
-.btn-link-1.btn-link-1-twitter { background: #55acee; }
-.btn-link-1.btn-link-1-google-plus { background: #dd4b39; }
+.btn-link-1.btn-link-1-facebook { background: #4862a3; color: #ffffff; }
+.btn-link-1.btn-link-1-google-plus { background: #dd4b39; color: #ffffff; }
 .btn-link-1.btn-link-1-kakaotalk { background: #f9e000; color: #3b1e1e; }
 
 .btn-link-1 i {
@@ -72,62 +89,5 @@ a, a:hover, a:focus {
 }
 .btn-link-2:hover, .btn-link-2:focus, 
 .btn-link-2:active, .btn-link-2:active:focus { outline: 0; opacity: 0.6; background: rgba(0, 0, 0, 0.3); color: #ffffff; }
-
-
-/***** Top content *****/
-.top-content {
-	margin: auto;
-	width: 500px; 
-	height: 700px; 
-	background: url('/wooltari/resource/img/login_note.png') no-repeat;
-}
-
-.top-content .text {
-	color: #bdbdbd;
-	font-weight: 600;
-	
-}
-
-.top-content .description a:hover, 
-.top-content .description a:focus { border-bottom: 1px dotted #ffffff; }
-
-.row {
-	margin:auto;
-	width: 400px; 
-	text-align:center;
-}
-.form-box {
-	width: 400px;
-}
-
-.form-top {
-	width: 100%;
-} 
-
-.form-bottom {
-	width: 100%; 
-}
-
-.form-bottom form button.btn {
-	width: 100%;
-} 
-
-.form-bottom form .input-error {
-	border: 2px solid #1abc9c;
-}
-
-.description {
-	margin-top: 100px; 
-}
-.form-top {
-	margin-top: 50px;
-}
-.form-bottom {
-	margin-top: 20px;
-}
-.social-login {
-	margin-top: 50px;
-}
-
 
 

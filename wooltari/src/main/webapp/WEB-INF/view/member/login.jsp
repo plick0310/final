@@ -13,8 +13,10 @@
 		<meta name="author" content="">
 		<title>Wooltari</title>
 		<!-- CSS -->
+		<link rel="stylesheet" href="<%=cp%>/resource/css/bootstrap.css">
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-        <link rel="stylesheet" href="<%=cp%>/resource/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/header.css">
+		<link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/style.css">
         <link rel="stylesheet" href="<%=cp%>/resource/fonts/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="<%=cp%>/resource/css/login-form-elements.css">
         <link rel="stylesheet" href="<%=cp%>/resource/css/login-style.css">
@@ -119,78 +121,61 @@
 		</script>
 </head>
 
-    <body>
-	<div class="body-container">
-		<!-- Top content -->
-		<div class="top-content">
-			<div class="container1">
-			
-			
-				<div class="row">
-					<div class="text">
-						<div class="description">
-							<p>${message}</p>
-							<a href="<%=cp%>/member/findmember"><strong>로그인이 안되시나요?</strong></a>
-						</div>
+   	<body class="login-body">
+		<div class="login-container">
+			<div class="login-outer">
+				<div class="login-inner">
+					<div class="login-msg">
+						<h3>${message}</h3>
+						<a href="<%=cp%>/member/findmember"><strong>로그인이 안되시나요?</strong></a>
 					</div>
-				</div>
 				
 				
-				<div class="row">
-					<div class="form-box">
+					<div class="login-form">
 						<div class="form-top">
 							<span style="font-size: 25px; color: #BDBDBD; font-weight: bold;">
 								<span style="font-size: 20px; color: #1abc9c;"
 								class="glyphicon glyphicon-pencil"> </span>&nbsp;&nbsp;&nbsp;W O O L T A R I&nbsp;&nbsp;&nbsp;
 							</span> <span style="font-size: 24px;"> L O G I N</span>
 						</div>
-						<div class="form-bottom">
-							<form name="loginform" class="login-form" method="post"
+						<div class="form-bottom" style="margin-top: 25px">
+							<form name="loginform" class="loginform" method="post"
 								role="form">
 								<div class="form-group">
-									<label class="sr-only" for="form-username">Username</label> <input
-										type="text" name="userId" placeholder="E-mail"
-										class="form-username form-control" id="form-username">
+									<label class="sr-only" for="form-username">Username</label>
+									<input type="text" name="userId" placeholder="E-mail"
+									class="form-username form-control" id="form-username">
 								</div>
 								<div class="form-group">
-									<label class="sr-only" for="form-password">Password</label> <input
-										type="password" name=userPwd placeholder="Password"
-										class="form-password form-control" id="form-password">
+									<label class="sr-only" for="form-password">Password</label>
+									<input type="password" name=userPwd placeholder="Password"
+									class="form-password form-control" id="form-password">
 								</div>
-								<button type="submit" class="btn">로그인</button>
-								<div style="margin-top: 25px">
-									<a href="<%=cp%>/member/findmember"><strong>아이디/비밀번호
-											찾기</strong></a> | <a href="<%=cp%>/member/join"><strong> 회원
-											가입</strong></a>
-								</div>
+								<button type="submit" class="login_btn">로그인</button>
 							</form>
+							<div style="margin-top: 25px">
+								<a href="<%=cp%>/member/findmember"><strong>아이디/비밀번호
+										찾기</strong></a> | <a href="<%=cp%>/member/join"><strong> 회원
+										가입</strong></a>
+							</div>
 						</div>
 					</div>
-				</div>
 				
-				
-				
-				<div class="row">
-					<div class="social-login">
+					<div class="login-social">
 						<h3>소셜 계정 로그인</h3>
 						<div class="social-login-buttons">
-							<a class="btn btn-link-1 btn-link-1-kakaotalk"
-								href="javascript:loginWithKakao();"> <i
-								class="fa fa-comments"></i><strong> KaKao</strong>
-							</a> <a class="btn btn-link-1 btn-link-1-facebook" href="#"> <i
-								class="fa fa-facebook"></i><strong> Facebook</strong>
-							</a> <a class="btn btn-link-1 btn-link-1-google-plus" href="#"> <i
-								class="fa fa-google"></i><strong> Google</strong>
+							<a class="btn btn-link-1 btn-link-1-kakaotalk" href="javascript:loginWithKakao();">
+							<i class="fa fa-comments"></i><strong> KaKao</strong>
+							</a> <a class="btn btn-link-1 btn-link-1-facebook" href="#">
+							<i class="fa fa-facebook"></i><strong> Facebook</strong>
+							</a> <a class="btn btn-link-1 btn-link-1-google-plus" href="#">
+							<i class="fa fa-google"></i><strong> Google</strong>
 							</a>
 						</div>
 					</div>
 				</div>
-				
-				
-				
 			</div>
 		</div>
-	</div>
-</body>
+	</body>
 </html>
 		
