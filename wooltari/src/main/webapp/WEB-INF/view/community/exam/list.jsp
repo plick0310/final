@@ -629,6 +629,28 @@ function deleteList() {
 }
 </script>
 
+<script type="text/javascript">
+    function sendOk() {
+        var f = document.modalForm;
+
+    	var str = f.wishlistName.value;
+        if(!str) {
+            alert("시험을 선택하세요");
+            return;
+        }
+
+    	str = f.wishlistDate.value;
+        if(!str) {
+            alert("응시일을 지정하세요. ");
+            return;
+        }
+
+    	f.action="<%=cp%>/exam/${mode}";
+    		
+        f.submit();
+    }
+</script>
+
 <div style="width: 900px; height:600px; margin: 60px auto;">
    <div style="height: 50px; font-size: 20px; text-align: center;">
       <span style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
@@ -863,15 +885,12 @@ function deleteList() {
          <div class="modal-dialog">
             <div class="modal-content">
 
-
                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal"
-                     aria-label="Close">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                   </button>
                   <h4 class="modal-title" id="exampleModalLabel">
-                     <div
-                        style="height: 50px; font-size: 20px; text-align: center; margin-top: 18px;">
+                     <div style="height: 50px; font-size: 20px; text-align: center; margin-top: 18px;">
                         <span
                            style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
                            <span style="font-size: 19px; color: #1abc9c;"
@@ -879,41 +898,47 @@ function deleteList() {
                         </span>E X A M
                      </div>
                   </h4>
-
                </div>
-               <div class="modal-body">
-                  <form>
-                     <div class="form-group"
-                        style="margin-bottom: 28px; margin-top: 22px;">
-                        <label for="recipient-name" class="control-label">시험명</label>
-                        &nbsp;&nbsp; 
-                        <select id="examSelect" style="border: 1px solid #D4D4D4">
-                           <option>시험 선택</option>
-                           <option value="op1">정보처리기사</option>
-                           <option value="op2">정보처리산업기사</option>
-                           <option value="op3">일본어</option>
-                        </select>
+               
+               <form name="modalForm" method="post" enctype="multipart/form-data">
+	               <div class="modal-body">
+	                     <div class="form-group" style="margin-bottom: 28px; margin-top: 22px;">
+	                        <label for="recipient-name" class="control-label">시험명</label>
+	                        &nbsp;&nbsp; 
+	                        
 
-                     </div>
-                     <div class="form-group">
-                        <label for="message-text" class="control-label"
-                           style="margin-right: 8px;">응시일</label>
-                        <div class="calendar_wrap">
-                           <input type="text" readonly="readonly" name="sdate"
-                              id="sampleDatePicker" value="날짜선택"></input>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-               <div class="modal-footer">
-
-                  <button type="button" class="clickbtn">등록 완료</button>
-                  <button type="button" class="clickbtn" data-dismiss="modal">닫기</button>
-
-               </div>
-            </div>
-         </div>
-      </div>
-
-   </form>
+							
+	   <!--                      <select id="examSelect" style="border: 1px solid #D4D4D4">
+	                           <option>시험 선택</option>
+	                           <option value="op1" examInfoName>정보처리기사</option>
+	                           <option value="op2">정보처리산업기사</option>
+	                           <option value="op3">일본어</option> -->
+	                           
+	                           
+	                           
+	                           
+	                           
+	                        </select>
+	
+	                     </div>
+	                     <div class="form-group">
+	                        <label for="message-text" class="control-label"
+	                           style="margin-right: 8px;">응시일</label>
+	                        <div class="calendar_wrap">
+	                           <input type="text" readonly="readonly" name="sdate"
+	                              id="sampleDatePicker" value="날짜선택"></input>
+	                        </div>
+	                     </div>
+	               </div>
+	               <div class="modal-footer">
+	
+	                  <button type="button" class="clickbtn">등록 완료</button>
+	                  <button type="button" class="clickbtn" data-dismiss="modal">닫기</button>
+	
+	               </div>
+   				</form>
+	          </div>
+	       </div>
+		</div>
+	</form>
 </div>
