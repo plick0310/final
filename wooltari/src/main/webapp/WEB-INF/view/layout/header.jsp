@@ -3,7 +3,6 @@
 <%
    String cp = request.getContextPath();
 %>
-
 <!-- 카카오톡 로그인 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type='text/javascript'>
@@ -23,6 +22,7 @@ function loginWithKakao() {
     }
   });
 };
+
 function getKakaoProfile(){
 	Kakao.API.request({
 		url: '/v1/user/me',
@@ -63,25 +63,6 @@ function logout(){
 		},10);
 	});
 }
-
-//]]>
-</script>
-
-<script type="text/javascript">
-//엔터 처리
-$(function(){
-	   $("input").not($(":button")).keypress(function (evt) {
-	        if (evt.keyCode == 13) {
-	            var fields = $(this).parents('form,body').find('button,input,textarea,select');
-	            var index = fields.index(this);
-	            if ( index > -1 && ( index + 1 ) < fields.length ) {
-	                fields.eq( index + 1 ).focus();
-	            }
-	            return false;
-	        }
-	     });
-});
-
 function dialogLogin() {
 	$("#modal-content").load("<%=cp%>/member/login_m");
 	$("#modalLogin").modal("show");	
@@ -90,28 +71,10 @@ function dialogLogin() {
 function dialogJoin() {
 	$("#modal-content").load("<%=cp%>/member/join_m");
 }
-
-function modalSendLogin() {
-    var f = document.modalLoginForm;
-	var msg = document.getElementById('msg');
-	var str = f.userId.value;
-    if(!str) {
-    	msg.innerHTML="<strong>아이디를 입력해주세요.</strong>";
-        f.userId.focus();
-        return;
-    }
-
-    str = f.userPwd.value;
-    if(!str) {
-    	msg.innerHTML="<strong>패스워드를 입력하세요.</strong>";
-        f.userPwd.focus();
-        return;
-    }
-
-    f.action = "<%=cp%>/member/login_check";
-    f.submit();
-}
 </script>
+
+
+
 
 <div data-spy="scroll" data-target=".navbar" data-offset="80">
 	<div class="mainlogo">
@@ -258,7 +221,7 @@ function modalSendLogin() {
 <!-- 모달 -->
 <div id="modalLogin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
-		<div class="modal-content" id="modal-content">
+		<div class="modal-content" id="modal-content" style="background: none;" >
 			<!-- jsp가 들어가는 곳 -->
 		</div>
 	</div>

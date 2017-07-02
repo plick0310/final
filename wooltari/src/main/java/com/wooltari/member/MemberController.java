@@ -37,7 +37,6 @@ public class MemberController {
 		return ".member.noAuthorized";
 	}
 	
-	
 	@RequestMapping(value="/member/join_m", method=RequestMethod.GET)
 	public String joinForm() throws Exception {
 		return "member/join_m";
@@ -45,7 +44,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/login_m", method=RequestMethod.GET)
 	public String loginForm() throws Exception {
-		return "member/login_m";
+		return "member/login";
 	}
 	
 	@RequestMapping(value="/member/login_kakao", method=RequestMethod.POST)
@@ -62,6 +61,12 @@ public class MemberController {
 		Map<String, Object> model = new HashMap<>();
 		model.put("userId", userId);
 		return model;
+	}
+	
+	@RequestMapping(value="/member/mypage", method=RequestMethod.GET)
+	public String myPage() {
+		
+		return ".member.mypage";
 	}
 	
 }

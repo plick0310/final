@@ -1,12 +1,9 @@
-input[type="text"], 
-input[type="password"], 
-textarea, 
-textarea.form-control {
+.form-username, .form-password {
 	height: 50px;
     margin: 0;
     padding: 0 20px;
     vertical-align: middle;
-    background: #f8f8f8;
+    background: #f8f8f8; 
     border: 1px solid #ddd;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -46,7 +43,7 @@ textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeh
 
 
 
-button.btn {
+button.login_btn {
 	height: 50px;
     margin: 0;
     padding: 0 20px;
@@ -64,10 +61,10 @@ button.btn {
     -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
 }
 
-button.btn:hover { opacity: 0.6; color: #ffffff; }
+button.login_btn:hover { opacity: 0.6; color: #ffffff; }
 
-button.btn:active { outline: 0; opacity: 0.6; color: #ffffff; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
+button.login_btn:active { outline: 0; opacity: 0.6; color: #ffffff; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
 
-button.btn:focus { outline: 0; opacity: 0.6; background: #1abc9c; color: #ffffff; }
+button.login_btn:focus { outline: 0; opacity: 0.6; background: #1abc9c; color: #ffffff; }
 
-button.btn:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #1abc9c; color: #ffffff; }
+button.login_btn:active:focus, button.login_btn.active:focus { outline: 0; opacity: 0.6; background: #1abc9c; color: #ffffff; }

@@ -49,6 +49,40 @@
          </div>
 
       </div>
+      
+      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
+         style="cursor: pointer;">
+         <div class="thumbnail">
+            <div class="imagebox">
+
+               <img src="..." alt="...">
+
+            </div>
+            <div class="caption">
+               <h4 style="text-align: center;">스터디명</h4>
+               <p>카테고리1</p>
+               <p>카테고리2</p>
+            </div>
+         </div>
+
+      </div>
+      
+      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
+         style="cursor: pointer;">
+         <div class="thumbnail">
+            <div class="imagebox">
+
+               <img src="..." alt="...">
+
+            </div>
+            <div class="caption">
+               <h4 style="text-align: center;">스터디명</h4>
+               <p>카테고리1</p>
+               <p>카테고리2</p>
+            </div>
+         </div>
+
+      </div>
       <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
          style="cursor: pointer;">
          <div class="thumbnail">
