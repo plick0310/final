@@ -27,6 +27,7 @@ public class MemberController {
 		if(login_error!=null){
 			String s = "등록되지 않은 아이디이거나,<br>아이디 또는 비밀번호를 잘못 입력하셨습니다.";
 			model.addAttribute("message", s);
+			model.addAttribute("modalflag", "false");
 		}
 		// 로그인 폼
 		return "member/login";
@@ -37,14 +38,31 @@ public class MemberController {
 		return ".member.noAuthorized";
 	}
 	
-	@RequestMapping(value="/member/join_m", method=RequestMethod.GET)
+	@RequestMapping(value="/member/join", method=RequestMethod.GET)
 	public String joinForm() throws Exception {
-		return "member/join_m";
+		return "member/join";
 	}
 	
-	@RequestMapping(value="/member/login_m", method=RequestMethod.GET)
-	public String loginForm() throws Exception {
-		return "member/login";
+	@RequestMapping(value="/member/join_submit", method=RequestMethod.GET)
+	public String joinSubmit() throws Exception {
+		
+		return ".member.complete";
+	}
+	
+	@RequestMapping(value="/member/userIdCheck")
+	@ResponseBody
+	public Map<String, Object> userIdCheck(
+			@RequestParam String userId
+			) throws Exception {
+		String passed="false";
+		Member dto=service.readMember(userId);
+		if(dto==null)
+			passed="true";
+		
+   	    // 작업 결과를 json으로 전송
+		Map<String, Object> model = new HashMap<>(); 
+		model.put("passed", passed);
+		return model;
 	}
 	
 	@RequestMapping(value="/member/login_kakao", method=RequestMethod.POST)
@@ -68,5 +86,7 @@ public class MemberController {
 		
 		return ".member.mypage";
 	}
+	
+	
 	
 }

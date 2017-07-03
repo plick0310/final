@@ -64,12 +64,13 @@ function logout(){
 	});
 }
 function dialogLogin() {
-	$("#modal-content").load("<%=cp%>/member/login_m");
-	$("#modalLogin").modal("show");	
+	$("#modal-content").load("<%=cp%>/member/login");
+	$("#modalflage").val("true");
+	$("#modalLogin").modal("show");
 }
 
 function dialogJoin() {
-	$("#modal-content").load("<%=cp%>/member/join_m");
+	$("#modal-content").load("<%=cp%>/member/join");
 }
 </script>
 
