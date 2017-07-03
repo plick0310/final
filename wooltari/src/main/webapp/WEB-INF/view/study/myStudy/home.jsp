@@ -67,7 +67,7 @@ background: #eee;
 		<table style="width: 700px; text-align: center;" class="mymain">
 		<tr>
 		<td>H O M E</td>
-		<td>N A M E</td>
+		<td>C A L E N D E R</td>
 		<td>M E M B E R</td>
 		<td>A D M I N</td>
 		</tr>

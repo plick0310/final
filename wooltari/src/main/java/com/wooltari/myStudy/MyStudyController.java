@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller("study.mystudy.myStudyController")
 public class MyStudyController {
 	
-	@RequestMapping(value="/study/myStudy/list")
+	@RequestMapping(value="/study/myStudy/home/{S_num}")
 	public String list() {
 
-		return ".study.myStudy.list";
+		return ".study.myStudy.home";
 	}
 	
 /*	@RequestMapping(value="/community/report/created")
