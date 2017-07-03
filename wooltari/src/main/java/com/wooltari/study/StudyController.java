@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.wooltari.member.SessionInfo;
 
 @Controller("study.studyController")
 public class StudyController {
@@ -38,25 +41,22 @@ public class StudyController {
 			StudyInfo dto,  Model model ,HttpSession session) throws Exception{
 		
 		
-		//SessionInfo info = (SessionInfo)session.getAttribute("member");
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
 	
 		String root=session.getServletContext().getRealPath("/");
 		String path=root+File.separator+"uploads"+File.separator+"study"+
 				File.separator+"studyMainimage";
 		
-		dto.setUserId("나야나");
+		dto.setUserId(info.getUserId());
 		service.insertStudy(dto ,path);
 		
-		
+		System.out.println(path);
 		System.out.println("ss");
-		return "redirect:/main";
+		//return "redirect:/main";
+		return "redirect:/study/myStudy/home/"+dto.getS_num();
 	}
 	
-	
-	
-	
-	
-	
+
 	@RequestMapping(value="/study/getCategory", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> ThemeList(@RequestParam int parent) throws Exception{
@@ -84,12 +84,15 @@ public class StudyController {
 	}
 	
 	
-	
-	
-	
 	@RequestMapping(value="/study/mylist")
-	   public String list(){
-	      
-	      return ".study.mystudylist.mylist";
+	   public String list(Model model , HttpSession session ,HttpServletRequest req){
+	     
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		List<StudyInfo> list = service.listMyStudy(info.getUserId());
+		
+		model.addAttribute("Mylist",list);	
+		
+	    return ".study.mystudylist.mylist";
 	}
 }

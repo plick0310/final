@@ -21,7 +21,10 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/swiper.min.css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/bootstrap.css">
 
-<script type="text/javascript" src="<%=cp%>/resource/js/jquery.1.11.1.js"></script>
+<%-- <script type="text/javascript" src="<%=cp%>/resource/js/jquery.1.11.1.js"></script>
+ --%>
+ 
+ <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 
 <script type="text/javascript" src="<%=cp%>/resource/js/bootstrap.min.js"></script>
 
@@ -41,6 +44,7 @@ body {
    color: #000;
    margin: 0;
    padding: 0;
+  
 }
 
 .swiper-container {
@@ -49,6 +53,7 @@ body {
 }
 
 .swiper-slide {
+   
    text-align: center;
    background: #fff;
    /* Center slide text vertically */
@@ -116,7 +121,7 @@ section {
 }
 
 
-input#introTitle {
+input#studyName {
    margin: 0;
 }
 
@@ -130,7 +135,7 @@ input#introTitle {
 .question-title {
    font-size: 2.0rem;
    font-weight: 300;
-   margin-bottom: 15px;
+   margin-bottom: 5px;
 }
 
 .question-answer select, .question-answer input {
@@ -218,11 +223,20 @@ section .moccozyType, section .teacher-type, .topCategory-box,
    overflow: hidden;
    visibility: hidden
 }
-
+#blah{
+border: 0px;
+}
 .col-sm-6 col-md-4:HOVER{
 background: black;
 }
+.help-block{
+color: #1abc9c;
+padding-top: 10px;
+}
+
 </style>
+ 
+
 
 </head>
 <body>
@@ -238,8 +252,9 @@ background: black;
                <div class="section-verticalLine"></div>
                <div class="section-question">
                   <div class="question-title">스터디 명을 입력해 주세요</div>
+                  <p class="help-block">40자 이내로 입력해 주세요.</p>
                   <div class="question-answer">
-                     <input id="introTitle" name="studyName" type="text" class="form-control">
+                     <input id="studyName" name="studyName" type="text" class="form-control">
 
 
                   </div>
@@ -249,6 +264,7 @@ background: black;
 
                <div class="section-question">
                   <div class="question-title">스터디 한줄 소개를 입력해 주세요</div>
+                  <p class="help-block">100자 이내로 입력해 주세요.</p>
                   <div class="question-answer">
                      <textarea class="form-control"rows="10%" cols="80%" name="study_Info" id="study_Info"
                         placeholder="40자 이내로 입력해주세요." onchange=""></textarea>
@@ -261,8 +277,9 @@ background: black;
                   <div class="question-answer">
                      <div class="upload-label">
                         <div class="fileBox">
+                        	<img id="blah" src="#" alt="" style="width: 300px; height: 250px;"/>
+                           <label for="uploadBtn"  class="btn btn-large uploadLabel "style="left:80px; top: 80px; position: absolute;">사진올리기</label>
                            <input type="file" name="upload" id="uploadBtn" class="uploadBtn tts" >
-                           <label for="uploadBtn" class="btn btn-large uploadLabel "style="left:80px; top: 80px; position: absolute;">사진올리기</label>
                         </div>
 
 
@@ -283,6 +300,7 @@ background: black;
 
                <div class="section-question">
                   <div class="question-title">스터디 인원을 입력해 주세요</div>
+                  
                   <div class="question-answer">
                      <select name="recruit">
                         <option value="2">2명</option>
@@ -297,6 +315,7 @@ background: black;
 
                <div class="section-question">
                   <div class="question-title">스터디 대상을 선택해 주세요</div>
+                  <p class="help-block" id="help-target">최대 세가지 선택가능합니다.</p>
                   <div class="question-answer">
                      <div class="row targetWrap">
 
@@ -374,6 +393,8 @@ background: black;
                            style="padding: 2px;">
                            <input type="radio" name="gender" id="LTB02" value="남자" />
                            <label class="targetProperty" for="LTB02">남자</label>
+                        	
+                        	
                         </div>
 
 
@@ -397,6 +418,7 @@ background: black;
 
       <div class="section-question">
                   <div class="question-title">스터디 카테고리를 선택해 주세요</div>
+                  <p class="help-block" id="help-cate">최대 3개의 카테고리를 선택 가능합니다.</p>
                   <div class="question-answer">
                      <div class="row targetWrap">
 
@@ -422,6 +444,7 @@ background: black;
 
             <div class="section-question">
                   <div class="question-title">스터디 활동 지역을 선택해 주세요</div>
+                  <p class="help-block" id="help-city">최대 3개의 지역을 선택가능합니다.</p>
                   <div class="question-answer">
                       <div class="row targetWrap">
 
@@ -542,6 +565,15 @@ background: black;
    function insertStudy(){
 	      var f=document.studyForm;
 	      
+	      var str;
+	      str=f.studyName.value;
+	      str=$.trim(str);
+	      if(!str){
+	    	  f.studyName.focus();
+	    	  alert("스터디명을 입력해주세요");
+	    	  return false;
+	      }
+	   
 	      f.action="<%=cp%>/study/created";
 	      f.submit();
 	   }
@@ -584,9 +616,12 @@ background: black;
          var cnt=0, vnt=0;
          $("#smallCategory").change(function() { //카테고리 선택하면 박스추가   
             if($("input[name='choiceCategory']").length>=3){
-               alert("3개이하만 선택 가능합니다.");
+               $("#help-cate").html("3개이하만 선택 가능합니다.").css("color","red");
                return;
+            } else{
+            	
             }
+         
             cnt++;
             var index1 = $("#bigCategory option:selected");
             var index2 = $("#smallCategory option:selected");
@@ -598,7 +633,7 @@ background: black;
              $("input[name='choiceCategory']").each(function() {
             	 if(index2.val() === this.value){
             		 state1=true;
-             		alert("중복된 카테고리를 선택하였습니다.");
+            		 $("#help-cate").html("중복된 카테고리를 선택하였습니다.").css("color","red");
             	 }
             });
 
@@ -608,8 +643,8 @@ background: black;
 
 			
 			
-            $("#select_category").append(" <div id='"+idx+"' style='width: 536px; height: 40px; margin: 0 auto; background-color: #1abc9c;'>"
-                    +"<div style='display: inline-block; font-size: 20px; line-height: 40px; color: white;'>"
+            $("#select_category").append(" <div id='"+idx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb;'>"
+                    +"<div style='display: inline-block; font-size: 17px; line-height: 40px; color: white;'>"
                       +s+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"
                         +" width='20px' height='20px' onclick='deleteCategory(\""+idx+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
                         	+"<input type='hidden' value='"+index2.val()+"' name='choiceCategory' id='choiceCategory'>");
@@ -621,9 +656,12 @@ background: black;
          $("#smallCity").change(function() { //도시 선택하면 박스추가 및 제어 
      
         	 if($("input[name='choiceCity']").length>=3){
-                alert("3개이하만 선택 가능합니다.");
+                $("#help-city").html("3개이하만 선택 가능합니다.").css("color","red");
                 return;
+             } else{
+             	
              }
+          
          	 vnt++;
              
          	 var index3 = $("#bigCity option:selected");
@@ -635,7 +673,7 @@ background: black;
              $("input[name='choiceCity']").each(function() {
             	 if(index4.val() === this.value){
             		 state2=true;
-             		alert("중복된 지역을 선택하였습니다.");
+            		 $("#help-city").html("중복된 지역을 선택하였습니다.").css("color","red");
             	 }
             });
 
@@ -645,8 +683,8 @@ background: black;
 
             
             	 
-             $("#select_city").append(" <div id='"+vdx+"' style='width: 536px; height: 40px; margin: 0 auto; background-color: #1abc9c; '>"
-                     +"<div style='display: inline-block; font-size: 20px; line-height: 40px; color: white;'>"
+             $("#select_city").append(" <div id='"+vdx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb; '>"
+                     +"<div style='display: inline-block; font-size: 17px; line-height: 40px; color: white;'>"
                        +s+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"
                          +" width='20px' height='20px' onclick='deleteCategory(\""+vdx+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
                          	+"<input type='hidden' value='"+index4.val()+"' name='choiceCity' id='choiceCity'>");
@@ -655,7 +693,7 @@ background: black;
          $('input[type=checkbox]').click(function() { //스터디대상3이하로 막기
             var count = $('input:checkbox[name="target"]:checked').length;
             if (count > 2) {
-               alert("2개이하만 선택가능합니다.");
+            	 $("#help-target").html("2개 이하로 선택해 주세요").css("color","red");
                $(this).attr("checked", false);
             }
 
@@ -762,7 +800,29 @@ background: black;
    </script>
 
 
+   <script type="text/javascript">
+        $(function() {
+            $("#uploadBtn").on('change', function(){
+                $("#uploadBtn").empty();
+                readURL(this);
+            });
+        });
 
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                    
+                }
+
+              reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+    </script>
 
 
 

@@ -33,104 +33,26 @@
    </div>
    <div class="row">
 
-      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
+
+<c:forEach var = "dto" items="${Mylist}">
+      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='<%=cp%>/study/myStudy/home/${dto.s_num}';"
          style="cursor: pointer;">
          <div class="thumbnail">
             <div class="imagebox">
 
-               <img src="..." alt="...">
-
+               
+			<img src="<%=cp%>/uploads/study/studyMainimage/${dto.imageFileName}" style="width: 250px; height: 200px;">
             </div>
             <div class="caption">
-               <h4 style="text-align: center;">스터디명</h4>
-               <p>카테고리1</p>
-               <p>카테고리2</p>
+               <h4 style="text-align: center;">${dto.studyName }</h4>
+             <!--   <p>카테고리1</p>
+               <p>카테고리2</p> -->
             </div>
          </div>
 
       </div>
-      
-      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
-         style="cursor: pointer;">
-         <div class="thumbnail">
-            <div class="imagebox">
-
-               <img src="..." alt="...">
-
-            </div>
-            <div class="caption">
-               <h4 style="text-align: center;">스터디명</h4>
-               <p>카테고리1</p>
-               <p>카테고리2</p>
-            </div>
-         </div>
-
-      </div>
-      
-      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
-         style="cursor: pointer;">
-         <div class="thumbnail">
-            <div class="imagebox">
-
-               <img src="..." alt="...">
-
-            </div>
-            <div class="caption">
-               <h4 style="text-align: center;">스터디명</h4>
-               <p>카테고리1</p>
-               <p>카테고리2</p>
-            </div>
-         </div>
-
-      </div>
-      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
-         style="cursor: pointer;">
-         <div class="thumbnail">
-            <div class="imagebox">
-
-               <img src="..." alt="...">
-
-            </div>
-            <div class="caption">
-               <h4 style="text-align: center;">스터디명</h4>
-               <p>카테고리1</p>
-               <p>카테고리2</p>
-            </div>
-         </div>
-
-      </div>
-      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
-         style="cursor: pointer;">
-         <div class="thumbnail">
-            <div class="imagebox">
-
-               <img src="..." alt="...">
-
-            </div>
-            <div class="caption">
-               <h4 style="text-align: center;">스터디명</h4>
-               <p>카테고리1</p>
-               <p>카테고리2</p>
-            </div>
-         </div>
-
-      </div>
-      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
-         style="cursor: pointer;">
-         <div class="thumbnail">
-            <div class="imagebox">
-
-               <img src="..." alt="...">
-
-            </div>
-            <div class="caption">
-               <h4 style="text-align: center;">스터디명</h4>
-               <p>카테고리1</p>
-               <p>카테고리2</p>
-            </div>
-         </div>
-
-      </div> 
+   </c:forEach>   
+   
 
       <div class="col-sm-6 col-md-4"
          onclick="javascript:location.href='<%=cp%>/study/created';"
