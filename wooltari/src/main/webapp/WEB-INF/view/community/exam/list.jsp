@@ -906,7 +906,9 @@ function deleteList() {
 	                        <label for="recipient-name" class="control-label">시험명</label>
 	                        &nbsp;&nbsp; 
 	                        
-
+					<c:forEach var="dto" items="${list}">
+                        <option value="${dto.examinfoName}" >${dto.examinfoName}</option>
+                     </c:forEach>
 							
 	   <!--                      <select id="examSelect" style="border: 1px solid #D4D4D4">
 	                           <option>시험 선택</option>
