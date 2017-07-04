@@ -1,12 +1,14 @@
 package com.wooltari.member;
 
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +27,8 @@ public class MemberController {
 			) {
 		
 		if(login_error!=null){
-			String s = "등록되지 않은 아이디이거나,<br>아이디 또는 비밀번호를 잘못 입력하셨습니다.";
-			model.addAttribute("message", s);
+			String message = "등록되지 않은 아이디이거나,<br>아이디 또는 비밀번호를 잘못 입력하셨습니다.";
+			model.addAttribute("message", message);
 			model.addAttribute("modalflag", "false");
 		}
 		// 로그인 폼
@@ -43,10 +45,28 @@ public class MemberController {
 		return "member/join";
 	}
 	
-	@RequestMapping(value="/member/join_submit", method=RequestMethod.GET)
-	public String joinSubmit() throws Exception {
+	@RequestMapping(value="/member/join_submit", method=RequestMethod.POST)
+	public String joinSubmit(Member dto, Model model, HttpSession session) throws Exception {
+		try {
+			// 패스워드 암호화
+			ShaPasswordEncoder pe = new ShaPasswordEncoder(256);
+			String s = pe.encodePassword(dto.getUserPwd(), null);
+			dto.setUserPwd(s);
+			
+			// 프로필 이미지 저장
+			String root=session.getServletContext().getRealPath("/");
+			String path=root+File.separator+"uploads"+File.separator+"member"+
+					File.separator+"userImg";
+			
+			service.insertMember(dto, path);
+		} catch (Exception e) {
+			model.addAttribute("message", "회원가입이 실패했습니다.");
+			return "member/notice";
+		}
+		String message = "울타리의 회원이 되신것을 환영합니다.<br>마이페이지에서 추가정보를 입력하시면 원할한 서비스 이용이 가능합니다.";
+		model.addAttribute("message", message);
 		
-		return ".member.complete";
+		return "member/notice";
 	}
 	
 	@RequestMapping(value="/member/userIdCheck")
@@ -82,8 +102,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/mypage", method=RequestMethod.GET)
-	public String myPage() {
+	public String myPage(Model model , HttpSession session) {
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		
+		Member dto = service.readMember(info.getUserId());
+		
+		model.addAttribute("dto", dto);
 		return ".member.mypage";
 	}
 	

@@ -68,3 +68,21 @@ button.member_btn:active { outline: 0; opacity: 0.6; color: #ffffff; -moz-box-sh
 button.member_btn:focus { outline: 0; opacity: 0.6; background: #1abc9c; color: #ffffff; }
 
 button.member_btn:active:focus, button.member_btn.active:focus { outline: 0; opacity: 0.6; background: #1abc9c; color: #ffffff; }
+
+
+.leftContent {
+	float: left;
+	width: 30%;
+	text-align: left;
+}
+.rightContent {
+	float: right;
+	width: 70%;
+}
+.footerContent {
+	clear: both;
+}
+.fileBox{position: relative}
+.fileBox .file_upload{display:inline-block; width:100px; height:25px;}
+.fileBox .btn_file{display:inline-block; width:100px; height:25px; border:1px solid #ccc; font-size:12px; background:none; text-align:center; vertical-align:middle; line-height:25px; cursor:pointer}
+.fileBox input[type='file'], .fileBox input[type='button']{position:absolute; /*top:14px; left:202px;*/ width:1px; height:1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); border:0}
