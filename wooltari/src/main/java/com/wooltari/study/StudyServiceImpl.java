@@ -92,9 +92,9 @@ public class StudyServiceImpl implements StudyService {
 				// 파일 업로드
 				String newFilename=fileManager.doFileUpload(dto.getUpload(), path);
 				dto.setImageFileName(newFilename);
-				
-				dao.insertData("study.insertStudy",dto);
 			}
+			
+			dao.insertData("study.insertStudy",dto);
 			
 			for(int i=0; i<dto.getChoiceCategory().size(); i++){
 				dto.setCategory(dto.getChoiceCategory().get(i));
@@ -151,6 +151,30 @@ public class StudyServiceImpl implements StudyService {
 	public void dropStudyTable(long s_num) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<StudyInfo> listMyStudy(String userId) {
+		List<StudyInfo> list = new ArrayList<>();
+		try {
+			list =dao.getListData("study.listMyStudy",userId);
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	@Override
+	public StudyInfo readMyStudy(long s_num) {
+		StudyInfo dto = new StudyInfo();
+		
+		try {
+			dto = dao.getReadData("study.readMyStudy", s_num);
+		} catch (Exception e) {
+			
+		}
+		return dto;
 	}
 
 }

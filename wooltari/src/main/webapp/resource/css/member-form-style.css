@@ -3,7 +3,7 @@
 	border: none; 
 }
 
-.login-body{ 
+.member-body{ 
 	width: 100%;
 	height: 100%; 
     font-size: 14px; 
@@ -13,31 +13,31 @@
 }
 
 
-.login-container {
+.member-container {
 	text-align:center;
 	width: 500px; 
 	height: 700px;
 	margin : 5% auto;
-	background: url('/wooltari/resource/img/login_note.png') no-repeat;
+	background: url('/wooltari/resource/img/member_note.png') no-repeat;
 }
 
-.login-container h3{
+.member-container h3{
 	font-family: 'BareunDotum';
 	color: #aaaaaa; 
 }
 
-.login-container a, a:hover, a:focus {
+.member-container a, a:hover, a:focus {
 	color: #888888; 
 }
-.login-outer {
+.member-outer {
 }
-.login-inner {
+.member-inner {
 	padding-top: 70px; 
 	width: 400px;
 	margin: auto;
 }
 
-.form-bottom form button.login_btn {
+.form-bottom form button.member_btn {
 	font-weight: 600; 
 	width: 100%;
 } 
@@ -48,7 +48,7 @@
 .form-top, .form-bottom {
 	
 }
-.login-msg, .login-form, .login-social{
+.login-msg, .member-form, .login-social{
 	margin-top: 50px;
 }
 

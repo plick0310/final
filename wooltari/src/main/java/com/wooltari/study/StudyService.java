@@ -17,4 +17,7 @@ public interface StudyService {
 	public int createStudyTable(long s_num);
 	public void dropStudyTable(long s_num) throws Exception;
 	
+	public List<StudyInfo> listMyStudy(String userId); 
+	public StudyInfo readMyStudy(long s_num);
+	
 }

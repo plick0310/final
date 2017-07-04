@@ -18,8 +18,8 @@
         <link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/header.css">
 		<link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/style.css">
         <link rel="stylesheet" href="<%=cp%>/resource/fonts/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="<%=cp%>/resource/css/login-form-elements.css">
-        <link rel="stylesheet" href="<%=cp%>/resource/css/login-style.css">
+		<link rel="stylesheet" href="<%=cp%>/resource/css/member-form-elements.css">
+        <link rel="stylesheet" href="<%=cp%>/resource/css/member-form-style.css">
         
         <!-- Javascript -->
         <script src="<%=cp%>/resource/js/jquery-1.11.1.min.js"></script>
@@ -38,11 +38,11 @@
 		    /*
 		        Form validation
 		    */
-		    $('.login-form input[type="text"], .login-form input[type="password"], .login-form textarea').on('focus', function() {
+		    $('.memberform input[type="text"], .memberform input[type="password"], .memberform textarea').on('focus', function() {
 		    	$(this).removeClass('input-error');
 		    });
 		    
-		    $('.login-form').on('submit', function(e) {
+		    $('.memberform').on('submit', function(e) {
 		    	var flag = true;
 		    	$(this).find('input[type="text"], input[type="password"], textarea').each(function(){
 		    		if( $(this).val() == "" ) {
@@ -55,7 +55,7 @@
 		    		}
 		    	});
 		    	if(flag){
-		    		var f = document.loginform;
+		    		var f = document.memberform;
 				    f.action = "<%=cp%>/member/login_check";
 				    f.submit();
 		    	}
@@ -67,6 +67,10 @@
 			var f = document.loginform;
 		    f.action = "<%=cp%>/member/login_check";
 		    f.submit();
+		}
+		
+		function memberJoin() {
+			location.href="<%=cp%>/member/join";
 		}
 		
 		//<![CDATA[
@@ -121,17 +125,17 @@
 		</script>
 </head>
 
-   	<body class="login-body">
-		<div class="login-container">
-			<div class="login-outer">
-				<div class="login-inner">
+   	<body class="member-body">
+		<div class="member-container">
+			<div class="member-outer">
+				<div class="member-inner">
 					<div class="login-msg">
 						<h3>${message}</h3>
 						<a href="<%=cp%>/member/findmember"><strong>로그인이 안되시나요?</strong></a>
 					</div>
 				
 				
-					<div class="login-form">
+					<div class="member-form">
 						<div class="form-top">
 							<span style="font-size: 25px; color: #BDBDBD; font-weight: bold;">
 								<span style="font-size: 20px; color: #1abc9c;"
@@ -139,24 +143,28 @@
 							</span> <span style="font-size: 24px;"> L O G I N</span>
 						</div>
 						<div class="form-bottom" style="margin-top: 25px">
-							<form name="loginform" class="loginform" method="post"
+							<form name="memberform" class="memberform" method="post"
 								role="form">
 								<div class="form-group">
-									<label class="sr-only" for="form-username">Username</label>
+									<label class="sr-only" for="form-userid">E-mail</label>
 									<input type="text" name="userId" placeholder="E-mail"
-									class="form-username form-control" id="form-username">
+									class="form-userid form-control" id="form-userid">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-password">Password</label>
 									<input type="password" name=userPwd placeholder="Password"
 									class="form-password form-control" id="form-password">
 								</div>
-								<button type="submit" class="login_btn">로그인</button>
+								<button type="submit" class="member_btn">로그인</button>
 							</form>
 							<div style="margin-top: 25px">
-								<a href="<%=cp%>/member/findmember"><strong>아이디/비밀번호
-										찾기</strong></a> | <a href="<%=cp%>/member/join"><strong> 회원
-										가입</strong></a>
+								<a href="<%=cp%>/member/findmember"><strong>아이디/비밀번호찾기</strong></a> |
+								<c:if test="${not empty modalflag}">
+									<a href="javascript:memberJoin()"><strong> 회원가입</strong></a>
+								</c:if>
+								<c:if test="${empty modalflag}">
+									<a href="javascript:dialogJoin()"><strong> 회원가입</strong></a>
+								</c:if>
 							</div>
 						</div>
 					</div>

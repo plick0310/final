@@ -31,106 +31,31 @@
          class="glyphicon glyphicon-pencil"> </span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;
       </span>M Y S T U D Y
    </div>
+ <div style="margin-bottom: 5px; font-size: 15px;">
+ <i class="glyphicon glyphicon-align-left" style="color: #1abc9c; margin-bottom: 20px;"></i>
+    <strong style="font-size: 20px;"><span style="color:rgba(183, 183, 183, 0.65); font-size: 20px;">${sessionScope.member.userName}</span></strong> 회원님의&nbsp; <span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">
+         주최&nbsp;</span>  스터디
+   </div>
    <div class="row">
-
-      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
+<c:forEach var = "dto" items="${Mylist}">
+      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='<%=cp%>/study/myStudy/home/${dto.s_num}';"
          style="cursor: pointer;">
          <div class="thumbnail">
             <div class="imagebox">
 
-               <img src="..." alt="...">
-
+               
+			<img src="<%=cp%>/uploads/study/studyMainimage/${dto.imageFileName}" style="width: 250px; height: 200px;">
             </div>
             <div class="caption">
-               <h4 style="text-align: center;">스터디명</h4>
-               <p>카테고리1</p>
-               <p>카테고리2</p>
+               <h4 style="text-align: center;">${dto.studyName}</h4>
+             <!--   <p>카테고리1</p>
+               <p>카테고리2</p> -->
             </div>
          </div>
 
       </div>
-      
-      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
-         style="cursor: pointer;">
-         <div class="thumbnail">
-            <div class="imagebox">
-
-               <img src="..." alt="...">
-
-            </div>
-            <div class="caption">
-               <h4 style="text-align: center;">스터디명</h4>
-               <p>카테고리1</p>
-               <p>카테고리2</p>
-            </div>
-         </div>
-
-      </div>
-      
-      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
-         style="cursor: pointer;">
-         <div class="thumbnail">
-            <div class="imagebox">
-
-               <img src="..." alt="...">
-
-            </div>
-            <div class="caption">
-               <h4 style="text-align: center;">스터디명</h4>
-               <p>카테고리1</p>
-               <p>카테고리2</p>
-            </div>
-         </div>
-
-      </div>
-      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
-         style="cursor: pointer;">
-         <div class="thumbnail">
-            <div class="imagebox">
-
-               <img src="..." alt="...">
-
-            </div>
-            <div class="caption">
-               <h4 style="text-align: center;">스터디명</h4>
-               <p>카테고리1</p>
-               <p>카테고리2</p>
-            </div>
-         </div>
-
-      </div>
-      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
-         style="cursor: pointer;">
-         <div class="thumbnail">
-            <div class="imagebox">
-
-               <img src="..." alt="...">
-
-            </div>
-            <div class="caption">
-               <h4 style="text-align: center;">스터디명</h4>
-               <p>카테고리1</p>
-               <p>카테고리2</p>
-            </div>
-         </div>
-
-      </div>
-      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
-         style="cursor: pointer;">
-         <div class="thumbnail">
-            <div class="imagebox">
-
-               <img src="..." alt="...">
-
-            </div>
-            <div class="caption">
-               <h4 style="text-align: center;">스터디명</h4>
-               <p>카테고리1</p>
-               <p>카테고리2</p>
-            </div>
-         </div>
-
-      </div> 
+   </c:forEach>   
+   
 
       <div class="col-sm-6 col-md-4"
          onclick="javascript:location.href='<%=cp%>/study/created';"
@@ -144,5 +69,34 @@
             </div>
          </div>
       </div>
+    
+   </div>
+      
+      
+     <div style="margin-bottom: 5px; font-size: 15px; margin-top: 30px;">
+     <i class="glyphicon glyphicon-align-left" style="color: #1abc9c; margin-bottom: 20px;"></i>
+      <strong style="font-size: 20px;"><span style="color:rgba(183, 183, 183, 0.65); font-size: 20px;">${sessionScope.member.userName}</span></strong> 
+      회원님이&nbsp;<span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">
+         가입한&nbsp;</span> 스터디
+   </div>
+      <div class="row">
+<c:forEach var = "dto" items="${Mylist}">
+      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='<%=cp%>/study/myStudy/home/${dto.s_num}';"
+         style="cursor: pointer;">
+         <div class="thumbnail">
+            <div class="imagebox">
+
+               
+			<img src="<%=cp%>/uploads/study/studyMainimage/${dto.imageFileName}" style="width: 250px; height: 200px;">
+            </div>
+            <div class="caption">
+               <h4 style="text-align: center;">${dto.studyName }</h4>
+             <!--   <p>카테고리1</p>
+               <p>카테고리2</p> -->
+            </div>
+         </div>
+
+      </div>
+   </c:forEach>   
    </div>
 </div>
