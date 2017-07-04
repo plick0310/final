@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wooltari.common.FileManager;
 import com.wooltari.common.dao.CommonDAO;
 
 
@@ -12,6 +13,9 @@ import com.wooltari.common.dao.CommonDAO;
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private CommonDAO dao;
+	
+	@Autowired
+	private FileManager fileManager;
 	
 	@Override
 	public Member readMember(String userId) {
@@ -27,11 +31,27 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void insertMember(Member dto) throws Exception {
+	public void insertMember(Member dto, String path) throws Exception {
+		try {
+			//프로필 설정
+			if(dto.getUserImgUpload()!=null && ! dto.getUserImgUpload().isEmpty()) {
+				String newFilename=fileManager.doFileUpload(dto.getUserImgUpload(), path);
+				dto.setUserImg(newFilename);
+			}
+			//회원 정보 저장
+			dao.insertData("member.insertMember", dto);
+			dao.insertData("member.insertMemberInfo", dto);
+			//권한 저장
+			dto.setAuth("ROLE_USER");
+			dao.insertData("member.insertAuthority", dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			throw e;
+		}
 	}
 
 	@Override
-	public void updateMember(Member dto) throws Exception {
+	public void updateMember(Member dto, String path) throws Exception {
 	}
 
 	@Override

@@ -58,6 +58,11 @@
   		SELECT * FROM study WHERE userId = #{userId}
   	</select>
   	
+  	<!-- 스터디 전체 정보 -->
+  	<select id="readMyStudy" parameterType="Long" resultType="com.wooltari.study.StudyInfo">
+  		SELECT * FROM study WHERE s_num = #{s_num}
+  	</select>
+  	
   	<!-- 스터디 내 게시판동적 생성 -->
   	<!--자유게시판 -->
 	<update id="createStudyBoard" parameterType="Long">

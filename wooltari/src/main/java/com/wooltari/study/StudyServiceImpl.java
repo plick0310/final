@@ -165,4 +165,16 @@ public class StudyServiceImpl implements StudyService {
 		return list;
 	}
 
+	@Override
+	public StudyInfo readMyStudy(long s_num) {
+		StudyInfo dto = new StudyInfo();
+		
+		try {
+			dto = dao.getReadData("study.readMyStudy", s_num);
+		} catch (Exception e) {
+			
+		}
+		return dto;
+	}
+
 }
