@@ -5,6 +5,7 @@
 <%
 	String cp = request.getContextPath();
 %>
+<link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/studyhome.css">
 <style type="text/css">
 * {
 	box-sizing: border-box;
@@ -42,447 +43,29 @@ input.uploadBtn {
    position: relative;
    width: 0px;
 }
-/*text area*/
-body {
-	background: #fafafa;
-}
 
-.widget-area.blank {
-	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	-ms-box-shadow: none;
-	-o-box-shadow: none;
-	box-shadow: none;
-}
-
-body .no-padding {
-	padding: 0;
-}
-
-.row {
-	margin-right: -60px;
-	margin-left: 70px;
-}
-
-.widget-area {
-	background-color: #fff;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-ms-border-radius: 4px;
-	-o-border-radius: 4px;
-	border-radius: 4px;
-	-webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
-	-moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
-	-ms-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
-	-o-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
-	box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
-	float: left;
-	margin-top: 30px;
-	padding: 25px 30px;
-	position: relative;
-	width: 100%;
-}
-
-.status-upload {
-	background: none repeat scroll 0 0 #f5f5f5;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-ms-border-radius: 4px;
-	-o-border-radius: 4px;
-	border-radius: 4px;
-	float: left;
-	width: 100%;
-}
-
-.status-upload form {
-	float: left;
-	width: 100%;
-}
-
-.status-upload form textarea {
-	background: none repeat scroll 0 0 #fff;
-	border: medium none;
-	-webkit-border-radius: 4px 4px 0 0;
-	-moz-border-radius: 4px 4px 0 0;
-	-ms-border-radius: 4px 4px 0 0;
-	-o-border-radius: 4px 4px 0 0;
-	border-radius: 4px 4px 0 0;
-	color: #777777;
-	float: left;
-	font-family: Lato;
-	font-size: 14px;
-	height: 142px;
-	letter-spacing: 0.3px;
-	padding: 20px;
-	width: 100%;
-	resize: vertical;
-	outline: none;
-	border: 1px solid #F2F2F2;
-}
-
-.status-upload ul {
-	float: left;
-	list-style: none outside none;
-	margin: 0;
-	padding: 0 0 0 15px;
-	width: auto;
-}
-
-.status-upload ul>li ,#lable-li {
-	float: left;
-}
-
-.status-upload ul>li>a ,#lable-li{
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-ms-border-radius: 4px;
-	-o-border-radius: 4px;
-	border-radius: 4px;
-	color: #777777;
-	float: left;
-	font-size: 14px;
-	height: 30px;
-	line-height: 30px;
-	margin: 10px 0 10px 10px;
-	text-align: center;
-	-webkit-transition: all 0.4s ease 0s;
-	-moz-transition: all 0.4s ease 0s;
-	-ms-transition: all 0.4s ease 0s;
-	-o-transition: all 0.4s ease 0s;
-	transition: all 0.4s ease 0s;
-	width: 30px;
-	cursor: pointer;
-}
-
-.status-upload ul>li>a:hover ,#lable-li:hover{
-	background: none repeat scroll 0 0 #606060;
-	color: #fff;
-}
-
-.status-upload form button {
-	border: medium none;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-ms-border-radius: 4px;
-	-o-border-radius: 4px;
-	border-radius: 4px;
-	color: #fff;
-	float: right;
-	font-family: Lato;
-	font-size: 14px;
-	letter-spacing: 0.3px;
-	margin-right: 9px;
-	margin-top: 9px;
-	padding: 6px 15px;
-}
-
-.dropdown>a>span.green:before {
-	border-left-color: #2dcb73;
-}
-
-.status-upload form button>i {
-	margin-right: 7px;
-}
-
-
-/*      feed       */
-
-.timeline {
-  list-style: none;
-  padding: 50px 0 20px;
-  position: relative;
-}
-.timeline:before {
-  top: 0;
-  bottom: 0;
-  position: absolute;
-  content: " ";
-  width: 3px;
-  background-color: #eeeeee;
-  left: 98%;
-  margin-left: -1.5px;
-}
-.timeline > li {
-    margin-bottom: 20px;
-    position: relative;
-    width: 95%;
-    float: left;
-    clear: left;
-    margin-left: 27px;
-}
-.timeline > li:before,
-.timeline > li:after {
-  content: " ";
-  display: table;
-}
-.timeline > li:after {
-  clear: both;
-}
-.timeline > li:before,
-.timeline > li:after {
-  content: " ";
-  display: table;
-}
-.timeline > li:after {
-  clear: both;
-}
-.timeline > li > .timeline-panel {
-  width: 95%;
-  float: left;
-  border: 1px solid #d4d4d4;
-  /*border-radius: 2px;*/
-  /*padding: 20px;*/
-  position: relative;
-  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-}
-
-.timeline > li > .timeline-panel:before {
-  position: absolute;
-  top: 26px;
-  right: -15px;
-  display: inline-block;
-  border-top: 15px solid transparent;
-  border-left: 15px solid #ccc;
-  border-right: 0 solid #ccc;
-  border-bottom: 15px solid transparent;
-  content: " ";
-}
-.timeline > li > .timeline-panel:after {
-  position: absolute;
-  top: 27px;
-  right: -14px;
-  display: inline-block;
-  border-top: 14px solid transparent;
-  border-left: 14px solid #fff;
-  border-right: 0 solid #fff;
-  border-bottom: 14px solid transparent;
-  content: " ";
-}
-.timeline > li > .timeline-badge {
-  color: #fff;
-  width: 24px;
-  height: 24px;
-  line-height: 50px;
-  font-size: 1.4em;
-  text-align: center;
-  position: absolute;
-  top: 16px;
-  right: -12px;
-  /*background-color: #999999;*/
-  z-index: 100;
-  /*
-  border-top-right-radius: 50%;
-  border-top-left-radius: 50%;
-  border-bottom-right-radius: 50%;
-  border-bottom-left-radius: 50%;
-  */
-}
-.timeline > li.timeline-inverted > .timeline-panel {
-  float: right;
-}
-.timeline > li.timeline-inverted > .timeline-panel:before {
-  border-left-width: 0;
-  border-right-width: 15px;
-  left: -15px;
-  right: auto;
-}
-.timeline > li.timeline-inverted > .timeline-panel:after {
-  border-left-width: 0;
-  border-right-width: 14px;
-  left: -14px;
-  right: auto;
-}
-.timeline-badge > a {
-  color: #C5C7C5 !important;
-}
-.timeline-badge a:hover {
-  color: #000 !important;
-}
-.timeline-title {
-  margin-top: 0;
-  color: inherit;
-}
-.timeline-body > p,
-.timeline-body > ul {
-    padding:20px;
-    margin-bottom: 0;
-}
-.timeline-body > p + p {
-  margin-top: 5px;
-}
-.timeline-footer{
-    padding:20px;
-    background-color:#f4f4f4;
-}
-.timeline-footer > a{
-    cursor: pointer;
-    text-decoration: none;
-}
-.tooltip{
-
-    position:absolute;
-    z-index:1020;
-    display:block;
-    visibility:visible;
-    padding:5px;
-    font-size:11px;
-    opacity:0;
-    filter:alpha(opacity=0);
-    
-}
-.tooltip.in{
-    /*opacity:0;
-    filter:alpha(opacity=80);*/
-    
-}
-.tooltip.top{
-    margin-top:-2px;
-}
-.tooltip.right{
-    margin-left:2px;
-}
-.tooltip.bottom{
-    margin-top:2px;
-}
-.tooltip.left{
-    margin-left:-2px;
-}
-.tooltip.top .tooltip-arrow{
-    bottom:0;
-    left:0;
-    margin-left:0;
-    border-left:0 solid transparent;
-    border-right:5px solid transparent;
-    border-top:0 solid #000;
-}
-.tooltip.left .tooltip-arrow{
-    bottom:0;
-    left:0;
-    margin-left:0;
-    border-left:0 solid transparent;
-    border-right:5px solid transparent;
-    border-top:0 solid #000;
-}
-.tooltip.bottom .tooltip-arrow{
-    bottom:0;
-    left:0;
-    margin-left:0;
-    border-left:0 solid transparent;
-    border-right:5px solid transparent;
-    border-top:0 solid #000;
-}
-.tooltip.right .tooltip-arrow{
-    bottom:0;
-    left:0;
-    margin-left:0;
-    border-left:0 solid transparent;
-    border-right:5px solid transparent;
-    border-top:0 solid #000;
-}
-.tooltip-inner{
-    width:200px;
-    padding:3px 8px;
-    color:#fff;
-    text-align:center;
-    text-decoration:none;
-    background-color:#313131;
-    -webkit-border-radius:0px;
-    -moz-border-radius:0px;
-    border-radius:0px;
-}
-.tooltip-arrow{
-    position:absolute;
-    width:0;
-    height:0;
-}
-.timeline > li.timeline-inverted{
-  float: right; 
-  clear: right;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-.timeline > li:nth-child(2){
-  margin-top: 60px;
-}
-.timeline > li.timeline-inverted > .timeline-badge{
-  left: -12px;
-}
-
-@media (max-width: 767px) {
-    ul.timeline:before {
-        left: 40px;
-    }
-
-    ul.timeline > li {
-      margin-bottom: 20px;
-      position: relative;
-      width:100%;
-      float: left;
-      clear: left;
-    }
-    ul.timeline > li > .timeline-panel {
-        width: calc(100% - 90px);
-        width: -moz-calc(100% - 90px);
-        width: -webkit-calc(100% - 90px);
-    }
-
-    ul.timeline > li > .timeline-badge {
-        left: 28px;
-        margin-left: 0;
-        top: 16px;
-    }
-
-    ul.timeline > li > .timeline-panel {
-        float: right;
-    }
-
-        ul.timeline > li > .timeline-panel:before {
-            border-left-width: 0;
-            border-right-width: 15px;
-            left: -15px;
-            right: auto;
-        }
-
-        ul.timeline > li > .timeline-panel:after {
-            border-left-width: 0;
-            border-right-width: 14px;
-            left: -14px;
-            right: auto;
-        }
-    
-.timeline > li.timeline-inverted{
-  float: left; 
-  clear: left;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
-.timeline > li.timeline-inverted > .timeline-badge{
-  left: 28px;
-}
-}
 </style>
+<script type="text/javascript" src="<%=cp%>/resource/js/jquery.form.js"></script>
 
 <script type="text/javascript">
-	$(document).ready(function(){
+$(document).ready(function(){
 			$('.menu').on('click', 'a', function(){
 				var fileName;
 				fileName = $(this).parent().attr('class');
 				
 				$.ajax({
-					dataType:"html",
-					url:"<%=cp%>/study/myStudy/" + fileName,
-				success : function(data) {
-					$('.cont').html(data);
+					dataType:"html"
+					,url:"<%=cp%>/study/myStudy/" + fileName
+					,success : function(data) {
+						$('.cont').html(data);
 				}
 			});
 
 		});
 //////////////////
+
 		$("[data-toggle=tooltip]").tooltip();
-//////////////////
+
 		var my_posts = $("[rel=tooltip]");
 
 		var size = $(window).width();
@@ -499,7 +82,122 @@ body .no-padding {
 		}
 		
 	});
+	
+$(function(){
+	listPage('5');
+});	
+
+function listPage(bbs_count) {
+	var url="<%=cp%>/study/myStudy/${s_num}/boardList";
+	var query="bbs_count="+bbs_count;//화면에 띄울 글 개수
+	
+	$.ajax({
+		type:"post"
+		,url:url
+		,data:query
+		,dataType:"json"
+		,success:function(data){
+			printBoard(data);
+		}
+		,error:function(e){
+			console.log(e.responseText);
+		}
+	});
+}
+
+function printBoard(data){
+	
+	var dataCount=data.dataCount;
+	var uid="${sessionScope.member.userId}";
+	
+	var out ="";
+	
+	if(dataCount!=0 ){
+		for(var idx=0; idx<data.list.length; idx++) {
+			var num=data.list[idx].num;
+			var userId=data.list[idx].userId;
+			var content=data.list[idx].content;
+			var created=data.list[idx].created;
+			var imageFileName = data.list[idx].imageFileName;
+			var s_num = data.list[idx].s_num;
+	
+			out+= 	"	<li><div class='timeline-badge primary'>" ;
+			out+=	"			<a><i class='glyphicon glyphicon-record' rel='tooltip' title="+created+" id=''></i></a> " ;
+			out+=	"		</div><div class='timeline-panel'>" ;
+						
+						//이미지
+	 		if(imageFileName!=null){
+				out+=	" <div class='timeline-heading'>";
+				out+=   "<img class='img-responsive' src='<%=cp%>/uploads/study/"+ s_num +"_Board/"+ imageFileName +" ' style='width: 810px; height: 400px;'/>";
+				out+=   "</div> " ;
+			}	
+					
+						//내용
+			out+=	"		<div class='timeline-body'><p>"+content+"</p></div>" ;
+	
+			out+=	"	    <div class='timeline-footer'> " ;
+			out+=	"			<a><i class='glyphicon glyphicon-thumbs-up'></i></a> &nbsp; 좋아요(255) &nbsp; " ;
+			out+=	"			<a class='' data-toggle='collapse' href='#collapseExample_"+num+ "' " ;
+			out+=   "               aria-expanded='false' aria-controls='collapseExample'> 댓글(35) </a> " ;
+									
+			if(uid==userId)		{
+				out+=	"		<a class='pull-right'>삭제 </a>"   ;
+				out+=	"		<a class='pull-right'>수정  |&nbsp;</a>" ;
+				} else {
+				out+=	"		<a class='pull-right'>"+userId+"</a>" ;
+				}
+			
+			out+=	"	<div class='collapse' id='collapseExample_" +num+ "'> ";
+			out+=	"	<div class='well'>댓글댓글</div>";
+			out+=	" </div></div></div></li> ";
+	
+			out+="<li class='clearfix' style='float: none;'></li>"
+			}
+		}
+		$("#listBoard").html(out);
+		
+	}
+	
+	
+	function createBoard() {
+		
+		//var query =$("form[name=createForm]").serialize(); //폼태그내 자동 인코더
+		var f= document.createForm;
+		var query = new FormData(f); //파일처리
+		
+		$.ajax({
+			type:"POST"
+			,url:"<%=cp%>/study/myStudy/home/${s_num}/boardCreated"
+		,processData: false  // file 전송시 필수
+		,contentType: false  // file 전송시 필수
+		,data : query
+		,success:function(data){
+			alert("성공");
+			
+			$("#content").val("");
+			
+			listPage(5);
+		}
+		,beforeSend:check
+		,error:function(e){
+			alert(e.responsText);
+		}
+	});
+}
+
+function check(){
+	var content=$("#content").val().trim;
+	if(!content){
+		$("#content").focus();
+		return false;
+	}
+	return true;
+}	
+
 </script>
+
+
+
 
 
 <div style="width: 1140px; height: 1800px; margin: 60px auto;">
@@ -553,7 +251,7 @@ body .no-padding {
 					<div class="col-md-10">
 						<div class="widget-area no-padding blank">
 							<div class="status-upload">
-								<form name="createForm" method="post">
+								<form name="createForm" method="post" enctype="multipart/form-data" >
 									<textarea name="content" id="content" placeholder="What are you doing right now?"></textarea>
 									<ul>
 										<li><a title="" data-toggle="tooltip"
@@ -572,9 +270,11 @@ body .no-padding {
                      	
 										</label>		
 										</li>
-									</ul>
-											<input type="file" name="upload" id="uploadBtn" class="uploadBtn tts" >
-									<button type="submit" class="">
+									</ul>			
+									<input type="file" name="upload" id="uploadBtn" class="uploadBtn tts" >
+								
+								
+									<button type="button" class="" onclick="createBoard();">
 										<i class="fa fa-share"></i> 등록하기
 									</button>
 								</form>
@@ -587,85 +287,31 @@ body .no-padding {
 				</div>
 				<!-- ----------------------------------피드 ----------------------------------------->
 				
-				<ul class="timeline">
+				<ul class="timeline" id="listBoard">
 			
 			
+				
+					
+				
 					<li>
 						<div class="timeline-badge primary">
 							<a><i class="glyphicon glyphicon-record" rel="tooltip"
-								title="1시간저" id=""></i></a>
-						</div>
-						<div class="timeline-panel">
-							<div class="timeline-heading">
-								<img class="img-responsive"
-									src="http://lorempixel.com/1600/500/sports/2" />
-
-							</div>
-							<div class="timeline-body">
-								<p>아아</p>
-
-							</div>
-
-							<div class="timeline-footer">
-								<a><i class="glyphicon glyphicon-thumbs-up"></i></a> &nbsp; 좋아요(255) &nbsp; 
-								<a class="" data-toggle="collapse"
-									href="#collapseExample" aria-expanded="false"
-									aria-controls="collapseExample"> 댓글(35) </a> 
-								<a class="pull-right">삭제 </a>
-								<a class="pull-right">수정  |&nbsp;</a>
-							
-							<div class="collapse" id="collapseExample">
-								<div class="well">댓글댓글</div>
-							</div>
-							
-							
-							</div>
-						</div>
-					</li>
-					<!-- 
-					<li>
-						<div class="timeline-badge primary">
-							<a><i class="glyphicon glyphicon-record" rel="tooltip"
-								title="11 hours ago via Twitter" id=""></i></a>
-						</div>
-						<div class="timeline-panel">
-							<div class="timeline-heading">
-								<img class="img-responsive"
-									src="http://lorempixel.com/1600/500/sports/2" />
-
-							</div>
-							<div class="timeline-body">
-								<p>ㅇ아아아</p>
-
-							</div>
-
-							<div class="timeline-footer">
-								<a><i class="glyphicon glyphicon-thumbs-up"></i></a> <a><i
-									class="glyphicon glyphicon-share"></i></a> <a class="pull-right">Continuar
-									Lendo</a>
-							</div>
-						</div>
-					</li>
-
-			 -->				<li>
-						<div class="timeline-badge primary">
-							<a><i class="glyphicon glyphicon-record" rel="tooltip"
-								title="1시간저" id=""></i></a>
+								title="1시간전" id=""></i></a>
 						</div>
 						<div class="timeline-panel">
 							<div class="timeline-heading">
 								
 							</div>
 							<div class="timeline-body">
-								<p>아아</p>
+								<p>스터디 멤버들과 소통을 시작해 보세요!</p>
 
 							</div>
 
 							<div class="timeline-footer">
-								<a><i class="glyphicon glyphicon-thumbs-up"></i></a> &nbsp; 좋아요(255) &nbsp; 
+								<a><i class="glyphicon glyphicon-thumbs-up"></i></a> &nbsp; 좋아요(0) &nbsp; 
 								<a class="" data-toggle="collapse"
 									href="#collapseExample2" aria-expanded="false"
-									aria-controls="collapseExample"> 댓글(35) </a> 
+									aria-controls="collapseExample"> 댓글(0) </a> 
 								<a class="pull-right">작성자 </a>
 								
 							
@@ -677,7 +323,10 @@ body .no-padding {
 							</div>
 						</div>
 					</li>
+					
+					
 					<li class="clearfix" style="float: none;"></li>
+					
 				</ul>
 
 
