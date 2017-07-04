@@ -1,306 +1,266 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
    String cp = request.getContextPath();
 %>
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>Wooltari</title>
+		<!-- CSS -->
+		<link rel="stylesheet" href="<%=cp%>/resource/css/bootstrap.css">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/header.css">
+		<link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/style.css">
+        <link rel="stylesheet" href="<%=cp%>/resource/fonts/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="<%=cp%>/resource/css/member-form-elements.css">
+        <link rel="stylesheet" href="<%=cp%>/resource/css/member-form-style.css">
+        
+        <!-- Javascript -->
+        <script src="<%=cp%>/resource/js/jquery-1.11.1.min.js"></script>
+        <script src="<%=cp%>/resource/js/bootstrap.min.js"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="<%=cp%>/resource/js/placeholder.js"></script>
+        <![endif]-->
+        
+		<script type='text/javascript'>
 
-<style type="text/css">
-.help-block {
-	margin-bottom: 5px;
-}
-</style>
+		$(document).ready(function() {
+			
+		    $('.memberform input[type="text"], .memberform input[type="password"], .memberform textarea').on('focus', function() {
+		    	$(this).removeClass('input-error');
+		    });
+		    
+		    $('.memberform').on('submit', function(e) {
+		    	if(! userCheckForm()) {
+		    		return false;
+		    	}
+		    	userCheckId();
+		    	if($('#checkId').val() == "false") {
+		    		return false;
+		    	}
+		    	
+		    	var flag = true;
+		    	$(this).find('input[type="text"], input[type="password"], textarea').each(function(){
+		    		if( $(this).val() == "" ) {
+		    			e.preventDefault();
+		    			$(this).addClass('input-error');
+		    			flag = false;
+		    		}
+		    		else {
+		    			$(this).removeClass('input-error');
+		    		}
+		    	});
+		    	if(flag){
+		    		var f = document.memberform;
+		    		f.action = "<%=cp%>/member/join_submit";
+		    	}
+		    });
+		});
 
-<script type="text/javascript">
-function memberOk() {
-	var f = document.memberForm;
-	var str;
-
-	str = f.userId.value;
-	str = str.trim(); // util.js에 만들어 놓은 trim() 함수
-	if(!str) {
-		alert("아이디를 입력하세요. ");
-		f.userId.focus();
-		return;
-	}
-	if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
-		alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
-		f.userId.focus();
-		return;
-	}
-	f.userId.value = str;
-
-	str = f.userPwd.value;
-	str = str.trim();
-	if(!str) {
-		alert("패스워드를 입력하세요. ");
-		f.userPwd.focus();
-		return;
-	}
-	if(!/^(?=.*[a-z])(?=.*[!@#$%^*+=-]|.*[0-9]).{5,10}$/i.test(str)) { 
-		alert("패스워드는 5~10자이며 하나 이상의 숫자나 특수문자가 포함되어야 합니다.");
-		f.userPwd.focus();
-		return;
-	}
-	f.userPwd.value = str;
-
-	if(str!= f.userPwdCheck.value) {
-        alert("패스워드가 일치하지 않습니다. ");
-        f.userPwdCheck.focus();
-        return;
-	}
-	
-    str = f.userName.value;
-	str = str.trim();
-    if(!str) {
-        alert("이름을 입력하세요. ");
-        f.userName.focus();
-        return;
-    }
-    f.userName.value = str;
-
-    str = f.birth.value;
-	str = str.trim();
-    if(!str || !isValidDateFormat(str)) {
-        alert("생년월일를 입력하세요[YYYY-MM-DD]. ");
-        f.birth.focus();
-        return;
-    }
-    
-    str = f.tel1.value;
-	str = str.trim();
-    if(!str) {
-        alert("전화번호를 입력하세요. ");
-        f.tel1.focus();
-        return;
-    }
-
-    str = f.tel2.value;
-	str = str.trim();
-    if(!str) {
-        alert("전화번호를 입력하세요. ");
-        f.tel2.focus();
-        return;
-    }
-    if(!/^(\d+)$/.test(str)) {
-        alert("숫자만 가능합니다. ");
-        f.tel2.focus();
-        return;
-    }
-
-    str = f.tel3.value;
-	str = str.trim();
-    if(!str) {
-        alert("전화번호를 입력하세요. ");
-        f.tel3.focus();
-        return;
-    }
-    if(!/^(\d+)$/.test(str)) {
-        alert("숫자만 가능합니다. ");
-        f.tel3.focus();
-        return;
-    }
-    
-    str = f.email.value;
-	str = str.trim();
-    if(!str) {
-        alert("이메일을 입력하세요. ");
-        f.email.focus();
-        return;
-    }
-
-    var mode="${mode}";
-    if(mode=="created") {
-    	f.action = "<%=cp%>/member/member";
-    } else if(mode=="update") {
-    	f.action = "<%=cp%>/member/update";
-    }
-
-    f.submit();
-}
-
-function userIdCheck() {
-	// 아이디 중복 검사
-	var userId=$("#userId").val();
-
-	if(!/^[a-z][a-z0-9_]{4,9}$/i.test(userId)) { 
-		var str="아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.";
-		$("#userId").focus();
-		$("#userId").parent().next(".help-block").html(str);
-		return;
-	}
-	
-	var url="<%=cp%>/member/userIdCheck";
-	var query="userId="+userId;
-	$.ajax({
-		type:"POST"
-		,url:url
-		,data:query
-		,dataType:"JSON"
-		,success:function(data) {
-			var passed=data.passed;
-
-			if(passed=="true") {
-				var str="<span style='color:blue;font-weight: bold;'>"+userId+"</span> 아이디는 사용가능 합니다.";
-				$("#userId").parent().next(".help-block").html(str);
-			} else {
-				var str="<span style='color:red;font-weight: bold;'>"+userId+"</span> 아이디는 사용할수 없습니다.";
-				$("#userId").parent().next(".help-block").html(str);
-				$("#userId").val("");
-				$("#userId").focus();
-			}
+		function userCheckId(){
+			var url="<%=cp%>/member/userIdCheck";
+			var userId=$("#form-userid").val();
+			var query="userId="+userId;
+			$.ajax({
+				type:"POST"
+				,url:url
+				,data:query
+				,dataType:"JSON"
+				,success:function(data) {
+					var passed=data.passed;
+					if(passed=="true") {
+						var str="<span style='color:blue;font-weight: bold;'>해당 이메일은 사용가능 합니다.</span>";
+						$("#form-userid + .help-block").html(str);
+						$('#checkId').val("true");
+					} else {
+						var str="<span style='color:red;font-weight: bold;'>이미 사용중인 이메일입니다.</span>";
+						$("#form-userid + .help-block").html(str);
+						$("form-userid").val("");
+						$("form-userid").focus();
+						$('#checkId').val("false");
+					}
+				}
+			});
 		}
-	});
-}
-</script>
+		function userCheckForm(){
+			//이메일 형식 검사
+			var userId=$("#form-userid").val();
+			var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+			if(!regex.test(userId)) { 
+				$("#form-userid").focus();
+				var str="<span style='color:red;font-weight: bold;'>잘못된 이메일 형식입니다.</span>";
+				$("#form-userid + .help-block").html(str);
+				return false;
+			}else{
+				var str="<span style='color:blue;font-weight: bold;'>이메일 형식을 만족합니다.<span>";
+				$("#form-userid + .help-block").html(str);
+			}
+			//닉네임 검사
+			var userName=$.trim($("#form-username").val());
+			if(!userName) { 
+				$("#form-username").focus();
+				var str="<span style='color:red;font-weight: bold;'>이름을 입력해주세요.</span>";
+				$("#form-username + .help-block").html(str);
+				return false;
+			}else{
+				var str="<span style='color:blue;font-weight: bold;'>입력하신 이름은 '" + userName + "' 입니다.</span>";
+				$("#form-username + .help-block").html(str);
+			}
+			
+			//패스워드 형식 검사			
+			var userPwd=$("#form-password").val();
+			var regex=/^(?=.*[a-z])(?=.*[!@#$%^*+=-]|.*[0-9]).{5,10}$/;
+			if(!regex.test(userPwd)) { 
+				$("#form-password").focus();
+				var str="<span style='color:red;font-weight: bold;'>패스워드는 5~10자이며 하나 이상의 숫자나 특수문자가 포함되어야 합니다.</span>";
+				$("#form-password + .help-block").html(str);
+				return false;
+			}else{
+				var str="<span style='color:blue;font-weight: bold;'>패스워드 조건에 만족합니다.<span>";
+				$("#form-password + .help-block").html(str);
+			}
+			//패스워드 2차 확인
+			if($("#form-password").val() != $("#form-password2").val()) {
+				$("#form-password2").focus();
+				var str="<span style='color:red;font-weight: bold;'>패스워드가 일치하지 않습니다.</span>";
+				$("#form-password2 + .help-block").html(str);
+				return false;
+			}else{
+				var str="<span style='color:blue;font-weight: bold;'>패스워드가 일치합니다.</span>";
+				$("#form-password2 + .help-block").html(str);
+			}
+			return true;
+		}
+		
+      	//첨부파일
+    	$(function(){ 
+    		var num=1;
+    		var userImg;
+    		$('body').on('change', 'input[name=userImgUpload]', function(){ 
+    			
+    			var src = getFileExtension($(this).val());
+    			if(!((src.toLowerCase() == "gif") || (src.toLowerCase() == "jpg") || (src.toLowerCase() == "jpeg"))){
+    			        alert('gif 와 jpg 파일만 지원합니다.');
+    			        return;
+   			    }
+    			
+    			if(window.FileReader){ 
+    				userImg = $(this)[0].files[0].name;
+    			} 
+    			else { //ie구버전
+    				userImg = $(this).val().split('/').pop().split('\\').pop();
+    			} 
+    			$(this).siblings('.file_upload').val(userImg);
+    			
+    			//프로필 이미지 미리보기
+    			var value = document.memberform.userImgUpload;
+    			if (value.files && value.files[0]) {
+            		var reader = new FileReader();
+            		reader.onload = function (e) {
+            			$('#img-thumbnail').attr('src', e.target.result);
+            		}
+            		reader.readAsDataURL(value.files[0]);
+            	}
+    			/* 
+    			if (value.files && value.files[0]) {
+            		window.URL = window.URL || window.webkitURL;
+            		var img = document.createElement("img");
+            		
+            		img.width = 100;
+            		img.height = 100;
+            		img.src = window.URL.createObjectURL(value.files[0]);
+            		img.onload = function(e) {
+            			window.URL.revokeObjectURL(this.src);
+            		};
+            		preview.innerHTML="";
+            		preview.appendChild(img);
+            	}
+    			 */
+    		});
+    	});
+      	
+    	// 파일의 확장자를 가져옮
+    	function getFileExtension(filePath){  
+    	    var lastIndex = -1;
+    	    lastIndex  = filePath.lastIndexOf('.');
+    	    var extension = "";
 
-<div class="body-container" style="width: 700px;">
-    <div class="body-title">
-        <h3><span style="font-family: Webdings">2</span> ${mode=="created"?"회원 가입":"회원 정보 수정"} </h3>
-    </div>
-    
-	<div>
-		     
-        <div class="alert-info">
-            <span style="font-family: Webdings; font-weight: 600;">m</span> SPRING의 회원이 되시면 회원님만의 유익한 정보를 만날수 있습니다.
-        </div>
-		     
-		<form name="memberForm" method="post">
-		  <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px;">
-		 <tr>
-		     <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
-		           <label style="font-weight: 900;">아이디</label>
-		     </td>
-		     <td style="padding: 0 0 15px 15px;">
-		       <p style="margin-bottom: 5px;">
-		           <input type="text" name="userId" id="userId" value="${dto.userId}"
-                         onchange="userIdCheck();" style="width: 95%;"
-                         ${mode=="update" ? "readonly='readonly' ":""}
-                         maxlength="15" class="boxTF" placeholder="아이디">
-		       </p>
-		       <p class="help-block">아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.</p>
-		     </td>
-		 </tr>
+    	 if(lastIndex != -1){
+    	  extension = filePath.substring( lastIndex+1, filePath.len );
+    	 }else{
+    	  extension = "";
+    	 }
+    	    return extension;
+    	}
+		</script>
 		
-		 <tr>
-		     <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
-		           <label style="font-weight: 900;">패스워드</label>
-		     </td>
-		     <td style="padding: 0 0 15px 15px;">
-		       <p style="margin-bottom: 5px;">
-		           <input type="password" name="userPwd" maxlength="15" class="boxTF"
-		                      style="width:95%;" placeholder="패스워드">
-		       </p>
-		       <p class="help-block">패스워드는 5~10자 이내이며, 하나 이상의 숫자나 특수문자가 포함되어야 합니다.</p>
-		     </td>
-		 </tr>
-		
-		 <tr>
-		     <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
-		           <label style="font-weight: 900;">패스워드 확인</label>
-		     </td>
-		     <td style="padding: 0 0 15px 15px;">
-		       <p style="margin-bottom: 5px;">
-		           <input type="password" name="userPwdCheck" maxlength="15" class="boxTF"
-		                      style="width: 95%;" placeholder="패스워드 확인">
-		       </p>
-		       <p class="help-block">패스워드를 한번 더 입력해주세요.</p>
-		     </td>
-		 </tr>
-		
-		 <tr>
-		     <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
-		           <label style="font-weight: 900;">이름</label>
-		     </td>
-		     <td style="padding: 0 0 15px 15px;">
-		       <p style="margin-bottom: 5px;">
-		           <input type="text" name="userName" value="${dto.userName}" maxlength="30" class="boxTF"
-		                       style="width: 95%;"
-		                      ${mode=="update" ? "readonly='readonly' ":""}
-		                      placeholder="이름">
-		       </p>
-		     </td>
-		 </tr>
-		
-		 <tr>
-		     <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
-		           <label style="font-weight: 900;">생년월일</label>
-		     </td>
-		     <td style="padding: 0 0 15px 15px;">
-		       <p style="margin-bottom: 5px;">
-		           <input type="text" name="birth" value="${dto.birth}" maxlength="10" 
-		                      class="boxTF" style="width: 95%;" placeholder="생년월일">
-		       </p>
-		       <p class="help-block">생년월일은 2000-01-01 형식으로 입력 합니다.</p>
-		     </td>
-		 </tr>
-		 
-		 <tr>
-		     <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
-		           <label style="font-weight: 900;">이메일</label>
-		     </td>
-		     <td style="padding: 0 0 15px 15px;">
-		       <p style="margin-bottom: 5px;">
-		           <input type="text" name="email" value="${dto.email}" maxlength="50"
-		                     class="boxTF" style="width: 95%;" placeholder="이메일">
-		       </p>
-		     </td>
-		 </tr>
-		 
-		 <tr>
-		     <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
-		           <label style="font-weight: 900;">전화번호</label>
-		     </td>
-		     <td style="padding: 0 0 15px 15px;">
-		       <p style="margin-bottom: 5px;">
-		           <select class="selectField" id="tel1" name="tel1" >
-		               <option value="">선 택</option>
-		               <option value="010" ${dto.tel1=="010" ? "selected='selected'" : ""}>010</option>
-		               <option value="011" ${dto.tel1=="011" ? "selected='selected'" : ""}>011</option>
-		               <option value="016" ${dto.tel1=="016" ? "selected='selected'" : ""}>016</option>
-		               <option value="017" ${dto.tel1=="017" ? "selected='selected'" : ""}>017</option>
-		               <option value="018" ${dto.tel1=="018" ? "selected='selected'" : ""}>018</option>
-		               <option value="019" ${dto.tel1=="019" ? "selected='selected'" : ""}>019</option>
-		           </select>
-		           -
-		           <input type="text" name="tel2" value="${dto.tel2}" class="boxTF" maxlength="4">
-		           -
-		           <input type="text" name="tel3" value="${dto.tel3}" class="boxTF" maxlength="4">
-		       </p>
-		     </td>
-		 </tr>
-		 
-		 <c:if test="${mode=='created'}">
-		  <tr>
-		      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
-		            <label style="font-weight: 900;">약관동의</label>
-		      </td>
-		      <td style="padding: 0 0 15px 15px;">
-		        <p style="margin-top: 7px; margin-bottom: 5px;">
-		             <label>
-		                 <input id="agree" name="agree" type="checkbox" checked="checked"
-		                      onchange="form.sendButton.disabled = !checked"> <a href="#">이용약관</a>에 동의합니다.
-		             </label>
-		        </p>
-		      </td>
-		  </tr>
-		 </c:if>
-		 </table>
-		
-		 <table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
-		    <tr height="45"> 
-		     <td align="center" >
-		       <button type="button" name="sendButton" class="btn" onclick="memberOk();">${mode=="created"?"회원가입":"정보수정"}</button>
-		       <button type="reset" class="btn">다시입력</button>
-		       <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/';">${mode=="created"?"가입취소":"수정취소"}</button>
-		     </td>
-		   </tr>
-		   <tr height="30">
-		       <td align="center" style="color: blue;">${message}</td>
-		    </tr>
-		  </table>
-		</form>
-	</div>
+</head>
 
-</div>
+   	<body class="member-body">
+		<div class="member-container">
+			<div class="member-outer">
+				<div class="member-inner">
+					<div class="member-form">
+						<div class="form-top">
+							<span style="font-size: 25px; color: #BDBDBD; font-weight: bold;">
+								<span style="font-size: 20px; color: #1abc9c;"
+								class="glyphicon glyphicon-pencil"> </span>&nbsp;&nbsp;&nbsp;W O O L T A R I&nbsp;&nbsp;&nbsp;
+							</span> <span style="font-size: 24px;"> J O I N</span>
+						</div>
+						<div class="form-bottom" style="margin-top: 25px">
+							<form name="memberform" class="memberform" method="post" role="form" enctype="multipart/form-data">
+								<div class="leftContent">
+									<div class="form-group">
+										<label class="control-label" for="modalUserImg">프로필 사진</label><br>
+										<img src="<%=cp%>/resource/img/noprofileimg.png" id="img-thumbnail" class="img-thumbnail" style="width: 100px; height: 100px;"/>
+										<div class="fileBox">
+											<input class="file_upload" type="text" name="file_upload" readonly="readonly" value="선택된 파일 없음">
+											<label for="userImgUpload" class="btn_file">찾아보기</label>
+											<input id="userImgUpload" type="file" name="userImgUpload">
+										</div>
+									</div>
+								</div>
+							<div class="rightContent">
+								<div class="form-group">
+									<label class="sr-only" for="form-userid">E-mail</label>
+									<input type="text" name="userId" placeholder="E-mail"
+									class="form-userid form-control" id="form-userid" onchange="userCheckId();">
+									<p class="help-block">아이디는 이메일 주소를 사용합니다.</p>
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="form-username">Username</label>
+									<input type="text" name="userName" placeholder="Name"
+									class="form-username form-control" id="form-username">
+									<p class="help-block">다른 회원들에게 보여질 별명입니다.</p>
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="form-password">Password</label>
+									<input type="password" name=userPwd placeholder="Password"
+									class="form-password form-control" id="form-password">
+									<p class="help-block">패스워드를 입력해주세요.</p>
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="form-password2">Password</label>
+									<input type="password" name=userPwd2 placeholder="Password"
+									class="form-password form-control" id="form-password2">
+									<p class="help-block">패스워드를 한번 더 입력해주세요.</p>
+								</div>
+								<input type="hidden" name="checkId" id="checkId" value="false">
+								<button type="submit" class="member_btn">회원가입</button>
+							</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+		

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+	<!-- 리뷰 등록 -->
+	<insert id="insertBoard" parameterType="com.wooltari.review.Review">
+		insert into reviewlist(num,subject,content,imagefilename,s_num,userId) values(reviewnum_seq.nextval,#{subject},#{content},#{imageFileName,jdbcType=VARCHAR},#{s_num},#{userId})		
+	</insert>
+	
+	
+	
+	<!-- 리뷰 리스트 -->
+	<select id="listBoard" parameterType="map" resultType="com.wooltari.review.Review">
+		select * from(
+			select rownum rnum, tb.* from(
+				select studyname,num,subject,r.content,hitcount,r.imagefilename,userName,
+				to_char(r.created,'yyyy-mm-dd')created,r.s_num,r.userId
+				from reviewlist r 
+    	    join member m on r.userId=m.userId
+      		  join study s on r.s_num=s.s_num
+				order by num desc
+		<![CDATA[		
+			)tb where rownum <= #{end}
+		)where rnum>=#{start}
+		]]>
+	</select>
+	
+	
+	<!-- 글 개수 -->
+	<select id="dataCount" resultType="Integer" parameterType="map">
+		select nvl(count(*),0) from reviewlist r
+		join member m on r.userId=m.userId
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateHitCount" parameterType="Integer">	
+		update reviewlist set hitcount=hitcount+1 where num=#{num}
+	</update>
+	
+	<!-- 글 보기 -->
+	<select id="readBoard" parameterType="map" resultType="com.wooltari.review.Review">
+		select studyname,num,subject,r.content,hitcount,r.created,r.imageFilename,r.s_num,r.userId,userName from reviewlist r
+		join member m on r.userId=m.userId
+    	join study s on r.s_num=s.s_num
+    	where num=#{num}
+	</select>
+	
+	<!-- 평점 넣기 -->
+	<insert id="insertStar" parameterType="com.wooltari.review.Review">
+		insert into reviewstar(num,userid,star)values(#{num},#{userId},#{star})
+	</insert>
+	
+	<!-- 평점 출력 -->
+	<select id="readStar" parameterType="Integer" resultType="Integer">
+		select nvl((select nvl(sum(star),0) from reviewstar where num=#{num})/nullif((select (count(*)) 
+		from reviewstar where num=#{num}),0),0)star from dual
+	</select>
+	
+	<!-- 별점 인원  -->
+	<select id="manyStar" parameterType="Integer" resultType="Integer">
+		select (count(*)) from reviewstar where num=#{num}
+	</select>
+	
+	<!-- 글 수정 -->
+	<update id="updateBoard" parameterType="com.wooltari.review.Review">
+		update reviewlist set subject=#{subject},content=#{content},imageFilename=#{imageFileName} where num=#{num}
+		
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteBoard" parameterType="Integer">
+		delete reviewlist where num=#{num}
+	</delete>
+	
+	<!-- 홍보글 댓글등록 -->
+	<insert id="insertReply" parameterType="com.wooltari.promote.PromoteReply">
+	insert into promotereply(prnum,content,num,userId) values(promoterenum_seq.nextval,#{content},#{num},#{userId})
+	</insert>
+	
+	<!-- 홍보글 댓글 리스트 -->
+	
+	
+	<!-- 댓글 카운트 -->
+	<select id="replyCount" parameterType="map" resultType="Integer">
+		select nvl(count(*),0) from reviewReply where num=#{num}
+	</select>
+	
+	<!-- 댓글삭제 -->
+	<delete id="deleteReply" parameterType="Integer">
+		delete from reviewReply where prnum=#{prnum}
+	</delete>
+	
+</mapper>

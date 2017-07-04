@@ -55,7 +55,7 @@ function insertBoard(){
 		return false;
 	}
 	
-	f.action="<%=cp%>/promote/created";
+	f.action="<%=cp%>/review/created";
 	f.submit();
 	
 }
@@ -115,6 +115,6 @@ function insertBoard(){
 	
 	<div class="read_btnArea">
 		<button class="clickbtn" onclick="insertBoard();">등록하기</button>
-		<button class="clickbtn" onclick="javascript:location.href='<%=cp%>/promote/list';">돌아가기</button>
+		<button class="clickbtn" onclick="javascript:location.href='<%=cp%>/review/list';">돌아가기</button>
 	</div>
 </form>

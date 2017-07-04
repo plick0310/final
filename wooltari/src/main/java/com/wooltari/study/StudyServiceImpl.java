@@ -133,7 +133,7 @@ public class StudyServiceImpl implements StudyService {
 		try {
 			
 			dao.updateData("study.createStudyBoard", s_num);
-			dao.updateData("study.createStudyPhoto", s_num);
+			//dao.updateData("study.createStudyPhoto", s_num);
 			dao.updateData("study.StudyBoardReply", s_num);
 			dao.updateData("study.StudyBoardLike", s_num);
 			dao.updateData("study.createStudyCalendar", s_num);
@@ -163,6 +163,18 @@ public class StudyServiceImpl implements StudyService {
 			System.out.println(e.toString());
 		}
 		return list;
+	}
+
+	@Override
+	public StudyInfo readMyStudy(long s_num) {
+		StudyInfo dto = new StudyInfo();
+		
+		try {
+			dto = dao.getReadData("study.readMyStudy", s_num);
+		} catch (Exception e) {
+			
+		}
+		return dto;
 	}
 
 }

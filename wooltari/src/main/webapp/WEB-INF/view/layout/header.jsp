@@ -64,15 +64,22 @@ function logout(){
 	});
 }
 function dialogLogin() {
-	$("#modal-content").load("<%=cp%>/member/login_m");
-	$("#modalLogin").modal("show");	
+	$("#modal-content").load("<%=cp%>/member/login");
+	$("#modalflage").val("true");
+	$("#modalLogin").modal("show");
 }
 
 function dialogJoin() {
-	$("#modal-content").load("<%=cp%>/member/join_m");
+	$("#modal-content").load("<%=cp%>/member/join");
 }
-</script>
 
+$(function(){
+	$('#modalLogin').on('hidden.bs.modal', function () {
+		$(".modal-backdrop").remove();
+	});
+});
+
+</script>
 
 
 
@@ -98,8 +105,7 @@ function dialogJoin() {
 			<div id="navbar-collapse-1" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<!-- Classic list -->
-					<li class="dropdown yamm-fw"><a href="#"
-						data-toggle="dropdown" class="dropdown-toggle">스터디<b
+					<li class="dropdown yamm-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">스터디<b
 							></b></a>
 						<ul class="dropdown-menu">
 							<li class="grid-demo">
@@ -183,11 +189,11 @@ function dialogJoin() {
 					</form>				
 					</div>
 				<div class="member" style="margin: 7px 0;"> 
-					<strong style="margin-right: 5px">${sessionScope.member.userName}</strong>
 					<c:if test="${empty sessionScope.member}">
 						<a href="javascript:dialogLogin();"><img src="<%=cp%>/resource/img/loginicon.png" alt="Login" class="img-circle" width="35px" height="35px"></a>
 					</c:if>
 					<c:if test="${not empty sessionScope.member}">
+						<strong style="margin-right: 5px">${sessionScope.member.userName}</strong>
 						<c:if test="${empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
 								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c"> 
@@ -195,23 +201,22 @@ function dialogJoin() {
 						</c:if>
 						<c:if test="${not empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-								<img src="${sessionScope.member.userImg}" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c">
+								<img src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c">
 							</a>
 						</c:if>
-					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-						<c:if test="${empty sessionScope.member.userImg}">
-							<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-thumbnail" width="100%" height="100%">
-						</c:if>
-						<c:if test="${not empty sessionScope.member.userImg}">
-							<img src="${sessionScope.member.userImg}" class="img-thumbnail" width="100%" height="100%">
-						</c:if>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+							<c:if test="${empty sessionScope.member.userImg}">
+								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-thumbnail" width="100%" height="100%">
+							</c:if>
+							<c:if test="${not empty sessionScope.member.userImg}">
+								<img src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}" class="img-thumbnail" width="100%" height="100%">
+							</c:if>
 							<li><h3 style="text-align: center;"> ${sessionScope.member.userName} 님</h3></li>
 							<li><a href="<%=cp%>/study/mylist">나의 스터디</a></li>
 							<li><a href="<%=cp%>/member/mypage">마이페이지</a></li>
 							<li><a href="javascript:logout();">로그아웃</a></li>
 						</ul>
 					</c:if>
-					
 				</div>
 			</div>
 		</div>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,7 +41,8 @@ public class StudyController {
 	public String StudyCratedSubmit(
 			StudyInfo dto,  Model model ,HttpSession session) throws Exception{
 		
-		
+		try {
+			
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 	
 		String root=session.getServletContext().getRealPath("/");
@@ -49,10 +51,14 @@ public class StudyController {
 		
 		dto.setUserId(info.getUserId());
 		service.insertStudy(dto ,path);
+		} catch (Exception e) {
+			System.out.println("실패");
+			return "redirect:/";
+		}
 		
-		System.out.println(path);
-		System.out.println("ss");
-		//return "redirect:/main";
+		//model.addAttribute("dto",dto);
+		
+	
 		return "redirect:/study/myStudy/home/"+dto.getS_num();
 	}
 	
@@ -95,4 +101,30 @@ public class StudyController {
 		
 	    return ".study.mystudylist.mylist";
 	}
+	
+	@RequestMapping(value="/study/myStudy/home/{s_num}")
+	public String list(Model model, @PathVariable long s_num) {
+		
+		StudyInfo dto = service.readMyStudy(s_num);
+	
+		model.addAttribute("dto",dto);
+		return ".study.myStudy.home";
+	}
+	
+	@RequestMapping(value="/study/myStudy/calender")
+	public String calender() {
+
+		return "/study/myStudy/calender";
+	}
+	@RequestMapping(value="/study/myStudy/s_member")
+	public String s_member() {
+
+		return "/study/myStudy/s_member";
+	}
+	@RequestMapping(value="/study/myStudy/chating")
+	public String chating() {
+
+		return "/study/myStudy/chating";
+	}
+	
 }

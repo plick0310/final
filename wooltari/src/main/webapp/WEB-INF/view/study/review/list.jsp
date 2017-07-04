@@ -64,9 +64,110 @@ var starRating = function(){
 starRating();
 </script>
 
+<script type="text/javascript">
 
-<div style="width: 900px; margin: 60px auto;">
-   <div style="height: 50px; font-size: 20px; text-align: center;">
+function readBoard(num){
+	var url="<%=cp%>/review/article?num="+num+"&page="+${page};
+	$("#myModalBody").load(url);
+	$("#myModal").modal("show");
+};
+
+function countStar(num){
+	var url="<%=cp%>/review/countStar";
+	$.post(url,{num:num},function(data){
+		var count=data.countStar;
+		var many=data.manyStar;
+		
+		$("#countStar").html(count);
+		$("#countMany").html(many);
+	},"json");
+}
+
+function insertStar() {
+	var f=document.reviewForm;
+	var num=f.num.value;
+	
+	var userId="${sessionScope.member.userId}";
+	if(! userId){
+		alert("로그인하세요");
+		$("#myModal").modal("hide");
+		return;
+	} 
+	
+	var star=$(':radio[name="star-input"]:checked').val();
+	
+	if(! star){
+		alert("점수를 입력하세요");
+		return;
+	}
+	
+	var query="star="+star;
+	query+="&num="+num;
+	
+	msg="몇점??"+star+"점??";
+	if(!confirm(msg)){
+		return;
+	}
+		
+	var url="<%=cp%>/review/insertStar"
+		
+	$.ajax({
+		type:"post"
+		,url:url
+		,data:query
+		,dataType:"json"
+		,success:function(data){
+			var state=data.state;
+			if(state=="true"){
+				countStar(num);
+			}else if(state=="false"){
+				alert("후기평점은 한번만 가능합니다.");
+			}else if(state=="loginFail"){
+				alert("로그인하세요");
+			}
+		}
+		,error:function(e){
+			console.log(e.responseText);
+		}
+	});
+	
+	
+
+	/* $("#myModal").modal("hide"); */
+}
+
+function deleteBoard(){
+	var f=document.reviewForm;
+	var num=f.num.value;
+	var page=f.page.value;
+	var query="num="+num+"&page="+page;
+	
+	var id="${sessionScope.member.userId}";
+	if(!id){
+		alert("로그인은 필수입니다.");
+		return;
+	}
+	
+	var readId=f.userId.value;
+	
+	if(readId!=id){
+		alert("작성자만 삭제할 수 있습니다.");
+		return;
+	}
+	
+	var url="<%=cp%>/review/delete?"+query;
+	
+	if(confirm("글을 삭제하시겠습니까?"))
+		location.href=url;
+	
+}
+
+
+</script>
+
+
+<div style="width: 920px; margin: 60px auto;">
+   <div style="height: 50px; font-size: 20px; text-align: center; width: 920px;">
       <span style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
          <span style="font-size: 19px; color: #1abc9c;"
          class="glyphicon glyphicon-pencil"> </span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;
@@ -77,52 +178,55 @@ starRating();
    	<div class="col-sm-6 col-md-4"
          onclick="javascript:location.href='<%=cp%>/review/created';"
          style="cursor: pointer;">
-         <div class="thumbnail" style="margin:57px; 0">
+         <div class="thumbnail" style="margin:10px; 0">
             <img src="<%=cp%>/resource/img/plus.png" alt="..." width="50%"
                height="50%" style="margin-top: 25px;">
             <div class="caption">
-               <h4 style="text-align: center;">글쓰기</h4>
+               <h4 style="text-align: center;" onclick="javascript:location.href='<%=cp%>/review/created';">글쓰기</h4>
 
             </div>
          </div>
       </div>
-
-      <div class="col-sm-6 col-md-4" onclick="javascript:location.href='';"
-         style="cursor: pointer;">
+ 
+<%--  <h6>dataCount:${dataCount}</h6> --%>
+ 
+ <form action="starForm">
+<c:forEach var="dto"  items="${list }">      
+      <!-- Button trigger modal -->
+ 
+<button type="button" class="btn btn-primary btn-lg" style="border: none; background: none;" onclick="readBoard(${dto.num});">
          <div class="thumbnail">
             <div class="imagebox">
-
-               <img src="..." alt="...">
+               <img src="<%=cp%>/uploads/review/${dto.imageFileName}" onerror="this.src='<%=cp%>/resource/images/reviewPhoto/pp.jpg'" style="width: 250px; height: 200px;">
 
             </div>
             <div class="caption">
-               <h4 style="text-align: center;">스터디명</h4>
-               <p>제목</p>
-               <p>작성자</p>
+               <h4 style="text-align: center; font-size: 15px;">제목 :${dto.subject } </h4>
+               <h4 style="text-align: center; font-size: 15px;">작성자 : ${dto.userName}</h4>
             </div>
          </div>
-
-      </div>
-      
-      <span class="star-input">
-  <span class="input">
-    <input type="radio" name="star-input" id="p1" value="1"><label for="p1">1</label>
-    <input type="radio" name="star-input" id="p2" value="2"><label for="p2">2</label>
-    <input type="radio" name="star-input" id="p3" value="3"><label for="p3">3</label>
-    <input type="radio" name="star-input" id="p4" value="4"><label for="p4">4</label>
-    <input type="radio" name="star-input" id="p5" value="5"><label for="p5">5</label>
-    <input type="radio" name="star-input" id="p6" value="6"><label for="p6">6</label>
-    <input type="radio" name="star-input" id="p7" value="7"><label for="p7">7</label>
-    <input type="radio" name="star-input" id="p8" value="8"><label for="p8">8</label>
-    <input type="radio" name="star-input" id="p9" value="9"><label for="p9">9</label>
-    <input type="radio" name="star-input" id="p10" value="10"><label for="p10">10</label>
-  </span>
-  <output for="star-input"><b>0</b>점</output>
-</span>
-      
-     
-      
-
-      
+</button>
+	
+</c:forEach>
+</form>
+     <div style="text-align: center">${paging }</div>
+			<%-- <input type="hidden" name="page" value="${page }"> --%>
    </div>
+</div>
+
+<!-- Modal --> 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- <div class="modal-header" style="height: 50px; ">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div> -->
+      <div id="myModalBody" class="modal-body" style="height: 500px; "></div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-default" style="width: 65px; height: 30px; background: #1abc9c; padding-top: 3px; padding-left: 13px;" onclick="deleteBoard();">삭제</button>
+         <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 65px; height: 30px; background: #1abc9c; padding-top: 3px; padding-left: 7px;">리스트</button>
+         <button type="button" class="btn btn-default" style="width: 65px; height: 30px; background: #1abc9c; padding-top: 3px; padding-left: 13px;" onclick="insertStar();">평가</button>
+      </div>
+    </div>
+  </div>
 </div>
