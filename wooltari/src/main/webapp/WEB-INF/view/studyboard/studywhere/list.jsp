@@ -129,6 +129,54 @@ ul.tabs li.active {
 	padding-top: 7px;
 }
 
+#results td {
+	width: 300px;
+	padding: 9px;
+}
+
+.btn btn-primary:HOVER {
+	background-color: white;
+	color: black;
+}
+
+.thumbnail img {
+	width: 100%;
+	height: 200px;
+}
+
+.thumbnail {
+	padding: 0px;
+	border-radius: 0px;
+	box-shadow: 2px 5px 80px 0px #eee;
+	border: none;
+	margin-bottom: 50px;
+}
+.clickbtn{
+background-color: white;
+    border-style: solid;
+    padding: 5px 20px;
+    margin-right: 10px;
+    margin-top: 20px;
+    float: right;
+    border: 1px solid #EAEAEA;
+
+}
+.likes{
+    line-height: 19px;
+    position: absolute;
+    top: -8px;
+    right: 10px;
+    background: #fff;
+    padding: 12px 5px 0px 5px;
+    display: block;
+    width: 85px;
+    height: 41px;
+    text-align: center;
+    font-size: 33px;
+    letter-spacing: -1px;
+    color: #1abc9c;
+    font-weight: bold;
+}
 </style>
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcO1EZpm4c5VVFmWf1h0dwX1QVbsx3Gb4&libraries=places"></script>
@@ -173,9 +221,9 @@ ul.tabs li.active {
 	 
 
 	function initialize() {
-		var myLatlng = new google.maps.LatLng(37.566535, 126.97796919999996);
+		var myLatlng = new google.maps.LatLng(37.534992, 126.902750);
 		var myOptions = {
-			zoom : 14,
+			zoom : 15,
 			center : myLatlng,
 			mapTypeId : google.maps.MapTypeId.ROADMAP
 		};
@@ -243,7 +291,7 @@ ul.tabs li.active {
 					markers[i] = new google.maps.Marker({
 						position : results[i].geometry.location,
 						animation : google.maps.Animation.DROP,
-						icon: image
+						icon : image
 					});
 					google.maps.event.addListener(markers[i], 'click',
 							getDetails(results[i], i));
@@ -276,15 +324,15 @@ ul.tabs li.active {
 		tr.onclick = function() {
 			google.maps.event.trigger(markers[i], 'click');
 		};
-		var iconTd = document.createElement('td');
+		/* var iconTd = document.createElement('td'); */
 		var nameTd = document.createElement('td');
 		var icon = document.createElement('img');
-		icon.src = result.icon.replace('http:', '');
-		icon.setAttribute('class', 'placeIcon');
+		/* icon.src = result.icon.replace('http:', '');
+		icon.setAttribute('class', 'placeIcon'); */
 		var name = document.createTextNode(result.name);
-		iconTd.appendChild(icon);
+		/* iconTd.appendChild(icon); */
 		nameTd.appendChild(name);
-		tr.appendChild(iconTd);
+		/* tr.appendChild(iconTd); */
 		tr.appendChild(nameTd);
 		results.appendChild(tr);
 	}
@@ -320,16 +368,15 @@ ul.tabs li.active {
 	}
 
 	function getIWContent(place) {
-		var content = '<table style="border:0"><tr><td style="border:0;">';
-		content += '<img class="placeIcon" src="' + place.icon + '"></td>';
-		content += '<td style="border:0;"><b><a href="' + place.url + '">'
+		var content = '<table style="border:0"><tr>';
+		content += '<td style="border:0;width:265px; padding: 9px;"><b><a href="' + place.url + '">'
 				+ place.name + '</a></b>';
 		content += '</td></tr></table>';
 		return content;
 	}
 	google.maps.event.addDomListener(window, 'load', initialize);
 </script>
-<div style="width: 900px; margin: 60px auto 150px;">
+<div style="width: 900px; margin: 60px auto 150px; height: 100%;">
 	<div style="height: 50px; font-size: 20px; text-align: center;">
 		<span style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c;"
@@ -341,155 +388,195 @@ ul.tabs li.active {
 		style="color: rgba(183, 183, 183, 0.65); font-size: 20px;"> <i
 			class="glyphicon glyphicon-align-left"
 			style="color: #1abc9c; margin-bottom: 20px;"></i>&nbsp;&nbsp;B E S T
-	</span> 스 터 디 장 소</strong>
+	</span> P L A C E</strong>
 
-	<div style="width: 900px; background-color: #eee; height: 150px;"></div>
+	<div class="row"
+		style="margin-bottom: 50px; width: 900px; margin-left: 0;">
+		<div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+				<div
+					style="width:100%; height:200px; background-image:url('<%=cp%>/resource/images/back1.jpg');background-size: contain;">
+					<img alt="" src="<%=cp%>/resource/images/no2.png"
+						style="width: 50px; height: 50px; margin: -1px;">
+				</div>
 
-	<strong style="font-size: 20px;"><span
-		style="color: rgba(183, 183, 183, 0.65); font-size: 20px;"> <i
-			class="glyphicon glyphicon-align-left"
-			style="color: #1abc9c; margin-bottom: 20px; margin-top: 20px;"></i>&nbsp;&nbsp;내
-			주 위
-	</span> 스 터 디 장 소</strong>
+				<div class="caption">
+					<h3 style="font-size: 18px;">
+						Green Cloud <small style="margin-left: 33px;">recommend&nbsp;&nbsp;</small><span
+							style="font-size: 35px; color: #1abc9c; font-weight: lighter;">4.9</span>
+					</h3>
+					<p>넓고 분위기좋은 런던풍 카페</p>
+					<p style="text-align: right;">
+						<a href="#" style="color: #1abc9c;">+MORE</a>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+				<div
+					style="width:100%; height:200px; background-image:url('<%=cp%>/resource/images/back1.jpg');background-size: contain;">
+					<img alt="" src="<%=cp%>/resource/images/no2.png"
+						style="width: 50px; height: 50px; margin: -1px;">
+				</div>
+
+				<div class="caption">
+					<h3 style="font-size: 18px;">
+						Green Cloud <small style="margin-left: 33px;">recommend&nbsp;&nbsp;</small><span
+							style="font-size: 35px; color: #1abc9c; font-weight: lighter;">4.9</span>
+					</h3>
+					<p>넓고 분위기좋은 런던풍 카페</p>
+					<p style="text-align: right;">
+						<a href="#" style="color: #1abc9c;">+MORE</a>
+					</p>
+				</div>
+			</div>
+		</div>
+
+	<div class="col-sm-6 col-md-4">
+			<div class="thumbnail">
+				<div
+					style="width:100%; height:200px; background-image:url('<%=cp%>/resource/images/back1.jpg');background-size: contain;">
+					<img alt="" src="<%=cp%>/resource/images/no2.png"
+						style="width: 50px; height: 50px; margin: -1px;">
+				</div>
+
+				<div class="caption">
+					<h3 style="font-size: 18px;">
+						Green Cloud <small style="margin-left: 33px;">recommend&nbsp;&nbsp;</small><span
+							style="font-size: 35px; color: #1abc9c; font-weight: lighter;">4.9</span>
+					</h3>
+					<p>넓고 분위기좋은 런던풍 카페</p>
+					<p style="text-align: right;">
+						<a href="#" style="color: #1abc9c;">+MORE</a>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<hr style="width: 100%; height: 1px; background-color: #eee;">
+
+		<strong style="font-size: 20px;"><span
+			style="color: rgba(183, 183, 183, 0.65); font-size: 20px;"> <i
+				class="glyphicon glyphicon-align-left"
+				style="color: #1abc9c; margin-bottom: 20px; margin-top: 10px;"></i>&nbsp;&nbsp;S E R C H
+		</span> P L A C E</strong>
+
+
+		<div
+			style="margin-bottom: 100px; width: 900px; background-color: #eee; height: 500px; box-shadow: 2px 5px 80px 0px #eee;">
+
+			<div id="map_canvas"
+				style="width: 600px; background-color: white; height: 500px; float: left;">
+			</div>
+
+			<div id="locationField" style="float: left;">
+				<input id="autocomplete" type="text"
+					style="width: 300px; height: 40px; padding: 10px;">
+			</div>
+			<div id="controls">
+				<form name="controls">
+					<div>
+
+
+						<label class="btn btn-primary" id="btncate"
+							style="width: 150px; background: #1abc9c; border-radius: 0px; color: white; border: none; font-weight: bold;">
+							<img class="img-circle" alt="" src=""> <input type="radio"
+							name="type" value="cafe" onclick="search()" checked="checked"
+							style="display: none;" />카페
+						</label> <label class="btn btn-primary" id="btncate"
+							style="width: 150px; background: #1abc9c; border-radius: 0px; color: white; border: none; font-weight: bold;">
+							<input type="radio" name="type" value="library"
+							onclick="search()" style="display: none;" />도서관
+						</label>
+					</div>
+				</form>
+
+			</div> 
+
+			<div id="listing"
+				style="float: left; width: 300px; height: 427px; overflow: auto; cursor: pointer;">
+				<table id="results"></table>
+			</div>
+
+		</div>
+		
+		
+		<table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px;">
+		   <tr height="35">
+		      <td align="left" width="50%">
+		          ${dataCount }개(${page}/${total_page } 페이지)
+		      </td>
+		      <td align="right">
+		          &nbsp; <!-- 5개, 10개씩 보기 쿼리 -->
+		      </td>
+		   </tr>
+		</table>
+		
+		
+		<div id="tabwrap" style="width: 900px; margin: 0px auto;">
+			<ul class="tabs">
+				<li class="active" rel="tab1">장소</li>
+				
+			</ul>
+			<div class="tab_container">
+				<div id="tab1" class="tab_content">
+
+					<table cellpadding="0" cellspacing="0" style="width: 100%;"
+						class="board_table array">
+						 <c:forEach var="dto" items="${list }">
+						<tr>
+
+							<td style="text-align: right; width: 65px; padding: 5px 18px;"><input
+								type="checkbox" name="chk"></td>
+
+							<td class="___number"
+								style="font-size: 11px; color: #666; text-align: center; font-weight: bold;">${dto.listNum }</td> 
+							<td style="padding: 9px 5px; border-bottom: 1px solid #EEEEEE;">
+								<div style="position: relative;">
+									<!--[category_name]-->
+
+									<a href="<%=cp%>/help/report/article" class="subject"
+										style="font-size: 15px; font-weight: bold; color: #373737;">[${dto.region}] ${dto.subject } - ${dto.placename }</a><span
+										class="comment"
+										style="display: inline-block; padding: 1px 7px 7px 7px; margin-left: 15px; 
+										color: #1abc9c; font-weight: bold; font-size: 15px; line-height: 8px; vertical-align: middle;">[${dto.replyCount }]</span>
+ 
+									<div class="info">
+										<strong>작성일 </strong> <span class="dateWrap"
+											title="[datetime]">${dto.created }</span> <span class="__dotted"></span>
+										<strong>작성자 </strong><span>${dto.userId }</span> <span class="__dotted"></span>
+										<strong>조회수 </strong><span>${dto.hitCount }</span>
+									</div>
+
+
+									<div class="likes">
+										${dto.likesCount }<br> <span class="num"
+											style="color: #777; font-size: 15px;">LIKE</span>
+										<!--[unlikes]-->
+									</div>
+
+								</div>
+							</td>
+						</tr>
+						</c:forEach>
+						</tbody>
+					</table>
+					<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
+					<tr><td><button onclick="javascript:location.href='<%=cp%>/studyboard/studywhere/created';" class="clickbtn" >등록하기</button><td><tr>
+		   <tr height="35">
+			<td align="center">
+		        <div style="width: 188px; text-align:center; margin: 30px auto;">${paging }</div> 
+			</td>
+		   </tr>
+		</table>
+
+				</div>
 			
-	<div style="width: 900px; background-color: #eee; height: 500px;">
-		
-		<div id="map_canvas"
-			style="width: 600px; background-color: white; height: 500px;     float: left;">
-		</div>
-		
-		<div id="locationField" style="float: left;">  
-				<input id="autocomplete" type="text" style="width: 300px; height: border: 2px solid #1abc9c;">
-		</div>
-		<div id="controls">
-		<form name="controls" >
-		<div >
-		<label class="btn btn-primary" style="width: 150px;
-    background: white;
-    border: 1px solid #1abc9c;
-    border-radius: 0px;
-    color: #3b3938;">
-			<input type="radio" name="type" value="cafe" onclick="search()" checked="checked" style="display:none;" />카페
-		</label>
-		<label class="btn btn-primary" style="width: 150px;
-    background: white;
-    border: 1px solid #1abc9c;
-    border-radius: 0px;
-    color: #3b3938;">
-			<input type="radio" name="type" value="library" onclick="search()" style="display:none;"/>도서관
-		</label>
-		</div>
-		</form>
-			
-	</div>
-		
-		<div id="listing" style="float: left;
-    
-    width: 300px;
-    height: 443px;
-    overflow: auto;
-    cursor: pointer;">
-		<table id="results"></table> 
-		</div>
-
-	</div>
-	<div id="tabwrap" style="width: 900px; margin: 0px auto;">
-		<ul class="tabs">
-			<li class="active" rel="tab1">공지사항</li>
-			<li rel="tab2">구매랭킹</li>
-			<li rel="tab3">공지사항</li>
-			<div style="float: right; margin: 8px 0;">
-				<input type="checkbox" id="allCheck" name="allCheck"
-					class="checkbox-style" /><label for="allCheck">전체선택</label>
 			</div>
-		</ul>
-		<div class="tab_container">
-			<div id="tab1" class="tab_content">
-
-				<table cellpadding="0" cellspacing="0" style="width: 100%;"
-					class="board_table array">
-					<tr>
-
-						<td style="text-align: right; width: 65px; padding: 5px 18px;"><input
-							type="checkbox" name="chk"></td>
-
-						<td class="___number"
-							style="font-size: 11px; color: #666; text-align: center; font-weight: bold;">11</td>
-						<td style="padding: 9px 5px; border-bottom: 1px solid #EEEEEE;">
-							<div style="position: relative;">
-								<!--[category_name]-->
-
-								<a href="<%=cp%>/help/report/article" class="subject"
-									style="font-size: 15px; font-weight: bold; color: #373737;">제목입니다</a><span
-									class="comment"
-									style="display: inline-block; padding: 1px 7px 7px 7px; margin-left: 15px; color: #1abc9c; font-weight: bold; font-size: 15px; line-height: 8px; vertical-align: middle;">[16]</span>
-
-								<div class="info">
-									<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">2017-06-19</span>
-									<span class="__dotted"></span> <strong>작성자 </strong><span>홍길동</span>
-									<span class="__dotted"></span> <strong>조회수 </strong><span>30</span>
-								</div>
-
-
-								<div class="likes"
-									style="line-height: 23px; position: absolute; top: -8px; right: 10px; background: #fff; padding: 9px 5px 5px 5px; display: block; width: 45px; height: 41px; text-align: center; font-size: 16px; letter-spacing: -1px; color: #666666; font-weight: bold;">
-									25<br> <span class="num"
-										style="color: #1abc9c; font-size: 18px; font-weight: bold; font-family: tahoma;">추천</span>
-									<!--[unlikes]-->
-								</div>
-
-							</div>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-
-			</div>
-			<!-- #tab1 -->
-			<div id="tab2" class="tab_content">
-				<table cellpadding="0" cellspacing="0" style="width: 100%;"
-					class="board_table array">
-					<tr>
-
-						<td style="text-align: right; width: 65px; padding: 5px 18px;"><input
-							type="checkbox" name="chk"></td>
-
-						<td class="___number"
-							style="font-size: 11px; color: #666; text-align: center; font-weight: bold;">11</td>
-						<td style="padding: 9px 5px; border-bottom: 1px solid #EEEEEE;">
-							<div style="position: relative;">
-								<!--[category_name]-->
-
-								<a href="<%=cp%>/help/report/article" class="subject"
-									style="font-size: 15px; font-weight: bold; color: #373737;">죔혹힙니다</a><span
-									class="comment"
-									style="display: inline-block; padding: 1px 7px 7px 7px; margin-left: 15px; color: #1abc9c; font-weight: bold; font-size: 15px; line-height: 8px; vertical-align: middle;">[16]</span>
-
-								<div class="info">
-									<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">2017-06-19</span>
-									<span class="__dotted"></span> <strong>작성자 </strong><span>홍길동</span>
-									<span class="__dotted"></span> <strong>조회수 </strong><span>30</span>
-								</div>
-
-
-								<div class="likes"
-									style="line-height: 23px; position: absolute; top: -8px; right: 10px; background: #fff; padding: 9px 5px 5px 5px; display: block; width: 45px; height: 41px; text-align: center; font-size: 16px; letter-spacing: -1px; color: #666666; font-weight: bold;">
-									25<br> <span class="num"
-										style="color: #1abc9c; font-size: 18px; font-weight: bold; font-family: tahoma;">추천</span>
-									<!--[unlikes]-->
-								</div>
-
-							</div>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-			</div>
-			<!-- #tab2 -->
-			<div id="tab3" class="tab_content"></div>
-			<!-- #tab3 -->
+			<!-- .tab_container -->
 		</div>
-		<!-- .tab_container -->
+		<!-- #container -->
 	</div>
-	<!-- #container -->
 </div>

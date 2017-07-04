@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="studywhere">
+	<insert id="insertStudyWhere" parameterType="com.wooltari.studywhere.StudyWhere">
+		insert into studywhereboard(num,userId,subject,content,imageFileName,placename,address,tel,ocTime,region) 
+		values(studywhereboard_seq.nextval,1,#{userId},#{subject},#{content},#{imageFileName,jdbcType=VARCHAR},#{placename},#{address},#{tel},#{ocTime},#{region});
+	</insert>
+	
+	 <!-- 조건검색 -->
+	<sql id="where-list">
+		제목
+		<if test="searchKey=='subject'">
+			INSTR(subject, #{searchValue})&gt;=1
+		</if>
+		
+		작성자
+		<if test="searchKey=='userName'">
+			INSTR(name, #{searchValue})=1
+		</if>
+		
+		내용
+		<if test="searchKey=='content'">
+			DBMS_LOB.INSTR(content, #{searchValue})&gt;=1
+		</if>
+		
+		등록일
+		<if test="searchKey=='created'">
+			TO_CHAR(created, 'YYYY-MM-DD')=#{searchValue} OR TO_CHAR(created,'YYYY-MM-DD')=#{searchValue}
+		</if>
+	</sql>
+	
+	<select id="dataCount" resultType="Integer" parameterType="map">
+			SELECT NVL(COUNT(*),0) FROM studywhereboard
+		<where>
+			<if test="searchValue!=null and searchValue!=''">
+				<include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+	<select id="listStudyWhere" parameterType="map" resultType="com.wooltari.studywhere.StudyWhere">
+ 	SELECT * FROM (
+			    SELECT ROWNUM rnum, tb.* FROM (
+			       SELECT tbBbs.num,hitCount,userId,subject,content,imageFileName,countReply,placename,address,tel,ocTime,region,created,
+			           NVL(replyCount, 0) replyCount,NVL(likesCount, 0) likesCount
+			       FROM
+			       (
+			           (
+				         SELECT num,hitCount,m.userId,subject,content,imageFileName,countReply,placename,address,tel,ocTime,region,
+				           TO_CHAR(b.created, 'YYYY-MM-DD') created
+						   
+				         FROM studywhereboard b JOIN member m ON b.userId=m.userId
+                        <where>
+	                         <if test="searchValue != null and searchValue != ''">
+				                  <include refid="where-list"/>
+			                 </if>
+		                </where>
+		                ) tbBbs
+				        LEFT OUTER JOIN
+				        (
+				            SELECT num, COUNT(*) replyCount
+	                                    FROM studywherereply GROUP BY num
+				        ) tbReply ON tbBbs.num = tbReply.num
+                
+                LEFT OUTER JOIN
+				        (
+				            SELECT num, COUNT(*) likesCount
+	                                    FROM studywherelike GROUP BY num
+				        ) tbLikes ON tbBbs.num = tbLikes.num
+                
+		            )
+		           ORDER BY num DESC
+		<![CDATA[
+		        ) tb WHERE ROWNUM <= #{end}
+		    ) WHERE rnum >= #{start}
+		]]>
+	</select>
+	
+	<select id="readBoard" parameterType="Integer" resultType="com.wooltari.studywhere.StudyWhere">
+		SELECT num, m.userId, m.username, subject, content, hitCount, created, saveFilename, originalFilename
+		FROM bbs b JOIN member1 m ON b.userId = m.userId WHERE num=#{num}
+	</select>
+	<!-- 
+	<select id="updateHitCount" parameterType="Integer">
+		UPDATE bbs SET hitCount=hitCount+1 WHERE num=#{num}
+	</select>
+	
+	<select id="preReadBoard" parameterType="map" resultType="com.sp.bbs.Board">
+		SELECT tb.* FROM (
+			SELECT num, subject FROM bbs
+			<where>
+				<if test="searchValue != null and searchValue != '' ">
+					<include refid="where-list"/>
+				</if>
+				
+				<![CDATA[
+					AND (num > #{num})
+				]]>
+			</where>
+			ORDER BY num ASC
+		)tb WHERE ROWNUM=1
+	</select>
+	
+	<select id="nextReadBoard" parameterType="map" resultType="com.sp.bbs.Board">
+		SELECT tb.* FROM (
+			SELECT num, subject FROM bbs
+			<where>
+				<if test="searchValue != null and searchValue != '' ">
+					<include refid="where-list"/>
+				</if>
+				
+				<![CDATA[
+					AND (num < #{num})
+				]]>
+			</where>
+			ORDER BY num DESC
+		)tb WHERE ROWNUM=1
+	</select>
+	
+	게시판 수정
+	<update id="updateBoard" parameterType="com.sp.bbs.Board">
+		UPDATE bbs SET subject=#{subject}, content=#{content}, saveFilename=#{saveFilename, jdbcType=VARCHAR},
+		originalFilename=#{originalFilename, jdbcType=VARCHAR} WHERE num=#{num}
+	</update>
+	
+	게시판 삭제
+	<delete id="deleteBoard" parameterType="Integer">
+		DELETE FROM bbs WHERE num=#{num}
+	</delete>
+	
+	게시물 공감
+	<insert id="insertLikeBoard" parameterType="com.sp.bbs.Board">
+		INSERT INTO bbsLike(num, userId) VALUES (#{num},#{userId})
+	</insert>
+	
+	게시물 공감 개수
+	<select id="countLikeBoard" resultType="Integer" parameterType="Integer">
+		SELECT NVL(COUNT(*),0) FROM bbsLike WHERE num=#{num}
+	</select>
+	
+	댓글 달기
+	<insert id="insertReply" parameterType="com.sp.bbs.Reply">
+		INSERT INTO bbsReply (replyNum, num, userId, content, answer)
+			VALUES (bbsReply_seq.NEXTVAL, #{num}, #{userId}, #{content}, #{answer})
+	</insert>
+	
+	댓글개수 
+	<select id="replyDataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM bbsReply WHERE num=#{num} AND answer=0
+	</select>
+	
+	댓글리스트
+	<select id="listReply" parameterType="map" resultType="com.sp.bbs.Reply">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT replyNum, num, r.userId, userName, content, created
+				FROM bbsReply r
+				JOIN member1 m ON r.userId = m.userId
+				WHERE num=#{num} AND answer=0
+				ORDER BY replyNum DESC
+			<![CDATA[
+				  ) tb WHERE ROWNUM <= #{end}
+				) WHERE rnum >= #{start}
+			]]>
+	</select>
+
+	
+	댓글 삭제
+	<delete id="deleteReply" parameterType="map">
+		DELETE bbsReply WHERE
+		<if test="mode=='num'">
+			num=#{num}
+		</if>
+		<if test="mode=='reply'">
+			replyNum=#{replyNum}
+		</if>
+	</delete> -->
+</mapper>
