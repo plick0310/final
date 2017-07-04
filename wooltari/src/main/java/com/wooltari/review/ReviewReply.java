@@ -1,7 +1,7 @@
-package com.wooltari.promote;
+package com.wooltari.review;
 
-public class PromoteReply {
-	private int listNum,prNum,num;
+public class ReviewReply {
+	private int listNum,reNum,num;
 	private String userId,userName,content,created;
 	public int getListNum() {
 		return listNum;
@@ -9,11 +9,11 @@ public class PromoteReply {
 	public void setListNum(int listNum) {
 		this.listNum = listNum;
 	}
-	public int getPrNum() {
-		return prNum;
+	public int getReNum() {
+		return reNum;
 	}
-	public void setPrNum(int prNum) {
-		this.prNum = prNum;
+	public void setReNum(int reNum) {
+		this.reNum = reNum;
 	}
 	public int getNum() {
 		return num;

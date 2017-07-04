@@ -45,9 +45,8 @@ function insertBoard(){
 		return false;
 	}
 	
-	if(f.file1.value==""){
-		
-		return true;
+	if(f.file1.value==""||f.file1.value==null){
+		var msg="기본사진으로 대신합니다.";
 		
 	}else if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.file1.value)) {	
 		alert('이미지 파일만 가능합니다.');
