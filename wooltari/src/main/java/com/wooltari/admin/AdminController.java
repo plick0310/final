@@ -10,9 +10,9 @@ public class AdminController {
 	@Autowired
 	private AdminService service;
 	
-	@RequestMapping(value="/admin/dashboard", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/index", method=RequestMethod.GET)
 	public String adminDashBoard(){
 		
-		return ".admin.dashboard";
+		return "admin/index";
 	}
 }

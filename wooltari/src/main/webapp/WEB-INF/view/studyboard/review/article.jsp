@@ -11,11 +11,11 @@
 		<table>
 			<tr style="height: 150px;">
 				<td style="width: 270px;">제목:${dto.subject }<br>스터디명:${dto.studyName }<br>작성자:${dto.userName }<br>평점:<span id="countStar">${star}</span>(<span id="countMany">${many}</span>명)<br>조회수:${dto.hitCount }</td>
-				<td><img src="<%=cp%>/uploads/review/${dto.imageFileName}" onerror="this.src='<%=cp%>/resource/images/reviewPhoto/pp.jpg'" style="height: 176px; width: 300px; margin-bottom: 3px; margin-top: -10px; border-radius: 10%;"></td>
+				<td><img src="<%=cp%>/uploads/review/${dto.imageFileName}" onerror="this.src='<%=cp%>/resource/images/reviewPhoto/pp.jpg'" style="height: 176px; width: 200px; margin-bottom: 3px; margin-top: -10px; border-radius: 10%;"></td>
 		
 			</tr>
 			<tr>
-				<td colspan="2"><textarea style="width: 571px; height: 290px;" readonly="readonly">${dto.content }</textarea></td>
+				<td colspan="2"><textarea style="width: 471px; height: 290px;" readonly="readonly">${dto.content }</textarea></td>
 			</tr>
 		
 

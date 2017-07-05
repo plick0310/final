@@ -218,6 +218,7 @@ header p {
 	text-transform: uppercase;
 	color: #fff;
 }
+/* 
 .btn-default {
 	color: #fff;
 	font-family: 'Open Sans', sans-serif;
@@ -230,7 +231,7 @@ header p {
 	border-radius: 4px;
 }
 
-	
+ */	
 }
 .btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active {
 	background-color: #fff;

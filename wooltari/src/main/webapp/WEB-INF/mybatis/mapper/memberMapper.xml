@@ -9,12 +9,13 @@
     </insert>
 	<!-- 회원 상세 정보 삽입 -->
     <insert id="insertMemberInfo" parameterType="com.wooltari.member.Member">
-       INSERT INTO memberInfo(userId, birth, tel) VALUES (#{userId}, #{birth, jdbcType=VARCHAR}, #{tel, jdbcType=VARCHAR}) 
+       INSERT INTO memberInfo(userId, birth, tel, gender, introduce)
+       VALUES (#{userId}, #{birth, jdbcType=VARCHAR}, #{tel, jdbcType=VARCHAR}, #{gender, jdbcType=VARCHAR}, #{introduce, jdbcType=VARCHAR}) 
     </insert>
 	<!-- 회원 정보 가져오기 -->
     <select id="readMember" resultType="com.wooltari.member.Member" parameterType="String">
         SELECT m.userId, userName, userPwd, userImg, point, NVL(enabled, 0) enabled,
-        		TO_CHAR(birth, 'YYYY-MM-DD') birth, tel, created_date, modify_date, last_login 
+        		TO_CHAR(birth, 'YYYY-MM-DD') birth, tel, gender, introduce, created_date, modify_date, last_login 
 		FROM member m JOIN memberInfo mi ON m.userId = mi.userId
 		WHERE m.userId=#{userId}
     </select>

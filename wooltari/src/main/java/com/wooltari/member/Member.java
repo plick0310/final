@@ -4,11 +4,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Member {
 	private String userId, userName, userPwd, userImg;
-	private String birth, tel, created_date, modify_date, last_login;
+	private String birth, tel, introduce, created_date, modify_date, last_login;
 	private String auth;
-	
-	private int point, enabled;
-	
+	private int gender, point, enabled;
 	private MultipartFile userImgUpload;
 
 	public String getUserId() {
@@ -59,6 +57,14 @@ public class Member {
 		this.tel = tel;
 	}
 
+	public String getIntroduce() {
+		return introduce;
+	}
+
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
+
 	public String getCreated_date() {
 		return created_date;
 	}
@@ -91,6 +97,14 @@ public class Member {
 		this.auth = auth;
 	}
 
+	public int getGender() {
+		return gender;
+	}
+
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+
 	public int getPoint() {
 		return point;
 	}
@@ -114,7 +128,4 @@ public class Member {
 	public void setUserImgUpload(MultipartFile userImgUpload) {
 		this.userImgUpload = userImgUpload;
 	}
-	
-		
-	
 }
