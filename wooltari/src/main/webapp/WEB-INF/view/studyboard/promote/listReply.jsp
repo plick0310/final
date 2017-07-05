@@ -5,50 +5,51 @@
 <%
    String cp=request.getContextPath();
 %>
+
+
 <div style="clear: both; padding-top: 20px;">
-    <div style="float: left;"><span style="color: #3EA9CD; font-weight: bold;">댓글 ${replyCount}개</span> <span>[댓글 목록, ${pageNo}/${total_page} 페이지]</span></div>
+    <div style="float: left;"><span style="color: #3EA9CD; font-weight: bold;">댓글 ${dataCount}개</span></div>
     <div style="float: right; text-align: right;"></div>
 </div>
 
 <div style="clear: both; padding-top: 5px;">
 
 <c:forEach var="vo" items="${listReply}">
-    <!-- 리플 내용 리스트 시작 -->
-    <div style="clear:both; margin-top:5px; padding: 10px; border: #d5d5d5 solid 1px; min-height: 130px;">
+
+    <div style="clear:both; margin-top:5px; padding: 10px;  min-height: 90px; border: none">
         <div style="clear: both;">
             <div style="float: left;">${vo.userName} | ${vo.created}</div>
             <div style="float: right;  text-align: rigth;">
-<c:if test="${sessionScope.member.userId==vo.userId || sessionScope.member.userId=='admin'}">		   
-                <a onclick='deleteReply("${vo.replyNum}", "${pageNo}");'>삭제</a>
-</c:if>		   
-<c:if test="${sessionScope.member.userId!=vo.userId && sessionScope.member.userId!='admin'}">		   
-                <a href='#'>신고</a>
-</c:if>		   
+	<c:if test="${sessionScope.member.userId==vo.userId || sessionScope.member.userId=='admin'}">		   
+                <a  href="#" onclick='deleteReply("${vo.prNum}","${pageNo }"); return false'>삭제</a>
+	</c:if>
+
             </div>
         </div>
-        <div style="clear: both; padding: 5px 0 5px 0px;  min-height: 70px;">
-            ${vo.content}
-        </div>
-        <div style="clear: both; min-height: 30px;">
+        <br>
+        <textarea style="width: 525px; height: 55px;" readonly="readonly">${vo.content }</textarea>
+       <%--  <div style="clear: both; min-height: 30px;">
             <div style="float: left;">
-                <button type="button" class="btn btn-primary btn-sm" onclick="replyAnswerLayout('${vo.replyNum}');">답글<span id="answerCount${vo.replyNum}">(${vo.answerCount})</span> <span id="answerGlyphicon${vo.replyNum}" class="glyphicon glyphicon-triangle-bottom"></span></button>
+                <button type="button" class="btn btn-primary btn-sm" onclick="replyAnswerLayout('${dto.prNum}');">답글<span id="answerCount${dto.prNum}">(${dto.answerCount})</span> <span id="answerGlyphicon${vo.replyNum}" class="glyphicon glyphicon-triangle-bottom"></span></button>
             </div>
                        
-        </div>
+        </div> --%>
 
         <!-- 답글 시작 -->
-        <div id="replyAnswerLayout${vo.replyNum}" style="display: none;">
+        <%-- <div id="replyAnswerLayout${dto.replyNum}" style="display: none;">
             <div style="clear: both; margin-top:10px; padding: 5px; border-top: #d5d5d5 solid 1px;">
-                <textarea id="replyContent${vo.replyNum}" rows="3" required="required"></textarea>
+                <textarea id="replyContent${dto.replyNum}" rows="3" required="required"></textarea>
             </div>
             <div style="text-align: right; padding-top: 7px;">
-                <button type="button" onclick="sendReplyAnswer('${vo.num}', '${vo.replyNum}')"> 답글등록 </button>
+                <button type="button" onclick="sendReplyAnswer('${dto.num}', '${dto.prNum}')"> 답글등록 </button>
             </div>
 
             <!-- 답글 리스트 -->       
-            <%-- <div id="listReplyAnswer${vo.replyNum}" style="padding-top: 5px;"></div> --%>
-        </div> <!-- 답글 끝 -->
+            <div id="listReplyAnswer${vo.replyNum}" style="padding-top: 5px;"></div>
+        </div> <!-- 답글 끝 --> --%>
                         
-    </div>  <!-- 리플 내용 리스트 끝 -->
+    </div>
 </c:forEach>
+<div style="text-align: center">${paging }</div>
+
 </div>

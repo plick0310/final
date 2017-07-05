@@ -7,6 +7,8 @@ public class Promote {
 	private String subject,content,created;
 	private String imageFileName;
 	private String userId,userName;
+	private int replyCount;
+	
 	private MultipartFile upload;
 	
 	public MultipartFile getUpload() {
@@ -75,6 +77,14 @@ public class Promote {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	public int getReplyCount() {
+		return replyCount;
+	}
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+	
+	
 	
 	
 }

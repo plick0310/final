@@ -14,6 +14,11 @@ background: none;
 </style>
 
 <script type="text/javascript">
+function login() {
+	location.href="<%=cp%>/main";
+}
+
+
 function deleteBoard(){
 <c:if test="${sessionScope.member.userId=='admin'||sessionScope.member.userId==dto.userId}">	
 	var num="${dto.num}";
@@ -36,13 +41,90 @@ $(function(){
 	listPage(1);
 });
 
-function lisgPage(page){
+function listPage(page) {
 	var url="<%=cp%>/promote/listReply";
 	var num="${dto.num}";
 	$.post(url, {num:num, pageNo:page}, function(data){
 		$("#listReply").html(data);
 	});
+	
 }
+
+
+function insertReply(){
+	var userId="${sessionScope.member.userId}";
+	if(! userId) {
+		login();
+		return false;
+	}
+	
+	
+	var num="${dto.num}";
+	var content=$.trim($("#replyContent").val());
+	if(! content ) {
+		alert("내용을 입력하세요");
+		$("#content").focus();
+		return false;
+	}
+	var query="num="+num+"&content="+encodeURIComponent(content);
+	
+	$.ajax({
+		type:"post"
+		,url:"<%=cp%>/promote/insertReply"
+		,data:query
+		,dataType:"json"
+		,success:function(data){
+			$("#replyContent").val("");
+			
+			var state=data.state;
+			if(state=="true"){
+				listPage(1);
+			}else if(state=="false"){
+				alert("댓글 등록에 실패하였습니다")
+			}else if(state=="loginFail"){
+				login();
+			}
+		}
+		,error:function(e){
+			console.log(e.responseText);
+		}
+			
+		
+		
+	});
+	
+}
+
+function deleteReply(){
+	var query="prNum="+prNum;
+	alert(query);
+	alert("df");
+	$.ajax({
+		type:"post"
+		,url:"<%=cp%>/promote/deleteReply"
+		,data:query
+		,dataType:"json"
+		,success:function(data){
+			if(state=="true"){
+				listPage(1);
+			}else if(state=="false"){
+				alert("삭제에 실패하였습니다.")
+			}else if(state=="loginFail"){
+				alert("로그인하세요");
+				location.href="<%=cp%>/main";
+			}
+			
+		}
+		,error:function(e){
+			console.log(e.responseText);
+		}
+		
+		
+		
+	});
+	
+}
+
 </script>
 
 
@@ -75,14 +157,14 @@ function lisgPage(page){
 
 		<tr>
 			<td>
-				<img src="<%=cp%>/uploads/photo/${dto.imageFileName}" style="max-width: 400px; height: auto; resize: both;">
+				<img src="<%=cp%>/uploads/photo/${dto.imageFileName}" style="max-width: 400px; height: auto; resize: both;" onerror="this.src='<%=cp%>/resource/images/reviewPhoto/promote.PNG'">
 			</td>
 		</tr>
 		<tr>		
 			<td class="read_contArea">
 				
 				
-				<div id="board_memo_area" style="height: 200px;">
+				<div id="board_memo_area" style="min-height: 200px;">
 				
 					${dto.content}
 				</div>
@@ -126,15 +208,13 @@ function lisgPage(page){
 					<div class="_CALLING_COMMENT"><strong style="font-size: 18px;">
 					<span style="font-size: 25px; color: #1abc9c; " class="glyphicon glyphicon-pencil"></span>리플입니다...</strong>
 					</div>
-					<textarea rows="" cols="" style="width: 543px; height: 73px;"></textarea>
-					<button type="button">등록</button>
+					<textarea id="replyContent" style="width: 543px; height: 73px;"></textarea>
+					<button type="button" onclick="insertReply();">등록</button>
 				</div> 
 			</td>
 		</tr>
 	</tbody>
 </table>	
-<div class="read_btnArea">
 
-<div id=listReply></div>
+<div id=listReply style="width: 550px; margin-left: 320px; margin-top: -40px;"></div>
 
-</div>

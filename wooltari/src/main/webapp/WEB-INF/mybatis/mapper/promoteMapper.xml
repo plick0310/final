@@ -23,9 +23,11 @@
 	<select id="listBoard" parameterType="map" resultType="com.wooltari.promote.Promote">
 		select * from(
 			select rownum rnum, tb.* from(
-				select num,subject,content,hitcount,imagefilename,userName,
-				to_char(created,'yyyy-mm-dd')created,s_num,p.userId
-				from promotelist p join member m on p.userId=m.userId
+				select distinct p.num,p.subject,p.content,hitcount,imagefilename,userName,
+					to_char(p.created,'yyyy-mm-dd')created,s_num,p.userId,(select nvl(count(*),0) from promotereply where num=p.num)replyCount
+					from promotelist p 
+			        join member m on p.userId=m.userId
+			        left outer join promotereply a on p.num=a.num
 			<where>
 				<if test="searchValue!=null and searchValue!=''">
 					<include refid="where-list"/>
@@ -83,7 +85,19 @@
 	</insert>
 	
 	<!-- 홍보글 댓글 리스트 -->
-	
+	<select id="readReply" parameterType="Integer" resultType="com.wooltari.promote.PromoteReply">
+		select * from(
+		  select rownum rnum, tb.* from(
+		    select prnum,content,p.created,p.userid,username,num
+		    from promotereply p
+		    join member m on p.userid=m.userid
+		    where num=#{num}
+		    order by prnum desc
+		  <![CDATA[		
+			)tb where rownum <= #{end}
+		)where rnum>=#{start}
+		]]>
+	</select>
 	
 	<!-- 댓글 카운트 -->
 	<select id="replyCount" parameterType="map" resultType="Integer">

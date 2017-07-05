@@ -110,31 +110,55 @@ public class PromoteServiceImpl implements PromoteService{
 	}
 
 	@Override
-	public int deleteBoardId(String userId, String root) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public int insertReply(PromoteReply dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		
+		try {
+			result=dao.insertData("promote.insertReply", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
 	public List<PromoteReply> listReply(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		List<PromoteReply> list=null;
+		
+		try {
+			list=dao.getListData("promote.readReply",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 
 	@Override
 	public int replyDataCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		try {
+			result=dao.getIntValue("promote.replyCount",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	@Override
 	public int deleteReply(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.deleteData("promote.deleteReply", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteBoardId(String userId, String root) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

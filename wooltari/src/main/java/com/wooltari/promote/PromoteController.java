@@ -1,7 +1,5 @@
 package com.wooltari.promote;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -16,10 +14,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wooltari.common.MyUtil;
 import com.wooltari.member.SessionInfo;
@@ -91,6 +89,7 @@ public class PromoteController {
 			listUrl=cp+"/promote/list?"+query;
 			articleUrl=cp+"/promote/article?page="+currentPage+"&"+query;
 		}
+		
 		
 		String paging=myUtil.paging(currentPage, total_page, listUrl);
 		
@@ -166,7 +165,7 @@ public class PromoteController {
 		              "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");
 		}
 		
-		
+		//model 스프링, map은 자바. 어떤거든 상관없음
 		model.addAttribute("dto", dto);
 		model.addAttribute("query", query);
 		model.addAttribute("page", page);
@@ -195,4 +194,104 @@ public class PromoteController {
 		return "redirect:/promote/list?page="+page;
 	}
 	
+	@RequestMapping(value="promote/insertReply",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> insertReply(
+			PromoteReply dto,
+			HttpSession session
+			)throws Exception{
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String state="true";
+		if(info==null){
+			state="loginFail";
+		}else{
+			dto.setUserId(info.getUserId());
+			int result=service.insertReply(dto);
+			if(result==0)
+				state="false";
+		}
+			
+		Map<String, Object> model=new HashMap<>();
+		model.put("state", state);
+	
+		return model;
+	}
+	
+	
+	@RequestMapping(value="promote/listReply")
+	public String listReply(
+			@RequestParam(value="num") int num,
+			@RequestParam(value="pageNo",defaultValue="1") int current_page,
+			Model model
+			)throws Exception{
+		
+		int rows=3;
+		int total_page=0;
+		int dataCount=0;
+		
+		Map<String, Object> map=new HashMap<String,Object>();
+		map.put("num", num);
+		
+		dataCount=service.replyDataCount(map);
+		total_page=myUtil.pageCount(rows, dataCount);
+		if(current_page>total_page)
+			current_page=total_page;
+		
+		int start=(current_page-1)*rows+1;
+		int end=current_page*rows;
+		map.put("start", start);
+		map.put("end", end);
+		List<PromoteReply> listReply=service.listReply(map);
+		
+		Iterator<PromoteReply> it=listReply.iterator();
+		int listNum,n=0;
+		while(it.hasNext())
+		{
+			PromoteReply dto=it.next();
+			listNum=dataCount-(start+n-1);
+			dto.setListNum(listNum);
+			dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+			n++;
+		}
+		
+		String paging=myUtil.paging(current_page, total_page);
+
+		model.addAttribute("dataCount",dataCount);
+		model.addAttribute("listReply",listReply);
+		model.addAttribute("pageNo",current_page);
+		model.addAttribute("total_page",total_page);
+		model.addAttribute("paging",paging);
+		
+		return "studyboard/promote/listReply";
+	}
+	
+	@RequestMapping(value="promote/deleteReply",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteReply(
+			@RequestParam int prNum,
+			@RequestParam int page,
+			HttpSession session
+			){
+		String state="true";
+		Map<String, Object>map=new HashMap<>();
+		
+		System.out.println(prNum+"#@#@");
+		System.out.println(page+"#@#@");
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		if(info==null){
+			state="loginFail";
+		}else {
+			map.put("prNum", prNum);
+			int result=service.deleteReply(map);
+			
+			if(result==0)
+				state="false";
+		}
+		
+		map.put("state", state);
+		
+		return map;
+	}
 }
