@@ -3,6 +3,7 @@ package com.wooltari.mockTest;
 public class MockTest {
 	private int num;
 	private int wishlistNum;
+	private String userId;
 	private int dday;
 	private long gap;
 	private String examInfoName;
@@ -11,6 +12,13 @@ public class MockTest {
 	private String examwishDate;
 	
 	
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public long getGap() {
 		return gap;
 	}

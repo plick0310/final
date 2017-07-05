@@ -621,7 +621,7 @@ function deleteList() {
     }
 </script>
 
-<div style="width: 900px; height:600px; margin: 60px auto;">
+<div style="width: 900px; height:100%; margin: 60px auto;">
    <div style="height: 50px; font-size: 20px; text-align: center;">
       <span style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
          <span style="font-size: 19px; color: #1abc9c;"

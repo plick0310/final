@@ -160,10 +160,7 @@
 	<select id="listReply" resultType="com.wooltari.infoReqBoard.Reply" parameterType="map">
 		SELECT * FROM(
 			SELECT ROWNUM rnum, tb.* FROM(
-				SELECT tbreply.replyNum, num, userId, content, created, tbreply.answer
-					,NVL(answerCount, 0) answerCount
-					,NVL(likeCount, 0) likeCount
-					,NVL(dislikeCount, 0) dislikeCount
+				SELECT tbreply.replyNum, num, userId, content, created, tbreply.answer									
 				FROM				
 					(
 						SELECT replyNum, r.num, r.userId, r.content, r.created, answer
@@ -214,6 +211,9 @@
 	DELETE FROM infoReqFile WHERE ${field}=#{num}
 	</delete>
 	
-
-
+	<!-- 다중 삭제 -->
+	<delete id="deleteList" parameterType="java.util.List">
+		DELETE FROM infoReqBoard WHERE num IN
+			<foreach close=")" separator="," open="(" collection="list" index="index" item="num">#{num}</foreach>
+	</delete>
 </mapper>

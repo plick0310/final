@@ -3,7 +3,7 @@ package com.wooltari.study.board;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Board {
-	private int num;
+	private int num , hitCount;
 	private String userId, content , created ;
 	private long s_num;
 	
@@ -11,6 +11,17 @@ public class Board {
 	private String imageFileName;
 	
 	private String tableName;
+
+	
+	
+	
+	public int getHitCount() {
+		return hitCount;
+	}
+
+	public void setHitCount(int hitCount) {
+		this.hitCount = hitCount;
+	}
 
 	public int getNum() {
 		return num;

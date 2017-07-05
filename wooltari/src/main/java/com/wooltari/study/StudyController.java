@@ -111,17 +111,19 @@ public class StudyController {
 		return ".study.myStudy.home";
 	}
 	
-	@RequestMapping(value="/study/myStudy/calender")
+	
+	
+	@RequestMapping(value="/study/myStudy/{s_num}/calender")
 	public String calender() {
 
 		return "/study/myStudy/calender";
 	}
-	@RequestMapping(value="/study/myStudy/s_member")
+	@RequestMapping(value="/study/myStudy/{s_num}/s_member")
 	public String s_member() {
 
 		return "/study/myStudy/s_member";
 	}
-	@RequestMapping(value="/study/myStudy/chating")
+	@RequestMapping(value="/study/myStudy/{s_num}/chating")
 	public String chating() {
 
 		return "/study/myStudy/chating";

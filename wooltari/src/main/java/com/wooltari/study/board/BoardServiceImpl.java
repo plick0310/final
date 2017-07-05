@@ -54,7 +54,7 @@ public class BoardServiceImpl implements BoardService{
 		
 		return list;
 	}
-
+ 
 	@Override
 	public int dataCount(Map<String, Object> map) {
 		int result=0;
@@ -69,8 +69,12 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void deleteBoard(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		
+		try {
+			dao.deleteData("studyBoard.deleteBoard", map);
+			//파일삭제
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 

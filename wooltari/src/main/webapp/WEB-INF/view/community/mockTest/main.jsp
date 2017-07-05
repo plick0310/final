@@ -7,7 +7,7 @@
 <%
    String cp = request.getContextPath();
 %>
-<link rel="stylesheet" href="<%=cp%>/resource/css/mock.css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/mock.css"/>
 <style>
 
 </style>
@@ -19,12 +19,12 @@ $(document).ready(function(){
     $("#allCheck").click(function(){
         //클릭되었으면
         if($("#allCheck").prop("checked")){
-            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
-            $("input[name=chk]").prop("checked",true);
+            //input태그의 name이 nums인 태그들을 찾아서 checked옵션을 true로 정의
+            $("input[name=nums]").prop("checked",true);
             //클릭이 안되있으면
         }else{
-            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
-            $("input[name=chk]").prop("checked",false);
+            //input태그의 name이 nums인 태그들을 찾아서 checked옵션을 false로 정의
+            $("input[name=nums]").prop("checked",false);
         }
     });
 });
@@ -53,14 +53,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 
 </script>
 <script>
-function deleteScore(hak) {
-   var url="<%=cp%>/exam/delete?hak="+hak+"&page=${page}";
-   if(confirm("자료를 삭제 하시겠습니까?")) {
-      location.href=url;
-   }
-}
-
-function updateScore(hak) {
+function updateScore(num) {
    var url="<%=cp%>/score/update?hak="+hak+"&page=${page}";
    location.href=url;
 }
@@ -90,18 +83,18 @@ function deleteList() {
    var f=document.array_form;
    var cnt=0;
    
-   if(f.wishlistNum==undefined) {
+   if(f.nums==undefined) {
       return false;      
    }
    
-   if(f.wishlistNum.length!=undefined) {// 체크박스가 둘 이상인 경우
-      for(var i=0; i<f.wishlistNum.length; i++) {
-         if(f.wishlistNum[i].checked)
+   if(f.nums.length!=undefined) {// 체크박스가 둘 이상인 경우
+      for(var i=0; i<f.nums.length; i++) {
+         if(f.nums[i].checked)
             cnt++;
       }
    } else {
       // 체크박스가 하나인 경우
-      if(f.wishlistNum.checked)
+      if(f.nums.checked)
          cnt++;
    }
    
@@ -111,7 +104,7 @@ function deleteList() {
    }
    
    if(confirm("선택한 게시물을 삭제하시겠습니까 ? ")) {
-      f.action="<%=cp%>/score/deleteList";
+      f.action="<%=cp%>/mockTest/deleteList";
       f.submit();
    }
 }
@@ -133,19 +126,19 @@ function deleteList() {
     function sendOk() {
         var f = document.modalForm;
 
-    	var str = f.wishlistName.value;
-        if(!str) {
+    	var str = f.examInfoName.value;
+    	
+        if(!str || str=='시험선택') {
             alert("시험을 선택하세요");
             return;
         }
 
-    	str = f.wishlistDate.value;
+    	str = f.examwishDate.value;
         if(!str) {
             alert("응시일을 지정하세요. ");
             return;
         }
 
-    	f.action="<%=cp%>/exam/${mode}";
     		
         f.submit();
     }
@@ -220,7 +213,10 @@ function deleteList() {
    </div>
    <div style="margin-bottom: 5px; font-size: 15px;">
       <span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">
-             홍길동&nbsp;&nbsp;</span>회원님의 응시할 시험 목록입니다.
+             
+             ${sessionScope.member.userName }
+             
+             &nbsp;&nbsp;</span>님의 응시할 시험 목록입니다.
    </div>
 
    <form name="array_form" id="array_form" style="width: 900px;">
@@ -236,49 +232,13 @@ function deleteList() {
             </tr>
          </table>
       </div>
-      
+
       <table cellpadding="0" cellspacing="0" style="width: 100%; border-top: 1px solid #4b4b4b;" class="board_table array">
+		<c:forEach var="dto" items="${examwishList }">
          <tbody>
             <tr>
                <td style="text-align: right; width: 65px; padding: 5px 18px;">
-               		<input type="checkbox" name="chk">
-               </td>
-
-               <td class="___number">1</td>
-               <td>
-                  <div style="position: relative;">
-
-                     <a href="#" class="subject"
-                        style="line-height: 27px; float: left;">한국사능력검정시험 1급</a>
-                     <span class="comment" style="line-height: 16px;">D-day 16</span>
-
-                     <div class="info"
-                        style="float: left; padding: 0; line-height: 25px; margin-left: 32px; float: left; padding: none;">
-                        <strong>주최기관 </strong><span>국사편찬위원회</span>
-                        <span class="__dotted"></span>
-                        <strong>응시일 </strong><span>2017-07-20</span>
-                     </div>
-                     <div style="float: right; margin: 4px;">
-                        <button id="modalbtn" type="button"
-                           class="glyphicon glyphicon-plus" data-toggle="modal"
-                           data-target="#exampleModal" data-whatever="@mdo" value="regist"></button>
-                        <button id="modalbtn" type="button"
-                           class="glyphicon glyphicon-edit" data-toggle="modal"
-                           data-target="#exampleModal" data-whatever="@mdo" value="change"></button>
-                     </div>
-                  </div>
-               </td>
-            </tr>
-         </tbody>
-      </table>
-      
-      
-      <c:forEach var="dto" items="${examwishList }">
-      <table cellpadding="0" cellspacing="0" style="width: 100%; border-top: 1px solid #4b4b4b;" class="board_table array">
-         <tbody>
-            <tr>
-               <td style="text-align: right; width: 65px; padding: 5px 18px;">
-               		<input type="checkbox" name="chk">
+               		<input type="checkbox" name="nums" value="${dto.num }">
                </td>
 
                <td class="___number">${dto.wishlistNum}</td>
@@ -291,9 +251,9 @@ function deleteList() {
 
                      <div class="info"
                         style="float: left; padding: 0; line-height: 25px; margin-left: 32px; float: left; padding: none;">
-                        <strong>주최기관 </strong><span>${dto.examInfoOrgan }</span>
+                        <strong>주최기관: </strong><span>${dto.examInfoOrgan }</span>
                         <span class="__dotted"></span>
-                        <strong>응시일 </strong><span>${dto.examwishDate }</span>
+                        <strong>응시일: </strong><span>${dto.examwishDate }</span>
                      </div>
                      <div style="float: right; margin: 4px;">
                         <button id="modalbtn" type="button"
@@ -307,8 +267,8 @@ function deleteList() {
                </td>
             </tr>
          </tbody>
-      </table>
       </c:forEach>
+    </table>
       
       
       <div class="btnArea">
@@ -362,26 +322,26 @@ function deleteList() {
 	                        <label for="recipient-name" class="control-label">시험명</label>
 	                        &nbsp;&nbsp; 
 	                        
-                        	<select id="examSelect" style="border: 1px solid #D4D4D4">
+                        	<select id="examSelect" name="examInfoName" style="border: 1px solid #D4D4D4">
+                        		<option value="시험선택">시험선택</option>
 	                       		<c:forEach var="dto" items = "${examinfoList }">
 	                       			<option value="${dto.examInfoName}">${dto.examInfoName }</option>
 	                       		</c:forEach>
 	                       	</select>
-	                     </select>
 	
 	                     </div>
 	                     <div class="form-group">
 	                        <label for="message-text" class="control-label"
 	                           style="margin-right: 8px;">응시일</label>
 	                            <div class="calendar_wrap">
-									<input type="date" name="tryDate" value="${dto.birth }"
+									<input type="date" name="examwishDate" value="${dto.examwishDate }"
 										style="margin-top: -15px; height: 26px; border: 1px solid #D4D4D4;"/>
 	                        	</div>
 	                     </div>
 	               </div>
 	               <div class="modal-footer">
 	
-	                  <button type="button" class="clickbtn">등록 완료</button>
+	                  <button type="button" class="clickbtn" onclick="sendOk();">${mode=='update'?'수정완료':'등록하기' }</button>
 	                  <button type="button" class="clickbtn" data-dismiss="modal">닫기</button>
 	
 	               </div>
