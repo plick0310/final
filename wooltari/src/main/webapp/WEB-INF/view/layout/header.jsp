@@ -73,6 +73,14 @@ function dialogJoin() {
 	$("#modal-content").load("<%=cp%>/member/join");
 }
 
+function dialogMemberInfo(userId) {
+	var url="<%=cp%>/member/memberinfo";
+	$.post(url, {userId:userId}, function(data){
+		$("#modal-content").html(data);
+		$("#modalLogin").modal("show");
+	});
+}
+
 $(function(){
 	$('body').on('hidden.bs.modal', '.modal', function () {
 		alert("dddd");
@@ -200,7 +208,7 @@ $(function(){
 						<a href="javascript:dialogLogin();"><img src="<%=cp%>/resource/img/loginicon.png" alt="Login" class="img-circle" width="35px" height="35px"></a>
 					</c:if>
 					<c:if test="${not empty sessionScope.member}">
-						<strong style="margin-right: 5px">${sessionScope.member.userName}</strong>
+						<strong style="margin-right: 5px"><a href="javascript:dialogMemberInfo('${sessionScope.member.userId}');">${sessionScope.member.userName}</a></strong>
 						<c:if test="${empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
 								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c"> 
@@ -218,8 +226,8 @@ $(function(){
 							<c:if test="${not empty sessionScope.member.userImg}">
 								<img src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}" class="img-thumbnail" width="100%" height="100%">
 							</c:if>
-							<li><h3 style="text-align: center;"> ${sessionScope.member.userName} 님</h3></li>
-							<c:if test="${sessionScope.member.userId == 'admin'}">
+							<li><h3 style="text-align: center;">${sessionScope.member.userName} 님</h3></li>
+							<c:if test="${sessionScope.member.userId == 'admin'}"> 
 							<li><a href="<%=cp%>/admin/index">관리자 페이지</a></li>
 							</c:if>
 							<li><a href="<%=cp%>/study/mylist">나의 스터디</a></li>

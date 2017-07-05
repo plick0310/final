@@ -44,6 +44,21 @@ public class MemberController {
 	public String joinForm() throws Exception {
 		return "member/join";
 	}
+	@RequestMapping(value="/member/membergetinfo", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> memberGetInfo(@RequestParam String userId) {
+		Member dto = service.readMember(userId);
+		// 작업 결과를 json으로 전송
+		Map<String, Object> model = new HashMap<>(); 
+		model.put("dto", dto);
+		return model;
+	}
+	@RequestMapping(value="/member/memberinfo", method=RequestMethod.POST)
+	public String memberInfo(@RequestParam String userId, Model model) throws Exception{
+		Member dto = service.readMember(userId);
+		model.addAttribute("dto", dto);
+		return "member/memberinfo";
+	}
 	
 	@RequestMapping(value="/member/join_submit", method=RequestMethod.POST)
 	public String joinSubmit(Member dto, Model model, HttpSession session) throws Exception {
