@@ -74,7 +74,6 @@
    		 ,hitCount NUMBER DEFAULT 0
    		 ,userId VARCHAR2(50) NOT NULL
    		 ,imageFileName VARCHAR2(1000)
-   		 
    		 ,PRIMARY KEY(num)
    		 ,FOREIGN KEY(s_num) REFERENCES study(s_num) ON DELETE CASCADE
    		 ,FOREIGN KEY(userId) REFERENCES member(userId)
@@ -107,11 +106,14 @@
 	<!--자유게시판 댓글  -->
 	<update id="StudyBoardReply" parameterType="Long">
 	CREATE TABLE s_${value}_BoardReply(
-   reNum number NOT NULL
-   ,num number NOT NULL
-   ,content VARCHAR2(500) NOT NULL
-   ,PRIMARY KEY(reNum)
-   ,FOREIGN KEY(num) REFERENCES s_${value}_Board(num) ON DELETE CASCADE
+	    reNum number NOT NULL
+	   ,num number NOT NULL
+	   ,userId VARCHAR2(50) NOT NULL
+	   ,content VARCHAR2(500) NOT NULL
+	   ,PRIMARY KEY(reNum)
+	   ,FOREIGN KEY(num) REFERENCES s_${value}_Board(num) ON DELETE CASCADE
+	   ,FOREIGN KEY(userId) REFERENCES member(userId)
+   
 	)
 	</update>
 	
@@ -123,10 +125,11 @@
 	<!--자유게시판좋아요 -->
 	<update id="StudyBoardLike" parameterType="Long">
 	CREATE TABLE s_${value}_BoardLike(
-   num number NOT NULL
-   ,PRIMARY KEY(num)
-   ,FOREIGN KEY(num) REFERENCES s_${value}_Board(num) ON DELETE CASCADE
-
+	    num NUMBER NOT NULL
+	   ,userId VARCHAR2(50) NOT NULL
+	   ,PRIMARY KEY(num,userId)
+	   ,FOREIGN KEY(num) REFERENCES s_${value}_Board(num) ON DELETE CASCADE
+	   ,FOREIGN KEY(userId) REFERENCES member(userId)
 )
 	</update>
 	

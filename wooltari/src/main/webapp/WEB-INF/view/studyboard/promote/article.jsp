@@ -41,6 +41,7 @@ $(function(){
 	listPage(1);
 });
 
+//댓글리스트
 function listPage(page) {
 	var url="<%=cp%>/promote/listReply";
 	var num="${dto.num}";
@@ -50,7 +51,7 @@ function listPage(page) {
 	
 }
 
-
+//댓글추가
 function insertReply(){
 	var userId="${sessionScope.member.userId}";
 	if(! userId) {
@@ -75,8 +76,8 @@ function insertReply(){
 		,dataType:"json"
 		,success:function(data){
 			$("#replyContent").val("");
-			
 			var state=data.state;
+			
 			if(state=="true"){
 				listPage(1);
 			}else if(state=="false"){
@@ -95,18 +96,25 @@ function insertReply(){
 	
 }
 
-function deleteReply(){
-	var query="prNum="+prNum;
-	alert(query);
-	alert("df");
+//댓글삭제
+function deleteReply(prNum,pageNo){
+	
+	if(!confirm("삭제하시겠습니까?")){
+		return;
+	}
+	
+	var query="prNum="+prNum+"&page="+pageNo;
 	$.ajax({
 		type:"post"
 		,url:"<%=cp%>/promote/deleteReply"
 		,data:query
 		,dataType:"json"
-		,success:function(data){
-			if(state=="true"){
-				listPage(1);
+		 ,success:function(data){
+			
+			 var state=data.state;
+			
+			if( state=="true"){
+				listPage(pageNo);
 			}else if(state=="false"){
 				alert("삭제에 실패하였습니다.")
 			}else if(state=="loginFail"){
@@ -118,12 +126,10 @@ function deleteReply(){
 		,error:function(e){
 			console.log(e.responseText);
 		}
-		
-		
-		
 	});
-	
 }
+
+
 
 </script>
 

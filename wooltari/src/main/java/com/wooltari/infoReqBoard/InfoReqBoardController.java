@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -216,7 +217,7 @@ public class InfoReqBoardController {
 			}
 				
 			List<InfoReqBoard> listFile=service.listFile(num);
-			
+			//model은 jsp로 넘기겠다.
 			model.addAttribute("mode", "update");
 			model.addAttribute("page", page);
 			model.addAttribute("dto", dto);
@@ -257,6 +258,44 @@ public class InfoReqBoardController {
 			return "redirect:/download/infoReqBoard/list?page="+page;
 			
 		}
+		/*
+		@RequestMapping(value="/download/infoReqBoar/deleteList")
+		@ResponseBody
+		public Map<String, Object> deleteList(
+				@RequestParam int num,
+				@RequestParam String page,
+				HttpSession session)throws Exception{
+			SessionInfo info=(SessionInfo)session.getAttribute("member");
+			String root=session.getServletContext().getRealPath("/");
+			String pathname= root+ File.separator + "uploads" + File.separator + "infoReqBoard";
+			
+			String state="true";
+			if(info==null){
+				state="loginFail";
+			}else{				
+				InfoReqBoard dto= service.deleteList(map);
+				if(dto==null)
+					state="flase";				
+			}			
+			//map은 제이슨으로 보낼때, hashmap은 키 : 밸류
+			Map<String, Object> model = new HashMap<>();
+			model.put("state", state);			
+			
+			return "redirect:/download/infoReqBoard/list";
+		}
+		*/
+		
+		@RequestMapping(value="/download/infoReqBoard/deleteList")
+		public String deleteList(
+				Integer[] chk,
+				@RequestParam String page
+				)throws Exception{
+			List<Integer> list=Arrays.asList(chk);
+			//Arrays.asList:Arrays 클래스 배열을 List에 담아서 반환한다.
+			service.deleteList(list);		
+			return "redirect:/download/infoReqBoard/list?page="+page;
+		}
+		
 		@RequestMapping(value="/download/infoReqBoard/download")
 		public void download(
 				@RequestParam int fileNum,
@@ -419,6 +458,7 @@ public class InfoReqBoardController {
 			
 			Map<String, Object> map= new HashMap<String, Object>();
 			map.put("num", num);
+			
 			dataCount=service.replyDataCount(map);
 			total_page=myUtil.pageCount(rows, dataCount);
 			if(current_page>total_page)
@@ -454,7 +494,5 @@ public class InfoReqBoardController {
 			
 		return "download/infoReqBoard/listReply";	
 		}
-		
-		
 }
 	

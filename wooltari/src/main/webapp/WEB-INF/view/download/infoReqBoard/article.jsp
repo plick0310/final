@@ -97,6 +97,82 @@ function login() {
 	location.href="<%=cp%>/member/login";
 }
 
+//댓글 리스트
+$(function(){
+	listPage(1);
+});
+
+function listPage(page){
+	var url="<%=cp%>/download/infoReqBoard/listReply";
+	var num="${dto.num}";
+	$.post(url, {num:num, pageNo:page}, function(data){
+		$("#listReply").html(data);
+	});
+}
+
+//댓글 추가
+function sendReply(){
+	var uid="${sessionScope.member.userId}";
+	if(!uid){
+		login();
+		return false;
+	}
+	var num="${dto.num}";//해당 게시물 번호
+	var content =$.trim($("#content").val());
+	if(! content ){
+		alert("내용을 입력하세요!!!");
+		$("content").focus();
+		return false;
+	}
+	
+	var query="num="+num;
+	query+="&content="+encodeURIComponent(content);
+	
+	$.ajax({
+		type:"post"
+		,url:"<%=cp%>/download/infoReqBoard/createdReply"
+		,data:query
+		,dataType:"json"
+		,success:function(data){
+			$("#content").val("");
+			
+			var state = data.state;
+			if(state=="true"){
+				listPage(1);
+			}else if(state=="false"){
+				alert("댓글을 등록하지 못했습니다.!!!");
+			}else if(state=="loginFail"){
+				login();
+			}
+		}
+		,error:function(e){
+			console.log(e.responseText)
+		}
+	});
+	
+}
+
+//댓글 삭제
+function deleteReply(replyNum, page){
+	var uid="${sessionScope.member.userId}";
+	if(!uid){
+		login();
+		return false;
+	}
+	
+	if(confirm("게시물을 삭제하시겠습니까?")){
+		var url="<%=cp%>/download/infoReqBoard/deleteReply"
+		$.post(url, {replyNum:replyNum, mode:"reply"}, function(data){
+			var state=data.state;
+			
+			if(state=="loginFail"){
+				login();
+			}else{
+				listPage(page);
+			}			
+		},"json");		
+	}	
+}
 </script>
 
 
@@ -134,10 +210,8 @@ function login() {
 								<span id="countLikeBoard">${countLikeBoard}<br/></span>
 								<span class="__count" style="color: #1abc9c;" >추천</span>
 							</a>
-						</li>
-						
-					</ul>
-				
+						</li>						
+					</ul>				
 				<ul>
 					<li>
 					<strong>첨부파일 :<br> </strong>
@@ -179,7 +253,6 @@ function login() {
 					</li>		
 				</ul>
 				</c:forEach> --%>
-				
 		<div class="bbs-reply">
            <div class="bbs-reply-write">
                <div style="clear: both;">
@@ -198,8 +271,6 @@ function login() {
        </div>
 			</td>
 		</tr>
+				
 	</tbody>
 </table>	
-<div class="read_btnArea">
-
-</div>
