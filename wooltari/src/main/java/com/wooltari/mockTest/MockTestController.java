@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wooltari.common.MyUtil;
 import com.wooltari.member.SessionInfo;
@@ -59,24 +61,32 @@ public class MockTestController {
 		List<MockTest> examwishList = service.examwishList(map);
 		
 		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+		Date a = new Date();
+		
 		//리스트 번호
-		Date endDate = new Date();
+		String bD = formatter.format(a);
+		
+		Date beginDate = formatter.parse(bD);
+		
 		long gap;
 		// 글번호 만들기
-		int wishlistNum, n = 0;
+		int wishlistNum = 0;
+		int n = 1;
 		Iterator<MockTest> it = examwishList.iterator();
 		while(it.hasNext()) {
 			MockTest data = (MockTest)it.next();
-			wishlistNum = dataCount - (start + n - 1);
+			wishlistNum = n;
 			data.setWishlistNum(wishlistNum);
 			
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date beginDate = formatter.parse(data.getExamwishDate());
+			Date endDate = formatter.parse(data.getExamwishDate());
 			
 			gap=(endDate.getTime() - beginDate.getTime()) / (24 * 60 * 60 * 1000); // 날짜차이 (일)
-			data.setGap(gap);
+			data.setGap((int) gap);
 			
 			data.setExamwishDate(data.getExamwishDate().substring(0, 10));
+			data.setDday(data.getGap());
 			
 			n++;
 		}
@@ -99,19 +109,29 @@ public class MockTestController {
 		return "redirect:/mockTest/main";
 	}
 	
-	@RequestMapping(value="/mockTest/createdList")
+	@RequestMapping(value="/mockTest/createdList",method=RequestMethod.POST)
+	@ResponseBody
 	public Map<String, Object> createdList (
-			MockTest dto,
+			@RequestParam String Name,
+			@RequestParam String Date,
 			HttpSession session
 			) throws Exception {
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		String state="true";
 		
-		dto.setUserId(info.getUserId());
-		service.insertExamwishList(dto,"created");
+		String userId=info.getUserId();
+		
+		Map<String, Object> map =new HashMap<>();
+		map.put("userId", userId);
+		map.put("examinfoName", Name);
+		map.put("examwishDate", Date);
+		
+		service.insertExamwishList(map);
 		
 		Map<String, Object> model = new HashMap<>();
 		model.put("state", state);
+		model.put("mode", "created");
+		
 		return model;
 	}
 }

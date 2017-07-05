@@ -23,12 +23,12 @@
 	<!-- 응시할 시험리스트 목록 (번호, 시험명, 주최기관, 응시일, 디데이 필요 - userId는 안가져오고 싶은데) -->
 	<select id="examwishList" parameterType="map" resultType="com.wooltari.mockTest.MockTest">
 		SELECT * FROM (
-			SELECT ROWNUM rnum, tb.* FROM (
+			SELECT ROWNUM wishlistNum, tb.* FROM (
 				SELECT num, el.examinfoName, examinfoOrgan, examwishDate FROM examwishList el
 				  LEFT OUTER JOIN examinfo e ON el.examinfoName = e.examinfoName WHERE userId = #{userId}
 		<![CDATA[		  
 	  			) tb WHERE ROWNUM <= #{end}
-	    	) WHERE rnum >= #{start}
+	    	) WHERE wishlistNum >= #{start} ORDER BY EXAMWISHDATE
 		]]>
 	</select>
 	
