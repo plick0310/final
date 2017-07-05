@@ -101,7 +101,7 @@ public class PromoteController {
 		model.addAttribute("articleUrl", articleUrl);
 		model.addAttribute("page", currentPage);
 		
-		return ".study.promote.list";
+		return ".studyboard.promote.list";
 	}
 	
 	
@@ -115,7 +115,7 @@ public class PromoteController {
 			return "redirect:/main";
 		
 		
-		return ".study.promote.created";
+		return ".studyboard.promote.created";
 	}
 	
 	@RequestMapping(value="/promote/created",method=RequestMethod.POST )
@@ -171,7 +171,7 @@ public class PromoteController {
 		model.addAttribute("query", query);
 		model.addAttribute("page", page);
 		
-		return ".study.promote.article";
+		return ".studyboard.promote.article";
 	}
 	
 	@RequestMapping(value="/promote/delete")

@@ -80,7 +80,7 @@ public class ReviewController {
 		model.addAttribute("total_page",total_page);
 		model.addAttribute("page", currentPage);
 		
-		return ".study.review.list"; 
+		return ".studyboard.review.list"; 
 	}
 	
 	@RequestMapping(value="/review/created", method=RequestMethod.GET)
@@ -91,7 +91,7 @@ public class ReviewController {
 			return "redirect:/main";
 		}
 		
-		return ".study.review.created";
+		return ".studyboard.review.created";
 	}
 	
 	@RequestMapping(value="/review/created", method=RequestMethod.POST)
@@ -134,7 +134,7 @@ public class ReviewController {
 		model.addAttribute("many",many);
 		model.addAttribute("page",page);
 		
-		return "study/review/article";
+		return "studyboard/review/article";
 	}
 	
 	@RequestMapping(value="/review/insertStar",method=RequestMethod.POST)
