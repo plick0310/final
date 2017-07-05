@@ -5,8 +5,8 @@
 	
 	<!-- 응시할 시험리스트 목록 추가 -->
 	<insert id="insertExamwishList" parameterType="com.wooltari.mockTest.MockTest">
-		INSERT INTO examwishList(num, examwishDate, userId, examinfoName, dday) values
-			(el_cnum.NEXTVAL, #{examwishDate}, #{userId}, #{examinfoName}, #{dday})
+		INSERT INTO examwishList(num, examwishDate, userId, examinfoName) values
+			(el_cnum.NEXTVAL, #{examwishDate}, #{userId}, #{examinfoName})
 	</insert>
 	
 	<!-- 응시할 시험리스트 내 시험 목록 불러오기 : #{}이 없기 때문에 parameterType을 명시하지 않았음-->
@@ -17,36 +17,28 @@
 	<!-- 데이터 수 -->
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*),0) FROM examwishList el 
-  			JOIN examinfo e ON el.examinfoName = e.examinfoName WHERE userId=#{userId}
+  			JOIN examinfo e ON el.examinfoName = e.examinfoName  WHERE userId = #{userId}
 	</select>
 	
 	<!-- 응시할 시험리스트 목록 (번호, 시험명, 주최기관, 응시일, 디데이 필요 - userId는 안가져오고 싶은데) -->
 	<select id="examwishList" parameterType="map" resultType="com.wooltari.mockTest.MockTest">
 		SELECT * FROM (
 			SELECT ROWNUM rnum, tb.* FROM (
-				SELECT num, el.examinfoName, examinfoOrgan, examwishDate, dday FROM examwishList el
-				  LEFT OUTER JOIN examinfo e ON el.examinfoName = e.examinfoName
+				SELECT num, el.examinfoName, examinfoOrgan, examwishDate FROM examwishList el
+				  LEFT OUTER JOIN examinfo e ON el.examinfoName = e.examinfoName WHERE userId = #{userId}
 		<![CDATA[		  
 	  			) tb WHERE ROWNUM <= #{end}
 	    	) WHERE rnum >= #{start}
 		]]>
 	</select>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	<!-- 응시할 시험리스트 삭제 -->
+	<delete id="deleteWishlists" parameterType="java.util.List">
+		DELETE FROM examwishList WHERE num IN
+		<foreach item="num" index="index" collection="list" open="(" separator="," close=")">
+		#{num}
+		</foreach>
+	</delete>
 	
 	
 	
