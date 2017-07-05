@@ -83,7 +83,6 @@ function dialogMemberInfo(userId) {
 
 $(function(){
 	$('body').on('hidden.bs.modal', '.modal', function () {
-		alert("dddd");
         $(this).removeData('bs.modal');
 	});
 	
