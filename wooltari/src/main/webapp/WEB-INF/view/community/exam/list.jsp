@@ -516,38 +516,8 @@ $('#exampleModal').on('show.bs.modal', function (event) {
      var modal = $(this)
      modal.find('.modal-title').text('New message to ' + recipient)
      modal.find('.modal-body input').val(recipient)
-   })
-   
-   $(document).ready(function(){
-   $( "#sampleDatePicker" ).datepicker({
-       changeMonth: true
-      ,changeYear: true 
-      ,dateFormat: "yy.mm.dd"
-      ,showMonthAfterYear: true 
-      , monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-      , monthNamesShort:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-      , dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
-      ,showOn: "button"
-      //한글 지정
-      ,regional : "ko-KR"
    });
 
-   
-   
-   $( "#sampleDatePicker02" ).datepicker({
-       changeMonth: true
-      ,changeYear: true 
-      ,dateFormat: "yy.mm.dd"
-      ,showMonthAfterYear: true 
-      , monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-      , monthNamesShort:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
-      , dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
-      //datepicker trigger 지정
-      ,showOn: "button"
-      //한글 지정
-      ,regional : "ko-KR"
-   });
-});
 </script>
 
 <script>
@@ -670,14 +640,10 @@ function deleteList() {
             border="0">
             <tr>
                <td colspan="2" style="text-align: left;">
-
                   <div
                      style="position: absolute;bottom: 10px;right: 1px;top: -22px;">
                      <input type="checkbox" id="allCheck" name="allCheck"
                         class="checkbox-style" /><label for="allCheck">전체선택</label>
-
-
-
                   </div>
                </td>
             </tr>
@@ -687,10 +653,72 @@ function deleteList() {
          style="width: 100%; border-top: 1px solid #4b4b4b;"
          class="board_table array">
          <tbody>
-
-
             <tr>
+               <td style="text-align: right; width: 65px; padding: 5px 18px;"><input
+                  type="checkbox" name="chk"></td>
 
+               <td class="___number">1</td>
+               <!-- 여기에 wishlistNum 들어가야함 -->
+               <td>
+                  <div style="position: relative;">
+                     <!--[category_name]-->
+
+                     <a href="<%=cp%>/help/report/article" class="subject"
+                        style="line-height: 27px; float: left;">한국사능력검정시험 1급</a> <span
+                        class="comment" style="line-height: 16px;">D-day 16</span>
+
+                     <div class="info"
+                        style="float: left; padding: 0; line-height: 25px; margin-left: 32px; float: left; padding: none;">
+                        <strong>주최기관 </strong><span>국사편찬위원회</span> <span class="__dotted"></span>
+                        <strong>응시일 </strong><span>2017-07-20</span>
+                     </div>
+                     <div style="float: right; margin: 4px;">
+                        <button id="modalbtn" type="button"
+                           class="glyphicon glyphicon-plus" data-toggle="modal"
+                           data-target="#exampleModal" data-whatever="@mdo" value="regist"></button>
+                        <button id="modalbtn" type="button"
+                           class="glyphicon glyphicon-edit" data-toggle="modal"
+                           data-target="#exampleModal" data-whatever="@mdo" value="change"></button>
+                        <!-- <a href=""class="glyphicon glyphicon-edit" style="margin-left: 13px;"></a>-->
+                     </div>
+
+                  </div>
+
+               </td>
+
+            </tr>
+         </tbody>
+      </table>
+
+
+<!-- 데이터만 가져오도록 만든 목록 -->
+ <table cellpadding="0" cellspacing="0"
+         style="width: 100%; border-top: 1px solid #4b4b4b;"
+         class="board_table array">
+         <tbody>
+            <tr>
+              <th width="60" style="color: #787878;">ㅁ</th>
+		      <th style="color: #787878;">제목</th>
+		      <th width="100" style="color: #787878;">작성자</th>
+		      <th width="80" style="color: #787878;">작성일</th>
+		      <th width="60" style="color: #787878;">조회수</th>
+		      <th width="50" style="color: #787878;">첨부</th>
+			</tr>
+			<c:forEach var="dto" items = "${examinfoList }">
+				<option value="${dto.examInfoName}">${dto.examInfoName }</option>
+			</c:forEach>
+			
+
+		</tbody>
+ </table>
+
+
+<!-- 테스트용 샘플목록 생성 -->
+ <table cellpadding="0" cellspacing="0"
+         style="width: 100%; border-top: 1px solid #4b4b4b;"
+         class="board_table array">
+         <tbody>
+            <tr>
                <td style="text-align: right; width: 65px; padding: 5px 18px;"><input
                   type="checkbox" name="chk"></td>
 
@@ -729,6 +757,18 @@ function deleteList() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
       <!--------------------------------------->
 
 
@@ -751,6 +791,7 @@ function deleteList() {
 		<ul class="tabs">
 			<li class="active" rel="tab1">문제</li>
 			<li rel="tab2">응시내역</li>
+			
 		</ul>
 		<div class="tab_container">
 			<div id="tab1" class="tab_content">
@@ -906,28 +947,21 @@ function deleteList() {
 	                        <label for="recipient-name" class="control-label">시험명</label>
 	                        &nbsp;&nbsp; 
 	                        
-
-							
-	   <!--                      <select id="examSelect" style="border: 1px solid #D4D4D4">
-	                           <option>시험 선택</option>
-	                           <option value="op1" examInfoName>정보처리기사</option>
-	                           <option value="op2">정보처리산업기사</option>
-	                           <option value="op3">일본어</option> -->
-	                           
-	                           
-	                           
-	                           
-	                           
-	                        </select>
+                        	<select id="examSelect" style="border: 1px solid #D4D4D4">
+	                       		<c:forEach var="dto" items = "${examinfoList }">
+	                       			<option value="${dto.examInfoName}">${dto.examInfoName }</option>
+	                       		</c:forEach>
+	                       	</select>
+	                     </select>
 	
 	                     </div>
 	                     <div class="form-group">
 	                        <label for="message-text" class="control-label"
 	                           style="margin-right: 8px;">응시일</label>
-	                        <div class="calendar_wrap">
-	                           <input type="text" readonly="readonly" name="sdate"
-	                              id="sampleDatePicker" value="날짜선택"></input>
-	                        </div>
+	                            <div class="calendar_wrap">
+									<input type="date" name="tryDate" value="${dto.birth }"
+										style="margin-top: -15px; height: 26px; border: 1px solid #D4D4D4;"/>
+	                        	</div>
 	                     </div>
 	               </div>
 	               <div class="modal-footer">

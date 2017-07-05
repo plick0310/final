@@ -133,7 +133,7 @@ public class StudyServiceImpl implements StudyService {
 		try {
 			
 			dao.updateData("study.createStudyBoard", s_num);
-			dao.updateData("study.createStudyPhoto", s_num);
+			//dao.updateData("study.createStudyPhoto", s_num);
 			dao.updateData("study.StudyBoardReply", s_num);
 			dao.updateData("study.StudyBoardLike", s_num);
 			dao.updateData("study.createStudyCalendar", s_num);
