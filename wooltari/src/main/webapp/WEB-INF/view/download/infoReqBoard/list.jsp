@@ -14,10 +14,6 @@ body {
 	margin: 0;
 }
 
-
-
-
-
 .d3 {
 	background: #F9F0DA;
 }
@@ -184,7 +180,7 @@ $(document).ready(function(){
 					<div style="position:relative;">
 						<!--[category_name]-->
 					
-						<a href="${articleUrl}&num=${dto.num}" class="subject">${dto.subject}</a><span class="comment">[16]</span>
+						<a href="${articleUrl}&num=${dto.num}" class="subject">${dto.subject}</a><span class="comment">(${dto.replyCount})</span>
 					
 						<div class="info">
 							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">${dto.created}</span>
@@ -193,14 +189,12 @@ $(document).ready(function(){
 							<span class="__dotted"></span>
 							<strong>조회수 </strong><span>${dto.hitCount}</span>
 						</div>
-						
-						
+												
 						<div class="likes">
-							25<br>
-							<span class="num" style="color: #1abc9c; ">추천</span>
+							${dto.likeCount}<br>
+							<span class="num" style="color: #1abc9c;">추천</span>
 							<!--[unlikes]-->
-						</div>
-						
+						</div>						
 					</div>
 				</td>
 			</tr>
