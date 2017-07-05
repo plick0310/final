@@ -10,7 +10,20 @@ public class InfoReqBoard {
 	private int listNum, num;
 	private String subject, content, userId, created;
 	private int hitCount;
+	private int likeCount, replyCount;	
 	
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+	public int getReplyCount() {
+		return replyCount;
+	}
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
 	private List<MultipartFile> upload;
 	
 	private long gap;
