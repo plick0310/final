@@ -24,12 +24,37 @@ $(function(){
 	
 });	
 
+//게시물 공감 개수
+ function countLikeBoard(num) {
+	var url="<%=cp%>/study/myStudy/${s_num}/countboardLike";
+	
+	$.post(url, {num:num}, function(data){
+		var count=data.countLikeBoard;
+		//alert(count);
+		$("#countLikeBoard_"+num).html(count);
+	}, "json");
+}
+
 
 function likeBoard(num){
+	var url="<%=cp%>/study/myStudy/${s_num}/boardLike";
+	$.ajax({
+		type:"post"
+		,url:url
+		,data:"num="+num
+		,dataType:"json"
+		,success:function(data){
+			alert("좋아요?");
+			countLikeBoard(num);
+			$("#like_up_"+num).css('color','red');
+		}
+		,error:function(e){
+			//alert("이미하셨자나욨!!!");
+			console.log(e.responseText);
+		}
+	});
 	
-	$("#like_up_"+num).css('color','red');
-	
-}
+} 
 
 function listPage(bbs_count) {
 	var url="<%=cp%>/study/myStudy/${s_num}/boardList";
@@ -65,7 +90,9 @@ function printBoard(data){
 			var imageFileName = data.list[idx].imageFileName;
 			var s_num = data.list[idx].s_num;
 			var hitCount = data.list[idx].hitCount;
-	
+			var likeCount = data.list[idx].likeCount;
+			
+			
 			out+= 	"	<li><div class='timeline-badge primary'>" ;
 			out+=	"			<a><i  class='glyphicon glyphicon-record' rel='tooltip' title="+created+" id=''></i></a> " ;
 			out+=	"		</div><div class='timeline-panel'>" ;
@@ -81,7 +108,8 @@ function printBoard(data){
 			out+=	"		<div class='timeline-body'><p>"+content+"</p></div>" ;
 	
 			out+=	"	    <div class='timeline-footer'> " ;
-			out+=	"			<a onclick='likeBoard(\""+num+"\")'><i id='like_up_"+num+ "' class='glyphicon glyphicon-thumbs-up'></i></a> &nbsp; 좋아요("+hitCount+") &nbsp; " ;
+							//좋아요
+			out+=	"			<a onclick='likeBoard(\""+num+"\")'><i id='like_up_"+num+ "' class='glyphicon glyphicon-thumbs-up'></i></a> &nbsp; 좋아요( <span id='countLikeBoard_"+num+"'>"+likeCount+"</span>)&nbsp; " ;
 			out+=	"			<a class='' data-toggle='collapse' href='#collapseExample_"+num+ "' " ;
 			out+=   "               aria-expanded='false' aria-controls='collapseExample'> 댓글(35) </a> " ;
 									

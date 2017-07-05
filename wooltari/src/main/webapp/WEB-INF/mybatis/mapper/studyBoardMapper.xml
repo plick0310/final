@@ -26,8 +26,18 @@
 	</select>
 	
 	<!-- 글 개수 -->
-	<select id="dataCount" resultType="Integer" parameterType="map">	
-	SELECT NVL(COUNT(*),0) FROM ${tableName}_board b
-		JOIN member m ON b.userId=m.userId
+	<select id="dataCount" parameterType="map" resultType="Integer" >	
+		SELECT NVL(COUNT(*),0) FROM ${tableName}_board b
+			JOIN member m ON b.userId=m.userId
+	</select>
+	
+	<!-- 글 좋아요 -->
+	<insert id="insertLikeBoard" parameterType="map">
+		INSERT INTO ${tableName}_boardlike (num,userId) 
+			VALUES(#{num},#{userId})
+	</insert>
+	<!-- 좋아요 갯수 -->
+	<select id="countLikeBoard" parameterType="map" resultType="Integer"  >
+		SELECT NVL(COUNT(*),0) FROM ${tableName}_boardlike WHERE num=#{num}
 	</select>
 </mapper>

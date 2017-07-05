@@ -77,6 +77,27 @@ public class BoardServiceImpl implements BoardService{
 		}
 	}
 
+	@Override
+	public void insertLikeBoard(Map<String, Object> map) throws Exception {
+		try {
+			dao.insertData("studyBoard.insertLikeBoard",map);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	@Override
+	public int countLikeBoard(Map<String, Object> map) {
+		int result=0;
+		try {
+			result = dao.getIntValue("studyBoard.countLikeBoard",map);
+		} catch (Exception e) {
+			
+		}
+		
+		return result;
+	}
+
 
 
 }
