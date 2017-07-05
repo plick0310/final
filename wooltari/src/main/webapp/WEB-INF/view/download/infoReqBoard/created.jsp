@@ -54,7 +54,7 @@ border: 1px solid #EAEAEA;
 		return true;
 	}
 
-	//동적으로 추가된 태그도 이벤트 처리 가능
+	//동적으로 추가된 태그도 이벤트 처리 가능(파일 추가)
 	  $(function(){
 		$("body").on("change", "input[name=upload]", function(){
 			if(! $(this).val()) {
@@ -84,10 +84,10 @@ border: 1px solid #EAEAEA;
 		    $("#tb").append($tr);
 		});
 	  });
-	  
+	  /* post  */
 	  <c:if test="${mode=='update'}">
 	  function deleteFile(fileNum) {
-			var url="<%=cp%>/notice/deleteFile";
+			var url="<%=cp%>/download/infoReqBoard/deleteFile";
 			$.post(url, {fileNum:fileNum}, function(data){
 				$("#f"+fileNum).remove();
 			}, "JSON");
@@ -150,20 +150,23 @@ border: 1px solid #EAEAEA;
                     <input type="file" name="upload" class="form-control input-sm" style="height: 35px;">
                 </td>
             </tr>
-			<c:if test="${mode=='update'}">
-   				<c:forEach var="vo" items="${listFile}">
-                  <tr id="f${vo.fileNum}"> 
+           
+            
+			<c:if test="${mode=='update'}"> 
+   				<c:forEach var="dto" items="${listFile}">
+                  <tr id="f${dto.fileNum}"> 
                       <td class="td1">첨부파일</td>
                       <td colspan="3" class="td3"> 
-                          ${vo.originalFilename}
-                          | <a href="javascript:deleteFile('${vo.fileNum}');">삭제</a>	        
+                          ${dto.originalFilename}
+                          | <a href="javascript:deleteFile('${dto.fileNum}');">삭제</a>	        
                       </td>
                   </tr>
  			 </c:forEach>
-			</c:if>	
-       
+			</c:if>
 		</tbody>
 	</table>
+				
+       
 	
 	<div class="read_btnArea">
 		<button class="clickbtn">${mode='update'?'수정하기':'등록하기'}</button>
