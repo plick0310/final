@@ -69,6 +69,11 @@ public class MemberController {
 		return "member/notice";
 	}
 	
+	@RequestMapping(value="/member/pwd", method=RequestMethod.GET)
+	public String pwdForm(){
+		
+		return "member/pwd";
+	}
 	@RequestMapping(value="/member/userIdCheck")
 	@ResponseBody
 	public Map<String, Object> userIdCheck(
@@ -104,13 +109,60 @@ public class MemberController {
 	@RequestMapping(value="/member/mypage", method=RequestMethod.GET)
 	public String myPage(Model model , HttpSession session) {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		
 		Member dto = service.readMember(info.getUserId());
-		
 		model.addAttribute("dto", dto);
 		return ".member.mypage";
 	}
 	
+	@RequestMapping(value="/member/my_main", method=RequestMethod.GET)
+	public String my_Main(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/my_main";
+	}
+	@RequestMapping(value="/member/my_msg", method=RequestMethod.GET)
+	public String my_Msg(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/my_msg";
+	}
+	@RequestMapping(value="/member/my_activity", method=RequestMethod.GET)
+	public String my_Activity(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/my_activity";
+	}
+	@RequestMapping(value="/member/my_info", method=RequestMethod.GET)
+	public String my_Info(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/my_info";
+	}
+	@RequestMapping(value="/member/my_point", method=RequestMethod.GET)
+	public String my_Point(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/my_point";
+	}
+	@RequestMapping(value="/member/my_qna", method=RequestMethod.GET)
+	public String my_Qna(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/my_qna";
+	}
+	@RequestMapping(value="/member/my_out", method=RequestMethod.GET)
+	public String my_Out(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/my_out";
+	}
 	
 	
 }

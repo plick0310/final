@@ -74,9 +74,16 @@ function dialogJoin() {
 }
 
 $(function(){
+	$('body').on('hidden.bs.modal', '.modal', function () {
+		alert("dddd");
+        $(this).removeData('bs.modal');
+	});
+	
+	/* 
 	$('#modalLogin').on('hidden.bs.modal', function () {
 		$(".modal-backdrop").remove();
 	});
+	 */
 });
 
 </script>
