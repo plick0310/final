@@ -77,8 +77,15 @@ function dialogMemberInfo(userId) {
 	var url="<%=cp%>/member/memberinfo";
 	$.post(url, {userId:userId}, function(data){
 		$("#modal-content").html(data);
+		$("#modalflage").val("true");
 		$("#modalLogin").modal("show");
 	});
+}
+
+function dialogChat() {
+	$("#modal-content").load("<%=cp%>/message/send");
+	$("#modalflage").val("true");
+	$("#modalLogin").modal("show");
 }
 
 $(function(){

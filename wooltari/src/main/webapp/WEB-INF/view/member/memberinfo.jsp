@@ -114,13 +114,16 @@ $(document).ready(function() {
 			                  </tr>
 			                  <tr>
 			                    <td>성별:</td>
-			                    <c:if test="${dto.enabled == 1}">
-				                    <td>남자</td>
+			                    <c:if test="${dto.gender == 0}">
+				                    <td></td>
 			                    </c:if>
-			                    <c:if test="${dto.enabled == 2}">
+			                    <c:if test="${dto.gender == 1}">
+				                    <td>남자 </td>
+			                    </c:if>
+			                    <c:if test="${dto.gender == 2}">
 				                    <td>여자</td>
 			                    </c:if>
-			                    <c:if test="${dto.enabled == 0}">
+			                    <c:if test="${dto.gender == 3}">
 				                    <td>비공개</td>
 			                    </c:if>
 			                  </tr>
@@ -168,10 +171,10 @@ $(document).ready(function() {
 				</div>
 			</div>
 			<div class="panel-footer" style="height: 50px;">
-                   <c:if test="${sessionScope.member.userId != dto.userId or sessionScope.member.userId == 'admin'}"><a href="#" data-original-title="Send this Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a></c:if>
+                   <c:if test="${sessionScope.member.userId != dto.userId or sessionScope.member.userId == 'admin'}"><a href="#" data-original-title="쪽지보내기" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a></c:if>
                    <span class="pull-right"> 
-                       <c:if test="${sessionScope.member.userId == dto.userId}"><a href="#" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a></c:if>
-                       <c:if test="${sessionScope.member.userId == 'admin'}"><a href="#" data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></c:if>
+                       <c:if test="${sessionScope.member.userId == dto.userId}"><a href="#" data-original-title="정보수정" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a></c:if>
+                       <c:if test="${sessionScope.member.userId == 'admin'}"><a href="#" data-original-title="탈퇴" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></c:if>
                    </span>
                </div>
 		</div>
