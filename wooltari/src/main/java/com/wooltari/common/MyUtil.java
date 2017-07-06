@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public abstract class MyUtil {
     //********************************************
 	// 총페이지 수 구하기

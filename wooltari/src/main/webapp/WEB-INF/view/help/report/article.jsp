@@ -92,7 +92,7 @@ background: none;
 		
 				<div class="commentBox">
 					<div class="_CALLING_COMMENT"><strong style="font-size: 18px;">
-					<span style="font-size: 25px; color: #1abc9c; " class="glyphicon glyphicon-pencil"></span>리플입니다...</strong>
+					<span style="font-size: 16px; color: #1abc9c; " class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;리플입니다...</strong>
 					</div>
 					<div class="_CALLING_COMMENT">
 					<span class="inforArea">

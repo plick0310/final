@@ -1,5 +1,7 @@
 package com.wooltari.common;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.renderable.ParameterBlock;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,6 +13,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Calendar;
 
+import javax.media.jai.JAI;
+import javax.media.jai.RenderedOp;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
@@ -222,7 +226,24 @@ public class FileManager {
 		
 		return size;
 	}
-	
+	// 이미지 폭
+		public int getImageWidth(String pathname) {
+			int width=-1;
+			
+			File file = new File(pathname);
+			if (! file.exists())
+				return width;
+			
+			ParameterBlock pb=new ParameterBlock(); 
+	        pb.add(pathname); 
+	        RenderedOp rOp=JAI.create("fileload",pb); 
+
+	        BufferedImage bi=rOp.getAsBufferedImage(); 
+
+	        width = bi.getWidth(); 		
+			
+			return width;
+		}
 	// 파일 타입
 	public String getFiletype(String pathname) {
 		String type="";

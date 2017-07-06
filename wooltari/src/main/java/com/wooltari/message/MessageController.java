@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.wooltari.common.MyUtil;
+import com.wooltari.common.MyUtilBootstrap;
 import com.wooltari.member.SessionInfo;
 
 @Controller("message.messageController")
@@ -25,7 +25,7 @@ public class MessageController {
 	@Autowired
 	private MessageService service;
 	@Autowired
-	private MyUtil myUtil;
+	private MyUtilBootstrap myUtil;
 
 	@RequestMapping(value="/message/send", method=RequestMethod.GET)
 	public String memberChat() throws Exception {
@@ -84,20 +84,23 @@ public class MessageController {
             n++;
         }
         String query = "";
-        String listUrl = cp+"/message/list";
+        //String listUrl = cp+"/message/list";
         String articleUrl = cp+"/message/article?page=" + current_page;
         if(searchValue.length()!=0) {
         	query = "mode=" +mode + "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");	
         }
         
         if(query.length()!=0) {
-        	listUrl = cp+"/message/list?" + query;
+        	//listUrl = cp+"/message/list?" + query;
         	articleUrl = cp+"/message/article?page=" + current_page + "&"+ query;
         }
         
-        String paging = myUtil.paging(current_page, total_page, listUrl);
-
+        
+        String paging = myUtil.pagingMethod(current_page, total_page, "messagePaging");
+        System.out.println(mode);
+        
         model.addAttribute("list", list);
+        model.addAttribute("mode", mode);
         model.addAttribute("articleUrl", articleUrl);
         model.addAttribute("page", current_page);
         model.addAttribute("dataCount", dataCount);

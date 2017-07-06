@@ -373,32 +373,16 @@ ul {
 }
 </style>
 <script type="text/javascript">
-<%-- 
-$.ajax({
-	url:"<%=cp%>/member/my_main",
-	dataType:"html",
-	success : function(data) {
-	$('.tab-content').html(data);
-	}
-});
-var fileName;
-pageName = $(this).attr('id');
-$.ajax({
-	url:"<%=cp%>/member/" + pageName,
-	dataType:"html",
-	success : function(data) {
-	$('.tab-content').html(data);
-	}
-});
- --%>
 $(document).ready(function(){
 	$.ajax({
 		url:"<%=cp%>/message/list",
+		type:"POST",
 		dataType:"html",
 		success : function(data) {
 		$('.msg-list').html(data);
 		}
 	});
+	
 	$(".inbox-nav li").click(function () {
 		$(".inbox-nav li").removeClass("active");
 		$(this).addClass("active");
@@ -519,8 +503,8 @@ $(document).ready(function(){
                       </ul>
                       <ul class="nav nav-pills nav-stacked labels-info ">
                           <li> <h4>스터디 멤버</h4> </li>
-                          <li> <a href="javascript:dialogChat();"> <i class=" fa fa-circle text-success"></i>하동기</a>  </li>
-                          <li> <a href="javascript:dialogChat();"> <i class=" fa fa-circle text-danger"></i>이형석</a> </li>
+                          <li> <a href="javascript:dialogURLID('/member/memberinfo', 'admin');"> <i class=" fa fa-circle text-success"></i>하동기</a>  </li>
+                          <li> <a href="javascript:dialogURL('/member/login');"> <i class=" fa fa-circle text-danger"></i>이형석</a> </li>
                           <li> <a href="javascript:dialogChat();"> <i class=" fa fa-circle text-muted "></i>오세훈</a> </li>
                           <li> <a href="javascript:dialogChat();"> <i class=" fa fa-circle text-muted "></i>이수정</a> </li>
                           <li> <a href="javascript:dialogChat();"> <i class=" fa fa-circle text-muted "></i>이주영</a> </li>

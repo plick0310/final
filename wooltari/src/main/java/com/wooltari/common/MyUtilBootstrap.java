@@ -2,6 +2,7 @@ package com.wooltari.common;
 
 import org.springframework.stereotype.Service;
 
+
 @Service("myUtil")
 public class MyUtilBootstrap extends MyUtil {
     //********************************************
