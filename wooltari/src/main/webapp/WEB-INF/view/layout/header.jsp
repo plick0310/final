@@ -3,9 +3,35 @@
 <%
    String cp = request.getContextPath();
 %>
+<link rel="stylesheet" href="<%=cp%>/resource/css/member-form-elements.css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/member-form-style.css">
 <!-- 카카오톡 로그인 -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type='text/javascript'>
+$(document).ready(function() {
+    $('.memberform input[type="text"], .memberform input[type="password"], .memberform textarea').on('focus', function() {
+    	$(this).removeClass('input-error');
+    });
+    
+    $('.memberform').on('submit', function(e) {
+    	var flag = true;
+    	$(this).find('input[type="text"], input[type="password"], textarea').each(function(){
+    		if( $(this).val() == "" ) {
+    			e.preventDefault();
+    			$(this).addClass('input-error');
+    			flag = false;
+    		}
+    		else {
+    			$(this).removeClass('input-error');
+    		}
+    	});
+    	if(flag){
+    		var f = document.memberform;
+		    f.action = "<%=cp%>/member/login_check";
+		    f.submit();
+    	}
+    });
+});
 //<![CDATA[
 // 사용할 앱의 JavaScript 키를 설정해 주세요.
 Kakao.init('510168497a3434cba4caf707891b2cca');
@@ -55,7 +81,14 @@ function getKakaoProfile(){
 		}
 	});
 }
-function logout(){
+//로그인 Submit
+function sendLogin() {
+	var f = document.loginform;
+    f.action = "<%=cp%>/member/login_check";
+    f.submit();
+}
+//로그아웃
+function sendlogout(){
 	//var refreshToken = Kakao.Auth.getRefreshToken();
 	Kakao.Auth.logout(function(){
 		setTimeout(function(){
@@ -63,45 +96,6 @@ function logout(){
 		},10);
 	});
 }
-<%-- 
-function dialogLogin() {
-	$("#modal-content").load("<%=cp%>/member/login");
-	$("#modalflage").val("true");
-	$("#modalLogin").modal("show");
-}
-
-function dialogJoin() {
-	$("#modal-content").load("<%=cp%>/member/join");
-}
- --%>
-function dialogURLID(url, userId) {
-	var loadurl="<%=cp%>" + url;
-	$.post(loadurl, {userId:userId}, function(data){
-		$("#modal-body").empty();
-		$("#modal-body").html(data);
-		$(".modal-backdrop").remove();
-		$("#modal").modal("show");
-	});
-}
-function dialogURL(url) {
-	var loadurl ="<%=cp%>" + url;
-	$("#modal-body").empty();
-	$("#modal-body").load(loadurl);
-	$(".modal-backdrop").remove();
-	$("#modal").modal("show");
-}
-$(function(){
-	$('body').on('hidden.bs.modal', '.modal', function () {
-		$("#modal-body").empty();
-        $(this).removeData('bs.modal');
-	});
-	
-	/* 
-	$('#modalLogin').on('hidden.bs.modal', function () {
-		$(".modal-backdrop").remove();
-	});
-	 */
-});
 
 </script>
 
@@ -214,10 +208,10 @@ $(function(){
 					</div>
 				<div class="member" style="margin: 7px 0;"> 
 					<c:if test="${empty sessionScope.member}">
-						<a href="javascript:dialogURL('/member/login');"><img src="<%=cp%>/resource/img/loginicon.png" alt="Login" class="img-circle" width="35px" height="35px"></a>
+						<a data-toggle="modal" href="#modal"><img src="<%=cp%>/resource/img/loginicon.png" alt="Login" class="img-circle" width="35px" height="35px"></a>
 					</c:if>
 					<c:if test="${not empty sessionScope.member}">
-						<strong style="margin-right: 5px"><a href="javascript:dialogURLID('/member/memberinfo','${sessionScope.member.userId}');">${sessionScope.member.userName}</a></strong>
+						<strong style="margin-right: 5px">${sessionScope.member.userName}</strong>
 						<c:if test="${empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
 								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c"> 
@@ -241,7 +235,7 @@ $(function(){
 							</c:if>
 							<li><a href="<%=cp%>/study/mylist">나의 스터디</a></li>
 							<li><a href="<%=cp%>/member/mypage">마이페이지</a></li>
-							<li><a href="javascript:logout();">로그아웃</a></li>
+							<li><a href="javascript:sendlogout();">로그아웃</a></li>
 						</ul>
 					</c:if>
 				</div>
@@ -255,7 +249,61 @@ $(function(){
 	<div class="modal-dialog">
 		<div class="modal-content" id="modal-content" style="background: none;" >
 			<div id="modal-body" class="modal-body">
-				<!-- JSP 로드될 곳 -->
+			
+					<div class="member-container">
+						<div class="member-outer">
+							<div class="member-inner">
+								<div class="login-msg">
+									<h3></h3>
+									<a href="<%=cp%>/member/findmember"><strong>로그인이 안되시나요?</strong></a>
+								</div>
+							
+							
+								<div class="member-form">
+									<div class="form-top">
+										<span style="font-size: 25px; color: #BDBDBD; font-weight: bold;">
+											<span style="font-size: 20px; color: #1abc9c;"
+											class="glyphicon glyphicon-pencil"> </span>&nbsp;&nbsp;&nbsp;W O O L T A R I&nbsp;&nbsp;&nbsp;
+										</span> <span style="font-size: 24px;"> L O G I N</span>
+									</div>
+									<div class="form-bottom" style="margin-top: 25px">
+										<form name="memberform" class="memberform" method="post"
+											role="form">
+											<div class="form-group">
+												<label class="sr-only" for="form-userid">E-mail</label>
+												<input type="text" name="userId" placeholder="E-mail"
+												class="form-userid form-control" id="form-userid">
+											</div>
+											<div class="form-group">
+												<label class="sr-only" for="form-password">Password</label>
+												<input type="password" name=userPwd placeholder="Password"
+												class="form-password form-control" id="form-password">
+											</div>
+											<button type="submit" class="member_btn">로그인</button>
+										</form>
+										<div style="margin-top: 25px">
+											<a href="<%=cp%>/member/findmember"><strong>아이디/비밀번호찾기</strong></a> |
+											<a href="<%=cp%>/member/join"><strong> 회원가입</strong></a>
+										</div>
+									</div>
+								</div>
+							
+								<div class="login-social">
+									<h3>소셜 계정 로그인</h3>
+									<div class="social-login-buttons">
+										<a class="btn btn-link-1 btn-link-1-kakaotalk" href="javascript:loginWithKakao();">
+										<i class="fa fa-comments"></i><strong> KaKao</strong>
+										</a> <a class="btn btn-link-1 btn-link-1-facebook" href="#">
+										<i class="fa fa-facebook"></i><strong> Facebook</strong>
+										</a> <a class="btn btn-link-1 btn-link-1-google-plus" href="#">
+										<i class="fa fa-google"></i><strong> Google</strong>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
 			</div>
 		</div>
 	</div>
