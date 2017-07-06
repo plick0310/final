@@ -14,7 +14,7 @@ public class StudyWhere {
 	private String imageFileName;
 	private String placename;
 	private int replyCount;
-	
+	private String address,tel,ocTime;
 	
 	
 	public int getReplyCount() {
@@ -101,6 +101,25 @@ public class StudyWhere {
 	}
 	public void setImageFileName(String imageFileName) {
 		this.imageFileName = imageFileName;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public String getOcTime() {
+		return ocTime;
+	}
+	public void setOcTime(String ocTime) {
+		this.ocTime = ocTime;
 	}
 	
 	

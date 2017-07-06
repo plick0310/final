@@ -60,64 +60,158 @@ public class StudyWhereServiceImpl implements StudyWhereService{
 	}
 	@Override
 	public StudyWhere readStudyWhere(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		StudyWhere dto = null;
+		
+		try {
+			dto=dao.getReadData("studywhere.readStudyWhere",num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 	@Override
 	public int updateHitCount(int num) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		try {
+			result=dao.updateData("studywhere.updateHitCount", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	@Override
 	public StudyWhere preReadStudyWhere(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		StudyWhere dto = null;
+		try {
+			dto=dao.getReadData("studywhere.preReadStudyWhere",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 	@Override
 	public StudyWhere nextReadStudyWhere(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		StudyWhere dto=null;
+		try {
+			dto=dao.getReadData("studywhere.nextReadStudyWhere",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 	@Override
 	public int updateStudyWhere(StudyWhere dto, String pathname) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		try {
+			if(dto.getUpload()!=null && !dto.getUpload().isEmpty()) {
+				/*String newFilename = fileManager.doFileUpload(dto.getUpload(), pathname);*/
+				
+				/*if(newFilename != null) {
+					if(dto.getSaveFilename().length()!=0&&dto.getSaveFilename()!=null) {
+						fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+					}
+					dto.setOriginalFilename(dto.getUpload().getOriginalFilename());
+					dto.setSaveFilename(newFilename);
+				}*/
+			}
+			dao.updateData("studywhere.updateStudyWhere", dto);
+			result=1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	@Override
 	public int deleteStudyWhere(int num, String pathname, String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+int result= 0;
+		
+		try {
+			StudyWhere dto = readStudyWhere(num);
+			if(dto!=null) {
+				if(! dto.getUserId().equals(userId)&&!userId.equals("admin")) {
+					return result;
+				}
+				if(dto.getImageFileName()!=null&&dto.getImageFileName().length()!=0) {
+					fileManager.doFileDelete(dto.getImageFileName(), pathname);
+				}
+			}
+			dao.deleteData("studywhere.deleteStudyWhere", num);
+			result=1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	@Override
 	public int insertLikeStudyWhere(StudyWhere dto) {
-		// TODO Auto-generated method stub
-		return 0;
+int result = 0;
+		
+		try {
+			result=dao.insertData("studywhere.insertLikeStudyWhere", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	@Override
 	public int countLikeStudyWhere(int num) {
-		// TODO Auto-generated method stub
-		return 0;
+int result = 0;
+		
+		try {
+			result=dao.getIntValue("studywhere.countLikeStudyWhere", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	@Override
 	public int insertReply(Reply dto) {
-		// TODO Auto-generated method stub
-		return 0;
+int result=0;
+		
+		try {
+			result=dao.insertData("studywhere.insertReply", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	@Override
 	public List<Reply> listReply(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+List<Reply> list = null;
+		
+		try {
+			list=dao.getListData("studywhere.listReply",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 	@Override
 	public int replyDataCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+	int result=0;
+		
+		try {
+			result=dao.getIntValue("studywhere.replyDataCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	@Override
 	public int deleteReply(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+int result=0;
+		
+		try {
+			result=dao.deleteData("studywhere.deleteReply", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
+
+
+	
 
 	
 }

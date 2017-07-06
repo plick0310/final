@@ -5,6 +5,127 @@
 <%
    String cp = request.getContextPath();
 %>
+<script type="text/javascript">
+function deleteBoard() {
+	
+	  var num = "${dto.num}";
+	  var page = "${page}";
+	  var query = "num="+num+"&page="+page;
+	  var url = "<%=cp%>/studyboard/studywhere/delete?" + query;
+
+	  if(confirm("위 자료를 삭제 하시 겠습니까 ? "))
+	  	location.href=url;
+	   
+	<c:if test="${sessionScope.member.userId!='admin' && sessionScope.member.userId!=dto.userId}">
+	  alert("게시물을 삭제할 수  없습니다.");
+	</c:if>
+	}
+</script>
+
+<script>
+	$(function(){
+		listPage(1);
+	});
+
+	function listPage(page) {
+		var url="<%=cp%>/studyboard/studywhere/listReply";
+		var num="${dto.num}";
+		
+		// text/html
+		$.post(url,{num:num, pageNo:page}, function(data){
+			$("#listReply").html(data);
+		});
+	}
+</script>
+
+<script>
+	//게시물 공감 추가 및 개수
+	function sendLikeStudyWhere(num) {
+		var msg="게시물에 공감하시겠습니까?";
+		if(!confirm(msg)) {
+			return;
+		}
+		var query="num="+num;
+		var url="<%=cp%>/studyboard/studywhere/insertLikeStudyWhere";
+		
+		$.ajax({
+			type:"post",
+			url:url,
+			data:query,
+			dataType:"json",
+			success:function(data) {
+				var state=data.state;
+				if(state=="true") {
+					var count=data.countLikeStudyWhere;
+					$("#countLikeStudyWhere").html(count);
+				} else if(state=="false") {
+					alert("이미 공감하셨습니다!!");
+				} else if(state=="loginFail"){
+					location.href="<%=cp%>/member/login";
+				}
+			}
+		,error:function(e) {
+			console.log(e.responseText);
+		}
+	});
+}
+
+	function sendReply() {
+		var num="${dto.num}";
+		var content=$("#replyContent").val().trim();
+		if(! content) {
+			$("#replyContent").focus();
+			return;
+		}
+		
+		// va
+		var query="num="+num;
+		query+="&content="+encodeURIComponent(content);
+		query+="&answer=0";
+		
+		$.ajax({
+			type:"post",
+			url:"<%=cp%>/studyboard/studywhere/createdReply",
+			data:query,
+			dataType:"json",
+			success:function(data) {
+				var state=data.state;
+				$("#replyContent").val("");
+				
+				if(state=="true") {
+					listPage(1);
+				} else if(state=="false") {
+					alert("댓글을 추가하지 못했습니다");
+				} else if(state=="loginFail") {
+					location.href="<%=cp%>/member/login";
+				}
+			}
+			,beforeSend : function(e){
+				e.setRequestHeader("AJAX",true);
+			}
+			,error:function(e) {
+				if(e.status==403){
+					location.href="<%=cp%>/member/login";
+					return;
+				}
+				
+				console.log(e.responseText);
+			}
+		});
+	}
+	
+	function deleteReply(reNum, page) {
+		var msg="게시물을 삭제하시겠습니까?";
+		if(!confirm(msg)) {
+			return;
+		}
+		
+		var url="<%=cp %>/studyboard/studywhere/deleteReply"
+		$.post(url, {reNum:reNum, mode:"reply"}, function(data){ 
+			listPage(page);
+		}, "json");
+	} 
+</script>
 <style>
 .dnu{
 border: none;
@@ -21,13 +142,13 @@ background: none;
 	<thead>
 		<tr>
 			<th class="informations">
-				제목입니다...
+				${dto.subject }
 				<span class="inforArea">
-					<strong>작성일</strong> [datetime]
+					<strong>작성일</strong> ${dto.created }
 					<span class="__dotted"></span>
-					<strong>작성자</strong> [writer]
+					<strong>작성자</strong> ${dto.userId }
 					<span class="__dotted"></span>
-					<strong>조회수</strong> [hit]
+					<strong>조회수</strong> ${dto.hitCount }
 				</span>
 			</th>
 		</tr>
@@ -36,23 +157,21 @@ background: none;
 		<tr>
 			<td class="read_contArea">
 				<div id="board_memo_area">
-					
+					${dto.content }
 				</div>
 		
-				<form name="read_likeAreaForm" class="_read_likesArea" ajaxAction="modules/board/read.likes.submit.php" ajaxType="html">
-					<input type="hidden" name="board_id" value="[board_id_value]" />
-					<input type="hidden" name="read_idno" value="[read_value]" />
-					<input type="hidden" name="mode" value="" />
+				
+					
 					<ul class="_read_likesArea" style="border-bottom: 1px solid #eee;">
 						<li class="_likes_btn">
-							<a href="#" title="">
-								13<br/>
-								<span class="__count" style="color: #1abc9c;">추천</span>
+							<a href="#" title="" id="countLikeStudyWhere" >
+								${countLikeBoard }<br/>
 							</a>
+								<span class="__count" style="color: #1abc9c;font-size: 18px;" onclick="sendLikeStudyWhere('${dto.num}');">추천</span>
 						</li>
 						
 					</ul>
-				</form>
+				
 <!-- 				<tr> -->
 <!-- 				<td> 이전글</td> -->
 <!-- 				</tr> -->
@@ -63,7 +182,11 @@ background: none;
 				<ul>
 					
 					<li>
-						<strong>이전글 :</strong>
+						<strong>이전글 :
+						<c:if test="${not empty preReadDto }">
+			       		<a href="<%=cp%>/studyboard/studywhere/article?${query }&num=${preReadDto.num}">${preReadDto.subject }</a>
+			       </c:if>
+						</strong>
 					</li>
 		
 					
@@ -72,7 +195,11 @@ background: none;
 				<ul>
 					
 					<li>
-						<strong>다음글 :</strong>
+						<strong>다음글 :
+					<c:if test="${not empty nextReadDto }">
+						<a href="<%=cp%>/studyboard/studywhere/article?${query }&num=${nextReadDto.num}">${nextReadDto.subject }</a>
+					</c:if>
+						</strong>
 					</li>
 		
 					
@@ -82,37 +209,57 @@ background: none;
 				<ul class="fileBox">
 					
 					<li>
-						<strong>첨부파일</strong>[file1]
+						<strong>첨부파일</strong>  
+					<c:if test="${not empty dto.imageFileName }">
+						<a href="<%=cp%>/studyboard/studywhere/download?num=${dto.num}">${dto.imageFileName }</a>
+			       </c:if>
 					</li>
 		
 					
 					
 				</ul>
+				<table style="width: 100%; margin: 0px auto 20px; border-spacing: 0px;">
+			<tr height="45">
+			    <td width="300" align="left">
+			    	<c:if test="${sessionScope.member.userId==dto.userId }">
+			          <button type="button" class="btn" onclick="updateBoard();">수정</button>
+			    	</c:if>
+			    	<c:if test="${sessionScope.member.userId==dto.userId || sessionScope.member.userId=='admin'}">
+			          <button type="button" class="btn" onclick="deleteBoard(${dto.num});">삭제</button> 
+			    	</c:if>
+			    </td>
+			
+			    <td align="right">
+			        <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/studyboard/studywhere/list?${query }';">리스트</button>
+			    </td>
+			</tr>
+			</table>
 				
 		
-				<div class="commentBox">
-					<div class="_CALLING_COMMENT"><strong style="font-size: 18px;">
-					<span style="font-size: 16px; color: #1abc9c; " class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;리플입니다...</strong>
-					</div>
-					<div class="_CALLING_COMMENT">
-					<span class="inforArea">
-					<strong>작성일</strong> [datetime]
-					<span class="__dotted"></span>
-					<strong>작성자</strong> [writer]
-					<span class="__dotted"></span>
-					<strong>조회수</strong> [hit]
-					</span>
-					<div style="float: right;">
-					<input class="dnu" type="button" value="삭제">
-					<input class="dnu" type="button" value="수정">
-					</div>
-					</div>
-					
-				</div> 
+				
 			</td>
 		</tr>
+		
+            <tr height='30' style="width: 900px; margin: 0 auto;"> 
+	            <td align='left'>
+	            	<span style='font-weight: bold;' >댓글쓰기</span><span> - 타인을 비방하거나 개인정보를 유출하는 글의 게시를 삼가 주세요.</span>
+	            </td>
+            </tr>
+            <tr>
+               <td style='padding:5px 5px 0px;'>
+                    <textarea id='replyContent' class='boxTA' style='width:99%; height: 70px;'></textarea>
+                </td>
+            </tr>
+            <tr>
+               <td align='right'>
+                    <button type='button' class='btn' style='padding:10px 20px;' onclick='sendReply();'>댓글 등록</button>
+                </td>
+            </tr>
+            
 	</tbody>
+	
 </table>	
 <div class="read_btnArea">
 
 </div>
+            <div id="listReply"></div>

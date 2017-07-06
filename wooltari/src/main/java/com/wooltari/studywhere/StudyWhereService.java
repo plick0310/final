@@ -8,6 +8,7 @@ public interface StudyWhereService {
 	public int dataCount(Map<String, Object>map);
 	public List<StudyWhere> listStudyWhere(Map<String, Object>map);
 	public StudyWhere readStudyWhere(int num);
+
 	public int updateHitCount(int num);
 	public StudyWhere preReadStudyWhere(Map<String, Object>map);
 	public StudyWhere nextReadStudyWhere(Map<String, Object>map);

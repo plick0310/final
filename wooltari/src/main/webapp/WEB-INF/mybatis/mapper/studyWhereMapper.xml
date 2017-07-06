@@ -4,9 +4,9 @@
 <mapper namespace="studywhere">
 	<insert id="insertStudyWhere" parameterType="com.wooltari.studywhere.StudyWhere">
 		insert into studywhereboard(num,userId,subject,content,imageFileName,placename,address,tel,ocTime,region) 
-		values(studywhereboard_seq.nextval,1,#{userId},#{subject},#{content},#{imageFileName,jdbcType=VARCHAR},#{placename},#{address},#{tel},#{ocTime},#{region});
+		values(studywhereboard_seq.nextval,#{userId},#{subject},#{content},#{imageFileName,jdbcType=VARCHAR},#{placename},#{address},#{tel},#{ocTime},#{region})
 	</insert>
-	
+	 
 	 <!-- 조건검색 -->
 	<sql id="where-list">
 		제목
@@ -42,12 +42,12 @@
 	<select id="listStudyWhere" parameterType="map" resultType="com.wooltari.studywhere.StudyWhere">
  	SELECT * FROM (
 			    SELECT ROWNUM rnum, tb.* FROM (
-			       SELECT tbBbs.num,hitCount,userId,subject,content,imageFileName,countReply,placename,address,tel,ocTime,region,created,
+			       SELECT tbBbs.num,hitCount,userId,subject,content,imageFileName,placename,address,tel,ocTime,region,created,
 			           NVL(replyCount, 0) replyCount,NVL(likesCount, 0) likesCount
 			       FROM
 			       (
 			           (
-				         SELECT num,hitCount,m.userId,subject,content,imageFileName,countReply,placename,address,tel,ocTime,region,
+				         SELECT num,hitCount,m.userId,subject,content,imageFileName,placename,address,tel,ocTime,region,
 				           TO_CHAR(b.created, 'YYYY-MM-DD') created
 						   
 				         FROM studywhereboard b JOIN member m ON b.userId=m.userId
@@ -77,18 +77,19 @@
 		]]>
 	</select>
 	
-	<select id="readBoard" parameterType="Integer" resultType="com.wooltari.studywhere.StudyWhere">
-		SELECT num, m.userId, m.username, subject, content, hitCount, created, saveFilename, originalFilename
-		FROM bbs b JOIN member1 m ON b.userId = m.userId WHERE num=#{num}
-	</select>
-	<!-- 
-	<select id="updateHitCount" parameterType="Integer">
-		UPDATE bbs SET hitCount=hitCount+1 WHERE num=#{num}
+	<select id="readStudyWhere" parameterType="Integer" resultType="com.wooltari.studywhere.StudyWhere">
+		SELECT num,hitCount,m.userId,subject,content,imageFileName,placename,address,tel,ocTime,region,
+				           TO_CHAR(b.created, 'YYYY-MM-DD') created
+		FROM studywhereboard b JOIN member m ON b.userId = m.userId WHERE num=#{num}
 	</select>
 	
-	<select id="preReadBoard" parameterType="map" resultType="com.sp.bbs.Board">
+	<select id="updateHitCount" parameterType="Integer">
+		UPDATE studywhereboard SET hitCount=hitCount+1 WHERE num=#{num}
+	</select>
+	
+	<select id="preReadStudyWhere" parameterType="map" resultType="com.wooltari.studywhere.StudyWhere">
 		SELECT tb.* FROM (
-			SELECT num, subject FROM bbs
+			SELECT num, subject,placename FROM studywhereboard
 			<where>
 				<if test="searchValue != null and searchValue != '' ">
 					<include refid="where-list"/>
@@ -102,9 +103,9 @@
 		)tb WHERE ROWNUM=1
 	</select>
 	
-	<select id="nextReadBoard" parameterType="map" resultType="com.sp.bbs.Board">
+	<select id="nextReadStudyWhere" parameterType="map" resultType="com.wooltari.studywhere.StudyWhere">
 		SELECT tb.* FROM (
-			SELECT num, subject FROM bbs
+			SELECT num, subject,placename FROM studywhereboard
 			<where>
 				<if test="searchValue != null and searchValue != '' ">
 					<include refid="where-list"/>
@@ -118,47 +119,47 @@
 		)tb WHERE ROWNUM=1
 	</select>
 	
-	게시판 수정
-	<update id="updateBoard" parameterType="com.sp.bbs.Board">
-		UPDATE bbs SET subject=#{subject}, content=#{content}, saveFilename=#{saveFilename, jdbcType=VARCHAR},
-		originalFilename=#{originalFilename, jdbcType=VARCHAR} WHERE num=#{num}
+	<!-- 게시판 수정 -->
+	<update id="updateStudyWhere" parameterType="com.wooltari.studywhere.StudyWhere">
+		UUPDATE studywhereboard SET subject=#{subject}, content=#{content}, imageFileName=#{imageFileName,jdbcType=VARCHAR},
+		placename=#{placename},address=#{address},tel=#{tel},ocTime=#{ocTime},region=#{region} WHERE num=#{num}
 	</update>
 	
-	게시판 삭제
-	<delete id="deleteBoard" parameterType="Integer">
-		DELETE FROM bbs WHERE num=#{num}
+	<!-- 게시판 삭제 -->
+	<delete id="deleteStudyWhere" parameterType="Integer">
+		DELETE FROM studywhereboard WHERE num=#{num}
 	</delete>
 	
-	게시물 공감
-	<insert id="insertLikeBoard" parameterType="com.sp.bbs.Board">
-		INSERT INTO bbsLike(num, userId) VALUES (#{num},#{userId})
+	<!-- 게시물 공감 -->
+	<insert id="insertLikeStudyWhere" parameterType="com.wooltari.studywhere.StudyWhere">
+		INSERT INTO studywherelike (num, userId) VALUES (#{num},#{userId})
 	</insert>
 	
-	게시물 공감 개수
-	<select id="countLikeBoard" resultType="Integer" parameterType="Integer">
-		SELECT NVL(COUNT(*),0) FROM bbsLike WHERE num=#{num}
+	<!-- 게시물 공감 개수 -->
+	<select id="countLikeStudyWhere" resultType="Integer" parameterType="Integer">
+		SELECT NVL(COUNT(*),0) FROM studywherelike WHERE num=#{num}
 	</select>
 	
-	댓글 달기
-	<insert id="insertReply" parameterType="com.sp.bbs.Reply">
-		INSERT INTO bbsReply (replyNum, num, userId, content, answer)
-			VALUES (bbsReply_seq.NEXTVAL, #{num}, #{userId}, #{content}, #{answer})
+	<!-- 댓글 달기 -->
+	<insert id="insertReply" parameterType="com.wooltari.studywhere.Reply">
+		INSERT INTO studywherereply (reNum, num, userId, content)
+			VALUES (studywherereply_seq.NEXTVAL, #{num}, #{userId}, #{content})
 	</insert>
 	
-	댓글개수 
+	<!-- 댓글개수 --> 
 	<select id="replyDataCount" parameterType="map" resultType="Integer">
-		SELECT NVL(COUNT(*),0) FROM bbsReply WHERE num=#{num} AND answer=0
+		SELECT NVL(COUNT(*),0) FROM studywherereply WHERE num=#{num}
 	</select>
 	
-	댓글리스트
-	<select id="listReply" parameterType="map" resultType="com.sp.bbs.Reply">
+	<!-- 댓글리스트 -->
+	<select id="listReply" parameterType="map" resultType="com.wooltari.studywhere.Reply">
 		SELECT * FROM (
 			SELECT ROWNUM rnum, tb.* FROM(
-				SELECT replyNum, num, r.userId, userName, content, created
-				FROM bbsReply r
-				JOIN member1 m ON r.userId = m.userId
-				WHERE num=#{num} AND answer=0
-				ORDER BY replyNum DESC
+				SELECT reNum, num, r.userId, userName, content, created
+				FROM studywherereply r
+				JOIN member m ON r.userId = m.userId
+				WHERE num=#{num}
+				ORDER BY reNum DESC
 			<![CDATA[
 				  ) tb WHERE ROWNUM <= #{end}
 				) WHERE rnum >= #{start}
@@ -166,14 +167,14 @@
 	</select>
 
 	
-	댓글 삭제
+	<!-- 댓글 삭제 -->
 	<delete id="deleteReply" parameterType="map">
-		DELETE bbsReply WHERE
+		DELETE studywherereply WHERE
 		<if test="mode=='num'">
 			num=#{num}
 		</if>
 		<if test="mode=='reply'">
-			replyNum=#{replyNum}
+			reNum=#{reNum}
 		</if>
-	</delete> -->
+	</delete>
 </mapper>

@@ -1,17 +1,12 @@
 package com.wooltari.studywhere;
 
 public class Reply {
-	private int replyNum, num;
+	private int reNum, num;
 	private String userId, userName, content, created;
 	private int answer;
 
 	
-	public int getReplyNum() {
-		return replyNum;
-	}
-	public void setReplyNum(int replyNum) {
-		this.replyNum = replyNum;
-	}
+	
 	public int getNum() {
 		return num;
 	}
@@ -47,5 +42,11 @@ public class Reply {
 	}
 	public void setAnswer(int answer) {
 		this.answer = answer;
+	}
+	public int getReNum() {
+		return reNum;
+	}
+	public void setReNum(int reNum) {
+		this.reNum = reNum;
 	}
 }

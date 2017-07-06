@@ -5,6 +5,8 @@
 <%
 	String cp = request.getContextPath();
 %>
+<script type="text/javascript" src="<%=cp%>/resource/se/js/HuskyEZCreator.js" charset="utf-8"></script>
+
 <script type="text/javascript">
     function sendOk() {
         var f = document.write_form;
@@ -28,6 +30,8 @@
         f.submit();
     }
 </script>
+
+
 <style>
 input {
 	height: 30px;
@@ -52,7 +56,7 @@ border: 1px solid #EAEAEA;
 }
 </style>
 
-<form name="write_form" id="write_form" enctype="multipart/form-data" method="post" style="margin: 60px auto; width: 900px;">
+<form name="write_form" id="write_form" enctype="multipart/form-data" onsubmit="return submitContents(this);" method="post" style="margin: 60px auto; width: 900px;">
 <div  style="height:50px; font-size: 20px;text-align: center; border-bottom: 1px solid #eee;">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
@@ -76,21 +80,26 @@ border: 1px solid #EAEAEA;
 				<th>장소정보</th>
 				<td>장소이름<input type="text" name="placename" maxlength="13"
 					style="width: 200px;" />
-					영엽시간<input type="text" name="octime" maxlength="13"
+					영엽시간<input type="text" name="ocTime" maxlength="13"
 					style="width: 200px;" />
 					지역<input type="text" name="region" maxlength="13"
 					style="width: 200px;" /></td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td><input type="text" name="writer" maxlength="8"
-					style="width: 700px;" /></td>
+				<td><input type="text" name="address" maxlength="8"
+					style="width: 500px;" />
+					전화번호<input type="text" name="tel" maxlength="8"
+					style="width: 150px;" />
+					
+					</td>
 			</tr>
 		
 
 			<tr>
-				<td colspan="2"><textarea name="content" id="ment" 
-						style="width: 100%; height: 300px;" ></textarea></td>
+				<td colspan="2">
+				<textarea name="content" id="content" style="width:95%; height: 270px;">${dto.content}</textarea>
+				</td>
 			</tr>
 
 			<tr>
@@ -112,3 +121,48 @@ border: 1px solid #EAEAEA;
 		<button class="clickbtn">돌아가기</button>
 	</div>
 </form>
+<script type="text/javascript">
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "content",
+	sSkinURI: "<%=cp%>/resource/se/SmartEditor2Skin.html",	
+	htParams : {bUseToolbar : true,
+		fOnBeforeUnload : function(){
+			//alert("아싸!");
+		}
+	}, //boolean
+	fOnAppLoad : function(){
+		//예제 코드
+		//oEditors.getById["content"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+	},
+	fCreator: "createSEditor2"
+});
+
+function pasteHTML() {
+	var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+	oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
+}
+
+function showHTML() {
+	var sHTML = oEditors.getById["content"].getIR();
+	alert(sHTML);
+}
+	
+function submitContents(elClickedObj) {
+	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+	
+	// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("content").value를 이용해서 처리하면 됩니다.
+	
+	try {
+		// elClickedObj.form.submit();
+		return check();
+	} catch(e) {}
+}
+
+function setDefaultFont() {
+	var sDefaultFont = '돋움';
+	var nFontSize = 24;
+	oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
+}
+</script> 

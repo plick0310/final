@@ -28,5 +28,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/leo/Downloads/스마트에디터 예제/스마트에디터 예제/스마트에디터 주의사항/lib/jai_codec.jar"/>
+	<classpathentry kind="lib" path="C:/Users/leo/Downloads/스마트에디터 예제/스마트에디터 예제/스마트에디터 주의사항/lib/jai_core.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
