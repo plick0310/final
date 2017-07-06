@@ -85,7 +85,7 @@ public class InfoReqBoardServiceImpl implements InfoReqBoardService {
 		}catch(Exception e){
 			System.out.println(e.toString());
 		}		
-		return null;
+		return dto;
 	}
 
 	@Override
@@ -132,58 +132,142 @@ public class InfoReqBoardServiceImpl implements InfoReqBoardService {
 
 	@Override
 	public int updateBoard(InfoReqBoard dto, String pathname) {
-		return 0;
+		int result=0;
+		
+		try{
+			result=dao.updateData("infoReqBoard.updateBoard", dto);
+			
+			if(! dto.getUpload().isEmpty()){
+				for(MultipartFile mf: dto.getUpload()){
+					if(mf.isEmpty())
+						continue;
+					
+					String saveFilename=fileManager.doFileUpload(mf, pathname);
+					if(saveFilename != null){
+						String originalFilename=mf.getOriginalFilename();
+						
+						dto.setOriginalFilename(originalFilename);
+						dto.setSaveFilename(saveFilename);
+						
+						insertFile(dto);						
+					}
+				}
+			}			
+		}catch(Exception e){ 			
+		}		
+		return result;
 	}
 
 	@Override
 	public int deleteBoard(int num, String saveFilename, String pathname) {
-		return 0;
+		int result=0;
+		
+		try{
+			if(saveFilename !=null){
+				fileManager.doFileDelete(saveFilename, pathname);
+				
+			}
+			dao.deleteData("infoReqBoard.deleteBoard", num);
+			result=1;
+			
+		}catch(Exception e){
+			
+		}
+		return result;
 	}
 
+	
+	
+	//좋아요
 	@Override
 	public int insertLikeBoard(InfoReqBoard dto) {
-		return 0;
+		int result=0;
+		
+		try{
+			result=dao.insertData("infoReqBoard.insertLikeBoard", dto);			
+		}catch(Exception e){			
+		}		
+		return result;
 	}
 
 	@Override
 	public int countLikeBoard(int num) {
-		return 0;
+		int result=0;		
+		try{
+			result=dao.getIntValue("infoReqBoard.countLikeBoard", num);
+		}catch(Exception e){			
+		}		
+		return result;
 	}
-
+	
+	// 회원이 탈퇴한 경우 게시물 삭제.
+	// 좋아요/싫어요, 댓글은 ON DELETE CASCADE 옵션으로 자동 삭제	
 	@Override
 	public int deleteBoardId(String userId, String root) {
 		return 0;
 	}
 
+	
+	//리플라이
+
 	@Override
 	public int insertReply(Reply dto) {
-		return 0;
+		int result=0;		
+		try{			
+			result=dao.insertData("infoReqBoard.insertReply", dto);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}		
+		return result;
 	}
 
 	@Override
 	public List<Reply> listReply(Map<String, Object> map) {
-		return null;
+		List<Reply> list=null;
+		try{
+			list=dao.getListData("infoReqBoard.listReply", map);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}		
+		return list;
 	}
 
+	@Override
+	public int replyDataCount(Map<String, Object> map) {
+		int result=0;
+		try{
+			result=dao.getIntValue("infoReqBoard.replyDataCount", map);			
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	
+	@Override
+	public int deleteReply(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.deleteData("infoReqBoard.deleteReply", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	
+	
+	//리플라이 관련 미기능 
 	@Override
 	public List<Reply> listReplyAnswer(int answer) {
 		return null;
 	}
 
-	@Override
-	public int replyDataCount(Map<String, Object> map) {
-		return 0;
-	}
 
 	@Override
 	public int replyCountAnswer(int answer) {
 		return 0;
 	}
 
-	@Override
-	public int deleteReply(Map<String, Object> map) {
-		return 0;
-	}
 
 	@Override
 	public int insertReplyLike(Reply dto) {
@@ -195,6 +279,7 @@ public class InfoReqBoardServiceImpl implements InfoReqBoardService {
 		return null;
 	}
 
+	//파일
 	@Override
 	public int insertFile(InfoReqBoard dto) {
 		int result=0;
@@ -215,7 +300,7 @@ public class InfoReqBoardServiceImpl implements InfoReqBoardService {
 		List<InfoReqBoard> listFile=null;
 		
 		try{
-			listFile=dao.getListData("", num);			
+			listFile=dao.getListData("infoReqBoard.listFile", num);			
 		}catch(Exception e){
 			System.out.println(e.toString());
 		}
@@ -240,7 +325,46 @@ public class InfoReqBoardServiceImpl implements InfoReqBoardService {
 
 	@Override
 	public int deleteFile(Map<String, Object> map) {
+		int result =0;
+		
+		try{
+			result= dao.deleteData("infoReqBoard.deleteFile", map);
+			
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+		
+		return result;
+	}
+/*
+	@Override
+	public int deleteList(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.deleteData("infoReqBoard.deleteList", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}*/
+
+	@Override
+	public int deleteList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int deleteList(List<Integer> list) {
+		int result=0;
+		
+		try{
+			result=dao.deleteData("infoReqBoard.deleteList", list);
+		}catch(Exception e){			
+		}
+		
+		return result;
 	}
 
 }

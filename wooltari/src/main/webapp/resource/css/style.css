@@ -218,6 +218,7 @@ header p {
 	text-transform: uppercase;
 	color: #fff;
 }
+/* 
 .btn-default {
 	color: #fff;
 	font-family: 'Open Sans', sans-serif;
@@ -230,7 +231,7 @@ header p {
 	border-radius: 4px;
 }
 
-	
+ */	
 }
 .btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active {
 	background-color: #fff;
@@ -564,8 +565,8 @@ label {
 }
 .modal-backdrop{
 	z-index: 0;
-	
 }
+
 @charset "utf-8";
 
 .__dotted{ width:3px; height:1px; background:url(../images/dotted.jpg); display:inline-block; *display:inline; *zoom:1; vertical-align:middle; margin:0 5px; }
@@ -671,4 +672,8 @@ label {
 .reply_comment_depthClass5{ margin-left:125px; }
 .reply_comment_depthClass6{ margin-left:150px; }
 .reply_comment_depthClass7{ margin-left:175px; }
+
+/* 모달 */
+.modal-content{ box-shadow: none; border: none; }
+.modal-body{ padding: 0px; }
 

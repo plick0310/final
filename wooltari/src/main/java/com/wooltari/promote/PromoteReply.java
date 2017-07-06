@@ -2,7 +2,7 @@ package com.wooltari.promote;
 
 public class PromoteReply {
 	private int listNum,prNum,num;
-	private String userId,nickName,content,created;
+	private String userId,userName,content,created;
 	public int getListNum() {
 		return listNum;
 	}
@@ -27,11 +27,11 @@ public class PromoteReply {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getNickName() {
-		return nickName;
+	public String getUserName() {
+		return userName;
 	}
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getContent() {
 		return content;

@@ -35,19 +35,22 @@ function insertBoard(){
 	
 	var str=f.subject.value;
 	if(!str){
+		alert("제목을 입력하세요.");
 		f.subject.focus();
-		return false;
+		return;
 	}
-	
+
 	str=f.content.value;
 	if(!str){
+		alert("내용을 입력하세요.");
 		f.content.focus();
 		return false;
 	}
 	
 	if(f.file1.value==""){
-		
-		return true;
+		if(! confirm("기본사진으로 대체합니다.")){
+			return false;
+		}
 		
 	}else if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.file1.value)) {	
 		alert('이미지 파일만 가능합니다.');
@@ -114,7 +117,7 @@ function insertBoard(){
 	</table>
 	
 	<div class="read_btnArea">
-		<button class="clickbtn" onclick="insertBoard();">등록하기</button>
-		<button class="clickbtn" onclick="javascript:location.href='<%=cp%>/promote/list';">돌아가기</button>
+		<button type="button" class="clickbtn" onclick="insertBoard();">등록하기</button>
+		<button type="button" class="clickbtn" onclick="javascript:location.href='<%=cp%>/promote/list';">돌아가기</button>
 	</div>
 </form>

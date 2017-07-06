@@ -25,7 +25,6 @@ public class MemberController {
 	public String loginForm(
 			String login_error, Model model
 			) {
-		
 		if(login_error!=null){
 			String message = "등록되지 않은 아이디이거나,<br>아이디 또는 비밀번호를 잘못 입력하셨습니다.";
 			model.addAttribute("message", message);
@@ -43,6 +42,22 @@ public class MemberController {
 	@RequestMapping(value="/member/join", method=RequestMethod.GET)
 	public String joinForm() throws Exception {
 		return "member/join";
+	}
+	/*
+	@RequestMapping(value="/member/membergetinfo", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> memberGetInfo(@RequestParam String userId) {
+		Member dto = service.readMember(userId);
+		// 작업 결과를 json으로 전송
+		Map<String, Object> model = new HashMap<>(); 
+		model.put("dto", dto);
+		return model;
+	}*/
+	@RequestMapping(value="/member/memberinfo", method=RequestMethod.POST)
+	public String memberInfo(@RequestParam String userId, Model model) throws Exception{
+		Member dto = service.readMember(userId);
+		model.addAttribute("dto", dto);
+		return "member/memberinfo";
 	}
 	
 	@RequestMapping(value="/member/join_submit", method=RequestMethod.POST)
@@ -63,12 +78,15 @@ public class MemberController {
 			model.addAttribute("message", "회원가입이 실패했습니다.");
 			return "member/notice";
 		}
-		String message = "울타리의 회원이 되신것을 환영합니다.<br>마이페이지에서 추가정보를 입력하시면 원할한 서비스 이용이 가능합니다.";
-		model.addAttribute("message", message);
-		
+		model.addAttribute("message", "울타리의 회원이 되신것을 환영합니다.<br>마이페이지에서 추가정보를 입력하시면 원할한 서비스 이용이 가능합니다.");
 		return "member/notice";
 	}
 	
+	@RequestMapping(value="/member/pwd", method=RequestMethod.GET)
+	public String pwdForm(){
+		
+		return "member/pwd";
+	}
 	@RequestMapping(value="/member/userIdCheck")
 	@ResponseBody
 	public Map<String, Object> userIdCheck(
@@ -104,13 +122,60 @@ public class MemberController {
 	@RequestMapping(value="/member/mypage", method=RequestMethod.GET)
 	public String myPage(Model model , HttpSession session) {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		
 		Member dto = service.readMember(info.getUserId());
-		
 		model.addAttribute("dto", dto);
 		return ".member.mypage";
 	}
 	
+	@RequestMapping(value="/member/my_main", method=RequestMethod.GET)
+	public String my_Main(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/my_main";
+	}
+	@RequestMapping(value="/member/my_msg", method=RequestMethod.GET)
+	public String my_Msg(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/my_msg";
+	}
+	@RequestMapping(value="/member/my_activity", method=RequestMethod.GET)
+	public String my_Activity(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/my_activity";
+	}
+	@RequestMapping(value="/member/my_info", method=RequestMethod.GET)
+	public String my_Info(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/my_info";
+	}
+	@RequestMapping(value="/member/my_point", method=RequestMethod.GET)
+	public String my_Point(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/my_point";
+	}
+	@RequestMapping(value="/member/my_qna", method=RequestMethod.GET)
+	public String my_Qna(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/my_qna";
+	}
+	@RequestMapping(value="/member/my_out", method=RequestMethod.GET)
+	public String my_Out(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/my_out";
+	}
 	
 	
 }

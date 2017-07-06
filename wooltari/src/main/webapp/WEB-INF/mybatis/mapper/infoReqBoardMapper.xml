@@ -3,11 +3,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="infoReqBoard">
 
-	
+	<!-- serviceImpl에 insertBoard에 서 새글번호 생성 -->
 	<select id="maxNum" resultType="Integer">
 		SELECT NVL(MAX(num), 0) FROM infoReqBoard
 	</select>
 
+	<!-- DB에 글 삽입  -->
 	<insert id="insertBoard" parameterType="com.wooltari.infoReqBoard.InfoReqBoard">
 		INSERT INTO infoReqBoard(num, subject, content, userId)
 		VALUES(infoReqBoard_seq.NEXTVAL, #{subject}, #{content}, #{userId})	
@@ -21,6 +22,7 @@
        * CLOB인 경우 검색(CLOB는 LIKE를 사용하면 성능 저하)
           DBMS_LOB.INSTR(content, #{searchValue}) &gt; 0 
 	 -->
+	 <!-- mapper에 리스트에서 사용  -->
 	<sql id="where-list">
 	  <if test="searchKey=='userId'">
 	      userName=#{searchValue}
@@ -51,8 +53,13 @@
 	            resultType="com.wooltari.infoReqBoard.InfoReqBoard">
 		SELECT * FROM (
 		    SELECT ROWNUM rnum, tb.* FROM (
-			     SELECT num, i.userId, subject, created,hitCount
-			        FROM infoReqBoard i JOIN member m ON i.userId=m.userId  
+			    SELECT i.num, i.userId, subject, created,hitCount
+			    ,NVL(likeCount, 0) likeCount, NVL(replyCount, 0) replyCount
+			       FROM infoReqBoard i
+			       JOIN member m ON i.userId=m.userId
+			       LEFT OUTER JOIN (SELECT num, COUNT(*) replyCount FROM infoReqReply GROUP BY num) r ON i.num=r.num
+			       LEFT OUTER JOIN (SELECT num, COUNT(*) likeCount FROM infoReqLike GROUP BY num) l ON i.num=l.num	
+			      
                     <where>
                          <if test="searchValue != null and searchValue != ''">
 			                  <include refid="where-list"/>
@@ -67,7 +74,7 @@
 	
 	<!-- 글보기 -->
 	<select id="readBoard" resultType="com.wooltari.infoReqBoard.InfoReqBoard" parameterType="Integer">
-		SELECT num, subject, hitCount, created, i.userId FROM infoReqBoard i		
+		SELECT num, subject, content, hitCount, created, i.userId FROM infoReqBoard i		
 		JOIN member m ON i.userId = m.userId WHERE num= #{num}	
 	</select>
 	
@@ -78,7 +85,7 @@
 	
 	<!-- 이전글 -->
 	<select id="preReadBoard" resultType="com.wooltari.infoReqBoard.InfoReqBoard" parameterType="map">
-		SELECT tb.* FROM(SELECT num, i.userId FROM infoReqBoard i JOIN member m ON i.userId=m.userId
+		SELECT tb.* FROM(SELECT num, i.userId, subject FROM infoReqBoard i JOIN member m ON i.userId=m.userId
 		<where>
 			<if test="searchValue !=null and searchValue!=''">
 				<include refid="where-list"/>
@@ -93,7 +100,7 @@
 	
 	<!-- 다음글 -->
 	<select id="nextReadBoard" resultType="com.wooltari.infoReqBoard.InfoReqBoard" parameterType="map">
-		SELECT tb.* FROM(SELECT num, i.userId FROM infoReqBoard i JOIN member m ON i.userId=m.userId
+		SELECT tb.* FROM(SELECT num, i.userId, subject FROM infoReqBoard i JOIN member m ON i.userId=m.userId
 		<where>
 			<if test="searchValue !=null and searchValue!=''">
 				<include refid="where-list"/>
@@ -106,6 +113,85 @@
 		)tb WHERE ROWNUM=1
 	</select>
 	
+	<!-- 수정  -->
+	<update id="updateBoard" parameterType="com.wooltari.infoReqBoard.InfoReqBoard">
+		UPDATE infoReqBoard SET subject=#{subject}, content=#{content}				
+				WHERE num=#{num}				 
+	</update>
+	
+	<!-- 삭제  -->
+	<delete id="deleteBoard" parameterType="Integer">
+		DELETE FROM infoReqBoard WHERE num=#{num}
+	</delete>
+	
+	<!-- 게시물 공감 -->
+	<insert id="insertLikeBoard" parameterType="com.wooltari.infoReqBoard.InfoReqBoard">
+		INSERT INTO infoReqLike(num, userId) VALUES(#{num},#{userId})
+	</insert>
+	
+	<select id="countLikeBoard" resultType="Integer" parameterType="Integer">
+		SELECT NVL(COUNT(*),0) boardCountLike FROM infoReqLike WHERE num=#{num}	
+	</select>
+	
+	<!-- 회원 탈퇴시 게시물 삭제 -->
+	<select id="listBoardId" parameterType="String" resultType="com.wooltari.infoReqBoard.InfoReqBoard">
+			SELECT num, userId, subject, content, hitCount, created, saveFilename, originalFilename
+			FROM infoReqBoard i 
+			JOIN member m ON i.userId=m.userId
+			JOIN infoReqFile f ON i.num=f.num
+			WHERE userId=#{userId}
+	</select>
+	<delete id="deleteBoardId" parameterType="String">
+		DELETE FROM infoReqBoard WHERE userId=#{userId}
+	</delete>
+	
+	<!-- 댓글 처리 -->
+	<insert id="insertReply" parameterType="com.wooltari.infoReqBoard.Reply">
+	INSERT INTO infoReqReply(replyNum, num, userId, content, answer)
+		VALUES(infoReqReply_seq.NEXTVAL, #{num}, #{userId}, #{content}, #{answer})	
+	</insert>
+	
+	<!-- 댓글 개수 -->
+	<select id="replyDataCount" resultType="Integer" parameterType="map">
+		SELECT NVL(COUNT(*), 0) FROM infoReqReply WHERE num=#{num} AND answer=0
+	</select>
+	
+	<!-- 댓글  리스트-->
+	<select id="listReply" resultType="com.wooltari.infoReqBoard.Reply" parameterType="map">
+		SELECT * FROM(
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT tbreply.replyNum, num, userId, content, created, tbreply.answer									
+				FROM				
+					(
+						SELECT replyNum, r.num, r.userId, r.content, r.created, answer
+							FROM infoReqReply r
+							JOIN infoReqBoard i ON r.num=i.num
+							JOIN member m ON r.userId=m.userId
+							WHERE r.num=#{num} AND answer=0
+					) tbreply	
+				ORDER BY replyNum DESC
+				<![CDATA[				
+			)tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+		]]>
+	</select>
+		
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply" parameterType="map">
+		DELETE infoReqReply WHERE
+			<if test="mode=='num'">
+				num=#{num}
+			</if>
+			<if test="mode=='reply'">
+				replyNum IN
+				(SELECT replyNum FROM infoReqReply START WITH replyNum=#{replyNum}
+				CONNECT BY PRIOR replyNum = answer)
+			</if>
+			<if test="mode=='answer'">
+				replyNum=#{replyNum}
+			</if> 
+	</delete>	
+	
 	<!-- 파일 -->	
 	<insert id="insertFile" parameterType="com.wooltari.infoReqBoard.InfoReqBoard">
 		 INSERT INTO infoReqFile(fileNum, num, saveFilename, originalFilename)
@@ -113,14 +199,21 @@
 	</insert>
 	
 	<select id="listFile" parameterType="Integer" resultType="com.wooltari.infoReqBoard.InfoReqBoard">
-		SELECT fileNum, num, saveFilename, originalFilename FROM infoReqBoard WHERE num=#{num}	
+		SELECT fileNum, num, saveFilename, originalFilename FROM infoReqFile WHERE num=#{num}	
 	</select>
 	
 	
 	<select id="readFile" parameterType="Integer" resultType="com.wooltari.infoReqBoard.InfoReqBoard">
-		SELECT fileNum, num, saveFilename, originalFilename FROM infoReqBoard WHERE fileNum=#{fileNum}	
+		SELECT fileNum, num, saveFilename, originalFilename FROM infoReqFile WHERE fileNum=#{fileNum}	
 	</select>
 	
+	<delete id="deleteFile" parameterType="map">
+	DELETE FROM infoReqFile WHERE ${field}=#{num}
+	</delete>
 	
-
+	<!-- 다중 삭제 -->
+	<delete id="deleteList" parameterType="java.util.List">
+		DELETE FROM infoReqBoard WHERE num IN
+			<foreach close=")" separator="," open="(" collection="list" index="index" item="num">#{num}</foreach>
+	</delete>
 </mapper>

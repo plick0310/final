@@ -14,10 +14,6 @@ body {
 	margin: 0;
 }
 
-
-
-
-
 .d3 {
 	background: #F9F0DA;
 }
@@ -184,7 +180,7 @@ function search(){
 				<td>
 					<div style="position:relative;">
 						
-						<a href="${articleUrl}&num=${dto.num}" class="subject">IT/컴퓨터&nbsp;&nbsp;&nbsp;&nbsp;서울&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.subject}&nbsp;&nbsp; </a><span class="comment">[12]</span>
+						<a href="${articleUrl}&num=${dto.num}" class="subject">IT/컴퓨터&nbsp;&nbsp;&nbsp;&nbsp;서울&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.subject}&nbsp;&nbsp; </a><span class="comment">[${dto.replyCount}]</span>
 					
 						<div class="info">
 							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">${dto.created}</span>

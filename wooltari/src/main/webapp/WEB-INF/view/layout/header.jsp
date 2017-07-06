@@ -63,6 +63,7 @@ function logout(){
 		},10);
 	});
 }
+<%-- 
 function dialogLogin() {
 	$("#modal-content").load("<%=cp%>/member/login");
 	$("#modalflage").val("true");
@@ -72,11 +73,31 @@ function dialogLogin() {
 function dialogJoin() {
 	$("#modal-content").load("<%=cp%>/member/join");
 }
-
+ --%>
+function dialogURLID(url, userId) {
+	var loadurl="<%=cp%>" + url;
+	$.post(loadurl, {userId:userId}, function(data){
+		$("#modal-body").html(data);
+		$(".modal-backdrop").remove();
+		$("#modal").modal("show");
+	});
+}
+function dialogURL(url) {
+	var loadurl ="<%=cp%>" + url;
+	$("#modal-body").load(loadurl);
+	$(".modal-backdrop").remove();
+	$("#modal").modal("show");
+}
 $(function(){
+	$('body').on('hidden.bs.modal', '.modal', function () {
+        $(this).removeData('bs.modal');
+	});
+	
+	/* 
 	$('#modalLogin').on('hidden.bs.modal', function () {
 		$(".modal-backdrop").remove();
 	});
+	 */
 });
 
 </script>
@@ -190,10 +211,10 @@ $(function(){
 					</div>
 				<div class="member" style="margin: 7px 0;"> 
 					<c:if test="${empty sessionScope.member}">
-						<a href="javascript:dialogLogin();"><img src="<%=cp%>/resource/img/loginicon.png" alt="Login" class="img-circle" width="35px" height="35px"></a>
+						<a href="javascript:dialogURL('/member/login');"><img src="<%=cp%>/resource/img/loginicon.png" alt="Login" class="img-circle" width="35px" height="35px"></a>
 					</c:if>
 					<c:if test="${not empty sessionScope.member}">
-						<strong style="margin-right: 5px">${sessionScope.member.userName}</strong>
+						<strong style="margin-right: 5px"><a href="javascript:dialogURLID('/member/memberinfo','${sessionScope.member.userId}');">${sessionScope.member.userName}</a></strong>
 						<c:if test="${empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
 								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c"> 
@@ -211,7 +232,10 @@ $(function(){
 							<c:if test="${not empty sessionScope.member.userImg}">
 								<img src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}" class="img-thumbnail" width="100%" height="100%">
 							</c:if>
-							<li><h3 style="text-align: center;"> ${sessionScope.member.userName} 님</h3></li>
+							<li><h3 style="text-align: center;">${sessionScope.member.userName} 님</h3></li>
+							<c:if test="${sessionScope.member.userId == 'admin'}"> 
+							<li><a href="<%=cp%>/admin/index">관리자 페이지</a></li>
+							</c:if>
 							<li><a href="<%=cp%>/study/mylist">나의 스터디</a></li>
 							<li><a href="<%=cp%>/member/mypage">마이페이지</a></li>
 							<li><a href="javascript:logout();">로그아웃</a></li>
@@ -224,10 +248,12 @@ $(function(){
 </div>
 
 <!-- 모달 -->
-<div id="modalLogin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content" id="modal-content" style="background: none;" >
-			<!-- jsp가 들어가는 곳 -->
+			<div id="modal-body" class="modal-body">
+				<!-- JSP 로드될 곳 -->
+			</div>
 		</div>
 	</div>
 </div>

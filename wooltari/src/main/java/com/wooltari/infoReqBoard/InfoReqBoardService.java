@@ -37,4 +37,8 @@ public interface InfoReqBoardService {
 	
 	public int insertReplyLike(Reply dto);
 	public Map<String, Object> replyCountLike(int replyNum);
+	
+	//전체 선택 삭제
+	public int deleteList(Map<String, Object> map);
+	public int deleteList(List<Integer> list);
 }

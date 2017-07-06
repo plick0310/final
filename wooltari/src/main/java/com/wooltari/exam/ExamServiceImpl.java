@@ -27,9 +27,28 @@ public class ExamServiceImpl implements ExamService{
 	}
 
 	@Override
-	public List<Exam> ExamwishList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Exam> readExamList(Map<String, Object> map) {
+		List<Exam> examinfoList = null;
+		
+		try {
+			examinfoList = dao.getListData("exam.readExamList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return examinfoList;
+	}
+
+	@Override
+	public List<Exam> examwishList(Map<String, Object> map) {
+		List<Exam> wishList = null;
+		
+		try {
+			// ↓ 아래 ""안에 mapper에서 선언한 내용 가져오기. 
+			wishList = dao.getListData("exam.examwishList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return wishList;
 	}
 
 	@Override
@@ -37,5 +56,6 @@ public class ExamServiceImpl implements ExamService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }

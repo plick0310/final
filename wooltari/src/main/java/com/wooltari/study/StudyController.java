@@ -41,7 +41,8 @@ public class StudyController {
 	public String StudyCratedSubmit(
 			StudyInfo dto,  Model model ,HttpSession session) throws Exception{
 		
-		
+		try {
+			
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 	
 		String root=session.getServletContext().getRealPath("/");
@@ -50,6 +51,10 @@ public class StudyController {
 		
 		dto.setUserId(info.getUserId());
 		service.insertStudy(dto ,path);
+		} catch (Exception e) {
+			System.out.println("실패");
+			return "redirect:/";
+		}
 		
 		//model.addAttribute("dto",dto);
 		
@@ -104,6 +109,24 @@ public class StudyController {
 	
 		model.addAttribute("dto",dto);
 		return ".study.myStudy.home";
+	}
+	
+	
+	
+	@RequestMapping(value="/study/myStudy/{s_num}/calender")
+	public String calender() {
+
+		return "/study/myStudy/calender";
+	}
+	@RequestMapping(value="/study/myStudy/{s_num}/s_member")
+	public String s_member() {
+
+		return "/study/myStudy/s_member";
+	}
+	@RequestMapping(value="/study/myStudy/{s_num}/chating")
+	public String chating() {
+
+		return "/study/myStudy/chating";
 	}
 	
 }

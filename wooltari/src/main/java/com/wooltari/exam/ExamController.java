@@ -1,9 +1,19 @@
 package com.wooltari.exam;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.wooltari.common.MyUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -11,10 +21,26 @@ import net.sf.json.JSONObject;
 @Controller("community.exam.communityController")
 public class ExamController {
 
+	@Autowired
+	private ExamService service;
+	
+	@Autowired
+	private MyUtil myUtil;
 	
 	@RequestMapping(value="/community/exam/list")
-	public String list() {
+	public String list(
+			Model model,
+	        HttpServletRequest req
+			) throws Exception {
 
+		Map<String, Object> map = new HashMap<>();
+		
+		List<Exam> examinfoList = service.readExamList(map);
+		model.addAttribute("examinfoList", examinfoList);
+		
+		List<Exam> wishList = service.examwishList(map);
+		model.addAttribute("wishList", wishList);
+		
 		return ".community.exam.list";
 	}
 	

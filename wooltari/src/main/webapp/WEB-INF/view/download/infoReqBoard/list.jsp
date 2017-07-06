@@ -14,10 +14,6 @@ body {
 	margin: 0;
 }
 
-
-
-
-
 .d3 {
 	background: #F9F0DA;
 }
@@ -123,9 +119,61 @@ function searchList() {
 	f.submit();
 }
 
+function check(){
+	//document.array_form 객체를 f 변수에 대입
+	var f=document.array_form;
+	
+	if(f.chk==undefined) 
+		return;
+	
+	if(f.chk.length!=undefined){//체크 박스가 둘 이상인 경우
+		for(var i=0;i<f.chk.length;i++){
+
+			if(f.allCheck.checked)
+				f.chk[i].checked=true;
+			else
+				f.chk[i].checked=false;			
+		}
+	}else{//체크박스가 하나인 경우
+		if(f.allCheck.checked)
+			f.chk.checked=true;
+		else
+			f.chk.checked=false;
+	}
+}
+
+function deleteList(){
+	var f=document.array_form;
+	var cnt=0;
+	
+	if(f.chk==undefined){
+		return false;
+	}
+	if(f.chk.length!=undefined){//체크 박스가 둘 이상인 경우
+		for(var i=0; i<f.chk.length;i++){
+			if(f.chk[i].checked)
+				cnt++;
+		}
+		
+	}else{
+		//체크박스가 하나인 경우
+		if(f.chk.checked)
+			cnt++;
+	}
+	if(cnt==0){
+		alert("선택한 게시물이 없습니다.");
+		return false;
+	}
+	if(confirm("선택한 게시물을 삭제하시겠습니까?")){		
+		f.action="<%=cp%>/download/infoReqBoard/deleteList";
+		f.submit();
+	}
+	
+}
+
+<%-- 
 $(document).ready(function(){
-    //최상단 체크박스 클릭
-  
+    //최상단 체크박스 클릭  
     $("#allCheck").click(function(){
         //클릭되었으면
         if($("#allCheck").prop("checked")){
@@ -140,7 +188,47 @@ $(document).ready(function(){
 
 });
 
+//체크박스를 통한 삭제
+function deleteAction(){
+	var  chk = "";
+	$("input[name='chk']:checked").each(function(){
+		chk+=$(this).val()+",";
+	});
+	chk=chk.substring(0,chk.lastIndexOf(","));//맨끝 콤마 지우기
+	
+	if(chk == ''){
+		alert("삭제할 대상을 선택 하세요.");
+		return false;
+	}
+	
+	var query={"chk":chk};	
+	var url="<%=cp%>/download/infoReqBoar/deleteList";
+	//console.log("### chk => {"+chk+"}");
+	
+	$.ajax({
+		type:"POST"
+		,url:url
+		,data:query
+		,dataType:"JSON"
+		,success:function(data){
+			var state=data.state;
+			if(state=="true"){
+				deleteList(num);				
+			}else if(state=="false") {
+				alert("삭제할 대상을 선택 하세요.");
+			} else if(state=="loginFail") {
+				login();
+			}
+		}
+		,error:function(e) {
+			console.log(e.responseText);
+		}
+	});
+}
+ --%>
 
+
+		
 </script>
 
 <div style="width: 900px; margin: 60px auto;">
@@ -148,11 +236,8 @@ $(document).ready(function(){
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
 			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>정보요청게시판</div> 
-<form name="array_form" id="array_form" style="width: 900px;"> 
-	<input type="hidden" name="article" value="[article_value]" />
-	<input type="hidden" name="category" value="[category_value]" />
-	<input type="hidden" name="board_id" value="[board_id_value]" />
-	<input type="hidden" name="page" value="[page_value]" />
+<form name="array_form" id="array_form" style="width: 900px;" method="post"> 
+	<input type="hidden" name="page" value="${page}" />
 	<!-- List Start-->
 	<div class="settingArea">
 		<table style="width:100%;" cellpadding="0" cellspacing="0" border="0">
@@ -163,7 +248,7 @@ $(document).ready(function(){
 					
 					</ul>
 					<div style="position:absolute; bottom:10px; right: -15px; top: 9px;">
-						<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" /><label for="allCheck">전체선택</label>			
+						<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" onclick="check()"/><label for="allCheck">전체선택</label>			
 										
 					</div>
 				</td>
@@ -177,14 +262,14 @@ $(document).ready(function(){
 	<c:forEach var="dto" items="${list}">
 			<tr>
 				
-				<td style="text-align:right; width:65px; padding: 5px 18px;"><input type="checkbox" name="chk"></td>
+				<td style="text-align:right; width:65px; padding: 5px 18px;"><input type="checkbox" name="chk" value="${dto.num}"></td>
 				
 				<td class="___number">${dto.listNum}</td>
 				<td>
 					<div style="position:relative;">
 						<!--[category_name]-->
 					
-						<a href="${articleUrl}&num=${dto.num}" class="subject">${dto.subject}</a><span class="comment">[16]</span>
+						<a href="${articleUrl}&num=${dto.num}" class="subject">${dto.subject}</a><span class="comment">(${dto.replyCount})</span>
 					
 						<div class="info">
 							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">${dto.created}</span>
@@ -193,14 +278,12 @@ $(document).ready(function(){
 							<span class="__dotted"></span>
 							<strong>조회수 </strong><span>${dto.hitCount}</span>
 						</div>
-						
-						
+												
 						<div class="likes">
-							25<br>
-							<span class="num" style="color: #1abc9c; ">추천</span>
+							${dto.likeCount}<br>
+							<span class="num" style="color: #1abc9c;">추천</span>
 							<!--[unlikes]-->
-						</div>
-						
+						</div>						
 					</div>
 				</td>
 			</tr>
@@ -225,8 +308,10 @@ $(document).ready(function(){
         	${paging}
         </c:if></div>
 	<div class="btnArea">
+	<c:if test="${sessionScope.member.userId=='admin'}">
 		<input type="button" class="clickbtn" 
-		 onclick="javascript:location.href='<%=cp%>/download/infoReqBoard/delete';" value="삭제">
+		 onclick="javascript:deleteList();" value="삭제">
+	</c:if>	
 		<input type="button" class="clickbtn"
 		 onclick="javascript:location.href='<%=cp%>/download/infoReqBoard/created';" value="글쓰기">
 	</div>

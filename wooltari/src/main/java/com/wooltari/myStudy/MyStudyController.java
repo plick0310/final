@@ -23,7 +23,7 @@ public class MyStudyController {
 		return ".study.myStudy.home";
 	}
 	*/
-	@RequestMapping(value="/study/myStudy/calender")
+/*	@RequestMapping(value="/study/myStudy/calender")
 	public String calender() {
 
 		return "/study/myStudy/calender";
@@ -37,7 +37,7 @@ public class MyStudyController {
 	public String chating() {
 
 		return "/study/myStudy/chating";
-	}
+	}*/
 	
 	
 /*	@RequestMapping(value="/community/report/created")
