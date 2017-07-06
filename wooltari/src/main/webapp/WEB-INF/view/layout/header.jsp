@@ -92,8 +92,8 @@ function sendlogout(){
 	//var refreshToken = Kakao.Auth.getRefreshToken();
 	Kakao.Auth.logout(function(){
 		setTimeout(function(){
-			location.href="<%=cp%>/member/logout";
 		},10);
+		location.href="<%=cp%>/member/logout";
 	});
 }
 

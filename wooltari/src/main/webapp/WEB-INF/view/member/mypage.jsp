@@ -125,6 +125,22 @@ $(document).ready(function(){
 		});
 	});
 });
+
+
+function messagePaging(paging) {
+	alert(paging);
+}
+
+<%--
+$.ajax({
+	url:"<%=cp%>/message/list?mode=" + mode + "&page=" + paging,
+	dataType:"html",
+	success : function(data) {
+	$('.msg-list').html(data);
+	}
+});
+--%>
+
 </script>
 <div class="container">
     <div class="card hovercard">

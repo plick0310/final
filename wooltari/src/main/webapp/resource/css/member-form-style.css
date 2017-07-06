@@ -16,12 +16,20 @@
 	background: url('/wooltari/resource/img/member_note.png') no-repeat;
 }
 
-.member-container h3{
+.member-container2 {
+	text-align:center;
+	width: 1080px; 
+	height: 840px;
+	margin : 5% auto auto auto;
+	background: url('/wooltari/resource/img/member_notepen.png') no-repeat;
+}
+
+.member-container h3, .member-container2 h3{
 	font-family: 'BareunDotum';
 	color: #aaaaaa; 
 }
 
-.member-container a, a:hover, a:focus {
+.member-container a, a:hover, a:focus, .member-container2 a, a:hover, a:focus {
 	color: #888888; 
 }
 .member-outer {

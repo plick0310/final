@@ -373,32 +373,16 @@ ul {
 }
 </style>
 <script type="text/javascript">
-<%-- 
-$.ajax({
-	url:"<%=cp%>/member/my_main",
-	dataType:"html",
-	success : function(data) {
-	$('.tab-content').html(data);
-	}
-});
-var fileName;
-pageName = $(this).attr('id');
-$.ajax({
-	url:"<%=cp%>/member/" + pageName,
-	dataType:"html",
-	success : function(data) {
-	$('.tab-content').html(data);
-	}
-});
- --%>
 $(document).ready(function(){
 	$.ajax({
 		url:"<%=cp%>/message/list",
+		type:"POST",
 		dataType:"html",
 		success : function(data) {
 		$('.msg-list').html(data);
 		}
 	});
+	
 	$(".inbox-nav li").click(function () {
 		$(".inbox-nav li").removeClass("active");
 		$(this).addClass("active");

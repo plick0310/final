@@ -120,7 +120,7 @@
 		</script>
 	</head>
    	<body class="member-body">
-		<div class="member-container">
+		<div class="member-container2">
 			<div class="member-outer">
 				<div class="member-inner">
 					<div class="login-msg">
