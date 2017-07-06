@@ -24,7 +24,18 @@ public class MockTestServiceImpl implements MockTestService{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return result;
+	}
+
+	@Override
+	public int updateExamwishLIST(Map<String, Object> map) {
+		int result = 0;
 		
+		try {
+			result=dao.updateData("mockTest.updateExamwishList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 
@@ -75,6 +86,7 @@ public class MockTestServiceImpl implements MockTestService{
 		}
 		return result;
 	}
+
 
 
 

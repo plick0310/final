@@ -53,11 +53,6 @@ $('#exampleModal').on('show.bs.modal', function (event) {
 
 </script>
 <script>
-function updateScore(num) {
-   var url="<%=cp%>/score/update?hak="+hak+"&page=${page}";
-   location.href=url;
-}
-
 function check() {
    var f=document.scoreListForm;
    
@@ -78,6 +73,8 @@ function check() {
          f.wishlistNum.checked=false;
    }
 }
+
+
 
 function deleteList() {
    var f=document.array_form;
@@ -109,6 +106,8 @@ function deleteList() {
    }
 }
 
+
+
 </script>
 <script type="text/javascript">
 	function popupLink(popHeight,popWidth){ 
@@ -121,108 +120,89 @@ function deleteList() {
 	var popY = winY + (winHeight - popHeight)/2;
 	window.open("<%=cp%>/community/exam/examFiles","popup","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX);
 }
+	
+	
 </script>
+
 <script type="text/javascript">
-    function sendOk() {
-        var f = document.modalForm;
+function create(){
+	var mode = "createdList";
+	$("#exampleModal").modal("show");
+}
 
-    	var str = f.examInfoName.value;
-    	var st= f.examwishDate.value;
- 
-        if(!str || str=='시험선택') {
-            alert("시험을 선택하세요");
-            return;
-        }
+// 수정
+function change(examInfoName,examwishDate){
+	var mode = "updateList";
+	$("#examSelect").val(examInfoName);
+	$("#examDate").val(examwishDate);
+	$("#exampleModal").modal("show");
+}
+</script>
 
-        if(!str) {
-            alert("응시일을 지정하세요. ");
-            return;
-        }
-
-    	var url = "<%=cp%>/mockTest/createdList";
-    	var query="Name="+str+"&Date="+st;
-    	
-    	$.ajax({
-    		type:"post"
-    		,url:url
-    		,data: query
-    		,dataType:"json"
-    		,success:function(data) {
-    			var state=data.state;
-                if(state=="false")
-                    alert("게시물을 추가(수정)하지 못했습니다. !!!");
-				if(mode=="created" || mode=="reply") {
-            		reloadBoard()
-            	} else {
-            		listPage(page);
-            	}
-    		}
-    		
-    	});
-    	
-    	
-    	
+<script type="text/javascript">
+function createOk(mode) {
+    var f = document.modalForm;
+	var name = f.examInfoName.value;
+	var date = f.examwishDate.value;
+	
+	
+	var url = "<%=cp%>/mockTest/createdList";
+	var query="Name="+name+"&Date="+date;
+	
+    if(!name || name=='시험선택') {
+        alert("시험을 선택하세요");
+        return;
     }
-</script>
-<script type="text/javascript">
-	$(function(){
-		$("#tab-test").addClass("active");
-		listPage(1);
-		
-		$("ul.tabs li").click(function(){
-			tab = $(this).attr("data-tab");
-			
-			$("ul.tabs li").each(function(){
-				$(this).removeClass("active")
-			});
-			$("#tab-"+tab).addClass("active");
-			
-			listPage(1);
-		});
-	});
 
-	// 글 리스트 및 페이징 처리
-	function listPage(page) {
-		var $tab = $(".tabs .active");
-		var tab = $tab.attr("data-tab");
-		var url="<%=cp%>/mockTest/"+tab+"/list";
-		
-		var query="pageNo="+page;
-		var search=$('form[name=packTestSearchForm]').serialize();
-		query=query+"$"+search;
-		
-		ajaxHTML(url,"get",query);
-	}
+    if(!date) { 
+        alert("응시일을 지정하세요. ");
+        return;
+    }
+
+    $.ajax({
+		type:"post"
+		,url:url
+		,data: query
+		,dataType:"json"
+		,success:function(data) {
+			var state=data.state;
+		}
+	});
 	
-	// 글리스트 및 글쓰기폼, 글보기, 글수정폼 ajax
-	function ajaxHTML(url, type, query) {
-		$.ajax({
-			type : type
-			,url : url
-			,data : query
-			,success:function(data) {
-				if($.trim(data)=="error") {
-					listPage(1);
-					return;
-				}
-				$("#tab-content").html(data);
-			}
-			,beforeSend : function(jqXHR) {
-				jqXHR.setRequestHeader("AJAX",true);
-			}
-			,error : function(jqXHR) {
-				if(jqXHR.status == 401) {
-					console.log(jqXHR);
-				} else if (jqXHR.status == 403) {
-					location.href="<%=cp%>/member/login";
-				} else {
-					console.log(jqXHR.responseText);
-				}
-			}
-		});
-	}
+    f.submit();
+}
+
+function updateOk(mode) {
+    var f = document.modalForm;
+	var name = f.examInfoName.value;
+	var date = f.examwishDate.value;
 	
 	
+	var url = "<%=cp%>/mockTest/createdList";
+	var query="Name="+name+"&Date="+date;
+	
+    if(!name || name=='시험선택') {
+        alert("시험을 선택하세요");
+        return;
+    }
+
+    if(!date) { 
+        alert("응시일을 지정하세요. ");
+        return;
+    }
+
+    $.ajax({
+		type:"post"
+		,url:url
+		,data: query
+		,dataType:"json"
+		,success:function(data) {
+			var state=data.state;
+		}
+	});
+	
+    f.submit();
+}
 </script>
 
 <div style="width: 900px; height:600px; margin: 60px auto;">
@@ -232,12 +212,14 @@ function deleteList() {
          class="glyphicon glyphicon-pencil"> </span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;
       </span>E X A M
    </div>
+   
    <div style="margin-bottom: 5px; font-size: 15px;">
       <span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">
              
              ${sessionScope.member.userName }
              
              &nbsp;&nbsp;</span>님의 응시할 시험 목록입니다.
+             <span style="font-size: 5px; color: #6799FF;">&nbsp;&nbsp;(최대 '5'개까지 등록 가능합니다)</span>
    </div>
 
    <form name="array_form" id="array_form" style="width: 900px;">
@@ -255,7 +237,8 @@ function deleteList() {
       </div>
 
       <table cellpadding="0" cellspacing="0" style="width: 100%; border-top: 1px solid #4b4b4b;" class="board_table array">
-		<c:forEach var="dto" items="${examwishList }">
+		
+		<c:forEach items="${examwishList }" var="dto" varStatus="status">
          <tbody>
             <tr>
                <td style="text-align: right; width: 65px; padding: 5px 18px;">
@@ -273,6 +256,9 @@ function deleteList() {
                      		<c:when test="${dto.dday eq 0 }">
                      			<span style="color: red;">D-day ! ! !</span>
                      		</c:when>
+                     		<c:when test="${dto.dday < 0 }">
+                     			<span style="color: #BDBDBD;">END..</span>
+                     		</c:when>
                      		<c:otherwise>
                      			D-day ${dto.dday }
                      		</c:otherwise>
@@ -286,18 +272,32 @@ function deleteList() {
                         <strong>응시일: </strong><span>${dto.examwishDate }</span>
                      </div>
                      <div style="float: right; margin: 4px;">
-                        <button id="modalbtn" type="button"
-                           class="glyphicon glyphicon-plus" data-toggle="modal"
-                           data-target="#exampleModal" data-whatever="@mdo" value="regist"></button>
-                        <button id="modalbtn" type="button"
-                           class="glyphicon glyphicon-edit" data-toggle="modal"
-                           data-target="#exampleModal" data-whatever="@mdo" value="change"></button>
+					
+					<c:if test="${status.last}">
+						<c:choose>
+							<c:when test="${status.count eq 0 }">
+								<span>등록한 시험 목록이 없습니다. 새로 등록하시려면 하단에 추가버튼을 눌러주세요</span>
+							</c:when>
+							<c:when test="${status.count eq 5 }">
+								
+	                        </c:when>   
+							<c:otherwise>
+	                        	<button id="modalbtn" type="button" onclick="create()"
+	                        		class="glyphicon glyphicon-plus"></button>
+                        	</c:otherwise>
+	                    </c:choose>       
+                    </c:if>   
+
+
+                        <button id="modalbtn" type="button" onclick="change('${dto.examInfoName}', '${dto.examwishDate}')"
+                           class="glyphicon glyphicon-edit"></button>
                      </div>
                   </div>
                </td>
             </tr>
          </tbody>
       </c:forEach>
+      
     </table>
       
       
@@ -364,20 +364,18 @@ function deleteList() {
 	                        <label for="message-text" class="control-label"
 	                           style="margin-right: 8px;">응시일</label>
 	                            <div class="calendar_wrap">
-									<input type="date" name="examwishDate" value="${dto.examwishDate }"
+									<input type="date" name="examwishDate" value="${dto.examwishDate }" id="examDate"
 										style="margin-top: -15px; height: 26px; border: 1px solid #D4D4D4;"/>
 	                        	</div>
 	                     </div>
 	               </div>
+	              
 	               <div class="modal-footer">
-	
-	                  <button type="button" class="clickbtn" onclick="sendOk();">${mode=='update'?'수정완료':'등록하기' }</button>
-	                  <button type="button" class="clickbtn" data-dismiss="modal">닫기</button>
-	
+	                  <button type="button" class="clickbtn" onclick="createOk('${mode}');">${mode=='update'?'수정완료':'등록하기' }</button>
+	                  <button type="button" class="clickbtn" data-dismiss="modal" >닫기</button>
+	                  
 	               </div>
    				</form>
 	          </div>
 	       </div>
 		</div>
-		
-		

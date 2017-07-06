@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wooltari.common.MyUtil;
 import com.wooltari.member.SessionInfo;
 
 
@@ -28,9 +27,6 @@ public class MockTestController {
 
 	@Autowired
 	private MockTestService service;
-	
-	@Autowired
-	private MyUtil myUtil;
 	
 	@RequestMapping("/mockTest/main")
 	public String main(
@@ -130,8 +126,38 @@ public class MockTestController {
 		
 		Map<String, Object> model = new HashMap<>();
 		model.put("state", state);
-		model.put("mode", "created");
+		model.put("mode", "createdList");
 		
 		return model;
 	}
+	
+	@RequestMapping(value="/mockTest/updateList", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> updateList(
+			@RequestParam String Name,
+			@RequestParam String Date,
+			HttpSession session
+			) throws Exception {
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		String state="true";
+		
+		String userId = info.getUserId();
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("userId", userId);
+		map.put("examinfoName", Name);
+		map.put("examwishDate", Date);
+		
+		service.updateExamwishLIST(map);
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		model.put("mode", "updateList");
+		
+		return model;
+	}
+	
+	
+	
+	
 }
