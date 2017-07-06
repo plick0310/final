@@ -12,9 +12,19 @@ public class Board {
 	
 	private String tableName;
 
+	private int likeCount;
 	
 	
 	
+	
+	public int getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+
 	public int getHitCount() {
 		return hitCount;
 	}
