@@ -79,14 +79,14 @@ function dialogURLID(url, userId) {
 	$.post(loadurl, {userId:userId}, function(data){
 		$("#modal-body").html(data);
 		$(".modal-backdrop").remove();
-		$("#modalLogin").modal("show");
+		$("#modal").modal("show");
 	});
 }
 function dialogURL(url) {
 	var loadurl ="<%=cp%>" + url;
 	$("#modal-body").load(loadurl);
 	$(".modal-backdrop").remove();
-	$("#modalLogin").modal("show");
+	$("#modal").modal("show");
 }
 $(function(){
 	$('body').on('hidden.bs.modal', '.modal', function () {
@@ -248,7 +248,7 @@ $(function(){
 </div>
 
 <!-- 모달 -->
-<div id="modalLogin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content" id="modal-content" style="background: none;" >
 			<div id="modal-body" class="modal-body">
