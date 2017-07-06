@@ -77,6 +77,7 @@ function dialogJoin() {
 function dialogURLID(url, userId) {
 	var loadurl="<%=cp%>" + url;
 	$.post(loadurl, {userId:userId}, function(data){
+		$("#modal-body").empty();
 		$("#modal-body").html(data);
 		$(".modal-backdrop").remove();
 		$("#modal").modal("show");
@@ -84,12 +85,14 @@ function dialogURLID(url, userId) {
 }
 function dialogURL(url) {
 	var loadurl ="<%=cp%>" + url;
+	$("#modal-body").empty();
 	$("#modal-body").load(loadurl);
 	$(".modal-backdrop").remove();
 	$("#modal").modal("show");
 }
 $(function(){
 	$('body').on('hidden.bs.modal', '.modal', function () {
+		$("#modal-body").empty();
         $(this).removeData('bs.modal');
 	});
 	
