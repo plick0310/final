@@ -10,7 +10,7 @@ public class StudyMarketBoardServiceImpl implements StudyMarketBoardService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+qqqqqqqqqqqqqqqqqqq
 	@Override
 	public List<StudyMarketBoardService> listBoard(Map<String, Object> map) {
 		// TODO Auto-generated method stub
