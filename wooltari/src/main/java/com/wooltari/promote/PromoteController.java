@@ -266,7 +266,7 @@ public class PromoteController {
 		return "studyboard/promote/listReply";
 	}
 	
-	@RequestMapping(value="promote/deleteReply",method=RequestMethod.POST)
+	@RequestMapping(value="/promote/deleteReply",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> deleteReply(
 			@RequestParam int prNum,
@@ -274,24 +274,24 @@ public class PromoteController {
 			HttpSession session
 			){
 		String state="true";
-		Map<String, Object>map=new HashMap<>();
 		
-		System.out.println(prNum+"#@#@");
-		System.out.println(page+"#@#@");
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		if(info==null){
 			state="loginFail";
 		}else {
-			map.put("prNum", prNum);
+			Map<String, Object>map=new HashMap<String,Object>();
+			map.put("prnum", prNum);
 			int result=service.deleteReply(map);
 			
 			if(result==0)
 				state="false";
 		}
 		
-		map.put("state", state);
+		Map<String, Object>model=new HashMap<>();
+		model.put("state", state);
 		
-		return map;
+		return model;
 	}
+	
 }

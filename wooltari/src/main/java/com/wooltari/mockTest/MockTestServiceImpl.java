@@ -16,11 +16,11 @@ public class MockTestServiceImpl implements MockTestService{
 	private CommonDAO dao;
 	
 	@Override
-	public int insertExamwishList(MockTest dto, String pathname) {
+	public int insertExamwishList(Map<String, Object> map) {
 		int result = 0;
 		
 		try {
-			result = dao.insertData("mockTest.insertExamwishList", dto);
+			result = dao.insertData("mockTest.insertExamwishList", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

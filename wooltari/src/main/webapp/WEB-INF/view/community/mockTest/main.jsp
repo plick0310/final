@@ -127,20 +127,41 @@ function deleteList() {
         var f = document.modalForm;
 
     	var str = f.examInfoName.value;
-    	
+    	var st= f.examwishDate.value;
+ 
         if(!str || str=='시험선택') {
             alert("시험을 선택하세요");
             return;
         }
 
-    	str = f.examwishDate.value;
         if(!str) {
             alert("응시일을 지정하세요. ");
             return;
         }
 
+    	var url = "<%=cp%>/mockTest/createdList";
+    	var query="Name="+str+"&Date="+st;
+    	
+    	$.ajax({
+    		type:"post"
+    		,url:url
+    		,data: query
+    		,dataType:"json"
+    		,success:function(data) {
+    			var state=data.state;
+                if(state=="false")
+                    alert("게시물을 추가(수정)하지 못했습니다. !!!");
+				if(mode=="created" || mode=="reply") {
+            		reloadBoard()
+            	} else {
+            		listPage(page);
+            	}
+    		}
     		
-        f.submit();
+    	});
+    	
+    	
+    	
     }
 </script>
 <script type="text/javascript">
@@ -247,7 +268,16 @@ function deleteList() {
 
                      <a href="#" class="subject"
                         style="line-height: 27px; float: left;">${dto.examInfoName }</a>
-                     <span class="comment" style="line-height: 16px;">D-day 20</span>
+                     <span class="comment" style="line-height: 16px;"> 
+                     	<c:choose>
+                     		<c:when test="${dto.dday eq 0 }">
+                     			<span style="color: red;">D-day ! ! !</span>
+                     		</c:when>
+                     		<c:otherwise>
+                     			D-day ${dto.dday }
+                     		</c:otherwise>
+                     	</c:choose>
+                     </span>
 
                      <div class="info"
                         style="float: left; padding: 0; line-height: 25px; margin-left: 32px; float: left; padding: none;">

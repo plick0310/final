@@ -5,40 +5,6 @@
 <%
 	String cp=request.getContextPath();
 %>
-<script type="text/javascript">
-/* 
-$(document).ready(function() {
-	$(".btn-pref .btn").click(function () {
-	    $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-	    // $(".tab").addClass("active"); // instead of this do the below 
-	    $(this).removeClass("btn-default").addClass("btn-primary");   
-	});
-	});
-*/
-$(document).ready(function(){
-	$.ajax({
-		url:"<%=cp%>/member/my_main",
-		dataType:"html",
-		success : function(data) {
-		$('.tab-content').html(data);
-		}
-	});
-	$(".btn-pref .btn").click(function () {
-		$(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-		$(this).removeClass("btn-default").addClass("btn-primary");   
-		
-		var fileName;
-		pageName = $(this).attr('id');
-		$.ajax({
-			url:"<%=cp%>/member/" + pageName,
-			dataType:"html",
-			success : function(data) {
-			$('.tab-content').html(data);
-			}
-		});
-	});
-});
-</script>
 <style>
 /* USER PROFILE PAGE */
  .card {
@@ -122,15 +88,57 @@ $(document).ready(function(){
 .btn-pref .btn {
     -webkit-border-radius:0 !important;
 }
+.well{
+	padding: 0px;
+}
 </style>
+<script type="text/javascript">
+/* 
+$(document).ready(function() {
+	$(".btn-pref .btn").click(function () {
+	    $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+	    // $(".tab").addClass("active"); // instead of this do the below 
+	    $(this).removeClass("btn-default").addClass("btn-primary");   
+	});
+	});
+*/
+$(document).ready(function(){
+	$.ajax({
+		url:"<%=cp%>/member/my_main",
+		dataType:"html",
+		success : function(data) {
+		$('.tab-content').html(data);
+		}
+	});
+	$(".btn-pref .btn").click(function () {
+		$(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+		$(this).removeClass("btn-default").addClass("btn-primary");   
+		
+		var fileName;
+		pageName = $(this).attr('id');
+		$.ajax({
+			url:"<%=cp%>/member/" + pageName,
+			dataType:"html",
+			success : function(data) {
+			$('.tab-content').html(data);
+			}
+		});
+	});
+});
+</script>
 <div class="container">
     <div class="card hovercard">
         <div class="card-background">
-            <img class="card-bkimg" alt="" src="http://lorempixel.com/100/100/people/9/">
+            <img class="card-bkimg" alt="" src="<%=cp%>/resource/img/card.jpg">
             <!-- http://lorempixel.com/850/280/people/9/ -->
         </div>
         <div class="useravatar">
-            <img alt="" src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}">
+        	<c:if test="${not empty sessionScope.member.userImg}">
+	            <img alt="" src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}">
+        	</c:if>
+        	<c:if test="${empty sessionScope.member.userImg}">
+        	    <img alt="" src="<%=cp%>/resource/img/noprofileimg.png">
+        	</c:if>
         </div>
         <div class="card-info"> <span class="card-title">${sessionScope.member.userName}</span>
 
@@ -175,7 +183,7 @@ $(document).ready(function(){
     </div>
 
     <div class="well">
-      <div class="tab-content" style="height: 1200px">
+      <div class="tab-content" style="height: 110%">
         	<!-- 여기에 내용이 표시됨 -->
       </div>
     </div>

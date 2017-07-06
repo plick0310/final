@@ -337,5 +337,34 @@ public class InfoReqBoardServiceImpl implements InfoReqBoardService {
 		
 		return result;
 	}
+/*
+	@Override
+	public int deleteList(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.deleteData("infoReqBoard.deleteList", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}*/
+
+	@Override
+	public int deleteList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteList(List<Integer> list) {
+		int result=0;
+		
+		try{
+			result=dao.deleteData("infoReqBoard.deleteList", list);
+		}catch(Exception e){			
+		}
+		
+		return result;
+	}
 
 }

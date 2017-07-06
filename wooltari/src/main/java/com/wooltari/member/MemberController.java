@@ -44,6 +44,7 @@ public class MemberController {
 	public String joinForm() throws Exception {
 		return "member/join";
 	}
+	
 	@RequestMapping(value="/member/membergetinfo", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> memberGetInfo(@RequestParam String userId) {
