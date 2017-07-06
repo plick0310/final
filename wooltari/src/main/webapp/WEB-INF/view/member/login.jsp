@@ -61,16 +61,11 @@
 		    	}
 		    });
 		});
-
 		
 		function sendLogin() {
 			var f = document.loginform;
 		    f.action = "<%=cp%>/member/login_check";
 		    f.submit();
-		}
-		
-		function memberJoin() {
-			location.href="<%=cp%>/member/join";
 		}
 		
 		//<![CDATA[
@@ -160,10 +155,10 @@
 							<div style="margin-top: 25px">
 								<a href="<%=cp%>/member/findmember"><strong>아이디/비밀번호찾기</strong></a> |
 								<c:if test="${not empty modalflag}">
-									<a href="javascript:memberJoin()"><strong> 회원가입</strong></a>
+									<a href="<%=cp%>/member/join"><strong> 회원가입</strong></a>
 								</c:if>
 								<c:if test="${empty modalflag}">
-									<a href="javascript:dialogJoin()"><strong> 회원가입</strong></a>
+									<a href="javascript:dialogURL('/member/join');"><strong> 회원가입</strong></a>
 								</c:if>
 							</div>
 						</div>

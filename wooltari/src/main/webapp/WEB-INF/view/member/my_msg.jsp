@@ -519,8 +519,8 @@ $(document).ready(function(){
                       </ul>
                       <ul class="nav nav-pills nav-stacked labels-info ">
                           <li> <h4>스터디 멤버</h4> </li>
-                          <li> <a href="javascript:dialogChat();"> <i class=" fa fa-circle text-success"></i>하동기</a>  </li>
-                          <li> <a href="javascript:dialogChat();"> <i class=" fa fa-circle text-danger"></i>이형석</a> </li>
+                          <li> <a href="javascript:dialogURLID('/member/memberinfo', 'admin');"> <i class=" fa fa-circle text-success"></i>하동기</a>  </li>
+                          <li> <a href="javascript:dialogURL('/member/login');"> <i class=" fa fa-circle text-danger"></i>이형석</a> </li>
                           <li> <a href="javascript:dialogChat();"> <i class=" fa fa-circle text-muted "></i>오세훈</a> </li>
                           <li> <a href="javascript:dialogChat();"> <i class=" fa fa-circle text-muted "></i>이수정</a> </li>
                           <li> <a href="javascript:dialogChat();"> <i class=" fa fa-circle text-muted "></i>이주영</a> </li>

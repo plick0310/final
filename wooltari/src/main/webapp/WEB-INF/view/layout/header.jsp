@@ -63,6 +63,7 @@ function logout(){
 		},10);
 	});
 }
+<%-- 
 function dialogLogin() {
 	$("#modal-content").load("<%=cp%>/member/login");
 	$("#modalflage").val("true");
@@ -72,22 +73,21 @@ function dialogLogin() {
 function dialogJoin() {
 	$("#modal-content").load("<%=cp%>/member/join");
 }
-
-function dialogMemberInfo(userId) {
-	var url="<%=cp%>/member/memberinfo";
-	$.post(url, {userId:userId}, function(data){
-		$("#modal-content").html(data);
-		$("#modalflage").val("true");
+ --%>
+function dialogURLID(url, userId) {
+	var loadurl="<%=cp%>" + url;
+	$.post(loadurl, {userId:userId}, function(data){
+		$("#modal-body").html(data);
+		$(".modal-backdrop").remove();
 		$("#modalLogin").modal("show");
 	});
 }
-
-function dialogChat() {
-	$("#modal-content").load("<%=cp%>/message/send");
-	$("#modalflage").val("true");
+function dialogURL(url) {
+	var loadurl ="<%=cp%>" + url;
+	$("#modal-body").load(loadurl);
+	$(".modal-backdrop").remove();
 	$("#modalLogin").modal("show");
 }
-
 $(function(){
 	$('body').on('hidden.bs.modal', '.modal', function () {
         $(this).removeData('bs.modal');
@@ -211,10 +211,10 @@ $(function(){
 					</div>
 				<div class="member" style="margin: 7px 0;"> 
 					<c:if test="${empty sessionScope.member}">
-						<a href="javascript:dialogLogin();"><img src="<%=cp%>/resource/img/loginicon.png" alt="Login" class="img-circle" width="35px" height="35px"></a>
+						<a href="javascript:dialogURL('/member/login');"><img src="<%=cp%>/resource/img/loginicon.png" alt="Login" class="img-circle" width="35px" height="35px"></a>
 					</c:if>
 					<c:if test="${not empty sessionScope.member}">
-						<strong style="margin-right: 5px"><a href="javascript:dialogMemberInfo('${sessionScope.member.userId}');">${sessionScope.member.userName}</a></strong>
+						<strong style="margin-right: 5px"><a href="javascript:dialogURLID('/member/memberinfo','${sessionScope.member.userId}');">${sessionScope.member.userName}</a></strong>
 						<c:if test="${empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
 								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c"> 
@@ -251,7 +251,9 @@ $(function(){
 <div id="modalLogin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content" id="modal-content" style="background: none;" >
-			<!-- jsp가 들어가는 곳 -->
+			<div id="modal-body" class="modal-body">
+				<!-- JSP 로드될 곳 -->
+			</div>
 		</div>
 	</div>
 </div>

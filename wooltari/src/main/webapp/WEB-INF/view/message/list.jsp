@@ -62,25 +62,30 @@
 <table class="table table-inbox table-hover">
 	<tbody>
 		<c:forEach var="dto" items="${list}">
-			<c:if test="${dto.read == 1}">
+			<c:if test="${dto.read == 0}">
 				<tr class="unread">
 			</c:if>
-			<c:if test="${dto.read == 0}">
+			<c:if test="${dto.read == 1}">
 				<tr class="">
 			</c:if>
 					<td class="inbox-small-cells">
-				       <input type="checkbox" class="mail-checkbox">
+						<input type="checkbox" class="mail-checkbox">
 					</td>
-					<td class="inbox-small-cells"><i class="fa fa-star"></i></td>
-					<c:if test="">
-						<td class="view-message  dont-show"><a href="javascript:dialogChat();">${dto.sendUserId}</a></td>
+					<td class="inbox-small-cells">
+						<i class="fa fa-star"></i>
+					</td>
+					${dto.recv_Id}
+					${dto.sent_Id}
+					<c:if test="${dto.recv_Id == sessoinScope.member.userId}">
+						<td class="view-message  dont-show"><a href="javascript:dialogChat();">보낸이 : ${dto.sent_Id}</a></td>
 					</c:if>
-					<c:if test="">
+					<c:if test="${dto.sent_Id == sessoinScope.member.userId}">
+						<td class="view-message  dont-show"><a href="javascript:dialogChat();">받는이 : ${dto.recv_Id}</a></td>
+					</c:if>
 					
-					</c:if>
 					<td class="view-message ">${dto.content}</td>
 					<td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
-					<td class="view-message  text-right">${dto.sendDate}</td>
+					<td class="view-message  text-right">${dto.date_Sent}</td>
 				</tr>
 		</c:forEach>
 	</tbody>

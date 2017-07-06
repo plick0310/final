@@ -25,7 +25,6 @@ public class MemberController {
 	public String loginForm(
 			String login_error, Model model
 			) {
-		
 		if(login_error!=null){
 			String message = "등록되지 않은 아이디이거나,<br>아이디 또는 비밀번호를 잘못 입력하셨습니다.";
 			model.addAttribute("message", message);
@@ -44,7 +43,7 @@ public class MemberController {
 	public String joinForm() throws Exception {
 		return "member/join";
 	}
-	
+	/*
 	@RequestMapping(value="/member/membergetinfo", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> memberGetInfo(@RequestParam String userId) {
@@ -53,7 +52,7 @@ public class MemberController {
 		Map<String, Object> model = new HashMap<>(); 
 		model.put("dto", dto);
 		return model;
-	}
+	}*/
 	@RequestMapping(value="/member/memberinfo", method=RequestMethod.POST)
 	public String memberInfo(@RequestParam String userId, Model model) throws Exception{
 		Member dto = service.readMember(userId);
@@ -79,9 +78,7 @@ public class MemberController {
 			model.addAttribute("message", "회원가입이 실패했습니다.");
 			return "member/notice";
 		}
-		String message = "울타리의 회원이 되신것을 환영합니다.<br>마이페이지에서 추가정보를 입력하시면 원할한 서비스 이용이 가능합니다.";
-		model.addAttribute("message", message);
-		
+		model.addAttribute("message", "울타리의 회원이 되신것을 환영합니다.<br>마이페이지에서 추가정보를 입력하시면 원할한 서비스 이용이 가능합니다.");
 		return "member/notice";
 	}
 	
