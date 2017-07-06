@@ -630,7 +630,7 @@ ul.tabs li.active {
 		<tr height="35">
 			<td align="center">
 				<div>${paging }</div>
-			</td>
+			</td> 
 		</tr>
 	</table>
 	
