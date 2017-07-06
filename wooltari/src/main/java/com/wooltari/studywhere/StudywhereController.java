@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wooltari.common.FileManager;
 import com.wooltari.common.MyUtil;
 import com.wooltari.member.SessionInfo;
 
@@ -38,8 +37,7 @@ public class StudywhereController {
 	@Autowired
 	private MyUtil myUtil;
 	
-	@Autowired
-	private FileManager fileManager;
+
 	
 	@RequestMapping(value="/studyboard/studywhere/list")
 	public String list(
@@ -78,8 +76,7 @@ public class StudywhereController {
 	map.put("end", end);
 	
 	List<StudyWhere> list = service.listStudyWhere(map);
-	
-	 
+
 	
 	
 	int listNum, n=0;
@@ -93,18 +90,32 @@ public class StudywhereController {
 		String content = dto.getContent();
 		Matcher match = pattern.matcher(content);	
 		String imgTag = null;
-		if(match.find()){ // 이미지 태그를 찾았다면,,
-		    imgTag = match.group(1); // 글 내용 중에 첫번째 이미지 태그를 뽑아옴.
+		if(match.find()){
+		    imgTag = match.group(1);
 		}
 		dto.setContent(imgTag);
 		
-		
 		n++;
-		
-		
-		
 	}
 	
+	
+	List<StudyWhere> bestlist = service.bestStudyWhere(map);
+	int bestlistNum, b=0;
+	Iterator<StudyWhere> ite = bestlist.iterator();
+	while(ite.hasNext()) {
+		StudyWhere dto = ite.next();
+		bestlistNum=b+1;
+		dto.setBestlistNum(bestlistNum);
+		Pattern pattern  =  Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
+		String content = dto.getContent();
+		Matcher match = pattern.matcher(content);	
+		String imgTag = null;
+		if(match.find()){
+		    imgTag = match.group(1);
+		}
+		dto.setContent(imgTag);
+		b++;
+	}
 
 	
 	
@@ -124,6 +135,7 @@ public class StudywhereController {
 	
 	String paging = myUtil.paging(current_page, total_page, listUrl);
 	
+	model.addAttribute("bestlist",bestlist);
 	model.addAttribute("list",list);
 	model.addAttribute("articleUrl",articleUrl);
 	model.addAttribute("paging",paging);

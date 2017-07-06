@@ -7,6 +7,7 @@ public interface StudyWhereService {
 	public int insertStudyWhere(StudyWhere dto, String pathname);
 	public int dataCount(Map<String, Object>map);
 	public List<StudyWhere> listStudyWhere(Map<String, Object>map);
+	public List<StudyWhere> bestStudyWhere(Map<String, Object>map);
 	public StudyWhere readStudyWhere(int num);
 
 	public int updateHitCount(int num);

@@ -54,6 +54,7 @@ margin-right: 10px;
 border: 1px solid #EAEAEA;  
 
 }
+
 </style>
 
 <form name="write_form" id="write_form" enctype="multipart/form-data" onsubmit="return submitContents(this);" method="post" style="margin: 60px auto; width: 900px;">
@@ -78,31 +79,31 @@ border: 1px solid #EAEAEA;
 			
 			<tr style="border-top: 3px solid #eee">
 				<th>장소정보</th>
-				<td>장소이름<input type="text" name="placename" maxlength="13"
+				<td><small>장소이름&nbsp;&nbsp;</small><input type="text" name="placename" maxlength="13"
 					style="width: 200px;" />
-					영엽시간<input type="text" name="ocTime" maxlength="13"
+					<small>영엽시간&nbsp;&nbsp;</small><input type="text" name="ocTime" maxlength="13"
 					style="width: 200px;" />
-					지역<input type="text" name="region" maxlength="13"
-					style="width: 200px;" /></td>
+					<small>&nbsp;&nbsp;&nbsp;&nbsp;지역&nbsp;&nbsp;</small><input type="text" name="region" 
+					style="width: 172px;" /></td>
 			</tr>
 			<tr>
-				<th>주소</th>
-				<td><input type="text" name="address" maxlength="8"
-					style="width: 500px;" />
-					전화번호<input type="text" name="tel" maxlength="8"
+				<th><small>주소</small></th>
+				<td><input type="text" name="address" 
+					style="    width: 507px;" />
+					<small>&nbsp;&nbsp;&nbsp;&nbsp;전화번호&nbsp;&nbsp;</small><input type="text" name="tel" maxlength="13"
 					style="width: 150px;" />
 					
 					</td>
 			</tr>
 		
 
-			<tr>
+			<tr> 
 				<td colspan="2">
 				<textarea name="content" id="content" style="width:95%; height: 270px;">${dto.content}</textarea>
 				</td>
 			</tr>
 
-			<tr>
+			<tr style="display: none;">
 				<th>첨부파일</th>
 				<td><input type="file" name="upload" id="file1" style="border: none;">
 				</td>

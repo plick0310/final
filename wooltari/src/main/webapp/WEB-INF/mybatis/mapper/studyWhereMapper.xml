@@ -39,6 +39,34 @@
 		</where>
 	</select>
 	
+	
+	<select id="bestStudyWhere" parameterType="map" resultType="com.wooltari.studywhere.StudyWhere">
+ 	SELECT * FROM (
+			    SELECT ROWNUM rnum, tb.* FROM (
+			       SELECT tbBbs.num,subject,placename,region,content,
+			          NVL(likesCount, 0) likesCount
+			       FROM
+			       (
+			           (
+				         SELECT num,subject,placename,region,content,
+				           TO_CHAR(b.created, 'YYYY-MM-DD') created
+				         FROM studywhereboard b JOIN member m ON b.userId=m.userId                             
+		                ) tbBbs       
+                LEFT OUTER JOIN
+				        (
+				            SELECT num, COUNT(*) likesCount
+	                                    FROM studywherelike GROUP BY num
+				        ) tbLikes ON tbBbs.num = tbLikes.num
+		            )
+		           ORDER BY likesCount desc
+		<![CDATA[
+		        ) tb WHERE ROWNUM <= 3
+		    ) WHERE rnum >= 1
+		]]>
+	</select>
+	
+	
+	
 	<select id="listStudyWhere" parameterType="map" resultType="com.wooltari.studywhere.StudyWhere">
  	SELECT * FROM (
 			    SELECT ROWNUM rnum, tb.* FROM (

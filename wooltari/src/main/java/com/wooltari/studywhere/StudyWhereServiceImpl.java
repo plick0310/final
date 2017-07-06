@@ -211,6 +211,20 @@ int result=0;
 	}
 
 
+	@Override
+	public List<StudyWhere> bestStudyWhere(Map<String, Object> map) {
+		List<StudyWhere> list =null;
+		
+		try {
+			list=dao.getListData("studywhere.bestStudyWhere",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+
 	
 
 	

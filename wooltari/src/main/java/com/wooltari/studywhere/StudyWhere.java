@@ -3,7 +3,7 @@ package com.wooltari.studywhere;
 import org.springframework.web.multipart.MultipartFile;
 
 public class StudyWhere {
-	private int listNum,num;
+	private int bestlistNum,listNum,num;
 	private String userId,userName;
 	private String subject,content,created;
 	private int hitCount;
@@ -120,6 +120,12 @@ public class StudyWhere {
 	}
 	public void setOcTime(String ocTime) {
 		this.ocTime = ocTime;
+	}
+	public int getBestlistNum() {
+		return bestlistNum;
+	}
+	public void setBestlistNum(int bestlistNum) {
+		this.bestlistNum = bestlistNum;
 	}
 	
 	

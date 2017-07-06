@@ -66,7 +66,7 @@ input[id=allCheck]:checked+label:before {
 	border-style: solid;
 	padding: 5px 20px;
 	margin-left: 10px;
-	font-size:15px;
+	font-size:13px;
 	border: 1px solid #EAEAEA;
 }
 
@@ -197,11 +197,12 @@ ul.tabs li.active {
     padding: 6px 12px;
     margin-left: -1px;
     line-height: 1.42857143;
-    color: #337ab7;
+    color: #1abc9c;
     text-decoration: none;
     background-color: #fff;
   border: none;
 }
+
 </style>
 <script
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcO1EZpm4c5VVFmWf1h0dwX1QVbsx3Gb4&libraries=places"></script>
@@ -421,70 +422,40 @@ ul.tabs li.active {
 			style="color: #1abc9c; margin-bottom: 20px;"></i>&nbsp;&nbsp;B E S T
 	</span> P L A C E</strong>
 
-	<div class="row"
-		style="margin-bottom: 20px; width: 900px; margin-left: 0;">
+	<div class="row"style="margin-bottom: 20px; width: 900px; margin-left: 0;">
+	
+	
+	<c:forEach var="dto" items="${bestlist }">
 		<div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
+			<div class="thumbnail" onclick="javascript:location.href='${articleUrl }&num=${dto.num}'">
 				<div
-					style="width:100%; height:200px; background-image:url('<%=cp%>/resource/images/back1.jpg');background-size: contain;">
-					<img alt="" src="<%=cp%>/resource/images/no2.png"
+					style="width:100%; height:200px; background-image:url('${dto.content}');background-size: cover;">
+					<img alt="" src="<%=cp%>/resource/images/no${dto.bestlistNum }.png"
 						style="width: 50px; height: 50px; margin: -1px;">
 				</div>
 
-				<div class="caption">
-					<h3 style="font-size: 18px;">
-						Green Cloud <small style="margin-left: 33px;">recommend&nbsp;&nbsp;</small><span
-							style="font-size: 35px; color: #1abc9c; font-weight: lighter;">4.9</span>
-					</h3>
-					<p>넓고 분위기좋은 런던풍 카페</p>
+				<div class="row" style="margin: 0">
+					<div class="col-sm-6" style="    font-size: 18px;
+    padding-top: 20px;">
+						<strong style="font-weight: bold;">${dto.placename }</strong> 
+					</div>
+					
+						<div class="col-sm-6" style="text-align: right;">
+						<small style="margin-left: 33px;">LIKE&nbsp;&nbsp;</small><span
+						style="font-size: 35px; color: #1abc9c; font-weight: lighter;"><strong style="font-weight: bold;">${dto.likesCount }</strong> </span>
+						</div>
+						
+						
+					<p style="padding-left: 15px;">${dto.subject }</p>
 					<p style="text-align: right;">
-						<a href="#" style="color: #1abc9c;">+MORE</a>
+						<a href="#" style="color: #1abc9c;padding-right: 15px;">+MORE</a>
 					</p>
 				</div>
-			</div>
+			</div> 
 		</div>
-
-		<div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
-				<div
-					style="width:100%; height:200px; background-image:url('<%=cp%>/resource/images/back1.jpg');background-size: contain;">
-					<img alt="" src="<%=cp%>/resource/images/no2.png"
-						style="width: 50px; height: 50px; margin: -1px;">
-				</div>
-
-				<div class="caption">
-					<h3 style="font-size: 18px;">
-						Green Cloud <small style="margin-left: 33px;">recommend&nbsp;&nbsp;</small><span
-							style="font-size: 35px; color: #1abc9c; font-weight: lighter;">4.9</span>
-					</h3>
-					<p>넓고 분위기좋은 런던풍 카페</p>
-					<p style="text-align: right;">
-						<a href="#" style="color: #1abc9c;">+MORE</a>
-					</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
-				<div
-					style="width:100%; height:200px; background-image:url('<%=cp%>/resource/images/back1.jpg');background-size: contain;">
-					<img alt="" src="<%=cp%>/resource/images/no2.png"
-						style="width: 50px; height: 50px; margin: -1px;">
-				</div>
-
-				<div class="caption">
-					<h3 style="font-size: 18px;">
-						Green Cloud <small style="margin-left: 33px;">recommend&nbsp;&nbsp;</small><span
-							style="font-size: 35px; color: #1abc9c; font-weight: lighter;">4.9</span>
-					</h3>
-					<p>넓고 분위기좋은 런던풍 카페</p>
-					<p style="text-align: right;">
-						<a href="#" style="color: #1abc9c;">+MORE</a>
-					</p>
-				</div>
-			</div>
-		</div>
+	</c:forEach>
+	
+	
 	</div>
 </div>
 <hr style="width: 100%; height: 1px; background-color: #eee; margin-bottom: 50px;">
