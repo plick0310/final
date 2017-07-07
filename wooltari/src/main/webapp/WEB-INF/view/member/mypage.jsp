@@ -102,7 +102,9 @@ $(document).ready(function() {
 	});
 	});
 */
+var noreadCount = null;
 $(document).ready(function(){
+	
 	$.ajax({
 		url:"<%=cp%>/member/my_main",
 		dataType:"html",
@@ -116,6 +118,10 @@ $(document).ready(function(){
 		
 		var fileName;
 		pageName = $(this).attr('id');
+		if(noreadCount != null){
+			clearInterval(noreadCount);
+			noreadCount=null;
+		}
 		$.ajax({
 			url:"<%=cp%>/member/" + pageName,
 			dataType:"html",
@@ -125,21 +131,6 @@ $(document).ready(function(){
 		});
 	});
 });
-
-
-function messagePaging(paging) {
-	alert(paging);
-}
-
-<%--
-$.ajax({
-	url:"<%=cp%>/message/list?mode=" + mode + "&page=" + paging,
-	dataType:"html",
-	success : function(data) {
-	$('.msg-list').html(data);
-	}
-});
---%>
 
 </script>
 <div class="container">

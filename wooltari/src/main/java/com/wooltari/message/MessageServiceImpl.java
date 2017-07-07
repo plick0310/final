@@ -34,7 +34,16 @@ public class MessageServiceImpl implements MessageService{
 		}
 		return result;
 	}
-
+	@Override
+	public int noreadCount(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.getIntValue("message.noreadCount", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
 	@Override
 	public List<Message> listMessage(Map<String, Object> map) {
 		List<Message> list=null;
