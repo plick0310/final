@@ -27,7 +27,60 @@ margin-right: 10px;
 border: 1px solid #EAEAEA;  
 
 }
+
+ #map {
+       height: 400px;
+       width: 100%;
+      }
 </style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript">
+$( function() {
+    $( "#datepicker1").datepicker();
+  } );
+  
+$( function() {
+    $( "#datepicker2").datepicker();
+  } );
+  
+$(function(){
+	$('#collapse1').on('shown.bs.collapse', function () {
+		initMap();
+   });		
+});
+
+  
+ function check(){
+	 var f=document.boardForm;
+	 
+	 var str=f.subject.value;
+	 if(!str){
+		 f.subject.focus();
+		 return false;
+	 }
+	 
+	 str=f.content.value;
+	 if(!str){
+		 f.content.focus();
+		 return false;
+	 }
+	 var mode="${mode}";
+	 if(mode="created")
+		 f.action="<%=cp%>/studyMarket/studyMarketBoard/created";
+		 else if(mode=="update")
+			 f.action="<%=cp%>/studyMarket/studyMarketBoard/update";
+			 
+	return true;
+ }   
+
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcO1EZpm4c5VVFmWf1h0dwX1QVbsx3Gb4&callback=initMap">
+    </script>
 
 <form name="write_form" id="write_form" enctype="multipart/form-data" method="post" style="margin: 60px auto; width: 900px;">
 <div  style="height:50px; font-size: 20px;text-align: center; border-bottom: 1px solid #eee;">
@@ -44,27 +97,26 @@ border: 1px solid #EAEAEA;
 				<td><input type="text" name="subject" 
 					class="subject" maxlength="100" style="width: 450px;" /></td>
 			</tr>
-			<tr>
-				<th>카테고리</th>
-				<td style=""><input type="checkbox" value="ww">
-					<input type="checkbox" value="ww">
-					<input type="checkbox" value="ww">
-				</td>
-			</tr>
+			
 			<tr>
 				<th>작성자</th>
 				<td><input type="text" name="writer" maxlength="8"
 					style="width: 200px;" /></td>
-			</tr>
-			<tr>
-				<th>패스워드</th>
-				<td><input type="password" name="password" maxlength="20"
-					style="width: 200px;"/><span style="font-size: 13px; font-weight:200;">&nbsp;&nbsp;글 삭제시 필요합니다.</span></td>
-			</tr>
+			</tr>			
 
 			<tr>
-				<th>E-MAIL</th>
-				<td><input type="text" name="email" style="width: 300px;" /></td>
+				<th>강의 시작일, 종료일</th>				
+				<td><a>StartDate: <input type="text" id="datepicker1"></a>&nbsp;
+				    <a>EndDate: <input type="text" id="datepicker2"></a></td>
+			</tr>
+			<tr>
+				<th>오프라인 강의실 주소</th>
+				<td><input type="text" name="writer" maxlength="8"
+					style="width: 200px;" /></td>
+			</tr>
+			<tr>
+				<th>url</th>				
+				<td><input type="text" name="url" maxlength="8" style="width: 200px;" /></td>
 			</tr>
 
 			<tr>
@@ -78,21 +130,17 @@ border: 1px solid #EAEAEA;
 				</td>
 			</tr>
 
-			<tr>
-				<th>파일이름</th>
-				<td><input type="checkbox"
-					name="file1_del" id="file1_del"><label for="file1_del"></label>
-				</td>
-			</tr>
-
-		
-
-
+			
 		</tbody>
 	</table>
 	
 	<div class="read_btnArea">
-		<button class="clickbtn">등록하기</button>
-		<button class="clickbtn">돌아가기</button>
+		<button class="clickbtn">${mode='update'?'수정하기':'등록하기'}</button>
+		<button class="clickbtn">${mode='update'?'수정취소':'등록취소'}</button>
+		
+		<c:if test="${mode=='update'}">
+			<input type="hidden" name="num" value="">
+			<input type="hidden" name="page" value="">
+		</c:if>
 	</div>
 </form>

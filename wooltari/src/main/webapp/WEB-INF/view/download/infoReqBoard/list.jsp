@@ -5,7 +5,46 @@
 <%
    String cp = request.getContextPath();
 %>
+
+
+
 <style type="text/css">
+
+.clickbtn {
+   background-color: white;
+   border-style: solid;
+   padding: 5px 20px;
+   margin-left: 10px;
+   font-size:13px;
+   border: 1px solid #EAEAEA;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #1abc9c;
+    /* border-color: #337ab7; */
+    /* text-align: center; */
+}
+
+.pagination-sm > li > a, .pagination-sm > li > span {
+    padding: 8px 9px;
+    
+    font-size: 11px;
+}
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #1abc9c;
+    text-decoration: none;
+    background-color: #fff;
+  border: none;
+}
+
 * {
 	box-sizing: border-box;
 }

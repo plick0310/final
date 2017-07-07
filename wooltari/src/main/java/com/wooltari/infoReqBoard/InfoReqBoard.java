@@ -12,6 +12,13 @@ public class InfoReqBoard {
 	private int hitCount;
 	private int likeCount, replyCount;	
 	
+	//리스트에서 새글 옆에 new 띄움
+	private long gap;
+	
+	private int fileNum;
+	private String originalFilename, saveFilename;
+	private List<MultipartFile> upload;
+
 	public int getLikeCount() {
 		return likeCount;
 	}
@@ -24,14 +31,6 @@ public class InfoReqBoard {
 	public void setReplyCount(int replyCount) {
 		this.replyCount = replyCount;
 	}
-	private List<MultipartFile> upload;
-	
-	private long gap;
-	
-	private int fileNum;
-	private String originalFilename, saveFilename;
-	
-	
 	
 	public int getListNum() {
 		return listNum;
