@@ -528,16 +528,16 @@ function readMsg() {
                       </div>
                       <ul class="inbox-nav inbox-divider">
                       	  <li id="all" class="active" >
-                              <a href="#"><i class="fa fa-inbox"></i> 전체 쪽지함<span class="label label-danger pull-right" id="recv_Count"></span></a>
+                              <a href="#"><i class="fa fa-envelope-o"></i> 전체 쪽지함</a>
                           </li>
                           <li id="receive">
                               <a href="#"><i class="fa fa-inbox"></i> 받은 쪽지함<span class="label label-danger pull-right" id="recv_Count"></span></a>
                           </li>
                           <li id="send">
-                              <a href="#"><i class="fa fa-envelope-o"></i>보낸 쪽지함</a>
+                              <a href="#"><i class="fa fa-paper-plane-o"></i>보낸 쪽지함</a>
                           </li>
                           <li id="keep">
-                              <a href="#"><i class="fa fa-bookmark-o"></i> 쪽지 보관함</a>
+                              <a href="#"><i class="fa fa-folder-o"></i> 쪽지 보관함</a>
                           </li>
                           <li id="trash">
                               <a href="#"><i class=" fa fa-trash-o"></i> 휴지통</a>
