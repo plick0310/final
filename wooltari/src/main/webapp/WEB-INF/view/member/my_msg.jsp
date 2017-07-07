@@ -419,7 +419,7 @@ $(document).ready(function(){
 			$('.msg-list').html(data);
 			}
 		});
-	}, 300000);
+	}, 3000);
 	$(".inbox-nav li").click(function () {
 		mode = $(this).attr('id');
 		page = 1;
@@ -455,6 +455,12 @@ function sendMsg(userId) {
 	$("#recv_Id").attr('readonly', 'readonly');
 	$("#myModal").modal('show');
 }
+
+function readMsg(num) {
+
+}
+
+
 function submitMsg() {
     var params = jQuery("#form-horizontal").serialize(); // serialize() : 입력된 모든Element(을)를 문자열의 데이터에 serialize 한다.
     $.ajax({
@@ -468,7 +474,7 @@ function submitMsg() {
 				alert("전송 완료!");
 				$('.modal.in').modal('hide') 
 			} else {
-				alert("전송 실패!");
+				alert("전송 실패! 받는사람을 확인 해 주세요.");
 				$('.modal.in').modal('hide')
 			}
         }
@@ -476,9 +482,6 @@ function submitMsg() {
 			console.log(e.responseText);
 		}
     });
-}
-function readMsg() {
-	
 }
 
 </script>
