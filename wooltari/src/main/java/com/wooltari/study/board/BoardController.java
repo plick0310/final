@@ -45,7 +45,10 @@ public class BoardController {
 		
 		return "/study/myStudy/board";
 	}
-	   
+	
+	
+
+	
 	@RequestMapping(value="/study/myStudy/home/{s_num}/boardCreated" , method= RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> createdSubmit(
@@ -82,17 +85,16 @@ public class BoardController {
 			@RequestParam int num,
 			@PathVariable long s_num,
 			HttpSession session)throws Exception{
-		   
 		try {
 				
 			Map<String, Object> map = new HashMap<>();
 			String tableName="s_"+s_num;		
 			map.put("tableName",tableName);
 			map.put("num", num);
-			
+			 
 			service.deleteBoard(map);
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		
 		Map<String, Object> model = new HashMap<>();
@@ -135,6 +137,7 @@ public class BoardController {
 			dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 			map.put("num", dto.getNum());
 			dto.setLikeCount(service.countLikeBoard(map));
+			dto.setReplyCount(service.countReplyBoard(map));
 		}
 		
 		
@@ -147,8 +150,8 @@ public class BoardController {
 		return model;
 	}
 	
-	
-	
+/*************************** 좋아요  ******************************/	
+	//좋아요
 	@RequestMapping(value="/study/myStudy/{s_num}/boardLike" , method= RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> boardLike(
@@ -156,27 +159,29 @@ public class BoardController {
 			@RequestParam int num,
 			HttpSession session
 			) throws Exception{
-		try {
 		
-		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
-		String tableName="s_"+s_num;		
-		 Map<String, Object> map = new HashMap<>();
-		 
-		 map.put("tableName", tableName);
-		 map.put("userId",info.getUserId());
-		 map.put("num", num);
-		  
-		 service.insertLikeBoard(map);
+	   
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		String state = "true";
+
+		String tableName = "s_" + s_num;
+		Map<String, Object> map = new HashMap<>();
+
+		map.put("tableName", tableName);
+		map.put("userId", info.getUserId());
+		map.put("num", num);
+
+		int result = service.insertLikeBoard(map);
+		if(result==0)
+			state="false";
 		
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-   	    Map<String, Object> model = new HashMap<>();
+		Map<String, Object> model = new HashMap<>();
+   	    model.put("state", state);
    	    return model;
 	}
 	
+	//좋아요 개수
 	@RequestMapping(value="/study/myStudy/{s_num}/countboardLike" , method= RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> countLike(
@@ -195,10 +200,114 @@ public class BoardController {
    	    model.put("countLikeBoard", countLikeBoard);
    	    return model;
 	}
+	 
+/*************************** 댓글 ******************************/
+	//댓글 페이지 이동
+	@RequestMapping(value="/study/myStudy/{s_num}/listReply")
+	public String Reply(
+			@PathVariable long s_num,
+			Model  model,
+			@RequestParam int num) {
+		
+		Map<String, Object> map = new HashMap<>();
+		String tableName="s_"+s_num;		
+		map.put("tableName",tableName);   
+		map.put("num",num);
+		int replyCount = service.countReplyBoard(map);
+		
+		model.addAttribute("num",num);
+		model.addAttribute("replyCount",replyCount);
+		return "/study/myStudy/listReply";
+	} 
+	
+	//댓글 입력
+	@RequestMapping(value="/study/myStudy/home/{s_num}/replyCreated" , method= RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> insertReply(
+			@PathVariable long s_num, Reply dto, HttpSession session) throws Exception {
+         
+	try {
+			SessionInfo info = (SessionInfo) session.getAttribute("member");
+  
+			String tableName = "s_" + s_num;
+			dto.setTableName(tableName);
+			dto.setUserId(info.getUserId());
+
+			service.insertReplyBoard(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Map<String, Object> model = new HashMap<>();
+		return model;
+
+		} 
+	 
+	//댓글 삭제
+	@RequestMapping(value="/study/myStudy/home/{s_num}/replyDelete" , method= RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Object> deleteReply(
+			@PathVariable long s_num,
+			@RequestParam int reNum,
+			HttpSession session) throws Exception {
+	try {
+			SessionInfo info = (SessionInfo) session.getAttribute("member");
+			Map<String, Object> map = new HashMap<>();
+			String tableName = "s_" + s_num;
+			map.put("tableName", tableName);
+			map.put("reNum", reNum);
+			
+			service.deleteReplyBoard(map);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Map<String, Object> model = new HashMap<>();
+		return model;
+
+		} 
 	
 	
+	//댓글 리스트
+	@RequestMapping(value="/study/myStudy/{s_num}/reply_List" , method= RequestMethod.POST )
+	@ResponseBody
+	public Map<String, Object> reply_List(
+			@PathVariable long s_num,
+			@RequestParam int num
+			
+			) throws Exception {
 	
+		
+		Map<String, Object> map= new HashMap<>();
+		map.put("num", num);
+		String tableName = "s_" + s_num;
+		map.put("tableName", tableName);
+		
+		List<Reply> list = service.listReply(map);
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("list", list);
+		return model;
+	}
 	
+	//댓글 갯수 카운트
+	@RequestMapping(value="/study/myStudy/{s_num}/countboardReply" , method= RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> countReply(
+			@PathVariable long s_num,
+			@RequestParam int num
+			) throws Exception{
+   
+	   	String tableName="s_"+s_num;		
+		 Map<String, Object> map = new HashMap<>();
+		 
+		 map.put("tableName", tableName);
+		 map.put("num", num);
+		int countReplyBoard = service.countReplyBoard(map);
+		
+   	    Map<String, Object> model = new HashMap<>();
+   	    model.put("countReplyBoard", countReplyBoard);
+   	    return model;
+	}
 	
 	
 }

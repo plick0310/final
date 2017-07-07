@@ -13,10 +13,18 @@ public class Board {
 	private String tableName;
 
 	private int likeCount;
+	private int replyCount;
 	
 	
 	
-	
+	public int getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+
 	public int getLikeCount() {
 		return likeCount;
 	}

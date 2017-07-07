@@ -112,7 +112,8 @@ public class StudyServiceImpl implements StudyService {
 			}
 			
 			createStudyTable(s_num); //스터디게시판 동적생성
-
+			
+			
 		} catch (Exception e) {
 			System.out.println(e.toString());
 			throw e;
@@ -122,14 +123,20 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public void deleteStudy(long s_num)  throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			dao.deleteData("study.deleteStudy", s_num);
+			dao.deleteData("study.deletestudyCategory", s_num);
+			dao.deleteData("study.deletestudyCity", s_num);
+			dao.deleteData("study.deletestudyTarget", s_num);
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
 		
 	}
 
 	@Override
-	public int createStudyTable(long s_num) {
-	
-		int result=0;
+	public void createStudyTable(long s_num) throws Exception{
 		try {
 			
 			dao.updateData("study.createStudyBoard", s_num);
@@ -139,12 +146,12 @@ public class StudyServiceImpl implements StudyService {
 			dao.updateData("study.createStudyCalendar", s_num);
 			dao.updateData("study.StudyCalendarReply", s_num);
 		
-			result=1;
+			
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			throw e;
 			
 		}
-		return result;
+	
 	}
 
 	@Override

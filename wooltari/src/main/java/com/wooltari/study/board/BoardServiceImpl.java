@@ -78,12 +78,15 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void insertLikeBoard(Map<String, Object> map) throws Exception {
+	public int insertLikeBoard(Map<String, Object> map) {
+		int result=0;
 		try {
-			dao.insertData("studyBoard.insertLikeBoard",map);
+			result= dao.insertData("studyBoard.insertLikeBoard",map);
 		} catch (Exception e) {
-			throw e;
+			e.printStackTrace();
 		}
+		
+		return result;
 	}
 
 	@Override
@@ -91,6 +94,56 @@ public class BoardServiceImpl implements BoardService{
 		int result=0;
 		try {
 			result = dao.getIntValue("studyBoard.countLikeBoard",map);
+		} catch (Exception e) {
+			
+		}
+		
+		return result;
+	}
+
+	@Override
+	public void insertReplyBoard(Reply dto) throws Exception {
+		try {
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("tableName", dto.getTableName());
+			int maxNum = dao.getIntValue("studyBoard.maxReplyNum",map);
+			dto.setReNum(maxNum+1);
+			
+			dao.insertData("studyBoard.insertReply", dto);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public void deleteReplyBoard(Map<String, Object> map) throws Exception {
+		try {
+			dao.deleteData("study.deleteReply", map);
+		} catch (Exception e) {
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public List<Reply> listReply(Map<String, Object> map) {
+		List<Reply> list= null;
+		try {
+			list=dao.getListData("studyBoard.listReply",map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int countReplyBoard(Map<String, Object> map) {
+		int result=0;
+		try {
+			result= dao.getIntValue("studyBoard.replyCount",map);
 		} catch (Exception e) {
 			
 		}

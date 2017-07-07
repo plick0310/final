@@ -10,6 +10,12 @@ public interface BoardService {
 	public int dataCount(Map<String, Object>map);
 	public void deleteBoard(Map<String, Object>map)throws Exception;
 	
-	public void insertLikeBoard(Map<String, Object>map) throws Exception;
+	public int insertLikeBoard(Map<String, Object>map);
 	public int countLikeBoard(Map<String, Object>map);
+	
+	public void insertReplyBoard(Reply dto) throws Exception;
+	public void deleteReplyBoard(Map<String, Object>map) throws Exception;
+	public List<Reply> listReply(Map<String, Object> map) ;
+	public int countReplyBoard(Map<String, Object>map);
+
 }

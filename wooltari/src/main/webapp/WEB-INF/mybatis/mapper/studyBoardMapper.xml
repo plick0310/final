@@ -6,14 +6,21 @@
 		SELECT NVL(MAX(num), 0) FROM ${tableName}_board
 	</select>
 	
+	<!-- 글 추가 -->
 	<insert id="insertBoard" parameterType="com.wooltari.study.board.Board">
-	INSERT INTO ${tableName}_board(num, s_num, userId, content ,imageFileName)
-	   VALUES (#{num}, #{s_num}, #{userId}, #{content},#{imageFileName, jdbcType=VARCHAR})
+		INSERT INTO ${tableName}_board(num, s_num, userId, content ,imageFileName)
+		   VALUES (#{num}, #{s_num}, #{userId}, #{content},#{imageFileName, jdbcType=VARCHAR})
 	</insert>
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteBoard" parameterType="map">
+		DELETE FROM ${tableName}_board WHERE num=#{num}
+	</delete>
+	<!-- 글 수정 -->
 	
 	<!-- 글 리스트 -->
 	<select id="listBoard" parameterType="Map" resultType="com.wooltari.study.board.Board">
-			SELECT * FROM(
+		SELECT * FROM(
 			SELECT rownum rnum, tb.* FROM(
 				SELECT num, s_num ,content, hitcount, imageFileName, userName,
 				created, b.userId
@@ -31,13 +38,47 @@
 			JOIN member m ON b.userId=m.userId
 	</select>
 	
-	<!-- 글 좋아요 -->
+	<!-- 좋아요 *********************** -->
 	<insert id="insertLikeBoard" parameterType="map">
 		INSERT INTO ${tableName}_boardlike (num,userId) 
 			VALUES(#{num},#{userId})
 	</insert>
+	
 	<!-- 좋아요 갯수 -->
-	<select id="countLikeBoard" parameterType="map" resultType="Integer"  >
+	<select id="countLikeBoard" parameterType="map" resultType="Integer" >
 		SELECT NVL(COUNT(*),0) FROM ${tableName}_boardlike WHERE num=#{num}
+	</select>
+	
+	
+	<!-- 댓글 *********************** -->
+     <select id="maxReplyNum" resultType="Integer" parameterType="map">
+      	 SELECT NVL(MAX(reNum), 0) FROM ${tableName}_boardReply
+     </select>
+
+	<!-- 댓글 추가 -->
+	<insert id="insertReply" parameterType="com.wooltari.study.board.Reply">
+		INSERT INTO ${tableName}_boardReply (reNum, num, userId,content)
+			VALUES(#{reNum}, #{num},#{userId}, #{content})
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply" parameterType="map">
+		DELETE FROM ${tableName}_boardReply WHERE reNum=#{reNum}
+	</delete>
+	
+	<!-- 댓글 개수 -->
+	<select id="replyCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM  ${tableName}_boardReply WHERE num=#{num}
+	</select>
+	
+	<!-- 댓글 리스트 -->
+	<select id="listReply" parameterType="map" resultType="com.wooltari.study.board.Reply">
+	
+				SELECT renum, num , r.userId , content , created ,userName , userImg 
+   				FROM ${tableName}_boardReply r
+      			LEFT OUTER JOIN member m on r.userId= m.userId
+      			WHERE num=#{num}
+      			ORDER BY renum DESC
+    
 	</select>
 </mapper>
