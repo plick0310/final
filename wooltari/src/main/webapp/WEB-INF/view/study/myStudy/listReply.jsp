@@ -206,7 +206,7 @@ function listPage2(replyCount, num) {
  
  function deleteReply(num,reNum) {
 	alert(num+"삭제");
-	if(confirm("댓글을 삭제하시겠습니까? ")){
+	if(confirm("댓글을 삭제하시겠습니까? ")){ 
 		var url="<%=cp%>/study/myStudy/home/${s_num}/replyDelete";
 		$.post(url,{reNum:reNum}, function(data){
 			countReplyBoard(num);
