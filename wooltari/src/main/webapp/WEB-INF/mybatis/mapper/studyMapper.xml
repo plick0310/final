@@ -130,7 +130,7 @@
 	   ,PRIMARY KEY(num,userId)
 	   ,FOREIGN KEY(num) REFERENCES s_${value}_Board(num) ON DELETE CASCADE
 	   ,FOREIGN KEY(userId) REFERENCES member(userId)
-)
+	)
 	</update>
 	
 	<update id="dropBoardLike" parameterType="long">

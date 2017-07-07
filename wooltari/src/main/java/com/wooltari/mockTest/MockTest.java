@@ -4,8 +4,8 @@ public class MockTest {
 	private int num;
 	private int wishlistNum;
 	private String userId;
-	private int dday;
-	private long gap;
+	private Integer dday;
+	private Integer gap;
 	private String examInfoName;
 	private String examInfoOrgan;
 	private String questionSubject;
@@ -13,17 +13,20 @@ public class MockTest {
 	
 	
 	
+	public Integer getGap() {
+		return gap;
+	}
+	public void setGap(Integer gap) {
+		this.gap = gap;
+	}
+	public void setDday(Integer dday) {
+		this.dday = dday;
+	}
 	public String getUserId() {
 		return userId;
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-	public long getGap() {
-		return gap;
-	}
-	public void setGap(long gap) {
-		this.gap = gap;
 	}
 	public int getNum() {
 		return num;

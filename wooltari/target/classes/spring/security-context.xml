@@ -18,6 +18,11 @@
 	<http pattern="/member/join_m" security="none"/>
 	
 	<http auto-config="true">
+	
+	<headers>
+            <frame-options policy="SAMEORIGIN" />
+            <hsts disabled="true"/>
+        </headers>
 		<!-- spring 4.x때 추가된 옵션으로 ssl을 사용하지 않을 경우 csrf는 disalbed=true로 설정. -->
 		<csrf disabled="true"/>
 		

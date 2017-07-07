@@ -40,8 +40,9 @@
 		    $('.memberform').on('submit', function(e) {
 		    	if(! userCheckForm()) {
 		    		return false;
+		    	}else{
+			    	userCheckId();
 		    	}
-		    	userCheckId();
 		    	if($('#checkId').val() == "false") {
 		    		return false;
 		    	}
@@ -65,6 +66,7 @@
 		});
 
 		function userCheckId(){
+			
 			var url="<%=cp%>/member/userIdCheck";
 			var userId=$("#form-userid").val();
 			var query="userId="+userId;
@@ -200,11 +202,10 @@
     	    return extension;
     	}
 		</script>
-		
-</head>
+	</head>
 
    	<body class="member-body">
-		<div class="member-container">
+		<div class="member-container2">
 			<div class="member-outer">
 				<div class="member-inner">
 					<div class="member-form">

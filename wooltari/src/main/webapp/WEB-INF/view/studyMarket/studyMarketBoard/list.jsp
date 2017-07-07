@@ -137,6 +137,8 @@ padding: 40px;
       <h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
         <span><small>No.1</small></span> &nbsp;&nbsp;&nbsp;<span>오세훈과 함께떠나는 자바여행</span>&nbsp;&nbsp;&nbsp;<small>작성일 : 2017-06-28</small>
+        <input type="button" class="clickbtn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"
+		 onclick="javascript:location.href='<%=cp%>/studyMarket/studyMarketBoard/article';" value="동영상 보기">
         </a>
       </h4>
     </div>
@@ -169,7 +171,7 @@ padding: 40px;
 		<input type="button" class="clickbtn" 
 		 onclick="javascript:location.href='<%=cp%>/help/report/delete';" value="삭제">
 		<input type="button" class="clickbtn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"
-		 onclick="javascript:location.href='<%=cp%>/study/promoteList/created';" value="글쓰기">
+		 onclick="javascript:location.href='<%=cp%>/studyMarket/studyMarketBoard/created';" value="글쓰기">
 	</div>
 	<div class="scArea" style="margin: 30px 10px 30px 180px;"> 
 		<select name="where" class="where">

@@ -68,7 +68,7 @@ public class BoardController {
 		dto.setUserId(info.getUserId());
 		service.insertBoard(dto ,pathname);
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		Map<String, Object> model = new HashMap<>();
 		
@@ -119,7 +119,7 @@ public class BoardController {
 		if(bbs_count>5){
 			end=5;
 		}
-		  
+		    
 		end = bbs_count;
 		 
 		map.put("start", start);
@@ -133,15 +133,72 @@ public class BoardController {
 		while(it.hasNext()){
 			Board dto = it.next();
 			dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+			map.put("num", dto.getNum());
+			dto.setLikeCount(service.countLikeBoard(map));
 		}
 		
 		
 		Map<String, Object> model = new HashMap<>();
+		
 		
 		model.put("list", list);
 		model.put("dataCount", dataCount);
 		
 		return model;
 	}
+	
+	
+	
+	@RequestMapping(value="/study/myStudy/{s_num}/boardLike" , method= RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> boardLike(
+			@PathVariable long s_num,
+			@RequestParam int num,
+			HttpSession session
+			) throws Exception{
+		try {
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		String tableName="s_"+s_num;		
+		 Map<String, Object> map = new HashMap<>();
+		 
+		 map.put("tableName", tableName);
+		 map.put("userId",info.getUserId());
+		 map.put("num", num);
+		  
+		 service.insertLikeBoard(map);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+   	    Map<String, Object> model = new HashMap<>();
+   	    return model;
+	}
+	
+	@RequestMapping(value="/study/myStudy/{s_num}/countboardLike" , method= RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> countLike(
+			@PathVariable long s_num,
+			@RequestParam int num
+			) throws Exception{
+
+		String tableName="s_"+s_num;		
+		 Map<String, Object> map = new HashMap<>();
+		 
+		 map.put("tableName", tableName);
+		 map.put("num", num);
+		int countLikeBoard = service.countLikeBoard(map);
+		
+   	    Map<String, Object> model = new HashMap<>();
+   	    model.put("countLikeBoard", countLikeBoard);
+   	    return model;
+	}
+	
+	
+	
+	
+	
 	
 }
