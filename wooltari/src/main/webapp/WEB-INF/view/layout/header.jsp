@@ -208,18 +208,21 @@ function sendlogout(){
 					</div>
 				<div class="member" style="margin: 7px 0;"> 
 					<c:if test="${empty sessionScope.member}">
-						<a data-toggle="modal" href="#modal"><img src="<%=cp%>/resource/img/loginicon.png" alt="Login" class="img-circle" width="35px" height="35px"></a>
+						<a data-toggle="modal" href="#modal">
+						<img src="<%=cp%>/resource/img/logloglog.png" class="img-circle" width="35px" height="35px" style="box-shadow: 2px 2px 5px grey;">
+						<%-- <img src="<%=cp%>/resource/img/loginicon.png" alt="Login"  width="35px" height="35px"> --%>
+						</a>
 					</c:if>
 					<c:if test="${not empty sessionScope.member}">
 						<strong style="margin-right: 5px">${sessionScope.member.userName}</strong>
 						<c:if test="${empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c"> 
+								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="box-shadow: 2px 2px 5px grey;"> 
 							</a>
 						</c:if>
 						<c:if test="${not empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-								<img src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c">
+								<img src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}" class="img-circle" width="35px" height="35px" style="box-shadow: 2px 2px 5px grey;">
 							</a>
 						</c:if>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">

@@ -9,25 +9,21 @@
 	 
 	 <!-- 조건검색 -->
 	<sql id="where-list">
-		제목
+		
 		<if test="searchKey=='subject'">
 			INSTR(subject, #{searchValue})&gt;=1
 		</if>
 		
-		작성자
-		<if test="searchKey=='userName'">
-			INSTR(name, #{searchValue})=1
+	
+		<if test="searchKey=='region'">
+			INSTR(region, #{searchValue})=1
 		</if>
 		
-		내용
+		
 		<if test="searchKey=='content'">
 			DBMS_LOB.INSTR(content, #{searchValue})&gt;=1
 		</if>
-		
-		등록일
-		<if test="searchKey=='created'">
-			TO_CHAR(created, 'YYYY-MM-DD')=#{searchValue} OR TO_CHAR(created,'YYYY-MM-DD')=#{searchValue}
-		</if>
+
 	</sql>
 	
 	<select id="dataCount" resultType="Integer" parameterType="map">
@@ -149,7 +145,7 @@
 	
 	<!-- 게시판 수정 -->
 	<update id="updateStudyWhere" parameterType="com.wooltari.studywhere.StudyWhere">
-		UUPDATE studywhereboard SET subject=#{subject}, content=#{content}, imageFileName=#{imageFileName,jdbcType=VARCHAR},
+		UPDATE studywhereboard SET subject=#{subject}, content=#{content},
 		placename=#{placename},address=#{address},tel=#{tel},ocTime=#{ocTime},region=#{region} WHERE num=#{num}
 	</update>
 	

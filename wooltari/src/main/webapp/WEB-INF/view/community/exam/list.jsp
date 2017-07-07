@@ -370,7 +370,7 @@ $(function(){
    var url="<%=cp%>/exam/firstChart";
    $.getJSON(url, function (csv) {
       $('#firstChart').highcharts({
-    	  colors: ['#FFBB00','#FF5E00','BLUE','#666666'],
+    	  colors: ['#eee','#FF5E00','BLUE','#666666'],
     	  chart: {
                type: 'pie',
                plotBackgroundColor:null,

@@ -209,6 +209,13 @@ ul.tabs li.active {
 <!-- <script src="http://maps.googleapis.com/maps/api/js"></script>
 <script src="https://maps.googleapis.com/maps/api/place/autocomplete/output?parameters"></script> -->
 <script>
+
+function searchList() {
+	var f=document.searchForm;
+	f.action="<%=cp%>/studyboard/studywhere/list";
+	f.submit();
+}
+
 	$(document).ready(function() {
 		//최상단 체크박스 클릭
 
@@ -605,14 +612,14 @@ ul.tabs li.active {
 		</tr>
 	</table>
 	
-	<form action="" id="array_form">
-		<div class="scArea" style="">
-			<select name="where" class="where">
+	<form action="" id="array_form" name="searchForm" method="post">
+		<div class="scArea">
+			<select name="searchKey" class="where">
 				<option value="subject">제목</option>
-				<option value="ment">내용</option>
-				<option value="writer">작성자</option>
-			</select> <input type="text" name="keyword" class="keyword" placeholder="검색"
-				style="width: 120px;"> <input type="button" class="submit">
+				<option value="content">내용</option>
+				<option value="region">지역</option>
+			</select> <input type="text" name="searchValue" class="keyword" placeholder="검색"
+				style="width: 120px;"> <input type="button" onclick="searchList()" class="submit">
 		</div>
 	</form>
 	<div style="    float: right;

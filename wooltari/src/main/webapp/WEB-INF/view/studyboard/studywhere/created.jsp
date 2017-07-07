@@ -69,7 +69,7 @@ border: 1px solid #EAEAEA;
 		<tbody>
 			<tr>
 				<th style="width: 100px; ">제목</th>
-				<td><input type="text" name="subject" 
+				<td><input type="text" name="subject" value="${dto.subject }"
 					class="subject" maxlength="100" style="width: 450px;" />
 				
 					
@@ -79,19 +79,19 @@ border: 1px solid #EAEAEA;
 			
 			<tr style="border-top: 3px solid #eee">
 				<th>장소정보</th>
-				<td><small>장소이름&nbsp;&nbsp;</small><input type="text" name="placename" maxlength="13"
+				<td><small>장소이름&nbsp;&nbsp;</small><input type="text" name="placename" maxlength="13" value="${dto.placename }" 
 					style="width: 200px;" />
-					<small>영엽시간&nbsp;&nbsp;</small><input type="text" name="ocTime" maxlength="13"
+					<small>영엽시간&nbsp;&nbsp;</small><input type="text" name="ocTime" maxlength="13" value="${dto.ocTime }" 
 					style="width: 200px;" />
-					<small>&nbsp;&nbsp;&nbsp;&nbsp;지역&nbsp;&nbsp;</small><input type="text" name="region" 
+					<small>&nbsp;&nbsp;&nbsp;&nbsp;지역&nbsp;&nbsp;</small><input type="text" name="region" value="${dto.region }" 
 					style="width: 172px;" /></td>
 			</tr>
 			<tr>
 				<th><small>주소</small></th>
-				<td><input type="text" name="address" 
+				<td><input type="text" name="address" value="${dto.address }"
 					style="    width: 507px;" />
 					<small>&nbsp;&nbsp;&nbsp;&nbsp;전화번호&nbsp;&nbsp;</small><input type="text" name="tel" maxlength="13"
-					style="width: 150px;" />
+				   value="${dto.tel }"	style="width: 150px;" />
 					
 					</td>
 			</tr>
@@ -118,8 +118,12 @@ border: 1px solid #EAEAEA;
 	</table>
 	
 	<div class="read_btnArea">
-		<button class="clickbtn">등록하기</button>
-		<button class="clickbtn">돌아가기</button>
+		<button type="submit" class="clickbtn">${mode=='update'?'수정완료':'등록하기'}</button>
+		<button type="button" onclick="javascript:location.href='<%=cp%>/studyboard/studywhere/list';" class="clickbtn">돌아가기</button>
+		  <c:if test="${mode=='update'}">
+         	 <input type="hidden" name="num" value="${dto.num}">
+        	 <input type="hidden" name="page" value="${page}">
+        </c:if>
 	</div>
 </form>
 <script type="text/javascript">

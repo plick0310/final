@@ -100,7 +100,7 @@ public class StudyWhereServiceImpl implements StudyWhereService{
 		return dto;
 	}
 	@Override
-	public int updateStudyWhere(StudyWhere dto, String pathname) {
+	public int updateStudyWhere(StudyWhere dto) {
 		int result = 0;
 		try {
 			if(dto.getUpload()!=null && !dto.getUpload().isEmpty()) {
