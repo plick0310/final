@@ -25,5 +25,10 @@ public class StudyMarketBoardController {
 			return ".studyMarket.studyMarketBoard.article";
 		}	
 
+		@RequestMapping(value="/studyMarket/studyMarketBoard/teacherInfo")
+		public String teacherInfo() {
+
+			return ".studyMarket.studyMarketBoard.teacherInfo";
+		}	
 	}
 

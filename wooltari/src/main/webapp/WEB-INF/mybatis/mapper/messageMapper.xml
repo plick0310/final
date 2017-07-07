@@ -49,8 +49,8 @@
 	<select id="listMessage" parameterType="map" resultType="com.wooltari.message.Message">
 		SELECT * FROM (
 			SELECT ROWNUM rnum, tb.* FROM (
-				SELECT num, sent_Id, recv_Id, sent_Name, userId AS recv_Name, content, date_Sent, date_Read, read, sent_Category, recv_Category FROM(
-					SELECT num, sent_Id, recv_Id, userId AS sent_Name, content, date_Sent, date_Read, read, sent_Category, recv_Category
+				SELECT num, sent_Id, recv_Id, sent_Name, userName AS recv_Name, content, date_Sent, date_Read, read, sent_Category, recv_Category FROM(
+					SELECT num, sent_Id, recv_Id, userName AS sent_Name, content, date_Sent, date_Read, read, sent_Category, recv_Category
 					FROM message msg JOIN member mem ON msg.sent_Id = mem.userId
 				)tb JOIN member mem ON tb.recv_Id = mem.userId
             <where>
@@ -66,8 +66,8 @@
 	
 	<!-- 쪽지 보기 -->
 	<select id="readMessage" resultType="com.wooltari.message.Message" parameterType="Integer">
-		SELECT num, sent_Id, recv_Id, sent_Name, userId AS recv_Name, content, date_Sent, date_Read, read, sent_Category, recv_Category FROM(
-			SELECT num, sent_Id, recv_Id, userId AS sent_Name, content, date_Sent, date_Read, read, sent_Category, recv_Category
+		SELECT num, sent_Id, recv_Id, sent_Name, userName AS recv_Name, content, date_Sent, date_Read, read, sent_Category, recv_Category FROM(
+			SELECT num, sent_Id, recv_Id, userName AS sent_Name, content, date_Sent, date_Read, read, sent_Category, recv_Category
 				FROM message msg JOIN member mem ON msg.sent_Id = mem.userId
 			)tb JOIN member mem ON tb.recv_Id = mem.userId
 		WHERE num = #{num}

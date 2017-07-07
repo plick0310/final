@@ -6,6 +6,43 @@
    String cp = request.getContextPath();
 %>
 
+<style>
+
+.clickbtn {
+   background-color: white;
+   border-style: solid;
+   padding: 5px 20px;
+   margin-left: 10px;
+   font-size:13px;
+   border: 1px solid #EAEAEA;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #1abc9c;
+    /* border-color: #337ab7; */
+    /* text-align: center; */
+}
+
+.pagination-sm > li > a, .pagination-sm > li > span {
+    padding: 8px 9px;
+    
+    font-size: 11px;
+}
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #1abc9c;
+    text-decoration: none;
+    background-color: #fff;
+  border: none;
+}
+</style>
 <div style="clear: both; padding-top: 20px;">
     <div style="float: left;"><span style="color: #3EA9CD; font-weight: bold;">댓글 ${replyCount}개</span> <span>[댓글 목록, ${pageNo}/${total_page} 페이지]</span></div>
     <div style="float: right; text-align: right;"></div>
@@ -16,6 +53,7 @@
 <c:forEach var="vo" items="${listReply}">
     <!-- 리플 내용 리스트 시작 -->
     <div style="clear:both; margin-top:5px; padding: 10px; border: #d5d5d5 solid 1px; min-height: 130px;">
+    
         <div style="clear: both;">
             <div style="float: left;">${vo.userId} | ${vo.created}</div>
             <div style="float: right;  text-align: rigth;">
