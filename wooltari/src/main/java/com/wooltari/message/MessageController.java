@@ -28,17 +28,22 @@ public class MessageController {
 	@Autowired
 	private MyUtilBootstrap myUtil;
 
-	@RequestMapping(value="/message/send", method=RequestMethod.GET)
-	public String memberChat(Message dto, HttpSession session) throws Exception {
+	@RequestMapping(value="/message/send", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> memberChat(Message dto, HttpSession session) throws Exception {
 		Map<String, Object> model = new HashMap<>();
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String result = "false";
 		try {
 			dto.setSent_Id(info.getUserId());
 			service.sendMessage(dto);
 		} catch (Exception e) {
-			
+			model.put("result", result);
+			return model;
 		}
-		return "message/send";
+		result = "true";
+		model.put("result", result);
+		return model;
 	}
 	
 	@RequestMapping(value="/message/read", method=RequestMethod.GET)

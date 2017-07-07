@@ -4,7 +4,7 @@
 <mapper namespace="message">
 	<!-- 메시지 전송 -->
 	<insert id="sendMessage" parameterType="com.wooltari.message.Message">
-		INSERT INTO message(num, sent_Id, recv_Id, sent_Name, recv_Name, content) VALUES (message_seq.NEXTVAL, #{sent_Id}, #{recv_Id}, #{sent_Name}, #{recv_Name}, #{content})
+		INSERT INTO message(num, sent_Id, recv_Id, content) VALUES (message_seq.NEXTVAL, #{sent_Id}, #{recv_Id}, #{content})
     </insert>
     
     <sql id="where-mode">

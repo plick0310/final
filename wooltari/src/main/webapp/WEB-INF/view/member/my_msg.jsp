@@ -419,7 +419,7 @@ $(document).ready(function(){
 			$('.msg-list').html(data);
 			}
 		});
-	}, 3000);
+	}, 300000);
 	$(".inbox-nav li").click(function () {
 		mode = $(this).attr('id');
 		page = 1;
@@ -435,6 +435,7 @@ $(document).ready(function(){
 	});
 	$("#myModal").on('hidden.bs.modal', function () {
 		$("#recv_Id").val("");
+		$("#content").val("");
 		$("#recv_Id").removeAttr('readonly');
 	});
 });
@@ -454,7 +455,28 @@ function sendMsg(userId) {
 	$("#recv_Id").attr('readonly', 'readonly');
 	$("#myModal").modal('show');
 }
-
+function submitMsg() {
+    var params = jQuery("#form-horizontal").serialize(); // serialize() : 입력된 모든Element(을)를 문자열의 데이터에 serialize 한다.
+    $.ajax({
+        url: '<%=cp%>/message/send',
+        type: 'POST',
+        data:params,
+        dataType: 'json',
+        success: function (data) {
+        	var result = data.result;
+        	if(result=="true") { 
+				alert("전송 완료!");
+				$('.modal.in').modal('hide') 
+			} else {
+				alert("전송 실패!");
+				$('.modal.in').modal('hide')
+			}
+        }
+        ,error:function(e) {
+			console.log(e.responseText);
+		}
+    });
+}
 function readMsg() {
 	
 }
@@ -494,7 +516,7 @@ function readMsg() {
                                           <h4 class="modal-title">쪽지 보내기</h4>
                                       </div>
                                       <div class="modal-body">
-                                          <form role="form" class="form-horizontal">
+                                          <form role="form" id="form-horizontal" class="form-horizontal" method="post">
                                           <div class="form-group">
                                                   <label class="col-lg-2 control-label">From</label>
                                                   <div class="col-lg-10">
@@ -515,7 +537,7 @@ function readMsg() {
                                               </div>
                                               <div class="form-group">
                                                   <div class="col-lg-offset-2 col-lg-10 text-right">
-                                                      <button class="btn btn-send" type="submit">Send</button>
+                                                      <button class="btn btn-send" type="button" onclick="submitMsg()">Send</button>
                                                   </div>
                                               </div>
                                           </form>
