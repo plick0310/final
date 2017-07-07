@@ -7,6 +7,13 @@
 		insert into promotelist(num,subject,content,imagefilename,s_num,userId) values(promotenum_seq.nextval,#{subject},#{content},#{imageFileName,jdbcType=VARCHAR},#{s_num},#{userId})		
 	</insert>
 	
+	<!-- 가입 스터디 목록 -->
+	<select id="pushStudy" parameterType="map" resultType="com.wooltari.promote.Promote">
+		select s_num,studyname,recruit,gender,m.userId,userName from study s
+		join member m on s.userId=m.userId where m.userId=#{userId}
+	</select>
+	
+	
 	<sql id="where-list">
 		<if test="searchKey=='userName'">
 			userName=#{searchValue}
@@ -23,11 +30,17 @@
 	<select id="listBoard" parameterType="map" resultType="com.wooltari.promote.Promote">
 		select * from(
 			select rownum rnum, tb.* from(
-				select distinct p.num,p.subject,p.content,hitcount,imagefilename,userName,
-					to_char(p.created,'yyyy-mm-dd')created,s_num,p.userId,(select nvl(count(*),0) from promotereply where num=p.num)replyCount
+				select distinct p.num,p.subject,p.content,hitcount,p.imagefilename,userName,c.choicecategory,s.subject name,sc.choicecity,target,cityname,recruit,gender,
+					p.created,p.s_num,p.userId,(select nvl(count(*),0) from promotereply where num=p.num)replyCount
 					from promotelist p 
-			        join member m on p.userId=m.userId
-			        left outer join promotereply a on p.num=a.num
+			       	  join member m on p.userId=m.userId
+		              join studycategory c on p.s_num=c.s_num
+		              join s_category s on c.choicecategory=s.categorynum
+		              join studycity sc on p.s_num=sc.s_num
+		              join studytarget tar on p.s_num=tar.s_num
+		              join s_city on sc.choicecity=s_city.citynum
+                  	  join study on p.s_num=study.s_num
+			         left outer join promotereply a on p.num=a.num
 			<where>
 				<if test="searchValue!=null and searchValue!=''">
 					<include refid="where-list"/>
@@ -59,8 +72,17 @@
 	
 	<!-- 글 보기 -->
 	<select id="readBoard" parameterType="map" resultType="com.wooltari.promote.Promote">
-		select num,subject,content,hitcount,created,imageFilename,s_num,p.userId,userName from promotelist p
-		join member m on p.userId=m.userId where num=#{num}
+		select p.num,p.subject,p.content,hitcount,p.created,p.imageFilename,p.s_num,p.userId,userName,target,study.recruit,gender,
+        c.choicecategory,s.subject name,sc.choicecity,cityname
+        from promotelist p
+        join member m on p.userId=m.userId 
+        join studycategory c on p.s_num=c.s_num
+        join s_category s on c.choicecategory=s.categorynum
+        join studycity sc on p.s_num=sc.s_num
+        join s_city on sc.choicecity=s_city.citynum
+        join studytarget tar on p.s_num=tar.s_num           
+        join study on p.s_num=study.s_num
+    	where num=#{num}
 	</select>
 	
 	<!--이전글 -->
@@ -70,7 +92,7 @@
 	
 	<!-- 글 수정 -->
 	<update id="updateBoard" parameterType="com.wooltari.promote.Promote">
-		update promotelist set subject=#{subject},content=#{content},imageFilename=#{imageFileName} where num=#{num}
+		update promotelist set subject=#{subject},content=#{content} where num=#{num}
 		
 	</update>
 	

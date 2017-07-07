@@ -1,38 +1,73 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-   String cp=request.getContextPath();
+	String cp=request.getContextPath();
 %>
+<style>
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #1abc9c;
+    /* border-color: #337ab7; */
+    /* text-align: center; */
+}
 
+.pagination-sm > li > a, .pagination-sm > li > span {
+    padding: 8px 9px;
+    
+    font-size: 11px;
+}
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+  border: none;
+</style>
 
-<div style="clear: both; padding-top: 20px;">
-    <div style="float: left;"><span style="color: #3EA9CD; font-weight: bold;">댓글 ${dataCount}개</span></div>
-    <div style="float: right; text-align: right;"></div>
-</div>
-
-<div style="clear: both; padding-top: 5px;">
+<table style='width: 900px; margin: 10px auto 30px; border-spacing: 0px;'>
+<tr height="35">
+    <td>
+       <div style="clear: both;">
+           <div style="float: left;"><span style="color: #1abc9c; font-weight: bold;">댓글 ${dataCount }개</span> <span>[댓글 목록, ${pageNo } / ${total_page } 페이지]</span></div>
+           <div style="float: right; text-align: right;"></div>
+       </div>
+    </td>
+</tr>
 
 <c:forEach var="vo" items="${listReply}">
-
-    <div style="clear:both; margin-top:5px; padding: 10px;  min-height: 90px; border: none">
-        <div style="clear: both;">
-            <div style="float: left;">${vo.userName} | ${vo.created}</div>
-            <div style="float: right;  text-align: rigth;">
-	<c:if test="${sessionScope.member.userId==vo.userId || sessionScope.member.userId=='admin'}">		   
-                <a  href="#" onclick='deleteReply("${vo.prNum}","${pageNo }"); return false'>삭제</a>
-                     <%-- <a onclick='deleteReply("${vo.prNum}", "${pageNo}");'>삭제</a> --%>
-	</c:if>
-            </div>
-        </div>
-        <br>
-        <textarea style="width: 525px; height: 55px;" readonly="readonly">${vo.content }</textarea>
-
-        <!-- 답글 시작 -->
-                              
-    </div>
+    <tr height='35' style='background: #eee;'>
+       <td width='50%' style='padding:5px 5px; '>
+           <span><b>${vo.userName }</b></span>
+        </td>
+       <td width='50%' style='padding:5px 5px;' align='right'>
+           <span>${vo.created}</span> |
+           <c:if test="${sessionScope.member.userId==vo.userId || sessionScope.member.userId=='admin' }">
+           		<a onclick='deleteReply(${vo.prNum}, ${pageNo })'>삭제</a>
+			</c:if>
+			
+		    <c:if test="${sessionScope.member.userId!=vo.userId && sessionScope.member.userId!='admin' }">
+           		<a onclick='#'>신고</a>
+			</c:if>
+        </td>
+    </tr>
+    <tr>
+        <td colspan='2' valign='top' style='padding:5px 5px;'>
+            ${vo.content }
+        </td>
+    </tr>
 </c:forEach>
-<div style="text-align: center">${paging }</div>
 
-</div>
+     <tr height="40">
+         <td colspan='2' style="    text-align: center;">
+              ${paging }
+         </td>
+     </tr>
+</table>
+

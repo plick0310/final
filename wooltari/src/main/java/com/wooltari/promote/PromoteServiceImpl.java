@@ -90,9 +90,15 @@ public class PromoteServiceImpl implements PromoteService{
 	}
 
 	@Override
-	public int updateBoard(Promote dto, String pathname) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateBoard(Promote dto) {
+		int result=0;
+		try {
+			result=dao.updateData("promote.updateBoard", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	@Override
@@ -161,6 +167,20 @@ public class PromoteServiceImpl implements PromoteService{
 	public int deleteBoardId(String userId, String root) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	
+	//가입 스터디 목록
+	@Override
+	public List<Promote> pushStudy(Map<String, Object> map) {
+		List<Promote> list=null;
+		try {
+			list=dao.getListData("promote.pushStudy", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 }

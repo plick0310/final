@@ -16,8 +16,8 @@
 				select studyname,num,subject,r.content,hitcount,r.imagefilename,userName,
 				to_char(r.created,'yyyy-mm-dd')created,r.s_num,r.userId
 				from reviewlist r 
-    	    join member m on r.userId=m.userId
-      		  join study s on r.s_num=s.s_num
+    	    	join member m on r.userId=m.userId
+      		  	join study s on r.s_num=s.s_num
 				order by num desc
 		<![CDATA[		
 			)tb where rownum <= #{end}
@@ -89,5 +89,11 @@
 	<delete id="deleteReply" parameterType="Integer">
 		delete from reviewReply where prnum=#{prnum}
 	</delete>
+	
+	<!-- 가입스터디목록  -->
+	<select id="pushStudy" parameterType="map" resultType="com.wooltari.promote.Promote">
+		select s_num,studyname,m.userId,userName from study s
+		join member m on s.userId=m.userId where m.userId=#{userId}
+	</select>
 	
 </mapper>
