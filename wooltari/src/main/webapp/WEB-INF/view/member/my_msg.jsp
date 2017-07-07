@@ -419,7 +419,7 @@ $(document).ready(function(){
 			$('.msg-list').html(data);
 			}
 		});
-	}, 30000);
+	}, 3000);
 	$(".inbox-nav li").click(function () {
 		mode = $(this).attr('id');
 		page = 1;
