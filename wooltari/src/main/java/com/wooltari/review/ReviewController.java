@@ -90,7 +90,11 @@ public class ReviewController {
 		if(info==null){
 			return "redirect:/main";
 		}
+		Map<String, Object> map=new HashMap<>();
+		map.put("userId", info.getUserId());
+		List<Review> list=service.pushStudy(map);
 		
+		model.addAttribute("list",list);
 		return ".studyboard.review.created";
 	}
 	
@@ -119,7 +123,7 @@ public class ReviewController {
 	@RequestMapping("/review/article")
 	public String readArticle(
 			@RequestParam int num,
-		@RequestParam(value="page") String page,
+			@RequestParam(value="page") String page,
 			Model model
 			)throws Exception{
 		

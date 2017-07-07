@@ -165,4 +165,16 @@ public class ReviewImpl implements ReviewService{
 		return result;
 	}
 
+	@Override
+	public List<Review> pushStudy(Map<String, Object> map) {
+		List<Review> list=null;
+		try {
+			list=dao.getListData("review.pushStudy", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
 }

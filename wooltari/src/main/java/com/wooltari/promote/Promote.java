@@ -9,6 +9,72 @@ public class Promote {
 	private String userId,userName;
 	private int replyCount;
 	
+	private int choiceCategory;
+	private String name;
+	private int choiceCity;
+	private String cityName;
+	private String target;
+	
+	private String studyName,gender;
+	private int recruit;
+	
+	private long gap;
+	
+	
+	public long getGap() {
+		return gap;
+	}
+	public void setGap(long gap) {
+		this.gap = gap;
+	}
+	public String getTarget() {
+		return target;
+	}
+	public void setTarget(String target) {
+		this.target = target;
+	}
+	public int getChoiceCategory() {
+		return choiceCategory;
+	}
+	public void setChoiceCategory(int choiceCategory) {
+		this.choiceCategory = choiceCategory;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getChoiceCity() {
+		return choiceCity;
+	}
+	public void setChoiceCity(int choiceCity) {
+		this.choiceCity = choiceCity;
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	public String getStudyName() {
+		return studyName;
+	}
+	public void setStudyName(String studyName) {
+		this.studyName = studyName;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public int getRecruit() {
+		return recruit;
+	}
+	public void setRecruit(int recruit) {
+		this.recruit = recruit;
+	}
 	private MultipartFile upload;
 	
 	public MultipartFile getUpload() {

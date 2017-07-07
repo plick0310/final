@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wooltari.common.MyUtilBootstrap;
 import com.wooltari.member.SessionInfo;
@@ -28,14 +29,42 @@ public class MessageController {
 	private MyUtilBootstrap myUtil;
 
 	@RequestMapping(value="/message/send", method=RequestMethod.GET)
-	public String memberChat() throws Exception {
+	public String memberChat(Message dto, HttpSession session) throws Exception {
+		Map<String, Object> model = new HashMap<>();
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		try {
+			dto.setSent_Id(info.getUserId());
+			service.sendMessage(dto);
+		} catch (Exception e) {
+			
+		}
 		return "message/send";
+	}
+	
+	@RequestMapping(value="/message/read", method=RequestMethod.GET)
+	public String msgRead() throws Exception {
+		return "message/";
+	}
+	
+	@RequestMapping(value="/message/count", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> msgCount(HttpSession session) throws Exception {
+		Map<String, Object> model = new HashMap<>();
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		model.put("userId", info.getUserId());
+		model.put("receive", "receive");
+		int recv_Count = service.noreadCount(model);
+		model.remove("receive");
+		
+		model.put("recv_Count", recv_Count);
+		return model;
 	}
 	
 	@RequestMapping(value="/message/list")
 	public String list(
 				@RequestParam(value="page", defaultValue="1") int current_page,
-				@RequestParam(value="mode", defaultValue="receive") String mode,
+				@RequestParam(value="mode", defaultValue="all") String mode,
 				@RequestParam(value="searchValue", defaultValue="") String searchValue,
 				Model model, HttpServletRequest req , HttpSession session
 			) throws Exception{
@@ -43,7 +72,7 @@ public class MessageController {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		String cp = req.getContextPath();
 		
-		int rows=10;
+		int rows=15;
 		int total_page = 0;
 		int dataCount = 0;
 		

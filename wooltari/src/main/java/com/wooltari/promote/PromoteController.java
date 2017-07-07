@@ -3,6 +3,8 @@ package com.wooltari.promote;
 import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -67,14 +69,29 @@ public class PromoteController {
 		List<Promote> list=service.listBoard(map);
 		
 		//글번호
+		 Date endDate = new Date();
+	     long gap;
+	        
 		int listNum,n =0;
 		
 		Iterator<Promote> it=list.iterator();
 		while(it.hasNext()){
-			Promote dto=it.next();
+			Promote dto=(Promote)it.next();
 			listNum=dataCount-(start+n-1);
 			dto.setListNum(listNum);
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	        Date beginDate = formatter.parse(dto.getCreated());
+			
+	        
+			gap=(endDate.getTime() - beginDate.getTime()) / (60*60* 1000);
+            dto.setGap(gap);
+            
+            dto.setCreated(dto.getCreated().substring(0, 10));
+            
 			n++;
+			
+			
 		}
 		
 		String query="";
@@ -113,6 +130,12 @@ public class PromoteController {
 		if(info==null)
 			return "redirect:/main";
 		
+		Map<String, Object> map=new HashMap<>();
+		map.put("userId", info.getUserId());
+		List<Promote> list=service.pushStudy(map);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("mode","created");
 		
 		return ".studyboard.promote.created";
 	}
@@ -132,7 +155,6 @@ public class PromoteController {
 		dto.setUserId(info.getUserId());
 		
 		model.addAttribute("dto", dto);
-		
 		service.insertBoard(dto, pathname);
 		
 		return "redirect:/promote/list";
@@ -172,6 +194,47 @@ public class PromoteController {
 		
 		return ".studyboard.promote.article";
 	}
+	
+	@RequestMapping(value="/promote/updateBoard", method=RequestMethod.GET)
+	public String updateBoard(
+			@RequestParam int num,
+			HttpSession session,
+			Model model
+			)throws Exception{
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		if(info==null){
+			return "redirect:/main";
+		}
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("userId", info.getUserId());
+		List<Promote> list=service.pushStudy(map);
+		
+		Promote dto=service.readBoard(num);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("dto",dto);
+		model.addAttribute("mode", "update");
+		model.addAttribute("num",num);
+		
+		return ".studyboard.promote.created";
+	}
+	
+	@RequestMapping(value="/promote/updateBoard",method=RequestMethod.POST)
+	public String updateSubmit(
+			Promote dto
+			)throws Exception{
+		
+		int result;
+		result=service.updateBoard(dto);
+		System.out.println(result+"출력!!");
+		
+		return "redirect:/promote/list";
+	}
+	
+	
 	
 	@RequestMapping(value="/promote/delete")
 	public String delete(
@@ -294,4 +357,5 @@ public class PromoteController {
 		return model;
 	}
 	
+
 }

@@ -32,6 +32,7 @@ border: 1px solid #EAEAEA;
 <script type="text/javascript">
 function insertBoard(){
 	var f=document.write_form;
+	var s_num=f.s_num.value;
 	
 	var str=f.subject.value;
 	if(!str){
@@ -47,21 +48,35 @@ function insertBoard(){
 		return false;
 	}
 	
-	if(f.file1.value==""){
-		if(! confirm("기본사진으로 대체합니다.")){
+	var mode="${mode}";
+
+	if(mode=="created"){
+		if(f.file1.value==""){
+			if(! confirm("기본사진으로 대체합니다.")){
+				return false;
+			}
+			
+		}else if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.file1.value)) {	
+			alert('이미지 파일만 가능합니다.');
+			f.upload.focus();
 			return false;
 		}
-		
-	}else if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.file1.value)) {	
-		alert('이미지 파일만 가능합니다.');
-		f.upload.focus();
-		return false;
+
 	}
 	
-	f.action="<%=cp%>/promote/created";
-	f.submit();
+	if(mode=="update"){
+		f.action="<%=cp%>/promote/updateBoard";
+		f.submit();
+	}else{
+		f.action="<%=cp%>/promote/created";
+		f.submit();
+	}
+	
+	
 	
 }
+
+
 
 </script>
 
@@ -80,18 +95,19 @@ function insertBoard(){
 			<tr>
 				<th style="width: 100px; ">제목</th>
 				<td><input type="text" name="subject" 
-					class="subject" maxlength="100" style="width: 450px;" /></td>
+					class="subject" maxlength="100" style="width: 450px;" value="${dto.subject }"/></td>
 			</tr>
 			
 			<tr>
 				<th>스터디</th>
 				<td>
+				
 					<select style="width: 100px;" name="s_num">
-						<option value="1">::</option>
-						
-						<option value="1">test</option>
-						
+					<c:forEach var="dto" items="${list }">
+						<option value=${dto.s_num }>${dto.studyName }</option>
+					</c:forEach>	
 					</select>
+				
 				</td>
 			</tr>
 			
@@ -103,21 +119,24 @@ function insertBoard(){
 
 			<tr>
 				<td colspan="2"><textarea name="content" id="ment" 
-						style="width: 100%; height: 300px;" ></textarea></td>
+						style="width: 100%; height: 300px;" >${dto.content }</textarea></td>
 			</tr>
-
+			
+			<c:if test="${mode =='created'}">
 			<tr>
 				<th>이미지</th>
 				<td><input type="file" name="upload" id="file1" style="border: none;">
 				</td>
 			</tr>
-
-
+			</c:if>
+			
+			
 		</tbody>
 	</table>
 	
 	<div class="read_btnArea">
-		<button type="button" class="clickbtn" onclick="insertBoard();">등록하기</button>
+		<input type="hidden" name="num" value="${num}">
+		<button type="button" class="clickbtn" onclick="insertBoard();">${mode=='update'?'수정하기':'등록하기'}</button>
 		<button type="button" class="clickbtn" onclick="javascript:location.href='<%=cp%>/promote/list';">돌아가기</button>
 	</div>
 </form>

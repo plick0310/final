@@ -83,10 +83,9 @@ function insertBoard(){
 				<th>스터디</th>
 				<td>
 					<select style="width: 100px;" name="s_num">
-						<option value="1">::</option>
-						
-						<option value="1">test</option>
-						
+						<c:forEach var="dto" items="${list }">
+							<option value=${dto.s_num }>${dto.studyName }</option>
+						</c:forEach>	
 					</select>
 				</td>
 			</tr>

@@ -6,6 +6,17 @@
 	String cp=request.getContextPath();
 %>
 <style>
+.form-group {
+	margin: 10px;
+}
+.form-horizontal {
+	padding: 10px;
+}
+.modal-dialog {
+	width: 600px;
+	height: 600px;
+    margin: 20% auto;
+}
 .mail-box {
     border-collapse: collapse;
     border-spacing: 0;
@@ -235,9 +246,10 @@ ul.inbox-pagination li {
     margin-left: 5px;
 }
 .inbox-pagination li span {
+	margin: 2px 10px 0px 0px;
     display: inline-block;
-    margin-right: 5px;
-    margin-top: 7px;
+    font-size: 14px;
+    font-weight: 600;
 }
 .fileinput-button {
     background: none repeat scroll 0 0 #eeeeee;
@@ -373,21 +385,46 @@ ul {
 }
 </style>
 <script type="text/javascript">
+var mode = "all";
+var page = 1;
 $(document).ready(function(){
 	$.ajax({
 		url:"<%=cp%>/message/list",
-		type:"POST",
 		dataType:"html",
 		success : function(data) {
 		$('.msg-list').html(data);
 		}
 	});
-	
+	$.ajax({
+		url:"<%=cp%>/message/count",
+		type : "POST",
+		dataType:"JSON",
+		success : function(data) {
+			$('#recv_Count').html(data.recv_Count);
+		}
+	});
+	noreadCount = setInterval(function() {
+		$.ajax({
+			url:"<%=cp%>/message/count",
+			type : "POST",
+			dataType:"JSON",
+			success : function(data) {
+				$('#recv_Count').html(data.recv_Count);
+			}
+		});
+		$.ajax({
+			url:"<%=cp%>/message/list?mode=" + mode + "&page=" + page,
+			dataType:"html",
+			success : function(data) {
+			$('.msg-list').html(data);
+			}
+		});
+	}, 3000);
 	$(".inbox-nav li").click(function () {
+		mode = $(this).attr('id');
+		page = 1;
 		$(".inbox-nav li").removeClass("active");
 		$(this).addClass("active");
-		var fileName;
-		mode = $(this).attr('id');
 		$.ajax({
 			url:"<%=cp%>/message/list?mode=" + mode,
 			dataType:"html",
@@ -396,8 +433,31 @@ $(document).ready(function(){
 			}
 		});
 	});
+	$("#myModal").on('hidden.bs.modal', function () {
+		$("#recv_Id").val("");
+		$("#recv_Id").removeAttr('readonly');
+	});
 });
+function messagePaging(paging) {
+	page = paging;
+	$.ajax({
+		url:"<%=cp%>/message/list?mode=" + mode + "&page=" + page,
+		dataType:"html",
+		success : function(data) {
+		$('.msg-list').html(data);
+		}
+	});
+}
 
+function sendMsg(userId) {
+	$("#recv_Id").val(userId);
+	$("#recv_Id").attr('readonly', 'readonly');
+	$("#myModal").modal('show');
+}
+
+function readMsg() {
+	
+}
 
 </script>
 <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
@@ -424,48 +484,37 @@ $(document).ready(function(){
                           <a href="#myModal" data-toggle="modal"  title="Compose"    class="btn btn-compose">
                               	새 쪽지 보내기
                           </a>
+                          
                           <!-- Modal -->
                           <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" style="display: none;">
                               <div class="modal-dialog">
                                   <div class="modal-content">
                                       <div class="modal-header">
                                           <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                                          <h4 class="modal-title">Compose</h4>
+                                          <h4 class="modal-title">쪽지 보내기</h4>
                                       </div>
                                       <div class="modal-body">
                                           <form role="form" class="form-horizontal">
+                                          <div class="form-group">
+                                                  <label class="col-lg-2 control-label">From</label>
+                                                  <div class="col-lg-10">
+                                                      <input type="text" class="form-control" id="sent_Id" name="sent_Id" readonly="readonly" value="${sessionScope.member.userName}(${sessionScope.member.userId})">
+                                                  </div>
+                                              </div>
                                               <div class="form-group">
                                                   <label class="col-lg-2 control-label">To</label>
                                                   <div class="col-lg-10">
-                                                      <input type="text" placeholder="" id="inputEmail1" class="form-control">
-                                                  </div>
-                                              </div>
-                                              <div class="form-group">
-                                                  <label class="col-lg-2 control-label">Cc / Bcc</label>
-                                                  <div class="col-lg-10">
-                                                      <input type="text" placeholder="" id="cc" class="form-control">
-                                                  </div>
-                                              </div>
-                                              <div class="form-group">
-                                                  <label class="col-lg-2 control-label">Subject</label>
-                                                  <div class="col-lg-10">
-                                                      <input type="text" placeholder="" id="inputPassword1" class="form-control">
+                                                      <input type="text" placeholder="받는 분의 아이디(example@example.com)" class="form-control" id="recv_Id" name="recv_Id" required="required">
                                                   </div>
                                               </div>
                                               <div class="form-group">
                                                   <label class="col-lg-2 control-label">Message</label>
                                                   <div class="col-lg-10">
-                                                      <textarea rows="10" cols="30" class="form-control" id="" name=""></textarea>
+                                                      <textarea rows="10" cols="30" placeholder="보내실 내용을 입력해주세요." class="form-control" id="content" name="content" required="required"></textarea>
                                                   </div>
                                               </div>
-
                                               <div class="form-group">
-                                                  <div class="col-lg-offset-2 col-lg-10">
-                                                      <span class="btn green fileinput-button">
-                                                        <i class="fa fa-plus fa fa-white"></i>
-                                                        <span>Attachment</span>
-                                                        <input type="file" name="files[]" multiple="multiple">
-                                                      </span>
+                                                  <div class="col-lg-offset-2 col-lg-10 text-right">
                                                       <button class="btn btn-send" type="submit">Send</button>
                                                   </div>
                                               </div>
@@ -473,20 +522,22 @@ $(document).ready(function(){
                                       </div>
                                   </div><!-- /.modal-content -->
                               </div><!-- /.modal-dialog -->
-                          </div><!-- /.modal -->
+                          </div>
+                          <!-- /.modal -->
+                          
                       </div>
                       <ul class="inbox-nav inbox-divider">
-                          <li id="receive" class="active" >
-                              <a href="#"><i class="fa fa-inbox"></i> 받은 쪽지함<span class="label label-danger pull-right">2</span></a>
+                      	  <li id="all" class="active" >
+                              <a href="#"><i class="fa fa-envelope-o"></i> 전체 쪽지함</a>
+                          </li>
+                          <li id="receive">
+                              <a href="#"><i class="fa fa-inbox"></i> 받은 쪽지함<span class="label label-danger pull-right" id="recv_Count"></span></a>
                           </li>
                           <li id="send">
-                              <a href="#"><i class="fa fa-envelope-o"></i>보낸 쪽지함</a>
+                              <a href="#"><i class="fa fa-paper-plane-o"></i>보낸 쪽지함</a>
                           </li>
                           <li id="keep">
-                              <a href="#"><i class="fa fa-bookmark-o"></i> 쪽지 보관함</a>
-                          </li>
-                          <li>
-                              <a href="#"><i class=" fa fa-external-link"></i>이건뭘로하지<span class="label label-info pull-right">30</span></a>
+                              <a href="#"><i class="fa fa-folder-o"></i> 쪽지 보관함</a>
                           </li>
                           <li id="trash">
                               <a href="#"><i class=" fa fa-trash-o"></i> 휴지통</a>

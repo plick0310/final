@@ -24,4 +24,5 @@ public interface ReviewService {
 	public List<ReviewReply> listReply(Map<String, Object> map);
 	public int replyDataCount(Map<String, Object> map);
 	public int deleteReply(Map<String, Object> map);
+	public List<Review> pushStudy(Map<String, Object>map);
 }

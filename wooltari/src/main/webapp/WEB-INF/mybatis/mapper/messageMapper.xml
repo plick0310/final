@@ -4,10 +4,13 @@
 <mapper namespace="message">
 	<!-- 메시지 전송 -->
 	<insert id="sendMessage" parameterType="com.wooltari.message.Message">
-		INSERT INTO message(num, sent_Id, recv_Id, content) VALUES (message_seq.NEXTVAL, #{sent_Id}, #{recv_Id}, #{content})
+		INSERT INTO message(num, sent_Id, recv_Id, sent_Name, recv_Name, content) VALUES (message_seq.NEXTVAL, #{sent_Id}, #{recv_Id}, #{sent_Name}, #{recv_Name}, #{content})
     </insert>
     
     <sql id="where-mode">
+    	<if test="mode=='all'">
+		(recv_Id = #{userId} OR sent_Id = #{userId}) AND recv_Category != 0
+		</if>
 		<if test="mode=='receive'">
 		recv_Id = #{userId} AND recv_Category = 1
 		</if>
@@ -36,12 +39,20 @@
 	    </where>
 	</select>
 	
+	<!-- 읽지 않은 메시지 개수 -->
+	<select id="noreadCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0) FROM message
+		WHERE recv_Id = #{userId} AND recv_Category = 1 AND read = 0
+	</select>
+	
 	<!-- 쪽지 리스트 -->
 	<select id="listMessage" parameterType="map" resultType="com.wooltari.message.Message">
 		SELECT * FROM (
-		    SELECT ROWNUM rnum, tb.* FROM (
-				SELECT num, sent_Id, recv_Id, content, date_Sent, date_Read, read, sent_Category, recv_Category
-				FROM message
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT num, sent_Id, recv_Id, sent_Name, userId AS recv_Name, content, date_Sent, date_Read, read, sent_Category, recv_Category FROM(
+					SELECT num, sent_Id, recv_Id, userId AS sent_Name, content, date_Sent, date_Read, read, sent_Category, recv_Category
+					FROM message msg JOIN member mem ON msg.sent_Id = mem.userId
+				)tb JOIN member mem ON tb.recv_Id = mem.userId
             <where>
 				<include refid="where-mode"/>
 				<include refid="where-value"/>
@@ -55,8 +66,10 @@
 	
 	<!-- 쪽지 보기 -->
 	<select id="readMessage" resultType="com.wooltari.message.Message" parameterType="Integer">
-		SELECT num, sent_Id, recv_Id, content, date_Sent, date_Read, read, sent_Category, recv_Category
-		FROM message
+		SELECT num, sent_Id, recv_Id, sent_Name, userId AS recv_Name, content, date_Sent, date_Read, read, sent_Category, recv_Category FROM(
+			SELECT num, sent_Id, recv_Id, userId AS sent_Name, content, date_Sent, date_Read, read, sent_Category, recv_Category
+				FROM message msg JOIN member mem ON msg.sent_Id = mem.userId
+			)tb JOIN member mem ON tb.recv_Id = mem.userId
 		WHERE num = #{num}
 	</select>
 	

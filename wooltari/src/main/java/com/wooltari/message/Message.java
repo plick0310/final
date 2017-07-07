@@ -2,7 +2,7 @@ package com.wooltari.message;
 
 public class Message {
 	private int listNum, num, sent_Category, recv_Category, read;
-	private String sent_Id, recv_Id, content, date_Sent, date_Read;
+	private String sent_Id, recv_Id, sent_Name, recv_Name, content, date_Sent, date_Read;
 	public int getListNum() {
 		return listNum;
 	}
@@ -45,6 +45,18 @@ public class Message {
 	public void setRecv_Id(String recv_Id) {
 		this.recv_Id = recv_Id;
 	}
+	public String getSent_Name() {
+		return sent_Name;
+	}
+	public void setSent_Name(String sent_Name) {
+		this.sent_Name = sent_Name;
+	}
+	public String getRecv_Name() {
+		return recv_Name;
+	}
+	public void setRecv_Name(String recv_Name) {
+		this.recv_Name = recv_Name;
+	}
 	public String getContent() {
 		return content;
 	}
@@ -63,4 +75,6 @@ public class Message {
 	public void setDate_Read(String date_Read) {
 		this.date_Read = date_Read;
 	}
+	
+	
 }

@@ -103,18 +103,15 @@ input[id=allCheck]:checked + label:before {
     line-height: 15px;  
 
 } 
-.clickbtn{
-background-color: white;
-border-style: solid;
-padding: 5px 20px;
 
-margin-right: 10px;
-border: 1px solid #EAEAEA;  
-
+.clickbtn {
+   background-color: white;
+   border-style: solid;
+   padding: 5px 20px;
+   margin-left: 10px;
+   font-size:13px;
+   border: 1px solid #EAEAEA;
 }
-
-
-
 
            
 </style>
@@ -180,8 +177,12 @@ function search(){
 				<td>
 					<div style="position:relative;">
 						
-						<a href="${articleUrl}&num=${dto.num}" class="subject">IT/컴퓨터&nbsp;&nbsp;&nbsp;&nbsp;서울&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.subject}&nbsp;&nbsp; </a><span class="comment">[${dto.replyCount}]</span>
+						<a href="${articleUrl}&num=${dto.num}" class="subject">카테고리>${dto.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;지역>${dto.cityName }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;성별>${dto.gender}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;대상>${dto.target }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정원>${dto.recruit }명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${dto.subject}</a><span class="comment">[${dto.replyCount}]</span>
 					
+						 <c:if test="${dto.gap < 1}">
+			               <img src='<%=cp%>/resource/images/new.gif'>
+			             </c:if>
+			             
 						<div class="info">
 							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">${dto.created}</span>
 							<span class="__dotted"></span>

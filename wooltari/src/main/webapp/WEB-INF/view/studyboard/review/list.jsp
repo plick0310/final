@@ -70,6 +70,7 @@ function readBoard(num){
 	var url="<%=cp%>/review/article?num="+num+"&page="+${page};
 	$("#myModalBody").load(url);
 	$("#myModal").modal("show");
+	
 };
 
 function countStar(num){
@@ -78,7 +79,7 @@ function countStar(num){
 		var count=data.countStar;
 		var many=data.manyStar;
 		
-		$("#countStar").html(count);
+		$("#countStar").html("계산중...");
 		$("#countMany").html(many);
 	},"json");
 }
@@ -203,6 +204,7 @@ function deleteBoard(){
             <div class="caption">
                <h4 style="text-align: center; font-size: 15px;">제목 :${dto.subject } </h4>
                <h4 style="text-align: center; font-size: 15px;">작성자 : ${dto.userName}</h4>
+               <h4 style="text-align: center; font-size: 15px;">스터디명 : ${dto.studyName}</h4>
             </div>
          </div>
 </button>
@@ -218,12 +220,11 @@ function deleteBoard(){
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
   <div class="modal-dialog">
     <div class="modal-content">
-      <!-- <div class="modal-header" style="height: 50px; ">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div> -->
       <div id="myModalBody" class="modal-body" style="height: 500px; "></div>
-      <div class="modal-footer">
+      <div class="modal-footer" style="margin-top: -5px;">
+      		
          <button type="button" class="btn btn-default" style="width: 65px; height: 30px; background: #1abc9c; padding-top: 3px; padding-left: 13px;" onclick="deleteBoard();">삭제</button>
+       
          <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 65px; height: 30px; background: #1abc9c; padding-top: 3px; padding-left: 7px;">리스트</button>
          <button type="button" class="btn btn-default" style="width: 65px; height: 30px; background: #1abc9c; padding-top: 3px; padding-left: 13px;" onclick="insertStar();">평가</button>
       </div>
