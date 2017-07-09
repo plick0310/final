@@ -15,8 +15,18 @@ public class Board {
 	private int likeCount;
 	private int replyCount;
 	
+	private int likeCheck;
 	
 	
+	
+	public int getLikeCheck() {
+		return likeCheck;
+	}
+
+	public void setLikeCheck(int likeCheck) {
+		this.likeCheck = likeCheck;
+	}
+
 	public int getReplyCount() {
 		return replyCount;
 	}
