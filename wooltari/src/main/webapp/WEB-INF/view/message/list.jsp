@@ -41,7 +41,7 @@
         </div>
     </div>
 	
-    <div class="btn-group">
+    <div class="btn-group"> 
         <a data-original-title="Refresh" href="javascript:reload();" class="btn mini tooltips">
             <i class=" fa fa-refresh"></i>
         </a>
