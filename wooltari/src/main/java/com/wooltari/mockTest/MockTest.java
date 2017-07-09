@@ -10,9 +10,16 @@ public class MockTest {
 	private String examInfoOrgan;
 	private String questionSubject;
 	private String examwishDate;
+	private String checkMode;
 	
 	
 	
+	public String getCheckMode() {
+		return checkMode;
+	}
+	public void setCheckMode(String checkMode) {
+		this.checkMode = checkMode;
+	}
 	public Integer getGap() {
 		return gap;
 	}
