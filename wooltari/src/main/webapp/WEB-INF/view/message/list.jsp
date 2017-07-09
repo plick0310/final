@@ -37,18 +37,12 @@
     <div class="chk-all">
         <input type="checkbox" class="mail-checkbox mail-group-checkbox">
         <div class="btn-group">
-            <a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false">
-            	 전체 <i class="fa fa-angle-down "></i>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="#">읽지 않은 쪽지</a></li>
-                <li><a href="#">읽은 쪽지</a></li>
-            </ul>
+            <a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false">전체선택</a>
         </div>
     </div>
-
+	
     <div class="btn-group">
-        <a data-original-title="Refresh" data-placement="top" data-toggle="dropdown" href="#" class="btn mini tooltips">
+        <a data-original-title="Refresh" href="javascript:reload();" class="btn mini tooltips">
             <i class=" fa fa-refresh"></i>
         </a>
     </div>
@@ -58,22 +52,8 @@
             <i class="fa fa-angle-down "></i>
         </a>
         <ul class="dropdown-menu">
-            <li><a href="#"><i class="fa fa-pencil"></i> 읽음표시</a></li>
-            <li><a href="#"><i class="fa fa-ban"></i> 스팸</a></li>
-            <li class="divider"></li>
-            <li><a href="#"><i class="fa fa-trash-o"></i> 휴지통</a></li>
-        </ul>
-    </div>
-    <div class="btn-group">
-        <a data-toggle="dropdown" href="#" class="btn mini blue">
-            	이동
-            <i class="fa fa-angle-down "></i>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a href="#"><i class="fa fa-pencil"></i> 읽음표시</a></li>
-            <li><a href="#"><i class="fa fa-ban"></i> 스팸</a></li>
-            <li class="divider"></li>
-            <li><a href="#"><i class="fa fa-trash-o"></i> 휴지통</a></li>
+        	<li><a href="#"><i class="fa fa-folder-o"></i> 보관함으로 이동</a></li>
+            <li><a href="#"><i class="fa fa-trash-o"></i> 휴지통으로 이동</a></li>
         </ul>
     </div>
 

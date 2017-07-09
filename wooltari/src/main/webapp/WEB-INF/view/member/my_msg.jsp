@@ -258,9 +258,38 @@ ul.inbox-pagination {
 <script type="text/javascript">
 var mode = "all";
 var page = 1;
+var searchValue = "";
 $(document).ready(function(){
+	reload();
+	noreadCount = setInterval(function() {
+		reload();
+	}, 300000);
+	$(".inbox-nav li").click(function () {
+		mode = $(this).attr('id');
+		page = 1;
+		searchValue = "";
+		$(".inbox-nav li").removeClass("active");
+		$(this).addClass("active");
+		reload();
+	});
+	$("#myModal").on('hidden.bs.modal', function () {
+		$('#send-btn').show();
+		$("#recv_Id").val("");
+		$("#content").val("");
+		$("#recv_Id").removeAttr('readonly');
+		$("#content").removeAttr('readonly');
+		reload();
+	});
+});
+
+function messagePaging(paging) {
+	page = paging;
+	reload();
+}
+
+function reload(){
 	$.ajax({
-		url:"<%=cp%>/message/list",
+		url:"<%=cp%>/message/list?mode=" + mode + "&page=" + page + "&searchValue=" + searchValue,
 		dataType:"html",
 		success : function(data) {
 		$('.msg-list').html(data);
@@ -271,72 +300,26 @@ $(document).ready(function(){
 		type : "POST",
 		dataType:"JSON",
 		success : function(data) {
-			$('#recv_Count').html(data.recv_Count);
-		}
-	});
-	noreadCount = setInterval(function() {
-		$.ajax({
-			url:"<%=cp%>/message/count",
-			type : "POST",
-			dataType:"JSON",
-			success : function(data) {
+			if(data.recv_Count != 0){
 				$('#recv_Count').html(data.recv_Count);
+			}else{
+				$('#recv_Count').html("");
 			}
-		});
-		$.ajax({
-			url:"<%=cp%>/message/list?mode=" + mode + "&page=" + page,
-			dataType:"html",
-			success : function(data) {
-			$('.msg-list').html(data);
-			}
-		});
-	}, 300000);
-	$(".inbox-nav li").click(function () {
-		mode = $(this).attr('id');
-		page = 1;
-		$(".inbox-nav li").removeClass("active");
-		$(this).addClass("active");
-		$.ajax({
-			url:"<%=cp%>/message/list?mode=" + mode,
-			dataType:"html",
-			success : function(data) {
-			$('.msg-list').html(data);
-			}
-		});
-	});
-	$("#myModal").on('hidden.bs.modal', function () {
-		$("#recv_Id").val("");
-		$("#content").val("");
-		$("#recv_Id").removeAttr('readonly');
-		$("#content").removeAttr('readonly');
-	});
-});
-function messagePaging(paging) {
-	page = paging;
-	$.ajax({
-		url:"<%=cp%>/message/list?mode=" + mode + "&page=" + page,
-		dataType:"html",
-		success : function(data) {
-		$('.msg-list').html(data);
 		}
 	});
 }
 
-function sendMsg(userId) {
-	$("#recv_Id").val(userId);
-	$("#recv_Id").attr('readonly', 'readonly');
-	$("#myModal").modal('show');
-}
-
-<%-- function readMsg(num) {
-	var params = {"num" : num}
+function readMsg(num) {
+	var params = "num="+num;
 	$.ajax({
-			url: '<%=cp%>/message/read,
+			url: '<%=cp%>/message/read',
 			type: 'POST',
 			data:params,
 			dataType: 'JSON',
 			success: function (data) {
+				var state = data.state;
 				if(state=="true") { 
+					$('#send-btn').hide();
 					$("#sent_Id").val(data.sent_Id);
 					$("#recv_Id").val(data.recv_Id);
 					$("#recv_Id").attr('readonly', 'readonly');
@@ -351,7 +334,13 @@ function sendMsg(userId) {
 				console.log(e.responseText);
 			}
 	});
-} --%>
+}
+
+function sendMsg(userId) {
+	$("#recv_Id").val(userId);
+	$("#recv_Id").attr('readonly', 'readonly');
+	$("#myModal").modal('show');
+}
 
 function submitMsg() {
     var params = jQuery("#form-horizontal").serialize(); // serialize() : 입력된 모든Element(을)를 문자열의 데이터에 serialize 한다.
@@ -363,11 +352,9 @@ function submitMsg() {
         success: function (data) {
         	var state = data.state;
         	if(state=="true") { 
-				alert("전송 완료!");
 				$('.modal.in').modal('hide') 
 			} else {
 				alert("전송 실패! 받는사람을 확인 해 주세요.");
-				$('.modal.in').modal('hide')
 			}
         }
         ,error:function(e) {
@@ -377,14 +364,8 @@ function submitMsg() {
 }
 
 function searchMsg() {
-	var searchValue = $('.sr-input').val();
-	$.ajax({
-		url:"<%=cp%>/message/list?mode=" + mode + "&searchValue=" + searchValue,
-		dataType:"html",
-		success : function(data) {
-		$('.msg-list').html(data);
-		}
-	});
+	searchValue = $('.sr-input').val();
+	reload();
 }
 
 </script>
@@ -414,31 +395,31 @@ function searchMsg() {
 					<div class="modal-content">
 						<div class="modal-header">
 							<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-							<h4 class="modal-title">쪽지 보내기</h4>
+							<h4 class="modal-title">쪽지</h4>
 						</div>
 						<div class="modal-body">
 							<form role="form" id="form-horizontal" class="form-horizontal" method="post">
 								<div class="form-group">
-									<label class="col-lg-2 control-label">From</label>
+									<label class="col-lg-2 control-label">받는 사람</label>
 									<div class="col-lg-10">
 										<input type="text" class="form-control" id="sent_Id" name="sent_Id" readonly="readonly" value="${sessionScope.member.userName}(${sessionScope.member.userId})">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-lg-2 control-label">To</label>
+									<label class="col-lg-2 control-label">보낸 사람</label>
 									<div class="col-lg-10">
 										<input type="text" placeholder="받는 분의 아이디(example@example.com)" class="form-control" id="recv_Id" name="recv_Id" required="required">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-lg-2 control-label">Message</label>
+									<label class="col-lg-2 control-label">내용</label>
 									<div class="col-lg-10">
 										<textarea rows="10" cols="30" placeholder="보내실 내용을 입력해주세요." class="form-control" id="content" name="content" required="required"></textarea>
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-lg-offset-2 col-lg-10 text-right">
-										<button class="btn btn-send" type="button" onclick="submitMsg()">Send</button>
+										<button id="send-btn" name="send-btn" class="btn btn-send" type="button" onclick="submitMsg()">Send</button>
 									</div>
 								</div>
 							</form>

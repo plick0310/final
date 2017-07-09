@@ -48,12 +48,16 @@ public class MessageController {
 	
 	@RequestMapping(value="/message/read")
 	@ResponseBody
-	public Map<String, Object> msgRead(@RequestParam int num) throws Exception {
+	public Map<String, Object> msgRead(@RequestParam int num, HttpSession session) throws Exception {
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		Map<String, Object> model = new HashMap<>();
 		String state = "false";
 		Message dto = null;
 		try {
 			dto = service.readMessage(num);
+			if(dto.getRecv_Id().equals(info.getUserId())){
+				service.updateReadMessage(num);
+			}
 		} catch (Exception e) {
 			model.put("state", state);
 		}
@@ -147,7 +151,7 @@ public class MessageController {
         
         
         String paging = myUtil.pagingMethod(current_page, total_page, "messagePaging");
-        System.out.println(mode);
+        System.out.println("mode : " + mode + " / page : " + current_page + " / searchValue : " + searchValue);
         
         model.addAttribute("list", list);
         model.addAttribute("mode", mode);
