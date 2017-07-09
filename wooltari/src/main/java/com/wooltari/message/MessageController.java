@@ -33,22 +33,36 @@ public class MessageController {
 	public Map<String, Object> memberChat(Message dto, HttpSession session) throws Exception {
 		Map<String, Object> model = new HashMap<>();
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		String result = "false";
+		String state = "false";
 		try {
 			dto.setSent_Id(info.getUserId());
 			service.sendMessage(dto);
 		} catch (Exception e) {
-			model.put("result", result);
+			model.put("state", state);
 			return model;
 		}
-		result = "true";
-		model.put("result", result);
+		state = "true";
+		model.put("state", state);
 		return model;
 	}
 	
-	@RequestMapping(value="/message/read", method=RequestMethod.GET)
-	public String msgRead() throws Exception {
-		return "message/";
+	@RequestMapping(value="/message/read")
+	@ResponseBody
+	public Map<String, Object> msgRead(@RequestParam int num) throws Exception {
+		Map<String, Object> model = new HashMap<>();
+		String state = "false";
+		Message dto = null;
+		try {
+			dto = service.readMessage(num);
+		} catch (Exception e) {
+			model.put("state", state);
+		}
+		state = "true";
+		model.put("state", state);
+		model.put("sent_Id", dto.getSent_Id());
+		model.put("recv_Id", dto.getRecv_Id());
+		model.put("content", dto.getContent());
+		return model;
 	}
 	
 	@RequestMapping(value="/message/count", method=RequestMethod.POST)
@@ -84,6 +98,8 @@ public class MessageController {
 		if(req.getMethod().equalsIgnoreCase("GET")) { // GET 방식인 경우
 			searchValue = URLDecoder.decode(searchValue, "utf-8");
 		}
+		
+		System.out.println(searchValue);
 		
 		//전체 페이지 수
 		Map<String, Object> map = new HashMap<String, Object>();

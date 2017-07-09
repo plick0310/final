@@ -94,10 +94,10 @@
 		
 		<c:forEach var="dto" items="${list}">
 			<c:if test="${dto.read == 0}">
-				<tr class="unread">
+				<tr class="unread" onclick="readMsg(${dto.num});"> 
 			</c:if>
 			<c:if test="${dto.read == 1}">
-				<tr class="">
+				<tr class="" onclick="readMsg(${dto.num});">
 			</c:if>
 					<td class="inbox-small-cells">
 						<input type="checkbox" class="mail-checkbox" value="${dto.num}">
@@ -118,7 +118,9 @@
 							<a href="javascript:sendMsg('${dto.recv_Id}');" data-toggle="modal">${dto.recv_Name}</a>
 						</c:if>
 					</td>
-					<td class="view-message text-left">${dto.content}</td>
+					<td class="view-message text-left">
+						<a href="javascript:readMsg('${dto.num}');" data-toggle="modal">${dto.content}</a>
+					</td>
 					<td class="inbox-small-cells">${dto.date_Sent}</td>
 					<td class="view-message">
 						<c:if test="${dto.read == 1}"><i class="fa fa-envelope-open-o" aria-hidden="true"></i></c:if>

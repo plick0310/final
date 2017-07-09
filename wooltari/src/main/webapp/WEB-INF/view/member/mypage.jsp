@@ -85,6 +85,9 @@
     padding: 0 20px;
     margin-bottom: 17px;
 }
+.btn-pref {
+	margin-top: 50px;
+}
 .btn-pref .btn {
     -webkit-border-radius:0 !important;
 }
@@ -134,6 +137,7 @@ $(document).ready(function(){
 
 </script>
 <div class="container">
+	<%-- 
     <div class="card hovercard">
         <div class="card-background">
             <img class="card-bkimg" alt="" src="<%=cp%>/resource/img/card.jpg">
@@ -151,6 +155,7 @@ $(document).ready(function(){
 
         </div>
     </div>
+     --%>
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
         <div class="btn-group" role="group">
             <button type="button" id="my_main" class="btn btn-primary" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>

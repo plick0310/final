@@ -6,9 +6,6 @@
 	String cp=request.getContextPath();
 %>
 <style>
-.form-group {
-	margin: 10px;
-}
 .form-horizontal {
 	padding: 10px;
 }
@@ -205,12 +202,6 @@ ul.labels-info li a i {
     background: none repeat scroll 0 0 #f7f7f7;
     font-weight: 600;
 }
-ul.inbox-pagination {
-    float: right;
-}
-ul.inbox-pagination li {
-    float: left;
-}
 .mail-option {
     display: inline-block;
     margin-bottom: 10px;
@@ -227,33 +218,12 @@ ul.inbox-pagination li {
     display: inline-block;
     padding: 5px 10px;
 }
-.inbox-pagination a.np-btn {
-    background: none repeat scroll 0 0 #fcfcfc;
-    border: 1px solid #e7e7e7;
-    border-radius: 3px !important;
-    color: #afafaf;
-    display: inline-block;
-    padding: 5px 15px;
-}
 .mail-option .chk-all input[type="checkbox"] {
     margin-top: 0;
 }
 .mail-option .btn-group a.all {
     border: medium none;
     padding: 0;
-}
-.inbox-pagination a.np-btn {
-    margin-left: 5px;
-}
-.inbox-pagination li span {
-	margin: 2px 10px 0px 0px;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 600;
-}
-.fileinput-button {
-    background: none repeat scroll 0 0 #eeeeee;
-    border: 1px solid #e6e6e6;
 }
 .inbox-body .modal .modal-body input, .inbox-body .modal .modal-body textarea {
     border: 1px solid #e6e6e6;
@@ -274,114 +244,15 @@ ul.inbox-pagination li {
     font-family: "Open Sans",sans-serif;
     font-weight: 400;
 }
-.heading-inbox h4 {
-    border-bottom: 1px solid #ddd;
-    color: #444;
-    font-size: 18px;
-    margin-top: 20px;
-    padding-bottom: 10px;
-}
-.sender-info {
-    margin-bottom: 20px;
-}
-.sender-info img {
-    height: 30px;
-    width: 30px;
-}
-.sender-dropdown {
-    background: none repeat scroll 0 0 #eaeaea;
-    color: #777;
-    font-size: 10px;
-    padding: 0 3px;
-}
-.view-mail a {
-    color: #ff6c60;
-}
-.attachment-mail {
-    margin-top: 30px;
-}
-.attachment-mail ul {
-    display: inline-block;
-    margin-bottom: 30px;
-    width: 100%;
-}
-.attachment-mail ul li {
-    float: left;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    width: 150px;
-}
-.attachment-mail ul li img {
-    width: 100%;
-}
-.attachment-mail ul li span {
-    float: right;
-}
-.attachment-mail .file-name {
-    float: left;
-}
-.attachment-mail .links {
-    display: inline-block;
-    width: 100%;
-}
-
-.fileinput-button {
-    float: left;
-    margin-right: 4px;
-    overflow: hidden;
-    position: relative;
-}
-.fileinput-button input {
-    cursor: pointer;
-    direction: ltr;
-    font-size: 23px;
-    margin: 0;
-    opacity: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transform: translate(-300px, 0px) scale(4);
-}
-.fileupload-buttonbar .btn, .fileupload-buttonbar .toggle {
-    margin-bottom: 5px;
-}
-.files .progress {
-    width: 200px;
-}
-.fileupload-processing .fileupload-loading {
-    display: block;
-}
-* html .fileinput-button {
-    line-height: 24px;
-    margin: 1px -3px 0 0;
-}
-* + html .fileinput-button {
-    margin: 1px 0 0;
-    padding: 2px 15px;
-}
-@media (max-width: 767px) {
-.files .btn span {
-    display: none;
-}
-.files .preview * {
-    width: 40px;
-}
-.files .name * {
-    display: inline-block;
-    width: 80px;
-    word-wrap: break-word;
-}
-.files .progress {
-    width: 20px;
-}
-.files .delete {
-    width: 60px;
-}
-}
 ul {
     list-style-type: none;
     padding: 0px;
     margin: 0px;
+}
+ul.inbox-pagination {
+    float: right;
+	font-size: 12px;
+	font-weight: 600;
 }
 </style>
 <script type="text/javascript">
@@ -419,7 +290,7 @@ $(document).ready(function(){
 			$('.msg-list').html(data);
 			}
 		});
-	}, 3000);
+	}, 300000);
 	$(".inbox-nav li").click(function () {
 		mode = $(this).attr('id');
 		page = 1;
@@ -437,6 +308,7 @@ $(document).ready(function(){
 		$("#recv_Id").val("");
 		$("#content").val("");
 		$("#recv_Id").removeAttr('readonly');
+		$("#content").removeAttr('readonly');
 	});
 });
 function messagePaging(paging) {
@@ -456,10 +328,30 @@ function sendMsg(userId) {
 	$("#myModal").modal('show');
 }
 
-function readMsg(num) {
-
-}
-
+<%-- function readMsg(num) {
+	var params = {"num" : num}
+	$.ajax({
+			url: '<%=cp%>/message/read,
+			type: 'POST',
+			data:params,
+			dataType: 'JSON',
+			success: function (data) {
+				if(state=="true") { 
+					$("#sent_Id").val(data.sent_Id);
+					$("#recv_Id").val(data.recv_Id);
+					$("#recv_Id").attr('readonly', 'readonly');
+					$("#content").val(data.content);
+					$("#content").attr('readonly', 'readonly');
+					$("#myModal").modal('show');
+				} else {
+					alert("메시지 로딩 실패");
+				}
+			}
+			,error:function(e) {
+				console.log(e.responseText);
+			}
+	});
+} --%>
 
 function submitMsg() {
     var params = jQuery("#form-horizontal").serialize(); // serialize() : 입력된 모든Element(을)를 문자열의 데이터에 serialize 한다.
@@ -469,8 +361,8 @@ function submitMsg() {
         data:params,
         dataType: 'json',
         success: function (data) {
-        	var result = data.result;
-        	if(result=="true") { 
+        	var state = data.state;
+        	if(state=="true") { 
 				alert("전송 완료!");
 				$('.modal.in').modal('hide') 
 			} else {
@@ -484,141 +376,113 @@ function submitMsg() {
     });
 }
 
+function searchMsg() {
+	var searchValue = $('.sr-input').val();
+	$.ajax({
+		url:"<%=cp%>/message/list?mode=" + mode + "&searchValue=" + searchValue,
+		dataType:"html",
+		success : function(data) {
+		$('.msg-list').html(data);
+		}
+	});
+}
+
 </script>
 <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
 <div class="mail-box">
-                  <aside class="sm-side">
-                      <div class="user-head">
-                          <a class="inbox-avatar" href="javascript:;">
-                          	<c:if test="${not empty sessionScope.member.userImg}">
-					            <img alt="" src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}" width="60" height="60">
-				        	</c:if>
-				        	<c:if test="${empty sessionScope.member.userImg}">
-				        	    <img alt="" src="<%=cp%>/resource/img/noprofileimg.png" width="60" height="60">
-				        	</c:if>
-                          </a>
-                          <div class="user-name">
-                              <h5><a href="#">${dto.userName}</a></h5>
-                              <span><a href="#">${dto.userId}</a></span>
-                          </div>
-                          <a class="mail-dropdown pull-right" href="javascript:;">
-                              <i class="fa fa-chevron-down"></i>
-                          </a>
-                      </div>
-                      <div class="inbox-body">
-                          <a href="#myModal" data-toggle="modal"  title="Compose"    class="btn btn-compose">
-                              	새 쪽지 보내기
-                          </a>
-                          
-                          <!-- Modal -->
-                          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" style="display: none;">
-                              <div class="modal-dialog">
-                                  <div class="modal-content">
-                                      <div class="modal-header">
-                                          <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                                          <h4 class="modal-title">쪽지 보내기</h4>
-                                      </div>
-                                      <div class="modal-body">
-                                          <form role="form" id="form-horizontal" class="form-horizontal" method="post">
-                                          <div class="form-group">
-                                                  <label class="col-lg-2 control-label">From</label>
-                                                  <div class="col-lg-10">
-                                                      <input type="text" class="form-control" id="sent_Id" name="sent_Id" readonly="readonly" value="${sessionScope.member.userName}(${sessionScope.member.userId})">
-                                                  </div>
-                                              </div>
-                                              <div class="form-group">
-                                                  <label class="col-lg-2 control-label">To</label>
-                                                  <div class="col-lg-10">
-                                                      <input type="text" placeholder="받는 분의 아이디(example@example.com)" class="form-control" id="recv_Id" name="recv_Id" required="required">
-                                                  </div>
-                                              </div>
-                                              <div class="form-group">
-                                                  <label class="col-lg-2 control-label">Message</label>
-                                                  <div class="col-lg-10">
-                                                      <textarea rows="10" cols="30" placeholder="보내실 내용을 입력해주세요." class="form-control" id="content" name="content" required="required"></textarea>
-                                                  </div>
-                                              </div>
-                                              <div class="form-group">
-                                                  <div class="col-lg-offset-2 col-lg-10 text-right">
-                                                      <button class="btn btn-send" type="button" onclick="submitMsg()">Send</button>
-                                                  </div>
-                                              </div>
-                                          </form>
-                                      </div>
-                                  </div><!-- /.modal-content -->
-                              </div><!-- /.modal-dialog -->
-                          </div>
-                          <!-- /.modal -->
-                          
-                      </div>
-                      <ul class="inbox-nav inbox-divider">
-                      	  <li id="all" class="active" >
-                              <a href="#"><i class="fa fa-envelope-o"></i> 전체 쪽지함</a>
-                          </li>
-                          <li id="receive">
-                              <a href="#"><i class="fa fa-inbox"></i> 받은 쪽지함<span class="label label-danger pull-right" id="recv_Count"></span></a>
-                          </li>
-                          <li id="send">
-                              <a href="#"><i class="fa fa-paper-plane-o"></i>보낸 쪽지함</a>
-                          </li>
-                          <li id="keep">
-                              <a href="#"><i class="fa fa-folder-o"></i> 쪽지 보관함</a>
-                          </li>
-                          <li id="trash">
-                              <a href="#"><i class=" fa fa-trash-o"></i> 휴지통</a>
-                          </li>
-                      </ul>
-                      <ul class="nav nav-pills nav-stacked labels-info inbox-divider">
-                          <li> <h4>스터디 쪽지함</h4> </li>
-                          <li> <a href="#"> <i class=" fa fa-sign-blank text-danger"></i>Study1</a> </li>
-                          <li> <a href="#"> <i class=" fa fa-sign-blank text-success"></i>Study2</a> </li>
-                          <li> <a href="#"> <i class=" fa fa-sign-blank text-info "></i>Study3</a>
-                          </li><li> <a href="#"> <i class=" fa fa-sign-blank text-warning "></i>Study4</a>
-                          </li><li> <a href="#"> <i class=" fa fa-sign-blank text-primary "></i>Study5</a>
-                          </li>
-                      </ul>
-                      <ul class="nav nav-pills nav-stacked labels-info ">
-                          <li> <h4>스터디 멤버</h4> </li>
-                          <li> <a href="javascript:dialogURLID('/member/memberinfo', 'admin');"> <i class=" fa fa-circle text-success"></i>하동기</a>  </li>
-                          <li> <a href="javascript:dialogURL('/member/login');"> <i class=" fa fa-circle text-danger"></i>이형석</a> </li>
-                          <li> <a href="javascript:dialogChat();"> <i class=" fa fa-circle text-muted "></i>오세훈</a> </li>
-                          <li> <a href="javascript:dialogChat();"> <i class=" fa fa-circle text-muted "></i>이수정</a> </li>
-                          <li> <a href="javascript:dialogChat();"> <i class=" fa fa-circle text-muted "></i>이주영</a> </li>
-                          <li> <a href="javascript:dialogChat();"> <i class=" fa fa-circle text-muted "></i>이도현</a> </li>
-                      </ul>
-
-                      <div class="inbox-body text-center">
-                          <div class="btn-group">
-                              <a class="btn mini btn-primary" href="javascript:;">
-                                  <i class="fa fa-plus"></i>
-                              </a>
-                          </div>
-                          <div class="btn-group">
-                              <a class="btn mini btn-success" href="javascript:;">
-                                  <i class="fa fa-phone"></i>
-                              </a>
-                          </div>
-                          <div class="btn-group">
-                              <a class="btn mini btn-info" href="javascript:;">
-                                  <i class="fa fa-cog"></i>
-                              </a>
-                          </div>
-                      </div>
-
-                  </aside>
-                  <aside class="lg-side">
-                      <div class="inbox-head">
-                          <form action="#" class="pull-right position">
-                              <div class="input-append">
-                                  <input type="text" class="sr-input" placeholder="쪽지 검색">
-                                  <button class="btn sr-btn" type="button"><i class="fa fa-search"></i></button>
-                              </div>
-                          </form>
-                      </div>
-                      <div class="inbox-body">
-                      	<div class="msg-list">
-                       	  <!-- 여기가 쪽지 리스트 -->
+	<aside class="sm-side">
+		<div class="user-head">
+			<a class="inbox-avatar" href="javascript:;">
+			<c:if test="${not empty sessionScope.member.userImg}">
+				<img alt="" src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}" width="60" height="60">
+        	</c:if>
+			<c:if test="${empty sessionScope.member.userImg}">
+				<img alt="" src="<%=cp%>/resource/img/noprofileimg.png" width="60" height="60">
+			</c:if>
+			</a>
+			<div class="user-name">
+				<h5><a href="#">${dto.userName}</a></h5>
+				<span><a href="#">${dto.userId}</a></span>
+			</div>
+		</div>
+                  
+		<div class="inbox-body">
+			<a href="#myModal" data-toggle="modal"  title="Compose"    class="btn btn-compose">새 쪽지 보내기</a>
+			<!-- Modal -->
+			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" style="display: none;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+							<h4 class="modal-title">쪽지 보내기</h4>
 						</div>
-                      </div>
-                  </aside>
-              </div>
+						<div class="modal-body">
+							<form role="form" id="form-horizontal" class="form-horizontal" method="post">
+								<div class="form-group">
+									<label class="col-lg-2 control-label">From</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control" id="sent_Id" name="sent_Id" readonly="readonly" value="${sessionScope.member.userName}(${sessionScope.member.userId})">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">To</label>
+									<div class="col-lg-10">
+										<input type="text" placeholder="받는 분의 아이디(example@example.com)" class="form-control" id="recv_Id" name="recv_Id" required="required">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">Message</label>
+									<div class="col-lg-10">
+										<textarea rows="10" cols="30" placeholder="보내실 내용을 입력해주세요." class="form-control" id="content" name="content" required="required"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-lg-offset-2 col-lg-10 text-right">
+										<button class="btn btn-send" type="button" onclick="submitMsg()">Send</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal -->
+		</div>
+		
+		<ul class="inbox-nav inbox-divider">
+			<li id="all" class="active" >
+				<a href="#"><i class="fa fa-envelope-o"></i> 전체 쪽지함</a>
+			</li>
+			<li id="receive">
+				<a href="#"><i class="fa fa-inbox"></i> 받은 쪽지함<span class="label label-danger pull-right" id="recv_Count"></span></a>
+			</li>
+			<li id="send">
+				<a href="#"><i class="fa fa-paper-plane-o"></i>보낸 쪽지함</a>
+			</li>
+			<li id="keep">
+				<a href="#"><i class="fa fa-folder-o"></i> 쪽지 보관함</a>
+			</li>
+			<li id="trash">
+				<a href="#"><i class=" fa fa-trash-o"></i> 휴지통</a>
+			</li>
+		</ul>
+	</aside>
+	
+	
+	<aside class="lg-side">
+		<div class="inbox-head">
+			<form action="#" class="pull-right position">
+				<div class="input-append">
+					<input type="text" class="sr-input" placeholder="쪽지 검색">
+					<button class="btn sr-btn" type="button" onclick="searchMsg();"><i class="fa fa-search"></i></button>
+				</div>
+			</form>
+		</div>
+		
+		<div class="inbox-body">
+			<div class="msg-list">
+			<!-- 여기가 쪽지 리스트 -->
+			</div>
+		</div>
+	</aside>
+</div>

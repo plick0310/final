@@ -36,6 +36,7 @@
 		SELECT NVL(COUNT(*), 0) FROM message
 		<where>
 			<include refid="where-mode"/>
+			<include refid="where-value"/>
 	    </where>
 	</select>
 	
