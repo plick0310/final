@@ -49,6 +49,10 @@
 		SELECT NVL(COUNT(*),0) FROM ${tableName}_boardlike WHERE num=#{num}
 	</select>
 	
+	<!-- 좋아요 여부 -->
+	<select id="checkLike" parameterType="map" resultType="Integer">
+		SELECT num FROM ${tableName}_boardlike WHERE userId=#{userId}
+	</select>
 	
 	<!-- 댓글 *********************** -->
      <select id="maxReplyNum" resultType="Integer" parameterType="map">

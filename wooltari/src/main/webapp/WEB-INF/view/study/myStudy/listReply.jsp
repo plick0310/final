@@ -194,7 +194,7 @@ function listPage2(replyCount, num) {
 			out += "<br>" + content + "</div>";
 			
 			if (uid == userId) {
-				out += "<div id='delete'> <a onclick='deleteReply("+reNum+")';>삭제</a></div></li>"
+				out += "<div id='delete'> <a onclick='deleteReply("+num+","+reNum+")';>삭제</a></div></li>"
 			} else {
 				out += "<div id='delete'> <a onclick='';>신고</a></div></li>"
 			}

@@ -109,11 +109,16 @@ public class BoardController {
 			@RequestParam (value="bbs_count", defaultValue="1") int bbs_count, //현재 화면에 출력할 개수
 			HttpSession session){
 		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+	
 		Map<String, Object> map = new HashMap<>();
 		String tableName="s_"+s_num;		
 		map.put("tableName",tableName);
 		
 		int dataCount = service.dataCount(map); //데이터 총 개수
+		
+		//map.put("userId", info.getUserId());
+		//int checkLike = service.checkLike(map);
 		
 		int start = 1;
 		int end = 0;	
@@ -123,7 +128,7 @@ public class BoardController {
 		}
 		    
 		end = bbs_count;
-		 
+		   
 		map.put("start", start);
 		map.put("end", end);
 		
@@ -138,6 +143,7 @@ public class BoardController {
 			map.put("num", dto.getNum());
 			dto.setLikeCount(service.countLikeBoard(map));
 			dto.setReplyCount(service.countReplyBoard(map));
+		//	dto.setLikeCheck(service.checkLike(map));
 		}
 		
 		
@@ -240,7 +246,7 @@ public class BoardController {
 		Map<String, Object> model = new HashMap<>();
 		return model;
 
-		} 
+		}    
 	 
 	//댓글 삭제
 	@RequestMapping(value="/study/myStudy/home/{s_num}/replyDelete" , method= RequestMethod.POST)

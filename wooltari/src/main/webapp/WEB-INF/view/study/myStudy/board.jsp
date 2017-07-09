@@ -48,8 +48,9 @@ var dataCount =${dataCount};
 
 
 $(function(){
+	
 	listPage('5');
-
+	
 	
 });	
 
@@ -69,7 +70,7 @@ $(function(){
 
 //댓글리스트
 function listReply(num){
-	alert(num+"눌렸당");
+	//alert(num+"눌렸당");
 	
 	var url="<%=cp%>/study/myStudy/${s_num}/listReply";
 	var num;
@@ -116,11 +117,18 @@ function listPage(bbs_count) {
 		,dataType:"json"
 		,success:function(data){
 			printBoard(data);
+			//printCheckLike(data);
 		}
 		,error:function(e){
 			console.log(e.responseText);
 		}
 	});
+}
+
+
+function printCheckLike(data){
+	var url ="<%=cp%>/study/myStudy/${s_num}/checkLike";
+	
 }
 
 function printBoard(data){
@@ -141,6 +149,7 @@ function printBoard(data){
 			var hitCount = data.list[idx].hitCount;
 			var likeCount = data.list[idx].likeCount;
 			var replyCount =data.list[idx].replyCount;
+			var checkLike = data.list[idx].checkLike;
 			
 			out+= 	"	<li><div class='timeline-badge primary'>" ;
 			out+=	"			<a><i  class='glyphicon glyphicon-record' rel='tooltip' title="+created+" id=''></i></a> " ;
@@ -158,7 +167,11 @@ function printBoard(data){
 	
 			out+=	"	    <div class='timeline-footer'> " ;
 							//좋아요
-			out+=	"			<a onclick='likeBoard(\""+num+"\")'><i id='like_up_"+num+ "' class='glyphicon glyphicon-thumbs-up'></i></a> &nbsp; 좋아요( <span id='countLikeBoard_"+num+"'>"+likeCount+"</span>)&nbsp; " ;
+			if(checkLike!=null){
+			out+=	"			<a onclick='likeBoard(\""+num+"\")'><i id='like_up_"+num+ "' class='glyphicon glyphicon-thumbs-up' style='color:red;'></i></a> &nbsp; 좋아요( <span id='countLikeBoard_"+num+"'>"+likeCount+"</span>)&nbsp; " ;
+			} else
+				out+=	"			<a onclick='likeBoard(\""+num+"\")'><i id='like_up_"+num+ "' class='glyphicon glyphicon-thumbs-up'></i></a> &nbsp; 좋아요( <span id='countLikeBoard_"+num+"'>"+likeCount+"</span>)&nbsp; " ;
+			
 			out+=	"			<a onclick='listReply(\""+num+"\")' data-toggle='collapse' href='#collapseExample_"+num+ "' " ;
 			out+=   "               aria-expanded='false' aria-controls='collapseExample'> 댓글( <span id='countReplyBoard_"+num+"'>"+replyCount+"</span>) </a> " ;
 									
@@ -246,6 +259,7 @@ var submit_chk = true;	// 이중 호출을 방지하기 위한 변수
 
 $(document).ready(function () {
 
+	
 	$(window).scroll(function aa() {
 		/* 현재 데이터가 전체 데이터를 넘지 않아야 함 */
 		if(bbs_count < dataCount) {
@@ -260,6 +274,7 @@ $(document).ready(function () {
 			    	setTimeout(function() {
 			    		$('#image_loading').html('');
 			    		listPage(bbs_count);
+			    		
 						submit_chk = true;
 					}, 1200);
 			    }

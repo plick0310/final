@@ -100,6 +100,17 @@ public class BoardServiceImpl implements BoardService{
 		
 		return result;
 	}
+	
+	@Override
+	public int checkLike(Map<String, Object> map) {
+		int result=0;
+		try {
+			result = dao.getIntValue("studyBoard.checkLike",map);
+		} catch (Exception e) {
+			
+		}
+		return result;
+	}
 
 	@Override
 	public void insertReplyBoard(Reply dto) throws Exception {
@@ -120,7 +131,7 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void deleteReplyBoard(Map<String, Object> map) throws Exception {
 		try {
-			dao.deleteData("study.deleteReply", map);
+			dao.deleteData("studyBoard.deleteReply", map);
 		} catch (Exception e) {
 			throw e;
 		}
