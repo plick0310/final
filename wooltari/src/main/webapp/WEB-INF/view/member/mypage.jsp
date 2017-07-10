@@ -158,40 +158,50 @@ $(document).ready(function(){
      --%>
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
         <div class="btn-group" role="group">
-            <button type="button" id="my_main" class="btn btn-primary" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <button type="button" id="my_main" class="btn btn-primary" data-toggle="tab">
+            	<i class="fa fa-star-o" aria-hidden="true"></i>
                 <div class="hidden-xs">마이페이지</div>
             </button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" id="my_msg" class="btn btn-default" data-toggle="tab"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+            <button type="button" id="my_msg" class="btn btn-default" data-toggle="tab">
+            	<i class="fa fa-envelope-o" aria-hidden="true"></i>
                 <div class="hidden-xs">쪽지함</div>
             </button>
         </div>
+        <!-- 
         <div class="btn-group" role="group">
             <button type="button" id="my_activity" class="btn btn-default" data-toggle="tab"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
                 <div class="hidden-xs">나의 활동</div>
             </button>
         </div>
+         -->
         <div class="btn-group" role="group">
-            <button type="button" id="my_info" class="btn btn-default" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <button type="button" id="my_info" class="btn btn-default" data-toggle="tab">
+            	<i class="fa fa-user-o" aria-hidden="true"></i>
                 <div class="hidden-xs">나의 정보</div>
             </button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" id="my_point" class="btn btn-default" data-toggle="tab"><span class="glyphicon glyphicon-ruble" aria-hidden="true"></span>
+            <button type="button" id="my_point" class="btn btn-default" data-toggle="tab">
+            	<i class="fa fa-krw" aria-hidden="true"></i>
                 <div class="hidden-xs">나의 포인트</div>
             </button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" id="my_qna" class="btn btn-default" data-toggle="tab"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-                <div class="hidden-xs">1:1 문의내역</div>
+            <button type="button" id="my_customer" class="btn btn-default" data-toggle="tab">
+            	<i class="fa fa-handshake-o" aria-hidden="true"></i>
+                <div class="hidden-xs">고객센터</div>
             </button>
         </div>
+        <!-- 
         <div class="btn-group" role="group">
-            <button type="button" id="my_out" class="btn btn-default" data-toggle="tab"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            <button type="button" id="my_out" class="btn btn-default" data-toggle="tab">
+            	<i class="fa fa-user-times" aria-hidden="true"></i>
                 <div class="hidden-xs">회원 탈퇴</div>
             </button>
         </div>
+         -->
     </div>
 
     <div class="well">

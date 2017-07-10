@@ -92,8 +92,7 @@
 							<form name="memberform" class="memberform" method="post" role="form">
 								<div class="form-group">
 									<label class="sr-only" for="form-userid">E-mail</label>
-									<h2>${sessionScope.member.userId}</h2>
-									<!-- <input type="text" name="userId" placeholder="E-mail" class="form-userid form-control" id="form-userid"> -->
+									<input type="text" name="userId" placeholder="E-mail" class="form-userid form-control" id="form-userid" value="${sessionScope.member.userId}" readonly="readonly">
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-password">Password</label>

@@ -43,6 +43,22 @@ public class MemberController {
 		return "member/join";
 	}
 	
+	@RequestMapping(value="/member/myinfo", method=RequestMethod.GET)
+	public String myInfo(HttpSession session, Model model) throws Exception{
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/info/myinfo";
+	}
+	
+	@RequestMapping(value="/member/editinfo", method=RequestMethod.GET)
+	public String editInfo(HttpSession session, Model model) throws Exception{
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member dto = service.readMember(info.getUserId());
+		model.addAttribute("dto", dto);
+		return "member/info/editinfo";
+	}
+
 	@RequestMapping(value="/member/memberinfo", method=RequestMethod.POST)
 	public String memberInfo(@RequestParam String userId, Model model) throws Exception{
 		Member dto = service.readMember(userId);
@@ -74,7 +90,6 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/pwd", method=RequestMethod.GET)
 	public String pwdForm(){
-		
 		return "member/pwd";
 	}
 	@RequestMapping(value="/member/userIdCheck")
@@ -152,12 +167,12 @@ public class MemberController {
 		model.addAttribute("dto", dto);
 		return "member/my_point";
 	}
-	@RequestMapping(value="/member/my_qna", method=RequestMethod.GET)
-	public String my_Qna(Model model , HttpSession session){
+	@RequestMapping(value="/member/my_customer", method=RequestMethod.GET)
+	public String my_Customer(Model model , HttpSession session){
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		Member dto = service.readMember(info.getUserId());
 		model.addAttribute("dto", dto);
-		return "member/my_qna";
+		return "member/my_customer";
 	}
 	@RequestMapping(value="/member/my_out", method=RequestMethod.GET)
 	public String my_Out(Model model , HttpSession session){

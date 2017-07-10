@@ -12,33 +12,33 @@
 .modal-dialog {
 	width: 600px;
 	height: 600px;
-    margin: 5% auto;
+    margin: 20% auto;
 }
-.body-box {
+.mail-box {
     border-collapse: collapse;
     border-spacing: 0;
     display: table;
     table-layout: fixed;
     width: 100%;
 }
-.body-box aside {
+.mail-box aside {
     display: table-cell;
     float: none;
     height: 100%;
     padding: 0;
     vertical-align: top;
 }
-.body-box .sm-side {
+.mail-box .sm-side {
     background: none repeat scroll 0 0 #e5e8ef;
     border-radius: 4px 0 0 4px;
     width: 25%;
 }
-.body-box .lg-side {
+.mail-box .lg-side {
     background: none repeat scroll 0 0 #fff;
     border-radius: 0 4px 4px 0;
     width: 75%;
 }
-.body-box .sm-side .user-head {
+.mail-box .sm-side .user-head {
     background: none repeat scroll 0 0 #029e81;
     border-radius: 4px 0 0;
     color: #fff;
@@ -76,9 +76,6 @@ a.mail-dropdown {
     font-size: 10px;
     margin-top: 20px;
     padding: 3px 5px;
-}
-.inbox-body {
-    padding: 20px;
 }
 .btn-compose {
     background: none repeat scroll 0 0 #ff6c60;
@@ -256,28 +253,15 @@ ul.inbox-pagination {
 }
 </style>
 <script type="text/javascript">
-var mode = "all";
+var mode = "notice";
 var page = 1;
-var searchValue = "";
 $(document).ready(function(){
 	reload();
-	noreadCount = setInterval(function() {
-		reload();
-	}, 5000);
 	$(".inbox-nav li").click(function () {
 		mode = $(this).attr('id');
 		page = 1;
-		searchValue = "";
 		$(".inbox-nav li").removeClass("active");
 		$(this).addClass("active");
-		reload();
-	});
-	$("#myModal").on('hidden.bs.modal', function () {
-		$('#send-btn').show();
-		$("#recv_Id").val("");
-		$("#content").val("");
-		$("#recv_Id").removeAttr('readonly');
-		$("#content").removeAttr('readonly');
 		reload();
 	});
 });
@@ -289,88 +273,28 @@ function paging(paging) {
 
 function reload(){
 	$.ajax({
-		url:"<%=cp%>/message/list?mode=" + mode + "&page=" + page + "&searchValue=" + searchValue,
+		url:"<%=cp%>/customer/" + mode,
 		dataType:"html",
 		success : function(data) {
-		$('.content').html(data);
+		$('.msg-list').html(data);
 		}
 	});
+	<%-- 
 	$.ajax({
-		url:"<%=cp%>/message/count",
-		type : "POST",
-		dataType:"JSON",
+		url:"<%=cp%>/customer/list?mode=" + mode + "&page=" + page,
+		dataType:"html",
 		success : function(data) {
-			if(data.recv_Count != 0){
-				$('#recv_Count').html(data.recv_Count);
-			}else{
-				$('#recv_Count').html("");
-			}
+		$('.msg-list').html(data);
 		}
 	});
+	 --%>
 }
 
-function readMsg(num) {
-	var params = "num="+num;
-	$.ajax({
-			url: '<%=cp%>/message/read',
-			type: 'POST',
-			data:params,
-			dataType: 'JSON',
-			success: function (data) {
-				var state = data.state;
-				if(state=="true") { 
-					$('#send-btn').hide();
-					$("#sent_Id").val(data.sent_Id);
-					$("#recv_Id").val(data.recv_Id);
-					$("#recv_Id").attr('readonly', 'readonly');
-					$("#content").val(data.content);
-					$("#content").attr('readonly', 'readonly');
-					$("#myModal").modal('show');
-				} else {
-					alert("메시지 로딩 실패");
-				}
-			}
-			,error:function(e) {
-				console.log(e.responseText);
-			}
-	});
-}
 
-function sendMsg(userId) {
-	$("#recv_Id").val(userId);
-	$("#recv_Id").attr('readonly', 'readonly');
-	$("#myModal").modal('show');
-}
-
-function submitMsg() {
-    var params = jQuery("#form-horizontal").serialize(); // serialize() : 입력된 모든Element(을)를 문자열의 데이터에 serialize 한다.
-    $.ajax({
-        url: '<%=cp%>/message/send',
-        type: 'POST',
-        data:params,
-        dataType: 'json',
-        success: function (data) {
-        	var state = data.state;
-        	if(state=="true") { 
-				$('.modal.in').modal('hide') 
-			} else {
-				alert("전송 실패! 받는사람을 확인 해 주세요.");
-			}
-        }
-        ,error:function(e) {
-			console.log(e.responseText);
-		}
-    });
-}
-
-function searchMsg() {
-	searchValue = $('.sr-input').val();
-	reload();
-}
 
 </script>
 <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
-<div class="body-box">
+<div class="mail-box">
 	<aside class="sm-side">
 		<div class="user-head">
 			<a class="inbox-avatar" href="#">
@@ -388,80 +312,29 @@ function searchMsg() {
 		</div>
                   
 		<div class="inbox-body">
-			<a href="#myModal" data-toggle="modal"  title="Compose"    class="btn btn-compose">새 쪽지 보내기</a>
-			<!-- Modal -->
-			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" style="display: none;">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-							<h4 class="modal-title">쪽지</h4>
-						</div>
-						<div class="modal-body">
-							<form role="form" id="form-horizontal" class="form-horizontal" method="post">
-								<div class="form-group">
-									<label class="col-lg-2 control-label">보낸 사람</label>
-									<div class="col-lg-10">
-										<input type="text" class="form-control" id="sent_Id" name="sent_Id" readonly="readonly" value="${sessionScope.member.userName}(${sessionScope.member.userId})">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-lg-2 control-label">받는 사람</label>
-									<div class="col-lg-10">
-										<input type="text" placeholder="받는 분의 아이디(example@example.com)" class="form-control" id="recv_Id" name="recv_Id" required="required">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-lg-2 control-label">내용</label>
-									<div class="col-lg-10">
-										<textarea rows="10" cols="30" placeholder="보내실 내용을 입력해주세요." class="form-control" id="content" name="content" required="required"></textarea>
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-lg-offset-2 col-lg-10 text-right">
-										<button id="send-btn" name="send-btn" class="btn btn-send" type="button" onclick="submitMsg()">Send</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /.modal -->
 		</div>
 		
 		<ul class="inbox-nav inbox-divider">
-			<li id="all" class="active" >
-				<a href="#"><i class="fa fa-envelope-o"></i> 전체 쪽지함</a>
+			<li id="notice" class="active">
+				<a href="#"><i class="fa fa-bell-o" aria-hidden="true"></i> 공지사항</a>
 			</li>
-			<li id="receive">
-				<a href="#"><i class="fa fa-inbox"></i> 받은 쪽지함<span class="label label-danger pull-right" id="recv_Count"></span></a>
+			<li id="suggest">
+				<a href="#"><i class="fa fa-rss" aria-hidden="true"></i> 신고 및 건의</a>
 			</li>
-			<li id="send">
-				<a href="#"><i class="fa fa-paper-plane-o"></i> 보낸 쪽지함</a>
+			<li id="faq">
+				<a href="#"><i class="fa fa-question-circle-o" aria-hidden="true"></i> 자주 묻는 질문</a>
 			</li>
-			<li id="keep">
-				<a href="#"><i class="fa fa-folder-o"></i> 쪽지 보관함</a>
-			</li>
-			<li id="trash">
-				<a href="#"><i class=" fa fa-trash-o"></i> 휴지통</a>
+			<li id="qna">
+				<a href="#"><i class="fa fa-commenting-o" aria-hidden="true"></i> 1:1 문의</a>
 			</li>
 		</ul>
 	</aside>
 	
 	
 	<aside class="lg-side">
-		<div class="inbox-head">
-			<form action="#" class="pull-right position">
-				<div class="input-append">
-					<input type="text" class="sr-input" placeholder="쪽지 검색">
-					<button class="btn sr-btn" type="button" onclick="searchMsg();"><i class="fa fa-search"></i></button>
-				</div>
-			</form>
-		</div>
 		
 		<div class="inbox-body">
-			<div class="content">
+			<div class="msg-list">
 			<!-- 여기가 쪽지 리스트 -->
 			</div>
 		</div>

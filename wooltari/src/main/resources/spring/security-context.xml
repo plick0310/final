@@ -48,11 +48,12 @@
 			login-processing-url="/member/login_check"
 			username-parameter="userId"
 			password-parameter="userPwd"
-			authentication-failure-url="/member/login?login_error"
 			default-target-url="/"
 			authentication-success-handler-ref="authSuccess"
+			authentication-failure-handler-ref="authFail"
 		/>
-		
+		<!-- authentication-failure-url="/member/login?login_error" -->
+
 		<logout
 			logout-url="/member/logout"
 			invalidate-session="true"
@@ -72,6 +73,7 @@
 	
 	<!-- 권한 획득 핸들러 클래스 생성 -->
 	<beans:bean id="authSuccess" class="com.wooltari.member.AuthSuccessHandler"/>
+	<beans:bean id="authFail" class="com.wooltari.member.AuthFailHandler"/>
     
     <!-- JDBC 유저서비스 -->
     <jdbc-user-service

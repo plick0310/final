@@ -256,7 +256,7 @@ public class MessageController {
         }
         
         
-        String paging = myUtil.pagingMethod(current_page, total_page, "messagePaging");
+        String paging = myUtil.pagingMethod(current_page, total_page, "paging");
         System.out.println("mode : " + mode + " / page : " + current_page + " / searchValue : " + searchValue);
         
         model.addAttribute("list", list);
@@ -267,6 +267,6 @@ public class MessageController {
         model.addAttribute("total_page", total_page);
         model.addAttribute("paging", paging);	
         
-		return "message/list";
+		return "member/message/list";
 	}
 }
