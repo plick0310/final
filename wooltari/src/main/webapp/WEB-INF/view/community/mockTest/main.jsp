@@ -45,36 +45,6 @@
  
  <!-- 응시할 시험리스트 -------------------------------------------------------------------->
 <script>
-	// 새로고침
-	function reloadBoard() {
-		var f=document.mockTestSearchForm;
-		f.searchKey.value ="subject";
-		f.searchValue.value="";
-		
-		listPage(1);
-	}
-	
-	// 글리스트 및 페이징 처리
-	function listPage(page){
-		var url="<%=cp%>/mockTest/main";
-		
-		var query="pageNo="+page;
-		var search=$('form[name=mockTestSearchForm]').serialize();
-		query=query+"&"+search;
-		
-		$.ajax({
-			type:"get"
-			,url:url
-			,data:query
-			,success:function(data) {
-				if($.trim(data)=="error") {
-					listPage(1);
-					return;
-				}
-			}
-		});
-	}
-
   // 모달 이벤트
   $('#exampleModal').on('show.bs.modal', function (event) {
      var button = $(event.relatedTarget) // Button that triggered the modal
@@ -163,7 +133,7 @@
 	   var date = f.examwishDate.value;
 	   
 	   var url = "<%=cp%>/mockTest/createdList";
-	   var query="Name="+name+"&Date="+date;
+	   var query="name="+name+"&date="+date;
 	   
 	    if(!name || name=='시험선택') {
 	        alert("시험을 선택하세요");
@@ -192,7 +162,6 @@
 	function updateOk(num) {
 	   var f = document.modalForm;
 	   
-	   var num = f.num.value; 
 	   var name = f.examInfoName.value;
 	   var date = f.examwishDate.value;
 	   
@@ -395,7 +364,6 @@ $(function(){
 					<tr>
 						<td style="text-align: right; width: 65px; padding: 5px 18px;">
 							<input type="checkbox" name="nums" value="${dto.num }">
-							<input type="hidden" name="num" value="${dto.num }">
 						</td>
 
 						<td class="___number">${dto.wishlistNum}</td>
@@ -441,7 +409,7 @@ $(function(){
 									<!-- 응시할 리스트 수정 -->
 									
 									<button id="modalbtn" type="button"
-										onclick="change('${dto.examInfoName}', '${dto.examwishDate}','${dto.num }' })"
+										onclick="change('${dto.examInfoName}', '${dto.examwishDate}')"
 										class="glyphicon glyphicon-edit">
 									</button>
 								</div>
@@ -617,10 +585,10 @@ $(function(){
 				<form name="modalForm" method="post" enctype="multipart/form-data">
 					<div class="modal-body" style="margin-left: 121px;">
 						<div class="form-group"
-							style="margin-bottom: 28px; margin-top: 22px;">
+							style="margin-bottom: 15px; margin-top: 22px;">
 							<label for="recipient-name" class="control-label">시험명</label>
 							&nbsp;&nbsp; <select id="examSelect" name="examInfoName"
-								style="border: 1px solid #D4D4D4">
+								style="border: 1px solid #D4D4D4; padding-bottom: 3px; padding-top: 1px;">
 								<option value="시험선택">시험선택</option>
 								<c:forEach var="dto" items="${examinfoList }">
 									<option value="${dto.examInfoName}">${dto.examInfoName }</option>
