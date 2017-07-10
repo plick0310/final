@@ -6,13 +6,13 @@ import java.util.Map;
 public interface StudyMarketBoardService {
 	
 	public int insertBoard(StudyMarketBoard dto, String pathname);
-	public List<StudyMarketBoardService> listBoard(Map<String, Object> map);
+	public List<StudyMarketBoard> listBoard(Map<String, Object> map);
 	public int dataCount(Map<String, Object> map);
 	public StudyMarketBoard readBoard(int num);
 	public int updateHitCount(int num);
 	public StudyMarketBoard preReadBoard(Map<String, Object> map);
 	public StudyMarketBoard nextReadBoard(Map<String, Object> map);
-	public int updateBoard(StudyMarketBoardService dto, String pathname);
+	public int updateBoard(StudyMarketBoard dto, String pathname);
 	public int deleteBoard(int num, String saveFilename, String pathname);
 	
 	public int insertLikeBoard(StudyMarketBoard dto);

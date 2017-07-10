@@ -6,6 +6,41 @@
    String cp = request.getContextPath();
 %>
 <style type="text/css">
+.clickbtn {
+   background-color: white;
+   border-style: solid;
+   padding: 5px 20px;
+   margin-left: 10px;
+   font-size:13px;
+   border: 1px solid #EAEAEA;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #1abc9c;
+    /* border-color: #337ab7; */
+    /* text-align: center; */
+}
+
+.pagination-sm > li > a, .pagination-sm > li > span {
+    padding: 8px 9px;
+    
+    font-size: 11px;
+}
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #1abc9c;
+    text-decoration: none;
+    background-color: #fff;
+  border: none;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -200,57 +235,53 @@ function teacherInfo(url){
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width: 900px; margin: 0px auto">
   
   
-<!-- 게시판  -->  
-  <div class="panel panel">
-    <div class="panel-heading" role="tab" id="heading1">
+<!-- 게시판  --> 
+<c:forEach var="dto" items="${list}">
+ <div class="panel panel">
+    <div class="panel-heading" role="tab" id="heading${dto.listNum}">
       <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
-        <span><small>No.1</small></span> &nbsp;&nbsp;&nbsp;<span>오세훈과 함께떠나는 자바여행</span>&nbsp;&nbsp;&nbsp;<small>작성일 : 2017-06-28</small>
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse${dto.listNum}" aria-expanded="false" aria-controls="collapse${dto.listNum}">
+        <span><small>${dto.listNum}</small></span> &nbsp;&nbsp;&nbsp;<span>${dto.subject}</span>&nbsp;&nbsp;&nbsp;<small>작성일 : ${dto.created}</small>
+        <small>조회수 : ${dto.hitCount} </small><small>추천 : ${dto.likeCount} </small>
         <input type="button" class="clickbtn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"
-		 onclick="javascript:location.href='<%=cp%>/studyMarket/studyMarketBoard/article';" value="동영상 보기">
+		 onclick="javascript:location.href='${articleUrl}&num=${dto.num}';" value="동영상 보기">
         </a>
       </h4>
     </div>
-    <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
+    <div id="collapse${dto.listNum}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading${dto.listNum}">
       <div class="panel-body">
         <div style="width: 150px;height: 150px;background-color: #eee;padding: 30px;float: left;"></div>
-        <div style="float: left; margin-left: 15px;">C O N T E N T : </div>
+        <div style="float: left; margin-left: 15px;">C O N T E N T : ${dto.content} </div>
       </div>
     </div>
   </div>
+</c:forEach> 
   
-  <div class="panel panel">
-    <div class="panel-heading" role="tab" id="heading2">
-      <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" aria-controls="collapse1">
-        <span><small>No.1</small></span> &nbsp;&nbsp;&nbsp;<span>오세훈과 함께떠나는 자바여행</span>&nbsp;&nbsp;&nbsp;<small>작성일 : 2017-06-28</small>
-        <input type="button" class="clickbtn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"
-		 onclick="javascript:location.href='<%=cp%>/studyMarket/studyMarketBoard/article';" value="동영상 보기">
-        </a>
-      </h4>
-    </div>
-    <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
-      <div class="panel-body">
-        <div style="width: 150px;height: 150px;background-color: #eee;padding: 30px;float: left;"></div>
-        <div style="float: left; margin-left: 15px;">C O N T E N T : </div>
-      </div>
-    </div>
-  </div>
-  
+
   
   <!-- 페이지, 글쓰기 삭제 버튼  -->
-  <form action="" id="array_form">
-  <div style="width: 900px; margin: 20px auto;text-align: center;">1 2 3</div>
+  
+  <div style="width: 900px; margin: 20px auto;text-align: center;">
+  		<c:if test="${dataCount==0}">
+  		등록된 게시물이 없습니다.
+  		</c:if>
+  		<c:if test="${dataCount!=0}">
+  		${paging}
+  		</c:if>
+  </div>
 	<div class="btnArea" style="float: right;">
+	<c:if test="${sessionScope.member.userId=='admin'}">
 		<input type="button" class="clickbtn" 
 		 onclick="javascript:location.href='<%=cp%>/help/report/delete';" value="삭제">
 		<input type="button" class="clickbtn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"
 		 onclick="javascript:location.href='<%=cp%>/studyMarket/studyMarketBoard/created';" value="글쓰기">
+	</c:if>
 	</div>
 	
 	<!-- 찾기  -->	
+  <form action="" id="array_form" name="searchForm" method="post">
 	<div class="scArea" style="margin: 30px 10px 30px 180px;"> 
-		<select name="where" class="where">
+		<select name="searchKey" class="where">
 			<option value="subject">제목</option>
 			<option value="ment">내용</option>
 			<option value="writer">작성자</option>

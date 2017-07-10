@@ -42,6 +42,27 @@ public class InfoReqBoardController {
 	@Autowired
 	private FileManager fileManager;
 		
+		@RequestMapping(value="/download/infoReqBoard/created", method=RequestMethod.GET)
+		public String createdForm(Model model, HttpSession session)throws Exception {
+			model.addAttribute("mode","created");			
+			
+			return ".download.infoReqBoard.created";
+		}
+		
+		@RequestMapping(value="/download/infoReqBoard/created", method=RequestMethod.POST)
+		public String createdSubmit(InfoReqBoard dto,	HttpSession session) throws Exception {
+			
+			SessionInfo info=(SessionInfo)session.getAttribute("member");
+			
+			String root=session.getServletContext().getRealPath("/");
+			String pathname=root+File.separator+"uploads"+File.separator+"infoReqBoard";
+			
+			dto.setUserId(info.getUserId());			
+			service.insertBoard(dto, pathname);
+			
+			return "redirect:/download/infoReqBoard/list";
+		}
+		
 		@RequestMapping(value="/download/infoReqBoard/list")
 		public String list(
 				@RequestParam(value="page", defaultValue="1") int current_page,
@@ -125,11 +146,11 @@ public class InfoReqBoardController {
 			
 			String paging = myUtil.paging(current_page, total_page, listUrl);
 			
+			model.addAttribute("dataCount", dataCount);
+			model.addAttribute("page", current_page);
+			model.addAttribute("total_page", total_page);
 			model.addAttribute("list", list);
 			model.addAttribute("articleUrl", articleUrl);
-			model.addAttribute("page", current_page);
-			model.addAttribute("dataCount", dataCount);
-			model.addAttribute("total_page", total_page);
 			model.addAttribute("paging", paging);	
 			
 			return ".download.infoReqBoard.list";
@@ -151,7 +172,7 @@ public class InfoReqBoardController {
 			if(dto==null)
 				return "redirect:/download/infoReqBoard/list?page="+page;
 			
-			//dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+			dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 			
 			//이전글, 다음글
 			Map<String, Object> map= new HashMap<String, Object>();
@@ -164,6 +185,7 @@ public class InfoReqBoardController {
 			//파일
 			List<InfoReqBoard> listFile= service.listFile(num);
 			
+			//좋아요.
 			int countLikeBoard=service.countLikeBoard(num);
 			
 			String query="page="+page;
@@ -184,26 +206,6 @@ public class InfoReqBoardController {
 			return ".download.infoReqBoard.article";
 		}
 	
-		@RequestMapping(value="/download/infoReqBoard/created", method=RequestMethod.GET)
-		public String createdForm(Model model, HttpSession session)throws Exception {
-			model.addAttribute("mode","created");			
-
-			return ".download.infoReqBoard.created";
-		}
-		
-		@RequestMapping(value="/download/infoReqBoard/created", method=RequestMethod.POST)
-		public String createdSubmit(InfoReqBoard dto,	HttpSession session) throws Exception {
-			
-			SessionInfo info=(SessionInfo)session.getAttribute("member");
-			
-			String root=session.getServletContext().getRealPath("/");
-			String pathname=root+File.separator+"uploads"+File.separator+"infoReqBoard";
-			
-			dto.setUserId(info.getUserId());			
-			service.insertBoard(dto, pathname);
-			
-			return "redirect:/download/infoReqBoard/list";
-		}
 		@RequestMapping(value="/download/infoReqBoard/update", method=RequestMethod.GET)
 		public String updateForm(
 				@RequestParam(value="num") int num,
@@ -284,7 +286,7 @@ public class InfoReqBoardController {
 			return "redirect:/download/infoReqBoard/list";
 		}
 		*/
-		
+		//체크 박스로 삭제.............................................
 		@RequestMapping(value="/download/infoReqBoard/deleteList")
 		public String deleteList(
 				Integer[] chk,
@@ -329,6 +331,7 @@ public class InfoReqBoardController {
 			
 		}
 		}
+		
 		//수정 화면에서 파일 삭제
 		@RequestMapping(value="/download/infoReqBoard/deleteFile", method=RequestMethod.POST)
 		@ResponseBody
@@ -356,7 +359,7 @@ public class InfoReqBoardController {
 				
 				return model;
 			}
-		//게시물 공감 추가
+		//게시물 공감 추가...............................................
 		@RequestMapping(value="/download/infoReqBoard/insertLikeBoard")
 		@ResponseBody
 		public Map<String, Object> insertLikeBoard(
@@ -391,6 +394,7 @@ public class InfoReqBoardController {
 			//작업 결과를 json으로 전송
 			return model;
 		}
+		
 		//댓글 처리....................................
 		//댓글 및 리플별 답글 추가
 		@RequestMapping(value="/download/infoReqBoard/createdReply")

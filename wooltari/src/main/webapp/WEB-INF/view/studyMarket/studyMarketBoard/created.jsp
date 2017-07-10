@@ -34,7 +34,6 @@ border: 1px solid #EAEAEA;
       }
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -46,13 +45,6 @@ $( function() {
 $( function() {
     $( "#datepicker2").datepicker();
   } );
-  
-$(function(){
-	$('#collapse1').on('shown.bs.collapse', function () {
-		initMap();
-   });		
-});
-
   
  function check(){
 	 var f=document.boardForm;
@@ -76,11 +68,50 @@ $(function(){
 			 
 	return true;
  }   
+	//동적으로 추가된 태그도 이벤트 처리 가능(파일 추가)
+  $(function(){
+		$("body").on("change", "input[name=upload]", function(){
+			if(! $(this).val()) {
+				return;	
+			}
+			
+			var b=false;
+			$("input[name=upload]").each(function(){
+				if(! $(this).val()) {
+					b=true;
+					return;
+				}
+			});
+			if(b)
+				return;
 
+			var $tr, $td, $input;
+			
+		    $tr=$("<tr>");
+		    $td=$("<td>", {class:"td1", html:"첨부"});
+		    $tr.append($td);
+		    $td=$("<td>", {class:"td3", colspan:"3"});
+		    $input=$("<input>", {type:"file", name:"upload", class:"form-control input-sm", style:"height: 35px;"});
+		    $td.append($input);
+		    $tr.append($td);
+		    
+		    $("#tb").append($tr);
+		});
+	  });
+	
+	//post
+	<c:if test="${mode=='update'}">
+	function deleteFile(fileNum){
+		var url="<%=cp%>/studyMarket/studyMarketBoard/deleteFile";
+		$.post(url,{fileNum:fileNum}, function(data){
+			$("#f"+fileNum).remove();
+		},"JSON");
+	}
+	
+	</c:if>
+	
 </script>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcO1EZpm4c5VVFmWf1h0dwX1QVbsx3Gb4&callback=initMap">
-    </script>
+
 
 <form name="write_form" id="write_form" enctype="multipart/form-data" method="post" style="margin: 60px auto; width: 900px;">
 <div  style="height:50px; font-size: 20px;text-align: center; border-bottom: 1px solid #eee;">
@@ -95,42 +126,53 @@ $(function(){
 			<tr>
 				<th style="width: 100px; ">제목</th>
 				<td><input type="text" name="subject" 
-					class="subject" maxlength="100" style="width: 450px;" /></td>
+					class="subject" maxlength="100" style="width: 450px;" value="${dto.subject}" /></td>
 			</tr>
 			
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="writer" maxlength="8"
-					style="width: 200px;" /></td>
+				<td>${sessionScope.member.userId}</td>
 			</tr>			
 
 			<tr>
 				<th>강의 시작일, 종료일</th>				
-				<td><a>StartDate: <input type="text" id="datepicker1"></a>&nbsp;
-				    <a>EndDate: <input type="text" id="datepicker2"></a></td>
+				<td><a>StartDate: <input type="text" name="startdate" id="datepicker1" value="${dto.startdate}"></a>&nbsp;
+				    <a>EndDate: <input type="text"  name="enddate" id="datepicker2" value="${dto.enddate}"></a></td>
 			</tr>
 			<tr>
 				<th>오프라인 강의실 주소</th>
-				<td><input type="text" name="writer" maxlength="8"
-					style="width: 200px;" /></td>
+				<td><input type="text" name="address" maxlength="8"
+					style="width: 200px;" value="${dto.address}"/></td>
 			</tr>
 			<tr>
 				<th>url</th>				
-				<td><input type="text" name="url" maxlength="8" style="width: 200px;" /></td>
+				<td><input type="text" name="urlContent" maxlength="8" style="width: 200px;"value="${dto.urlContent}" /></td>
 			</tr>
 
 			<tr>
-				<td colspan="2"><textarea name="ment" id="ment" 
-						style="width: 100%; height: 300px;" ></textarea></td>
+				
+				<td colspan="2"><textarea name="content" id="ment" 
+						style="width: 100%; height: 300px;"> ${dto.content}</textarea></td>
 			</tr>
 
 			<tr>
-				<th>첨부파일</th>
-				<td><input type="file" name="file1" id="file1" style="border: none;">
-				</td>
+				<td class="td1">첨부</td>
+                <td colspan="3" class="td3">
+                    <input type="file" name="upload" class="form-control input-sm" style="height: 35px;">
+                </td>
 			</tr>
-
 			
+			<c:if test="${mode=='update'}"> 
+   				<c:forEach var="dto" items="${listFile}">
+                  <tr id="f${dto.fileNum}"> 
+                      <td class="td1">첨부파일</td>
+                      <td colspan="3" class="td3"> 
+                          ${dto.originalFilename}
+                          | <a href="javascript:deleteFile('${dto.fileNum}');">삭제</a>	        
+                      </td>
+                  </tr>
+ 			 </c:forEach>
+			</c:if>
 		</tbody>
 	</table>
 	
@@ -139,8 +181,8 @@ $(function(){
 		<button class="clickbtn">${mode='update'?'수정취소':'등록취소'}</button>
 		
 		<c:if test="${mode=='update'}">
-			<input type="hidden" name="num" value="">
-			<input type="hidden" name="page" value="">
+			<input type="hidden" name="num" value="${dto.num}">
+			<input type="hidden" name="page" value="${page}">
 		</c:if>
 	</div>
 </form>

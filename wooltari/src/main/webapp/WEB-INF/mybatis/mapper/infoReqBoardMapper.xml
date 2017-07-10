@@ -54,12 +54,15 @@
 		SELECT * FROM (
 		    SELECT ROWNUM rnum, tb.* FROM (
 			    SELECT i.num, i.userId, subject, created,hitCount
+			    
 			    ,NVL(likeCount, 0) likeCount, NVL(replyCount, 0) replyCount
+			      
 			       FROM infoReqBoard i
 			       JOIN member m ON i.userId=m.userId
+			     
 			       LEFT OUTER JOIN (SELECT num, COUNT(*) replyCount FROM infoReqReply GROUP BY num) r ON i.num=r.num
 			       LEFT OUTER JOIN (SELECT num, COUNT(*) likeCount FROM infoReqLike GROUP BY num) l ON i.num=l.num	
-			      
+			       
                     <where>
                          <if test="searchValue != null and searchValue != ''">
 			                  <include refid="where-list"/>

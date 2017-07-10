@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class StudyMarketBoard {
-	private int num;
+	private int listNum, num;
 	private String subject, content, userId, created;
 	private int hitCount;
+	private int likeCount, replyCount;
 	
-	private String urlContetn, startdate, enddate, address;
+	private String urlContent, startdate, enddate, address;
 	
 	//리스트에서 새글 옆에 new 띄움
 	private long gap;
@@ -18,6 +19,33 @@ public class StudyMarketBoard {
 	private String originalFilename, saveFilename;
 	private List<MultipartFile> upload;
 	
+	
+	
+		
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+	public int getReplyCount() {
+		return replyCount;
+	}
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+	public String getUrlContent() {
+		return urlContent;
+	}
+	public void setUrlContent(String urlContent) {
+		this.urlContent = urlContent;
+	}
 	public long getGap() {
 		return gap;
 	}
@@ -48,12 +76,7 @@ public class StudyMarketBoard {
 	public void setUpload(List<MultipartFile> upload) {
 		this.upload = upload;
 	}
-	public String getUrlContetn() {
-		return urlContetn;
-	}
-	public void setUrlContetn(String urlContetn) {
-		this.urlContetn = urlContetn;
-	}
+	
 	public String getStartdate() {
 		return startdate;
 	}

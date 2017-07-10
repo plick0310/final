@@ -78,6 +78,7 @@ function updateBoard(){
 </c:if>
 }
 </script>
+
 <script type="text/javascript">
 //게시물 공감 개수
 function countLikeBoard(num){
@@ -251,13 +252,15 @@ function deleteReply(replyNum, page){
 					<li>
 					<strong>첨부파일 :<br> </strong>
 				<c:forEach var="dto" items="${listFile}">	
-					  <a href="<%=cp%>/download/infoReqBoard/download?fileNum=${dto.fileNum}">${dto.originalFilename}<span class="glyphicon glyphicon-download-alt"></span><br></a>
+					  <a href="<%=cp%>/download/infoReqBoard/download?fileNum=${dto.fileNum}">
+					  ${dto.originalFilename}<span class="glyphicon glyphicon-download-alt"></span><br></a>
 				</c:forEach>	 
 					</li>					
 					<li>
 						<strong>이전글 :</strong>
 						<c:if test="${not empty preReadDto }">
-                            <a href="<%=cp%>/download/infoReqBoard/article?${query}&num=${preReadDto.num}">${preReadDto.subject}</a>
+                            <a href="<%=cp%>/download/infoReqBoard/article?${query}&num=${preReadDto.num}">
+                            ${preReadDto.subject}</a>
                         </c:if>						
 					</li>
 				</ul>
@@ -265,7 +268,8 @@ function deleteReply(replyNum, page){
 					<li>
 						<strong>다음글 :</strong>
 						<c:if test="${not empty nextReadDto }">
-                            <a href="<%=cp%>/download/infoReqBoard/article?${query}&num=${nextReadDto.num}">${nextReadDto.subject}</a>
+                            <a href="<%=cp%>/download/infoReqBoard/article?${query}&num=${nextReadDto.num}">
+                            ${nextReadDto.subject}</a>
                         </c:if>	
 					</li>
 					<li>
