@@ -32,7 +32,7 @@
 	    $("#allCheck").click(function(){
 	        //클릭되었으면
 	        if($("#allCheck").prop("checked")){
-	            //input태그의 name이 nums인 태그들을 찾아서 checked옵션을 true로 정의
+	            //input태그의 name이 s인 태그들을 찾아서 checked옵션을 true로 정의
 	            $("input[name=nums]").prop("checked",true);
 	            //클릭이 안되있으면
 	        }else{
@@ -133,7 +133,7 @@
 	   var date = f.examwishDate.value;
 	   
 	   var url = "<%=cp%>/mockTest/createdList";
-	   var query="Name="+name+"&Date="+date;
+	   var query="name="+name+"&date="+date;
 	   
 	    if(!name || name=='시험선택') {
 	        alert("시험을 선택하세요");
@@ -151,21 +151,24 @@
 	      ,data: query
 	      ,dataType:"json"
 	      ,success:function(data) {
+	    	 $("#exampleModal").modal("hide");
 	         var state=data.state;
+	         location.href="<%=cp%>/mockTest/main";
 	      }
 	   });
-	   
-	    f.submit();
 	}
 
 	// 수정 처리(DB)
-	function updateOk() {
-	    var f = document.modalForm;
+	function updateOk(num) {
+	   var f = document.modalForm;
+	   
 	   var name = f.examInfoName.value;
 	   var date = f.examwishDate.value;
 	   
+	   alert(num);
+	   
 	   var url = "<%=cp%>/mockTest/updateList";
-	   var query = "Name=" + name + "&Date=" + date;
+	   var query = "name=" + name + "&date=" + date;
 
 			if (!name || name == '시험선택') {
 				alert("시험을 선택하세요");
@@ -176,18 +179,18 @@
 				alert("응시일을 지정하세요. ");
 				return;
 			}
-
+			alert(query);
 			$.ajax({
 				type : "post",
 				url : url,
 				data : query,
 				dataType : "json",
 				success : function(data) {
+					$("#exampleModal").modal("hide");
 					var state = data.state;
+					location.href="<%=cp%>/mockTest/main";
 				}
 			});
-
-			f.submit();
 		}
 </script>
 
@@ -404,9 +407,11 @@ $(function(){
 									</c:if>
 
 									<!-- 응시할 리스트 수정 -->
+									
 									<button id="modalbtn" type="button"
 										onclick="change('${dto.examInfoName}', '${dto.examwishDate}')"
-										class="glyphicon glyphicon-edit"></button>
+										class="glyphicon glyphicon-edit">
+									</button>
 								</div>
 							</div>
 						</td>
@@ -447,6 +452,7 @@ $(function(){
 				<div class="tab_container">
 					<div id="tab1" class="tab_content">
 						<table cellpadding="0" cellspacing="0" style="width: 100%;" class="board_table array">
+							<%-- <c:forEach items="${ }"></c:forEach> --%>
 							<tbody>
 								<tr>
 									<td class="___number"
@@ -503,7 +509,7 @@ $(function(){
 								<td class="___number" style="font-size: 11px; color: #666; text-align: center; font-weight: bold;">11</td>
 								<td style="padding: 9px 5px; border-bottom: 1px solid #EEEEEE;">
 									<div style="position: relative;">
-										<a href="<%=cp%>/help/report/article" class="subject" style="font-size: 15px; font-weight: bold; color: #373737;">정보처리기사</a>
+										<a href="<%=cp %>/help/report/article" class="subject" style="font-size: 15px; font-weight: bold; color: #373737;">정보처리기사</a>
 										<span class="comment" style="display: inline-block; padding: 1px 7px 7px 7px; margin-left: 15px; color: #1abc9c;
 											font-weight: bold; font-size: 15px; line-height: 8px; vertical-align: middle;">
 											[17년 3회차]
@@ -579,10 +585,10 @@ $(function(){
 				<form name="modalForm" method="post" enctype="multipart/form-data">
 					<div class="modal-body" style="margin-left: 121px;">
 						<div class="form-group"
-							style="margin-bottom: 28px; margin-top: 22px;">
+							style="margin-bottom: 15px; margin-top: 22px;">
 							<label for="recipient-name" class="control-label">시험명</label>
 							&nbsp;&nbsp; <select id="examSelect" name="examInfoName"
-								style="border: 1px solid #D4D4D4">
+								style="border: 1px solid #D4D4D4; padding-bottom: 3px; padding-top: 1px;">
 								<option value="시험선택">시험선택</option>
 								<c:forEach var="dto" items="${examinfoList }">
 									<option value="${dto.examInfoName}">${dto.examInfoName }</option>
@@ -613,3 +619,7 @@ $(function(){
 		</div>
 	</div>
 </div>
+<form name="mockTestSearchForm" action="" method="post">
+    <input type="hidden" name="searchKey" value="subject">
+    <input type="hidden" name="searchValue" value="">
+</form>

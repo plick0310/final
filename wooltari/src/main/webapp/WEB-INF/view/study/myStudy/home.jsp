@@ -22,6 +22,9 @@
 	float: left;
 	width: 225px;
 }
+.footer{
+clear:  both;
+}
 
 .menu li:HOVER {
 	background-color: #1abc9c;
@@ -43,13 +46,34 @@ input.uploadBtn {
    position: relative;
    width: 0px;
 }
+li .active{
+	background-color: #1abc9c;
+}
+.clickbtn {
+   background-color: white;
+   border-style: solid;
+   padding: 5px 20px;
+   margin-left: 10px;
+   font-size:13px;
+   border: 1px solid #EAEAEA;
+}
 
+.btn-compose {
+    background: none repeat scroll 0 0 #1abc9d;
+    color: #fff;
+    padding: 12px 0;
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+}
 </style>
 <script type="text/javascript" src="<%=cp%>/resource/js/jquery.form.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function(){
-		$.ajax({
+		
+	
+	$.ajax({
 			url:"<%=cp%>/study/myStudy/${s_num}/board",
 			dataType:"html",
 			success : function(data) {
@@ -57,14 +81,18 @@ $(document).ready(function(){
 			}
 		});
 		
-	
+		
 	
 		$('.menu').on('click', 'a', function(){
 			var fileName;
 			fileName = $(this).parent().attr('class');
 			
-			$(this).parent().css("background-color","#1abc9c");
-				
+			$('li').each(function(index){
+				$(this).removeClass("active").css("background-color","");
+			})
+			
+			$(this).parent().addClass("active").css("background-color","#1abc9c");
+			
 			
 			$.ajax({
 				dataType:"html"
@@ -77,6 +105,29 @@ $(document).ready(function(){
 		});
 
 	});
+	
+	
+function joinStudy(userId,s_num) {
+	
+	var query = "userId="+userId+"&s_num="+s_num;
+	var url = "<%=cp%>/study/joinStudy";
+	
+	$.ajax({
+		 url: url,
+         data: query,
+		 dataType:"json",
+		 success: function(data){
+			 
+			 alert("신청이 완료되었습니다. 리더의 승인을 기다려주세요!");
+			 //가입신청중으로 html 바꾸기
+		 },
+		 error: function(e){
+              console.log(e.responseText);
+          }
+	});
+	
+	
+}
 
 </script>
 
@@ -84,7 +135,7 @@ $(document).ready(function(){
 
 
 
-<div style="width: 1140px; overflow: hidden;  margin: 60px auto;">
+<div style="width: 1140px;  margin: 60px auto;">
 	<div style="height: 50px; font-size: 20px; text-align: center;">
 		<span style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c;"
@@ -100,10 +151,51 @@ $(document).ready(function(){
 			<div style="width: 170px; height: 3px; background-color: #1abc9c;"></div>
 			<Strong>LEADER</Strong><span style="font-size: 14px;">&nbsp;&nbsp;${dto.userId }</span>
 		</div>
-		<div
+		<%-- <div
 			style="margin: 20px 0; padding: 10px 0;">
-			<button>스터디 가입하기</button>
+			<button  type="button" class="clickbtn" onclick="joinStudy('${sessionScope.member.userId}',${dto.s_num});">스터디 가입하기</button>
 			</div>
+			 --%>
+			
+			
+		<div class="inbox-body">
+			<a href="#joinStudy" data-toggle="modal"  title="Compose"  class="btn btn-compose" style="border-radius: 0px;">스터디 가입하기</a>
+			
+			
+			<!-- Modal -->
+			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="joinStudy" class="modal fade" style="display: none;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+							<h4 class="modal-title">스터디 가입 양식</h4>
+						</div>
+						<div class="modal-body">
+							<form role="form" id="form-horizontal" class="form-horizontal" method="post">
+							
+							
+								<div class="form-group">
+									
+										<textarea rows="10" cols="30" placeholder="보내실 내용을 입력해주세요." class="form-control" id="content" name="content" required="required"></textarea>
+									
+								</div>
+								
+								
+								<div class="form-group">
+									<div class="col-lg-offset-2 ">
+										<button id="send-btn" name="send-btn" class="btn btn-send" type="button" onclick="">제출하기</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal -->
+			
+			
+		</div>	
+			
 		
 		<div
 			style="margin: 20px 0; border-top: 1px solid #eee; padding: 20px 0;">${dto.study_Info }</div>

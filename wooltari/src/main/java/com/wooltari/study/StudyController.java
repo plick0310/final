@@ -117,6 +117,16 @@ public class StudyController {
 	}
 	
 	
+	@RequestMapping(value="/study/joinStudy")
+	@ResponseBody
+	public Map<String, Object> joinStudy(StudyMember dto) throws Exception{
+		
+		Map<String, Object> model = new HashMap<>();
+		
+		return model;
+	}
+	
+	
 	
 	@RequestMapping(value="/study/myStudy/{s_num}/calender")
 	public String calender() {
