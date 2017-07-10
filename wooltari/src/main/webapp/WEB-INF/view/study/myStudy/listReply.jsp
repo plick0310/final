@@ -123,7 +123,7 @@ function countReplyBoard(num) {
 	
 	$.post(url, {num:num}, function(data){
 		var count=data.countReplyBoard;
-		alert(count);
+		//alert(count);
 		$("#countReplyBoard_"+num).html(count);
 	}, "json");
 }
@@ -145,7 +145,7 @@ function sendReply(num){
 		,data:query
 		,dataType:"json"
 		,success:function(data){
-			alert("성공");
+			//alert("성공");
 			$("#rcontent_"+num).val("");
 			//리스트 띄우기
 			 listPage2(replyCount, num);
@@ -205,7 +205,7 @@ function listPage2(replyCount, num) {
 	}
  
  function deleteReply(num,reNum) {
-	alert(num+"삭제");
+	//alert(num+"삭제");
 	if(confirm("댓글을 삭제하시겠습니까? ")){ 
 		var url="<%=cp%>/study/myStudy/home/${s_num}/replyDelete";
 		$.post(url,{reNum:reNum}, function(data){
@@ -224,8 +224,8 @@ function listPage2(replyCount, num) {
 			개인정보를 유출하는 글의 게시를 삼가 주세요.</span>
 	</div>
 	<div style="clear: both; padding-top: 10px; float: left;">
-		<textarea id="rcontent_${num}" name ="content" class="boxTF" rows="1"
-			style="display: block; width: 80%; padding: 6px 12px; box-sizing: border-box;"></textarea>
+		<textarea id="rcontent_${num}" name ="content"  rows="1" 
+			style="display: block; width: 80%;padding: 6px 12px; box-sizing: border-box;"></textarea>
 	</div>
 	<div style="text-align: right; padding-top: 10px; ">
 		<button type="button" class="" onclick="sendReply(${num});"

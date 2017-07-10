@@ -117,8 +117,8 @@ public class BoardController {
 		
 		int dataCount = service.dataCount(map); //데이터 총 개수
 		
-		//map.put("userId", info.getUserId());
-		//int checkLike = service.checkLike(map);
+	//	map.put("userId", info.getUserId());
+	//	int checkLike = service.checkLike(map);
 		
 		int start = 1;
 		int end = 0;	
@@ -246,7 +246,7 @@ public class BoardController {
 		Map<String, Object> model = new HashMap<>();
 		return model;
 
-		}    
+		} 
 	 
 	//댓글 삭제
 	@RequestMapping(value="/study/myStudy/home/{s_num}/replyDelete" , method= RequestMethod.POST)
