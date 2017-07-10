@@ -132,8 +132,8 @@ public class MockTestController {
 	@RequestMapping(value="/mockTest/updateList", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> updateList(
-			@RequestParam String Name,
-			@RequestParam String Date,
+			@RequestParam String name,
+			@RequestParam String date,
 			@RequestParam int num,
 			HttpSession session
 			) throws Exception {
@@ -147,8 +147,8 @@ public class MockTestController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("userId", userId);
 		map.put("num", num);
-		map.put("examinfoName", Name);
-		map.put("examwishDate", Date);
+		map.put("examinfoName", name);
+		map.put("examwishDate", date);
 		
 		service.updateExamwishLIST(map);
 		
