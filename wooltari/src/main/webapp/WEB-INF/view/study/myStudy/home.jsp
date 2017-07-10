@@ -62,7 +62,10 @@ $(document).ready(function(){
 		$('.menu').on('click', 'a', function(){
 			var fileName;
 			fileName = $(this).parent().attr('class');
+			
+			$(this).parent().css("background-color","#1abc9c");
 				
+			
 			$.ajax({
 				dataType:"html"
 				,url:"<%=cp%>/study/myStudy/${s_num}/" + fileName
@@ -98,7 +101,12 @@ $(document).ready(function(){
 			<Strong>LEADER</Strong><span style="font-size: 14px;">&nbsp;&nbsp;${dto.userId }</span>
 		</div>
 		<div
-			style="margin: 30px 0; border-top: 1px solid #eee; padding: 20px 0;">${dto.study_Info }</div>
+			style="margin: 20px 0; padding: 10px 0;">
+			<button>스터디 가입하기</button>
+			</div>
+		
+		<div
+			style="margin: 20px 0; border-top: 1px solid #eee; padding: 20px 0;">${dto.study_Info }</div>
 	</div>
 
 	<div id="wrap">

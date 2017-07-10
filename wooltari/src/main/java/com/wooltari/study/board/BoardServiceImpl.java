@@ -101,15 +101,16 @@ public class BoardServiceImpl implements BoardService{
 		return result;
 	}
 	
+	//좋아요...?
 	@Override
-	public int checkLike(Map<String, Object> map) {
-		int result=0;
+	public Map<String, Object> checkLike(Map<String, Object> map) {
+		Map<String, Object> map2 = new HashMap<>() ;
 		try {
-			result = dao.getIntValue("studyBoard.checkLike",map);
+			map2 = dao.callSelectListProcedureMap("studyBoard.checkLike", map);
 		} catch (Exception e) {
 			
 		}
-		return result;
+		return map2;
 	}
 
 	@Override

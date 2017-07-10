@@ -218,4 +218,10 @@ public class ReviewController {
 		return "redirect:/review/list?page="+page;
 
 	}
+	
+	
+	@RequestMapping(value="/review/cal")
+	public String cal(){
+		return ".studyboard.review.cal";
+	}
 }

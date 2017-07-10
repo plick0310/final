@@ -142,6 +142,7 @@ function printBoard(data){
 		for(var idx=0; idx<data.list.length; idx++) {
 			var num=data.list[idx].num;
 			var userId=data.list[idx].userId;
+			var userName=data.list[idx].userName;
 			var content=data.list[idx].content;
 			var created=data.list[idx].created;
 			var imageFileName = data.list[idx].imageFileName;
@@ -149,8 +150,7 @@ function printBoard(data){
 			var hitCount = data.list[idx].hitCount;
 			var likeCount = data.list[idx].likeCount;
 			var replyCount =data.list[idx].replyCount;
-			var checkLike = data.list[idx].checkLike;
-			
+		
 			out+= 	"	<li><div class='timeline-badge primary'>" ;
 			out+=	"			<a><i  class='glyphicon glyphicon-record' rel='tooltip' title="+created+" id=''></i></a> " ;
 			out+=	"		</div><div class='timeline-panel'>" ;
@@ -167,10 +167,8 @@ function printBoard(data){
 	
 			out+=	"	    <div class='timeline-footer'> " ;
 							//좋아요
-			if(checkLike!=null){
-			out+=	"			<a onclick='likeBoard(\""+num+"\")'><i id='like_up_"+num+ "' class='glyphicon glyphicon-thumbs-up' style='color:red;'></i></a> &nbsp; 좋아요( <span id='countLikeBoard_"+num+"'>"+likeCount+"</span>)&nbsp; " ;
-			} else
-				out+=	"			<a onclick='likeBoard(\""+num+"\")'><i id='like_up_"+num+ "' class='glyphicon glyphicon-thumbs-up'></i></a> &nbsp; 좋아요( <span id='countLikeBoard_"+num+"'>"+likeCount+"</span>)&nbsp; " ;
+			
+		out+=	"			<a onclick='likeBoard(\""+num+"\")'><i id='like_up_"+num+ "' class='glyphicon glyphicon-thumbs-up'></i></a> &nbsp; 좋아요( <span id='countLikeBoard_"+num+"'>"+likeCount+"</span>)&nbsp; " ;
 			
 			out+=	"			<a onclick='listReply(\""+num+"\")' data-toggle='collapse' href='#collapseExample_"+num+ "' " ;
 			out+=   "               aria-expanded='false' aria-controls='collapseExample'> 댓글( <span id='countReplyBoard_"+num+"'>"+replyCount+"</span>) </a> " ;
@@ -179,7 +177,7 @@ function printBoard(data){
 				out+=	"		<a class='pull-right' onclick='deleteBoard(\""+num+"\")'>삭제 </a>"   ;
 				out+=	"		<a class='pull-right'>수정  |&nbsp;</a>" ;
 				} else {
-				out+=	"		<a class='pull-right'>"+userId+"</a>" ;
+				out+=	"		<a class='pull-right'> 글쓴이 "+userName+"</a>" ;
 				}
 			
 			out+=	"	<div class='collapse' id='collapseExample_" +num+ "'> ";

@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Board {
 	private int num , hitCount;
-	private String userId, content , created ;
+	private String userId, content , created , userName;
 	private long s_num;
 	
 	private MultipartFile upload;
@@ -19,6 +19,14 @@ public class Board {
 	
 	
 	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public int getLikeCheck() {
 		return likeCheck;
 	}
