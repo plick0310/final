@@ -373,7 +373,7 @@ function searchMsg() {
 <div class="mail-box">
 	<aside class="sm-side">
 		<div class="user-head">
-			<a class="inbox-avatar" href="javascript:;">
+			<a class="inbox-avatar" href="#">
 			<c:if test="${not empty sessionScope.member.userImg}">
 				<img alt="" src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}" width="60" height="60">
         	</c:if>
