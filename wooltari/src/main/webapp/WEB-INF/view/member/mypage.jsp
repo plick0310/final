@@ -85,6 +85,9 @@
     padding: 0 20px;
     margin-bottom: 17px;
 }
+.btn-pref {
+	margin-top: 50px;
+}
 .btn-pref .btn {
     -webkit-border-radius:0 !important;
 }
@@ -102,7 +105,9 @@ $(document).ready(function() {
 	});
 	});
 */
+var noreadCount = null;
 $(document).ready(function(){
+	
 	$.ajax({
 		url:"<%=cp%>/member/my_main",
 		dataType:"html",
@@ -116,6 +121,10 @@ $(document).ready(function(){
 		
 		var fileName;
 		pageName = $(this).attr('id');
+		if(noreadCount != null){
+			clearInterval(noreadCount);
+			noreadCount=null;
+		}
 		$.ajax({
 			url:"<%=cp%>/member/" + pageName,
 			dataType:"html",
@@ -126,23 +135,9 @@ $(document).ready(function(){
 	});
 });
 
-
-function messagePaging(paging) {
-	alert(paging);
-}
-
-<%--
-$.ajax({
-	url:"<%=cp%>/message/list?mode=" + mode + "&page=" + paging,
-	dataType:"html",
-	success : function(data) {
-	$('.msg-list').html(data);
-	}
-});
---%>
-
 </script>
 <div class="container">
+	<%-- 
     <div class="card hovercard">
         <div class="card-background">
             <img class="card-bkimg" alt="" src="<%=cp%>/resource/img/card.jpg">
@@ -160,6 +155,7 @@ $.ajax({
 
         </div>
     </div>
+     --%>
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
         <div class="btn-group" role="group">
             <button type="button" id="my_main" class="btn btn-primary" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>

@@ -147,7 +147,7 @@ function sendlogout(){
 							<li class="grid-demo">
 
 								<div class="row">
-									<div class="col-sm-2"><a href="<%=cp%>/community/exam/list">모의 테스트</a></div>
+									<div class="col-sm-2"><a href="<%=cp%>/mockTest/main">모의 테스트</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>">한줄톡톡</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>">자유광장</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>">포톡스</a></div>
@@ -206,20 +206,25 @@ function sendlogout(){
 				
 					</form>				
 					</div>
-				<div class="member" style="margin: 7px 0;"> 
+				<div class="member" style="height: 50px;line-height: 50px;"> 
 					<c:if test="${empty sessionScope.member}">
-						<a data-toggle="modal" href="#modal"><img src="<%=cp%>/resource/img/loginicon.png" alt="Login" class="img-circle" width="35px" height="35px"></a>
+					<span style="color: #d6d6d6;">|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<a data-toggle="modal" href="#modal">
+						<strong style=" font-size: 16px;font-size: 14px;color: #3e3a39;font-weight: 600;
+						font-family: 'Open Sans', sans-serif;"> L O G &nbsp;I N</strong>
+						<%-- <img src="<%=cp%>/resource/img/loginicon.png" alt="Login"  width="35px" height="35px"> --%>
+						</a>
 					</c:if>
 					<c:if test="${not empty sessionScope.member}">
 						<strong style="margin-right: 5px">${sessionScope.member.userName}</strong>
 						<c:if test="${empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c"> 
+								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="padding:1px; box-shadow: 2px 2px 5px grey;"> 
 							</a>
 						</c:if>
 						<c:if test="${not empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-								<img src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}" class="img-circle" width="35px" height="35px" style="border: 2px solid #1abc9c">
+								<img src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}" class="img-circle" width="35px" height="35px" style="padding:1px; box-shadow: 2px 2px 5px grey;">
 							</a>
 						</c:if>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">

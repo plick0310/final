@@ -53,7 +53,12 @@ public class StudyController {
 		service.insertStudy(dto ,path);
 		} catch (Exception e) {
 			System.out.println("실패");
-			return "redirect:/";
+			
+			//study 테이블 삭제........ 
+			service.deleteStudy(dto.getS_num());
+			model.addAttribute("messaage","스터디 생성 실패" );
+			
+			return "member/notice";
 		}
 		
 		//model.addAttribute("dto",dto);

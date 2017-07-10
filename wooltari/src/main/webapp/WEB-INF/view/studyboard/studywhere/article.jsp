@@ -265,7 +265,8 @@ line-height: normal;
 			<tr height="45" style="    border-top: 1px solid #eee;">
 			    <td width="300" align="left">
 			    	<c:if test="${sessionScope.member.userId==dto.userId }">
-			          <button type="button" class="clickbtn" onclick="updateBoard();" style="    margin-left: 0;">수정</button>
+			          <button type="button" class="clickbtn" onclick="javascript:location.href='<%=cp%>/studyboard/studywhere/update?num=${dto.num}&page=${page}';" 
+			          style="margin-left: 0;">수정</button>
 			    	</c:if>
 			    	<c:if test="${sessionScope.member.userId==dto.userId || sessionScope.member.userId=='admin'}">
 			          <button type="button" class="clickbtn" onclick="deleteBoard(${dto.num});" style="    margin-left: 5px;">삭제</button> 

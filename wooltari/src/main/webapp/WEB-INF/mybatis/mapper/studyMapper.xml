@@ -35,7 +35,7 @@
 		SELECT NVL(MAX(s_num),0) FROM study
 	</select>
 	
-	<!--스터디생성  -->
+	<!--스터디 생성  -->
 	<insert id="insertStudy" parameterType="com.wooltari.study.StudyInfo">
 		INSERT INTO study (s_num, userId , studyName, study_Info, gender, recruit, range ,imageFileName) 
 		VALUES (#{s_num},#{userId},#{studyName},#{study_Info},#{gender},#{recruit},#{range},#{imageFileName, jdbcType=VARCHAR})
@@ -52,6 +52,24 @@
   	<insert id="insertstudyTarget" parameterType="com.wooltari.study.StudyInfo">
   		INSERT INTO studyTarget (s_num , target) VALUES(#{s_num},#{s_target})
   	</insert>
+  	
+  	<!-- 스터디 삭제 -->
+  	<delete id="deleteStudy" parameterType="Long">
+  		DELETE FROM study WHERE s_num=#{s_num}
+  	</delete>
+  	
+  	<delete id="deletestudyCategory" parameterType="Long">
+  		DELETE FROM studyCategory WHERE s_num=#{s_num}
+  	</delete>
+  	
+  	<delete id="deletestudyCity" parameterType="Long">
+  		DELETE FROM studyCity WHERE s_num=#{s_num}
+  	</delete>
+  	
+  	<delete id="deletestudyTarget" parameterType="Long">
+  		DELETE FROM studyTarget WHERE s_num=#{s_num}
+  	</delete>
+  	
   	
   	<!-- (내가만든)나의 스터디 리스트 -->
   	<select id="listMyStudy" parameterType="String" resultType="com.wooltari.study.StudyInfo">
@@ -87,22 +105,7 @@
 	</update>
 	
 	
-	<!--자유게시판 사진   
-	<update id="createStudyPhoto" parameterType="Long">
-		   CREATE TABLE s_${value}_Photo(
-		   pNum number NOT NULL
-		   ,num number NOT NULL
-		   ,imageFileName VARCHAR2(1000) NOT NULL
-		   ,PRIMARY KEY(pNum)
-		   ,FOREIGN KEY(num) REFERENCES s_${value}_Board(num) ON DELETE CASCADE
-		) 
-	</update>
-	
-	<update id="dropStudyPhoto" parameterType="long">
-		drop table s_${value}_Photo purge
-	</update>
-	-->
-	
+
 	<!--자유게시판 댓글  -->
 	<update id="StudyBoardReply" parameterType="Long">
 	CREATE TABLE s_${value}_BoardReply(
@@ -110,6 +113,7 @@
 	   ,num number NOT NULL
 	   ,userId VARCHAR2(50) NOT NULL
 	   ,content VARCHAR2(500) NOT NULL
+	   ,created DATE DEFAULT SYSDATE
 	   ,PRIMARY KEY(reNum)
 	   ,FOREIGN KEY(num) REFERENCES s_${value}_Board(num) ON DELETE CASCADE
 	   ,FOREIGN KEY(userId) REFERENCES member(userId)

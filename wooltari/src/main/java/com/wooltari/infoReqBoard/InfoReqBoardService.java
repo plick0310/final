@@ -17,6 +17,7 @@ public interface InfoReqBoardService {
 	public int insertLikeBoard(InfoReqBoard dto);
 	public int countLikeBoard(int num);
 	
+	//회원 탈퇴시 글 삭제
 	public int deleteBoardId(String userId, String root);
 	
 	//파일 첨부

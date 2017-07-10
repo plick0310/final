@@ -47,19 +47,19 @@ public class StudywhereController {
 		HttpServletRequest req,
 		Model model
 		)throws Exception{
-	
+	System.out.println("================================1"+searchValue);
 	if(req.getMethod().equalsIgnoreCase("GET")) {
 		searchValue= URLDecoder.decode(searchValue, "UTF-8");
 	}
-	
+	System.out.println("================================2"+searchValue);
 	int rows=10;
 	int total_page=0;
 	int dataCount=0;
 	
 	
 	Map<String, Object> map = new HashMap<>();
-	map.put(searchKey, searchKey);
-	map.put(searchValue, searchValue);
+	map.put("searchKey", searchKey);
+	map.put("searchValue", searchValue);
 	
 	dataCount=service.dataCount(map);
 	if(dataCount!=0) {
@@ -74,7 +74,7 @@ public class StudywhereController {
 	int end=current_page*rows;
 	map.put("start", start);
 	map.put("end", end);
-	
+	System.out.println("================================3"+searchValue);
 	List<StudyWhere> list = service.listStudyWhere(map);
 
 	
@@ -97,7 +97,7 @@ public class StudywhereController {
 		
 		n++;
 	}
-	
+	System.out.println("================================4"+searchValue);
 	
 	List<StudyWhere> bestlist = service.bestStudyWhere(map);
 	int bestlistNum, b=0;
@@ -217,35 +217,7 @@ public class StudywhereController {
 		return ".studyboard.studywhere.article";
 	}
 	
-	@RequestMapping(value="/studyboard/studywhere/download")
-	public void download(
-				@RequestParam int num,
-				HttpServletRequest req,
-				HttpServletResponse resp,
-				HttpSession session
-			) throws Exception {
-		String cp = req.getContextPath();
-		
-		SessionInfo info = (SessionInfo) session.getAttribute("member"); 
-/*		if(info==null) {
-			resp.sendRedirect(cp+"/member/login");
-			return;
-		}*/
-		
-		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"uploads"+File.separator+"studywhere";
-		StudyWhere dto=service.readStudyWhere(num);
-		boolean flag = false;
-		
-		/*if(dto!=null) {
-			flag=fileManager.doFileDownload(dto.getSaveFilename(), dto.getOriginalFilename(), pathname, resp);
-		}*/
-		if(!flag) {
-			resp.setContentType("text/html;charset=utf-8");
-			PrintWriter out=resp.getWriter();
-			out.print("<script>alert('파일 다운로드에 실패하였습니다.');history.back();</script>");
-		}
-	}
+	
 	@RequestMapping(value="/studyboard/studywhere/insertLikeStudyWhere",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> insertLikeStudyWhere(StudyWhere dto, HttpSession session) throws Exception {
@@ -307,10 +279,9 @@ public class StudywhereController {
 			return "redirect:/member/login";
 		}
 		
-		String root = session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"bbs";
+		
 
-		service.updateStudyWhere(dto, pathname);
+		service.updateStudyWhere(dto);
 		
 		return "redirect:/studyboard/studywhere/list?page="+page;
 	}

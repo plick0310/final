@@ -13,7 +13,7 @@ public interface StudyWhereService {
 	public int updateHitCount(int num);
 	public StudyWhere preReadStudyWhere(Map<String, Object>map);
 	public StudyWhere nextReadStudyWhere(Map<String, Object>map);
-	public int updateStudyWhere(StudyWhere dto,String pathname);
+	public int updateStudyWhere(StudyWhere dto);
 	public int deleteStudyWhere(int num,String pathname, String userId);
 	
 	public int insertLikeStudyWhere(StudyWhere dto);

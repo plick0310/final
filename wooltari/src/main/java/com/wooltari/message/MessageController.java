@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wooltari.common.MyUtilBootstrap;
 import com.wooltari.member.SessionInfo;
@@ -27,15 +28,66 @@ public class MessageController {
 	@Autowired
 	private MyUtilBootstrap myUtil;
 
-	@RequestMapping(value="/message/send", method=RequestMethod.GET)
-	public String memberChat() throws Exception {
-		return "message/send";
+	@RequestMapping(value="/message/send", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> memberChat(Message dto, HttpSession session) throws Exception {
+		Map<String, Object> model = new HashMap<>();
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String state = "false";
+		try {
+			dto.setSent_Id(info.getUserId());
+			service.sendMessage(dto);
+		} catch (Exception e) {
+			model.put("state", state);
+			return model;
+		}
+		state = "true";
+		model.put("state", state);
+		return model;
+	}
+	
+	@RequestMapping(value="/message/read")
+	@ResponseBody
+	public Map<String, Object> msgRead(@RequestParam int num, HttpSession session) throws Exception {
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		Map<String, Object> model = new HashMap<>();
+		String state = "false";
+		Message dto = null;
+		try {
+			dto = service.readMessage(num);
+			if(dto.getRecv_Id().equals(info.getUserId())){
+				service.updateReadMessage(num);
+			}
+		} catch (Exception e) {
+			model.put("state", state);
+		}
+		state = "true";
+		model.put("state", state);
+		model.put("sent_Id", dto.getSent_Id());
+		model.put("recv_Id", dto.getRecv_Id());
+		model.put("content", dto.getContent());
+		return model;
+	}
+	
+	@RequestMapping(value="/message/count", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> msgCount(HttpSession session) throws Exception {
+		Map<String, Object> model = new HashMap<>();
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		model.put("userId", info.getUserId());
+		model.put("receive", "receive");
+		int recv_Count = service.noreadCount(model);
+		model.remove("receive");
+		
+		model.put("recv_Count", recv_Count);
+		return model;
 	}
 	
 	@RequestMapping(value="/message/list")
 	public String list(
 				@RequestParam(value="page", defaultValue="1") int current_page,
-				@RequestParam(value="mode", defaultValue="receive") String mode,
+				@RequestParam(value="mode", defaultValue="all") String mode,
 				@RequestParam(value="searchValue", defaultValue="") String searchValue,
 				Model model, HttpServletRequest req , HttpSession session
 			) throws Exception{
@@ -43,13 +95,15 @@ public class MessageController {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		String cp = req.getContextPath();
 		
-		int rows=10;
+		int rows=15;
 		int total_page = 0;
 		int dataCount = 0;
 		
 		if(req.getMethod().equalsIgnoreCase("GET")) { // GET 방식인 경우
 			searchValue = URLDecoder.decode(searchValue, "utf-8");
 		}
+		
+		System.out.println(searchValue);
 		
 		//전체 페이지 수
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -97,7 +151,7 @@ public class MessageController {
         
         
         String paging = myUtil.pagingMethod(current_page, total_page, "messagePaging");
-        System.out.println(mode);
+        System.out.println("mode : " + mode + " / page : " + current_page + " / searchValue : " + searchValue);
         
         model.addAttribute("list", list);
         model.addAttribute("mode", mode);

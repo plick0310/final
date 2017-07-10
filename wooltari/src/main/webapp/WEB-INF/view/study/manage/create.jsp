@@ -236,7 +236,40 @@ padding-top: 10px;
 
 </style>
  
-
+<script>
+$(function() {
+    $("input").not($(":button")).keypress(
+          function(evt) {
+             if (evt.keyCode == 13) {
+                var fields = $(this).parents('form:eq(0),body').find(
+                      'button,input,textarea,select');
+                var index = fields.index(this);
+                if (index > -1 && (index + 1) < fields.length) {
+                   fields.eq(index + 1).focus();
+                }
+                return false;
+             }
+          });
+ });
+ 
+ 
+function insertStudy(){
+    var f=document.studyForm;
+    
+    var str;
+    str=f.studyName.value;
+    str=$.trim(str);
+    if(!str){
+  	  f.studyName.focus();
+  	  alert("스터디명을 입력해주세요");
+  	  return false;
+    }
+ 
+    f.action="<%=cp%>/study/created";
+    f.submit();
+ }
+ 
+</script>
 
 </head>
 <body>
@@ -562,22 +595,7 @@ padding-top: 10px;
    </script>
 
    <script>
-   function insertStudy(){
-	      var f=document.studyForm;
-	      
-	      var str;
-	      str=f.studyName.value;
-	      str=$.trim(str);
-	      if(!str){
-	    	  f.studyName.focus();
-	    	  alert("스터디명을 입력해주세요");
-	    	  return false;
-	      }
-	   
-	      f.action="<%=cp%>/study/created";
-	      f.submit();
-	   }
-	   
+
 	  
    function deleteCategory(item) {//x버튼 클릭시 제거
 		
