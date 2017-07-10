@@ -181,7 +181,7 @@ function printBoard(data){
 				}
 			
 			out+=	"	<div class='collapse' id='collapseExample_" +num+ "'> ";
-			out+=	"	<div class='well' id='listReply_" +num+ "'>댓글댓글</div>";
+			out+=	"	<div class='well' id='listReply_" +num+ "'></div>";
 			out+=	" </div></div></div></li> ";
 	
 			out+="<li class='clearfix' style='float: none;'></li>"

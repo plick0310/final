@@ -1,10 +1,235 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<script>
 
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%
-	String cp = request.getContextPath();
-%>
-멤버멤버
+</script>
+<style>
+.addon {
+width:45%;
+float:left;
+background: #fff;
+border: 1px solid #eeeeee	;
+margin: 22px;
+border-radius: 3px;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+}
 
+.addon li {
+padding: 10px;
+border-top: 1px solid #eee;
+overflow: hidden;
+}
+.addon li {
+list-style:none;
+}
+
+.clearfix {
+display: block;
+}
+.clearfix:after {
+content: " ";
+display: block;
+height: 0;
+clear: both;
+visibility: hidden;
+overflow: hidden;
+}
+
+li {
+display: list-item;
+text-align: -webkit-match-parent;
+} ul {
+margin: 0;
+padding: 0;
+border: 0;
+font-size: 100%;
+font: inherit;
+vertical-align: baseline;
+}
+ ul {
+list-style: none;
+}
+.round {
+border-radius:100%;
+  display: block;
+height: 48px;
+width: 49px;
+float: left;
+}
+.addon li em {
+background: url(http://d1dls1ko4h0b59.cloudfront.net/assets/campaign-legend-d95e12bce50a8e18d8bd3c96383c352f.png) no-repeat;
+display: block;
+height: 48px;
+width: 49px;
+float: left;
+}
+.addon li em.extra {
+background-position: -118px 0;
+}
+.addon li em.hot {
+background-position: -58px 0;
+}
+.addon p {
+padding: 10px 15px;
+margin: 0;
+font: 600 16px/22px "myriad-pro",Arial,"Helvetica Neue",Helvetica,sans-serif;
+}
+p {
+display: block;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+}
+
+.addon li .legend-info {
+float: left;
+margin-left: 10px;
+width: 155px;
+}
+
+.addon strong {
+display: block;
+margin: 0 0 4px;
+}
+
+strong {
+font-weight: bold;
+}
+
+/* .d3 {background: #F9F0DA;} */
+.d3 form {
+  background: #eee;
+}
+.d3 input, .d3 button {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+.d3 input {
+  width: 88%;
+  height: 42px;
+  padding-left: 15px;
+}
+.d3 button {
+  height: 42px;
+  width: 42px;
+
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+.d3 button:before {
+  content: "\f002";
+  font-family: FontAwesome;
+  font-size: 16px;
+  color: #1abc9d;
+}
+.form-control{
+width:85%;}
+</style>
+<div class="addon 1">
+	<p id="" style="border-bottom: 1px solid #eee;">
+		스터디 멤버 <span style="color: #1abc9c;">9</span>명
+		
+		<a class="" data-toggle="collapse" href="#collapseExample2"
+					aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-ellipsis-v" style="float: right;"></i></a>
+	
+	
+	</p>
+	<div class="collapse" id="collapseExample2">
+	<div class="d3">
+		<form class="d3">
+			<input type="text" placeholder="멤버 ID 혹은 이름을 검색해보세요">
+			<button type="submit"></button>
+		</form>
+	</div>
+	</div>
+	
+	<ul>
+		<li class="clearfix"><a href="#" target="_blank"> <img
+				class="round"
+				src="https://8share-production-my.s3.amazonaws.com/campaigns/4898/photos/profile/thumb_copy.png?1397732185">
+				<div class="legend-info">
+					<strong>Social Good</strong>Help share a cause and do good.
+				</div></a></li>
+		<li class="clearfix"><em class="hot"></em>
+			<div class="legend-info">
+				<strong>Fire Hot</strong>Featured hot special at the moment.
+			</div></li>
+		<li class="clearfix"><em class="extra"></em>
+			<div class="legend-info">
+				<strong>Extra Fun</strong>Contests, surveys, prizes and more fun
+				stuff.
+			</div></li>
+	</ul>
+</div>
+
+<div class="addon 2">
+	<p>대기중인 스터디 멤버
+	<a href="#myModal" data-toggle="modal" data-placement="top" title="Add Contact"><i class="glyphicon glyphicon-plus" style="float: right;"></i></a>
+	
+	</p>
+	
+	<ul>
+		<li class="clearfix"><img
+				class="round"
+				src="https://8share-production-my.s3.amazonaws.com/campaigns/4898/photos/profile/thumb_copy.png?1397732185">
+				<div class="legend-info">
+					<strong>앙이디</strong>한줄 소개
+				</div></li>
+		<li class="clearfix"><em class="hot"></em>
+			<div class="legend-info">
+				<strong>Fire Hot</strong>Featured hot special at the moment.
+			</div></li>
+		<li class="clearfix"><em class="extra"></em>
+			<div class="legend-info">
+				<strong>Extra Fun</strong>Contests, surveys, prizes and more fun
+				stuff.
+			</div></li>
+	</ul>
+</div>
+
+
+    
+   	<!-- Modal -->
+			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" style="display: none;">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+							<h4 class="modal-title">멤버 초대하기</h4>
+						</div>
+						<div class="modal-body">
+							<form role="form" id="form-horizontal" class="form-horizontal" method="post">
+								<div class="form-group">
+									<label class="col-lg-2 control-label">받는 사람</label>
+									<div class="col-lg-10">
+										<input type="text" placeholder="받는 분의 아이디(example@example.com)" class="form-control" id="recv_Id" name="recv_Id" required="required">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">보낸 사람</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control" id="sent_Id" name="sent_Id" readonly="readonly" value="${sessionScope.member.userName}(${sessionScope.member.userId})">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-lg-2 control-label">내용</label>
+									<div class="col-lg-10">
+										<textarea rows="10" cols="30" placeholder="보내실 내용을 입력해주세요." class="form-control" id="content" name="content" required="required"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-lg-offset-2 col-lg-10 text-right">
+										<button id="send-btn" name="send-btn" class="btn btn-send" type="button" onclick="submitMsg()">Send</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal -->
