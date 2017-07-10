@@ -2,14 +2,14 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="message">
-	<!-- 메시지 전송 -->
+	<!-- 메시지 전송 처리 -->
 	<insert id="sendMessage" parameterType="com.wooltari.message.Message">
 		INSERT INTO message(num, sent_Id, recv_Id, content) VALUES (message_seq.NEXTVAL, #{sent_Id}, #{recv_Id}, #{content})
     </insert>
     
     <sql id="where-mode">
     	<if test="mode=='all'">
-		(recv_Id = #{userId} OR sent_Id = #{userId}) AND recv_Category != 0
+		(recv_Id = #{userId} OR sent_Id = #{userId}) AND recv_Category != 0 AND sent_Category != 0
 		</if>
 		<if test="mode=='receive'">
 		recv_Id = #{userId} AND recv_Category = 1
@@ -31,7 +31,7 @@
 		</if>
 	</sql>
 	
-    <!-- 메시지 개수 -->
+    <!-- 메시지 개수 카운트 처리 -->
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0) FROM message
 		<where>
@@ -40,7 +40,7 @@
 	    </where>
 	</select>
 	
-	<!-- 읽지 않은 메시지 개수 -->
+	<!-- 읽지 않은 메시지 개수 카운트 처리 -->
 	<select id="noreadCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0) FROM message
 		WHERE recv_Id = #{userId} AND recv_Category = 1 AND read = 0
@@ -76,34 +76,43 @@
 	
 	<!-- 읽은 쪽지 처리 -->
 	<update id="updateReadMessage" parameterType="Integer">
-		UPDATE message SET read=1 WHERE num = #{num}
+		UPDATE message SET read=1, date_Read=SYSDATE WHERE num = #{num}
 	</update>
 	
-	<!-- 보관함 이동 처리 -->
-	<update id="updateHoldMessage" parameterType="Integer">
-		UPDATE message SET recv_Category=2 WHERE num = #{num}
+	<!-- 받은 쪽지 읽은 쪽지 처리 -->
+	<update id="readMessageList" parameterType="java.util.List">
+		UPDATE (SELECT * FROM message WHERE read=0)message SET read=1, date_Read=SYSDATE WHERE num IN
+		<foreach close=")" separator="," open="(" collection="list" index="index" item="num">#{num}</foreach>
 	</update>
 	
-	<!-- 휴지통 이동 처리 -->
-	<update id="updateTrashMessage" parameterType="Integer">
-		UPDATE message SET recv_Category=3 WHERE num = #{num}
+	<!-- 받은 쪽지 보관함 이동 처리 -->
+	<update id="keepMessageList" parameterType="java.util.List">
+		UPDATE message SET recv_Category=2 WHERE num IN
+		<foreach close=")" separator="," open="(" collection="list" index="index" item="num">#{num}</foreach>
 	</update>
 	
-	<!-- 휴지통 비우기 처리 -->
-	<update id="updateDeleteMessage" parameterType="Integer">
-		UPDATE message SET recv_Category=0 WHERE num = #{num}
+	<!-- 받은 쪽지 휴지통 이동 처리 -->
+	<update id="trashMessageList" parameterType="java.util.List">
+		UPDATE message SET recv_Category=3 WHERE num IN
+		<foreach close=")" separator="," open="(" collection="list" index="index" item="num">#{num}</foreach>
 	</update>
 	
-	<!-- 보낸 쪽지 삭제 -->
-	<update id="updateSentTrashMessage" parameterType="Integer">
-		UPDATE message SET sent_Category=0 WHERE num = #{num}
+	<!-- 받은 쪽지함 이동 처리 -->
+	<update id="receiveMessageList" parameterType="java.util.List">
+		UPDATE message SET recv_Category=1 WHERE num IN
+		<foreach close=")" separator="," open="(" collection="list" index="index" item="num">#{num}</foreach>
 	</update>
 	
-	<!-- 쪽지 리스트 삭제 -->
-	<!-- 
-	<update id="deleteList" parameterType="java.util.List">
-      DELETE FROM message WHERE num IN
-         <foreach close=")" separator="," open="(" collection="list" index="index" item="num">#{num}</foreach>
-    </update>
-    -->
+	<!-- 받은 쪽지 휴지통 비우기 처리 -->
+	<update id="deleteMessageList" parameterType="java.util.List">
+		UPDATE message SET recv_Category=0 WHERE num IN
+		<foreach close=")" separator="," open="(" collection="list" index="index" item="num">#{num}</foreach>
+	</update>
+	
+	<!-- 보낸 쪽지 삭제 처리-->
+	<update id="deleteSendMessageList" parameterType="java.util.List">
+		UPDATE message SET sent_Category=0 WHERE num IN
+		<foreach close=")" separator="," open="(" collection="list" index="index" item="num">#{num}</foreach>
+	</update>
+	
 </mapper>

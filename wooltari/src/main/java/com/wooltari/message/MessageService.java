@@ -10,6 +10,12 @@ public interface MessageService {
 	public List<Message> listMessage(Map<String, Object> map);
 	public Message readMessage(int num);
 	public int updateReadMessage(int num);
-	public int updateHoldMessage(int num);
-	public int updateTrashMessage(int num);
+	
+	public int readMessageList(List<Integer> list);
+	public int keepMessageList(List<Integer> list);
+	public int trashMessageList(List<Integer> list);
+	public int receiveMessageList(List<Integer> list);
+	public int deleteMessageList(List<Integer> list);
+	public int deleteSendMessageList(List<Integer> list);
+	
 }

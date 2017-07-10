@@ -400,13 +400,13 @@ function searchMsg() {
 						<div class="modal-body">
 							<form role="form" id="form-horizontal" class="form-horizontal" method="post">
 								<div class="form-group">
-									<label class="col-lg-2 control-label">받는 사람</label>
+									<label class="col-lg-2 control-label">보낸 사람</label>
 									<div class="col-lg-10">
 										<input type="text" class="form-control" id="sent_Id" name="sent_Id" readonly="readonly" value="${sessionScope.member.userName}(${sessionScope.member.userId})">
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-lg-2 control-label">보낸 사람</label>
+									<label class="col-lg-2 control-label">받는 사람</label>
 									<div class="col-lg-10">
 										<input type="text" placeholder="받는 분의 아이디(example@example.com)" class="form-control" id="recv_Id" name="recv_Id" required="required">
 									</div>

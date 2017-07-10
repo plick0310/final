@@ -28,9 +28,10 @@ public class MessageController {
 	@Autowired
 	private MyUtilBootstrap myUtil;
 
+	//메시지 전송 처리
 	@RequestMapping(value="/message/send", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> memberChat(Message dto, HttpSession session) throws Exception {
+	public Map<String, Object> sendMessage(Message dto, HttpSession session) throws Exception {
 		Map<String, Object> model = new HashMap<>();
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		String state = "false";
@@ -46,16 +47,33 @@ public class MessageController {
 		return model;
 	}
 	
+	//읽지 않은 메시지 개수 카운트 처리
+	@RequestMapping(value="/message/count", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> dataCount(HttpSession session) throws Exception {
+		Map<String, Object> model = new HashMap<>();
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		model.put("userId", info.getUserId());
+		model.put("receive", "receive");
+		int recv_Count = service.noreadCount(model);
+		model.remove("receive");
+		
+		model.put("recv_Count", recv_Count);
+		return model;
+	}
+		
+	//쪽지 보기,읽은 쪽지 처리
 	@RequestMapping(value="/message/read")
 	@ResponseBody
-	public Map<String, Object> msgRead(@RequestParam int num, HttpSession session) throws Exception {
+	public Map<String, Object> readMessage(@RequestParam int num, HttpSession session) throws Exception {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		Map<String, Object> model = new HashMap<>();
 		String state = "false";
 		Message dto = null;
 		try {
 			dto = service.readMessage(num);
-			if(dto.getRecv_Id().equals(info.getUserId())){
+			if(dto.getRecv_Id().equals(info.getUserId()) && dto.getRead() == 0){
 				service.updateReadMessage(num);
 			}
 		} catch (Exception e) {
@@ -69,23 +87,111 @@ public class MessageController {
 		return model;
 	}
 	
-	@RequestMapping(value="/message/count", method=RequestMethod.POST)
+	//받은 쪽지 읽은 쪽지 처리
+	@RequestMapping(value="/message/msgread", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> msgCount(HttpSession session) throws Exception {
+	public Map<String, Object> readMessageList(@RequestParam(value="checkArray[]") List<Integer> list) throws Exception {
 		Map<String, Object> model = new HashMap<>();
-		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		
-		model.put("userId", info.getUserId());
-		model.put("receive", "receive");
-		int recv_Count = service.noreadCount(model);
-		model.remove("receive");
-		
-		model.put("recv_Count", recv_Count);
+		String state = "false";
+		try {
+			service.readMessageList(list);
+		} catch (Exception e) {
+			model.put("state", state);
+			return model;
+		}
+		state = "true";
+		model.put("state", state);
 		return model;
 	}
 	
+	//받은 쪽지 보관함 이동 처리
+	@RequestMapping(value="/message/msgkeep", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> keepMessageList(@RequestParam(value="checkArray[]") List<Integer> list) throws Exception {
+		Map<String, Object> model = new HashMap<>();
+		String state = "false";
+		try {
+			service.keepMessageList(list);
+		} catch (Exception e) {
+			model.put("state", state);
+			return model;
+		}
+		state = "true";
+		model.put("state", state);
+		return model;
+	}
+	
+	//받은 쪽지 휴지통 이동 처리
+	@RequestMapping(value="/message/msgtrash", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> trashMessageList(@RequestParam(value="checkArray[]") List<Integer> list) throws Exception {
+		Map<String, Object> model = new HashMap<>();
+		String state = "false";
+		try {
+			service.trashMessageList(list);
+		} catch (Exception e) {
+			model.put("state", state);
+			return model;
+		}
+		state = "true";
+		model.put("state", state);
+		return model;
+	}
+	
+	//받은 쪽지함 이동 처리
+	@RequestMapping(value="/message/msgreceive", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> receiveMessageList(@RequestParam(value="checkArray[]") List<Integer> list) throws Exception {
+		Map<String, Object> model = new HashMap<>();
+		String state = "false";
+		try {
+			service.receiveMessageList(list);
+		} catch (Exception e) {
+			model.put("state", state);
+			return model;
+		}
+		state = "true";
+		model.put("state", state);
+		return model;
+	}
+	
+	//받은 쪽지 휴지통 비우기 처리
+	@RequestMapping(value="/message/msgdelete", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteMessageList(@RequestParam(value="checkArray[]") List<Integer> list) throws Exception {
+		Map<String, Object> model = new HashMap<>();
+		String state = "false";
+		try {
+			service.deleteMessageList(list);
+		} catch (Exception e) {
+			model.put("state", state);
+			return model;
+		}
+		state = "true";
+		model.put("state", state);
+		return model;
+	}
+	
+	//보낸 쪽지 삭제 처리
+	@RequestMapping(value="/message/msgsenddelete", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteSendMessageList(@RequestParam(value="checkArray[]") List<Integer> list) throws Exception {
+		Map<String, Object> model = new HashMap<>();
+		String state = "false";
+		try {
+			service.deleteSendMessageList(list);
+		} catch (Exception e) {
+			model.put("state", state);
+			return model;
+		}
+		state = "true";
+		model.put("state", state);
+		return model;
+	}
+	
+	//쪽지 리스트 가져오기
 	@RequestMapping(value="/message/list")
-	public String list(
+	public String listMessage(
 				@RequestParam(value="page", defaultValue="1") int current_page,
 				@RequestParam(value="mode", defaultValue="all") String mode,
 				@RequestParam(value="searchValue", defaultValue="") String searchValue,

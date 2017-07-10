@@ -76,23 +76,64 @@ public class MessageServiceImpl implements MessageService{
 		return result;
 	}
 	@Override
-	public int updateHoldMessage(int num) {
+	public int readMessageList(List<Integer> list) {
 		int result=0;
 		try {
-			result = dao.updateData("message.updateHoldMessage", num);
+			result = dao.updateData("message.readMessageList", list);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
 		return result;
 	}
 	@Override
-	public int updateTrashMessage(int num) {
+	public int keepMessageList(List<Integer> list) {
 		int result=0;
 		try {
-			result = dao.updateData("message.updateTrashMessage", num);
+			result = dao.updateData("message.keepMessageList", list);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
 		return result;
 	}
+	@Override
+	public int trashMessageList(List<Integer> list) {
+		int result=0;
+		try {
+			result = dao.updateData("message.trashMessageList", list);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	@Override
+	public int receiveMessageList(List<Integer> list) {
+		int result=0;
+		try {
+			result = dao.updateData("message.receiveMessageList", list);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	@Override
+	public int deleteMessageList(List<Integer> list) {
+		int result=0;
+		try {
+			result = dao.updateData("message.deleteMessageList", list);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	@Override
+	public int deleteSendMessageList(List<Integer> list) {
+		int result=0;
+		try {
+			result = dao.updateData("message.deleteSendMessageList", list);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+	
 }
