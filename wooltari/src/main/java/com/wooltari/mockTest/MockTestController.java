@@ -55,8 +55,6 @@ public class MockTestController {
 		List<MockTest> examinfoList = service.readExamList(map);
 		// 글 리스트
 		List<MockTest> examwishList = service.examwishList(map);
-		// 글작성/수정 여부 확인
-		List<MockTest> examcheckMode = service.readcheckMode(map);
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -87,7 +85,6 @@ public class MockTestController {
 			
 			n++;
 		}
-		model.addAttribute("examcheckMode", examcheckMode);
 		model.addAttribute("examinfoList", examinfoList);
 		model.addAttribute("examwishList", examwishList);
 		model.addAttribute("pageNo", current_page);
@@ -115,8 +112,6 @@ public class MockTestController {
 			HttpSession session
 			) throws Exception {
 		
-		System.out.println("여기 들어왔을까요---------------------------");
-		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		String state="true";
 		
@@ -129,9 +124,6 @@ public class MockTestController {
 		
 		service.insertExamwishList(map);
 		
-		MockTest dto = new MockTest();
-		System.out.println("checkMode 랍니다-----------------------------------------"+dto.getCheckMode());
-		
 		Map<String, Object> model = new HashMap<>();
 		model.put("state", state);
 		return model;
@@ -142,6 +134,7 @@ public class MockTestController {
 	public Map<String, Object> updateList(
 			@RequestParam String Name,
 			@RequestParam String Date,
+			@RequestParam int num,
 			HttpSession session
 			) throws Exception {
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
@@ -149,8 +142,11 @@ public class MockTestController {
 		
 		String userId = info.getUserId();
 		
+		System.out.println("num은 -------------------> "+num);
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("userId", userId);
+		map.put("num", num);
 		map.put("examinfoName", Name);
 		map.put("examwishDate", Date);
 		

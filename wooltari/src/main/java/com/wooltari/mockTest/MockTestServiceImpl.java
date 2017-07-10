@@ -50,19 +50,7 @@ public class MockTestServiceImpl implements MockTestService{
 		}
 		return examinfoList;
 	}
-	
-	@Override
-	public List<MockTest> readcheckMode(Map<String, Object> map) {
-		List<MockTest> examcheckMode = null;
-		
-		try {
-			examcheckMode = dao.getListData("mockTest.readcheckMode", map);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return examcheckMode;
-	}
-	
+
 	@Override
 	public List<MockTest> examwishList(Map<String, Object> map) {
 		List<MockTest> wishList = null;

@@ -107,28 +107,12 @@
 	   }
 	}
   
-	// 글쓰기 폼 + 수정 폼
-	$(document).ready(function() {
-		$('#modalbtn').click(function(){
-			$('#examcheckMode').each(function() {
-				var modalType = $('#examcheckMode').val();
-				if(modalType == 'createBtn') {
-					alert("생성!");
-					$('#createBtn').attr('style', 'display'); 
-		            $('#updateBtn').attr('style', 'display: none;'); 
-				} else if (modalType == 'updateBtn') {
-					$('#createBtn').attr('style', 'display: none;'); 
-		            $('#updateBtn').attr('style', 'display'); 
-				}
-			})
-		});
-	});
-		
 	// 글쓰기 폼
 	function create(){
 		$("#examSelect").val("시험선택");
 		$("#examDate").val("");
-		$("#examcheckMode").val("createdList");
+		$("#createBtn").attr('style','display');
+		$("#updateBtn").attr('style','display: none;');
 		$("#exampleModal").modal("show");
 		
 	}
@@ -137,7 +121,8 @@
 	function change(examInfoName,examwishDate){
 		$("#examSelect").val(examInfoName);
 		$("#examDate").val(examwishDate);
-		$("#examcheckMode").val("updateList");
+		$("#createBtn").attr('style','display: none;');
+		$("#updateBtn").attr('style','display');
 		$("#exampleModal").modal("show");
 	}
 	
@@ -179,9 +164,8 @@
 	   var name = f.examInfoName.value;
 	   var date = f.examwishDate.value;
 	   
-	   
 	   var url = "<%=cp%>/mockTest/updateList";
-			var query = "Name=" + name + "&Date=" + date;
+	   var query = "Name=" + name + "&Date=" + date;
 
 			if (!name || name == '시험선택') {
 				alert("시험을 선택하세요");
@@ -619,9 +603,6 @@ $(function(){
 					</div>
 	
 					<div class="modal-footer">
-						<!-- 작성 / 수정 여부 판단 -->
-						<input id="examcheckMode" type="text" readonly="readonly" value="${dto.checkMode }"/><br>
-						
 							<button id="createBtn" type="button" class="clickbtn" onclick="createOk();">등록하기</button>
 							<button id="updateBtn" type="button" class="clickbtn" onclick="updateOk();">수정완료</button>
 							
