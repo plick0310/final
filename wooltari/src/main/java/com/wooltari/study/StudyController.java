@@ -128,11 +128,11 @@ public class StudyController {
 	
 	
 	
-	@RequestMapping(value="/study/myStudy/{s_num}/calender")
+	/*@RequestMapping(value="/study/myStudy/{s_num}/calender")
 	public String calender() {
 
 		return "/study/myStudy/calender";
-	}
+	}*/
 	@RequestMapping(value="/study/myStudy/{s_num}/s_member")
 	public String s_member() {
 
