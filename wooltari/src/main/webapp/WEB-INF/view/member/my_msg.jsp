@@ -263,7 +263,7 @@ $(document).ready(function(){
 	reload();
 	noreadCount = setInterval(function() {
 		reload();
-	}, 5000);
+	}, 10000);
 	$(".inbox-nav li").click(function () {
 		mode = $(this).attr('id');
 		page = 1;
