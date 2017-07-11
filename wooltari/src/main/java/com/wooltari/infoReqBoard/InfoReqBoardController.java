@@ -298,6 +298,35 @@ public class InfoReqBoardController {
 			return "redirect:/download/infoReqBoard/list?page="+page;
 		}
 		
+		
+		//수정 화면에서 파일 삭제
+		@RequestMapping(value="/download/infoReqBoard/deleteFile", method=RequestMethod.POST)
+		@ResponseBody
+		public Map<String, Object> deleteFile(
+				@RequestParam int fileNum,
+				HttpServletResponse resp,
+				HttpSession session) throws Exception {			
+			
+			String root = session.getServletContext().getRealPath("/");
+			String pathname = root + File.separator + "uploads" + File.separator + "infoReqBoard";		
+			
+			InfoReqBoard dto= service.readFile(fileNum);
+			
+			if(dto != null) {
+				fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+			}	
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("field", "fileNum");
+				map.put("num", fileNum);
+				service.deleteFile(map);
+				
+				// 작업 결과를 json으로 전송
+				Map<String, Object> model = new HashMap<>(); 
+				model.put("state", "true");
+				
+				return model;
+			}
+		//아티클에서 파일 다운 로드
 		@RequestMapping(value="/download/infoReqBoard/download")
 		public void download(
 				@RequestParam int fileNum,
@@ -328,37 +357,9 @@ public class InfoReqBoardController {
 					out.println("<script>alert('파일 다운로드가 불가능 합니다 !!!');history.back();</script>");
 				} catch (Exception e) {
 				}
-			
-		}
-		}
-		
-		//수정 화면에서 파일 삭제
-		@RequestMapping(value="/download/infoReqBoard/deleteFile", method=RequestMethod.POST)
-		@ResponseBody
-		public Map<String, Object> deleteFile(
-				@RequestParam int fileNum,
-				HttpServletResponse resp,
-				HttpSession session) throws Exception {			
-			
-			String root = session.getServletContext().getRealPath("/");
-			String pathname = root + File.separator + "uploads" + File.separator + "infoReqBoard";		
-			
-			InfoReqBoard dto= service.readFile(fileNum);
-			
-			if(dto != null) {
-				fileManager.doFileDelete(dto.getSaveFilename(), pathname);
-			}	
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("field", "fileNum");
-				map.put("num", fileNum);
-				service.deleteFile(map);
 				
-				// 작업 결과를 json으로 전송
-				Map<String, Object> model = new HashMap<>(); 
-				model.put("state", "true");
-				
-				return model;
 			}
+		}
 		//게시물 공감 추가...............................................
 		@RequestMapping(value="/download/infoReqBoard/insertLikeBoard")
 		@ResponseBody

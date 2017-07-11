@@ -1,6 +1,7 @@
 package com.wooltari.studyMarketBoard;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -24,8 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wooltari.common.FileManager;
 import com.wooltari.common.MyUtil;
-import com.wooltari.infoReqBoard.InfoReqBoard;
+import com.wooltari.studyMarketBoard.Reply;
 import com.wooltari.member.SessionInfo;
+
 
 
 @Controller("studyMarketBoard.StudyMarketBoardController")
@@ -146,6 +148,21 @@ public class StudyMarketBoardController {
 			
 			String paging=myUtil.paging(current_page, total_page, listUrl);
 			
+			//베스트 리스트
+			List<StudyMarketBoard> bestlist = service.bestStudyMarket(map);
+			int bestlistNum, b=0;
+			
+			Iterator<StudyMarketBoard> ite= bestlist.iterator();
+			while(ite.hasNext()){
+				StudyMarketBoard dto= ite.next();
+				bestlistNum=b+1;
+				dto.setBestlistNum(bestlistNum);
+				String userImg = dto.getUserImg();
+				dto.setContent(userImg);
+				b++;
+			}
+			
+			model.addAttribute("bestlist", bestlist);
 			model.addAttribute("dataCount", dataCount);
 			model.addAttribute("page", current_page);
 			model.addAttribute("total_page", total_page);
@@ -187,7 +204,7 @@ public class StudyMarketBoardController {
 			List<StudyMarketBoard> listFile= service.listFile(num);
 			
 			//좋아요.
-			//int countLikeBoard=service.countLikeBoard(num);
+			int countLikeBoard=service.countLikeBoard(num);
 			
 			String query="page="+page;
 			if(searchValue.length()!=0){
@@ -202,7 +219,7 @@ public class StudyMarketBoardController {
 			
 			model.addAttribute("page", page);
 			model.addAttribute("query", query);
-			//model.addAttribute("countLikeBoard", countLikeBoard);
+			model.addAttribute("countLikeBoard", countLikeBoard);
 			
 			return ".studyMarket.studyMarketBoard.article";
 		}
@@ -284,5 +301,179 @@ public class StudyMarketBoardController {
 				model.put("state", "true");
 			
 			return model;
+		}
+		//아티클에서 파일 다운로드
+		@RequestMapping(value="/studyMarket/studyMarketBoard/download")
+		public void download(
+				@RequestParam int fileNum,
+				HttpServletRequest req,
+				HttpServletResponse resp,
+				HttpSession session
+				)throws Exception{
+			
+			String root=session.getServletContext().getRealPath("/");
+			String pathname= root + File.separator +"uploads"+File.separator +"studyMarketBoard";
+			StudyMarketBoard dto=service.readFile(fileNum);
+			
+			boolean b= false;
+			
+			System.out.println("pathname");
+			
+
+			if(dto!=null){
+				String saveFilename = dto.getSaveFilename();
+				String originalFilename = dto.getOriginalFilename();
+				
+				b = fileManager.doFileDownload(saveFilename, originalFilename, pathname, resp);
+			}
+			if (!b) {
+				try {
+					resp.setContentType("text/html; charset=utf-8");
+					PrintWriter out = resp.getWriter();
+					out.println("<script>alert('파일 다운로드가 불가능 합니다 !!!');history.back();</script>");
+				} catch (Exception e) {
+				}
+				
+			}
+		}
+		//게시물 공감추가..............................................
+		@RequestMapping(value="/studyMarket/studyMarketBoard/insertLikeBoard")
+		@ResponseBody
+		public Map<String, Object> insertLikeBoard(
+				StudyMarketBoard dto, HttpSession session
+				) throws Exception{
+			
+			SessionInfo info=(SessionInfo)session.getAttribute("member");
+			String state="true";
+			
+			if(info==null){
+				state="loginFail";
+			}else{
+				dto.setUserId(info.getUserId());
+				int result=service.insertLikeBoard(dto);
+				if(result==0) state="false";
+			}
+			Map<String, Object> model = new HashMap<>();
+			model.put("state", state);	
+			
+			return model;
+		}
+		//게시물 공감 개수
+		@RequestMapping(value="/studyMarket/studyMarketBoard/countLikeBoard")
+		@ResponseBody
+		public Map<String, Object> countLikeBoard(
+				@RequestParam(value="num") int num) throws Exception {
+			
+			String state="true";
+			int countLikeBoard=service.countLikeBoard(num);
+			
+			 Map<String, Object> model = new HashMap<>();
+	   	  	 model.put("state", state);
+	   	     model.put("countLikeBoard", countLikeBoard);
+	   	     
+			//작업 결과를 json으로 전송
+			return model;
+		}
+		//댓글 처리.............................................
+		//댓글 및 리플별 답글 추가
+		@RequestMapping(value="/studyMarket/studyMarketBoard/createdReply")
+		@ResponseBody
+		public Map<String, Object> cretaedReply(
+				Reply dto,
+				HttpSession session) throws Exception {
+			SessionInfo info=(SessionInfo)session.getAttribute("member");
+			
+			String state="true";
+			if(info==null){
+				state="loginFail";
+			}else{
+				dto.setUserId(info.getUserId());
+				int result=service.insertReply(dto);
+				if(result==0)
+					state="false";				
+			}
+			
+			//작업 결과를 json으로 전송
+			Map<String, Object> model= new HashMap<>();
+			model.put("state", state);
+			return model;
+		}
+		//댓글 및 댓글별 답글 삭제
+		@RequestMapping(value="/studyMarket/studyMarketBoard/deleteReply")
+		@ResponseBody
+		public Map<String, Object> deleteReply(
+				@RequestParam int replyNum,
+				@RequestParam String mode,							
+				HttpSession session)throws Exception{
+			
+			SessionInfo info=(SessionInfo)session.getAttribute("member");
+			
+			String state="true";
+			if(info==null){
+				state="loginFail";
+			}else{
+			Map<String, Object> map=new HashMap<>();
+			map.put("mode",mode);
+			map.put("replyNum", replyNum);
+			map.put("userId", info.getUserId());
+			
+			 // 댓글삭제
+			int result=service.deleteReply(map);
+
+			if(result==0)
+				state="false";
+			
+			}
+			Map<String, Object> model=new HashMap<>();
+			model.put("state", state);
+			return model;
+		}
+		
+		@RequestMapping(value="/studyMarket/studyMarketBoard/listReply")
+		public String listReply(
+				@RequestParam(value="num") int num,
+				@RequestParam(value="pageNo", defaultValue="1") int current_page,
+				Model model
+				)throws Exception{
+			int rows=5;
+			int total_page=0;
+			int dataCount=0;
+			
+			Map<String, Object> map= new HashMap<String, Object>();
+			map.put("num", num);
+			
+			dataCount=service.replyDataCount(map);
+			total_page=myUtil.pageCount(rows, dataCount);
+			if(current_page>total_page)
+				current_page=total_page;
+			
+			//리스트에 출력할 데이터
+			int start=(current_page-1)*rows+1;
+			int end=current_page*rows;
+			map.put("start", start);
+			map.put("end", end);
+			List<Reply> listReply= service.listReply(map);
+			
+			// 엔터를 <br>
+			Iterator<Reply> it=listReply.iterator();
+			int listNum, n=0;
+			while(it.hasNext()) {
+				Reply dto=it.next();
+				listNum=dataCount-(start+n-1);
+				dto.setListNum(listNum);
+				dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+				n++;
+			}
+			// 페이징처리(인수2개 짜리 js로 처리)
+			String paging=myUtil.paging(current_page, total_page);
+			
+			// jsp로 넘길 데이터
+			model.addAttribute("listReply", listReply);
+			model.addAttribute("pageNo", current_page);
+			model.addAttribute("replyCount", dataCount);
+			model.addAttribute("total_page", total_page);
+			model.addAttribute("paging", paging);
+			
+			return "studyMarket/studyMarketBoard/listReply";
 		}
 }

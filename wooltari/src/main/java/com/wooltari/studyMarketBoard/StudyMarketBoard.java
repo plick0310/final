@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class StudyMarketBoard {
-	private int listNum, num;
-	private String subject, content, userId, created;
+	private int bestlistNum, listNum, num;
+	private String subject, content, userId, created, userImg;
 	private int hitCount;
 	private int likeCount, replyCount;
 	
@@ -22,6 +22,18 @@ public class StudyMarketBoard {
 	
 	
 		
+	public String getUserImg() {
+		return userImg;
+	}
+	public void setUserImg(String userImg) {
+		this.userImg = userImg;
+	}
+	public int getBestlistNum() {
+		return bestlistNum;
+	}
+	public void setBestlistNum(int bestlistNum) {
+		this.bestlistNum = bestlistNum;
+	}
 	public int getListNum() {
 		return listNum;
 	}

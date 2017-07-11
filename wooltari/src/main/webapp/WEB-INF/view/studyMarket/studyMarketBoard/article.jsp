@@ -43,13 +43,144 @@ function updateBoard(){
 </c:if>
 }
 </script>
+<script type="text/javascript">
+//게시물 공감 개수
+function countLikeBoard(num){
+	var url="<%=cp%>/studyMarket/studyMarketBoard/countLikeBoard";
+	$.post(url,{num:num},function(data){
+		var count=data.countLikeBoard;
+		
+		$("#countLikeBoard").html(count);
+	},"json");
+}
+
+//게시물 공감 추가
+function sendLikeBoard(num){
+	var uid="${sessionScope.member.userId}";
+	if(!uid){
+		login();
+		return;
+	}
+	msg="게시물에 공감하십니까?";
+	if(!confirm(msg))
+		return;
+	
+	var query = "num="+num;
+	
+	$.ajax({
+		type:"post"
+		,url:"<%=cp%>/studyMarket/studyMarketBoard/insertLikeBoard"
+		,data:query
+		,dataType:"json"
+		,success:function(data){
+			var state=data.state;
+			if(state=="true"){
+				countLikeBoard(num);
+			}else if(state=="false"){
+				alert("좋아요는 한번만 가능합니다.!!!");
+			}else if(state=="loginFail"){
+				login();
+			}
+		}
+		,error:function(e){
+			console.log(e.responseText);
+		}
+	});
+}
+//...............................................
+//댓글
+function login(){
+	location.href="<%=cp%>/member/login";
+}
+//댓글 리스트
+$(function(){
+	listPage(1);
+});
+function listPage(page){
+	var url="<%=cp%>/studyMarket/studyMarketBoard/listReply";
+	var num="${dto.num}";
+	$.post(url, {num:num, pageNo:page}, function(data){
+		$("#listReply").html(data);
+	});
+}
+//댓글 추가
+function sendReply(){
+	var uid="${sessionScope.member.userId}";
+	if(!uid){
+		login();
+		return false;
+	}
+	var num="${dto.num}";//해당 게시물 번호
+	var content = $.trim($("#replyContent").val());
+	if(!content){
+		alert("내용을 입력하세요!!!");
+		$("replyContent").focus();
+		return false;
+	}
+	var query="num="+num;
+	query+="&content="+encodeURIComponent(content);
+	
+	$.ajax({
+		type:"post"
+		,url:"<%=cp%>/studyMarket/studyMarketBoard/createdReply"
+		,data:query
+		,dataType:"json"
+		,success:function(data){
+			$("#content").val("");
+			
+			var state = data.state;
+			if(state=="true"){
+				listPage(1);
+			}else if(state=="false"){
+				alert("댓글을 등록하지 못했습니다.!!!");
+			}else if(state=="loginFail"){
+				login();
+			}
+		}
+		,error:function(e){
+			console.log(e.responseText)
+		}
+	});
+}
+//댓글 삭제
+function deleteReply(replyNum, page){
+	var uid="${sessionScope.member.userId}";
+	if(!uid){
+		login();
+		return false;
+	}
+	if(confirm("게시물을 삭제하시겠습니까?")){
+		var url="<%=cp%>/studyMarket/studyMarketBoard/deleteReply"
+		$.post(url, {replyNum:replyNum, mode:"reply"}, function(data){
+			var state=data.state;
+			
+			if(state=="loginFail"){
+				login();
+			}else{
+				listPage(page);
+			}
+		},"json");
+	}
+}
+
+</script>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=196f5f594407d5c461e6aaaadcc90e14">
+
+		var container = document.getElementById('map');
+		var options = {
+			center: new daum.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
+
+		var map = new daum.maps.Map(container, options);
+	</script>
+
 
 <div  style=" margin: 60px auto; height:50px; font-size: 20px;text-align: center;">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
 			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>W R I T E . . .</div>
 <table cellpadding="0" cellspacing="0" id="read_table" class="board_table" style="width: 900px; margin: -45px auto 0;">
-
 	<thead>
 		<tr>
 			<th class="informations">
@@ -67,41 +198,26 @@ function updateBoard(){
 	<tbody>
 		<tr>
 			<td class="read_contArea">
-				<div id="" >
-					${dto.startdate}
-					
-				</div>
-				<div id="" >
-					${dto.enddate}
-					
-				</div>
-				<div id="" >
+				<span id="" >강의 시작일  : ${dto.startdate}</span>&nbsp;&nbsp;&nbsp;<span id="" >강의 종료일 : ${dto.enddate}</span>
+				
+				<div id="map" style="width:500px;height:400px;">
 					${dto.address}
-					
 				</div>
 				<div id="" >
 					${dto.urlContent}
-					
 				</div>
 				<div id="board_memo_area">
 					${dto.content}
-					
 				</div>
-		
-				<form name="read_likeAreaForm" class="_read_likesArea" ajaxAction="modules/board/read.likes.submit.php" ajaxType="html">
-					<input type="hidden" name="board_id" value="[board_id_value]" />
-					<input type="hidden" name="read_idno" value="[read_value]" />
-					<input type="hidden" name="mode" value="" />
+			<!-- 좋아요  -->
 					<ul class="_read_likesArea" style="border-bottom: 1px solid #eee;">
 						<li class="_likes_btn">
-							<a href="#" title="">
-								13<br/>
+							<a href="javascript:sendLikeBoard('${dto.num}');" title="">
+								<span id="countLikeBoard">${countLikeBoard}<br/></span>
 								<span class="__count" style="color: #1abc9c;">추천</span>
 							</a>
 						</li>
-						
 					</ul>
-				</form>
 <!-- 				<tr> -->
 <!-- 				<td> 이전글</td> -->
 <!-- 				</tr> -->
@@ -149,29 +265,22 @@ function updateBoard(){
 					</div>
 		
 		<!-- 답글 -->
-				<div class="commentBox">
-					<div class="_CALLING_COMMENT"><strong style="font-size: 18px;">
-					<span style="font-size: 25px; color: #1abc9c; " class="glyphicon glyphicon-pencil"></span>리플입니다...</strong>
-					</div>
-					<div class="_CALLING_COMMENT">
-					<span class="inforArea">
-					<strong>작성일</strong> [datetime]
-					<span class="__dotted"></span>
-					<strong>작성자</strong> [writer]
-					<span class="__dotted"></span>
-					<strong>조회수</strong> [hit]
-					</span>
-					<div style="float: right;">
-					<input class="dnu" type="button" value="수정">
-					<input class="dnu" type="button" value="삭제">
-					</div>
-					</div>
-					
-				</div> 
-			</td>
-		</tr>
-	</tbody>
-</table>	
-<div class="read_btnArea">
-
-</div>
+            <tr height='30' style="width: 900px; margin: 0 auto;"> 
+	            <td align='left' colspan="2" style="    padding-top: 41px;">
+	            	<span style='font-weight: bold; color: #1abc9c;' >댓글쓰기</span><span> - 타인을 비방하거나 개인정보를 유출하는 글의 게시를 삼가 주세요.</span>
+	            </td>
+            </tr>
+            <tr>
+               <td style='padding:5px 5px 0px;' colspan="2">
+                    <textarea id='replyContent' class='boxTA' style='width:99%; height: 70px;'></textarea>
+                </td>
+            </tr>
+            <tr>
+               <td align='right' colspan="2">
+                    <button type='button' class='clickbtn' style="padding:10px 20px;     border: none;" onclick='sendReply();'>댓글 등록</button>
+                </td>
+            </tr>
+		</tbody>
+	</table>
+    <div id="listReply">
+    </div>

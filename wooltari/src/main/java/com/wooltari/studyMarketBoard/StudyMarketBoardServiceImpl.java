@@ -294,7 +294,7 @@ public class StudyMarketBoardServiceImpl implements StudyMarketBoardService{
 	
 
 	
-	//
+	//.............................................
 	@Override
 	public int insertReplyStar(Reply dto) {
 		// TODO Auto-generated method stub
@@ -345,5 +345,19 @@ public class StudyMarketBoardServiceImpl implements StudyMarketBoardService{
 	public Map<String, Object> replyCountLike(int replyNum) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<StudyMarketBoard> bestStudyMarket(Map<String, Object> map) {
+		List<StudyMarketBoard> list= null;
+		
+		try{
+			list=dao.getListData("studyMarketBoard.bestStudyMarket",map);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		
+		return list;
 	}
 }
