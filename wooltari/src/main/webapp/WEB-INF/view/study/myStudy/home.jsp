@@ -14,7 +14,7 @@
 .menu {
 	width: 900px;
 	text-align: center;
-}
+} 
 
 .menu li {
 	padding: 5px 0;

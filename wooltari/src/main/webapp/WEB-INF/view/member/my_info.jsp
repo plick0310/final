@@ -77,9 +77,6 @@ a.mail-dropdown {
     margin-top: 20px;
     padding: 3px 5px;
 }
-.inbox-body {
-    padding: 20px;
-}
 .btn-compose {
     background: none repeat scroll 0 0 #ff6c60;
     color: #fff;
@@ -294,8 +291,8 @@ function login_check() {
 			success : function(data) {
 				var state = data.state;
 				if(state == 'true'){
-					$("#pwdmodal").hide();
     				edit();
+					$("#pwdmodal").modal("hide"); 
 				}else{
 					$(".login-msg strong").text("비밀번호를 잘못 입력하셨습니다."); 
 				}

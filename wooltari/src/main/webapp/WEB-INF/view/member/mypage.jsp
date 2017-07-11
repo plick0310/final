@@ -95,6 +95,7 @@
 	padding: 0px;
 }
 </style>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
 <script type="text/javascript">
 /* 
 $(document).ready(function() {
