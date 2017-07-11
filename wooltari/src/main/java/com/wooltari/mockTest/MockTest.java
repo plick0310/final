@@ -1,6 +1,8 @@
 package com.wooltari.mockTest;
 
 public class MockTest {
+	
+	// 응시할 리스트 
 	private int num;
 	private int wishlistNum;
 	private String userId;
@@ -12,10 +14,27 @@ public class MockTest {
 	private String examwishDate;
 	private String checkMode;
 	
+	// 모의 테스트 & 문제 DB
+	private int testNum; // 시험번호
+	private String created; // 생성일
+	
+	// 응시내역
 	
 	
 	public String getCheckMode() {
 		return checkMode;
+	}
+	public int getTestNum() {
+		return testNum;
+	}
+	public void setTestNum(int testNum) {
+		this.testNum = testNum;
+	}
+	public String getCreated() {
+		return created;
+	}
+	public void setCreated(String created) {
+		this.created = created;
 	}
 	public void setCheckMode(String checkMode) {
 		this.checkMode = checkMode;

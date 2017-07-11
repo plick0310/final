@@ -1,4 +1,4 @@
-package com.wooltari.mockTest.test;
+package com.wooltari.mockTest.exam;
 
 import java.util.List;
 import java.util.Map;
@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 import com.wooltari.common.dao.CommonDAO;
 
 @Service("mockTest.testService")
-public class TestServiceImpl implements TestService{
+public class ExamServiceImpl implements ExamService{
 
 	@Autowired
 	public CommonDAO dao;
 	
 	@Override
-	public Test readTest(int num) {
-		Test dto = null;
+	public Exam readTest(int num) {
+		Exam dto = null;
 		
 		try {
 			dto=dao.getReadData("test.readTest", num);
@@ -28,8 +28,8 @@ public class TestServiceImpl implements TestService{
 	}
 
 	@Override
-	public List<Test> listTest(Map<String, Object> map) {
-		List<Test> list = null;
+	public List<Exam> listTest(Map<String, Object> map) {
+		List<Exam> list = null;
 		
 		try {
 			list=dao.getListData("test.listTest", map);

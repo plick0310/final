@@ -107,10 +107,11 @@ public class MockTestController {
 	@RequestMapping(value="/mockTest/createdList",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> createdList (
-			@RequestParam String Name,
-			@RequestParam String Date,
+			@RequestParam String name,
+			@RequestParam String date,
 			HttpSession session
 			) throws Exception {
+		System.out.println("아아아앙아아아아아아아 아");
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		String state="true";
@@ -119,10 +120,11 @@ public class MockTestController {
 		
 		Map<String, Object> map =new HashMap<>();
 		map.put("userId", userId);
-		map.put("examinfoName", Name);
-		map.put("examwishDate", Date);
+		map.put("examinfoName", name);
+		map.put("examwishDate", date);
 		
 		service.insertExamwishList(map);
+		
 		
 		Map<String, Object> model = new HashMap<>();
 		model.put("state", state);
@@ -134,7 +136,6 @@ public class MockTestController {
 	public Map<String, Object> updateList(
 			@RequestParam String name,
 			@RequestParam String date,
-			@RequestParam int num,
 			HttpSession session
 			) throws Exception {
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
@@ -142,11 +143,8 @@ public class MockTestController {
 		
 		String userId = info.getUserId();
 		
-		System.out.println("num은 -------------------> "+num);
-		
 		Map<String, Object> map = new HashMap<>();
 		map.put("userId", userId);
-		map.put("num", num);
 		map.put("examinfoName", name);
 		map.put("examwishDate", date);
 		
@@ -156,5 +154,25 @@ public class MockTestController {
 		model.put("state", state);
 		
 		return model;
+	}
+	
+	// 탭 기능-----------------------------------------------------------------------------
+	// 모의테스트
+	@RequestMapping(value="/mockTest/exam")
+	public String exam(
+			HttpServletRequest req,
+			Model model,
+			HttpSession session
+			) {
+		
+		return "community/mockTest/exam";
+	}
+	// 응시내역
+	@RequestMapping(value="/mockTest/challengeList")
+	public String callengeList() {
+		
+		System.out.println("응시내역~★");
+
+		return "community/mockTest/challengeList";
 	}
 }

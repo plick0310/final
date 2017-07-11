@@ -1,4 +1,4 @@
-package com.wooltari.mockTest.test;
+package com.wooltari.mockTest.exam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,16 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wooltari.common.MyUtil;
 
-@Controller("nockTest.testController")
-public class TestController {
+@Controller("mockTest.testController")
+public class ExamController {
 	@Autowired
-	private TestService service;
+	private ExamService service;
 	@Autowired
 	private MyUtil myUtil;
 	
-	@RequestMapping(value = "/nockTest/test/list")
+	@RequestMapping(value = "/mockTest/test/list")
 	public String list() throws Exception {
 		
-		return "nockTest/test/list";
+		return "mockTest/test/";
 	}
 }
