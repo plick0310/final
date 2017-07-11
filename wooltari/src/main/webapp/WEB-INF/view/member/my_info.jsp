@@ -357,6 +357,7 @@ function edit(){
 	
 	<aside class="lg-side">
 		<div class="inbox-head">
+		<h2>나의 정보</h2>
 		</div>
 		
 		<div class="inbox-body">
