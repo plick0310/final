@@ -40,12 +40,14 @@ clear:  both;
 	margin-left: 25px;
 	width: 900px;
 	float: left;
+	margin-bottom: 60px;
 }
 input.uploadBtn {
    opacity: 0; /*input type="file" tag 투명하게 처리*/
    position: relative;
-   width: 0px;
-}
+   width: 0px; 
+   margin: -15px;
+} 
 li .active{
 	background-color: #1abc9c;
 }
@@ -66,6 +68,33 @@ li .active{
     width: 100%;
     margin-top: 20px;
 }
+.center {
+    margin-top:50px;   
+}
+
+.modal-header {
+	padding-bottom: 5px;
+}
+
+
+.img-thumbnail {
+    width: 100px;
+    height: 100px;
+    margin: 5px auto;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 53%;
+
+}
+label {
+    font-size: 14px;
+    float: none;
+}	
+.form-control {
+    display: block;
+    width: 90%;
+    margin: 0px auto;}
 </style>
 <script type="text/javascript" src="<%=cp%>/resource/js/jquery.form.js"></script>
 
@@ -104,31 +133,62 @@ $(document).ready(function(){
 
 		});
 
+		
+		$("#joinStudy").on('hidden.bs.modal', function () {
+		      $("#uploadBtn").val("");
+		      $("#content").val("");
+		    
+		   });
+		
+		
+		
 	});
 	
 	
-function joinStudy(userId,s_num) {
+function joinstudy() {
 	
-	var query = "userId="+userId+"&s_num="+s_num;
-	var url = "<%=cp%>/study/joinStudy";
+	var f= document.joinStudy;
+	var query = new FormData(f); 
 	
 	$.ajax({
-		 url: url,
-         data: query,
-		 dataType:"json",
-		 success: function(data){
+		type:"POST"
+		,url:"<%=cp%>/study/${s_num}/joinStudy"
+		,processData: false  // file 전송시 필수
+		,contentType: false  // file 전송시 필수
+		,data : query
+		,dataType:"json"
+		,success:function(data){
+			alert("신청이 완료되었습니다. 리더의 승인을 기다려주세요!");
+			 $('.modal.in').modal('hide'); 
+			 $('#joinstudy').html("가입신청 중").attr('disabled', true);
 			 
-			 alert("신청이 완료되었습니다. 리더의 승인을 기다려주세요!");
-			 //가입신청중으로 html 바꾸기
-		 },
+		},
 		 error: function(e){
               console.log(e.responseText);
-          }
+          } 
 	});
 	
 	
 }
 
+//이미지 미리보기
+$(function() {
+    $("#uploadBtn").on('change', function(){
+        $("#uploadBtn").empty();
+        readURL(this);
+    });
+});
+function readURL(input) {
+    if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+}
 </script>
 
 
@@ -151,47 +211,76 @@ function joinStudy(userId,s_num) {
 			<div style="width: 170px; height: 3px; background-color: #1abc9c;"></div>
 			<Strong>LEADER</Strong><span style="font-size: 14px;">&nbsp;&nbsp;${dto.userId }</span>
 		</div>
-		<%-- <div
-			style="margin: 20px 0; padding: 10px 0;">
-			<button  type="button" class="clickbtn" onclick="joinStudy('${sessionScope.member.userId}',${dto.s_num});">스터디 가입하기</button>
-			</div>
-			 --%>
+	
 			
 			
 		<div class="inbox-body">
-			<a href="#joinStudy" data-toggle="modal"  title="Compose"  class="btn btn-compose" style="border-radius: 0px;">스터디 가입하기</a>
+			<a href="#joinStudy" data-toggle="modal" id="joinstudy" title="Compose"  class="btn btn-compose" style="border-radius: 0px;">스터디 가입하기</a>
 			
 			
-			<!-- Modal -->
 			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="joinStudy" class="modal fade" style="display: none;">
-				<div class="modal-dialog">
+			<!-- Modal -->
+				
+	
+			 
+			 	<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-							<h4 class="modal-title">스터디 가입 양식</h4>
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+							</button>
+							<h3 class="modal-title" id="lineModalLabel">스터디 가입 양식</h3>
 						</div>
 						<div class="modal-body">
-							<form role="form" id="form-horizontal" class="form-horizontal" method="post">
-							
-							
-								<div class="form-group">
-									
-										<textarea rows="10" cols="30" placeholder="보내실 내용을 입력해주세요." class="form-control" id="content" name="content" required="required"></textarea>
-									
-								</div>
+
+							<!-- content goes here -->
+							<form name="joinStudy" enctype="multipart/form-data" method="post" >
+
 								
-								
-								<div class="form-group">
-									<div class="col-lg-offset-2 ">
-										<button id="send-btn" name="send-btn" class="btn btn-send" type="button" onclick="">제출하기</button>
+									<div class="form-group">
+									<label for="exampleInputFile">스터디에서 사용 할 프로필 사진을 등록해주세요</label><br>
+
+									  
+									  
+									  <label for="uploadBtn"  class="btn btn-large uploadLabel">
+									 
+									  <c:if test="${empty sessionScope.member.userImg}"> 
+										<img  id="blah" src="<%=cp%>/resource/img/noprofileimg.png" 
+											class="img-thumbnail" width="100%" height="100%">
+										
+									  </c:if>
+									
+									  <c:if test="${not empty sessionScope.member.userImg}">
+										<img id="blah"
+											src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}"
+											class="img-thumbnail" width="100%" height="100%">
+									  </c:if>
+										
+										</label>
+										
+									<input type="file" name="upload" id="uploadBtn" class="uploadBtn tts" >
+    
+										
+									<p class="help-block">이미지를 변경하지 않으면 기본프로필 이미지를 사용합니다.</p>
 									</div>
+
+
+								<div class="form-group">
+									<label for="exampleInputPassword1">스터디원에게 간단한 자기소개를 해주세요</label> 
+									<textarea rows="8" cols="10" class="form-control" id="content" name="content" required="required"></textarea>
 								</div>
+								
+								
+								
+								<button type="button" class="btn btn-default" onclick="joinstudy();">제출하기</button>
 							</form>
+
 						</div>
+
 					</div>
 				</div>
-			</div>
 			<!-- /.modal -->
+			</div>
 			
 			
 		</div>	
@@ -208,7 +297,7 @@ function joinStudy(userId,s_num) {
 				<ul class="menu">
 					<li class="board"><a href="#">H O M E</a></li>
 					<li class="calender"><a href="#">C A L E N D E R</a></li>
-					<li class="s_member"><a href="#">M E M B E R</a></li>
+					<li class="team"><a href="#">M E M B E R</a></li>
 					<li class="chating"><a href="#">C H A T H I N G</a></li>
 				</ul>
 

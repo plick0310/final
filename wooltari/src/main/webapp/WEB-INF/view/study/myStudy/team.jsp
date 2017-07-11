@@ -87,7 +87,7 @@ display: block;
 .addon li .legend-info {
 float: left;
 margin-left: 10px;
-width: 155px;
+width: 200px;
 }
 
 .addon strong {
@@ -127,9 +127,25 @@ font-weight: bold;
   font-size: 16px;
   color: #1abc9d;
 }
+#a_check{
+display:inline-block;
+padding-left:45px;
+font-size: 14px;
+}
 .form-control{
 width:85%;}
 </style>
+
+<script>
+function listWait() {
+	var url ="/${s_num}/listWait";
+	
+}
+
+
+
+
+</script>
 <div class="addon 1">
 	<p id="" style="border-bottom: 1px solid #eee;">
 		스터디 멤버 <span style="color: #1abc9c;">9</span>명
@@ -167,19 +183,23 @@ width:85%;}
 	</ul>
 </div>
 
-<div class="addon 2">
+<div class="addon 2" >
 	<p>대기중인 스터디 멤버
 	<a href="#myModal" data-toggle="modal" data-placement="top" title="Add Contact"><i class="glyphicon glyphicon-plus" style="float: right;"></i></a>
 	
 	</p>
 	
-	<ul>
+	<ul id="addon2">
 		<li class="clearfix"><img
 				class="round"
 				src="https://8share-production-my.s3.amazonaws.com/campaigns/4898/photos/profile/thumb_copy.png?1397732185">
 				<div class="legend-info">
-					<strong>앙이디</strong>한줄 소개
-				</div></li>
+					<strong>앙이디</strong>한줄 소개 
+					
+					
+					
+				</div>
+				<p id="a_check"><a>승인 </a>|<a> 거절</a></p></li>
 		<li class="clearfix"><em class="hot"></em>
 			<div class="legend-info">
 				<strong>Fire Hot</strong>Featured hot special at the moment.

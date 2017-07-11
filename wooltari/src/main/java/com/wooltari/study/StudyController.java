@@ -117,15 +117,7 @@ public class StudyController {
 	}
 	
 	
-	@RequestMapping(value="/study/joinStudy")
-	@ResponseBody
-	public Map<String, Object> joinStudy(StudyMember dto) throws Exception{
-		
-		Map<String, Object> model = new HashMap<>();
-		
-		return model;
-	}
-	
+
 	
 	
 	/*@RequestMapping(value="/study/myStudy/{s_num}/calender")
@@ -133,11 +125,7 @@ public class StudyController {
 
 		return "/study/myStudy/calender";
 	}*/
-	@RequestMapping(value="/study/myStudy/{s_num}/s_member")
-	public String s_member() {
-
-		return "/study/myStudy/s_member";
-	}
+	
 	@RequestMapping(value="/study/myStudy/{s_num}/chating")
 	public String chating() {
 
