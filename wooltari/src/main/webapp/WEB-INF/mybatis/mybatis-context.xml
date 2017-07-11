@@ -15,7 +15,7 @@
 			<value>/WEB-INF/mybatis/jdbc.properties</value>
 		</property>
 	</bean>
-
+ 
     <!-- DBCP를 위한 DataSource 객체 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driverClass}"/>
