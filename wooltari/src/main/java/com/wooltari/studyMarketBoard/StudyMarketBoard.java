@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class StudyMarketBoard {
-	private int listNum, num;
-	private String subject, content, userId, created;
+	private int innerlistNum, bestlistNum, listNum, num;
+	private String subject, content, userId, created, userImg;
 	private int hitCount;
-	private int likeCount, replyCount;
+	private int likeCount, replyCount; 
+	//private List<InnerStudy> innerList;
 	
 	private String urlContent, startdate, enddate, address;
 	
@@ -22,6 +23,24 @@ public class StudyMarketBoard {
 	
 	
 		
+	public int getInnerlistNum() {
+		return innerlistNum;
+	}
+	public void setInnerlistNum(int innerlistNum) {
+		this.innerlistNum = innerlistNum;
+	}
+	public String getUserImg() {
+		return userImg;
+	}
+	public void setUserImg(String userImg) {
+		this.userImg = userImg;
+	}
+	public int getBestlistNum() {
+		return bestlistNum;
+	}
+	public void setBestlistNum(int bestlistNum) {
+		this.bestlistNum = bestlistNum;
+	}
 	public int getListNum() {
 		return listNum;
 	}

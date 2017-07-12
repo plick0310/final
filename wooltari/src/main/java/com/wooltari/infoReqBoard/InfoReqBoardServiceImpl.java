@@ -176,9 +176,96 @@ public class InfoReqBoardServiceImpl implements InfoReqBoardService {
 		return result;
 	}
 
+	//파일.......................................................
+	@Override
+	public int insertFile(InfoReqBoard dto) {
+		int result=0;
+		try{
+			result=dao.insertData("infoReqBoard.insertFile", dto);
+			
+			
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+		
+		return result;
+	}
+	
+	@Override
+	public List<InfoReqBoard> listFile(int num) {
+		List<InfoReqBoard> listFile=null;
+		
+		try{
+			listFile=dao.getListData("infoReqBoard.listFile", num);			
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+		
+		return listFile;
+	}
+	
+	@Override
+	public InfoReqBoard readFile(int fileNum) {
+		InfoReqBoard dto=null;
+		
+		try{
+			dto=dao.getReadData("infoReqBoard.readFile", fileNum);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+		
+		return dto;
+	}
+	
+	@Override
+	public int deleteFile(Map<String, Object> map) {
+		int result =0;
+		
+		try{
+			result= dao.deleteData("infoReqBoard.deleteFile", map);
+			
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+		
+		return result;
+	}
+	/*
+	@Override
+	public int deleteList(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.deleteData("infoReqBoard.deleteList", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}*/
+	
+	@Override
+	public int deleteList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public int deleteList(List<Integer> list) {
+		int result=0;
+		
+		try{
+			result=dao.deleteData("infoReqBoard.deleteList", list);
+		}catch(Exception e){			
+		}
+		
+		return result;
+	}
 	
 	
-	//좋아요
+	//좋아요....................................................
 	@Override
 	public int insertLikeBoard(InfoReqBoard dto) {
 		int result=0;
@@ -208,8 +295,7 @@ public class InfoReqBoardServiceImpl implements InfoReqBoardService {
 	}
 
 	
-	//리플라이
-
+	//리플라이............................................
 	@Override
 	public int insertReply(Reply dto) {
 		int result=0;		
@@ -279,92 +365,5 @@ public class InfoReqBoardServiceImpl implements InfoReqBoardService {
 		return null;
 	}
 
-	//파일
-	@Override
-	public int insertFile(InfoReqBoard dto) {
-		int result=0;
-		try{
-			result=dao.insertData("infoReqBoard.insertFile", dto);
-			
-			
-		}catch(Exception e){
-			System.out.println(e.toString());
-		}
-		
-		
-		return result;
-	}
-
-	@Override
-	public List<InfoReqBoard> listFile(int num) {
-		List<InfoReqBoard> listFile=null;
-		
-		try{
-			listFile=dao.getListData("infoReqBoard.listFile", num);			
-		}catch(Exception e){
-			System.out.println(e.toString());
-		}
-		
-		
-		return listFile;
-	}
-
-	@Override
-	public InfoReqBoard readFile(int fileNum) {
-		InfoReqBoard dto=null;
-		
-		try{
-			dto=dao.getReadData("infoReqBoard.readFile", fileNum);
-		}catch(Exception e){
-			System.out.println(e.toString());
-		}
-		
-		
-		return dto;
-	}
-
-	@Override
-	public int deleteFile(Map<String, Object> map) {
-		int result =0;
-		
-		try{
-			result= dao.deleteData("infoReqBoard.deleteFile", map);
-			
-		}catch(Exception e){
-			System.out.println(e.toString());
-		}
-		
-		
-		return result;
-	}
-/*
-	@Override
-	public int deleteList(Map<String, Object> map) {
-		int result=0;
-		try {
-			result=dao.deleteData("infoReqBoard.deleteList", map);
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		return result;
-	}*/
-
-	@Override
-	public int deleteList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteList(List<Integer> list) {
-		int result=0;
-		
-		try{
-			result=dao.deleteData("infoReqBoard.deleteList", list);
-		}catch(Exception e){			
-		}
-		
-		return result;
-	}
 
 }

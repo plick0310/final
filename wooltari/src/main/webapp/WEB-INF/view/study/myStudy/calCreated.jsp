@@ -8,26 +8,38 @@
 
 
 
-<form name="calForm" method="post">
-	<div>
-		<p style="font-size: 30px; font-weight: bold; font-family: monospace;">일정추가</p><hr style="width: auto;">
-		<table>
+<form name="calForm" id="calForm" method="post">
+	<div style="margin-left: 17px;">
+		<p style="font-size: 30px; font-weight: bold; font-family: monospace; margin-right: 20px;">일정추가</p>
+		<hr style="width: auto; margin-top: -15px; margin-right:20px; height: 1px;">
+		<table style="margin-top: -20px;">
 			<tr>
-				<td style="font-weight: bold; font-family: monospace;">시작날짜:<input type="text" value="${startDate }" name="startDate" readonly="readonly"></td>
+				<td style="font-weight: bold; font-family: monospace; color: #1abc9c;">시작날짜<br>
+					<input type="text" style=" text-align:center;  border: none; color: gray" value="${sdate }" name="sdate" readonly="readonly">
+				</td>
 			</tr>
-		
+	
 			<tr>
-				<td style="font-weight: bold; font-family: monospace;">종료날짜:<input type="text" value="${endDate }" name="endDate" readonly="readonly"></td>
+				<td style="font-weight: bold; font-family: monospace; color: #1abc9c;">종료날짜<br>
+					<input type="text" style="  text-align:center; border: none; color: gray" value="${edate }" name="edate" readonly="readonly">
+				</td>
 			</tr>
 			
 			<tr>
-				<td style="font-weight: bold; font-family: monospace; padding-top: 10px;">일정제목:<input type="text" name="subject"></td>
+				<td style="font-weight: bold; font-family: monospace; color: #1abc9c;">타이틀<br>
+					<input type="text" name="subject" style=" color: gray">
+				</td>
 			</tr>
 			
 			<tr>
-				<td style="font-weight: bold; font-family: monospace; padding-top: 10px; padding-left: 11px;">일정내용<textarea style="margin-left: 9px;" name="content"></textarea></td>
+				<td style="font-weight: bold; font-family: monospace;  color: #1abc9c;">내용<br>
+					<textarea style="color: gray" name="content"></textarea>
+				</td>
 			</tr>
 			
 		</table>
+		
 	</div>
+	<input type="hidden" name="month" value="${month }">
+	<input type="hidden" name="s_num" value="${s_num }">
 </form>

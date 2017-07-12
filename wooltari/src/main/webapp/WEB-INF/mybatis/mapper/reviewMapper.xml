@@ -25,7 +25,6 @@
 		]]>
 	</select>
 	
-	
 	<!-- 글 개수 -->
 	<select id="dataCount" resultType="Integer" parameterType="map">
 		select nvl(count(*),0) from reviewlist r

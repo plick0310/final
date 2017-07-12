@@ -88,6 +88,36 @@ public class MemberController {
 		return "member/notice";
 	}
 	
+	@RequestMapping(value="/member/update_submit", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> updateSubmit(Member dto, HttpSession session) throws Exception {
+		Map<String, Object> model = new HashMap<>();
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		try {
+			// 패스워드 암호화
+			ShaPasswordEncoder pe = new ShaPasswordEncoder(256);
+			String s = pe.encodePassword(dto.getUserPwd(), null);
+			dto.setUserPwd(s);
+			
+			// 아이디 설정
+			dto.setUserId(info.getUserId());
+						
+			// 프로필 이미지 저장
+			String root=session.getServletContext().getRealPath("/");
+			String path=root+File.separator+"uploads"+File.separator+"member"+File.separator+"userImg";
+			service.updateMember(dto, path);
+		} catch (Exception e) {
+			model.put("state", "false");
+			return model;
+		}
+		// 세션 정보 수정
+		info.setUserName(dto.getUserName());
+	    info.setUserImg(dto.getUserImg());
+		model.put("state", "true");
+		return model;
+	}
+	
 	@RequestMapping(value="/member/pwd", method=RequestMethod.GET)
 	public String pwdForm(){
 		return "member/pwd";
@@ -101,7 +131,6 @@ public class MemberController {
 		Member dto=service.readMember(userId);
 		if(dto==null)
 			passed="true";
-		
    	    // 작업 결과를 json으로 전송
 		Map<String, Object> model = new HashMap<>(); 
 		model.put("passed", passed);
@@ -117,7 +146,6 @@ public class MemberController {
 		info.setUserName(userName);
 		info.setUserImg(userImg);
 		session.setAttribute("member", info);
-		
 		// 작업 결과를 json으로 전송
 		Map<String, Object> model = new HashMap<>();
 		model.put("userId", userId);

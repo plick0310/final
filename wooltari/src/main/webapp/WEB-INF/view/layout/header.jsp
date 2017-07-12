@@ -191,7 +191,7 @@ function sendlogout(){
 
 				</ul>
 				<div class="col-lg-4"
-					style="margin-left: 100px; padding-right: 0px; width: 245px;">
+					style="margin-left: 70px; padding-right: 0px; width: 245px;">
 					<form class="form-inline" style="margin: 7.5px;">
 					  <div class="form-group">
 					    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
@@ -216,7 +216,7 @@ function sendlogout(){
 						</a>
 					</c:if>
 					<c:if test="${not empty sessionScope.member}">
-						<strong style="margin-right: 5px">${sessionScope.member.userName}</strong>
+						<div id="memberbar"><strong style="margin-right: 5px">${sessionScope.member.userName}</strong></div>
 						<c:if test="${empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
 								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="padding:1px; box-shadow: 2px 2px 5px grey;"> 

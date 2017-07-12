@@ -135,7 +135,7 @@ function insertBoard(){
 	</table>
 	
 	<div class="read_btnArea">
-		<input type="hidden" name="num" value="${num}">
+		<c:if test="${mode=='update' }"><input type="hidden" name="num" value="${num}"></c:if>	
 		<button type="button" class="clickbtn" onclick="insertBoard();">${mode=='update'?'수정하기':'등록하기'}</button>
 		<button type="button" class="clickbtn" onclick="javascript:location.href='<%=cp%>/promote/list';">돌아가기</button>
 	</div>

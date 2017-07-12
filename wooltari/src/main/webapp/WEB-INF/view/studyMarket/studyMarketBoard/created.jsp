@@ -69,36 +69,35 @@ $( function() {
 	return true;
  }   
 	//동적으로 추가된 태그도 이벤트 처리 가능(파일 추가)
-  $(function(){
-		$("body").on("change", "input[name=upload]", function(){
+ $(function(){
+	$("body").on("change", "input[name=upload]", function(){
+		if(! $(this).val()) {
+			return;	
+		}
+		
+		var b=false;
+		$("input[name=upload]").each(function(){
 			if(! $(this).val()) {
-				return;	
-			}
-			
-			var b=false;
-			$("input[name=upload]").each(function(){
-				if(! $(this).val()) {
-					b=true;
-					return;
-				}
-			});
-			if(b)
+				b=true;
 				return;
-
-			var $tr, $td, $input;
-			
-		    $tr=$("<tr>");
-		    $td=$("<td>", {class:"td1", html:"첨부"});
-		    $tr.append($td);
-		    $td=$("<td>", {class:"td3", colspan:"3"});
-		    $input=$("<input>", {type:"file", name:"upload", class:"form-control input-sm", style:"height: 35px;"});
-		    $td.append($input);
-		    $tr.append($td);
-		    
-		    $("#tb").append($tr);
+			}
 		});
-	  });
-	
+		if(b)
+			return;
+
+		var $tr, $td, $input;
+		
+	    $tr=$("<tr>");
+	    $td=$("<td>", {class:"td1", html:"첨부"});
+	    $tr.append($td);
+	    $td=$("<td>", {class:"td3", colspan:"3"});
+	    $input=$("<input>", {type:"file", name:"upload", class:"form-control input-sm", style:"height: 35px;"});
+	    $td.append($input);
+	    $tr.append($td);
+	    
+	    $("#tb").append($tr);
+	});
+ });
 	//post
 	<c:if test="${mode=='update'}">
 	function deleteFile(fileNum){
@@ -122,7 +121,7 @@ $( function() {
 		style="background-color:#F5F5F5; color: #353535; border-top: none;
 		box-shadow: 60px 0px 100px -90px #000000, -60px 0px 100px -90px #000000;"class="board_table">
 	
-		<tbody>
+		<tbody id="tb" >
 			<tr>
 				<th style="width: 100px; ">제목</th>
 				<td><input type="text" name="subject" 
@@ -141,12 +140,12 @@ $( function() {
 			</tr>
 			<tr>
 				<th>오프라인 강의실 주소</th>
-				<td><input type="text" name="address" maxlength="8"
+				<td><input type="text" name="address" 
 					style="width: 200px;" value="${dto.address}"/></td>
 			</tr>
 			<tr>
 				<th>url</th>				
-				<td><input type="text" name="urlContent" maxlength="8" style="width: 200px;"value="${dto.urlContent}" /></td>
+				<td><input type="text" name="urlContent"  style="width: 200px;"value="${dto.urlContent}" /></td>
 			</tr>
 
 			<tr>

@@ -18,6 +18,13 @@ body {
 	
 }
 
+#memberbar {
+	float: left; 
+	width: 90px;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
 
 .nav>li>a {
 	color: #3e3a39;

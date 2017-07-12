@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%
+	String cp = request.getContextPath();
+%>
 <script>
 
 </script>
@@ -128,93 +133,168 @@ font-weight: bold;
   color: #1abc9d;
 }
 #a_check{
-display:inline-block;
-padding-left:45px;
-font-size: 14px;
+    
+    padding-left: 46px;
+
+    font-size: 14px;
 }
 .form-control{
 width:85%;}
+.img_bt{
+  opacity: 0; /*input type="file" tag 투명하게 처리*/
+   position: relative;
+   width: 0px;
+   padding :0;
+   border: 0px;
+}
 </style>
 
 <script>
+var waitCount =${waitCount};
+var teamCount =${teamCount};
+var uid="${sessionScope.member.userId}";
+var leader ="${leader}";
+$(function () {
+	listTeam();
+	listWait();
+});
+
 function listWait() {
-	var url ="/${s_num}/listWait";
+	var url ="<%=cp%>/${s_num}/listWait";
 	
+	$.ajax({
+		type:"post"
+		,url:url
+		//,data:query
+		,dataType:"json"
+		,success:function(data){
+			printWait(data);
+		}
+		,error:function(e){
+			console.log(e.responseText);
+		}
+	});
 }
 
+function printWait(data){
+	
 
+	var out ="";
+	if(waitCount!=0){
+		for(var idx=0; idx<data.list.length; idx++){
+			var imageFileName = data.list[idx].imageFileName;
+			var userName=data.list[idx].userName;
+			var content=data.list[idx].content;
+			var userId=data.list[idx].userId;
+			
+			out+=	"<li class='clearfix'><img class='round'";
+			out+=		"src='<%=cp%>/uploads/study/"+${s_num}+"_TeamImg/"+imageFileName+"'>";
+			out+=	"<div class='legend-info'>";
+			out+=	"<strong>"+userName+"</strong>"+content;	
+			out+= "</div>";
+		
+		if (leader == uid) {
+					out += "<p id='a_check'><a>승인 </a>|<a> 거절</a></p></li>";
+				}
 
+			}
+		}
+		$(addon2).html(out);
 
+	}
+	
+	
+function listTeam() {
+	var url ="<%=cp%>/${s_num}/listTeam";
+	
+	$.ajax({
+		type:"post"
+		,url:url
+		//,data:query
+		,dataType:"json"
+		,success:function(data){
+			printTeam(data);
+		}
+		,error:function(e){
+			console.log(e.responseText);
+		}
+	});
+}
+function printTeam(data) {
+	var out ="";
+	if(teamCount !=0){
+		for(var idx=0; idx<data.list.length; idx++){
+			var imageFileName = data.list[idx].imageFileName;
+			var userName=data.list[idx].userName;
+			var content=data.list[idx].content;
+			var userId=data.list[idx].userId;
+			
+			out+="<li class='clearfix'><img class='round'";
+			out+=		"src='<%=cp%>/uploads/study/"+${s_num}+"_TeamImg/"+imageFileName+"'>";
+			out+=	"<div class='legend-info'>";
+			out+=	"<strong>"+userName+"</strong>"+content;	
+			out+= "</div>";
+			
+			if (userId == uid) {
+				out+="<p id='a_check'><label for='ct' class='btn btn-large uploadLabel'> <img";
+				out+=		" alt='' src='<%=cp%>/resource/img/set.png'>";
+				out+=	"</label>"
+			}else{
+			out+="<p id='a_check'><label for='at' class='btn btn-large uploadLabel'> <img";
+			out+=		" alt='' src='<%=cp%>/resource/img/information.png'>";
+			out+=	"</label> <label for='bt' class='btn btn-large uploadLabel'> <img";
+			out+=		" alt='' src='<%=cp%>/resource/img/envelope.png'></a>";
+			out+="</label></p>";
+			}
+				
+			out+="<button class='img_bt' type='button' id='at' onclick='' />";
+			out+="<button class='img_bt' type='button' id='bt' onclick='' />";
+			out+="<button class='img_bt' type='button' id='ct' onclick='' /></li>";
+		
+			}
+	}
+	
+	$(addon1).html(out);
+	
+}
 </script>
 <div class="addon 1">
 	<p id="" style="border-bottom: 1px solid #eee;">
-		스터디 멤버 <span style="color: #1abc9c;">9</span>명
-		
-		<a class="" data-toggle="collapse" href="#collapseExample2"
-					aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-ellipsis-v" style="float: right;"></i></a>
-	
-	
+		스터디 멤버 <span style="color: #1abc9c;">${teamCount}</span>명 <a class=""
+			data-toggle="collapse" href="#collapseExample2" aria-expanded="false"
+			aria-controls="collapseExample"><i class="fa fa-ellipsis-v"
+			style="float: right;"></i></a>
+
+
 	</p>
 	<div class="collapse" id="collapseExample2">
-	<div class="d3">
-		<form class="d3">
-			<input type="text" placeholder="멤버 ID 혹은 이름을 검색해보세요">
-			<button type="submit"></button>
-		</form>
+		<div class="d3">
+			<form class="d3">
+				<input type="text" placeholder="멤버 ID 혹은 이름을 검색해보세요">
+				<button type="submit"></button>
+			</form>
+		</div>
 	</div>
-	</div>
-	
-	<ul>
-		<li class="clearfix"><a href="#" target="_blank"> <img
-				class="round"
-				src="https://8share-production-my.s3.amazonaws.com/campaigns/4898/photos/profile/thumb_copy.png?1397732185">
-				<div class="legend-info">
-					<strong>Social Good</strong>Help share a cause and do good.
-				</div></a></li>
-		<li class="clearfix"><em class="hot"></em>
-			<div class="legend-info">
-				<strong>Fire Hot</strong>Featured hot special at the moment.
-			</div></li>
-		<li class="clearfix"><em class="extra"></em>
-			<div class="legend-info">
-				<strong>Extra Fun</strong>Contests, surveys, prizes and more fun
-				stuff.
-			</div></li>
-	</ul>
+
+	<ul id="addon1"></ul>
 </div>
 
-<div class="addon 2" >
-	<p>대기중인 스터디 멤버
-	<a href="#myModal" data-toggle="modal" data-placement="top" title="Add Contact"><i class="glyphicon glyphicon-plus" style="float: right;"></i></a>
-	
+
+
+<div class="addon 2">
+	<p>
+		대기중인 스터디 멤버<span style="color: #1abc9c;">${waitCount}</span>명 <a
+			href="#myModal" data-toggle="modal" data-placement="top"
+			title="Add Contact"><i class="glyphicon glyphicon-plus"
+			style="float: right;"></i></a>
 	</p>
-	
-	<ul id="addon2">
-		<li class="clearfix"><img
-				class="round"
-				src="https://8share-production-my.s3.amazonaws.com/campaigns/4898/photos/profile/thumb_copy.png?1397732185">
-				<div class="legend-info">
-					<strong>앙이디</strong>한줄 소개 
-					
-					
-					
-				</div>
-				<p id="a_check"><a>승인 </a>|<a> 거절</a></p></li>
-		<li class="clearfix"><em class="hot"></em>
-			<div class="legend-info">
-				<strong>Fire Hot</strong>Featured hot special at the moment.
-			</div></li>
-		<li class="clearfix"><em class="extra"></em>
-			<div class="legend-info">
-				<strong>Extra Fun</strong>Contests, surveys, prizes and more fun
-				stuff.
-			</div></li>
-	</ul>
+
+	<ul id="addon2"></ul>
 </div>
 
 
-    
-   	<!-- Modal -->
+
+<!-- Modal -->
 			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" style="display: none;">
 				<div class="modal-dialog">
 					<div class="modal-content">

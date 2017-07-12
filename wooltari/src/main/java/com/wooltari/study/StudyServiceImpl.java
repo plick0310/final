@@ -96,6 +96,7 @@ public class StudyServiceImpl implements StudyService {
 			
 			dao.insertData("study.insertStudy",dto);
 			
+		
 			for(int i=0; i<dto.getChoiceCategory().size(); i++){
 				dto.setCategory(dto.getChoiceCategory().get(i));
 				dao.insertData("study.insertstudyCategory", dto);

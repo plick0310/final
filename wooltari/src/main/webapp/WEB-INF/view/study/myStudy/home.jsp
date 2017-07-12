@@ -122,9 +122,12 @@ $(document).ready(function(){
 			
 			$(this).parent().addClass("active").css("background-color","#1abc9c");
 			
+			var query ="leader=${dto.userId}";
+			//alert(query);
 			
 			$.ajax({
-				dataType:"html"
+				type: 'POST',  	
+				data:query
 				,url:"<%=cp%>/study/myStudy/${s_num}/" + fileName
 				,success : function(data) {
 					$('.cont').html(data);

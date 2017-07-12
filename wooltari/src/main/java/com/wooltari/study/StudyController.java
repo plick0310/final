@@ -19,11 +19,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wooltari.member.SessionInfo;
+import com.wooltari.study.team.Team;
+import com.wooltari.study.team.TeamService;
 
 @Controller("study.studyController")
 public class StudyController {
 	@Autowired
 	private StudyService service;
+	
+	@Autowired
+	private TeamService tservice;
+	
 	
 	@RequestMapping(value="/study/created")
 	public String StudyCratedForm(Model model) throws Exception{
@@ -40,7 +46,7 @@ public class StudyController {
 	@RequestMapping(value="/study/created", method=RequestMethod.POST)
 	public String StudyCratedSubmit(
 			StudyInfo dto,  Model model ,HttpSession session) throws Exception{
-		
+		  
 		try {
 			
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
@@ -51,9 +57,19 @@ public class StudyController {
 		
 		dto.setUserId(info.getUserId());
 		service.insertStudy(dto ,path);
+		
+		Team tdto = new Team();
+		tdto.setS_num(dto.getS_num());
+		tdto.setUserId(info.getUserId());
+		tdto.setImageFileName(info.getUserImg());
+		tdto.setEnabled(1);
+		tdto.setContent("리더입니다.");
+		tservice.joinStudy(tdto);
+		
+		
 		} catch (Exception e) {
 			System.out.println("실패");
-			
+			  
 			//study 테이블 삭제........ 
 			service.deleteStudy(dto.getS_num());
 			model.addAttribute("messaage","스터디 생성 실패" );
