@@ -6,6 +6,9 @@
 	String cp=request.getContextPath();
 %>
 <style>
+hr {
+	width: 800px;
+}
 .form-horizontal {
 	padding: 10px;
 }
@@ -291,8 +294,8 @@ function login_check() {
 			success : function(data) {
 				var state = data.state;
 				if(state == 'true'){
-    				edit();
 					$("#pwdmodal").modal("hide"); 
+    				edit();
 				}else{
 					$(".login-msg strong").text("비밀번호를 잘못 입력하셨습니다."); 
 				}
@@ -356,10 +359,6 @@ function edit(){
 	
 	
 	<aside class="lg-side">
-		<div class="inbox-head">
-		<h2>나의 정보</h2>
-		</div>
-		
 		<div class="inbox-body">
 			<div class="content">
 			<!-- content -->

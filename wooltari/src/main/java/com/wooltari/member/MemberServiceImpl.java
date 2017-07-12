@@ -33,7 +33,14 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void insertMember(Member dto, String path) throws Exception {
 		try {
-			//프로필 설정
+			
+			byte [] name = dto.getUserName().trim().getBytes();
+			if(name.length >= 12){
+				dto.setUserName(new String(name, 0, 12));
+				System.out.println(dto.getUserName());
+			}
+			
+			//프로필 사진 설정
 			if(dto.getUserImgUpload()!=null && ! dto.getUserImgUpload().isEmpty()) {
 				String newFilename=fileManager.doFileUpload(dto.getUserImgUpload(), path);
 				dto.setUserImg(newFilename);
@@ -52,6 +59,36 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void updateMember(Member dto, String path) throws Exception {
+		try {
+			
+			byte [] name = dto.getUserName().trim().getBytes();
+			if(name.length >= 12){
+				dto.setUserName(new String(name, 0, 12));
+				System.out.println(dto.getUserName());
+			}
+			
+			byte [] introduce = dto.getIntroduce().trim().getBytes();
+			if(introduce.length >= 100){
+				dto.setIntroduce(new String(introduce, 0, 100));
+				System.out.println(dto.getIntroduce());
+			}
+
+			//프로필 사진 설정
+			if(dto.getUserImgUpload()!=null && ! dto.getUserImgUpload().isEmpty()) {
+				//기존 프로필 사진이 있으면 서버에서 삭제
+				if(dto.getUserImg()!=null && ! dto.getUserImg().isEmpty()) {
+					fileManager.doFileDelete(dto.getUserImg(), path);
+				}
+				String newFilename=fileManager.doFileUpload(dto.getUserImgUpload(), path);
+				dto.setUserImg(newFilename);
+			}
+			//회원 정보 저장
+			dao.updateData("member.updateMember", dto);
+			dao.updateData("member.updateMemberInfo", dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			throw e;
+		}
 	}
 
 	@Override

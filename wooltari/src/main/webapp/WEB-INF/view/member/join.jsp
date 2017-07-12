@@ -112,7 +112,7 @@
 				$("#form-username + .help-block").html(str);
 				return false;
 			}else{
-				var str="<span style='color:blue;font-weight: bold;'>입력하신 이름은 '" + userName + "' 입니다.</span>";
+				var str="<span style='color:blue;font-weight: bold;'>입력하신 닉네임은 '" + userName + "' 입니다.</span>";
 				$("#form-username + .help-block").html(str);
 			}
 			
@@ -188,7 +188,7 @@
     		});
     	});
       	
-    	// 파일의 확장자를 가져옮
+    	// 파일의 확장자를 가져옴
     	function getFileExtension(filePath){  
     	    var lastIndex = -1;
     	    lastIndex  = filePath.lastIndexOf('.');
@@ -239,7 +239,19 @@
 									<label class="sr-only" for="form-username">Username</label>
 									<input type="text" name="userName" placeholder="Name"
 									class="form-username form-control" id="form-username">
-									<p class="help-block">다른 회원들에게 보여질 별명입니다.</p>
+									<p class="help-block">닉네임을 입력하세요.(한글 6자 / 영어 12자)</p>
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="gender">Gender</label>
+									<div class="form-gender form-control" style="margin: auto;">
+										<label class="radio-inline" for="gender-0">
+											<input type="radio" name="gender" id="gender-0" value="1" required="required">남자
+										</label> 
+										<label class="radio-inline" for="gender-1">
+											<input type="radio" name="gender" id="gender-1" value="2" required="required">여자
+										</label>
+									</div>
+									<p class="help-block">성별을 선택하세요.</p> 
 								</div>
 								<div class="form-group">
 									<label class="sr-only" for="form-password">Password</label>
