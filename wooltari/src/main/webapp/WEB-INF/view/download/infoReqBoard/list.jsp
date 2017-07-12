@@ -277,6 +277,7 @@ function deleteAction(){
 			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>정보요청게시판</div> 
 <form name="array_form" id="array_form" style="width: 900px;" method="post"> 
 	<input type="hidden" name="page" value="${page}" />
+	
 	<!-- List Start-->
 	<div class="settingArea">
 		<table style="width:100%;" cellpadding="0" cellspacing="0" border="0">

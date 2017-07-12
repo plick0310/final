@@ -6,30 +6,10 @@
    String cp = request.getContextPath();
 %>
 <style>
-   /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #floating-panel {
-        position: absolute;
-        top: 10px;
-        left: 25%;
-        z-index: 5;
-        background-color: #fff;
-        padding: 5px;
-        border: 1px solid #999;
-        text-align: center;
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
+#map {
+        height: 400px;
+        width: 100%;
+       }
 
 embed-container {
     position: relative;
@@ -211,41 +191,167 @@ function deleteReply(replyNum, page){
 
 <script type="text/javascript">
 
-$(function(){
-	$('#collapseTwo').on('shown.bs.collapse', function () {
-		initialize();
-   });		
-});
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 8,
-          center: {lat: -34.397, lng: 150.644}
-        });
-        var geocoder = new google.maps.Geocoder();
+	$(function(){
+		$('#collapseTwo').on('shown.bs.collapse', function () {
+			initialize();
+	   });		
+	});
+	var map, places, iw;
+	var markers = [];
+	var autocomplete;
+	 
 
-        document.getElementById('submit').addEventListener('click', function() {
-          geocodeAddress(geocoder, map);
-        });
-      }
+	function initialize() {
+		var myLatlng = new google.maps.LatLng(37.534992, 126.902750);
+		var myOptions = {
+			zoom : 15,
+			center : myLatlng,
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+		};
+		map = new google.maps.Map(document.getElementById('map_canvas'),
+				myOptions);
+		places = new google.maps.places.PlacesService(map);
+		google.maps.event.addListener(map, 'tilesloaded', tilesLoaded);
+		autocomplete = new google.maps.places.Autocomplete(document
+				.getElementById('autocomplete'));
+		google.maps.event.addListener(autocomplete, 'place_changed',
+				function() {
+					showSelectedPlace();
+				});
+	}
 
-      function geocodeAddress(geocoder, resultsMap) {
-        var address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status === 'OK') {
-            resultsMap.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        });
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcO1EZpm4c5VVFmWf1h0dwX1QVbsx3Gb4&callback=initMap">
-    </script>
+	function tilesLoaded() {
+		google.maps.event.clearListeners(map, 'tilesloaded');
+		google.maps.event.addListener(map, 'zoom_changed', search);
+		google.maps.event.addListener(map, 'dragend', search);
+		search();
+	}
+
+	function showSelectedPlace() {
+		clearResults();
+		clearMarkers();
+		var place = autocomplete.getPlace();
+		console.log(autocomplete.getPlace());
+	
+		map.panTo(place.geometry.location);
+		markers[0] = new google.maps.Marker({
+			position : place.geometry.location,
+			map : map,		
+		});
+		iw = new google.maps.InfoWindow({
+			content : getIWContent(place)
+		});
+		iw.open(map, markers[0]);
+	}
+
+	function search() {
+		var type;
+		for (var i = 0; i < document.controls.type.length; i++) {
+			if (document.controls.type[i].checked) {
+				type = document.controls.type[i].value;
+			}
+		}
+		autocomplete.setBounds(map.getBounds());
+		var search = {
+			bounds : map.getBounds()
+		};
+		if (type != 'establishment') {
+			search.types = [ type ];
+		}
+		places.search(search, function(results, status) {
+			if (status == google.maps.places.PlacesServiceStatus.OK) {
+				clearResults();
+				clearMarkers();
+				for (var i = 0; i < results.length; i++) {
+					 var image = '<%=cp%>/resource/images/picpic.png';
+					markers[i] = new google.maps.Marker({
+						position : results[i].geometry.location,
+						animation : google.maps.Animation.DROP,
+						icon : image
+					});
+					google.maps.event.addListener(markers[i], 'click',
+							getDetails(results[i], i));
+					setTimeout(dropMarker(i), i * 100);
+					addResult(results[i], i);
+				}
+			}
+		});
+	}
+
+	function clearMarkers() {
+		for (var i = 0; i < markers.length; i++) {
+			if (markers[i]) {
+				markers[i].setMap(null);
+				markers[i] == null;
+			}
+		}
+	}
+
+	function dropMarker(i) {
+		return function() {
+			markers[i].setMap(map);
+		}
+	}
+
+	function addResult(result, i) {
+		var results = document.getElementById('results');
+		var tr = document.createElement('tr');
+		tr.style.backgroundColor = (i % 2 == 0 ? '#F0F0F0' : '#FFFFFF');
+		tr.onclick = function() {
+			google.maps.event.trigger(markers[i], 'click');
+		};
+		/* var iconTd = document.createElement('td'); */
+		var nameTd = document.createElement('td');
+		var icon = document.createElement('img');
+		/* icon.src = result.icon.replace('http:', '');
+		icon.setAttribute('class', 'placeIcon'); */
+		var name = document.createTextNode(result.name);
+		/* iconTd.appendChild(icon); */
+		nameTd.appendChild(name);
+		/* tr.appendChild(iconTd); */
+		tr.appendChild(nameTd);
+		results.appendChild(tr);
+	}
+
+	function clearResults() {
+		var results = document.getElementById('results');
+		while (results.childNodes[0]) {
+			results.removeChild(results.childNodes[0]);
+		}
+	}
+
+	function getDetails(result, i) {
+		return function() {
+			places.getDetails({
+				reference : result.reference
+			}, showInfoWindow(i));
+		}
+	}
+
+	function showInfoWindow(i) {
+		return function(place, status) {
+			if (iw) {
+				iw.close();
+				iw = null;
+			}
+			if (status == google.maps.places.PlacesServiceStatus.OK) {
+				iw = new google.maps.InfoWindow({
+					content : getIWContent(place)
+				});
+				iw.open(map, markers[i]);
+			}
+		}
+	}
+
+	function getIWContent(place) {
+		var content = '<table style="border:0"><tr>';
+		content += '<td style="border:0;width:265px; padding: 9px;"><b><a href="' + place.url + '">'
+				+ place.name + '</a></b>';
+		content += '</td></tr></table>';
+		return content;
+	}
+	/* google.maps.event.addDomListener(window, 'load', initialize); */
+</script>
 
 <div  style=" margin: 60px auto; height:50px; font-size: 20px;text-align: center;">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
@@ -290,11 +396,33 @@ $(function(){
 					<div style="margin-bottom: 100px; width: 900px; background-color: #eee; height: 500px;">
 						
 						<!--지도 -->
-				<div id="floating-panel">
-     				 <input id="address" type="textbox" value="${dto.address}">
-     				 <input id="submit" type="button" value="Geocode">
-    			</div>
-    			<div id="map"></div>
+						<div id="map_canvas" style="width: 600px; background-color: white; height: 500px; float: left;"></div>
+						
+						<!-- 위치입력 -->
+						<div id="locationField" style="float: left;">
+							<input id="autocomplete" type="text" style="width: 300px; height: 40px; padding: 10px; border: 1px solid #eee">
+						</div>
+						
+						<!-- 까페 도서관 입력 -->
+						<!--
+						<div id="controls">
+							<form name="controls">
+								<div>
+									<label class="btn btn-primary" id="btncate"	style="width: 150px; background: #1abc9c; border-radius: 0px; color: white; border: none; font-weight: bold;">
+										<img class="img-circle" alt="" src=""> 
+										<input type="radio" name="type" value="cafe" onclick="search()"	checked="checked" style="display: none;" />카페
+									</label>
+									<label class="btn btn-primary" id="btncate"	style="width: 150px; background: #1abc9c; border-radius: 0px; color: white; border: none; font-weight: bold;">
+										<input type="radio" name="type" value="library"	onclick="search()" style="display: none;" />도서관
+									</label>
+								</div>
+							</form>
+						</div>
+ 						-->
+ 						
+						<div id="listing" style="float: left; width: 300px; height: 427px; overflow: auto; cursor: pointer;">
+							<table id="results"></table>
+						</div>
 
 					</div>
 				</div>

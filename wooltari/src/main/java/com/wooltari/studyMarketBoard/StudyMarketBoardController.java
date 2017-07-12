@@ -53,8 +53,8 @@ public class StudyMarketBoardController {
 		@RequestMapping(value="/studyMarket/studyMarketBoard/created" ,  method=RequestMethod.POST)
 		public String createdSubmit(StudyMarketBoard dto, HttpSession session) throws Exception {
 			
+			dto.setUrlContent(dto.getUrlContent().substring(32,43));
 			SessionInfo info=(SessionInfo)session.getAttribute("member");
-			
 			String root = session.getServletContext().getRealPath("/");
 			String pathname=root+File.separator+"uploads"+File.separator+"studyMarketBoard";
 			
@@ -118,6 +118,8 @@ public class StudyMarketBoardController {
 				listNum=dataCount - (start + n - 1);
 				data.setListNum(listNum);
 				
+				//data.setUrlCode(dto.getUrlContent().substring(32,43));
+				
 				SimpleDateFormat formatter= new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
 				Date beginDate= formatter.parse(data.getCreated());
 				
@@ -131,7 +133,8 @@ public class StudyMarketBoardController {
 				
 				data.setCreated(data.getCreated().substring(0,10));
 				
-				n++;				
+				n++;
+				
 			}
 			
 			String query="";
@@ -157,11 +160,19 @@ public class StudyMarketBoardController {
 				StudyMarketBoard dto= ite.next();
 				bestlistNum=b+1;
 				dto.setBestlistNum(bestlistNum);
-				String userImg = dto.getUserImg();
-				dto.setContent(userImg);
 				b++;
 			}
 			
+			/*
+			Iterator<StudyMarketBoard> iter= innerlist.iterator();
+			while(iter.hasNext()){
+				StudyMarketBoard dto= iter.next();
+				innerlistNum=i+1;
+				dto.setInnerlistNum(innerlistNum);
+				i++;
+			}
+			*/
+			//model.addAttribute("innerlist", innerlist);
 			model.addAttribute("bestlist", bestlist);
 			model.addAttribute("dataCount", dataCount);
 			model.addAttribute("page", current_page);
@@ -211,7 +222,10 @@ public class StudyMarketBoardController {
 				query += "&searchKey"+searchKey+
 						"&searchValue="+URLEncoder.encode(searchValue,"utf-8");				
 			}
-
+			
+			//String urlContent = dto.getUrlContent().substring(32,43);
+			//model.addAttribute("urlContent", urlContent);
+		
 			model.addAttribute("dto", dto);
 			model.addAttribute("preReadDto", preReadDto);
 			model.addAttribute("nextReadDto", nextReadDto);

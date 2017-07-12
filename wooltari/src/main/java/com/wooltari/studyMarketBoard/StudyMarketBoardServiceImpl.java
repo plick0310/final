@@ -360,4 +360,16 @@ public class StudyMarketBoardServiceImpl implements StudyMarketBoardService{
 		
 		return list;
 	}
+
+	@Override
+	public List<StudyMarketBoard> innerStudyMarket(Map<String, Object> map) {
+		List<StudyMarketBoard> list = null;
+		try{
+			list= dao.getListData("studyMarketBoard.innerStudyMarket",map);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 }

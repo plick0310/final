@@ -156,8 +156,11 @@ padding: 40px;
 		<c:forEach var="dto" items="${bestlist}">
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail" onclick="javascript:location.href='${articleUrl}&num=${dto.num}'">
-				<div
-					style="width:100%; height:200px; background-image:url('${dto.content}');background-size: contain;">
+			
+			<div
+					style="width:100%; height:200px; background-image:url('http://img.youtube.com/vi/${dto.urlContent}/hqdefault.jpg');background-size: contain;">
+				<%-- <div
+					style="width:100%; height:200px; background-image:url('<%=cp%>/uploads/member/userImg/${dto.userImg}');background-size: contain;"> --%>
 					<img alt="" src="<%=cp%>/resource/images/no${dto.bestlistNum }.png"
 						style="width: 50px; height: 50px; margin: -1px;">
 				</div>
@@ -195,8 +198,8 @@ padding: 40px;
     <div class="panel-heading" role="tab" id="heading${dto.listNum}">
       <h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse${dto.listNum}" aria-expanded="false" aria-controls="collapse${dto.listNum}">
-        <span><small>${dto.listNum}</small></span> &nbsp;&nbsp;&nbsp;<span>${dto.subject}</span>&nbsp;&nbsp;&nbsp;<small>작성일 : ${dto.created}</small>
-        <small>조회수 : ${dto.hitCount} </small><small class="likes">추천 : ${dto.likeCount} </small>
+        <span><small>${dto.listNum}</small></span> &nbsp;&nbsp;&nbsp;<span>${dto.subject}</span> <small>작성자 : ${dto.userId} </small>&nbsp;&nbsp;&nbsp;<small>작성일 : ${dto.created}</small>
+        <small>조회수 : ${dto.hitCount} </small><small class="likes"> 추천 : ${dto.likeCount} </small>
         <input type="button" class="clickbtn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"
 		 onclick="javascript:location.href='${articleUrl}&num=${dto.num}';" value="동영상 보기">
         </a>
@@ -204,8 +207,31 @@ padding: 40px;
     </div>
     <div id="collapse${dto.listNum}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading${dto.listNum}">
       <div class="panel-body">
-        <div style="width: 150px;height: 150px;background-color: #eee;padding: 30px;float: left;"></div>
+        <div style="width: 150px;height: 150px;background-color: #eee;padding: 30px;float: left; background-size:cover; background-image: url('http://img.youtube.com/vi/${dto.urlContent}/hqdefault.jpg');">
+        <!-- <div style="width: 150px;height: 150px;background-color: #eee;padding: 30px;float: left; background-size:cover; background-image: url('<%=cp%>/uploads/member/userImg/${dto.userImg}');"> -->
+        </div>
         <div style="float: left; margin-left: 15px;">C O N T E N T : ${dto.content} </div>
+        
+        	<div class="tbl_st1">
+			<table>
+				<colgroup>
+					<col width="100px">
+					<col width="100px">
+				</colgroup>
+				<tr>
+					<th>제목</th>
+					<th>작성일</th>
+				</tr>
+				<%-- <c:forEach var="dto" items="innerlist">
+				<tr>
+					<td class="subject"><a href="${articleUrl}&num=${dto.num}">${dto.subject}</a></td>
+					<td class="created">${dto.created}</td>
+				</tr>
+				</c:forEach> --%>
+				
+			</table>
+		</div>
+        
       </div>
     </div>
   </div>
