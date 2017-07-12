@@ -1,14 +1,21 @@
-package com.wooltari.mockTest.test;
+package com.wooltari.mockTest.exam;
 
-public class Test {
+public class Exam {
 	private int num;
 	private int testNum;
 	private String examInfoName;
 	private String examInfoOrgan;
 	private String questionSubject;
 	private String created;
+	private long s_num;
 	
 	
+	public long getS_num() {
+		return s_num;
+	}
+	public void setS_num(long s_num) {
+		this.s_num = s_num;
+	}
 	public String getCreated() {
 		return created;
 	}

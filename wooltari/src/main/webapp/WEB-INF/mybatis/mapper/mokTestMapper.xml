@@ -45,16 +45,4 @@
 		</foreach>
 	</delete>
 	
-	
-	
-	
-	<!-- 총 데이터 수   [[[일단 보류]]]
-		<select id="wishdataCount" resultType="Integer" parameterType="map">
-		SELECT NVL(COUNT(*),0) FROM examwishList el JOIN member m ON el.userId = m.userId
-		<where>
-			<if test="searchValue!=null and searchValue!=''">
-				<include refid=""></include>
-			</if>
-		</where>
-	</select>	 -->
 </mapper>

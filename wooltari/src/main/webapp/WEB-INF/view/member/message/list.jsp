@@ -5,11 +5,6 @@
 <%
 	String cp=request.getContextPath();
 %>
-<script type="text/javascript">
-function chkAll() {
-	
-}
-</script>
 <style>
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
     z-index: 2;

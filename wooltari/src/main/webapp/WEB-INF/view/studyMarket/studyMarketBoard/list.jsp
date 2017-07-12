@@ -137,12 +137,6 @@ padding: 40px;
            
 </style>
 <script type="text/javascript">
-function teacherInfo(url){
-	 var loadurl ="<%=cp%>" + url;
-	   $("#modal-body").load(loadurl);
-	   $("#modalflage").val("true");
-	   $("#modalLogin").modal("show");
-	}
 
 
 
@@ -159,68 +153,28 @@ function teacherInfo(url){
 <!-- 베스트 강좌 -->
 <div class="row"
 		style="margin-bottom: 20px; width: 900px; margin-left: 0;">
+		<c:forEach var="dto" items="${bestlist}">
 		<div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
+			<div class="thumbnail" onclick="javascript:location.href='${articleUrl}&num=${dto.num}'">
 				<div
-					style="width:100%; height:200px; background-image:url('<%=cp%>/resource/images/back1.jpg');background-size: contain;">
-					<img alt="" src=""
+					style="width:100%; height:200px; background-image:url('${dto.content}');background-size: contain;">
+					<img alt="" src="<%=cp%>/resource/images/no${dto.bestlistNum }.png"
 						style="width: 50px; height: 50px; margin: -1px;">
 				</div>
 
 				<div class="caption">
 					<h3 style="font-size: 18px;">
-						Green Cloud <small style="margin-left: 33px;">recommend&nbsp;&nbsp;</small><span
-							style="font-size: 35px; color: #1abc9c; font-weight: lighter;">4.9</span>
+						${dto.subject} <small style="margin-left: 33px;">추천&nbsp;&nbsp;</small><span
+							style="font-size: 35px; color: #1abc9c; font-weight: lighter;">${dto.likeCount }</span>
 					</h3>
-					<p>넓고 분위기좋은 런던풍 카페</p>
+					<p>강사명  : ${dto.userId}</p>
 					<p style="text-align: right;">
 						<a href="#" style="color: #1abc9c;">+MORE</a>
 					</p>
 				</div>
 			</div>
 		</div>
-
-		<div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
-				<div
-					style="width:100%; height:200px; background-image:url('<%=cp%>/resource/images/back1.jpg');background-size: contain;">
-					<img alt="" 
-						style="width: 50px; height: 50px; margin: -1px;">
-				</div>
-
-				<div class="caption">
-					<h3 style="font-size: 18px;">
-						Green Cloud <small style="margin-left: 33px;">recommend&nbsp;&nbsp;</small><span
-							style="font-size: 35px; color: #1abc9c; font-weight: lighter;">4.9</span>
-					</h3>
-					<p>넓고 분위기좋은 런던풍 카페</p>
-					<p style="text-align: right;">
-						<a href="#" style="color: #1abc9c;">+MORE</a>
-					</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-sm-6 col-md-4">
-			<div class="thumbnail">
-				<div
-					style="width:100%; height:200px; background-image:url('<%=cp%>/resource/images/back1.jpg');background-size: contain;">
-					<img alt="" src=""
-						style="width: 50px; height: 50px; margin: -1px;">
-				</div>
-
-				<div class="caption">
-					<h3 style="font-size: 18px;">
-						Green Cloud <small style="margin-left: 33px;">recommend&nbsp;&nbsp;</small><span
-							style="font-size: 35px; color: #1abc9c; font-weight: lighter;">4.9</span>
-					</h3>
-					<p>넓고 분위기좋은 런던풍 카페</p>
-					<p style="text-align: right;">
-						<a href="#" style="color: #1abc9c;">+MORE</a>
-					</p>
-				</div>
-			</div>
-		</div>
+		</c:forEach>
 	</div>
 </div>
 <hr style="width: 100%; height: 1px; background-color: #eee; margin-bottom: 50px;">
@@ -242,7 +196,7 @@ function teacherInfo(url){
       <h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse${dto.listNum}" aria-expanded="false" aria-controls="collapse${dto.listNum}">
         <span><small>${dto.listNum}</small></span> &nbsp;&nbsp;&nbsp;<span>${dto.subject}</span>&nbsp;&nbsp;&nbsp;<small>작성일 : ${dto.created}</small>
-        <small>조회수 : ${dto.hitCount} </small><small>추천 : ${dto.likeCount} </small>
+        <small>조회수 : ${dto.hitCount} </small><small class="likes">추천 : ${dto.likeCount} </small>
         <input type="button" class="clickbtn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"
 		 onclick="javascript:location.href='${articleUrl}&num=${dto.num}';" value="동영상 보기">
         </a>
@@ -270,12 +224,10 @@ function teacherInfo(url){
   		</c:if>
   </div>
 	<div class="btnArea" style="float: right;">
-	<c:if test="${sessionScope.member.userId=='admin'}">
-		<input type="button" class="clickbtn" 
-		 onclick="javascript:location.href='<%=cp%>/help/report/delete';" value="삭제">
+			
 		<input type="button" class="clickbtn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"
 		 onclick="javascript:location.href='<%=cp%>/studyMarket/studyMarketBoard/created';" value="글쓰기">
-	</c:if>
+	
 	</div>
 	
 	<!-- 찾기  -->	

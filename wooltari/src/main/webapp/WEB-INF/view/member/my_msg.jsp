@@ -15,6 +15,7 @@
     margin: 5% auto;
 }
 .body-box {
+	min-height:800px;
     border-collapse: collapse;
     border-spacing: 0;
     display: table;
@@ -263,7 +264,7 @@ $(document).ready(function(){
 	reload();
 	noreadCount = setInterval(function() {
 		reload();
-	}, 5000);
+	}, 10000);
 	$(".inbox-nav li").click(function () {
 		mode = $(this).attr('id');
 		page = 1;

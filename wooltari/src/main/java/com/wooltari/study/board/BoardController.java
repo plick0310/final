@@ -17,19 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wooltari.common.MyUtilBootstrap;
 import com.wooltari.member.SessionInfo;
-import com.wooltari.study.StudyService;
 
 @Controller("study.board.BoardController")
 public class BoardController {
 	@Autowired
 	private BoardService service;
-	@Autowired
-	private StudyService studyService;
-	@Autowired
-	private MyUtilBootstrap util; //페이징처리
-	
+
 	
 	@RequestMapping(value="/study/myStudy/{s_num}/board")
 	public String board(@PathVariable long s_num, Model  model) {
@@ -53,7 +47,7 @@ public class BoardController {
 	@ResponseBody
 	public Map<String, Object> createdSubmit(
 			@PathVariable long s_num, 
-			Board dto , 
+			Board dto, 
 			HttpSession session) throws Exception{
 		try {
 			

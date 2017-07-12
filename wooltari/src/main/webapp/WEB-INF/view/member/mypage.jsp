@@ -95,16 +95,8 @@
 	padding: 0px;
 }
 </style>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
 <script type="text/javascript">
-/* 
-$(document).ready(function() {
-	$(".btn-pref .btn").click(function () {
-	    $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-	    // $(".tab").addClass("active"); // instead of this do the below 
-	    $(this).removeClass("btn-default").addClass("btn-primary");   
-	});
-	});
-*/
 var noreadCount = null;
 $(document).ready(function(){
 	
@@ -134,7 +126,6 @@ $(document).ready(function(){
 		});
 	});
 });
-
 </script>
 <div class="container">
 	<%-- 
@@ -205,7 +196,7 @@ $(document).ready(function(){
     </div>
 
     <div class="well">
-      <div class="tab-content" style="height: 110%">
+      <div class="tab-content" style="min-height: 800px;">
         	<!-- 여기에 내용이 표시됨 -->
       </div>
     </div>

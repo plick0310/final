@@ -87,4 +87,28 @@ public class MockTestServiceImpl implements MockTestService{
 		return result;
 	}
 
+	@Override
+	public List<MockTest> examTestList(Map<String, Object> map) {
+		List<MockTest> examList = null;
+		
+		try {
+			examList = dao.getListData("mockTest.examTestList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return examList;
+	}
+
+	@Override
+	public List<MockTest> examTestArticle(Map<String, Object> map) {
+		List<MockTest> examArticle = null;
+		
+		try {
+			examArticle = dao.getListData("mockTest.examArticle", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return examArticle;
+	}
+
 }

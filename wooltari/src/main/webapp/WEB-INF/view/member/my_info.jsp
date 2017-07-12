@@ -6,6 +6,9 @@
 	String cp=request.getContextPath();
 %>
 <style>
+hr {
+	width: 800px;
+}
 .form-horizontal {
 	padding: 10px;
 }
@@ -15,6 +18,7 @@
     margin: 5% auto;
 }
 .body-box {
+	min-height:800px;
     border-collapse: collapse;
     border-spacing: 0;
     display: table;
@@ -76,9 +80,6 @@ a.mail-dropdown {
     font-size: 10px;
     margin-top: 20px;
     padding: 3px 5px;
-}
-.inbox-body {
-    padding: 20px;
 }
 .btn-compose {
     background: none repeat scroll 0 0 #ff6c60;
@@ -294,7 +295,7 @@ function login_check() {
 			success : function(data) {
 				var state = data.state;
 				if(state == 'true'){
-					$("#pwdmodal").hide();
+					$("#pwdmodal").modal("hide"); 
     				edit();
 				}else{
 					$(".login-msg strong").text("비밀번호를 잘못 입력하셨습니다."); 
@@ -359,9 +360,6 @@ function edit(){
 	
 	
 	<aside class="lg-side">
-		<div class="inbox-head">
-		</div>
-		
 		<div class="inbox-body">
 			<div class="content">
 			<!-- content -->

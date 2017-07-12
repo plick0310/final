@@ -158,7 +158,7 @@ function printBoard(data){
 						//이미지
 	 		if(imageFileName!=null){
 				out+=	" <div class='timeline-heading'>";
-				out+=   "<img class='img-responsive' src='<%=cp%>/uploads/study/"+ s_num +"_Board/"+ imageFileName +" ' style='width: 810px; height: 400px;'/>";
+				out+=   "<img style='width: 810px; height: 400px;' class='img-responsive' src='<%=cp%>/uploads/study/"+${s_num}+"_Board/"+imageFileName+"'/>";
 				out+=   "</div> " ;
 			}	
 					
@@ -207,7 +207,7 @@ function createBoard() {
 			,success:function(data){
 				alert("성공");
 			
-				$("#content").val("");
+				$("#content2").val("");
 				$("#uploadBtn").val("");
 				
 				listPage(bbs_count);
@@ -222,9 +222,9 @@ function createBoard() {
 }
 
 function check() {
-	if(! $.trim($("#content").val()) ) {
+	if(! $.trim($("#content2").val()) ) {
 		alert("내용을 입력하세요");
-		$("#content").focus();
+		$("#content2").focus();
 		return false;
 	}
 	
@@ -337,7 +337,7 @@ $(document).ready(function () {
 		<div class="widget-area no-padding blank">
 			<div class="status-upload">
 				<form name="createForm" method="post" enctype="multipart/form-data">
-					<textarea name="content" id="content"
+					<textarea name="content" id="content2"
 						placeholder="What are you doing right now?"></textarea>
 					<ul>
 						<li><a title="" data-toggle="tooltip" data-placement="bottom"

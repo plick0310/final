@@ -11,36 +11,76 @@
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+
+<style>
+ .footer {
+ 	clear: both;
+ }
+	ui.tab_menu {
+		margin:0;
+		padding:0;
+		float:left;
+		list-style:none;
+		height:32px;
+		border-left:1px solid #eee;
+		width:900px;
+		font-family: "dotum";
+		font-size: 12px;
+ }
+	 .tab_menu li {
+ 	padding: 5px 18px;
+ 	border: 1px solid #eeeeee;
+ 	border-bottom: none;
+ }
+ 
+  .tab_menu li a:active{
+  	color: #1abc9c;
+  }
+</style>
  
  <!-- 먼저 실행되야 할 것들 -->
 <script type="text/javascript">
-	$(document).ready(function(){
-		// 문제은행 쪽 문제 / 응시내역 탭버튼처리
-		$(function() {
-		    $(".tab_content").hide();
-		    $(".tab_content:first").show();
+$(function(){
+		var $tab = $(".tab_menu .active");
+		var tab = $tab.attr("data-tab");
+		var url = "<%=cp%>/mockTest/"+tab;
+/*  		if ($(".tab_menu li").hasClass("active")) {
+			$(".active a").css("color", "#1abc9c");
+ 		}
+*/
+		$("#exam a").css("color", "#1abc9c");
+		$("#challengeList").css("background-color", "#eeeeee");
 		
-		    $("ul.tabs li").click(function() {
-		       $("ul.tabs li").removeClass("active").css("color", "#333");
-		       $(this).addClass("active").css("color", "#1abc9c");
-		       $(".tab_content").hide()
-		       var activeTab = $(this).attr("rel");
-		       $("#" + activeTab).fadeIn()
-		    });
-		});
-		
-	    $("#allCheck").click(function(){
-	        //클릭되었으면
-	        if($("#allCheck").prop("checked")){
-	            //input태그의 name이 s인 태그들을 찾아서 checked옵션을 true로 정의
-	            $("input[name=nums]").prop("checked",true);
-	            //클릭이 안되있으면
-	        }else{
-	            //input태그의 name이 nums인 태그들을 찾아서 checked옵션을 false로 정의
-	            $("input[name=nums]").prop("checked",false);
-	        }
-	    });
-	});
+        $.ajax({
+            dataType:"html"
+            ,url:url
+            ,success : function(data) {
+               $('.tab_cont').html(data);
+            }
+         });
+});
+	   
+/*        $(".tab_cont").hide();
+          $(".tab_cont:first").show();
+*/
+          
+	      <%-- 
+	      $('.tab_menu').on('click', 'a', function(){
+		         $('li').each(function(index){
+		            $(this).removeClass("active").css("background-color","");
+		         })
+		         
+		         $(this).parent().addClass("active").css("background-color","#eeeeee");
+		         
+		         $.ajax({
+		            dataType:"html"
+		            ,url:"<%=cp%>/mockTest/"+tab
+		            ,success : function(data) {
+		               $('.tab_cont').html(data);
+		            }
+		         });
+		      });
+	       --%>
 </script>
  
  <!-- 응시할 시험리스트 -------------------------------------------------------------------->
@@ -145,12 +185,15 @@
 	        return;
 	    }
 
+	    alert("url은 : "+url+", query은 "+query);
+	    
 	    $.ajax({
 	      type:"post"
 	      ,url:url
 	      ,data: query
 	      ,dataType:"json"
 	      ,success:function(data) {
+	    	 alert("들어옴~");
 	    	 $("#exampleModal").modal("hide");
 	         var state=data.state;
 	         location.href="<%=cp%>/mockTest/main";
@@ -176,7 +219,7 @@
 			}
 
 			if (!date) {
-				alert("응시일을 지정하세요. ");
+				alert("응시일을 지정하세요.");
 				return;
 			}
 			alert(query);
@@ -196,6 +239,34 @@
 
  <!-- 문제은행 탭 -------------------------------------------------------------------->
 <script>
+$(function(){
+	$('.tab_menu li').on('click', 'a', function(){
+        $('.tab_menu li').each(function(index){
+            $(this).removeClass("active").css("background-color", "#eeeeee");
+      		 $(".tab_menu a").removeClass("active").css("color", "black");
+        });
+            
+      		$(this).addClass("active").css("color", "#1abc9c");
+      		//$(".tab_cont").hide();
+            var activeTab = $(this).attr("data-tab");
+            $("#" + activeTab).fadeIn();
+        	 
+         	 $(this).parent().addClass("active").css("background-color","white");
+        
+            $tab = $(".tab_menu .active");
+            tab = $tab.attr("data-tab");           
+    		 url = "<%=cp%>/mockTest/"+tab;
+    		 
+        $.ajax({
+           dataType:"html"
+           ,url:"<%=cp%>/mockTest/"+tab
+           ,success : function(data) {
+              $('.tab_cont').html(data);
+           }
+        });
+     }); 
+});	 
+
 // 통계 처리 함수 - 첫번째
 $(function(){
    var url="<%=cp%>/exam/firstChart";
@@ -371,7 +442,7 @@ $(function(){
 							<div style="position: relative;">
 
 								<a href="#" class="subject"
-									style="line-height: 27px; float: left;">${dto.examInfoName }</a>
+									style="padding-left: 10px; line-height: 27px; float: left;">${dto.examInfoName }</a>
 								<span class="comment" style="line-height: 16px;"> <c:choose>
 										<c:when test="${dto.dday eq 0 }">
 											<span style="color: red;">D-day ! ! !</span>
@@ -386,7 +457,7 @@ $(function(){
 								</span>
 
 								<div class="info"
-									style="float: left; padding: 0; line-height: 25px; margin-left: 32px; float: left; padding: none;">
+									style="float: left; padding: 0; line-height: 25px; margin-left: 32px; float: left; padding: ;">
 									<strong>주최기관: </strong><span>${dto.examInfoOrgan }</span> <span
 										class="__dotted"></span> <strong>응시일: </strong><span>${dto.examwishDate }</span>
 								</div>
@@ -399,8 +470,7 @@ $(function(){
 											</c:when>
 											<c:otherwise>
 												<!-- 응시할 리스트 추가 -->
-												<button id="modalbtn" type="button" onclick="create()"
-													class="glyphicon glyphicon-plus">
+												<button id="modalbtn" type="button" onclick="create()" class="glyphicon glyphicon-plus">
 												</button>
 											</c:otherwise>
 										</c:choose>
@@ -408,8 +478,7 @@ $(function(){
 
 									<!-- 응시할 리스트 수정 -->
 									
-									<button id="modalbtn" type="button"
-										onclick="change('${dto.examInfoName}', '${dto.examwishDate}')"
+									<button id="modalbtn" type="button" onclick="change('${dto.examInfoName}', '${dto.examwishDate}')"
 										class="glyphicon glyphicon-edit">
 									</button>
 								</div>
@@ -436,128 +505,38 @@ $(function(){
 			</div>
 		</c:if>
 		<!-- 응시할 시험 리스트 끝 ----------------------------------------------------------------------->
-		
+			
 		
 		
 		<!-- 문제  / 응시내역 탭 -->
 			<div style="margin-bottom: 5px;">
 				<span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">문제은행</span>
 			</div>
-			<div id="tabwrap" style="width: 900px; margin: 0px auto;">
-				<ul class="tabs">
-					<li class="active" rel="tab1">문제</li>
-					<li rel="tab2">응시내역</li>
-				</ul>
-	
-				<div class="tab_container">
-					<div id="tab1" class="tab_content">
-						<table cellpadding="0" cellspacing="0" style="width: 100%;" class="board_table array">
-							<%-- <c:forEach items="${ }"></c:forEach> --%>
-							<tbody>
-								<tr>
-									<td class="___number"
-										style="font-size: 11px; color: #666; text-align: center; font-weight: bold;">1</td>
-									<td style="padding: 9px 5px; border-bottom: 1px solid #EEEEEE;">
-										<div style="position: relative;">
-											<a href="#" class="subject" style="font-size: 15px; font-weight: bold; color: #373737;">정보처리기사</a>
-												<span class="comment" style="display: inline-block; padding: 1px 7px 7px 7px; margin-left: 15px;
-													color: #1abc9c; font-weight: bold; font-size: 15px; line-height: 8px; vertical-align: middle;">
-													[17년 2회차 ]
-												</span>
-	
-											<div class="info">
-												<strong>등록일 :</strong>&nbsp;<span class="dateWrap" title="[datetime]">2017-06-19</span>
-												<span class="__dotted"></span>
-												<strong>주최기관 :</strong>&nbsp;<span>큐넷(Q-net)</span>
-											</div>
-	
-											<div class="likes" style="font-size: 13px; width: 60px;"> 응시하기
-												<br>
-												<span class="num" style="color: #1abc9c;">
-													<a target="_blank" onclick="popupLink(550,1000)" style="width: 100px; height: 100px;">
-														<span class="glyphicon glyphicon-circle-arrow-right"></span>
-													</a>
-												</span>
-											</div>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					
-					<!-- #tab1 -->
-					<div id="tab2" class="tab_content">
-						<div style="margin-bottom: 5px; font-size: 15px; width: 100%; text-align: left; margin-top: 20px;">
-							<span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">
-								『 2017년 06월 29일 』</span> 을 기준으로 총 합격률은 80%입니다.<br>
-							<span style="font-size: 10px; color: red; margin-left: 236px;">(※최초 응시할 때의 응시 정보만 반영됩니다)</span>
-						</div>
-						<br><br> 
+			
+			
+			<div id="wrap">
+				<div id="box">
+					<div style="width: 100%;float: left;margin: 0px auto;">
+						<ul class="tab_menu">
+			               <li class="active" id="exam" style="border-right:none; float:left;" data-tab="exam"><a href="#">문 제</a></li>
+			               <li id="challengeList" style="border-right:none; float:left;" data-tab="challengeList"><a href="#">응시내역</a></li>
+						</ul>
 						
-						<span style="font-size: 20px; margin-left: 50px;">
-							<strong>"응시 수가 많은 시험&nbsp;Best 3"</strong></span> <br><br>
-							<!-- 통계 처리하기 -->
-							<div style="clear: both; margin-left: 130px;">
-								<div id="firstChart" style="width: 300px; height: 500px; float: left; margin: 10px;"></div>
-								<div id="secondChart" style="width: 300px; height: 250px; float: left; margin: 66px 10px 30px;"></div>
-								<div id="lastChart" style="width: 300px; height: 250px; float: left; margin: 10px;"></div>
-							</div> <br><br><br><br>
-							
-							<table cellpadding="0" cellspacing="0" style="width: 100%;" class="board_table array">
-								<tr>
-								<td class="___number" style="font-size: 11px; color: #666; text-align: center; font-weight: bold;">11</td>
-								<td style="padding: 9px 5px; border-bottom: 1px solid #EEEEEE;">
-									<div style="position: relative;">
-										<a href="<%=cp %>/help/report/article" class="subject" style="font-size: 15px; font-weight: bold; color: #373737;">정보처리기사</a>
-										<span class="comment" style="display: inline-block; padding: 1px 7px 7px 7px; margin-left: 15px; color: #1abc9c;
-											font-weight: bold; font-size: 15px; line-height: 8px; vertical-align: middle;">
-											[17년 3회차]
-										</span>
-	
-										<div class="info">
-											<strong>응시일: &nbsp;&nbsp;</strong>
-											<span class="dateWrap" title="[datetime]">2017-06-29</span>
-											<span class="__dotted"></span>
-											<strong>주최기관:&nbsp;&nbsp;</strong><span>큐넷</span> <span class="__dotted"></span>
-											<strong>성적: &nbsp;&nbsp;</strong> <spanstyle="font-size: 20px;">82점</span>&nbsp;
-										</div>
-										
-										<div class="likes" style="line-height: 23px; position: absolute; top: -8px; right: 10px; background: #fff;
-											padding: 9px 5px 5px 5px; display: block; width: 45px; height: 41px; text-align: center; font-size: 16px;
-											letter-spacing: -1px; color: #666666; font-weight: bold;">
-											<br>
-											<span class="num" style="color: #1abc9c; font-size: 18px; font-weight: bold; font-family: tahoma;">합격</span>
-											<!--[unlikes]-->
-										</div>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+						<div class="tab_cont"></div>
 					</div>
-					<!-- #tab2 -->
-					<!-- .tab_container -->
 				</div>
-				<!-- #container -->
-	
-	
-				<!------------------------------------->
-				<div style="width: 900px; margin: 20px auto; text-align: center;">1	2 3</div>
-	
-				<div class="scArea">
-					<select name="where" class="where">
-						<option value="subject">시험명</option>
-						<option value="subject">주최기관</option>
-	
-					</select>
+			</div>	
+				
+<!-- 	
+			<div class="tab_container">
+				<div id="tab1" class="tab_content">
+				</div>
 					
-					<input type="text" name="keyword" class="keyword" placeholder="검색" style="width: 120px;">
-					<input type="button" class="submit">
+				<div id="tab2" class="tab_content">
 				</div>
 			</div>
-		</form>
-
+ -->
+</form>
 	<!-- -------------------------------------------------------------------------------------------------------------------- -->
 	<!-- 모달 -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"

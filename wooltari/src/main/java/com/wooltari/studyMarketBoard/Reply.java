@@ -1,10 +1,23 @@
 package com.wooltari.studyMarketBoard;
 
 public class Reply {
-	private int num;
+	private int num, listNum;
 	private String userId, created, content;
-	private int smb_num;
+	private int replyNum;
 	
+	
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
+	public int getReplyNum() {
+		return replyNum;
+	}
+	public void setReplyNum(int replyNum) {
+		this.replyNum = replyNum;
+	}
 	public int getNum() {
 		return num;
 	}
@@ -29,13 +42,7 @@ public class Reply {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getIrb_num() {
-		return smb_num;
-	}
-	public void setIrb_num(int smb_num) {
-		this.smb_num = smb_num;
-	}
-
+	
 	
 
 }

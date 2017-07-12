@@ -17,7 +17,7 @@
    <script src="<%=cp%>/resource/js/swiper.min.js"></script>
 
 <!-- Link Swiper's CSS -->
-
+ 
 <link rel="stylesheet" href="<%=cp%>/resource/css/swiper.min.css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/bootstrap.css">
 

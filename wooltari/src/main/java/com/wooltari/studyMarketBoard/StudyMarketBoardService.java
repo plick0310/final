@@ -7,6 +7,7 @@ public interface StudyMarketBoardService {
 	
 	public int insertBoard(StudyMarketBoard dto, String pathname);
 	public List<StudyMarketBoard> listBoard(Map<String, Object> map);
+	public List<StudyMarketBoard> bestStudyMarket(Map<String, Object> map);
 	public int dataCount(Map<String, Object> map);
 	public StudyMarketBoard readBoard(int num);
 	public int updateHitCount(int num);
