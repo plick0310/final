@@ -30,41 +30,31 @@
     background-color: #fff;
   border: none;
 </style>
-
-<table style='width: 900px; margin: 10px auto 30px; border-spacing: 0px;'>
-<tr height="35">
-    <td>
-       <div style="clear: both;">
-           <div style="float: left;"><span style="color: #1abc9c; font-weight: bold;">댓글 ${dataCount }개</span> <span>[댓글 목록, ${pageNo } / ${total_page } 페이지]</span></div>
-           <div style="float: right; text-align: right;"></div>
-       </div>
-    </td>
-</tr>
+<div style="text-align: left; color: red; font-weight: 300;">일정${dataCount }개</div>
 <c:forEach var="vo" items="${list}">
-    <tr height='35' style='background: #eee;'>
-       <td width='50%' style='padding:5px 5px; '>
-           <span><b>${vo.userName }</b></span>
-        </td>
-       <td width='50%' style='padding:5px 5px;' align='right'>
-           <span>${vo.created}</span> |
-           <c:if test="${sessionScope.member.userId==vo.userId || sessionScope.member.userId=='admin' }">
-           		<a onclick='deleteReply(${vo.prNum}, ${pageNo })'>삭제</a>
-			</c:if>
-			
-		    
-        </td>
-    </tr>
-    <tr>
-        <td colspan='2' valign='top' style='padding:5px 5px;'>
-            ${vo.content }
-        </td>
-    </tr>
-</c:forEach>
+<table style='width: 444px; margin-bottom: 10px; border: 1px solid #1abc9c;'>
 
-     <tr height="40">
-         <td colspan='2' style="    text-align: center;">
-              ${paging }
-         </td>
-     </tr>
+    <tr  height='35' style="">
+        <td colspan="2" width='80%;' style='padding:5px 5px;'>
+           <span style="font-size: 17px; color:#1abc9c; ">${vo.sdate }&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;${vo.edate}</span>
+           
+           	<img src="<%=cp%>/resource/images/reviewPhoto/calendarDelete.png" style="width: 10px; float: right;" onclick="deleteBoard('${vo.num}','${page }');">
+           		
+
+        </td>
+        
+    </tr>
+    <tr style="">
+ 		 <td width='20%;' style='padding:5px 5px; color: black' align='center'>
+           <span >${vo.subject}</span> 		    
+        </td>
+ 		
+        <td valign='top' style='padding:5px 5px; text-align: center; color: black' >
+           ${vo.content }
+        </td>
+    </tr>
 </table>
 
+</c:forEach>
+
+${paging }

@@ -1,14 +1,18 @@
-package com.wooltari.Calendar;
+package com.wooltari.calendar;
 
 public class Calendar {
-	private String startDate,endDate;
+	private String sdate,edate;
+	private String month;
+	public String getMonth() {
+		return month;
+	}
+	public void setMonth(String month) {
+		this.month = month;
+	}
 	private String content,subject;
 	private String tableName;
 	private int num;
 	private long s_num;
-	
-	
-	
 	
 	public long getS_num() {
 		return s_num;
@@ -30,18 +34,17 @@ public class Calendar {
 	}
 	private int listNum;
 	
-	
-	public String getStartDate() {
-		return startDate;
+	public String getSdate() {
+		return sdate;
 	}
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setSdate(String sdate) {
+		this.sdate = sdate;
 	}
-	public String getEndDate() {
-		return endDate;
+	public String getEdate() {
+		return edate;
 	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+	public void setEdate(String edate) {
+		this.edate = edate;
 	}
 	public String getContent() {
 		return content;
