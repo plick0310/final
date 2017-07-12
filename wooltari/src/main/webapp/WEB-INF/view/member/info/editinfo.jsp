@@ -46,6 +46,8 @@ function update_submit() {
 		flag = false;
 	}
 	if(flag){
+		var introduce = document.getElementById("introduce");
+		fnChkByte(introduce, 100, 'introduce');
 		var f= document.updateform;
 		var formdata = new FormData(f);
 		$.ajax({
@@ -73,9 +75,15 @@ function update_submit() {
 function userCheckForm(){
 	//닉네임 검사
 	var userName=$.trim($("#userName").val());
+	var regex=/[~!@\#$%<>^&*\()\-=+_\’]/gi;
 	if(!userName) { 
 		$("#userName").focus();
-		var str="<span style='color:red;font-weight: bold;'>이름을 입력해주세요.</span>";
+		var str="<span style='color:red;font-weight: bold;'>닉네임을 입력해주세요.</span>";
+		$("#userName + .help-block").html(str);
+		return false;
+	}else if(regex.test(userName)){
+		$("#userName").focus();
+		var str="<span style='color:red;font-weight: bold;'>특수문자는 사용이 불가합니다.</span>";
 		$("#userName + .help-block").html(str);
 		return false;
 	}else{
@@ -133,23 +141,24 @@ function fnChkByte(obj, maxByte, id){
 	var rlen = 0;
 	var one_char = "";
 	var str2 = "";
+	/* 
 	if(id == 'userName'){
 		$('#'+id).val($('#'+id).val().trim());
 	}
-	
+	 */
 	for(var i=0; i<str_len; i++){
-	one_char = str.charAt(i);
-	if(escape(one_char).length > 4){
-	    rbyte += 2; //한글2Byte
-	}else{
-	    rbyte++; //영문 등 나머지 1Byte
-	}
+		one_char = str.charAt(i);
+		
+		if(escape(one_char).length > 4){
+		    rbyte += 2; //한글2Byte
+		}else{
+		    rbyte++; //영문 등 나머지 1Byte
+		}
 
-	if(rbyte <= maxByte){
-	    rlen = i+1; //return할 문자열 갯수
+		if(rbyte <= maxByte){
+		    rlen = i+1; //return할 문자열 갯수
+		}
 	}
-	}
-	
 	if(rbyte > maxByte){
 		var str="<span style='color:red;font-weight: bold;'>허용된 입력 범위 초과(" + rbyte + "/" + maxByte + ")</span>";
 		$('#'+id+" + .help-block").html(str);
@@ -280,8 +289,8 @@ $("#addrBtn").click(function(){
 				<div class="form-group">
 				  <label class="col-md-3 control-label" for="userName">닉네임</label>  
 				  <div class="col-md-8">
-				  <input type="text" id="userName" name="userName" onKeyUp="javascript:fnChkByte(this,'12', 'userName')" placeholder="Name" class="form-control input-md" required="required" value="${dto.userName}">
-				  <span class="help-block">닉네임을 입력하세요.(한글 6자 / 영어 12자)</span>  
+				  <input type="text" id="userName" name="userName" placeholder="Name" class="form-control input-md" maxlength="6" required="required" value="${dto.userName}">
+				  <span class="help-block">닉네임을 입력하세요.(한/영/숫자 조합 최대 6글자)</span>  
 				  </div>
 				</div>
 				

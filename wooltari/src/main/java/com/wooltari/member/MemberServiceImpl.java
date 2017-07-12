@@ -61,6 +61,7 @@ public class MemberServiceImpl implements MemberService {
 	public void updateMember(Member dto, String path) throws Exception {
 		try {
 			
+			//바이트 단위로 자름
 			byte [] name = dto.getUserName().trim().getBytes();
 			if(name.length >= 12){
 				dto.setUserName(new String(name, 0, 12));
@@ -72,7 +73,7 @@ public class MemberServiceImpl implements MemberService {
 				dto.setIntroduce(new String(introduce, 0, 100));
 				System.out.println(dto.getIntroduce());
 			}
-
+			
 			//프로필 사진 설정
 			if(dto.getUserImgUpload()!=null && ! dto.getUserImgUpload().isEmpty()) {
 				//기존 프로필 사진이 있으면 서버에서 삭제
