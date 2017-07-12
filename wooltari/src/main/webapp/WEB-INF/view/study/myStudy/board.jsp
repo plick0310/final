@@ -158,7 +158,7 @@ function printBoard(data){
 						//이미지
 	 		if(imageFileName!=null){
 				out+=	" <div class='timeline-heading'>";
-				out+=   "<img class='img-responsive' src='<%=cp%>/uploads/study/"+ s_num +"_Board/"+ imageFileName +" ' style='width: 810px; height: 400px;'/>";
+				out+=   "<img style='width: 810px; height: 400px;' class='img-responsive' src='<%=cp%>/uploads/study/"+${s_num}+"_Board/"+imageFileName+"'/>";
 				out+=   "</div> " ;
 			}	
 					
