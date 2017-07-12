@@ -196,7 +196,7 @@ $(document).ready(function(){
     </div>
 
     <div class="well">
-      <div class="tab-content" style="height: 110%">
+      <div class="tab-content" style="min-height: 800px;">
         	<!-- 여기에 내용이 표시됨 -->
       </div>
     </div>

@@ -97,7 +97,7 @@ textarea {
                         </td>
                         <td>
                         	<c:if test="${not empty dto.zipcode}">
-                            	(${dto.zipcode})&nbsp;&nbsp;${dto.addr1}&nbsp;&nbsp;${dto.addr2}
+                            	[${dto.zipcode}]<br>${dto.addr1}<br>${dto.addr2}
                             </c:if>
                         </td>
                     </tr>

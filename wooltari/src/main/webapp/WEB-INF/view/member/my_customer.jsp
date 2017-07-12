@@ -12,33 +12,34 @@
 .modal-dialog {
 	width: 600px;
 	height: 600px;
-    margin: 20% auto;
+    margin: 5% auto;
 }
-.mail-box {
+.body-box {
+	min-height:800px;
     border-collapse: collapse;
     border-spacing: 0;
     display: table;
     table-layout: fixed;
     width: 100%;
 }
-.mail-box aside {
+.body-box aside {
     display: table-cell;
     float: none;
     height: 100%;
     padding: 0;
     vertical-align: top;
 }
-.mail-box .sm-side {
+.body-box .sm-side {
     background: none repeat scroll 0 0 #e5e8ef;
     border-radius: 4px 0 0 4px;
     width: 25%;
 }
-.mail-box .lg-side {
+.body-box .lg-side {
     background: none repeat scroll 0 0 #fff;
     border-radius: 0 4px 4px 0;
     width: 75%;
 }
-.mail-box .sm-side .user-head {
+.body-box .sm-side .user-head {
     background: none repeat scroll 0 0 #029e81;
     border-radius: 4px 0 0;
     color: #fff;
@@ -294,7 +295,7 @@ function reload(){
 
 </script>
 <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
-<div class="mail-box">
+<div class="body-box">
 	<aside class="sm-side">
 		<div class="user-head">
 			<a class="inbox-avatar" href="#">
