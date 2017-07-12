@@ -8,26 +8,31 @@
 
 <table cellpadding="0" cellspacing="0" style="width: 100%;"
 	class="board_table array">
-	<c:forEach items="${examwishList }" var="dto" varStatus="status">
+	<c:forEach items="${examtestList }" var="dto" varStatus="status">
 		<tbody>
 			<tr>
+			<c:if test="${sessionScope.member.userId eq 'admin' }">
+				<td style="text-align: right; width: 65px; padding: 5px 18px;">
+					<input type="checkbox" name="nums" value="${dto.num }">
+				</td>
+			</c:if>
 				<td class="___number"
-					style="font-size: 11px; color: #666; text-align: center; font-weight: bold;">1</td>
+					style="font-size: 11px; color: #666; text-align: center; font-weight: bold;">${dto.examlistNum}</td>
 				<td style="padding: 9px 5px; border-bottom: 1px solid #EEEEEE;">
 					<div style="position: relative;">
 						<!--[category_name]-->
 	
 						<a href="#" class="subject" 
-							style="font-size: 15px; font-weight: bold; color: #373737;">정보처리기사</a>
+							style="font-size: 15px; font-weight: bold; color: #373737;">${dto.examInfoName }</a>
 						<span class="comment"
 							style="display: inline-block; padding: 1px 7px 7px 7px; margin-left: 15px; color: #1abc9c; font-weight: bold; font-size: 15px; line-height: 8px; vertical-align: middle;">
-							[17년 2회차 ] </span>
+							[ ${dto.questionSubject} ] </span>
 	
 						<div class="info">
 							<strong>등록일 :</strong>&nbsp; <span class="dateWrap"
-								title="[datetime]">2017-06-19</span> <span class="__dotted"></span>
+								title="[datetime]">${dto.created }</span> <span class="__dotted"></span>
 	
-							<strong>주최기관 :</strong> &nbsp; <span>큐넷(Q-net)</span>
+							<strong>주최기관 :</strong> &nbsp; <span>${dto.examInfoOrgan }</span>
 						</div>
 	
 						<div class="likes" style="font-size: 13px; width: 60px;">
@@ -44,15 +49,15 @@
 		</tbody>
 	</c:forEach>
 </table>
-<div style="width: 900px; margin: 20px auto; text-align: center;">1 2 3</div>
-
-<div class="scArea" style="float: right;margin-top: -163px;width: 152px;">
-	<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-	<div class="input-group" style="width: 151px;">
-		<input type="text" class="form-control" id="exampleInputAmount" placeholder="시험명으로 검색" 
-			style="height:28px; border:1px solid gray; border-right:none; padding-right: 0; padding-left: 3px; border-radius: 0;">
-			<div class="input-group-addon"
-			style="background:none; border:1px solid gray; border-left:none; cursor: pointer;padding-left: 1px; padding-right: 5px; border-radius: 0;"
-			onclick=""><i class="fa fa-search"></i></div>
-	</div>
-</div>
+<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
+   <tr height="35">
+	<td align="center">
+       <c:if test="${dataCount==0 }">
+           등록된 게시물이 없습니다.
+       </c:if>
+       <c:if test="${dataCount!=0 }">
+           ${paging}
+       </c:if>
+	</td>
+   </tr>
+</table>

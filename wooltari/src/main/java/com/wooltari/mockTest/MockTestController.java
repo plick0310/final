@@ -59,11 +59,10 @@ public class MockTestController {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		Date a = new Date();
-		
-		//리스트 번호
 		String bD = formatter.format(a);
-		
 		Date beginDate = formatter.parse(bD);
+		// Date beginDate = new Date(); ← 결국 이거였음...
+		
 		
 		long gap;
 		// 글번호 만들기
@@ -157,16 +156,6 @@ public class MockTestController {
 	}
 	
 	// 탭 기능-----------------------------------------------------------------------------
-	// 모의테스트
-	@RequestMapping(value="/mockTest/exam")
-	public String exam(
-			HttpServletRequest req,
-			Model model,
-			HttpSession session
-			) {
-		
-		return "community/mockTest/exam";
-	}
 	// 응시내역
 	@RequestMapping(value="/mockTest/challengeList")
 	public String callengeList() {

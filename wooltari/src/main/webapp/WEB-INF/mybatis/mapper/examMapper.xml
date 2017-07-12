@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="exam">
+
+ 	<sql id="where-list">
+		<if test="searchKey=='examInfoName'">
+<!-- 			ei.examInfoName=#{searchValue} -->
+			INSTR(ei.examInfoName, #{searchValue}) &gt; 0
+		</if>
+	</sql> 
+	
+	<!-- '시험'리스트 -->
+	<select id="listExam" parameterType="map" resultType="com.wooltari.mockTest.exam.Exam">
+		SELECT * FROM (
+			SELECT ROWNUM examlistNum, tb.* FROM (
+				SELECT etl.examinfoname, questionsubject, examinfoOrgan, created FROM examtestList etl
+				LEFT OUTER JOIN examinfo ei ON etl.examinfoname = ei.examinfoname
+			<where>
+				<if test="searchValue != null and searchValue != ''">
+					<include refid="where-list"/>
+				</if>
+			</where>
+			ORDER BY created DESC
+  		<![CDATA[		  
+			    ) tb WHERE ROWNUM <= #{end}
+			)WHERE examlistNum >= #{start} 
+		]]>
+	</select>	
+	
+	<!-- 데이터 수 -->
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM examtestList
+	</select>
+</mapper>

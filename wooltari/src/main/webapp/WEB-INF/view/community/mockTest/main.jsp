@@ -9,12 +9,38 @@
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/mock.css" />
 
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/highcharts-3d.js"></script>
-
 <style>
  .footer {
  	clear: both;
+ }
+ 
+ .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #1abc9c;
+    /* border-color: #337ab7; */
+    /* text-align: center; */
+}
+
+.pagination-sm > li > a, .pagination-sm > li > span {
+    padding: 8px 9px;
+    
+    font-size: 11px;
+}
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #1abc9c;
+    text-decoration: none;
+    background-color: #fff;
+  border: none;
+}
+ .scArea {
+ 	margin-bottom: -28px;
  }
 	ui.tab_menu {
 		margin:0;
@@ -40,16 +66,33 @@
  
  <!-- 먼저 실행되야 할 것들 -->
 <script type="text/javascript">
+$(document).ready(function() {
+    //최상단 체크박스 클릭
+
+    $("#allCheck").click(function() {
+       //클릭되었으면
+       if ($("#allCheck").prop("checked")) {
+          //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+          $("input[name=nums]").prop("checked", true);
+          //클릭이 안되있으면
+       } else {
+          //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+          $("input[name=nums]").prop("checked", false);
+       }
+    });
+
+ });
+
 $(function(){
 		var $tab = $(".tab_menu .active");
 		var tab = $tab.attr("data-tab");
 		var url = "<%=cp%>/mockTest/"+tab;
-/*  		if ($(".tab_menu li").hasClass("active")) {
-			$(".active a").css("color", "#1abc9c");
- 		}
-*/
+
 		$("#exam a").css("color", "#1abc9c");
 		$("#challengeList").css("background-color", "#eeeeee");
+		$("#examSearch").attr({
+			style : 'margin-top:0; float:right;'
+		});
 		
         $.ajax({
             dataType:"html"
@@ -60,27 +103,6 @@ $(function(){
          });
 });
 	   
-/*        $(".tab_cont").hide();
-          $(".tab_cont:first").show();
-*/
-          
-	      <%-- 
-	      $('.tab_menu').on('click', 'a', function(){
-		         $('li').each(function(index){
-		            $(this).removeClass("active").css("background-color","");
-		         })
-		         
-		         $(this).parent().addClass("active").css("background-color","#eeeeee");
-		         
-		         $.ajax({
-		            dataType:"html"
-		            ,url:"<%=cp%>/mockTest/"+tab
-		            ,success : function(data) {
-		               $('.tab_cont').html(data);
-		            }
-		         });
-		      });
-	       --%>
 </script>
  
  <!-- 응시할 시험리스트 -------------------------------------------------------------------->
@@ -93,28 +115,6 @@ $(function(){
      modal.find('.modal-title').text('New message to ' + recipient)
      modal.find('.modal-body input').val(recipient)
    });
-
-  // 삭제 체크박스 조건처리
-	function check() {
-	   var f=document.scoreListForm;
-	   
-	   if(f.wishlistNum==undefined)
-	      return;
-	   
-	   if(f.wishlistNum.length!=undefined) { // 체크박스가 둘 이상인 경우
-	      for(var i=0; i<f.wishlistNum.length; i++) {
-	         if(f.chkAll.checked)
-	            f.wishlistNum[i].checked=true;
-	         else
-	            f.wishlistNum[i].checked=false;
-	      }
-	   } else { // 체크박스가 하나인 경우
-	      if(f.chkAll.checked)
-	         f.wishlistNum.checked=true;
-	      else
-	         f.wishlistNum.checked=false;
-	   }
-	}
 
   // 삭제
 	function deleteList() {
@@ -185,15 +185,12 @@ $(function(){
 	        return;
 	    }
 
-	    alert("url은 : "+url+", query은 "+query);
-	    
 	    $.ajax({
 	      type:"post"
 	      ,url:url
 	      ,data: query
 	      ,dataType:"json"
 	      ,success:function(data) {
-	    	 alert("들어옴~");
 	    	 $("#exampleModal").modal("hide");
 	         var state=data.state;
 	         location.href="<%=cp%>/mockTest/main";
@@ -208,8 +205,6 @@ $(function(){
 	   var name = f.examInfoName.value;
 	   var date = f.examwishDate.value;
 	   
-	   alert(num);
-	   
 	   var url = "<%=cp%>/mockTest/updateList";
 	   var query = "name=" + name + "&date=" + date;
 
@@ -222,7 +217,6 @@ $(function(){
 				alert("응시일을 지정하세요.");
 				return;
 			}
-			alert(query);
 			$.ajax({
 				type : "post",
 				url : url,
@@ -255,132 +249,27 @@ $(function(){
         
             $tab = $(".tab_menu .active");
             tab = $tab.attr("data-tab");           
-    		 url = "<%=cp%>/mockTest/"+tab;
+    		url = "<%=cp%>/mockTest/"+tab;
     		 
         $.ajax({
            dataType:"html"
            ,url:"<%=cp%>/mockTest/"+tab
            ,success : function(data) {
               $('.tab_cont').html(data);
+      		if(tab != 'exam') {
+    			$("#examSearch").attr({
+    				style : 'display:none;'
+    				
+    			});
+    		} else if(tab == 'exam') {
+    			$("#examSearch").attr({
+    				style : 'margin-top:0; float:right;'
+    			});
+    		}
            }
         });
      }); 
 });	 
-
-// 통계 처리 함수 - 첫번째
-$(function(){
-   var url="<%=cp%>/exam/firstChart";
-   $.getJSON(url, function (csv) {
-      $('#firstChart').highcharts({
-    	  colors: ['#eee','#FF5E00','BLUE','#666666'],
-    	  chart: {
-               type: 'pie',
-               plotBackgroundColor:null,
-               plotBorderWidth:null,
-               plotShadow:false,
-               type:'pie'
-           },
-           title: {
-               text: '# 응시 수 <br> 1위: 정보처리기사 <br> [ 10 회 ]'
-           },
-           tooltip: {
-               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-           },
-           plotOptions: {
-               pie: {
-                   allowPointSelect: true,
-                   cursor: 'pointer',
-                   dataLabels: {
-                       enabled: false
-                   },
-                   showInLegend: true
-               }
-           },
-           credits:{
-        	 enabled:false  
-           },
-           series:csv
-      });
-   });
-});
-
-//통계 처리 함수 - 두번째
-$(function(){
-   var url="<%=cp%>/exam/secondChart";
-   $.getJSON(url, function (csv) {
-      $('#secondChart').highcharts({
-    	  colors: ['#FFBB00','#FF5E00','BLUE','#666666'],
-    	  chart: {
-               type: 'pie',
-               plotBackgroundColor:null,
-               plotBorderWidth:null,
-               plotShadow:false,
-               type:'pie'
-           },
-           title: {
-               text: '# 합격률 <br> 1위: 정보처리기사 <br> [ 80% ]'
-           },
-           tooltip: {
-               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-           },
-           plotOptions: {
-               pie: {
-                   allowPointSelect: true,
-                   cursor: 'pointer',
-                   dataLabels: {
-                       enabled: false
-                   },
-                   showInLegend: true
-               }
-           },
-           credits:{
-        	 enabled:false  
-           },
-           series:csv
-      });
-   });
-});
-
-//통계 처리 함수 - 세번째
-$(function(){
-   var url="<%=cp%>/exam/lastChart";
-   $.getJSON(url, function (csv) {
-      $('#lastChart').highcharts({
-    	  colors: ['#FFBB00','#FF5E00','BLUE','#666666'],
-    	  chart: {
-               type: 'pie',
-               plotBackgroundColor:null,
-               plotBorderWidth:null,
-               plotShadow:false,
-               type:'pie'
-           },
-           title: {
-               text: '# 오답율 <br> 1위: 한국사 능력 검정시험 <br> [ 40% ]'
-           },
-           tooltip: {
-               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-           },
-           plotOptions: {
-               pie: {
-                   allowPointSelect: true,
-                   cursor: 'pointer',
-                   dataLabels: {
-                       enabled: false
-                   },
-                   showInLegend: true
-               }
-           },
-           credits:{
-        	 enabled:false  
-           },
-           series:csv
-      });
-   });
-});
-</script>
-
- <!-- 모의 테스트 새 창 -------------------------------------------------------------------->
-<script type="text/javascript">
 	function popupLink(popHeight,popWidth){ 
 	var winHeight = document.body.clientHeight;   // 현재창의 높이
 	var winWidth = document.body.clientWidth;   // 현재창의 너비
@@ -392,6 +281,45 @@ $(function(){
 	window.open("<%=cp%>/community/exam/examFiles", "popup",
 			"width="+ popWidth + "px,height=" + popHeight + "px,top=" + popY+ ",left=" + popX);
 	}
+</script>
+
+
+<!-- 음.. 임시? -->
+<script>
+function listPage(page) {
+	var $tab = $(".tabs .active");
+	var tab = $tab.attr("data-tab");
+	var url="<%=cp%>/mockTest/exam";
+	
+	var query="pageNo="+page;
+	var search=$('form[name=mockTestSearchForm]').serialize();
+	query=query+"&"+search;
+	
+	ajaxHTML(url, "get", query);
+}
+
+function ajaxHTML(url, type, query) {
+	$.ajax({
+		type:type
+		,url:url
+		,data:query
+		,success:function(data) {
+			if($.trim(data)=="error") {
+				listPage(1);
+				return;
+			}
+			$(".tab_cont").html(data);
+		}
+	});
+}
+
+function searchList() {
+	var f=document.mockTestSearchForm;
+	f.searchKey.value=$("#searchKey").val();
+	f.searchValue.value=$.trim($("#searchValue").val());
+
+	listPage(1);
+}
 </script>
 
 <div style="width: 900px; height: 100%; margin: 60px auto;">
@@ -417,10 +345,9 @@ $(function(){
 				border="0">
 				<tr>
 					<td colspan="2" style="text-align: left;">
-						<div
-							style="position: absolute; bottom: 10px; right: 1px; top: -22px;">
-							<input type="checkbox" id="allCheck" name="allCheck"
-								class="checkbox-style" /> <label for="allCheck">전체선택</label>
+						<div style="position: absolute; bottom: 10px; right: 1px; top: -22px;">
+							<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" />
+							<label for="allCheck">전체선택</label>
 						</div>
 					</td>
 				</tr>
@@ -505,15 +432,29 @@ $(function(){
 			</div>
 		</c:if>
 		<!-- 응시할 시험 리스트 끝 ----------------------------------------------------------------------->
-			
-		
-		
+	</form>		
 		<!-- 문제  / 응시내역 탭 -->
 			<div style="margin-bottom: 5px;">
 				<span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">문제은행</span>
 			</div>
 			
-			
+		<!--  검색: '시험' 탭만 사용 가능. -->
+		<form name="searchForm" action="" method="post">
+			<div id="examSearch" class="scArea" style="margin-top:0;float:right;"> 
+				<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+					<div class="input-group" style="width: 151px;">
+						<input type="hidden" id="searchKey" name="searchKey" value="examInfoName" />
+						<input type="text" class="form-control" name="searchValue" id="searchValue" placeholder="시험명으로 검색" 
+							style="height:28px; border:1px solid gray; border-right:none; padding-right: 0; padding-left: 3px; border-radius: 0;"/>
+						<div class="input-group-addon" style="background:none; border:1px solid gray; border-left:none;
+							cursor: pointer;padding-left: 1px; padding-right: 5px; border-radius: 0;" onclick="searchList();">
+							<i class="fa fa-search"></i>
+						</div>
+					</div>
+				</div> 
+         </form>			
+         
+	<form name="array_form" id="array_form" style="width: 900px;">
 			<div id="wrap">
 				<div id="box">
 					<div style="width: 100%;float: left;margin: 0px auto;">
@@ -526,7 +467,11 @@ $(function(){
 					</div>
 				</div>
 			</div>	
-				
+		</form>
+			<form name="mockTestSearchForm" action="" method="post">
+			    <input type="hidden" name="searchKey" value="examInfoName"/>
+			    <input type="hidden" name="searchValue" value=""/>
+			</form>
 <!-- 	
 			<div class="tab_container">
 				<div id="tab1" class="tab_content">
@@ -536,7 +481,7 @@ $(function(){
 				</div>
 			</div>
  -->
-</form>
+
 	<!-- -------------------------------------------------------------------------------------------------------------------- -->
 	<!-- 모달 -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -598,7 +543,3 @@ $(function(){
 		</div>
 	</div>
 </div>
-<form name="mockTestSearchForm" action="" method="post">
-    <input type="hidden" name="searchKey" value="subject">
-    <input type="hidden" name="searchValue" value="">
-</form>

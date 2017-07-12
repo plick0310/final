@@ -15,11 +15,11 @@ public class ExamServiceImpl implements ExamService{
 	public CommonDAO dao;
 	
 	@Override
-	public Exam readTest(int num) {
+	public Exam readExam(int num) {
 		Exam dto = null;
 		
 		try {
-			dto=dao.getReadData("test.readTest", num);
+			dto=dao.getReadData("exam.readTest", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -28,15 +28,26 @@ public class ExamServiceImpl implements ExamService{
 	}
 
 	@Override
-	public List<Exam> listTest(Map<String, Object> map) {
+	public List<Exam> listExam(Map<String, Object> map) {
 		List<Exam> list = null;
 		
 		try {
-			list=dao.getListData("test.listTest", map);
+			list=dao.getListData("exam.listExam", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
 
+	@Override
+	public int dataCount(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result=dao.getIntValue("exam.dataCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

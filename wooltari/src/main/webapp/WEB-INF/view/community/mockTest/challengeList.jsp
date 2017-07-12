@@ -10,8 +10,7 @@
 		">
 	<span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">
 		『 2017년 06월 29일 』</span> 을 기준으로 총 합격률은 80%입니다.<br> <span
-		style="font-size: 10px; color: red; margin-left: 236px;">(※최초
-		응시할 때의 응시 정보만 반영됩니다)</span>
+		style="font-size: 10px; color: red; margin-left: 236px;">(※최초 응시할 때의 응시 정보만 반영됩니다)</span>
 </div>
 <br>
 <br>
@@ -20,19 +19,9 @@
 		수가 많은 시험&nbsp;Best 3"</strong></span>
 <br>
 <br>
-<!-- 통계 처리하기 -->
-<div style="clear: both; margin-left: 130px;">
-	<div id="firstChart"
-		style="width: 300px; height: 500px; float: left; margin: 10px;"></div>
-	<div id="secondChart"
-		style="width: 300px; height: 250px; float: left; margin: 66px 10px 30px;"></div>
-	<div id="lastChart"
-		style="width: 300px; height: 250px; float: left; margin: 10px;"></div>
-</div>
 <br>
 <br>
-<br>
-<br>
+
 
 <table cellpadding="0" cellspacing="0" style="width: 100%;"
 	class="board_table array">
@@ -66,3 +55,4 @@
 	</tr>
 	</tbody>
 </table>
+<br>
