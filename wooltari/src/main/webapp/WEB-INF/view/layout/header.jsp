@@ -182,9 +182,9 @@ function sendlogout(){
 							<li class="grid-demo">
 
 								<div class="row">
-									<div class="col-md-4"><a href="<%=cp%>">공지사항</a></div>
-									<div class="col-md-4"><a href="<%=cp%>">FAQ</a></div>
-									<div class="col-md-4"><a href="<%=cp%>/help/report/list">신고 / 건의</a></div>
+									<div class="col-md-4"><a href="<%=cp%>/customer/notice/list">공지사항</a></div>
+									<div class="col-md-4"><a href="<%=cp%>/customer/faq/list">FAQ</a></div>
+									<div class="col-md-4"><a href="<%=cp%>/customer/report/list">신고 / 건의</a></div>
 								</div>
 							</li>
 						</ul></li>
