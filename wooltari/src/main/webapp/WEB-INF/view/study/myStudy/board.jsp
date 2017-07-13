@@ -197,7 +197,7 @@ function createBoard() {
 		//var query =$("form[name=createForm]").serialize(); //폼태그내 자동 인코더
 		var f= document.createForm;
 		var query = new FormData(f); //파일처리
-		
+		alert(f.upload2.value);
 		$.ajax({
 			type:"POST"
 			,url:"<%=cp%>/study/myStudy/home/${s_num}/boardCreated"
@@ -208,7 +208,7 @@ function createBoard() {
 				alert("성공");
 			
 				$("#content2").val("");
-				$("#uploadBtn").val("");
+				$("#uploadBtn2").val("");
 				
 				listPage(bbs_count);
 				
@@ -347,13 +347,15 @@ $(document).ready(function () {
 						<li><a title="" data-toggle="tooltip" data-placement="bottom"
 							data-original-title="Sound Record"><i
 								class="fa fa-microphone"></i></a></li>
-						<li><label for="uploadBtn" id="lable-li"> <a title=""
+						<li>
+						
+						<label for="uploadBtn2" id="lable-li"> <a title=""
 								data-toggle="tooltip" data-placement="bottom"
 								data-original-title="Picture"><i class="fa fa-picture-o"></i></a>
 
 						</label></li>
 					</ul>
-					<input type="file" name="upload" id="uploadBtn"
+					<input type="file" name="upload2" id="uploadBtn2"
 						class="uploadBtn tts">
 
 

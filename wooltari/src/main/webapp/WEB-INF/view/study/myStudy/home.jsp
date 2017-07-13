@@ -177,21 +177,46 @@ function joinstudy() {
 //이미지 미리보기
 $(function() {
     $("#uploadBtn").on('change', function(){
-        $("#uploadBtn").empty();
-        readURL(this);
-    });
-});
-function readURL(input) {
-    if (input.files && input.files[0]) {
-    var reader = new FileReader();
+    	  
+	var src = getFileExtension($(this).val());
+					if (!((src.toLowerCase() == "gif")
+							|| (src.toLowerCase() == "jpg") || (src
+							.toLowerCase() == "jpeg"))) {
+						alert('gif 와 jpg 파일만 지원합니다.');
+						return;
+					}
 
-    reader.onload = function (e) {
-            $('#blah').attr('src', e.target.result);
-        }
+					$("#uploadBtn").empty();
+					readURL(this);
+				});
+	});
+	
+//파일의 확장자를 가져옴
+function getFileExtension(filePath){  
+    var lastIndex = -1;
+    lastIndex  = filePath.lastIndexOf('.');
+    var extension = "";
 
-      reader.readAsDataURL(input.files[0]);
-    }
+   if(lastIndex != -1){
+    extension = filePath.substring( lastIndex+1, filePath.len );
+   }else{
+    extension = "";
+   }
+    return extension;
 }
+
+
+function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				$('#blah').attr('src', e.target.result);
+			}
+
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
 </script>
 
 
@@ -209,7 +234,7 @@ function readURL(input) {
 		<div
 			style="width: 170px; height: 230px; box-shadow: 0px 3px 5px 1px #eee; font-size: 20px; font-size: 16px; line-height: 50px;">
 			<div
-				style="width: 170px; height: 170px; background-image: url('<%=cp%>/uploads/study/studyMainimage/${dto.imageFileName}'); background-size: cover;">
+				style="width: 170px; height: 170px; background-image: url('<%=cp%>/uploads/member/userImg/${dto.imageFileName}'); background-size: cover;">
 			</div>
 			<div style="width: 170px; height: 3px; background-color: #1abc9c;"></div>
 			<Strong>LEADER</Strong><span style="font-size: 14px;">&nbsp;&nbsp;${dto.userId }</span>
@@ -218,9 +243,17 @@ function readURL(input) {
 			
 			
 		<div class="inbox-body">
-			<a href="#joinStudy" data-toggle="modal" id="joinstudy" title="Compose"  class="btn btn-compose" style="border-radius: 0px;">스터디 가입하기</a>
-			
-			
+		
+		<!-- 멤버회원이 아닌경우만 출력... -->
+				<c:if test="${state == false}">
+						<a href="#joinStudy" data-toggle="modal" id="joinstudy" title="Compose"  class="btn btn-compose" style="border-radius: 0px;">스터디 가입하기</a>
+				</c:if>
+
+
+	<!-- 	<a href="#joinStudy" data-toggle="modal" id="joinstudy" title="Compose"  class="btn btn-compose" style="border-radius: 0px;">스터디 가입하기</a>
+	 -->		
+			 
+			 
 			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="joinStudy" class="modal fade" style="display: none;">
 			<!-- Modal -->
 				

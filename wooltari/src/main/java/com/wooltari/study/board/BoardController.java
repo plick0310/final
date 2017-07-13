@@ -56,12 +56,13 @@ public class BoardController {
 		String root=session.getServletContext().getRealPath("/");
 		String pathname = root +File.separator+"uploads"+File.separator+"study"+
 				File.separator+s_num+"_Board";
+		
 		System.out.println(pathname);
 		
 		String tableName="s_"+s_num;
 		dto.setTableName(tableName);
 		dto.setS_num(s_num);
-		
+		   
 		dto.setUserId(info.getUserId());
 		service.insertBoard(dto ,pathname);
 		} catch (Exception e) {
@@ -227,12 +228,15 @@ public class BoardController {
 			@PathVariable long s_num, Reply dto, HttpSession session) throws Exception {
          
 	try {
+		
 			SessionInfo info = (SessionInfo) session.getAttribute("member");
-  
-			String tableName = "s_" + s_num;
+			String root =session.getServletContext().getRealPath("/"); 
+
+			String tableName = "s_"+ s_num;
 			dto.setTableName(tableName);
 			dto.setUserId(info.getUserId());
-
+			dto.setUserImg(info.getUserImg());
+			
 			service.insertReplyBoard(dto);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -257,7 +261,7 @@ public class BoardController {
 			map.put("reNum", reNum);
 			
 			service.deleteReplyBoard(map);
-			
+			    
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -265,8 +269,8 @@ public class BoardController {
 		return model;
 
 		} 
-	
-	
+	  
+	  
 	//댓글 리스트
 	@RequestMapping(value="/study/myStudy/{s_num}/reply_List" , method= RequestMethod.POST )
 	@ResponseBody
@@ -281,7 +285,7 @@ public class BoardController {
 		map.put("num", num);
 		String tableName = "s_" + s_num;
 		map.put("tableName", tableName);
-		
+		map.put("s_num", s_num);
 		List<Reply> list = service.listReply(map);
 		
 		Map<String, Object> model = new HashMap<>();

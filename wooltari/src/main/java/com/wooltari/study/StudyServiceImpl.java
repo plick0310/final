@@ -174,6 +174,19 @@ public class StudyServiceImpl implements StudyService {
 	}
 
 	@Override
+	public List<StudyInfo> list2MyStudy(String userId) {
+			List<StudyInfo> list = new ArrayList<>();
+			try {
+				list =dao.getListData("study.listMyStudy2",userId);
+				
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
+			return list;
+	}
+	
+	
+	@Override
 	public StudyInfo readMyStudy(long s_num) {
 		StudyInfo dto = new StudyInfo();
 		
@@ -184,5 +197,6 @@ public class StudyServiceImpl implements StudyService {
 		}
 		return dto;
 	}
+
 
 }

@@ -188,7 +188,7 @@ function listPage2(replyCount, num) {
 		var reNum = data.list[idx].reNum;
 		
 			out += "<li class='clearfix'> ";
-			out += "<img class='round' src=''>";
+			out += "<img class='round' src='<%=cp%>/uploads/member/userImg/"+imageFileName+"'>";
 			out += "<div class='legend-info'>";
 			out += "<strong>" + userName + "</strong>" + created;
 			out += "<br>" + content + "</div>";

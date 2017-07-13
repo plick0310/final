@@ -43,7 +43,7 @@ public class TeamController {
 		
 		return "/study/myStudy/team";
 	}
-	
+	  
 	@RequestMapping(value="/study/{s_num}/joinStudy" ,method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> joinStudy(
@@ -51,25 +51,28 @@ public class TeamController {
 			Team dto ,
 			HttpSession session) throws Exception{
 		try {
-			  
-			SessionInfo info =(SessionInfo)session.getAttribute("member");
+			       
+		 	SessionInfo info =(SessionInfo)session.getAttribute("member");
 			String root =session.getServletContext().getRealPath("/"); 
-			String pathname = root +File.separator+"uploads"+File.separator+"study"+
-					File.separator+s_num+"_TeamImg";
+			String path=root+File.separator+"uploads"+File.separator+"member"+
+					File.separator+"userImg";
+			
 			
 			//System.out.println(pathname);
 			//이미지를 새로 저장하지 않은 경우
-			if(dto.getUpload()!=null && !dto.getUpload().isEmpty()){
+			/*if(dto.getUpload()!=null && !dto.getUpload().isEmpty()){
 				String newFilename=fileManager.doFileUpload(dto.getUpload(), pathname);
 				dto.setImageFileName(newFilename);
 			} else {
 				dto.setImageFileName(info.getUserImg());
+			}*/
+			if(dto.getUpload()==null || dto.getUpload().isEmpty()){
+				dto.setImageFileName(info.getUserImg());
 			}
-			
 			dto.setS_num(s_num);
 			dto.setUserId(info.getUserId());
 			
-			service.joinStudy(dto);
+			service.joinStudy(dto ,path);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,4 +107,47 @@ public class TeamController {
 		model.put("list", list);
 		return model;
 	}
+	  
+	@RequestMapping(value="/{s_num}/admitTeam",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> admitTeam(
+			@PathVariable long s_num ,
+			@RequestParam String userId
+			)throws Exception{
+
+		try {
+			Map<String, Object> map = new HashMap<>();
+			map.put("s_num", s_num);
+			map.put("userId", userId);
+			service.updateTeam(map);
+		  	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		List<Team> list = service.listTeam(s_num);	
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("list", list);
+		
+		
+		return model;
+	}
+	
+	@RequestMapping(value="/{s_num}/countChange",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> countChange(
+			@PathVariable long s_num 
+			)throws Exception{
+
+		int waitCount = service.waitCount(s_num);
+		int teamCount = service.teamCount(s_num);
+
+		 
+			
+		Map<String, Object> model = new HashMap<>();
+		model.put("waitCount", waitCount);
+		model.put("teamCount",teamCount);
+		return model;
+	}
+	
 }

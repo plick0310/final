@@ -44,7 +44,7 @@
             <div class="imagebox">
 
                
-			<img src="<%=cp%>/uploads/study/studyMainimage/${dto.imageFileName}" style="width: 250px; height: 200px;">
+			<img src="<%=cp%>/uploads/member/userImg/${dto.imageFileName}" style="width: 250px; height: 200px;">
             </div>
             <div class="caption">
                <h4 style="text-align: center;">${dto.studyName}</h4>
@@ -80,14 +80,12 @@
          가입한&nbsp;</span> 스터디
    </div>
       <div class="row">
-<c:forEach var = "dto" items="${Mylist}">
+<c:forEach var = "dto" items="${Mylist2}">
       <div class="col-sm-6 col-md-4" onclick="javascript:location.href='<%=cp%>/study/myStudy/home/${dto.s_num}';"
          style="cursor: pointer;">
          <div class="thumbnail">
             <div class="imagebox">
-
-               
-			<img src="<%=cp%>/uploads/study/studyMainimage/${dto.imageFileName}" style="width: 250px; height: 200px;">
+			<img src="<%=cp%>/uploads/member/userImg/${dto.imageFileName}" style="width: 250px; height: 200px;">
             </div>
             <div class="caption">
                <h4 style="text-align: center;">${dto.studyName }</h4>

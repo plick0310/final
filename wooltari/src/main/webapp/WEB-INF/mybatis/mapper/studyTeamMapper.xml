@@ -28,6 +28,7 @@
 		FROM studyMember s 
 		JOIN member m ON s.userId = m.userId  
 		WHERE s_num=#{s_num} AND s.enabled =1
+		ORDER BY joinDate DESC
 	</select>
 	
 	<!-- 멤버 수 -->
@@ -36,5 +37,9 @@
  	  WHERE s_num= #{s_num} AND enabled =1
 	</select>
 	
+	<!-- 관리자 승인 -->
+	<update id="updateAdmit" parameterType="Map">
+		UPDATE studyMember  SET ENABLED = ENABLED+1 WHERE s_num=#{s_num} AND userId=#{userId} 
+	</update>
 	
 </mapper>

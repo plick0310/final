@@ -3,6 +3,7 @@ package com.wooltari.study;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,7 @@ public class StudyController {
 	private TeamService tservice;
 	
 	
+	
 	@RequestMapping(value="/study/created")
 	public String StudyCratedForm(Model model) throws Exception{
 		
@@ -52,8 +54,9 @@ public class StudyController {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 	
 		String root=session.getServletContext().getRealPath("/");
-		String path=root+File.separator+"uploads"+File.separator+"study"+
-				File.separator+"studyMainimage";
+		String path=root+File.separator+"uploads"+File.separator+"member"+
+				File.separator+"userImg";
+		
 		
 		dto.setUserId(info.getUserId());
 		service.insertStudy(dto ,path);
@@ -64,7 +67,9 @@ public class StudyController {
 		tdto.setImageFileName(info.getUserImg());
 		tdto.setEnabled(1);
 		tdto.setContent("리더입니다.");
-		tservice.joinStudy(tdto);
+		
+		
+		tservice.joinStudy(tdto,path);
 		
 		
 		} catch (Exception e) {
@@ -72,14 +77,14 @@ public class StudyController {
 			  
 			//study 테이블 삭제........ 
 			service.deleteStudy(dto.getS_num());
-			model.addAttribute("messaage","스터디 생성 실패" );
+			model.addAttribute("messaage","스터디 생성 실패");
 			
-			return "member/notice";
-		}
+			return "main/msg";
+		} 
 		
 		//model.addAttribute("dto",dto);
 		
-	
+		
 		return "redirect:/study/myStudy/home/"+dto.getS_num();
 	}
 	
@@ -117,18 +122,32 @@ public class StudyController {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		
 		List<StudyInfo> list = service.listMyStudy(info.getUserId());
-		
+		List<StudyInfo> list2 = service.list2MyStudy(info.getUserId());
 		model.addAttribute("Mylist",list);	
+		model.addAttribute("Mylist2",list2);	
+		
 		
 	    return ".study.mystudylist.mylist";
 	}
 	
 	@RequestMapping(value="/study/myStudy/home/{s_num}")
-	public String list(Model model, @PathVariable long s_num) {
-		
+	public String list(Model model, @PathVariable long s_num, HttpSession session) {
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		StudyInfo dto = service.readMyStudy(s_num);
-	
+		List<Team> teamList = tservice.listTeam(s_num);
+		
+		Iterator<Team> it = teamList.iterator();
+        while(it.hasNext()){
+        	Team tdto = it.next();
+        	if(tdto.getUserId().equals(info.getUserId())){
+        		model.addAttribute("state", "true");
+        		break;
+        	}
+        	model.addAttribute("state", "false");
+        }
+		
 		model.addAttribute("dto",dto);
+		model.addAttribute("teamList", teamList);
 		return ".study.myStudy.home";
 	}
 	

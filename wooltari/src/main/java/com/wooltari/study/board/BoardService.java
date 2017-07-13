@@ -14,7 +14,7 @@ public interface BoardService {
 	public int countLikeBoard(Map<String, Object>map);
 	public Map<String, Object> checkLike(Map<String, Object> map);
 	
-	public void insertReplyBoard(Reply dto) throws Exception;
+	public void insertReplyBoard(Reply dto ) throws Exception;
 	public void deleteReplyBoard(Map<String, Object>map) throws Exception;
 	public List<Reply> listReply(Map<String, Object> map) ;
 	public int countReplyBoard(Map<String, Object>map);

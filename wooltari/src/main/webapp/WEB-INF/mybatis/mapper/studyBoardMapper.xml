@@ -79,12 +79,12 @@
 	
 	<!-- 댓글 리스트 -->
 	<select id="listReply" parameterType="map" resultType="com.wooltari.study.board.Reply">
-	
-				SELECT renum, num , r.userId , content , created ,userName , userImg 
-   				FROM ${tableName}_boardReply r
-      			LEFT OUTER JOIN member m on r.userId= m.userId
-      			WHERE num=#{num}
-      			ORDER BY renum DESC
-    
+	SELECT renum, num, content, created ,tb.* from(
+          SELECT s.userId ,imageFileName, userName
+              FROM member m
+              LEFT OUTER JOIN studyMember s ON m.userId = s.userId
+              WHERE s_num=#{s_num}
+            )tb JOIN ${tableName}_boardReply b ON b.userId = tb.userId where num=#{num}
+            ORDER BY renum DESC
 	</select>
 </mapper>

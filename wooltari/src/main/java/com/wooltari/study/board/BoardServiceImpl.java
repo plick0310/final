@@ -28,10 +28,10 @@ public class BoardServiceImpl implements BoardService{
 			int maxNum=dao.getIntValue("studyBoard.maxNum", map);
 			dto.setNum(maxNum+1);
 			
-			if(dto.getUpload()!=null && ! dto.getUpload().isEmpty()) {
+			if(dto.getUpload2()!=null && ! dto.getUpload2().isEmpty()) {
 				// 파일 업로드
-				String newFilename=fileManager.doFileUpload(dto.getUpload(), pathname);
-				dto.setImageFileName(newFilename);
+				String newFilename=fileManager.doFileUpload(dto.getUpload2(), pathname);
+				dto.setUserImg(newFilename);
 			}
 		
 			dao.insertData("studyBoard.insertBoard", dto);
@@ -121,6 +121,7 @@ public class BoardServiceImpl implements BoardService{
 			map.put("tableName", dto.getTableName());
 			int maxNum = dao.getIntValue("studyBoard.maxReplyNum",map);
 			dto.setReNum(maxNum+1);
+			
 			
 			dao.insertData("studyBoard.insertReply", dto);
 		} catch (Exception e) {

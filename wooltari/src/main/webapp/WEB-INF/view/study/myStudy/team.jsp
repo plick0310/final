@@ -175,10 +175,35 @@ function listWait() {
 		}
 	});
 }
+function admit(userId) {
+	if(confirm(userId+" 님을 스터디 회원으로 수락하시겠습니까?")){
+		
+		$.ajax({
+			type:"post"
+			,url:"<%=cp%>/${s_num}/admitTeam"
+			,data:"userId="+userId
+			,dataType:"json"
+			,success:function(data){
+				
+				alert("성공");
+				$('#userId').remove();
+				
+				printTeam(data);
+				listWait();
+				 countChange() ;
+				
+			}
+			,error:function(e){
+				console.log(e.responseText);
+			}
+		});
+		
+	}
+	
+}
 
 function printWait(data){
 	
-
 	var out ="";
 	if(waitCount!=0){
 		for(var idx=0; idx<data.list.length; idx++){
@@ -187,14 +212,14 @@ function printWait(data){
 			var content=data.list[idx].content;
 			var userId=data.list[idx].userId;
 			
-			out+=	"<li class='clearfix'><img class='round'";
-			out+=		"src='<%=cp%>/uploads/study/"+${s_num}+"_TeamImg/"+imageFileName+"'>";
+			out+=	"<li id='"+userId+"'class='clearfix'><img class='round'";
+			out+=		"src='<%=cp%>/uploads/member/userImg/"+imageFileName+"'>";
 			out+=	"<div class='legend-info'>";
 			out+=	"<strong>"+userName+"</strong>"+content;	
 			out+= "</div>";
 		
 		if (leader == uid) {
-					out += "<p id='a_check'><a>승인 </a>|<a> 거절</a></p></li>";
+					out += "<p id='a_check'><a onclick='admit(\""+userId+"\")';>승인 </a>|<a onclick=';'> 거절</a></p></li>";
 				}
 
 			}
@@ -230,7 +255,7 @@ function printTeam(data) {
 			var userId=data.list[idx].userId;
 			
 			out+="<li class='clearfix'><img class='round'";
-			out+=		"src='<%=cp%>/uploads/study/"+${s_num}+"_TeamImg/"+imageFileName+"'>";
+			out+=		"src='<%=cp%>/uploads/member/userImg/"+imageFileName+"'>";
 			out+=	"<div class='legend-info'>";
 			out+=	"<strong>"+userName+"</strong>"+content;	
 			out+= "</div>";
@@ -257,10 +282,25 @@ function printTeam(data) {
 	$(addon1).html(out);
 	
 }
+
+//팀원 수/대기자 수  변경
+function countChange() {
+	var url ="<%=cp%>/${s_num}/countChange";
+	$.post(url,  function(data){
+		var waitCount=data.waitCount;
+		var teamCount=data.teamCount;
+		
+		$("#waitCount").html(waitCount);
+		$("#teamCount").html(teamCount);
+		
+	}, "json");
+}
+
+
 </script>
 <div class="addon 1">
 	<p id="" style="border-bottom: 1px solid #eee;">
-		스터디 멤버 <span style="color: #1abc9c;">${teamCount}</span>명 <a class=""
+		스터디 멤버 <span style="color: #1abc9c;" id="teamCount">${teamCount}</span>명 <a class=""
 			data-toggle="collapse" href="#collapseExample2" aria-expanded="false"
 			aria-controls="collapseExample"><i class="fa fa-ellipsis-v"
 			style="float: right;"></i></a>
@@ -283,7 +323,7 @@ function printTeam(data) {
 
 <div class="addon 2">
 	<p>
-		대기중인 스터디 멤버<span style="color: #1abc9c;">${waitCount}</span>명 <a
+		대기중인 스터디 멤버<span style="color: #1abc9c;" id="waitCount">${waitCount}</span>명 <a
 			href="#myModal" data-toggle="modal" data-placement="top"
 			title="Add Contact"><i class="glyphicon glyphicon-plus"
 			style="float: right;"></i></a>

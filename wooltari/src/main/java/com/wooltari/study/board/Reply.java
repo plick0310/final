@@ -4,11 +4,19 @@ public class Reply {
 	private int  reNum , num ;
 	private String userId, userName , content , created;
 	private String userImg;
-	
+	private String imageFileName;
 	private String tableName;
 
 	
 	
+	public String getImageFileName() {
+		return imageFileName;
+	}
+
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
+	}
+
 	public String getUserImg() {
 		return userImg;
 	}

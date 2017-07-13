@@ -7,8 +7,9 @@ public class Board {
 	private String userId, content , created , userName;
 	private long s_num;
 	
-	private MultipartFile upload;
+	private MultipartFile upload2;
 	private String imageFileName;
+	private String userImg;
 	
 	private String tableName;
 
@@ -19,6 +20,16 @@ public class Board {
 	
 	
 	
+	
+	
+	public String getImageFileName() {
+		return imageFileName;
+	}
+
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
+	}
+
 	public String getUserName() {
 		return userName;
 	}
@@ -99,20 +110,22 @@ public class Board {
 		this.s_num = s_num;
 	}
 
-	public MultipartFile getUpload() {
-		return upload;
+	
+
+	public MultipartFile getUpload2() {
+		return upload2;
 	}
 
-	public void setUpload(MultipartFile upload) {
-		this.upload = upload;
+	public void setUpload2(MultipartFile upload2) {
+		this.upload2 = upload2;
 	}
 
-	public String getImageFileName() {
-		return imageFileName;
+	public String getUserImg() {
+		return userImg;
 	}
 
-	public void setImageFileName(String imageFileName) {
-		this.imageFileName = imageFileName;
+	public void setUserImg(String userImg) {
+		this.userImg = userImg;
 	}
 
 	public String getTableName() {
