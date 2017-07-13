@@ -261,9 +261,9 @@ var mode = "all";
 var page = 1;
 var searchValue = "";
 $(document).ready(function(){
-	reload();
+	msgLoad();
 	noreadCount = setInterval(function() {
-		reload();
+		msgLoad();
 	}, 10000);
 	$(".inbox-nav li").click(function () {
 		mode = $(this).attr('id');
@@ -271,7 +271,7 @@ $(document).ready(function(){
 		searchValue = "";
 		$(".inbox-nav li").removeClass("active");
 		$(this).addClass("active");
-		reload();
+		msgLoad();
 	});
 	$("#myModal").on('hidden.bs.modal', function () {
 		$('#send-btn').show();
@@ -279,16 +279,16 @@ $(document).ready(function(){
 		$("#content").val("");
 		$("#recv_Id").removeAttr('readonly');
 		$("#content").removeAttr('readonly');
-		reload();
+		msgLoad();
 	});
 });
 
 function paging(paging) {
 	page = paging;
-	reload();
+	msgLoad();
 }
 
-function reload(){
+function msgLoad(){
 	$.ajax({
 		url:"<%=cp%>/message/list?mode=" + mode + "&page=" + page + "&searchValue=" + searchValue,
 		dataType:"html",
@@ -366,7 +366,7 @@ function submitMsg() {
 
 function searchMsg() {
 	searchValue = $('.sr-input').val();
-	reload();
+	msgLoad();
 }
 
 </script>

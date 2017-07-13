@@ -60,7 +60,7 @@ function update_submit() {
 			success : function(data) {
 				var state = data.state;
 				if(state == 'true'){
-    				alert("수정 성공!");
+    				myPageLoad();
 				}else{
 					alert("수정 실패!");
 				}

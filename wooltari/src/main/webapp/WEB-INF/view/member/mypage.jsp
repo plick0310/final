@@ -98,34 +98,31 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
 <script type="text/javascript">
 var noreadCount = null;
+var pageName = '${pageName}';
 $(document).ready(function(){
-	
-	$.ajax({
-		url:"<%=cp%>/member/my_main",
-		dataType:"html",
-		success : function(data) {
-		$('.tab-content').html(data);
-		}
-	});
+	myPageLoad();
 	$(".btn-pref .btn").click(function () {
 		$(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
 		$(this).removeClass("btn-default").addClass("btn-primary");   
 		
-		var fileName;
 		pageName = $(this).attr('id');
 		if(noreadCount != null){
 			clearInterval(noreadCount);
 			noreadCount=null;
 		}
-		$.ajax({
-			url:"<%=cp%>/member/" + pageName,
-			dataType:"html",
-			success : function(data) {
-			$('.tab-content').html(data);
-			}
-		});
+		myPageLoad();
 	});
 });
+
+function myPageLoad() {
+	$.ajax({
+		url:"<%=cp%>/member/" + pageName,
+		dataType:"html",
+		success : function(data) {
+		$('.tab-content').html(data);
+		}
+	});
+}
 </script>
 <div class="container">
 	<%-- 

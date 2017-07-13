@@ -54,7 +54,7 @@ public class MemberController {
 	public String joinForm() throws Exception {
 		return "member/join";
 	}
-	
+
 	@RequestMapping(value="/member/myinfo", method=RequestMethod.GET)
 	public String myInfo(HttpSession session, Model model) throws Exception{
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
@@ -94,10 +94,10 @@ public class MemberController {
 			service.insertMember(dto, path);
 		} catch (Exception e) {
 			model.addAttribute("message", "회원가입이 실패했습니다.");
-			return "member/notice";
+			return "main/msg";
 		}
 		model.addAttribute("message", "울타리의 회원이 되신것을 환영합니다.<br>마이페이지에서 추가정보를 입력하시면 원할한 서비스 이용이 가능합니다.");
-		return "member/notice";
+		return "main/msg";
 	}
 	
 	@RequestMapping(value="/member/update_submit", method=RequestMethod.POST)
@@ -130,10 +130,31 @@ public class MemberController {
 		return model;
 	}
 	
+	@RequestMapping(value="/member/out", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> outSubmit(@RequestParam String state, HttpSession session) throws Exception {
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Map<String, Object> model = new HashMap<>();
+		try {
+			if(state.equals("true")){
+				service.outMember(info.getUserId());
+			}else{
+				model.put("state", "false");
+				return model;
+			}
+		} catch (Exception e) {
+			model.put("state", "false");
+			return model;
+		}
+		model.put("state", "true");
+		return model;
+	}
+	
 	@RequestMapping(value="/member/pwd", method=RequestMethod.GET)
 	public String pwdForm(){
 		return "member/pwd";
 	}
+	
 	@RequestMapping(value="/member/userIdCheck")
 	@ResponseBody
 	public Map<String, Object> userIdCheck(
@@ -165,9 +186,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/mypage", method=RequestMethod.GET)
-	public String myPage(Model model , HttpSession session) {
+	public String myPage(@RequestParam(value="pageName", defaultValue="my_main") String pageName, Model model , HttpSession session) {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		Member dto = service.readMember(info.getUserId());
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@" + pageName);
+		model.addAttribute("pageName", pageName);
 		model.addAttribute("dto", dto);
 		return ".member.mypage";
 	}

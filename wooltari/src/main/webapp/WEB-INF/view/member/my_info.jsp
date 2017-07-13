@@ -257,6 +257,7 @@ ul.inbox-pagination {
 }
 </style>
 <script type="text/javascript">
+var mode=null;
 $(document).ready(function(){
 	myinfo();
 	$(".inbox-nav li").click(function () {
@@ -295,8 +296,32 @@ function login_check() {
 			success : function(data) {
 				var state = data.state;
 				if(state == 'true'){
-					$("#pwdmodal").modal("hide"); 
-    				edit();
+					if(mode == 'edit'){
+	    				$("#pwdmodal").modal("hide");
+	    				edit();
+					}else if(mode == 'out'){
+						$("#pwdmodal").modal("hide");
+						if (confirm("정말 WOOLTARI를 탈퇴하시겠습니까?\n회원정보는 복구 되지 않습니다.") == true){
+							var params ="state=true";
+							$.ajax({
+								type:"POST",
+								url:"<%=cp%>/member/out",
+								data : params,
+								dataType: "json",
+								success : function(data) {
+									var state = data.state;
+									if(state == 'true'){
+										alert("그동안 WOOLTARI를 이용해주셔서 감사합니다.\n메인페이지로 이동합니다.");
+										location.href="<%=cp%>/member/logout";
+									}else{
+										alert("문제가 발생하여 작업을 처리하지 못했습니다.");
+									}
+								}
+							});
+						}else{
+						    return;
+						}
+					}
 				}else{
 					$(".login-msg strong").text("비밀번호를 잘못 입력하셨습니다."); 
 				}
@@ -353,7 +378,7 @@ function edit(){
 				<a data-toggle="modal" href="#pwdmodal"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>정보 수정</a>
 			</li>
 			<li id="out">
-				<a href="#"><i class="fa fa-user-times" aria-hidden="true"></i>회원 탈퇴</a>
+				<a data-toggle="modal" href="#pwdmodal"><i class="fa fa-user-times" aria-hidden="true"></i>회원 탈퇴</a>
 			</li>
 		</ul>
 	</aside>

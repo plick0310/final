@@ -56,6 +56,16 @@ public class MemberServiceImpl implements MemberService {
 			throw e;
 		}
 	}
+	
+	@Override
+	public int outMember(String userId) {
+		int result=0;
+		try {
+			result=dao.deleteData("member.outMember", userId);
+		} catch (Exception e) {
+		}
+		return result;
+	}
 
 	@Override
 	public void updateMember(Member dto, String path) throws Exception {
@@ -100,11 +110,6 @@ public class MemberServiceImpl implements MemberService {
 		} catch (Exception e) {
 		}
 		return result;
-	}
-
-	@Override
-	public int deleteMember(String userId) {
-		return 0;
 	}
 
 	@Override

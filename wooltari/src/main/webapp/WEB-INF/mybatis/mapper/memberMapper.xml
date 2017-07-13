@@ -42,6 +42,12 @@
         WHERE userId=#{userId}
     </update>
     
+    <!-- 회원 비활성/탈퇴 처리 -->
+    <update id="outMember" parameterType="String">
+        UPDATE member SET enabled = 0 
+        WHERE userId=#{userId}
+    </update>
+    
     <!-- 어쏘러티(권한) 삽입 -->    
 	<insert id="insertAuthority" parameterType="com.wooltari.member.Member">
 	    INSERT INTO memberAuth(userId, auth)
