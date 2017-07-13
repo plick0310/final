@@ -216,7 +216,7 @@ function sendlogout(){
 						</a>
 					</c:if>
 					<c:if test="${not empty sessionScope.member}">
-						<div id="memberbar"><strong style="margin-right: 5px">${sessionScope.member.userName}</strong></div>
+						<strong style="margin-right: 5px">${sessionScope.member.userName}</strong>
 						<c:if test="${empty sessionScope.member.userImg}">
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
 								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="padding:1px; box-shadow: 2px 2px 5px grey;"> 

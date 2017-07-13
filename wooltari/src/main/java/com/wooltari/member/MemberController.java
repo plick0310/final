@@ -21,13 +21,25 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 
-	@RequestMapping(value="/member/login", method=RequestMethod.POST)
+	@RequestMapping(value="/member/login", method=RequestMethod.GET)
 	public String loginForm(
-			String login_error, Model model
+			String error_code, Model model
 			) {
-		if(login_error!=null){
-			String message = "등록되지 않은 아이디이거나,<br>아이디 또는 비밀번호를 잘못 입력하셨습니다.";
-			model.addAttribute("message", message);
+		String message;
+		if(error_code != null){
+			if(error_code.equals("1")){
+				message = "권한을 인증받는 도중 오류가 발생하였습니다.";
+				model.addAttribute("message", message);
+			}else if(error_code.equals("2")){
+				message = "등록되지 않은 아이디이거나,<br>비밀번호를 잘못 입력하셨습니다.";
+				model.addAttribute("message", message);
+			}else if(error_code.equals("3")){
+				message = "서버에 문제가 있어 로그인이 불가합니다.";
+				model.addAttribute("message", message);
+			}else if(error_code.equals("4")){
+				message = "탈퇴한 회원이거나,<br>운영자에 의해 계정이 정지된 회원입니다.";
+				model.addAttribute("message", message);
+			}
 		}
 		// 로그인 폼
 		return "member/login";
