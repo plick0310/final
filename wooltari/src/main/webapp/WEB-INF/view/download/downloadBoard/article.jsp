@@ -52,7 +52,7 @@ function deleteBoard(){
 	var num="${dto.num}";
 	var page="${page}";
 	var query="num="+num+"&page="+page;
-	var url="<%=cp%>/download/infoReqBoard/delete?"+query;
+	var url="<%=cp%>/download/downloadBoard/delete?"+query;
 	
 	if(confirm("위 자료를 삭제 하시 겠습니까 ? "))
 	  	location.href=url;
@@ -69,7 +69,7 @@ function updateBoard(){
 	var num="${dto.num}";
 	var page = "${page}";
 	var query="num="+num+"&page="+page;
-	var url = "<%=cp%>/download/infoReqBoard/update?"+query;
+	var url = "<%=cp%>/download/downloadBoard/update?"+query;
 	
 	location.href=url;	
 </c:if>
@@ -82,7 +82,7 @@ function updateBoard(){
 <script type="text/javascript">
 //게시물 공감 개수
 function countLikeBoard(num){
-	var url="<%=cp%>/download/infoReqBoard/countLikeBoard";
+	var url="<%=cp%>/download/downloadBoard/countLikeBoard";
 	$.post(url,{num:num},function(data){
 		var count=data.countLikeBoard;
 		
@@ -107,7 +107,7 @@ function sendLikeBoard(num){
 	
 	$.ajax({
 		type:"post"
-		,url:"<%=cp%>/download/infoReqBoard/insertLikeBoard"
+		,url:"<%=cp%>/download/downloadBoard/insertLikeBoard"
 		,data:query
 		,dataType:"json"
 		,success:function(data){
@@ -139,7 +139,7 @@ $(function(){
 });
 
 function listPage(page){
-	var url="<%=cp%>/download/infoReqBoard/listReply";
+	var url="<%=cp%>/download/downloadBoard/listReply";
 	var num="${dto.num}";
 	$.post(url, {num:num, pageNo:page}, function(data){
 		$("#listReply").html(data);
@@ -166,7 +166,7 @@ function sendReply(){
 	
 	$.ajax({
 		type:"post"
-		,url:"<%=cp%>/download/infoReqBoard/createdReply"
+		,url:"<%=cp%>/download/downloadBoard/createdReply"
 		,data:query
 		,dataType:"json"
 		,success:function(data){
@@ -197,7 +197,7 @@ function deleteReply(replyNum, page){
 	}
 	
 	if(confirm("게시물을 삭제하시겠습니까?")){
-		var url="<%=cp%>/download/infoReqBoard/deleteReply"
+		var url="<%=cp%>/download/downloadBoard/deleteReply"
 		$.post(url, {replyNum:replyNum, mode:"reply"}, function(data){
 			var state=data.state;
 			
@@ -252,14 +252,14 @@ function deleteReply(replyNum, page){
 					<li>
 					<strong>첨부파일 :<br> </strong>
 				<c:forEach var="dto" items="${listFile}">	
-					  <a href="<%=cp%>/download/infoReqBoard/download?fileNum=${dto.fileNum}">
+					  <a href="<%=cp%>/download/downloadBoard/download?fileNum=${dto.fileNum}">
 					  ${dto.originalFilename}<span class="glyphicon glyphicon-download-alt"></span><br></a>
 				</c:forEach>	 
 					</li>					
 					<li>
 						<strong>이전글 :</strong>
 						<c:if test="${not empty preReadDto }">
-                            <a href="<%=cp%>/download/infoReqBoard/article?${query}&num=${preReadDto.num}">
+                            <a href="<%=cp%>/download/downloadBoard/article?${query}&num=${preReadDto.num}">
                             ${preReadDto.subject}</a>
                         </c:if>						
 					</li>
@@ -268,7 +268,7 @@ function deleteReply(replyNum, page){
 					<li>
 						<strong>다음글 :</strong>
 						<c:if test="${not empty nextReadDto }">
-                            <a href="<%=cp%>/download/infoReqBoard/article?${query}&num=${nextReadDto.num}">
+                            <a href="<%=cp%>/download/downloadBoard/article?${query}&num=${nextReadDto.num}">
                             ${nextReadDto.subject}</a>
                         </c:if>	
 					</li>
@@ -292,8 +292,8 @@ function deleteReply(replyNum, page){
 					</li>		
 				</ul>
 				</c:forEach> --%>
-				
-		<!-- 댓글 등록  -->		
+		
+		<!-- 댓글 등록  -->	
 		<tr height='30' style="width: 900px; margin: 0 auto;"> 
 	            <td align='left' colspan="2" style="    padding-top: 41px;">
 	            	<span style='font-weight: bold; color: #1abc9c;' >댓글쓰기</span><span> - 타인을 비방하거나 개인정보를 유출하는 글의 게시를 삼가 주세요.</span>
@@ -311,4 +311,6 @@ function deleteReply(replyNum, page){
             </tr>
 		</tbody>
 	</table>
-    <div id="listReply"></div>
+    <div id="listReply">
+       </div>
+</table>	

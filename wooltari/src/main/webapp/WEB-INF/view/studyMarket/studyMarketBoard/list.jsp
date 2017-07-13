@@ -222,12 +222,12 @@ padding: 40px;
 					<th>제목</th>
 					<th>작성일</th>
 				</tr>
-				<%-- <c:forEach var="dto" items="innerlist">
+				 <c:forEach var="vo" items="${dto.innerList}"><!--${dto.innerList}에서 dto는 부모 forEach의 var="dto"의 dto   -->
 				<tr>
-					<td class="subject"><a href="${articleUrl}&num=${dto.num}">${dto.subject}</a></td>
-					<td class="created">${dto.created}</td>
+					<td class="subject"><a href="${articleUrl}&num=${vo.num}">${vo.subject}</a></td>
+					<td class="created">${vo.created}</td>
 				</tr>
-				</c:forEach> --%>
+				</c:forEach>
 				
 			</table>
 		</div>
@@ -261,10 +261,10 @@ padding: 40px;
 	<div class="scArea" style="margin: 30px 10px 30px 180px;"> 
 		<select name="searchKey" class="where">
 			<option value="subject">제목</option>
-			<option value="ment">내용</option>
-			<option value="writer">작성자</option>
+			<option value="content">내용</option>
+			<option value="userId">작성자</option>
 		</select>
-		<input type="text" name="keyword" class="keyword" placeholder="검색"  style="width:120px; "> <input type="button" class="submit">
+		<input type="text" name="searchValue" class="keyword" placeholder="검색"  style="width:120px; "> <input type="button" class="submit">
 	</div>
 	</form>
 </div>	

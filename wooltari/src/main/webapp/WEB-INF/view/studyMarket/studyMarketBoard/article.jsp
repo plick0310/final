@@ -383,5 +383,4 @@ $(function(){
             </tr>
 		</tbody>
 	</table>
-    <div id="listReply">
-    </div>
+    <div id="listReply">    </div>

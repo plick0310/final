@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+	
+	<select id="maxNum" resultType="Integer">
+		SELECT NVL(MAX(num),0) FROM notice
+	</select>
+	
+	<insert id="insertNotice" parameterType="com.wooltari.notice.Notice">
+	INSERT INTO notice(num, userId, subject, content, notice)
+	VALUES(#{num},#{userId},#{subject},#{content},#{notice})	
+	</insert>	
+	
+	<!-- sql태그 -->
+	<!--  
+	* LIKE 대신 INSTR()함수를 사용하는 경우 INSTR(content, #{searchValue} &gt;0
+	* CLOB 인 경우 검색(LIKE 사용하지 말것)
+	   DBMS_LOB.INSTR(content, #{searchValue}) &gt;0
+	-->
+	
+	<sql id="where-list">
+		<if test="searchKey=='userId'">
+			userId=#{userId}
+		</if>
+		<if test="searchKey=='subject'">
+			subject LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test="searchKey=='content'">
+			DBMS_LOB.INSTR(content, #{searchValue})&gt;0
+		</if>
+	</sql>
+	
+	
+</mapper>

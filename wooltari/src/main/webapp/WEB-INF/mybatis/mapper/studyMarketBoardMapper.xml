@@ -25,7 +25,7 @@
 	 <!-- mapper에 리스트에서 사용  -->
 	<sql id="where-list">
 	  <if test="searchKey=='userId'">
-	      userName=#{searchValue}
+	      userId=#{searchValue}
 	  </if>
 	  <if test="searchKey=='subject'">
 	      INSTR(subject, #{searchValue}) &gt; 0
@@ -82,7 +82,7 @@
 	SELECT s.num, s.userId, subject, created
 	FROM studyMarketBoard s
 	JOIN member m ON s.userId= m.userId
-   	WHERE s.userId = #{userId}
+   	WHERE s.userId = #{userId} AND s.num != #{num}
   	ORDER by created DESC          
 	            
 	</select>            
