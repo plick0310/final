@@ -14,9 +14,16 @@ public class SearchController {
 	private SearchService service;
 
 	@RequestMapping(value="/study/search", method=RequestMethod.GET)
-	public String createdForm(Model model, HttpSession session)throws Exception {
+	public String search(Model model, HttpSession session)throws Exception {
 		
 		
 		return ".studysearch.search";
+	}
+	
+	@RequestMapping(value="/study/search2", method=RequestMethod.GET)
+	public String search2(Model model, HttpSession session)throws Exception {
+		
+		
+		return ".studysearch.search2";
 	}
 }
