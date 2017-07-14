@@ -101,6 +101,7 @@ var noreadCount = null;
 var pageName = '${pageName}';
 $(document).ready(function(){
 	myPageLoad();
+	//$('#'+pageName)
 	$(".btn-pref .btn").click(function () {
 		$(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
 		$(this).removeClass("btn-default").addClass("btn-primary");   

@@ -189,7 +189,6 @@ public class MemberController {
 	public String myPage(@RequestParam(value="pageName", defaultValue="my_main") String pageName, Model model , HttpSession session) {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		Member dto = service.readMember(info.getUserId());
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@" + pageName);
 		model.addAttribute("pageName", pageName);
 		model.addAttribute("dto", dto);
 		return ".member.mypage";
