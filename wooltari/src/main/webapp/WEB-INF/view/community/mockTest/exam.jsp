@@ -36,12 +36,13 @@
 						</div>
 	
 						<div class="likes" style="font-size: 13px; width: 60px;">
-							응시하기<br> <span class="num" style="color: #1abc9c;"> <a
-								target="_blank" onclick="popupLink(550,1000)"
-								style="width: 100px; height: 100px;"> <span
-									class="glyphicon glyphicon-circle-arrow-right"></span>
+							응시하기<br> <span class="num" style="color: #1abc9c;">
+							<a target="_blank" onclick="popupLink(600,1050)"
+								style="width: 100px; height: 100px;">
+								<span class="glyphicon glyphicon-circle-arrow-right"></span>
 							</a>
 							</span>
+							<input type="hidden" id="examNo" name="examNo" value="num" />
 						</div>
 					</div>
 				</td>

@@ -19,8 +19,6 @@
     color: #fff;
     cursor: default;
     background-color: #1abc9c;
-    /* border-color: #337ab7; */
-    /* text-align: center; */
 }
 
 .pagination-sm > li > a, .pagination-sm > li > span {
@@ -174,7 +172,7 @@ $(function(){
 	   
 	   var url = "<%=cp%>/mockTest/createdList";
 	   var query="name="+name+"&date="+date;
-	   
+	    
 	    if(!name || name=='시험선택') {
 	        alert("시험을 선택하세요");
 	        return;
@@ -278,13 +276,13 @@ $(function(){
 	
 	var popX = winX + (winWidth - popWidth)/2;
 	var popY = winY + (winHeight - popHeight)/2;
-	window.open("<%=cp%>/community/exam/examFiles", "popup",
+	window.open("<%=cp%>/mockTest/examFiles", "popup",
 			"width="+ popWidth + "px,height=" + popHeight + "px,top=" + popY+ ",left=" + popX);
 	}
 </script>
 
 
-<!-- 음.. 임시? -->
+<!-- 음.. 임시 -->
 <script>
 function listPage(page) {
 	var $tab = $(".tabs .active");
@@ -322,6 +320,23 @@ function searchList() {
 }
 </script>
 
+<!--
+<script>
+var startDate = new Date();
+updateTime();
+
+function updateTime() {
+		var now = new Date();
+		var t = now.getTime() - startDate.getTime();
+		var s = Math.round(t/1000);
+
+		min.innerHTML = Math.floor(s/60);
+		sec.innerHTML = s%60;
+		setTimeout("updateTime()",500);
+	}
+</script>
+-->
+
 <div style="width: 900px; height: 100%; margin: 60px auto;">
 	<div style="height: 50px; font-size: 20px; text-align: center;">
 		<span style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
@@ -331,10 +346,10 @@ function searchList() {
 	</div>
 
 		<strong style="font-size: 20px;">
-		<span style="color: rgba(183, 183, 183, 0.65); font-size: 20px;"> <i
-			class="glyphicon glyphicon-align-left"
+		<span style="color: rgba(183, 183, 183, 0.65); font-size: 20px;"> 
+		<i class="glyphicon glyphicon-align-left"
 			style="color: #1abc9c; margin-bottom: 20px;"></i>&nbsp;&nbsp;${sessionScope.member.userName }
-		</span> 님의 응시할 시험 목록입니다.</strong>
+		</span>님의 응시할 시험 목록입니다.</strong>
 		
 		
 		<span style="font-size: 11px; color: #D9418C;">&nbsp;&nbsp;(최대  <strong style="font-size: 13px;">5</strong> 개까지 등록 가능합니다)</span>
@@ -433,6 +448,7 @@ function searchList() {
 		</c:if>
 		<!-- 응시할 시험 리스트 끝 ----------------------------------------------------------------------->
 	</form>		
+	
 		<!-- 문제  / 응시내역 탭 -->
 			<div style="margin-bottom: 5px;">
 				<span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">문제은행</span>

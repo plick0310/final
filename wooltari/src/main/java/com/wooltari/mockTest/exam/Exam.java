@@ -9,8 +9,6 @@ public class Exam {
 	private String created;
 	private long gap;
 	
-	
-	
 	public int getExamlistNum() {
 		return examlistNum;
 	}
