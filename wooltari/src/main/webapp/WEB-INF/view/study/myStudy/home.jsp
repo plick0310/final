@@ -10,7 +10,7 @@
 * {
 	box-sizing: border-box;
 }
-
+ 
 .menu {
 	width: 900px;
 	text-align: center;
