@@ -26,7 +26,7 @@
 			    ) tb WHERE ROWNUM <= #{end}
 			)WHERE examlistNum >= #{start} 
 		]]>
-	</select>	
+	</select>
 	
 	<!-- 데이터 수 -->
 	<select id="dataCount" parameterType="map" resultType="Integer">

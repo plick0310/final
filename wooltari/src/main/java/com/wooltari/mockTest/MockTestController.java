@@ -110,7 +110,6 @@ public class MockTestController {
 			@RequestParam String date,
 			HttpSession session
 			) throws Exception {
-		System.out.println("아아아앙아아아아아아아 아");
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		String state="true";
@@ -160,8 +159,7 @@ public class MockTestController {
 	@RequestMapping(value="/mockTest/challengeList")
 	public String callengeList() {
 		
-		System.out.println("응시내역~★");
-
 		return "community/mockTest/challengeList";
 	}
+	
 }

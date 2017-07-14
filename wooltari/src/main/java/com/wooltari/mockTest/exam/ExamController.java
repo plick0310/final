@@ -37,8 +37,6 @@ public class ExamController {
 			Model model,
 			HttpSession session
 			) throws Exception {
-		System.out.println("       들어왔을까");
-		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
 		int rows = 5; // 한 화면에 보여주는 게시물 수
@@ -53,8 +51,6 @@ public class ExamController {
 		map.put("userId", info.getUserId());
 		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
-		
-		System.err.println("serchValue도 들어왔길.. ---> "+searchValue);
 		
 		// 카운트는 최대 5까지 설정
 		dataCount = service.dataCount(map);
@@ -84,7 +80,6 @@ public class ExamController {
 		
 		Iterator<Exam> it = examtestList.iterator();
 		while(it.hasNext()) {
-			System.out.println("examtestList로 들어옴?");
 			Exam data = (Exam)it.next();
 			examlistNum = n;
 			data.setExamlistNum(examlistNum);

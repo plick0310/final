@@ -18,7 +18,7 @@ cursor: pointer;
 }
 </style>
 <script>
-coin = 50  
+coin = ${point }  
 bet = 1
 game = false
 box1 = true
@@ -58,9 +58,9 @@ function keisan(){
 	}
 	game = false
 	box1 = true
-	box2 = true
+	box2 = true 
 	box3 = true
-}
+} 
 
 function end(variable){
 	if(game == true){
@@ -136,19 +136,21 @@ function startGame(){
 </div>
 
 <hr style="width: 100% ;background-color: #eee; height: 1px;"> 
-<c:forEach var="dto" items="${list }">
+
 <div>
 <div class="row" style="width: 724px; margin: 0 auto; border-right: ">
 <div class="col-sm-4" style="margin: 0 auto 15px;padding: 0;">
-<Strong style="font-size: 17px;">${dto.userName }</Strong><br>P O I N T : ${dto.point }</div> 
+<Strong style="font-size: 17px;">${userName }</Strong><br>P O I N T : ${point }</div> 
 <div class="col-sm-4" style="margin: 0 auto 15px;padding: 0;">오늘 남은 기회는 3회 입니다.</div>
 <div class="col-sm-4" style="margin: 0 auto 15px;padding: 0;">오늘 남은 기회는 3회 입니다.</div>
 </div>
-</c:forEach>
 
-<form name="slotform" style="margin: 0px auto;     width: 724px;">
 
-<div style="width: 1140px; height: 346px;">
+<form name="slotform" style="margin: 0px auto 30px;     width: 724px;">
+	<div style="margin: 10px auto 45px;width: 400px;">
+	<input type="text" size=55 name="pay_back" style="box-shadow: 2px 2px 4px #b8b8b8;border: 9px solid #eee;">  
+	</div>
+<div style="width: 1140px; height: 346px;"> 
 	<div style="border: 35px solid #eee;box-shadow: 1px 1px 5px grey;width: 724px;height: 346px;float: left;">
 	<div style=" 
     margin: 0 auto;
@@ -169,6 +171,7 @@ function startGame(){
 
 	<br> 
 	<div style="width:126px; margin: 30px auto;">
+	I N S E R T P O I N T<br>
 		<SELECT NAME="select" SIZE="1"> 
 			<OPTION value="0"><strong>INSERT COIN(S)</strong></OPTION>
 			<OPTION value="1">1 COIN</OPTION>
@@ -182,6 +185,6 @@ function startGame(){
 		<br>
 	<br>
 	<br> 
-		<input type="text" size=55 name="pay_back">
+		
 </form>
 </div>

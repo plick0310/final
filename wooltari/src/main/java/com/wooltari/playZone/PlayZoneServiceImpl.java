@@ -15,15 +15,15 @@ public class PlayZoneServiceImpl implements PlayZoneService{
 	private CommonDAO dao;
 	
 	@Override
-	public List<PlayZone> pointlist(Map<String, Object> map) {
-		List<PlayZone> list=null;
+	public int pointlist(Map<String, Object> map) {
+		int result = 0;
 		try {
-			list=dao.getListData("playZone.pointlist", map);
+			result=dao.getIntValue("playZone.point", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return list;
+		return result;
 	}
 }
 

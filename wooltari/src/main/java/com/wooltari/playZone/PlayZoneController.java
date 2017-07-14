@@ -1,7 +1,6 @@
 package com.wooltari.playZone;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -26,17 +25,23 @@ public class PlayZoneController {
 			Model model,HttpSession session
 			)throws Exception{
 	
+		int point = 0;
+		String userId,userName;
 		
 	SessionInfo info=(SessionInfo)session.getAttribute("member");
-		System.out.println(info);
+
 		if(info==null)
 			return "redirect:/main";
-		
 		Map<String, Object> map=new HashMap<>();
 		map.put("userId", info.getUserId());
-		List<PlayZone> list=service.pointlist(map);
+		point=service.pointlist(map);
 		
-		model.addAttribute("list",list);
+		userId = info.getUserId();
+		userName = info.getUserName();
+		
+		model.addAttribute("point",point);
+		model.addAttribute("userId",userId);
+		model.addAttribute("userName",userName);
 	
 		
 	return ".community.playZone.home";
