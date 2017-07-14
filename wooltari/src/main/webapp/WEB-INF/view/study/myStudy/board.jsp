@@ -204,12 +204,13 @@ function createBoard() {
 			,processData: false  // file 전송시 필수
 			,contentType: false  // file 전송시 필수
 			,data : query
+			,dataType:"json"
 			,success:function(data){
 				alert("성공");
 			
 				$("#content2").val("");
 				$("#uploadBtn2").val("");
-				
+				$('#content1').removeAttr('src');
 				listPage(bbs_count);
 				
 				
@@ -290,33 +291,35 @@ $(document).ready(function () {
 	for(i=0;i<my_posts.length;i++){
 		the_post = $(my_posts[i]);
 
-	/* 	if(the_post.hasClass('invert') && size >=767 ){
-			the_post.tooltip({ placement: 'left'});
-			the_post.css("cursor","pointer");
-		} else{
-			the_post.tooltip({ placement: 'rigth'});
-			the_post.css("cursor","pointer");
-		}  */
 	}
 
 	
 	
 });
+
+//이미지 미리보기
+$(function() {
+    $("#uploadBtn2").on('change', function(){
+    	  
+	var src = getFileExtension($(this).val());
+					if (!((src.toLowerCase() == "gif")
+							|| (src.toLowerCase() == "jpg") || (src
+							.toLowerCase() == "jpeg"))) {
+						alert('gif 와 jpg 파일만 지원합니다.');
+						return;
+					}
+
+					$("#uploadBtn2").empty();
+					readURL(this);
+				});
+	});
+	
+
 </script>
 
 
  <div class="input-group">
-<!--  
-	<input type="text" class="form-control" id="exampleInputAmount"
-		placeholder="검색어를 입력하세요..."
-		style="border: 3px solid rgba(26, 188, 156, 0.66); border-right: none; border-top-left-radius: 20px; border-bottom-left-radius: 20px;">
-	<div class="input-group-addon"
-		style="background: none; border: 3px solid rgba(26, 188, 156, 0.66);; border-left: none; cursor: pointer; border-top-right-radius: 20px; border-bottom-right-radius: 20px;"
-		onclick="">
-		<i class="fa fa-search"></i>
-	</div>
-	 -->
-	
+<!-- ----------------------------------검색창 ---------------------------------------->
 	<div class="d3">
 	<form  name="searchForm" method="post" class="form-inline">
 		  <!--  <select class="form-control input-sm" name="searchKey" >
@@ -331,14 +334,20 @@ $(document).ready(function () {
 	</div>
  </div>
  
-
+<!-- ----------------------------------입력창 ---------------------------------------->
 <div class="row">
 	<div class="col-md-10">
 		<div class="widget-area no-padding blank">
 			<div class="status-upload">
-				<form name="createForm" method="post" enctype="multipart/form-data">
-					<textarea name="content" id="content2"
-						placeholder="What are you doing right now?"></textarea>
+				<form name="createForm" method="post" enctype="multipart/form-data" style="width:100%;">
+					
+					
+					<img id="content1"
+						style="width: 35%; height: 250px; background: white; float: left;  border: 0;"
+						></img>
+
+					<div><textarea name="content" id="content2"
+						placeholder="What are you doing right now?"></textarea></div>
 					<ul>
 						<li><a title="" data-toggle="tooltip" data-placement="bottom"
 							data-original-title="Audio"><i class="fa fa-music"></i></a></li>
@@ -358,7 +367,6 @@ $(document).ready(function () {
 					<input type="file" name="upload2" id="uploadBtn2"
 						class="uploadBtn tts">
 
-
 					<button type="button" class="" onclick="createBoard();">
 						<i class="fa fa-share"></i> 등록하기
 					</button>
@@ -370,6 +378,8 @@ $(document).ready(function () {
 	</div>
 
 </div>
+
+
 <!-- ----------------------------------피드 ----------------------------------------->
 
 <ul class="timeline" id="listBoard">

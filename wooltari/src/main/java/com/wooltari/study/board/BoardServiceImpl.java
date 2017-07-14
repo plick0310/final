@@ -31,7 +31,7 @@ public class BoardServiceImpl implements BoardService{
 			if(dto.getUpload2()!=null && ! dto.getUpload2().isEmpty()) {
 				// 파일 업로드
 				String newFilename=fileManager.doFileUpload(dto.getUpload2(), pathname);
-				dto.setUserImg(newFilename);
+				dto.setImageFileName(newFilename);
 			}
 		
 			dao.insertData("studyBoard.insertBoard", dto);

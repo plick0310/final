@@ -68,10 +68,10 @@ body .no-padding {
 	float: left;
 	font-family: Lato;
 	font-size: 14px;
-	height: 142px;
 	letter-spacing: 0.3px;
 	padding: 20px;
-	width: 100%;
+	width: 65%;
+	height:250px;
 	resize: vertical;
 	outline: none;
 	border: 1px solid #F2F2F2;

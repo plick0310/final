@@ -9,6 +9,7 @@ public class Board {
 	
 	private MultipartFile upload2;
 	private String imageFileName;
+	
 	private String userImg;
 	
 	private String tableName;

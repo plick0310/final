@@ -71,7 +71,7 @@ public class BoardController {
 		Map<String, Object> model = new HashMap<>();
 		
 		return model;
-	}
+	}  
 	
 	
 	@RequestMapping(value="/study/myStudy/{s_num}/boardDelete" , method= RequestMethod.POST)
