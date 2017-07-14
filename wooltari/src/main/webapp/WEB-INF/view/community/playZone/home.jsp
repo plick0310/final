@@ -81,7 +81,7 @@ function hyouji(){
    if(box2)document.images["second"].src = IMG[(num + 3) % 10].src
    if(box3)document.images["third"].src = IMG[(num + 6) % 10].src
 num += 1
-tid = setTimeout("hyouji()",60)  
+tid = setTimeout("hyouji()",60) 
 }
 
 

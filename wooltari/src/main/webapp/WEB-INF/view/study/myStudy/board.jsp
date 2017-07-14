@@ -335,8 +335,8 @@ $(function() {
  </div>
  
 <!-- ----------------------------------입력창 ---------------------------------------->
-<div class="row">
-	<div class="col-md-10">
+<div class="row" style="margin-left: 10px;">
+	<div class="col-md-10" style="    width: 810px; padding: 0;    padding-left: 10px;">
 		<div class="widget-area no-padding blank">
 			<div class="status-upload">
 				<form name="createForm" method="post" enctype="multipart/form-data" style="width:100%;">
