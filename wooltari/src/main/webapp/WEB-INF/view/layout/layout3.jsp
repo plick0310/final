@@ -24,8 +24,9 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="<%=cp%>/resource/css/base.css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/css-classes.min.css">
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css">
 
-<script src="<%=cp%>/resource/js/jquery.1.11.1.js"></script>
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/js/front_js.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/js/jquery-ui.min.js"></script>

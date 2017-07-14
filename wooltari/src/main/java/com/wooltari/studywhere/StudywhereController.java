@@ -47,11 +47,11 @@ public class StudywhereController {
 		HttpServletRequest req,
 		Model model
 		)throws Exception{
-	System.out.println("================================1"+searchValue);
+	
 	if(req.getMethod().equalsIgnoreCase("GET")) {
 		searchValue= URLDecoder.decode(searchValue, "UTF-8");
 	}
-	System.out.println("================================2"+searchValue);
+	
 	int rows=10;
 	int total_page=0;
 	int dataCount=0;
@@ -74,7 +74,7 @@ public class StudywhereController {
 	int end=current_page*rows;
 	map.put("start", start);
 	map.put("end", end);
-	System.out.println("================================3"+searchValue);
+	
 	List<StudyWhere> list = service.listStudyWhere(map);
 
 	
@@ -97,7 +97,7 @@ public class StudywhereController {
 		
 		n++;
 	}
-	System.out.println("================================4"+searchValue);
+	
 	
 	List<StudyWhere> bestlist = service.bestStudyWhere(map);
 	int bestlistNum, b=0;
