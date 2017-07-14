@@ -64,8 +64,8 @@
 		<span style="color: #404040;font-weight: bolder;">TRIAL EXAMINATION</span> <br/><br/>
       
 		<table style="margin:0px 0px 5px 0px;width:100%;border: 1px solid #eee; BORDER-BOTTOM: NONE; background:#f8f8f8;/* border-top: 1px solid #eee; */" align="center"><!-- 상단 타이틀 시작. -->
-			<c:forEach items="${examwishList }" var="dto" varStatus="status">
-				<tbody>
+			<%-- <c:forEach items="${examwishList }" var="dto" varStatus="status">
+			 --%>	<tbody>
 					<tr style="height:45px;">
 						<td style="font-family: 'BareunDotum'; font-weight:bolder; color:#383635; font-size:11pt;" align="center" valign="middle">
 							<strong>정보처리기사 [ 2017년 1회 기출문제 ] 응시 </strong>
@@ -94,9 +94,9 @@
 						</td>
 					</tr>
 				</tbody>
-			</c:forEach>	
+<%-- 			</c:forEach> --%>	
 		</table>
-     
+
 		<div id="index_div" style="margin: 30px auto 45px; width:715px;" align="center"><!-- 첫화면 컨테이너 시작. -->
 			<table style="width:100%">
             	<tbody>
