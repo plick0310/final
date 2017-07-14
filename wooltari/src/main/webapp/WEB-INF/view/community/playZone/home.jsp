@@ -60,7 +60,7 @@ function keisan(){
 	box1 = true
 	box2 = true 
 	box3 = true
-}
+} 
 
 function end(variable){
 	if(game == true){
