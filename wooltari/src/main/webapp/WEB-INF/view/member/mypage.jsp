@@ -101,6 +101,7 @@ var noreadCount = null;
 var pageName = '${pageName}';
 $(document).ready(function(){
 	myPageLoad();
+	$('#'+pageName).removeClass("btn-default").addClass("btn-primary");
 	$(".btn-pref .btn").click(function () {
 		$(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
 		$(this).removeClass("btn-default").addClass("btn-primary");   
@@ -146,7 +147,7 @@ function myPageLoad() {
      --%>
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
         <div class="btn-group" role="group">
-            <button type="button" id="my_main" class="btn btn-primary" data-toggle="tab">
+            <button type="button" id="my_main" class="btn btn-default" data-toggle="tab">
             	<i class="fa fa-star-o" aria-hidden="true"></i>
                 <div class="hidden-xs">마이페이지</div>
             </button>

@@ -239,7 +239,8 @@ function sendlogout(){
 							<li><a href="<%=cp%>/admin/index">관리자 페이지</a></li>
 							</c:if>
 							<li><a href="<%=cp%>/study/mylist">나의 스터디</a></li>
-							<li><a href="<%=cp%>/member/mypage">마이페이지</a></li>
+							<li><a href="<%=cp%>/member/mypage?pageName=my_msg">나의 쪽지함</a></li>
+							<li><a href="<%=cp%>/member/mypage?pageName=my_info">나의 정보</a></li>
 							<li><a href="javascript:sendlogout();">로그아웃</a></li>
 						</ul>
 					</c:if>

@@ -319,6 +319,7 @@ function login_check() {
 								}
 							});
 						}else{
+							myPageLoad();
 						    return;
 						}
 					}
