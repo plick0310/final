@@ -283,11 +283,12 @@ function deleteAction(){
 		<table style="width:100%;" cellpadding="0" cellspacing="0" border="0">
 			<tr>
 				<td colspan="2" style="text-align:left;">
+					<!-- 
 					<ul id="category">
-						<li><a href="">게시판</a></li>						
-					
+						<li> <a href="">게시판</a> </li>						
 					</ul>
-					<div style="position:absolute; bottom:10px; right: -15px; top: 9px;">
+					 -->
+					<div style="position:absolute; bottom:10px; right: -15px;">
 						<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" onclick="check()"/><label for="allCheck">전체선택</label>			
 										
 					</div>
@@ -299,24 +300,50 @@ function deleteAction(){
 	<table cellpadding="0" cellspacing="0" style="width:100%;" class="board_table array">
 		<tbody>
 
-	<c:forEach var="dto" items="${list}">
+	<!-- 공지글 -->
+	<c:forEach var="dto" items="${noticeList}">
 			<tr>
-				
 				<td style="text-align:right; width:65px; padding: 5px 18px;"><input type="checkbox" name="chk" value="${dto.num}"></td>
-				
-				<td class="___number">${dto.listNum}</td>
+				<td class="___number"><span style="display: inline-block;width: 28px;height:18px;line-height:18px; background: #ED4C00;color: #FFFFFF">공지</span></td>
 				<td>
 					<div style="position:relative;">
-						<!--[category_name]-->
-					
-						<a href="${articleUrl}&num=${dto.num}" class="subject">${dto.subject}</a><span class="comment"></span>
+						<a href="${articleUrl}&num=${dto.num}" class="subject">${dto.subject}</a>
+						<c:if test="${dto.gap<1}">
+							<img src='<%=cp %>/resource/images/new.gif'>
+						</c:if>
+						<span class="comment"></span>
+						<div class="info">
+							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">${dto.created}</span>
+							<span class="__dotted"></span>
+							<strong>작성자 </strong><span>${dto.userId}</span>
+							<span class="__dotted"></span>
+							<!-- <strong>조회수 </strong><span></span> -->
+						</div>
+												
+					</div>
+				</td>
+			</tr>
+	</c:forEach>	
+	
+	<!-- 일반 글 -->
+	<c:forEach var="dto" items="${list}">
+			<tr>
+				<td style="text-align:right; width:65px; padding: 5px 18px;"><input type="checkbox" name="chk" value="${dto.num}"></td>
+				<td class="___number">${dto.listNum}</td>				
+				<td>
+					<div style="position:relative;">
+						<a href="${articleUrl}&num=${dto.num}" class="subject">${dto.subject}</a>
+						<c:if test="${dto.gap<1}">
+							<img src='<%=cp %>/resource/images/new.gif'>
+						</c:if>
+						<span class="comment"></span>
 					
 						<div class="info">
 							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">${dto.created}</span>
 							<span class="__dotted"></span>
 							<strong>작성자 </strong><span>${dto.userId}</span>
 							<span class="__dotted"></span>
-							<strong>조회수 </strong><span></span>
+							<!-- <strong>조회수 </strong><span></span> -->
 						</div>
 												
 					</div>
@@ -335,7 +362,7 @@ function deleteAction(){
         <c:if test="${dataCount!=0 }">
         	${paging}
         </c:if></div>
-	<div class="btnArea">
+	<div class="btnArea" style="float: right;">
 	<c:if test="${sessionScope.member.userId=='admin'}">
 		<input type="button" class="clickbtn" 
 		 onclick="javascript:deleteList();" value="삭제">
@@ -345,7 +372,7 @@ function deleteAction(){
 	</div>
 
 <form action="" id="array_form" name="searchForm" method="post">
-	<div class="scArea" style="margin: 30px 10px 30px 180px;"> 
+	<div class="scArea" style="margin: 30px 10px 30px 200px;">
 		<select name="searchKey" class="where">
 			<option value="subject">제목</option>
 			<option value="content">내용</option>

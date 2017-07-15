@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -93,6 +94,12 @@ public class NoticeController {
 		if(total_page<current_page)
 			total_page=current_page;
 		
+		//1페이지인 경우 공지리스트 가져오기
+		 List<Notice> noticeList = null;
+		 if(current_page==1){
+			 noticeList=service.listNoticeTop();
+		 }
+		
 		//리스트에 출력할 데이터의 시작과 끝 
 		int start=(current_page-1)*rows+1;
 		int end=current_page*rows;
@@ -111,22 +118,23 @@ public class NoticeController {
 		Iterator<Notice> it=list.iterator();
 		
 		while(it.hasNext()){
-			Notice data=it.next();
+			Notice data=(Notice)it.next();
 			listNum=dataCount-(start+n-1);
 			data.setListNum(listNum);			
 			
 			//심플 데이터 포맷 이용 비긴데이트(생성일) 구하기
-			SimpleDateFormat formatter=new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+			SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date beginDate= formatter.parse(data.getCreated());
+			
+			System.out.println(beginDate);
 			
 			//날짜 차이
 			gap=(endDate.getTime()-beginDate.getTime())/(60*60*1000);
 			data.setGap(gap);
 			
 			data.setCreated(data.getCreated().substring(0,10));
-			
-			
-			//n++;
+					
+			n++;
 		}
 		//쿼리, 리스트url, 아티클url
 		String query="";
@@ -151,6 +159,7 @@ public class NoticeController {
 		model.addAttribute("total_page", total_page);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("noticeList",noticeList);
 		model.addAttribute("articleUrl", articleUrl);
 		model.addAttribute("paging", paging);
 		
@@ -185,7 +194,7 @@ public class NoticeController {
 		
 		Notice preReadDto= service.preReadNotice(map);
 		Notice nextReadDto= service.nextReadNotice(map);
-		
+				
 		//파일
 		//List<Notice> listFile=service.listFile(num);
 				
@@ -203,11 +212,73 @@ public class NoticeController {
 			
 			return ".customer.notice.article";
 		}
+	
+	@RequestMapping(value="/customer/notice/update", method=RequestMethod.GET)
+	public String updateForm(
+			@RequestParam(value="num") int num,
+			@RequestParam(value="page") String page,
+			Model model,
+			HttpSession session) throws Exception {
 		
+		Notice dto=(Notice)service.readNotice(num);
+		if(dto==null){
+			return "redirect:/customer/notice/list?page="+page;
+		}
+			
+		//model은 jsp로 넘기겠다.
+		model.addAttribute("mode", "update");
+		model.addAttribute("page", page);
+		model.addAttribute("dto", dto);
+					
+		return ".customer.notice.created";
+	}
+	
+	@RequestMapping(value="/customer/notice/update")
+	public String udpateSubmit(
+			Notice dto,
+			@RequestParam String page,
+			HttpSession session) throws Exception {
 		
+		String root=session.getServletContext().getRealPath("/");
+		String pathname= root + File.separator +"uploads" + File.separator +"infoReqBoard";
 		
+		service.updateNotice(dto, pathname);
+		
+		return "redirect:/customer/notice/list?page="+page;
+	}
+	
+	@RequestMapping(value="/customer/notice/delete")
+	public String delete(
+			@RequestParam int num,
+			@RequestParam String page,
+			HttpSession session)throws Exception{
+		String root=session.getServletContext().getRealPath("/");
+		String pathname= root+ File.separator + "uploads" + File.separator + "infoReqBoard";
+		
+		Notice dto= service.readNotice(num);
+		if(dto==null){
+			return "redirect:/customer/notice/list?page="+page;
+		}			
+		
+		service.deleteNotice(num, dto.getSaveFilename(), pathname);
+					
+		return "redirect:/customer/notice/list?page="+page;
 		
 	}
+		//체크 박스로 삭제.............................................
+			@RequestMapping(value="/customer/notice/deleteList")
+			public String deleteList(
+					Integer[] chk,
+					@RequestParam String page
+					)throws Exception{
+				List<Integer> list=Arrays.asList(chk);
+				//Arrays.asList:Arrays 클래스 배열을 List에 담아서 반환한다.
+				service.deleteList(list);		
+				return "redirect:/customer/notice/list?page="+page;
+			}
+			
+			
+}
 	
 	
 	

@@ -200,6 +200,17 @@ public class NoticeServiceImpl implements NoticeService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	@Override
+	public int deleteList(List<Integer> list) {
+		int result=0;
+		
+		try{
+			result=dao.deleteData("notice.deleteList", list);
+		}catch(Exception e){			
+		}
+		
+		return result;
+	}
 
 	
 }

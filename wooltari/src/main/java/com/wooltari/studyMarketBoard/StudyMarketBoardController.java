@@ -121,6 +121,7 @@ public class StudyMarketBoardController {
 				listNum=dataCount - (start + n - 1);
 				data.setListNum(listNum);
 				
+				
 				//data.setUrlCode(dto.getUrlContent().substring(32,43));
 				
 				SimpleDateFormat formatter= new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");

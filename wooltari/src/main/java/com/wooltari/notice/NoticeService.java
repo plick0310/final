@@ -25,5 +25,8 @@ public interface NoticeService {
 	public List<Notice> listFile(int num);
 	public Notice readFile(int fileNum);
 	public int deleteFile(Map<String, Object> map);
+	
+	//전체 선택 삭제
+	 public int deleteList(List<Integer> list);
 
 }
