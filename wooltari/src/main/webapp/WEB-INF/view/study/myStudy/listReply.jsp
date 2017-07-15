@@ -10,17 +10,22 @@
 
 .reply-list {
 background: #fff;
-
+    margin-top: 20px;
 margin-bottom: 20px;
 border-radius: 3px;
 -moz-border-radius: 3px;
 -webkit-border-radius: 3px;
 }
+.reply-list ul{
+    clear: both;
+    background: white;
+}
 
 .reply-list li {
-padding: 10px;
-border-top: 1px solid #eee;
-overflow: hidden;
+padding: 0px 10px 1px;
+    border-top: 1px solid #eee;
+    overflow: hidden;
+    line-height: 25px;
 }
 .reply-list li {
 list-style:none;
@@ -223,19 +228,19 @@ function listPage2(replyCount, num) {
 		<span style="font-weight: bold;">댓글 쓰기</span><span> - 타인을 비방하거나
 			개인정보를 유출하는 글의 게시를 삼가 주세요.</span>
 	</div>
-	<div style="clear: both; padding-top: 10px; float: left;">
-		<textarea id="rcontent_${num}" name ="content"  rows="1" 
-			style="display: block; width: 80%;padding: 6px 12px; box-sizing: border-box;"></textarea>
+	<div style="clear: both; padding-top: 10px; float: left; width: 620px;">
+		<textarea id="rcontent_${num}" name ="content"  rows="1"  
+			style="resize:none; display: block; width: 95%;padding: 6px 12px;border:none; box-sizing: border-box;height: 38px;"></textarea>
 	</div>
-	<div style="text-align: right; padding-top: 10px; ">
+	<div style="text-align: right; padding-top: 10px;  ">
 		<button type="button" class="" onclick="sendReply(${num});"
-			style="padding: 8px 25px;">등록하기</button>
+			style="padding: 8px 25px; background: white; border: 1px solid #eee; ">등록하기</button>
 	</div>
 </div>
 
 <div class="reply-list">
 
-	<ul id="reply-content_${num}" class="reply-content">
+	<ul id="reply-content_${num}" class="reply-content" style="border: none;font-family: 'BareunDotum';">
 	
 	</ul>
 	

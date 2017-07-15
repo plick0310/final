@@ -77,7 +77,7 @@ function msgRead() {
 	        type:'POST',
 	        data: chkarray,
 	        success:function(data){
-	            reload();
+	            msgLoad();
 	        },
 	        error:function(jqXHR, textStatus, errorThrown){
 	            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
@@ -123,7 +123,7 @@ function msgKeep() {
 	        type:'POST',
 	        data: chkarray,
 	        success:function(data){
-	            reload();
+	            msgLoad();
 	        },
 	        error:function(jqXHR, textStatus, errorThrown){
 	            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
@@ -169,7 +169,7 @@ function msgTrash() {
 	        type:'POST',
 	        data: chkarray,
 	        success:function(data){
-	            reload();
+	            msgLoad();
 	        },
 	        error:function(jqXHR, textStatus, errorThrown){
 	            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
@@ -215,7 +215,7 @@ function msgReceive() {
 	        type:'POST',
 	        data: chkarray,
 	        success:function(data){
-	            reload();
+	            msgLoad();
 	        },
 	        error:function(jqXHR, textStatus, errorThrown){
 	            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
@@ -261,7 +261,7 @@ function msgDelete() {
 	        type:'POST',
 	        data: chkarray,
 	        success:function(data){
-	            reload();
+	            msgLoad();
 	        },
 	        error:function(jqXHR, textStatus, errorThrown){
 	            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
@@ -307,7 +307,7 @@ function msgSendDelete() {
 	        type:'POST',
 	        data: chkarray,
 	        success:function(data){
-	            reload();
+	            msgLoad();
 	        },
 	        error:function(jqXHR, textStatus, errorThrown){
 	            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
@@ -327,7 +327,7 @@ function msgSendDelete() {
 	    </div>
 		
 	    <div class="btn-group"> 
-	        <a data-original-title="Refresh" href="javascript:reload();" class="btn mini tooltips">
+	        <a data-original-title="Refresh" href="javascript:msgLoad();" class="btn mini tooltips">
 	            <i class=" fa fa-refresh"></i>
 	        </a>
 	    </div>

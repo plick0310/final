@@ -264,7 +264,7 @@ $(document).ready(function(){
 	msgLoad();
 	noreadCount = setInterval(function() {
 		msgLoad();
-	}, 10000);
+	}, 60000);
 	$(".inbox-nav li").click(function () {
 		mode = $(this).attr('id');
 		page = 1;
