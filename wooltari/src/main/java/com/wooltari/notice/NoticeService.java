@@ -15,7 +15,7 @@ public interface NoticeService {
 	public Notice nextReadNotice(Map<String, Object> map);
 	
 	public int updateNotice(Notice dto, String pathname);
-	public int deleteNotice(int num, String pathname);
+	public int deleteNotice(int num, String saveFilename, String pathname);
 	
 	//좋아요
 	public int updateHitCount(int num);
@@ -25,5 +25,8 @@ public interface NoticeService {
 	public List<Notice> listFile(int num);
 	public Notice readFile(int fileNum);
 	public int deleteFile(Map<String, Object> map);
+	
+	//전체 선택 삭제
+	 public int deleteList(List<Integer> list);
 
 }

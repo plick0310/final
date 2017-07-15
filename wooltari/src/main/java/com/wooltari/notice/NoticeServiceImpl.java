@@ -17,7 +17,8 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Autowired
 	private FileManager fileManager;
-		
+	
+	//삽입
 	@Override
 	public int insertNotice(Notice dto, String pathname) {
 		int result=0;
@@ -49,19 +50,20 @@ public class NoticeServiceImpl implements NoticeService {
 		}
 		return result;
 	}
-
+	//데이타 카운트
 	@Override
 	public int dataCount(Map<String, Object> map) {
 		int result=0;
 		try{
-			result=dao.getIntValue("Notice.dataCount", map);
+			result=dao.getIntValue("notice.dataCount", map);
 		}catch(Exception e){
 			System.out.println(e.toString());
 		}
 		
 		return result;
 	}
-
+	
+	//리스트
 	@Override
 	public List<Notice> listNotice(Map<String, Object> map) {
 		List<Notice> list=null;
@@ -85,41 +87,94 @@ public class NoticeServiceImpl implements NoticeService {
 		}
 		return list;
 	}
-
+	
 	@Override
 	public Notice readNotice(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		Notice dto=null;
+		
+		try{
+			dto=dao.getReadData("notice.readNotice",num);
+		}catch (Exception e) {
+			System.out.println(e.toString());
+		}		
+		
+		return dto;
 	}
 
 	@Override
 	public Notice preReadNotice(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		Notice dto=null;
+		
+		try{
+			dto=dao.getReadData("notice.preReadNotice",map);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+		return dto;
 	}
 
 	@Override
 	public Notice nextReadNotice(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		Notice dto=null;
+		try{
+			dto=dao.getReadData("notice.nextReadNotice",map);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return dto;
 	}
 
 	@Override
 	public int updateNotice(Notice dto, String pathname) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		
+		try{
+			result=dao.updateData("notice.updateNotice", dto);
+			
+			if(!dto.getUpload().isEmpty()){
+				for(MultipartFile mf:dto.getUpload()){
+					if(mf.isEmpty())
+						continue;
+					
+					String saveFilename=fileManager.doFileUpload(mf, pathname);
+					if(saveFilename !=null){
+						String originalFilename=mf.getOriginalFilename();
+						
+						dto.setOriginalFilename(originalFilename);
+						dto.setSaveFilename(saveFilename);
+						
+						insertFile(dto);
+					}
+				}
+			}
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override
-	public int deleteNotice(int num, String pathname) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteNotice(int num, String saveFilename, String pathname) {
+		int result=0;
+		
+		try{
+			if(saveFilename !=null){
+				fileManager.doFileDelete(saveFilename, pathname);
+			}
+			dao.deleteData("studyMarketBoard.deleteBoard", num);
+			result=1;
+		}catch(Exception e){
+		}
+		return result;
 	}
 
 	@Override
 	public int updateHitCount(int num) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		
+		
+		return result;
 	}
 
 	@Override
@@ -144,6 +199,17 @@ public class NoticeServiceImpl implements NoticeService {
 	public int deleteFile(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	@Override
+	public int deleteList(List<Integer> list) {
+		int result=0;
+		
+		try{
+			result=dao.deleteData("notice.deleteList", list);
+		}catch(Exception e){			
+		}
+		
+		return result;
 	}
 
 	

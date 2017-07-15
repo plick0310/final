@@ -283,11 +283,12 @@ function deleteAction(){
 		<table style="width:100%;" cellpadding="0" cellspacing="0" border="0">
 			<tr>
 				<td colspan="2" style="text-align:left;">
+					<!-- 
 					<ul id="category">
 						<li><a href="">게시판</a></li>						
-					
 					</ul>
-					<div style="position:absolute; bottom:10px; right: -15px; top: 9px;">
+					 -->
+					<div style="position:absolute; bottom:10px; right: -15px;">
 						<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" onclick="check()"/><label for="allCheck">전체선택</label>			
 										
 					</div>
@@ -347,7 +348,7 @@ function deleteAction(){
         <c:if test="${dataCount!=0 }">
         	${paging}
         </c:if></div>
-	<div class="btnArea">
+	<div class="btnArea" style="float: right;">
 	<c:if test="${sessionScope.member.userId=='admin'}">
 		<input type="button" class="clickbtn" 
 		 onclick="javascript:deleteList();" value="삭제">
@@ -357,7 +358,7 @@ function deleteAction(){
 	</div>
 
 <form action="" id="array_form" name="searchForm" method="post">
-	<div class="scArea" style="margin: 30px 10px 30px 180px;"> 
+	<div class="scArea" style="margin: 30px 10px 30px 200px;"> 
 		<select name="searchKey" class="where">
 			<option value="subject">제목</option>
 			<option value="content">내용</option>

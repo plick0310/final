@@ -258,7 +258,7 @@ padding: 40px;
 	
 	<!-- 찾기  -->	
   <form action="" id="array_form" name="searchForm" method="post">
-	<div class="scArea" style="margin: 30px 10px 30px 180px;"> 
+	<div class="scArea" style="margin: 30px 10px 30px 80px;"> 
 		<select name="searchKey" class="where">
 			<option value="subject">제목</option>
 			<option value="content">내용</option>

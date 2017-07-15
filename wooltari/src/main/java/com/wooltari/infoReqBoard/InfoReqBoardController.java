@@ -451,6 +451,8 @@ public class InfoReqBoardController {
 			model.put("state", state);
 			return model;
 		}
+		
+		//댓글 리스트
 		@RequestMapping(value="/download/infoReqBoard/listReply")
 		public String listReply(
 				@RequestParam(value="num") int num,
