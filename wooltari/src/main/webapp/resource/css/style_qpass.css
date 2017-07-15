@@ -1,0 +1,87 @@
+@charset "utf-8";
+
+#body_style {margin:15px; text-align:center; background:#aaa;} /*PC 페이지*/
+body,table,tr,td,div,p,span,a,ul,li,form,input,iframe,img,textarea,form,button,select, c1 {margin:0px; padding:0px; font-family:MalgunGothic,Sans-serif; font-size:10pt; color:#323232;}
+img {border:0px;}
+input {color:#323232; text-decoration:none; outline-style:none;}
+
+form {margin:0px;}
+img {border:0px;}
+
+input {color:#323232; text-decoration:none; outline-style:none;}
+
+a {cursor:pointer;}
+a:link {text-decoration:none; color:#323232; outline-style:none;}
+a:visited {text-decoration:none; color:#323232;}
+a:hover {text-decoration:none; color:#405ca3;}
+a:active {text-decoration:none; color:#1818ff;}
+a.menu:link, a.menu:visited, a.menu:active, a.menu:hover {text-decoration:none;}
+
+.member {font-weight:bold; color:#888;}
+.guest {font-weight:normal; color:#888;}
+
+.lh {line-height:150%;}
+.jt {text-align:justify;}
+
+.li {font-weight:bold; font-size:18px; vertical-align:-4px; color:#66aead;}
+.ul {list-style-type:square; color:#66aead;}
+.ct {font-family:Verdana; color:#323232;}
+
+.ed {border:1px solid #ccc;}
+.tx {border:1px solid #ccc;}
+
+.small {font-family:Verdana; font-size:10pt;}
+.cloudy, a.cloudy {color:#888;} /* 흐림 */
+
+input.ed {padding:3px 2px 0px 2px; height:20px; border:1px solid #9a9a9a; border-right:1px solid #d8d8d8; border-bottom:1px solid #d8d8d8;}
+input.ed_password {padding:3px 2px 0px 2px; height:20px; border:1px solid #9a9a9a; border-right:1px solid #d8d8d8; border-bottom:1px solid #d8d8d8; font:10px tahoma;}
+textarea.tx {padding:2px; border:1px solid #9a9a9a; border-right:1px solid #d8d8d8; border-bottom:1px solid #d8d8d8;}
+textarea.quest_txt {width:99%;}
+.border_common_qpass {border:solid 1px #ccc;}
+
+.btn01_qpass {padding:5px; min-width:45px; color:#323232; border:1px solid #ccc; background:#f8f8f8; cursor:pointer;}
+.help01_qpass {padding:6px; border:2px solid #bdbec6; background:#f9f9f9; text-align:left; line-height:140%;}
+
+.td_border_common_qpass {border:solid 1px #ccc; border-right:none; border-bottom:none;}
+.td_border_right_qpass {border:solid 1px #ccc; border-bottom:none;}
+
+.td_border_bottom_qpass {border:solid 1px #ccc; border-right:none;}
+.td_border_bottomright_qpass {border:solid 1px #ccc;}
+
+
+.td_border_commonTitle_qpass {padding:3px; border:solid 1px #ccc; border-right:none; border-bottom:none; font-weight:bold; color:#323232; text-align:center;}
+.td_border_rightTitle_qpass {padding:3px; border:solid 1px #ccc; border-bottom:none; font-weight:bold; color:#323232; text-align:center;}
+
+.td_border_bottomTitle_qpass {padding:3px; border:solid 1px #ccc; border-right:none; font-weight:bold; color:#323232; text-align:center;}
+.td_border_bottomrightTitle_qpass {padding:3px; font-weight:bold; color:#323232; border:solid 1px #ccc; text-align:center;}
+
+.textInput_qpass {text-align:center; border:solid 1px #ccc;}
+
+.title01_qpass {padding:3px; font-weight:bold; color:#323232;}
+.title02_qpass {padding:3px; font-weight:bold; color:#323232; text-align:center;}
+.title03_qpass {margin-top:5px; font-size:13px; font-weight:bold; color:#bb6600; text-align:center;}
+
+.count_qpass {padding:5px 0px 0px 0px; vertical-align:top; font-weight:bold; line-height:1.5;} /*문제번호*/
+.question01_qpass {padding:5px 5px 3px 8px; font-weight:bold; text-align:justify; vertical-align:top; line-height:1.5; word-break:break-all;} /*문제*/
+.question02_qpass {padding:2px 5px 3px 22px; text-indent:-18px; text-align:justify; vertical-align:top; line-height:1.5; word-break:break-all;} /*답항*/
+
+.qpass_copyright {margin:3px 0px 0px 0px; background-color:white; font-size:11px;}
+.rightRate {color:blue;}
+
+#menu_top_select {padding:1px; width:185px; font-size:9pt; height:24px; border:1px solid #ccc;} /*탑메뉴 종목 선택*/
+#google_search input {padding:0px 8px !important; min-width:70px; height:24px !important; font-size:9pt; border:0px; background:#f8f8f8;}
+
+/* 시험설명(제목, 파일첨부, 참고사항), 문제해설(링크, 동영상 아이콘) */
+#subj_01 {font-size:10pt; font-weight:700; color:#333; line-height:1.6;} /*시험설명 제목*/
+#linesp_01 {margin-top:8px; padding:0px;} /*시험설명 줄간격*/
+#file_01 {margin-top:12px; padding:0px;} /*시험설명 파일첨부*/
+#refe_01 {font-weight:bold; color:#6868ff; text-align:justify;} /*시험설명 참고사항 제목*/
+#refe_02 {margin-top:3px; color:#6868ff; text-align:justify;} /*시험설명 참고사항 내용*/
+
+#sol_link {font-size:10pt; color:#ff6868; font-weight:bold;} /*문제해설 링크*/
+#sol_img {border:0px;} /*문제해설 동영상 아이콘*/
+#sol_ref {margin-bottom:3px; color:#454545; font-weight:bold;} /*문제해설 참고사항*/
+#sol_zans {margin-left:15px; text-indent:-15px;} /*문제해설 링크*/
+
+.dotabi_gisafirst_link div {margin:15px 12px; padding:14px 0px; width:100px; font-weight:bold; border:2px solid #79a5e4; background:#f8f8f8; text-align:center; line-height:24px; border-radius:50%;} /*기사퍼스트*/
+.dotabi_gisafirst_link div:hover {color:#405ca3; background:#e2f0fe;}

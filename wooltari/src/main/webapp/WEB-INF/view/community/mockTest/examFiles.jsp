@@ -54,6 +54,7 @@
 	  src: url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunDotum/BareunDotumOTFPro1.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/orgs/othrs/kpa/BareunDotum/BareunDotumOTFPro1.woff') format('woff');
 	}
 </style>
+
 <div style="width: 100%;height:30px;margin: 60px auto 13px;">
 	<div style="height: 50px; font-size: 20px; text-align: center; padding-bottom: 50px;">
 		<span style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
@@ -134,7 +135,13 @@
 										<td align="center"><strong style="color: #1abc9c;">응시전</strong>&nbsp;&nbsp;&nbsp;20 문제<span>|</span><br/></td>
 										<td style="text-align: center;">17.07.13<span>|</span></td>
 										<td colspan="1" align="center">
-											<button type="button" value="시작" class="clickbtn">시작</button>
+											<button type="button" value="시작" class="clickbtn" onclick="examStart();">시작</button>
+																						<script>
+												function examStart() {
+													alert("안녕");
+												}
+											</script>
+
                              			</td>
                              		</tr>
                         		</tbody>

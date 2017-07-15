@@ -276,7 +276,7 @@ $(function(){
 	
 	var popX = winX + (winWidth - popWidth)/2;
 	var popY = winY + (winHeight - popHeight)/2;
-	window.open("<%=cp%>/mockTest/examFiles", "popup",
+	window.open("<%=cp%>/mockTest/mockExam", "popup",
 			"width="+ popWidth + "px,height=" + popHeight + "px,top=" + popY+ ",left=" + popX);
 	}
 </script>

@@ -60,8 +60,6 @@ SessionInfo info = (SessionInfo) session.getAttribute("member");
 	@RequestMapping("/mockTest/examFiles") 
 	public String examFiles(
 			) throws Exception {
-		System.out.println("들어왔다~");	
-		
 		
 		
 		return "community/mockTest/examFiles";
