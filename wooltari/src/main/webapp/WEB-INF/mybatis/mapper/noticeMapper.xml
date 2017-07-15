@@ -31,5 +31,66 @@
 		</if>
 	</sql>
 	
+	<!-- 글 개수 -->
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM notice n
+			JOIN member m
+			ON n.userId=m.userId
+			<where>
+				<if test="searchValue!=null and searchValue=''">
+					<include refid="where-list"/>
+				</if>
+			</where>
+	</select>
+		
+	<!-- 베스트 글리스트 -->
+	<select id="listNotice" parameterType="map" resultType="com.wooltari.notice.Notice">
+		SELECT * FROM(
+			SELECT ROWNUM rnum, tb.* FROM(
+					SELECT n.num, notice, subject, hitCount, created, n.userId, content
+					FROM notice n
+					JOIN member m ON n.userId=m.userId
+						
+						<where>
+							<if test="searchValue !=null and searchValue!=''">
+								<include refid="where-list"/>
+							</if>
+						</where>
+					ORDER BY num DESC
+		<![CDATA[
+				)tb WHERE ROWNUM <=#{end}
+			)WHERE rnum>= #{start}
+		]]>
+	</select>
+	
+	<!-- 글보기 -->
+	<select id="readNotice" parameterType="Integer" resultType="com.wooltari.notice.Notice">
+		SELECT num, notice, subject, hitCount, created, n.userId, content
+		FROM notice n
+		JOIN member m ON n.userId=m.userId WHERE num=#{num}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	
+	
+	<!-- 이전글 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </mapper>

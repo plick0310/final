@@ -15,7 +15,7 @@ public interface NoticeService {
 	public Notice nextReadNotice(Map<String, Object> map);
 	
 	public int updateNotice(Notice dto, String pathname);
-	public int deleteNotice(int num, String pathname);
+	public int deleteNotice(int num, String saveFilename, String pathname);
 	
 	//좋아요
 	public int updateHitCount(int num);

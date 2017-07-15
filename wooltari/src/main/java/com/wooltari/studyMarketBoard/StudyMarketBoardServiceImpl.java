@@ -165,6 +165,7 @@ public class StudyMarketBoardServiceImpl implements StudyMarketBoardService{
 			result=1;
 		}catch(Exception e){
 		}
+		
 		return result;
 	}
 	

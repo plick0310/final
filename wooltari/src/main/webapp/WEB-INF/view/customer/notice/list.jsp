@@ -309,37 +309,25 @@ function deleteAction(){
 					<div style="position:relative;">
 						<!--[category_name]-->
 					
-						<a href="${articleUrl}&num=${dto.num}" class="subject">${dto.subject}</a><span class="comment">(${dto.replyCount})</span>
+						<a href="${articleUrl}&num=${dto.num}" class="subject">${dto.subject}</a><span class="comment"></span>
 					
 						<div class="info">
 							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">${dto.created}</span>
 							<span class="__dotted"></span>
 							<strong>작성자 </strong><span>${dto.userId}</span>
 							<span class="__dotted"></span>
-							<strong>조회수 </strong><span>${dto.hitCount}</span>
+							<strong>조회수 </strong><span></span>
 						</div>
 												
-						<div class="likes">
-							${dto.likeCount}<br>
-							<span class="num" style="color: #1abc9c;">추천</span>
-							<!--[unlikes]-->
-						</div>						
 					</div>
 				</td>
 			</tr>
 	</c:forEach>	
-			
-			
-		
-			
 		</tbody>
 	</table>
-
-	
 </form>	
 	
 <!--------------------s:loop�쁺�뿭-------------------->
-
 	<div class="paging" style="width: 900px; margin: 20px auto;text-align: center;">
 		<c:if test="${dataCount==0 }">
                             등록된 게시물이 없습니다.

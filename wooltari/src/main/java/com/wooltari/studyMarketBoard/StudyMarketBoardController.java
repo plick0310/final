@@ -104,17 +104,18 @@ public class StudyMarketBoardController {
 			map.put("end", end);
 			
 			
-			//글 리스트
+			//리스트에 담기
 			List<StudyMarketBoard> list=service.listBoard(map);
 			
 			//리스트의 번호
-			
 			Date endDate= new Date();
 			long gap;
 			int listNum, n=0;
-			Iterator<StudyMarketBoard> it=list.iterator();
 			
+			Iterator<StudyMarketBoard> it=list.iterator();
+			//이너리스트 만들기 위해 맵을 별도로함.
 			Map<String, Object> map1=new HashMap<>();
+			
 			while(it.hasNext()){
 				StudyMarketBoard data=it.next();
 				listNum=dataCount - (start + n - 1);
@@ -135,10 +136,11 @@ public class StudyMarketBoardController {
 				
 				data.setCreated(data.getCreated().substring(0,10));
 				
+				//이너리스트 만들기 위해 맵에 userId와 
 				map1.put("userId", data.getUserId());
 				map1.put("num", data.getNum());
 				data.setInnerList(service.innerStudyMarket(map1));
-				//서비스임플에 innerStudyMarket(맵퍼)에 userId와 num을 넣고, 그것을 setInnerlist로 innerlist로 담는다.
+				//서비스임플에 innerStudyMarket(맵퍼)으로 userId와 num을 넣고, 그것을 setInnerlist로 innerlist로 담는다.
 				
 				n++;
 				
@@ -171,9 +173,11 @@ public class StudyMarketBoardController {
 			}
 			
 			model.addAttribute("bestlist", bestlist);
+			
 			model.addAttribute("dataCount", dataCount);
 			model.addAttribute("page", current_page);
 			model.addAttribute("total_page", total_page);
+			
 			model.addAttribute("list", list);
 			model.addAttribute("articleUrl", articleUrl);
 			model.addAttribute("paging", paging);	
