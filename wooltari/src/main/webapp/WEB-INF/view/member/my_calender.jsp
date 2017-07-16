@@ -254,13 +254,11 @@ ul.inbox-pagination {
 }
 </style>
 <script type="text/javascript">
-var mode = "notice";
-var page = 1;
+var mode = "all";
 $(document).ready(function(){
 	reload();
 	$(".inbox-nav li").click(function () {
 		mode = $(this).attr('id');
-		page = 1;
 		$(".inbox-nav li").removeClass("active");
 		$(this).addClass("active");
 		reload();
@@ -274,21 +272,12 @@ function paging(paging) {
 
 function reload(){
 	$.ajax({
-		url:"<%=cp%>/customer/" + mode,
-		dataType:"html",
-		success : function(data) {
-		$('.msg-list').html(data);
+		type: 'POST'
+		,url:"<%=cp%>/study/myStudy/" + mode + "/calender"
+		,success : function(data) {
+			$('.content').html(data);
 		}
 	});
-	<%-- 
-	$.ajax({
-		url:"<%=cp%>/customer/list?mode=" + mode + "&page=" + page,
-		dataType:"html",
-		success : function(data) {
-		$('.msg-list').html(data);
-		}
-	});
-	 --%>
 }
 
 
@@ -307,8 +296,8 @@ function reload(){
 			</c:if>
 			</a>
 			<div class="user-name">
-				<h5><a href="#">${dto.userName}</a></h5>
-				<span><a href="#">${dto.userId}</a></span>
+				<h5><a href="#">${mdto.userName}</a></h5>
+				<span><a href="#">${mdto.userId}</a></span>
 			</div>
 		</div>
                   
@@ -317,17 +306,15 @@ function reload(){
 		
 		<ul class="inbox-nav inbox-divider">
 			<li id="notice" class="active">
-				<a href="#"><i class="fa fa-bell-o" aria-hidden="true"></i> 공지사항</a>
+				<a href="#"><i class="fa fa-bell-o" aria-hidden="true"></i> 전체 스케줄</a>
 			</li>
-			<li id="suggest">
-				<a href="#"><i class="fa fa-rss" aria-hidden="true"></i> 신고 및 건의</a>
+			
+		<c:forEach var="studyList" items="${studyList}">
+			<li id="${studyList.s_num}">
+				<a href="#"><i class="fa fa-calendar-o" aria-hidden="true"></i> ${studyList.studyName}</a>
 			</li>
-			<li id="faq">
-				<a href="#"><i class="fa fa-question-circle-o" aria-hidden="true"></i> 자주 묻는 질문</a>
-			</li>
-			<li id="qna">
-				<a href="#"><i class="fa fa-commenting-o" aria-hidden="true"></i> 1:1 문의</a>
-			</li>
+		</c:forEach>
+			
 		</ul>
 	</aside>
 	
@@ -335,7 +322,7 @@ function reload(){
 	<aside class="lg-side">
 		
 		<div class="inbox-body">
-			<div class="msg-list">
+			<div class="content">
 			<!-- 여기가 쪽지 리스트 -->
 			</div>
 		</div>

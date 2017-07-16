@@ -3,6 +3,7 @@ package com.wooltari.member;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -16,10 +17,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.wooltari.study.StudyInfo;
+import com.wooltari.study.StudyService;
+
+
 @Controller("member.memberController")
 public class MemberController {
 	@Autowired
-	private MemberService service;
+	private MemberService mservice;
+	
+	@Autowired
+	private StudyService sservice;
 
 	@RequestMapping(value="/member/login", method=RequestMethod.GET)
 	public String loginForm(
@@ -58,7 +66,7 @@ public class MemberController {
 	@RequestMapping(value="/member/myinfo", method=RequestMethod.GET)
 	public String myInfo(HttpSession session, Model model) throws Exception{
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		Member dto = service.readMember(info.getUserId());
+		Member dto = mservice.readMember(info.getUserId());
 		model.addAttribute("dto", dto);
 		return "member/info/myinfo";
 	}
@@ -66,14 +74,14 @@ public class MemberController {
 	@RequestMapping(value="/member/editinfo", method=RequestMethod.GET)
 	public String editInfo(HttpSession session, Model model) throws Exception{
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		Member dto = service.readMember(info.getUserId());
+		Member dto = mservice.readMember(info.getUserId());
 		model.addAttribute("dto", dto);
 		return "member/info/editinfo";
 	}
 
 	@RequestMapping(value="/member/memberinfo", method=RequestMethod.POST)
 	public String memberInfo(@RequestParam String userId, Model model) throws Exception{
-		Member dto = service.readMember(userId);
+		Member dto = mservice.readMember(userId);
 		model.addAttribute("dto", dto);
 		return "member/memberinfo";
 	}
@@ -91,7 +99,7 @@ public class MemberController {
 			String path=root+File.separator+"uploads"+File.separator+"member"+
 					File.separator+"userImg";
 			
-			service.insertMember(dto, path);
+			mservice.insertMember(dto, path);
 		} catch (Exception e) {
 			model.addAttribute("message", "회원가입이 실패했습니다.");
 			return "main/msg";
@@ -118,7 +126,7 @@ public class MemberController {
 			// 프로필 이미지 저장
 			String root=session.getServletContext().getRealPath("/");
 			String path=root+File.separator+"uploads"+File.separator+"member"+File.separator+"userImg";
-			service.updateMember(dto, path);
+			mservice.updateMember(dto, path);
 		} catch (Exception e) {
 			model.put("state", "false");
 			return model;
@@ -137,7 +145,7 @@ public class MemberController {
 		Map<String, Object> model = new HashMap<>();
 		try {
 			if(state.equals("true")){
-				service.outMember(info.getUserId());
+				mservice.outMember(info.getUserId());
 			}else{
 				model.put("state", "false");
 				return model;
@@ -161,7 +169,7 @@ public class MemberController {
 			@RequestParam String userId
 			) throws Exception {
 		String passed="false";
-		Member dto=service.readMember(userId);
+		Member dto=mservice.readMember(userId);
 		if(dto==null)
 			passed="true";
    	    // 작업 결과를 json으로 전송
@@ -188,7 +196,7 @@ public class MemberController {
 	@RequestMapping(value="/member/mypage", method=RequestMethod.GET)
 	public String myPage(@RequestParam(value="pageName", defaultValue="my_main") String pageName, Model model , HttpSession session) {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		Member dto = service.readMember(info.getUserId());
+		Member dto = mservice.readMember(info.getUserId());
 		model.addAttribute("pageName", pageName);
 		model.addAttribute("dto", dto);
 		return ".member.mypage";
@@ -197,52 +205,40 @@ public class MemberController {
 	@RequestMapping(value="/member/my_main", method=RequestMethod.GET)
 	public String my_Main(Model model , HttpSession session){
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		Member dto = service.readMember(info.getUserId());
+		Member dto = mservice.readMember(info.getUserId());
 		model.addAttribute("dto", dto);
 		return "member/my_main";
 	}
 	@RequestMapping(value="/member/my_msg", method=RequestMethod.GET)
 	public String my_Msg(Model model , HttpSession session){
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		Member dto = service.readMember(info.getUserId());
+		Member dto = mservice.readMember(info.getUserId());
 		model.addAttribute("dto", dto);
 		return "member/my_msg";
-	}
-	@RequestMapping(value="/member/my_activity", method=RequestMethod.GET)
-	public String my_Activity(Model model , HttpSession session){
-		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		Member dto = service.readMember(info.getUserId());
-		model.addAttribute("dto", dto);
-		return "member/my_activity";
 	}
 	@RequestMapping(value="/member/my_info", method=RequestMethod.GET)
 	public String my_Info(Model model , HttpSession session){
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		Member dto = service.readMember(info.getUserId());
+		Member dto = mservice.readMember(info.getUserId());
 		model.addAttribute("dto", dto);
 		return "member/my_info";
+	}
+	@RequestMapping(value="/member/my_calender", method=RequestMethod.GET)
+	public String my_Calender(Model model , HttpSession session){
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		Member mdto = mservice.readMember(info.getUserId());
+		List<StudyInfo> studyList = sservice.list2MyStudy(info.getUserId());
+		
+		model.addAttribute("mdto", mdto);
+		model.addAttribute("studyList", studyList);
+		
+		return "member/my_calender";
 	}
 	@RequestMapping(value="/member/my_point", method=RequestMethod.GET)
 	public String my_Point(Model model , HttpSession session){
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		Member dto = service.readMember(info.getUserId());
+		Member dto = mservice.readMember(info.getUserId());
 		model.addAttribute("dto", dto);
 		return "member/my_point";
 	}
-	@RequestMapping(value="/member/my_customer", method=RequestMethod.GET)
-	public String my_Customer(Model model , HttpSession session){
-		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		Member dto = service.readMember(info.getUserId());
-		model.addAttribute("dto", dto);
-		return "member/my_customer";
-	}
-	@RequestMapping(value="/member/my_out", method=RequestMethod.GET)
-	public String my_Out(Model model , HttpSession session){
-		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		Member dto = service.readMember(info.getUserId());
-		model.addAttribute("dto", dto);
-		return "member/my_out";
-	}
-	
-	
 }

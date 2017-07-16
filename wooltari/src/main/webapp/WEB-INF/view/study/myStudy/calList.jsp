@@ -32,7 +32,7 @@
 </style>
 <div style="text-align: left; color: red; font-weight: 300;">일정${dataCount }개</div>
 <c:forEach var="vo" items="${list}">
-<table style='width: 444px; margin-bottom: 10px; border: 1px solid #1abc9c;'>
+<table style='width: 100%; margin-bottom: 10px; border: 1px solid #1abc9c;'>
 
     <tr  height='35' style="">
         <td colspan="2" width='80%;' style='padding:5px 5px;'>

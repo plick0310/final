@@ -240,9 +240,8 @@ function deleteBoard(num,page){
 
 <style>
 
-	body {
+	#listCalendar {
 	    margin-bottom: 40px;
-		margin-top: 40px;
 		text-align: center;
 		font-size: 14px;
 		font-family: 'Roboto', sans-serif;
@@ -307,9 +306,9 @@ color:#1abc9c;
 </style>
 
 
-<div id='calendar' style=" width:50%; float: left; "></div> 
+<div id='calendar' style=" width:49%; float: left; "></div> 
 
-<div id='listCalendar' style="float: right; width: 441px;"></div>
+<div id='listCalendar' style="float: right; width:49%;"></div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
   <div class="modal-dialog">

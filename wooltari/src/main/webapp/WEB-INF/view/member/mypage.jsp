@@ -126,25 +126,7 @@ function myPageLoad() {
 }
 </script>
 <div class="container">
-	<%-- 
-    <div class="card hovercard">
-        <div class="card-background">
-            <img class="card-bkimg" alt="" src="<%=cp%>/resource/img/card.jpg">
-            <!-- http://lorempixel.com/850/280/people/9/ -->
-        </div>
-        <div class="useravatar">
-        	<c:if test="${not empty sessionScope.member.userImg}">
-	            <img alt="" src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}">
-        	</c:if>
-        	<c:if test="${empty sessionScope.member.userImg}">
-        	    <img alt="" src="<%=cp%>/resource/img/noprofileimg.png">
-        	</c:if>
-        </div>
-        <div class="card-info"> <span class="card-title">${sessionScope.member.userName}</span>
-
-        </div>
-    </div>
-     --%>
+	
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
         <div class="btn-group" role="group">
             <button type="button" id="my_main" class="btn btn-default" data-toggle="tab">
@@ -158,17 +140,17 @@ function myPageLoad() {
                 <div class="hidden-xs">쪽지함</div>
             </button>
         </div>
-        <!-- 
-        <div class="btn-group" role="group">
-            <button type="button" id="my_activity" class="btn btn-default" data-toggle="tab"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
-                <div class="hidden-xs">나의 활동</div>
-            </button>
-        </div>
-         -->
+        
         <div class="btn-group" role="group">
             <button type="button" id="my_info" class="btn btn-default" data-toggle="tab">
             	<i class="fa fa-user-o" aria-hidden="true"></i>
                 <div class="hidden-xs">나의 정보</div>
+            </button>
+        </div>
+        <div class="btn-group" role="group">
+            <button type="button" id="my_calender" class="btn btn-default" data-toggle="tab">
+            	<i class="fa fa-calendar" aria-hidden="true"></i>
+                <div class="hidden-xs">나의 스케줄</div>
             </button>
         </div>
         <div class="btn-group" role="group">
@@ -177,20 +159,6 @@ function myPageLoad() {
                 <div class="hidden-xs">나의 포인트</div>
             </button>
         </div>
-        <div class="btn-group" role="group">
-            <button type="button" id="my_customer" class="btn btn-default" data-toggle="tab">
-            	<i class="fa fa-handshake-o" aria-hidden="true"></i>
-                <div class="hidden-xs">고객센터</div>
-            </button>
-        </div>
-        <!-- 
-        <div class="btn-group" role="group">
-            <button type="button" id="my_out" class="btn btn-default" data-toggle="tab">
-            	<i class="fa fa-user-times" aria-hidden="true"></i>
-                <div class="hidden-xs">회원 탈퇴</div>
-            </button>
-        </div>
-         -->
     </div>
 
     <div class="well">
