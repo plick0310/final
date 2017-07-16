@@ -1,5 +1,6 @@
 package com.wooltari.calendar;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -37,7 +38,6 @@ public class CalendarController {
 		
 		return "study/myStudy/cal";
 	}
-	
 	
 	@RequestMapping(value="/study/myStudy/{s_num}/calender/created",method=RequestMethod.GET)
 	public String createdForm(
@@ -185,6 +185,55 @@ public class CalendarController {
 		Map<String, Object>model=new HashMap<>();
 		model.put("state", state);
 		model.put("page", page);
+		return model;
+	}
+	
+	
+	@RequestMapping(value="/study/myStudy/{s_num}/calender/cal")
+	@ResponseBody
+	public Map<String, Object> month(
+			@RequestParam(value="start") String start,
+			@RequestParam(value="end") String end,
+			Calendar dto,
+			@PathVariable long s_num,
+			HttpSession session) throws Exception {
+		
+		System.out.println("1단계");
+		
+		String tableName="s_"+dto.getS_num();
+		dto.setTableName(tableName);
+
+		Map<String, Object> map=new HashMap<String, Object>();	
+		map.put("start", start);
+		map.put("end", end);
+		map.put("tableName", tableName);
+
+		List<Calendar> list=service.listCal(map);
+		
+		System.out.println("2단계");
+		
+	 	List<ScheduleJSON> listJSON=new ArrayList<>();
+	    Iterator<Calendar> it=list.iterator();
+		while(it.hasNext()) {
+			Calendar vo=it.next();
+			
+			ScheduleJSON vo2=new ScheduleJSON();
+	    	vo2.setTitle(vo.getSubject());
+	    	vo2.setStart(vo.getSdate());
+	    	vo2.setEnd(vo.getEdate());
+	    	vo2.setContent(vo.getContent());
+	    	
+	    	System.out.println("시작일"+vo.getSdate());
+	    	System.out.println("종료일"+vo.getEdate());
+	    	
+	    	listJSON.add(vo2);
+		}
+		
+		System.out.println("3단계");
+   	    // 작업 결과를 json으로 전송
+		Map<String, Object> model = new HashMap<>(); 
+
+		model.put("list", listJSON);
 		return model;
 	}
 
