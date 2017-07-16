@@ -1,11 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%
-	String cp=request.getContextPath();
-%>
-<style>
+﻿@CHARSET "UTF-8";
 .pic-list .pic-list-padding {
     padding: 10px;
 }
@@ -871,54 +864,3 @@ textarea{
     border:1px solid #fff;
     padding:4px 6px;
 }
-</style>
-
-<script type="text/javascript">
-
-
-</script>
-
-
-<div class="container">
-<div class="pic-list" id="pick-container">
-	<div class="pic-list-title">WOOLTARI PICK</div>
-		<div class="row no-margin">
-			<c:forEach begin="1" end="10" step="1">
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 pic-list-margin pic-list-padding">
-					<a href="#">
-					<div class="study-item">
-						<div class="study-item-overlay">
-						</div>
-						<div class="header-bg" style="background-image:url(https://moccozy.blob.core.windows.net/pictures/adc93874-bd74-489c-a13e-6bf3188a54ff.jpg)">
-						</div>
-						<div class="header-text-container">
-							<div class="header-text">
-								<div style="height:68px;">
-									<div class="title">
-										피아노 1주에 1곡 배우기
-									</div>
-									<div class="sub-title">
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="item-contents">
-							<div class="profile-image" style="background-image:url(https://graph.facebook.com/1081345805289267/picture?type=large)">
-							</div>
-							<div class="user-name">
-								JaeHoon Jang
-							</div>
-							<div class="location">
-								서울 영등포구 당산동1가
-							</div>
-							<div class="strong-info">
-								₩ 60,000원 · 월 4회
-							</div>
-						</div>
-					</div>
-					</a>
-				</div>
-			</c:forEach>
-		</div>
-	</div>
-</div>    
