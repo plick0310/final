@@ -225,7 +225,7 @@ function listPage2(replyCount, num) {
 
 <div id="reply-insert">
 	<div style="clear: both;">
-		<span style="font-weight: bold;">댓글 쓰기</span><span> - 타인을 비방하거나
+		<span style="font-weight: bold;">댓글 쓰기</span><span style="font-size: 13px;"> - 타인을 비방하거나
 			개인정보를 유출하는 글의 게시를 삼가 주세요.</span>
 	</div>
 	<div style="clear: both; padding-top: 10px; float: left; width: 620px;">
