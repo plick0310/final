@@ -6,9 +6,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class StudyInfo {
 	private long s_num;
-	private String userId;
+	private String userId ;
 	private String studyName, study_Info, created, gender; // 스터디명,스터디한줄소개,스터디생성일
-	private int recruit, range;// 모집인원 , 스터디 공개 범위
+	private int recruit, range ;// 모집인원 , 스터디 공개 범위
+	
+	private String userName , userImg;
 	
 	private String[] target =null;// 모집대상
 	private String s_target;
@@ -23,10 +25,27 @@ public class StudyInfo {
 	private MultipartFile upload;
 	private String imageFileName;
 	
+	
 
 	
 	
 	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getUserImg() {
+		return userImg;
+	}
+
+	public void setUserImg(String userImg) {
+		this.userImg = userImg;
+	}
+
 	public MultipartFile getUpload() {
 		return upload;
 	}
