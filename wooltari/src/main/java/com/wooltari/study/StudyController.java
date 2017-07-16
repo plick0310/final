@@ -1,5 +1,5 @@
 package com.wooltari.study;
-
+  
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -126,7 +126,7 @@ public class StudyController {
 		model.addAttribute("Mylist",list);	
 		model.addAttribute("Mylist2",list2);	
 		
-		
+		  
 	    return ".study.mystudylist.mylist";
 	}
 	
