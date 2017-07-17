@@ -14,21 +14,18 @@
    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
 <!-- Swiper JS -->
-   <script src="<%=cp%>/resource/js/swiper.min.js"></script>
+<script src="<%=cp%>/resource/js/swiper.min.js"></script>
+
+<!-- Map -->
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=tkYb1p5roIP90h3KhPZ_&submodules=geocoder"></script>
 
 <!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="<%=cp%>/resource/css/style.css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/swiper.min.css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/bootstrap.css">
 
-<%-- <script type="text/javascript" src="<%=cp%>/resource/js/jquery.1.11.1.js"></script>
- --%>
- 
- <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/js/bootstrap.min.js"></script>
-
-
 
 <!-- Demo styles -->
 <style>
@@ -148,7 +145,6 @@ input#studyName {
    margin: 10px 0;
    font-size: 1.6rem;
    font-weight: 300;
-  
    border: 1px solid #ccc;
 }
 
@@ -323,8 +319,7 @@ function insertStudy(){
 </head>
 <body>
    <!-- Swiper -->
-   <form class="swiper-container" method="post"
-      enctype="multipart/form-data" name="studyForm">
+   <form class="swiper-container" method="post" enctype="multipart/form-data" name="studyForm">
 
       <div class="swiper-wrapper">
          <div class="swiper-slide">
@@ -348,9 +343,7 @@ function insertStudy(){
                   <div class="question-title">스터디 한줄 소개를 입력해 주세요</div>
                   <p class="help-block">100자 이내로 입력해 주세요.</p>
                   <div class="question-answer">
-                     <textarea class="form-control"rows="6%" cols="80%" name="study_Info" id="study_Info" style="    border-radius: 0;
-    border: 1px solid #ccc; resize: none;"
-                        onchange=""></textarea>
+                     <textarea class="form-control"rows="6%" cols="80%" name="study_Info" id="study_Info" style="border-radius: 0; border: 1px solid #ccc; resize: none;" onchange=""></textarea>
                   </div>
                </div>
             </div>
@@ -361,9 +354,7 @@ function insertStudy(){
                      <div class="upload-label">
                         <div class="fileBox" >
                         <img id="blah" src="#" alt="" style="width: 250px; height: 250px;"/>
-                           <label id="blahbtn" for="uploadBtn"  class="btn btn-large uploadLabel " style="    position: absolute;
-    top: 94px;
-    left: 0px;">사진올리기
+                           <label id="blahbtn" for="uploadBtn"  class="btn btn-large uploadLabel " style="position: absolute; top: 94px; left: 0px;">사진올리기
                            <i class="glyphicon glyphicon-cloud-upload"></i></label>
                            <input type="file" name="upload" id="uploadBtn" class="uploadBtn tts" >
                         </div>
@@ -487,6 +478,31 @@ function insertStudy(){
                      </div>
                   </div>
                </div>
+               
+               
+               <div class="section-question">
+                  <div class="question-title">스터디 카테고리를 선택해 주세요</div>
+                  <p class="help-block" id="help-cate">최대 3개의 카테고리를 선택 가능합니다.</p>
+                  <div class="question-answer">
+                     <div class="row targetWrap">
+
+                        <select id="bigCategory" class="selectField" onchange="themeList();" style=" margin: 10px 0 0;width: 265px;">
+                           <option value="">:: 대분류 ::</option>
+                           <c:forEach var="vo" items="${listBigCategory}">
+                              <option value="${vo.categoryNum}">${vo.subject}</option>
+                           </c:forEach>
+                        </select>
+                        
+                        <select  id="smallCategory" class="selectField" style=" margin: 10px 0 0;width: 265px;" >
+                           <option value="">:: 중분류 ::</option>
+                        </select>
+                        
+                        <div id="select_category">
+                       </div>
+                        </div>
+
+                     </div>
+                  </div>
 
 
             </div>
@@ -502,30 +518,6 @@ function insertStudy(){
                <div class="section-title"><i class="glyphicon glyphicon-th-list" style="font-size: 19px;"></i>&nbsp;스터디 <span style="color: #b8b8b8;">상세 정보&nbsp;II</span></div>
                <div class="section-verticalLine"></div>
 
-      <div class="section-question">
-                  <div class="question-title">스터디 카테고리를 선택해 주세요</div>
-                  <p class="help-block" id="help-cate">최대 3개의 카테고리를 선택 가능합니다.</p>
-                  <div class="question-answer">
-                     <div class="row targetWrap">
-
-                        <select id="bigCategory" class="selectField" onchange="themeList();" style=" margin: 10px 0 0;width: 265px;">
-                           <option value="">:: 대분류 ::</option>
-                           <c:forEach var="vo" items="${listBigCategory}">
-                              <option value="${vo.categoryNum}"
-                               <%--   ${vo.categoryNum==dto.bigCategory ? "selected='selected'" : ""} --%>>${vo.subject}</option>
-                           </c:forEach>
-                        </select>
-                        
-                        <select  id="smallCategory" class="selectField" style=" margin: 10px 0 0;width: 265px;" >
-                           <option value="">:: 중분류 ::</option>
-                        </select>
-                        
-                        <div id="select_category">
-                       </div>
-                        </div>
-
-                     </div>
-                  </div>
                </div>
 
             <div class="section-question">
@@ -533,19 +525,123 @@ function insertStudy(){
                   <p class="help-block" id="help-city">최대 3개의 지역을 선택가능합니다.</p>
                   <div class="question-answer">
                       <div class="row targetWrap">
-
-                        <select  id="bigCity" class="selectField" onchange="cityList();" style="margin: 10px 0 0;width: 265px;">
-                           <option value="">:: 대분류 ::</option>
-                           <c:forEach var="vo" items="${listBigCity}">
-                              <option value="${vo.cityNum}">${vo.cityName}</option>
-                           </c:forEach>
-                        </select> 
-                        <select  id="smallCity" class="selectField" style="margin: 10px 0 0;width: 265px;">
-                           <option value="">:: 중분류 ::</option>
-                        </select>
-                        <div id="select_city">
-                        
+						<div id="select_city">
                         </div>
+						<!-- 맵 시작 -->
+						<div class="question-answer">
+								<input id="address" name="address" type="text"> 
+								<input type="button" id="addLocal" value="검색">
+							<div id=map style="width: 550px; height: 300px;"></div>
+						</div>
+						<div id="map" style="width:100%;height:400px;"></div>
+						
+						<script type="text/javascript">
+						var searchLocal = null;
+						var pointx = null;
+						var pointy = null;
+						var map = new naver.maps.Map("map", {
+						    center: new naver.maps.LatLng(37.3595316, 127.1052133),
+						    zoom: 10,
+						    mapTypeControl: true
+						});
+
+						var infoWindow = new naver.maps.InfoWindow({
+						    anchorSkew: true
+						});
+
+						map.setCursor('pointer');
+
+						// search by tm128 coordinate
+						function searchCoordinateToAddress(latlng) {
+						    var tm128 = naver.maps.TransCoord.fromLatLngToTM128(latlng);
+
+						    infoWindow.close();
+
+						    naver.maps.Service.reverseGeocode({
+						        location: tm128,
+						        coordType: naver.maps.Service.CoordType.TM128
+						    }, function(status, response) {
+						        if (status === naver.maps.Service.Status.ERROR) {
+						            return alert('Something Wrong!');
+						        }
+								//onclick='deleteCategory(\""+idx+"\");'
+						        var item = response.result.items[0],
+					            point = new naver.maps.Point(item.point.x, item.point.y);
+					            searchLocal = item.address;
+					            pointx = point.x;
+						        pointy = point.y;
+						        
+					            var btn = '<input type="button" onclick="addStudyLocal();" value="스터디 활동 지역 추가">';
+					            var atag = '<a href="javascript:addStudyLocal();">스터디 활동 지역 추가</a>';
+					            infoWindow.setContent([
+					                '<div style="padding:10px;min-width:200px;line-height:150%;">',
+					                item.address +'</br>',
+					                '('+ point.x +','+ point.y + ')</br>',
+					                btn,
+					                '</div>'
+					            ].join('\n'));
+
+ 						        infoWindow.open(map, latlng);
+						    }); 
+						}
+
+						// result by latlng coordinate
+						function searchAddressToCoordinate(address) {
+						    naver.maps.Service.geocode({
+						        address: address
+						    }, function(status, response) {
+						        if (status === naver.maps.Service.Status.ERROR) {
+						            return alert('Something Wrong!');
+						        }
+
+						        var item = response.result.items[0],
+						        point = new naver.maps.Point(item.point.x, item.point.y);
+						        searchLocal = item.address;
+						        pointx = point.x;
+						        pointy = point.y;
+						        
+						        var btn = '<input type="button" onclick="addStudyLocal();" value="스터디 활동 지역 추가">';
+					            var atag = '<a href="javascript:addStudyLocal();">스터디 활동 지역 추가</a>';
+					            infoWindow.setContent([
+					                '<div style="padding:10px;min-width:200px;line-height:150%;">',
+					                item.address +'</br>',
+					                '('+ point.x +','+ point.y + ')</br>',
+					                btn,
+					                '</div>'
+					            ].join('\n'));
+
+
+						        map.setCenter(point);
+						        infoWindow.open(map, point);
+						    });
+						}
+
+						function initGeocoder() {
+						    map.addListener('click', function(e) {
+						        searchCoordinateToAddress(e.coord);
+						    });
+
+						    $('#address').on('keydown', function(e) {
+						        var keyCode = e.which;
+
+						        if (keyCode === 13) { // Enter Key
+						            searchAddressToCoordinate($('#address').val());
+						        }
+						    });
+
+						    $('#addLocal').on('click', function(e) {
+						        e.preventDefault();
+
+						        searchAddressToCoordinate($('#address').val());
+						    });
+
+						    searchAddressToCoordinate('정자동 178-1');
+						}
+
+						naver.maps.onJSContentLoaded = initGeocoder;
+						</script>
+
+						<!-- 맵 끝 -->
 
                      </div> 
                   </div>
@@ -567,18 +663,19 @@ function insertStudy(){
 
 
                <div class="section-question" >
-                  <div class="question-title" style="    margin-bottom: 38px;">스터디 공개범위를 선택해 주세요</div>
+                  <div class="question-title" style="margin-bottom: 38px;">스터디 공개범위를 선택해 주세요</div>
                   <div class="question-answer">
 
                      <div class="row">
                         <div class="col-sm-6 col-md-4">
                            <div class="thumbnail" id="thum1">
-                              <label style="    margin-left: 31px;"> <input type="radio" name="range" value="0" id="range0"/>
+                              <label style="margin-left: 31px;">
+                              <input type="radio" name="range" value="0" id="range0"/>
                                  <img class="icon"src="<%=cp%>/resource/img/group.png" alt="..."> 
                               </label>
                               <div class="caption">
                                  <h4>전체공개</h4>
-                                 <p style="    font-size: 13px;color: #858585;font-weight: lighter;">누구나 스터디를 검색해 찾을 수 있고,홈페이지 회원 모두 게시물을 볼 수 있습니다.</p>
+                                 <p style="font-size: 13px;color: #858585;font-weight: lighter;">누구나 스터디를 검색해 찾을 수 있고,홈페이지 회원 모두 게시물을 볼 수 있습니다.</p>
                               </div>
                            </div>
 
@@ -586,25 +683,26 @@ function insertStudy(){
 
                         <div class="col-sm-6 col-md-4">
                            <div class="thumbnail" id="thum2">
-                              <label style="    margin-left: 31px;"> <input type="radio" name="range" value="1" id="range1"/>
+                              <label style="margin-left: 31px;">
+                              <input type="radio" name="range" value="1" id="range1"/>
                                  <img class="icon" src="<%=cp%>/resource/img/user.png" alt="..." >
                               </label>
                               
                               <div class="caption">
                                  <h4>스터디명 공개</h4>
-                                 <p style="    font-size: 13px;color: #858585;font-weight: lighter;">누구나 스터디를 검색해 찾을 수 있지만, 게시물은 멤버만 볼 수 있습니다.</p>
+                                 <p style="font-size: 13px;color: #858585;font-weight: lighter;">누구나 스터디를 검색해 찾을 수 있지만, 게시물은 멤버만 볼 수 있습니다.</p>
                               </div>
                            </div>
                         </div>
 
                         <div class="col-sm-6 col-md-4">
                            <div class="thumbnail" id="thum3">
-                              <label style="    margin-left: 31px;"> <input type="radio" name="range" value="2" id="range2"/>
+                              <label style="margin-left: 31px;"> <input type="radio" name="range" value="2" id="range2"/>
 							    <img class="icon" src="<%=cp%>/resource/img/padlock.png" alt="...">
                               </label>
                               <div class="caption">
                                  <h4>비공개</h4>
-                                 <p style="    font-size: 13px;color: #858585;font-weight: lighter;">스터디와 게시글이 공개되지 않습니다. 초대를 통해서만 가입할 수 있습니다.</p>
+                                 <p style="font-size: 13px;color: #858585;font-weight: lighter;">스터디와 게시글이 공개되지 않습니다. 초대를 통해서만 가입할 수 있습니다.</p>
                               </div>
                            </div>
                         </div>
@@ -616,10 +714,9 @@ function insertStudy(){
             
                <div class="section-question" >
                   <input type="button" id="uploadBtn2" class="uploadBtn tts" onclick="insertStudy();" >
-                  <label for="uploadBtn2" class="btn btn-large uploadLabel">스터디
-                     만들기</label>
+                  <label for="uploadBtn2" class="btn btn-large uploadLabel">스터디 만들기</label>
                   <input type="button" id="uploadBtn2" class="uploadBtn tts">
-                  <label for="uploadBtn2" class="btn btn-large uploadLabel" style="    float: right;">취소</label>
+                  <label for="uploadBtn2" class="btn btn-large uploadLabel" style="float: right;">취소</label>
                </div>
             
             </div>
@@ -655,14 +752,14 @@ function insertStudy(){
 
    <script>
 
-	  
-   function deleteCategory(item) {//x버튼 클릭시 제거
-		
+	function deleteCategory(item) {//x버튼 클릭시 제거
 		var $item =$("#"+item);
+		$item.next().next().next().remove();
+		$item.next().next().remove();
 		$item.next().remove();
 		$item.remove();
-			
-   }
+		cnt--;
+	}
 	   
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -731,43 +828,6 @@ function insertStudy(){
          });
       	
          
-         $("#smallCity").change(function() { //도시 선택하면 박스추가 및 제어 
-     
-        	 if($("input[name='choiceCity']").length>=3){
-                $("#help-city").html("3개이하만 선택 가능합니다.").css("color","#f27979");
-                return;
-             } else{
-             	
-             }
-          
-         	 vnt++;
-             
-         	 var index3 = $("#bigCity option:selected");
-             var index4 = $("#smallCity option:selected");
-             var s = index3.text() + "-" + index4.text();
-             var vdx ="my_city"+vnt;
-             
-             var state2=false;
-             $("input[name='choiceCity']").each(function() {
-            	 if(index4.val() === this.value){
-            		 state2=true;
-            		 $("#help-city").html("중복된 지역을 선택하였습니다.").css("color","#f27979");
-            	 }
-            });
-
-			if(state2){
-				return;
-			}	
-
-            
-            	 
-             $("#select_city").append(" <div id='"+vdx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb; '>"
-                     +"<div style='display: inline-block; font-size: 17px; line-height: 40px; color: white;'>"
-                       +s+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"
-                         +" width='20px' height='20px' onclick='deleteCategory(\""+vdx+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
-                         	+"<input type='hidden' value='"+index4.val()+"' name='choiceCity' id='choiceCity'>");
-          });
-       
          $('input[type=checkbox]').click(function() { //스터디대상3이하로 막기
             var count = $('input:checkbox[name="target"]:checked').length;
             if (count > 2) {
@@ -777,6 +837,45 @@ function insertStudy(){
 
          });
       });
+    
+    
+    
+    
+		var vdx = null;
+		var vnt = 0;
+		var cnt = 0;
+    	function addStudyLocal() {
+    		// 3개 초과인지 검사
+            if(cnt>=3){
+                $("#help-city").html("3개이하만 선택 가능합니다.").css("color","#f27979");
+                return;
+            } 
+            var flag = true;
+			$("input[id='choiceCity']").each(function() {
+				//$("#"+vdx).next().val()
+				if(searchLocal == this.value){
+					$("#help-city").html("중복된 카테고리를 선택하였습니다.").css("color","#f27979");
+					flag = false;
+					return;
+				}
+			});
+			if(!flag){
+				return;
+			}
+			cnt++;
+			vnt++;
+			var vdx ="my_city"+vnt;
+			$("#select_city").append(" <div id='"+vdx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb; '>"
+			+"<div style='display: inline-block; font-size: 17px; line-height: 40px; color: white;'>"
+			+searchLocal+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"
+			+" width='20px' height='20px' onclick='deleteCategory(\""+vdx+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
+			+"<input type='hidden' value='"+searchLocal+"' name='choiceCity' id='choiceCity'>"
+			+"<input type='hidden' value='"+pointx+"' name='pointx' id='pointx'>"
+			+"<input type='hidden' value='"+pointy+"' name='pointy' id='pointy'>");
+		} 
+    	
+    	
+    	
       /////////////////////////////////////////////////////////////////////////////////////////////////////
   
       function themeList() {
@@ -826,55 +925,6 @@ function insertStudy(){
                });
       }
       
-      function cityList() {
-          var bigCity=$("#bigCity").val();
-          if(bigCity=="") {
-             $("#smallCity option").each(function() {
-                $("#smallCity option:eq(0)").remove();
-             });
-
-             $("#smallCity").append("<option value=''>:: 중분류 ::</option>");
-             return false;
-          }
-          
-          var url="<%=cp%>/study/getCity";
-            var query = "parent=" + bigCity;
-            //alert(query);
-            $
-                  .ajax({
-                     type : "post",
-                     url : url,
-                     data : query,
-                     dataType : "json",
-                     success : function(data) {
-                        $("#smallCity option").each(function() {
-                           $("#smallCity option:eq(0)").remove();
-                        });
-
-                        $("#smallCity").append(
-                              "<option value=''>:: 중분류 ::</option>");
-
-                        var cn = "${dto.cityNum}";
-                        var s;
-                        for (var idx = 0; idx < data.listSmallCity.length; idx++) {
-                           s = "";
-                           if (cn == data.listSmallCity[idx].cityNum)
-                              s = " selected='selected'";
-                           $("#smallCity")
-                                 .append(
-                                       "<option value='"+data.listSmallCity[idx].cityNum+"' " + s +">"
-                                             + data.listSmallCity[idx].cityName
-                                             + "</option>");
-                        }
-                     },
-                     error : function(e) {
-                        alert(e.responseText);
-                     }
-                  });
-         }
-
-      
-      
    </script>
 
 
@@ -894,7 +944,7 @@ function insertStudy(){
 
             reader.onload = function (e) {
             	$('#blahbtn').html("사진 바꾸기");
-$('#blah').attr('src', e.target.result); 
+				$('#blah').attr('src', e.target.result); 
                		/* alert(e.target.result);
                     $('#blah').style.backgroundImage = "url('"e.target.result"')"; */
                 }
@@ -902,11 +952,6 @@ $('#blah').attr('src', e.target.result);
               reader.readAsDataURL(input.files[0]);
             }
         }
-
-
     </script>
-
-
-
 </body>
 </html>
