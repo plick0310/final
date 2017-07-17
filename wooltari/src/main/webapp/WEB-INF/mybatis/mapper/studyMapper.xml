@@ -106,7 +106,7 @@
    		 ,created DATE default SYSDATE
    		 ,hitCount NUMBER DEFAULT 0
    		 ,userId VARCHAR2(50) NOT NULL
-   		 ,imageFileName VARCHAR2(1000)
+   		 <!-- ,imageFileName VARCHAR2(1000) -->
    		 ,PRIMARY KEY(num)
    		 ,FOREIGN KEY(s_num) REFERENCES study(s_num) ON DELETE CASCADE
    		 ,FOREIGN KEY(userId) REFERENCES member(userId)
@@ -123,12 +123,11 @@
 	<!-- 자유게시판 사진첨부 -->
 	<update id="createStudyPhoto" parameterType="Long">
 		CREATE TABLE s_${value}_Photo(
- 		  pNum NUMBER NOT NULL
-  		 ,s_num NUMBER NOT NULL
-  		 ,imageFile VARCHAR2(1000) NOT NULL
-  		 ,PRIMARY KEY(pNum)
-  		 ,FOREIGN KEY(s_num) REFERENCES s_${value}_Board(s_num)
-		);   
+ 		  num NUMBER NOT NULL
+  		 ,imageFileName VARCHAR2(1000) NOT NULL
+  		 ,PRIMARY KEY(num, imageFileName)
+  		 ,FOREIGN KEY(num) REFERENCES s_${value}_Board(num) ON DELETE CASCADE
+		)
 	
 	</update>
 	

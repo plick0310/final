@@ -65,6 +65,9 @@ public class BoardController {
 		     
 		dto.setUserId(info.getUserId());
 		service.insertBoard(dto ,pathname);
+		
+		
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -123,12 +126,11 @@ public class BoardController {
 		}
 		    
 		end = bbs_count;
-		   
+		    
 		map.put("start", start);
 		map.put("end", end);
 		
 		List<Board> list = service.listBoard(map);
-		
 		
 		Iterator<Board> it = list.iterator();
 		
@@ -136,9 +138,16 @@ public class BoardController {
 			Board dto = it.next();
 			dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 			map.put("num", dto.getNum());
+			
 			dto.setLikeCount(service.countLikeBoard(map));
 			dto.setReplyCount(service.countReplyBoard(map));
-		//	dto.setLikeCheck(service.checkLike(map));
+			
+			
+			List<String> photolist = service.readPhoto(map);
+				if(photolist.size()!=0){
+					dto.setImageFileName(photolist.get(0));
+				}
+			
 		}
 		
 		

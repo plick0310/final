@@ -211,9 +211,10 @@ function readURL(input) {
 			var reader = new FileReader();
 
 			reader.onload = function(e) {
+				
 				$('#blah').attr('src', e.target.result);
 				$('#content1').attr('src', e.target.result);
-				$('#b_image').show().attr('src', e.target.result);
+				
 				
 			}
 
