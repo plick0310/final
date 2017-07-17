@@ -81,9 +81,9 @@ border: 1px solid #EAEAEA;
 		
 		var mode="${mode}";
 		if(mode=="created")
-    		f.action="<%=cp%>/infoReqBoard/created";
+    		f.action="<%=cp%>/customer/faq/created";
     	else if(mode=="update")
-    		f.action="<%=cp%>/infoReqBoard/update";
+    		f.action="<%=cp%>/customer/faq/update";
 		
 		
 		return true;
@@ -150,8 +150,13 @@ border: 1px solid #EAEAEA;
 			</tr>
 			 
 			<tr>
-				<th>공지여부</th>
-				<td style=""><input type="checkbox" name=notice value="1" ${dto.notice==1?"checked='checked'":"" }>공지				
+				<th>이용 안내</th>
+				<td>
+					<select name='category'>
+    				<option value='frequentask'>자주묻는 질문</option>
+    				<option value='using'>이용관련</option>
+    				<option value='payment'>결제관련</option>
+				</select>				
 				</td>
 			</tr>
 			
