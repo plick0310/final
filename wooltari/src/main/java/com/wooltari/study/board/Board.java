@@ -1,5 +1,7 @@
 package com.wooltari.study.board;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class Board {
@@ -7,7 +9,7 @@ public class Board {
 	private String userId, content , created , userName;
 	private long s_num;
 	
-	private MultipartFile upload2;
+	private List<MultipartFile> upload2;
 	private String imageFileName;
 	
 	private String userImg;
@@ -21,6 +23,15 @@ public class Board {
 	
 	
 	
+	
+	
+	public List<MultipartFile> getUpload2() {
+		return upload2;
+	}
+
+	public void setUpload2(List<MultipartFile> upload2) {
+		this.upload2 = upload2;
+	}
 	
 	
 	public String getImageFileName() {
@@ -111,15 +122,6 @@ public class Board {
 		this.s_num = s_num;
 	}
 
-	
-
-	public MultipartFile getUpload2() {
-		return upload2;
-	}
-
-	public void setUpload2(MultipartFile upload2) {
-		this.upload2 = upload2;
-	}
 
 	public String getUserImg() {
 		return userImg;

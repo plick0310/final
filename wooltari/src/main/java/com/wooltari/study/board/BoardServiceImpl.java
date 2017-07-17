@@ -6,9 +6,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.wooltari.common.FileManager;
 import com.wooltari.common.dao.CommonDAO;
+import com.wooltari.studyMarketBoard.StudyMarketBoard;
 
 @Service("study.board.BoardService")
 public class BoardServiceImpl implements BoardService{
@@ -28,13 +30,26 @@ public class BoardServiceImpl implements BoardService{
 			int maxNum=dao.getIntValue("studyBoard.maxNum", map);
 			dto.setNum(maxNum+1);
 			
+			
+			dao.insertData("studyBoard.insertBoard", dto);
+			
+			
 			if(dto.getUpload2()!=null && ! dto.getUpload2().isEmpty()) {
 				// 파일 업로드
-				String newFilename=fileManager.doFileUpload(dto.getUpload2(), pathname);
-				dto.setImageFileName(newFilename);
+				for(MultipartFile mf:dto.getUpload2()){
+					if(mf.isEmpty())
+						continue;
+					
+				String newFileName = fileManager.doFileUpload(mf, pathname);
+		
+				map.put("num", dto.getNum());
+				map.put("imageFileName", newFileName);
+				insertPhoto(map);
+				}
+				
 			}
 		
-			dao.insertData("studyBoard.insertBoard", dto);
+			
 			
 			
 		} catch (Exception e) {
@@ -42,12 +57,27 @@ public class BoardServiceImpl implements BoardService{
 		}
 		
 	}
+	
+	//이미지 추가
+	@Override
+	public void insertPhoto(Map<String, Object>map ) throws Exception{
+		
+		try{
+			dao.insertData("studyBoard.insertPhoto", map);
+		}catch(Exception e){
+			throw e;
+		}
+		
+	}
+	
 
 	@Override
 	public List<Board> listBoard(Map<String, Object> map) {
 		List<Board> list= null;
 		try {
 			list=dao.getListData("studyBoard.listBoard",map);
+			
+			
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -55,6 +85,20 @@ public class BoardServiceImpl implements BoardService{
 		return list;
 	}
  
+	
+	@Override
+	public List<String> readPhoto(Map<String, Object> map) {
+		List<String> readPhoto=null;
+		
+		try{
+			readPhoto=dao.getListData("studyBoard.readPhoto", map);			
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+		return readPhoto;
+	}
+	 
 	@Override
 	public int dataCount(Map<String, Object> map) {
 		int result=0;
