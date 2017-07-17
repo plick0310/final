@@ -76,7 +76,7 @@
 	</div>
 	
 	<span class="star-input" >
-	   <span class="input">
+	   <span class="input" style="margin-top: 20px;">
 			    <input type="radio" name="star-input" id="p2" value="1"><label for="p2">1</label>
 			    <input type="radio" name="star-input" id="p4" value="2"><label for="p4">2</label>
 			    <input type="radio" name="star-input" id="p6" value="3"><label for="p6">3</label>

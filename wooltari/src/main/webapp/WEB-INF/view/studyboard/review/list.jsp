@@ -219,7 +219,7 @@ function deleteBoard(){
 <!-- Modal --> 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" style="padding: 15px;">
       <div id="myModalBody" class="modal-body" style="height: 500px; "></div>
       <div class="modal-footer" style="margin-top: -5px;">
       		
