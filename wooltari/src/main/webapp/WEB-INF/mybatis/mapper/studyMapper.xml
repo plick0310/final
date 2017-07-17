@@ -50,7 +50,7 @@
   	</insert>
   	
   	<insert id="insertstudyCity" parameterType="com.wooltari.study.StudyInfo">
-  		INSERT INTO studyCity (s_num , choiceCity) VALUES(#{s_num},#{city})
+  		INSERT INTO studyLocal (s_num , choiceCity, pointx, pointy) VALUES(#{s_num},#{city},#{point_x},#{point_y})
   	</insert>
   	
   	<insert id="insertstudyTarget" parameterType="com.wooltari.study.StudyInfo">
