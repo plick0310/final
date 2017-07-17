@@ -162,7 +162,7 @@ public class NoticeServiceImpl implements NoticeService {
 			if(saveFilename !=null){
 				fileManager.doFileDelete(saveFilename, pathname);
 			}
-			dao.deleteData("studyMarketBoard.deleteBoard", num);
+			dao.deleteData("notice.deleteNotice", num);
 			result=1;
 		}catch(Exception e){
 		}

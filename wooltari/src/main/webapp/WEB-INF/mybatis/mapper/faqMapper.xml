@@ -3,4 +3,83 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="faq">
 	
+	<select id="maxNum" resultType="Integer">
+		SELECT NVL(MAX(num),0) FROM faq
+	</select>
+	
+	<insert id="insertFaq" parameterType="com.wooltari.faq.Faq">
+		INSERT INTO Faq(num, userId, category, subject, content)
+		VALUES(#{num}, #{userId}, #{category},#{subject},#{content})
+	</insert>
+	
+	<!-- sql태그 -->
+	<!--  
+	* LIKE 대신 INSTR()함수를 사용하는 경우 INSTR(content, #{searchValue} &gt;0
+	* CLOB 인 경우 검색(LIKE 사용하지 말것)
+	   DBMS_LOB.INSTR(content, #{searchValue}) &gt;0
+	-->
+	
+	<sql id="where-list">
+		<if test="searchKey=='userId'">
+			userId=#{userId}
+		</if>
+		<if test="searchKey=='subject'">
+			subject LIKE '%' || #{searchValue} || '%'
+		</if>
+		<if test="searchKey=='content'">
+			DBMS_LOB.INSTR(content, #{searchValue})&gt;0
+		</if>
+	</sql>
+	
+	<sql id="where-category">
+		<if test="category=='all'">
+			(category='frequentask' OR category='using' OR category='payment')		
+		</if>
+		<if test="category=='frequentask'">
+			category='frequentask'	
+		</if>
+		<if test="category=='using'">
+			category='using'	
+		</if>
+		<if test="category=='payment'">
+			category='payment'	
+		</if>
+	</sql>
+	
+	<!-- 글 개수  -->
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM faq f
+			JOIN member m
+			ON f.userId=m.userId
+			<where>
+				<include refid="where-category"/>
+				<if test="searchValue!=null and searchValue!=''">
+					AND <include refid="where-list"/>
+				</if>
+			</where>
+	</select>
+	
+	<!-- 글 리스트 -->
+	<select id="listFaq" parameterType="map" resultType="com.wooltari.faq.Faq">
+		SELECT * FROM(
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT num, category, subject, content, created, f.userId
+				FROM faq f
+				JOIN member m ON f.userId=m.userId
+					<where>
+					       <include refid="where-category"/>
+							<if test="searchValue !=null and searchValue!=''">
+								AND <include refid="where-list"/>
+							</if>
+					</where>
+					ORDER BY num DESC
+		<![CDATA[		
+			)tb WHERE ROWNUM <=#{end}
+		)WHERE rnum>= #{start}
+		]]>	
+	</select>
+	
+
+	
+	
 </mapper>

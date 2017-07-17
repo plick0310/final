@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wooltari.common.FileManager;
 import com.wooltari.common.dao.CommonDAO;
 
 @Service("faq.FaqService")
@@ -14,43 +13,79 @@ public class FaqServiceImpl implements FaqService {
 	
 	@Autowired
 	private CommonDAO  dao;
-	@Autowired
-	private FileManager fileManager;
+	
 	
 	@Override
-	public int insertBoard(Faq dto, String pathname) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertFaq(Faq dto) {
+		int result=0;
+		
+		try{
+			int maxNum=dao.getIntValue("faq.maxNum");
+			dto.setNum(maxNum+1);
+			
+			result=dao.insertData("faq.insertFaq", dto);
+						
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+		return result;
 	}
-
-	@Override
-	public List<Faq> listBoard(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public int dataCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		
+		try{
+			result=dao.getIntValue("faq.dataCount", map);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return result;
 	}
-
+	
 	@Override
-	public Faq readBoard(int num) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Faq> listFaq(Map<String, Object> map) {
+		List<Faq> list=null;
+		try{
+			list=dao.getListData("faq.listFaq",map);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return list;
 	}
-
+	
 	@Override
-	public Faq preReadBoard(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public int updateFaq(Faq dto) {
+		int result=0;
+		
+		try{
+			result=dao.updateData("faq.updateFaq", dto);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+		return result;
 	}
-
 	@Override
-	public Faq nextReadBoard(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public int deleteFaq(int num) {
+		int result=0;
+		
+		try{
+			dao.deleteData("faq.deleteFaq", num);
+		}catch(Exception e){
+		}
+		
+		return result;
+	}
+	@Override
+	public int deleteList(List<Integer> list) {
+		int result=0;
+		
+		try{
+			result=dao.deleteData("deleteList", list);
+		}catch(Exception e){			
+		}
+		return result;
 	}
 
 }
