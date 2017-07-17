@@ -38,7 +38,8 @@ var dataCount =${dataCount};
 $(function(){
 	
 	listPage('5');
-	
+	$('#b_image').hide();
+	$('#plus_box').hide();
 	
 });	
 
@@ -204,7 +205,11 @@ function createBoard() {
 			
 				$("#content2").val("");
 				$("#uploadBtn2").val("");
-				$('#content1').removeAttr('src');
+				$('#b_image').removeAttr('src');
+				$('#c_photo').show();
+				$('#plus_box').hide();
+				
+				
 				listPage(bbs_count);
 				
 				
@@ -304,6 +309,8 @@ $(function() {
 					}
 
 					$("#uploadBtn2").empty();
+					$('#c_photo').hide();
+					$('#plus_box').show();
 					readURL(this);
 				});
 	});
@@ -592,6 +599,8 @@ $(function() {
 .timeline > li{
 margin-left: 0;
 }
+
+
 </style>
 
 
@@ -627,17 +636,13 @@ margin-left: 0;
 									class="fa fa-microphone"></i></a></li>
 							<li><a title="" data-toggle="collapse" href="#clickphoto"><i
 									class="fa fa-picture-o"></i></a></li>
-
-
-
 						</ul>
-
-
 
 						<button type="button" class="" onclick="createBoard();">
 							<i class="fa fa-share"></i> 등록하기
 						</button>
 
+						
 						<div id="clickphoto" class="pannel-collapse collapse"
 							style="clear: both;">
 
@@ -645,14 +650,27 @@ margin-left: 0;
 								style="position: relative; border: 1px solid #d9d9d9; background: #fff;">
 
 								<div
-									style="margin: 20px; overflow: hidden; position: relative; height: 98px;">
+									style="margin: 20px; overflow: hidden; position: relative; height: 80px;">
+
+									<div id="c_photo">
+										<label for="uploadBtn2" id="lable-li" style="margin:0px; width: 100%; mardisplay: inline-block; overflow: hidden; position: relative; height: 80px; font-size: 15px; font-weight: 700; color: #999;">
+											<img id="c_image" alt="" src="<%=cp%>/resource/img/camera.png" style="width: 50px; height: 50px;"> <br>
+											<span style="color: #1abc9d;">사진 추가하기</span>
+										</label>
+									</div>
 
 
-									<label for="uploadBtn2" id="lable-li"
-										style="width: 100%; mardisplay: inline-block; overflow: hidden; position: relative; height: 98px; font-size: 15px; font-weight: 700; color: #999;">
-										<img alt="" src="<%=cp%>/resource/img/camera.png"> <br>
-										<span style="color: #1abc9d;">사진 추가하기</span>
-									</label>
+									<img id="b_image" src="" width="80px" height="80px"
+										style="float: left;">
+									<div id="plus_box"
+										style="width: 80px; height: 80px; border: 1px solid #ccc; float: left; margin-left: 10px;">
+
+										<label for="uploadBtn2" id="lable-li" 
+											style="position: absolute; height: 80px; margin:0px; font-size: 15px; font-weight: 700; color: #999; width: 80px; top: 0; border-radius: 0; height: 80px;">
+											<img alt="" src="<%=cp%>/resource/img/add.png" style="margin: 28px 0;"> <br>
+										</label>
+
+									</div>
 								</div>
 							</div>
 

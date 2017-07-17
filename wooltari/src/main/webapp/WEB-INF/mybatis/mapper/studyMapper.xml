@@ -120,6 +120,22 @@
 	</update>
 	
 	
+	<!-- 자유게시판 사진첨부 -->
+	<update id="createStudyPhoto" parameterType="Long">
+		CREATE TABLE s_${value}_Photo(
+ 		  pNum NUMBER NOT NULL
+  		 ,s_num NUMBER NOT NULL
+  		 ,imageFile VARCHAR2(1000) NOT NULL
+  		 ,PRIMARY KEY(pNum)
+  		 ,FOREIGN KEY(s_num) REFERENCES s_${value}_Board(s_num)
+		);   
+	
+	</update>
+	
+	<update id="dropStudyPhoto" parameterType="long">
+		drop table s_${value}_Photo purge
+	</update>
+	
 
 	<!--자유게시판 댓글  -->
 	<update id="StudyBoardReply" parameterType="Long">
