@@ -81,6 +81,16 @@ public class CalendarServiceImpl implements CalendarService {
 		return result;
 	}
 
-
+	@Override
+	public List<Calendar> listCal(Map<String, Object> map) {
+		List<Calendar> list=null;
+		
+		try {
+			list=dao.getListData("calendar.listCal", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 }

@@ -62,7 +62,7 @@ public class BoardController {
 		String tableName="s_"+s_num;
 		dto.setTableName(tableName);
 		dto.setS_num(s_num);
-		   
+		     
 		dto.setUserId(info.getUserId());
 		service.insertBoard(dto ,pathname);
 		} catch (Exception e) {

@@ -28,7 +28,7 @@
 		FROM studyMember s 
 		JOIN member m ON s.userId = m.userId  
 		WHERE s_num=#{s_num} AND s.enabled =1
-		ORDER BY joinDate DESC
+		ORDER BY joinDate ASC
 	</select>
 	
 	<!-- 멤버 수 -->

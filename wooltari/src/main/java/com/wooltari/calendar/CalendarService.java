@@ -11,5 +11,5 @@ public interface CalendarService {
 	public int getMonth(Map<String, Object>map);
 	public int deleteBoard(Map<String, Object>map);
 	
-	
+	public List<Calendar> listCal(Map<String, Object> map);
 }

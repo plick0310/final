@@ -77,15 +77,18 @@
   	
   	<!-- (내가만든)나의 스터디 리스트 -->
   	<select id="listMyStudy" parameterType="String" resultType="com.wooltari.study.StudyInfo">
-  		SELECT * FROM study WHERE userId = #{userId}
+		SELECT s.s_num ,s.userId, created, studyName , study_Info , imageFilename , userName , userImg
+		FROM study s JOIN member m  ON s.userId = m.userId  
+		WHERE s.userId = #{userId}
   	</select>
   	
   	<!-- 가입한 스터디 리스트 -->
   	<select id="listMyStudy2" parameterType="String" resultType="com.wooltari.study.StudyInfo">      
-	    SELECT s.s_num ,s.imageFileName , studyName  
+	    SELECT s.s_num  ,s.userId ,s.imageFileName , created, studyName ,study_Info, me.userName , me.userImg 
 	    FROM STUDY s
 	    JOIN STUDYMEMBER m ON m.s_num = s.s_num 
-	    WHERE m.userId =#{userId} AND enabled=1
+      	JOIN MEMBER me ON m.userId = me.userId
+    	where s.userId=#{userId} AND m.enabled=1
   	</select>
   	
   	<!-- 스터디 전체 정보 -->

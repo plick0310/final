@@ -8,20 +8,9 @@
    String cp = request.getContextPath();
 %>
 
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="content-language" content="ko">
-<meta name="robots" content="all">
-<meta name="robots" content="index,follow">
-<meta name="keywords" content="정보처리기사 기출문제, 정보처리기사, 필기, 기출문제, 기출, 문제, CBT, 모의고사, 문제은행">
-<meta name="subject" content="건시스템 운영 [도타비 문제은행] :: 2017년 1회 정보처리기사 필기 기출문제 CBT 1문제씩 풀기">
-<meta name="publisher" content="건시스템(gunsys.com)">
-<meta name="date" content="2017-05-15">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="Expires" content="0"> 
+<html><head> 
 
-<title>도타비 문제은행 :: 2017년 1회 정보처리기사 필기 기출문제 CBT 1문제씩 풀기</title>
+<title>[WOOLTARI 모의테스트] 2017년 1회 정보처리기사 CBT</title>
 <link rel="stylesheet" href="<%=cp%>/resource/css/style_qpass.css">
 <link type="image/x-icon" href="/favicon.ico" rel="shortcut icon">
 
@@ -76,7 +65,7 @@ var isMobile = -1;
 		<span style="color: #404040;font-weight: bolder;">TRIAL EXAMINATION</span> <br><br>
      
 
-<div style="padding:5px; min-height:680px; _height:640px; border:solid 1px #ccc;"><!--PC 시험 영역 시작.-->
+<div style="padding:5px; border:solid 1px #ccc;"><!--PC 시험 영역 시작.-->
 
 
 <table style="margin:0px 0px 5px 0px; width:100%; border:1px solid #ccc; background:#f8f8f8" align="center"><!-- 상단 타이틀 시작. -->
@@ -107,7 +96,7 @@ var isMobile = -1;
 							</span>
 						</td>
 <td style="padding-right:5px; text-align:right;" valign="middle">
-	<input type="button" value="첫화면" class="btn01_qpass" style="width:60px; border:1px solid #008000;" onclick="move2main()">
+	<input type="button" value="중도포기" class="btn01_qpass" style="width:60px; padding:1px; border:1px solid #008000;" onclick="move2main()">
 </td>
 </tr>
 </tbody></table><!-- 상단 타이틀 끝. -->
@@ -115,10 +104,11 @@ var isMobile = -1;
 <input type="hidden" id="current_i" value="0" size="3">
 <input type="hidden" id="current_j" value="0" size="3">
 <input type="hidden" id="current_startNum" value="1" size="3">
-<input type="hidden" id="current_questionTotal" value="20" size="3">
+<input type="hidden" id="current_questionTotal" value="10" size="3">
 <input type="hidden" id="current_mode" value="first" size="3">
 
-<form name="test_form" method="post" action="qpass_takeExam.php?examUid=2283" style="margin:0">
+<form name="test_form" method="post" action="#" style="margin:0">
+  alert("짜잔~");
 	<input type="hidden" name="mode" value="first">
 	<input type="hidden" name="targetDiv" value="">
 	<input type="hidden" name="ansTryList" value="">
@@ -152,7 +142,11 @@ var initEachTotal = 20;
 <script>
 /* 첫화면으로 이동*/
 function move2main() {
-	location.href = "qpass_takeExam.php?examUid=2283";
+  if(confirm("포기하실거에요?")) {
+    opener.document.location.href="<%=cp%>/mockTest/main"
+    /* 여기에 값 넣어서 부모창 새로고침 후, 응시일의 해당 과목은 '중도포기'로 0점 처리를 시켜 응시내역으로 보내준다. */
+    self.close();
+  }
 }
 
 /* 인덱스에서의 선택 처리*/
@@ -526,7 +520,7 @@ function previous_div(courseName, divIndex, fiveIndex) {
 }
 
 function next_div(courseName, divIndex, fiveIndex) {
-	if(fiveIndex == max_five[divIndex]) {
+	if(fiveIndex == max_five[divIndex]-10) {
 		alert("마지막 문제입니다.");
 		return;
 	}
@@ -554,7 +548,7 @@ function get_notTriedNum(startNum, endNum) {
 function finish_exam(divIndex) {
 	/* 안푼 문제가 있는지 체크*/
 	var startNum = document.getElementById('current_startNum').value;
-	var eachTotal = document.getElementById('current_questionTotal').value;
+	var eachTotal = (document.getElementById('current_questionTotal').value) - 10;
 	var endNum = eval(startNum) + eval( eachTotal ) - 1;
 
 	/* 주관식 문제 이전*/

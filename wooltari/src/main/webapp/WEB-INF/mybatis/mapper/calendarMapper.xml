@@ -38,6 +38,18 @@
 		delete ${tableName}_Calendar where num=#{num}
 	</delete>
 	
-	
+	<!-- 캘린더 내부출력  -->
+	<select id="listCal" resultType="com.wooltari.calendar.Calendar">
+		select num,s_num,subject,content,to_char(sdate,'YYYY-MM-DD')sdate,
+		to_char(to_date(edate)+1,'YYYY-MM-DD')edate
+		from ${tableName}_Calendar	
+		
+		<where>
+			<![CDATA[
+         	    AND ((sdate>=#{start} AND sdate<=#{end})
+          	      OR (edate>=#{start} AND edate<=#{end}))
+     	   ]]>
+		</where>		
+	</select>
 	
 </mapper>

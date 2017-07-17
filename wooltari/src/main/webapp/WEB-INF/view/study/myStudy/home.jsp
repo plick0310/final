@@ -232,7 +232,7 @@ function readURL(input) {
 			class="glyphicon glyphicon-pencil"> </span>&nbsp;&nbsp;&nbsp;${dto.studyName }&nbsp;&nbsp;&nbsp;
 		</span>S T U D Y
 	</div>
-	<div style="float: left; text-align: center;">
+	<div style="float: left; text-align: center; ">
 		<div
 			style="width: 170px; height: 230px; box-shadow: 0px 3px 5px 1px #eee; font-size: 20px; font-size: 16px; line-height: 50px;">
 			<div
@@ -325,7 +325,7 @@ function readURL(input) {
 			
 		
 		<div
-			style="margin: 20px 0; border-top: 1px solid #eee; padding: 20px 0;">${dto.study_Info }</div>
+			style="margin: 20px 0; border-top: 1px solid #eee; padding: 20px 0; width: 170px;">${dto.study_Info }</div>
 	</div>
 
 	<div id="wrap">

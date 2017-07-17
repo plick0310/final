@@ -50,7 +50,7 @@
 			
 				
 			});
-	}
+	}	
 
 
 	$(document).ready(function() {
@@ -60,17 +60,25 @@
 		var y=date.getFullYear();
 		
 	$('#calendar').fullCalendar({
-	    locale:'ko',
+	    locale:'en',
 	    height: 450,	
-	    header: {
+	//    header: {
 	     	/* left: 'prev ,next today myCustomButton ',
 	     	left:"", */
-	        center: 'title',
-	        left:'prev',
-	        right:'next'
+	  //      center: 'title',
+	    //    left:'prev',
+	      //  right:'next'
 	        /*,right: 'month,agendaWeek,agendaDay' */
 	        
+	   // },
+	    
+	    header: {
+	     	left: 'prev ,next today myCustomButton ',
+	        center: 'title', 
+	        right: 'month,agendaWeek,agendaDay'
+	        
 	    },
+	    
 	    editable:true,
 	    allDaySlot:false,
 	    selectable: true,  //사용자가 클릭 및 드래그하여 선택을 할 수 있도록
@@ -87,12 +95,7 @@
 			var edate=end.add("-1","days").format();
 	    	
 	        createdForm(sdate,edate);
-	    },
-	    
-	    eventClick: function(calEvent, jsEvent, view){
-	    	articleForm(calEvent);
-	    },
-
+	    }
 	    /* events:[
 	    	{
 	    		title:"all",
@@ -104,6 +107,29 @@
 	    		end:new Date(y,m+1,d+3)
 	    	}
 	    ]  */
+	    
+	    ,events: function(start, end, timezone, callback){
+			// 캘린더가 처음 실행되거나 월이 변경되면
+			var startDay=start.format("YYYY-MM-DD");
+			var endDay=end.add("-1","days").format("YYYY-MM-DD");
+			
+			
+			var url="<%=cp%>/study/myStudy/${s_num}/calender/cal";
+			var query="start="+startDay+"&end="+endDay;
+
+			$.ajax({
+			    url: url,
+			    data:query,
+			    dataType: 'json',
+			    success: function(data, text, request) {
+			    	var events = eval(data.list);
+			        callback(events);
+			    },
+			    error:function(e){
+			    	console.log(e.responseText);
+			    }
+			});
+		}
 	    	
 	    
 	    
@@ -131,7 +157,7 @@
         month=date.yyyymmdd();
         
         listPage(1);
-        
+       
     }
 
     // 받은 날짜값을 YYYY-MM-DD 형태로 출력하기위한 함수.
@@ -196,7 +222,7 @@ function insertBoard(){
 			if(data.state=="true"){
 				
 				listPage(1);
-				
+	
 			}else{
 				alert("일정등록에 실패하였습니다");
 			}
@@ -296,17 +322,17 @@ function deleteBoard(num,page){
 -moz-box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
 box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
 		}
-h2{
+/* h2{
 font-size: 20px;
 padding-top: 15px;
 color:#1abc9c;
-}
+} */
 
 
 </style>
 
 
-<div id='calendar' style=" width:49%; float: left; "></div> 
+<div id='calendar' style=" width:95%; float: left; "></div> 
 
 <div id='listCalendar' style="float: right; width:49%;"></div>
 
