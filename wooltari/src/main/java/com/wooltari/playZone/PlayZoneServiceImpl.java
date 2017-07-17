@@ -1,6 +1,5 @@
 package com.wooltari.playZone;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,19 @@ public class PlayZoneServiceImpl implements PlayZoneService{
 		
 		return result;
 	}
+
+	@Override
+	public int pointupdate(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.updateData("playZone.pointupdate", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	
 }
 
 

@@ -5,4 +5,8 @@
 	<select id="point" parameterType="map" resultType="Integer">
 	 select point from member where userid=#{userId}
 	 </select>
+	 
+	 <update id="pointupdate" parameterType="map">
+	 update member set point=#{point} where userid=#{userId}
+	 </update>
 </mapper>

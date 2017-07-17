@@ -25,6 +25,7 @@ box1 = true
 box2 = true
 box3 = true
 num = Math.floor(Math.random() * 10)
+count = 5;
 
 IMG = new Array();
 
@@ -45,21 +46,52 @@ function keisan(){
 	if((document.images["first"].src == document.images["second"].src) && (document.images["second"].src == document.images["third"].src) && (document.images["third"].src == IMG[7].src)){
 		coin += bet * 10; 
 		f.pay_back.value="축하 "+(bet*10)+"점 먹었구요　　점수는："+coin+"점"
+		f.hid.value=coin
+		$('#nowPoint').html(coin);
 		document.getElementById('img1').style.backgroundImage="url(<%=cp%>/resource/images/up.png)"
+		
 	}
 	else if((document.images["first"].src == document.images["second"].src) && (document.images["second"].src == document.images["third"].src)){
 		coin += bet * 5; 
 		f.pay_back.value="와따리~ "+(bet*5)+"점 먹었구요　　점수는："+coin+"점";
+		f.hid.value=coin
+		$('#nowPoint').html(coin);
 		document.getElementById('img1').style.backgroundImage="url(<%=cp%>/resource/images/up.png)"
 	} else {
 		coin -= bet
 		f.pay_back.value="안걸려 씀다！　　　남은 점수："+coin+"점";
+		f.hid.value=coin;
+		$('#nowPoint').html(coin);
 		document.getElementById('img1').style.backgroundImage="url(<%=cp%>/resource/images/up.png)"
 	}
 	game = false
 	box1 = true
 	box2 = true 
 	box3 = true
+
+	$.ajax({
+        type : "POST",
+        url : "<%=cp%>/community/playZone/pointset",
+        data : "hid=" + coin,
+        dataType : "json",
+        success : function(data){
+        	
+        },
+        error : function(){
+            alert('통신실패!!');
+        }
+         
+    });
+	count = count-1;
+	if(count < 0){
+		$('#not').html("오늘은 더이상 참여하실수 없습니다.");
+		$('#not').css("color","red");
+	/* 	return; */
+		$('#img1').disabled ='true';
+	}
+	$('#cnt').html(count);
+	<%-- f.action="<%=cp%>/community/playZone/pointset";
+	f.submit(); --%>
 } 
 
 function end(variable){
@@ -73,6 +105,7 @@ function end(variable){
 			keisan()
 	  }
 }
+
 
 function hyouji(){
        
@@ -107,8 +140,8 @@ function inCoin(){
 }
 function startGame(){
 	var f=document.getElementById('img1');
+
 	f.style.backgroundImage="url(<%=cp%>/resource/images/down.png)"
-	
 	
    if(game == false){
             game = true
@@ -138,10 +171,11 @@ function startGame(){
 <hr style="width: 100% ;background-color: #eee; height: 1px;"> 
 
 <div>
+
 <div class="row" style="width: 724px; margin: 0 auto; border-right: ">
 <div class="col-sm-4" style="margin: 0 auto 15px;padding: 0;">
-<Strong style="font-size: 17px;">${userName }</Strong><br>P O I N T : ${point }</div> 
-<div class="col-sm-4" style="margin: 0 auto 15px;padding: 0;">오늘 남은 기회는 3회 입니다.</div>
+<Strong style="font-size: 17px;">${userName }</Strong><br>P O I N T : <span id="nowPoint">${point }</span></div> 
+<div class="col-sm-4" style="margin: 0 auto 15px;padding: 0;" id="not">오늘 남은 기회는 <span id="cnt">5</span>회 입니다.</div>
 <div class="col-sm-4" style="margin: 0 auto 15px;padding: 0;">오늘 남은 기회는 3회 입니다.</div>
 </div>
 
@@ -149,6 +183,8 @@ function startGame(){
 <form name="slotform" style="margin: 0px auto 30px;     width: 724px;">
 	<div style="margin: 10px auto 45px;width: 400px;">
 	<input type="text" size=55 name="pay_back" style="box-shadow: 2px 2px 4px #b8b8b8;border: 9px solid #eee;">  
+	<input type="hidden" name="hid" >
+	
 	</div>
 <div style="width: 1140px; height: 346px;"> 
 	<div style="border: 35px solid #eee;box-shadow: 1px 1px 5px grey;width: 724px;height: 346px;float: left;">
@@ -173,7 +209,7 @@ function startGame(){
 	<div style="width:126px; margin: 30px auto;">
 	I N S E R T P O I N T<br>
 		<SELECT NAME="select" SIZE="1"> 
-			<OPTION value="0"><strong>INSERT COIN(S)</strong></OPTION>
+			<OPTION value="0">INSERT COIN(S)</OPTION>
 			<OPTION value="1">1 COIN</OPTION>
 			<OPTION value="2">2 COINS</OPTION>
 			<OPTION value="3">3 COINS</OPTION>

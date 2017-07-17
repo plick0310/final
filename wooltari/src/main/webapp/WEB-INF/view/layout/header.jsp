@@ -150,7 +150,7 @@ function sendlogout(){
 									<div class="col-sm-2"><a href="<%=cp%>/mockTest/main">모의 테스트</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>">한줄톡톡</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>">자유광장</a></div>
-									<div class="col-sm-2"><a href="<%=cp%>">포톡스</a></div>
+									<div class="col-sm-2"><a href="<%=cp%>/community/photalks/list">포톡스</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>">교재중고장터</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/community/playZone/home">놀이터</a></div>
 								</div>
