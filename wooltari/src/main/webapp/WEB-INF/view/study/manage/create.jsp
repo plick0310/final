@@ -97,7 +97,7 @@ section {
 }
 
 .section-area {
-   padding-top: 30px;
+   padding-top: 5%;
 }
 
 .section-verticalLine {
@@ -117,7 +117,7 @@ section {
 }
 
 .section-question {
-   padding: 25px 0;
+   padding: 15px 0; 
    max-width: 550px;
    margin: 0 auto;
 }
@@ -145,15 +145,15 @@ input#studyName {
 .question-answer select, .question-answer input {
    height: 45px;
    width: 100%;
-   margin: 10px 5px;
+   margin: 10px 0;
    font-size: 1.6rem;
    font-weight: 300;
-   border-radius: 5px;
+  
    border: 1px solid #ccc;
 }
 
 .upload-label {
-    width: 300px;
+    width: 250px;
     height: 250px;
 
     background-position: center;
@@ -164,12 +164,14 @@ input#studyName {
 }
 
 .uploadLabel {
-   background-color: #1abc9c;
-   font-size: 16px;
-   color: #fff;
-   width: 138px;
-   padding: 18px;
-   text-align: center;
+     background-color: rgba(0,0,0,0.7);
+    font-size: 16px;
+    color: #ffffff;
+    width: 250px;
+    padding: 18px;
+    border-radius: 0px;
+    text-align: center;
+    border: none;
 }
 
 input #LTA {
@@ -192,7 +194,7 @@ input[type="checkbox"], input[type="radio"] {
    #what {
    font-size: 1.7rem;
    font-weight: 300;
-   border: 1px solid #dfdfdf;
+   border: 1px solid #ccc;
    padding: 10px;
    width: 100%;
    height: 100%;
@@ -233,12 +235,17 @@ border: 0px;
 background: black;
 }
 .help-block{
-color: #1abc9c;
+    color: #1abc9c;
+    font-weight: lighter; 
 
 }
 
 .swiper-pagination-progress .swiper-pagination-progressbar{
 background-color: #1abc9c; 
+
+}
+.swiper-container-horizontal>.swiper-pagination-progress{
+height: 9px;
 }
 
 .swiper-button-next{
@@ -255,6 +262,26 @@ background: #eee;
     border-radius: 50%;
         box-shadow: 1px 1px 3px grey;
 }
+
+.uploadLabel:HOVER {
+	color: gray;
+}
+.row{
+margin: 0; 
+}
+.thumbnail .caption{
+clear: both;
+}
+.thumbnail{
+border-radius: 0px;
+    box-shadow: 1px 1px 3px #b0b0b0;
+    border: none;
+}
+.thumbnail:HOVER{
+background: rgba(26,188,156,0.1);
+
+}
+
 
 </style>
  
@@ -303,7 +330,7 @@ function insertStudy(){
          <div class="swiper-slide">
 
             <div class="section-area">
-               <div class="section-title">스터디 기본 정보</div>
+               <div class="section-title"><i class="glyphicon glyphicon-th-list" style="font-size: 19px;"></i>&nbsp;스터디 <span style="color: #b8b8b8;">기본 정보</span></div>
                <div class="section-verticalLine"></div>
                <div class="section-question">
                   <div class="question-title">스터디 명을 입력해 주세요</div>
@@ -333,8 +360,11 @@ function insertStudy(){
                   <div class="question-answer">
                      <div class="upload-label">
                         <div class="fileBox" >
-                        <img id="blah" src="#" alt="" style="width: 300px; height: 250px;"/>
-                           <label for="uploadBtn"  class="btn btn-large uploadLabel "style="left:80px; top: 80px; position: absolute;">사진올리기</label>
+                        <img id="blah" src="#" alt="" style="width: 250px; height: 250px;"/>
+                           <label id="blahbtn" for="uploadBtn"  class="btn btn-large uploadLabel " style="    position: absolute;
+    top: 94px;
+    left: 0px;">사진올리기
+                           <i class="glyphicon glyphicon-cloud-upload"></i></label>
                            <input type="file" name="upload" id="uploadBtn" class="uploadBtn tts" >
                         </div>
 
@@ -350,7 +380,7 @@ function insertStudy(){
 
          <div class="swiper-slide">
             <div class="section-area">
-               <div class="section-title">스터디 상세 정보I</div>
+               <div class="section-title"><i class="glyphicon glyphicon-th-list" style="font-size: 19px;"></i>&nbsp;스터디  <span style="color: #b8b8b8;">상세 정보&nbsp;I</span></div>
                <div class="section-verticalLine"></div>
 
 
@@ -358,7 +388,7 @@ function insertStudy(){
                   <div class="question-title">스터디 인원을 입력해 주세요</div>
                   
                   <div class="question-answer">
-                     <select name="recruit">
+                     <select name="recruit" style="    border-radius: 0;">
                         <option value="2">2명</option>
                         <option value="3">3명</option>
                         <option value="4">4명</option>
@@ -371,9 +401,9 @@ function insertStudy(){
 
                <div class="section-question">
                   <div class="question-title">스터디 대상을 선택해 주세요</div>
-                  <p class="help-block" id="help-target">최대 세가지 선택가능합니다.</p>
+                  <p class="help-block" id="help-target">최대 두가지 선택가능합니다.</p>
                   <div class="question-answer">
-                     <div class="row targetWrap">
+                     <div class="row targetWrap" style="margin: 0;">
 
 
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
@@ -469,7 +499,7 @@ function insertStudy(){
             <div class="section-area">
             
             
-               <div class="section-title">스터디 상세 정보II</div>
+               <div class="section-title"><i class="glyphicon glyphicon-th-list" style="font-size: 19px;"></i>&nbsp;스터디 <span style="color: #b8b8b8;">상세 정보&nbsp;II</span></div>
                <div class="section-verticalLine"></div>
 
       <div class="section-question">
@@ -478,7 +508,7 @@ function insertStudy(){
                   <div class="question-answer">
                      <div class="row targetWrap">
 
-                        <select id="bigCategory" class="selectField" onchange="themeList();" style="width: 45%;">
+                        <select id="bigCategory" class="selectField" onchange="themeList();" style=" margin: 10px 0 0;width: 265px;">
                            <option value="">:: 대분류 ::</option>
                            <c:forEach var="vo" items="${listBigCategory}">
                               <option value="${vo.categoryNum}"
@@ -486,7 +516,7 @@ function insertStudy(){
                            </c:forEach>
                         </select>
                         
-                        <select  id="smallCategory" class="selectField" style="width: 45%;" >
+                        <select  id="smallCategory" class="selectField" style=" margin: 10px 0 0;width: 265px;" >
                            <option value="">:: 중분류 ::</option>
                         </select>
                         
@@ -504,13 +534,13 @@ function insertStudy(){
                   <div class="question-answer">
                       <div class="row targetWrap">
 
-                        <select  id="bigCity" class="selectField" onchange="cityList();" style="width: 45%;">
+                        <select  id="bigCity" class="selectField" onchange="cityList();" style="margin: 10px 0 0;width: 265px;">
                            <option value="">:: 대분류 ::</option>
                            <c:forEach var="vo" items="${listBigCity}">
                               <option value="${vo.cityNum}">${vo.cityName}</option>
                            </c:forEach>
                         </select> 
-                        <select  id="smallCity" class="selectField" style="width: 45%;">
+                        <select  id="smallCity" class="selectField" style="margin: 10px 0 0;width: 265px;">
                            <option value="">:: 중분류 ::</option>
                         </select>
                         <div id="select_city">
@@ -523,7 +553,7 @@ function insertStudy(){
 
 
          
-               
+                
             </div>
          
          
@@ -532,49 +562,49 @@ function insertStudy(){
          <div class="swiper-slide">
             
             <div class="section-area">
-               <div class="section-title">스터디 공개범위 설정</div>
+               <div class="section-title"><i class="glyphicon glyphicon-th-list" style="font-size: 19px;"></i>&nbsp;스터디 공개범위 설정</div>
                <div class="section-verticalLine"></div>
 
 
                <div class="section-question" >
-                  <div class="question-title">스터디 공개범위를 선택해 주세요</div>
+                  <div class="question-title" style="    margin-bottom: 38px;">스터디 공개범위를 선택해 주세요</div>
                   <div class="question-answer">
 
                      <div class="row">
                         <div class="col-sm-6 col-md-4">
-                           <div class="thumbnail">
-                              <label> <input type="radio" name="range" value="0" id="range0"/>
+                           <div class="thumbnail" id="thum1">
+                              <label style="    margin-left: 31px;"> <input type="radio" name="range" value="0" id="range0"/>
                                  <img class="icon"src="<%=cp%>/resource/img/group.png" alt="..."> 
                               </label>
                               <div class="caption">
                                  <h4>전체공개</h4>
-                                 <p>누구나 스터디를 검색해 찾을 수 있고,홈페이지 회원 모두 게시물을 볼 수 있습니다.</p>
+                                 <p style="    font-size: 13px;color: #858585;font-weight: lighter;">누구나 스터디를 검색해 찾을 수 있고,홈페이지 회원 모두 게시물을 볼 수 있습니다.</p>
                               </div>
                            </div>
 
                         </div>
 
                         <div class="col-sm-6 col-md-4">
-                           <div class="thumbnail">
-                              <label> <input type="radio" name="range" value="1" id="range1"/>
+                           <div class="thumbnail" id="thum2">
+                              <label style="    margin-left: 31px;"> <input type="radio" name="range" value="1" id="range1"/>
                                  <img class="icon" src="<%=cp%>/resource/img/user.png" alt="..." >
                               </label>
                               
                               <div class="caption">
                                  <h4>스터디명 공개</h4>
-                                 <p>누구나 스터디를 검색해 찾을 수 있지만, 게시물은 멤버만 볼 수 있습니다.</p>
+                                 <p style="    font-size: 13px;color: #858585;font-weight: lighter;">누구나 스터디를 검색해 찾을 수 있지만, 게시물은 멤버만 볼 수 있습니다.</p>
                               </div>
                            </div>
                         </div>
 
                         <div class="col-sm-6 col-md-4">
-                           <div class="thumbnail">
-                              <label> <input type="radio" name="range" value="2" id="range2"/>
+                           <div class="thumbnail" id="thum3">
+                              <label style="    margin-left: 31px;"> <input type="radio" name="range" value="2" id="range2"/>
 							    <img class="icon" src="<%=cp%>/resource/img/padlock.png" alt="...">
                               </label>
                               <div class="caption">
                                  <h4>비공개</h4>
-                                 <p>스터디와 게시글이 공개되지 않습니다. 초대를 통해서만 가입할 수 있습니다.</p>
+                                 <p style="    font-size: 13px;color: #858585;font-weight: lighter;">스터디와 게시글이 공개되지 않습니다. 초대를 통해서만 가입할 수 있습니다.</p>
                               </div>
                            </div>
                         </div>
@@ -589,7 +619,7 @@ function insertStudy(){
                   <label for="uploadBtn2" class="btn btn-large uploadLabel">스터디
                      만들기</label>
                   <input type="button" id="uploadBtn2" class="uploadBtn tts">
-                  <label for="uploadBtn2" class="btn btn-large uploadLabel">취소</label>
+                  <label for="uploadBtn2" class="btn btn-large uploadLabel" style="    float: right;">취소</label>
                </div>
             
             </div>
@@ -643,17 +673,18 @@ function insertStudy(){
 			var $me =  $(this).parent().siblings();
 			var radioValue = $(this).val();
 			if (radioValue == "0") {
-				$("#range0").parent().siblings().css("color","#1abc9c");
-				$("#range1").parent().siblings().css("color","black");
-				$("#range2").parent().siblings().css("color","black");
+				$("#thum1").css("background","rgba(26,188,156,0.1)");
+				$("#thum2").css("background","none");
+				$("#thum3").css("background","none");
+		
 			} else if (radioValue == "1") {
-				$("#range0").parent().siblings().css("color","black");
-			 	$("#range1").parent().siblings().css("color","#1abc9c");
-				$("#range2").parent().siblings().css("color","black");
+				$("#thum1").css("background","none");
+				$("#thum2").css("background","rgba(26,188,156,0.1)");
+				$("#thum3").css("background","none");
 			} else if (radioValue == "2") {
-				$("#range0").parent().siblings().css("color","black");
-			 	$("#range1").parent().siblings().css("color","black");
-				$("#range2").parent().siblings().css("color","#1abc9c");
+				$("#thum1").css("background","none");
+				$("#thum2").css("background","none"); 
+				$("#thum3").css("background","rgba(26,188,156,0.1)");
 			}
 		
 		});
@@ -663,7 +694,7 @@ function insertStudy(){
          var cnt=0, vnt=0;
          $("#smallCategory").change(function() { //카테고리 선택하면 박스추가   
             if($("input[name='choiceCategory']").length>=3){
-               $("#help-cate").html("3개이하만 선택 가능합니다.").css("color","red");
+               $("#help-cate").html("3개이하만 선택 가능합니다.").css("color","#f27979");
                return;
             } else{
             	
@@ -680,7 +711,7 @@ function insertStudy(){
              $("input[name='choiceCategory']").each(function() {
             	 if(index2.val() === this.value){
             		 state1=true;
-            		 $("#help-cate").html("중복된 카테고리를 선택하였습니다.").css("color","red");
+            		 $("#help-cate").html("중복된 카테고리를 선택하였습니다.").css("color","#f27979");
             	 }
             });
 
@@ -703,7 +734,7 @@ function insertStudy(){
          $("#smallCity").change(function() { //도시 선택하면 박스추가 및 제어 
      
         	 if($("input[name='choiceCity']").length>=3){
-                $("#help-city").html("3개이하만 선택 가능합니다.").css("color","red");
+                $("#help-city").html("3개이하만 선택 가능합니다.").css("color","#f27979");
                 return;
              } else{
              	
@@ -720,7 +751,7 @@ function insertStudy(){
              $("input[name='choiceCity']").each(function() {
             	 if(index4.val() === this.value){
             		 state2=true;
-            		 $("#help-city").html("중복된 지역을 선택하였습니다.").css("color","red");
+            		 $("#help-city").html("중복된 지역을 선택하였습니다.").css("color","#f27979");
             	 }
             });
 
@@ -740,7 +771,7 @@ function insertStudy(){
          $('input[type=checkbox]').click(function() { //스터디대상3이하로 막기
             var count = $('input:checkbox[name="target"]:checked').length;
             if (count > 2) {
-            	 $("#help-target").html("2개 이하로 선택해 주세요").css("color","red");
+            	 $("#help-target").html("2개 이하로 선택해 주세요").css("color","#f27979");
                $(this).attr("checked", false);
             }
 
@@ -852,6 +883,7 @@ function insertStudy(){
             $('#blah').attr('src', '<%=cp%>/resource/images/white.png'); 
             $("#uploadBtn").on('change', function(){
                 $("#uploadBtn").empty();
+
                 readURL(this);
             });
         });
@@ -861,6 +893,7 @@ function insertStudy(){
             var reader = new FileReader();
 
             reader.onload = function (e) {
+            	$('#blahbtn').html("사진 바꾸기");
 $('#blah').attr('src', e.target.result); 
                		/* alert(e.target.result);
                     $('#blah').style.backgroundImage = "url('"e.target.result"')"; */

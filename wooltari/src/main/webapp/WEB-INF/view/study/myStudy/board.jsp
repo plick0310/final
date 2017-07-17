@@ -603,56 +603,72 @@ margin-left: 0;
 	<div class="col-md-10" style="    width: 810px; padding: 0;    padding-left: 10px;">
 		<div class="widget-area no-padding blank">
 			<div class="status-upload">
-				<form name="createForm" method="post" enctype="multipart/form-data" style="width:100%;">
-					
-					
+					<form name="createForm" method="post" enctype="multipart/form-data"
+						style="width: 100%;">
+
+						<!-- 	
 					<img id="content1"
 						style="width: 35%; height: 250px; background: white; float: left;  border: 0;"
 						></img>
-
-					<div><textarea name="content" id="content2"
-						placeholder="What are you doing right now?"></textarea></div>
-					<ul>
-						<li><a title="" data-toggle="tooltip" data-placement="bottom"
-							data-original-title="Audio"><i class="fa fa-music"></i></a></li>
-						<li><a title="" data-toggle="tooltip" data-placement="bottom"
-							data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
-						<li><a title="" data-toggle="tooltip" data-placement="bottom"
-							data-original-title="Sound Record"><i
-								class="fa fa-microphone"></i></a></li>
-						<!-- <li>
-						
-						<label for="uploadBtn2" id="lable-li"> <a title=""
-								data-toggle="tooltip" data-placement="bottom"
-								data-original-title="Picture"><i class="fa fa-picture-o"></i></a>
-
-						</label></li> -->
-						<li>
-						 <a class=""
-			data-toggle="collapse" href="#collapseExample2" aria-expanded="false"
-			aria-controls="collapseExample">
-						<i class="fa fa-picture-o"></i></a>
-						</li>
+ -->
+						<div>
+							<textarea name="content" id="content2"
+								placeholder="What are you doing right now?"></textarea>
+						</div>
+						<ul>
+							<li><a title="" data-toggle="tooltip"
+								data-placement="bottom" data-original-title="Audio"><i
+									class="fa fa-music"></i></a></li>
+							<li><a title="" data-toggle="tooltip"
+								data-placement="bottom" data-original-title="Video"><i
+									class="fa fa-video-camera"></i></a></li>
+							<li><a title="" data-toggle="tooltip"
+								data-placement="bottom" data-original-title="Sound Record"><i
+									class="fa fa-microphone"></i></a></li>
+							<li><a title="" data-toggle="collapse" href="#clickphoto"><i
+									class="fa fa-picture-o"></i></a></li>
 
 
 
 						</ul>
-							<div class="collapse" id="collapseExample2">
-								<div class="d3">
 
-									<input type="text" placeholder="멤버 ID 혹은 이름을 검색해보세요">
-									<button type="submit"></button>
 
+
+						<button type="button" class="" onclick="createBoard();">
+							<i class="fa fa-share"></i> 등록하기
+						</button>
+
+						<div id="clickphoto" class="pannel-collapse collapse"
+							style="clear: both;">
+
+							<div
+								style="position: relative; border: 1px solid #d9d9d9; background: #fff;">
+
+								<div
+									style="margin: 20px; overflow: hidden; position: relative; height: 98px;">
+
+
+									<label for="uploadBtn2" id="lable-li"
+										style="width: 100%; mardisplay: inline-block; overflow: hidden; position: relative; height: 98px; font-size: 15px; font-weight: 700; color: #999;">
+										<img alt="" src="<%=cp%>/resource/img/camera.png"> <br>
+										<span style="color: #1abc9d;">사진 추가하기</span>
+									</label>
 								</div>
 							</div>
-					<input type="file" name="upload2" id="uploadBtn2"
-						class="uploadBtn tts">
 
-					<button type="button" class="" onclick="createBoard();">
-						<i class="fa fa-share"></i> 등록하기
-					</button>
-				</form>
-			</div>
+
+						</div>
+
+						<input type="file" name="upload2" id="uploadBtn2"
+							class="uploadBtn tts"
+							style="opacity: 0; position: relative; width: 0px; margin: -15px;">
+
+
+
+
+					</form>
+
+				</div>
 			<!-- Status Upload  -->
 		</div>
 		<!-- Widget Area -->
@@ -666,142 +682,6 @@ margin-left: 0;
 
   
     <ul class="timeline" style="width: 900px;" id="listBoard">
-       
-       
-        <li>
-          <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record" rel="tooltip" title="11 hours ago via Twitter" id=""></i></a></div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <img class="img-responsive" src="http://lorempixel.com/1600/500/sports/2" />
-              
-            </div>
-            <div class="timeline-body">
-              <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
-              
-            </div>
-            
-            <div class="timeline-footer">
-                <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
-                <a><i class="glyphicon glyphicon-share"></i></a>
-                <a class="pull-right">Continuar Lendo</a>
-            </div>
-          </div>
-        </li>
-        
-        <li  class="timeline-inverted">
-          <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record invert" rel="tooltip" title="11 hours ago via Twitter" id=""></i></a></div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <img class="img-responsive" src="http://lorempixel.com/1600/500/sports/2" />
-              
-            </div>
-            <div class="timeline-body">
-              <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
-             
-            </div>
-            
-            <div class="timeline-footer">
-                <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
-                <a><i class="glyphicon glyphicon-share"></i></a>
-                <a class="pull-right">Continuar Lendo</a>
-            </div>
-          </div>
-        </li>
-        
-        
-        <li>
-          <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record" rel="tooltip" title="11 hours ago via Twitter" id=""></i></a></div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <img class="img-responsive" src="http://lorempixel.com/1600/500/sports/2" />
-              
-            </div>
-            <div class="timeline-body">
-              <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
-              
-            </div>
-            
-            <div class="timeline-footer">
-                <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
-                <a><i class="glyphicon glyphicon-share"></i></a>
-                <a class="pull-right">Continuar Lendo</a>
-            </div>
-          </div>
-        </li>
-        
-        
-        
-        <li  class="timeline-inverted">
-          <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record invert" rel="tooltip" title="11 hours ago via Twitter" id=""></i></a></div>
-          <div class="timeline-panel">
-            <div class="timeline-body">
-              <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
-              
-            </div>
-            
-            <div class="timeline-footer">
-                <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
-                <a><i class="glyphicon glyphicon-share"></i></a>
-                <a class="pull-right">Continuar Lendo</a>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record" rel="tooltip" title="11 hours ago via Twitter" id=""></i></a></div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <img class="img-responsive" src="http://lorempixel.com/1600/500/sports/2" />
-              
-            </div>
-            <div class="timeline-body">
-              <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
-              
-            </div>
-            
-            <div class="timeline-footer">
-                <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
-                <a><i class="glyphicon glyphicon-share"></i></a>
-                <a class="pull-right">Continuar Lendo</a>
-            </div>
-          </div>
-        </li>
-        
-        <li  class="timeline-inverted">
-          <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record invert" rel="tooltip" title="11 hours ago via Twitter" id=""></i></a></div>
-          <div class="timeline-panel">
-            <div class="timeline-heading">
-              <img class="img-responsive" src="http://lorempixel.com/1600/500/sports/2" />
-              
-            </div>
-            <div class="timeline-body">
-              <p>Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis porris, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.</p>
-              
-            </div>
-            
-            <div class="timeline-footer primary">
-                <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
-                <a><i class="glyphicon glyphicon-share"></i></a>
-                <a class="pull-right">Continuar Lendo</a>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="timeline-badge primary"><a><i class="glyphicon glyphicon-record invert" rel="tooltip" title="11 hours ago via Twitter" id=""></i></a></div>
-          <div class="timeline-panel">
-            <div class="timeline-body">
-              <p><b>All the credits go to <a href="http://bootsnipp.com/rafamaciel">Rafamaciel</a></b></p>
-              <p>I only make it responsive and remove the empty spaces to be more like Facebook timeline!</p>
-            </div>
-            
-            <div class="timeline-footer primary">
-                <a><i class="glyphicon glyphicon-thumbs-up"></i></a>
-                <a><i class="glyphicon glyphicon-share"></i></a>
-                <a class="pull-right">Continuar Lendo</a>
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix" style="float: none;"></li>
     </ul>
 </div>
 
