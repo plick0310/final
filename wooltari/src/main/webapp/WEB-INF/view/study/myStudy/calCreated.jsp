@@ -13,27 +13,25 @@
 		<p style="font-size: 30px; font-weight: bold; font-family: monospace; margin-right: 20px;">일정추가</p>
 		<hr style="width: auto; margin-top: -15px; margin-right:20px; height: 1px;">
 		<table style="margin-top: -20px;">
-			<tr>
-				<td style="font-weight: bold; font-family: monospace; color: #1abc9c;">시작날짜<br>
-					<input type="text" style=" text-align:center;  border: none; color: gray" value="${sdate }" name="sdate" readonly="readonly">
+			<tr style="font-size: 25px; font-weight: bolder; font-family: monospace; ">
+				<td style="color: #1abc9c;">시작날짜<br>
+					<input type="text" style="  width:130px; text-align:center;  border: none; color: gray" value="${sdate }" name="sdate" readonly="readonly">
+				</td>
+				<td style="color: #1abc9c; padding-left: 100px;">종료날짜<br>
+					<input type="text" style=" width:130px; text-align:center; border: none; color: gray" value="${edate }" name="edate" readonly="readonly">
 				</td>
 			</tr>
-	
+
+			
 			<tr>
-				<td style="font-weight: bold; font-family: monospace; color: #1abc9c;">종료날짜<br>
-					<input type="text" style="  text-align:center; border: none; color: gray" value="${edate }" name="edate" readonly="readonly">
+				<td colspan="2" style="font-weight: bold; font-family: monospace; color: #1abc9c; font-size: 25px;">타이틀<br>
+					<input type="text" name="subject" style=" color: gray; width: 450px;">
 				</td>
 			</tr>
 			
 			<tr>
-				<td style="font-weight: bold; font-family: monospace; color: #1abc9c;">타이틀<br>
-					<input type="text" name="subject" style=" color: gray">
-				</td>
-			</tr>
-			
-			<tr>
-				<td style="font-weight: bold; font-family: monospace;  color: #1abc9c;">내용<br>
-					<textarea style="color: gray" name="content"></textarea>
+				<td colspan="2" style="font-weight: bold; font-family: monospace;  color: #1abc9c; font-size: 25px;">내용<br>
+					<textarea style="color: gray; width: 450px; height: 160px;" name="content"></textarea>
 				</td>
 			</tr>
 			

@@ -53,14 +53,14 @@
 	}	
 
 
-	$(document).ready(function() {
+$(document).ready(function() {
 		var date=new Date();
 		var d=date.getDate();
 		var m=date.getMonth();
 		var y=date.getFullYear();
 		
 	$('#calendar').fullCalendar({
-	    locale:'en',
+	    locale:'en',	//언어설정
 	    height: 450,	
 	//    header: {
 	     	/* left: 'prev ,next today myCustomButton ',
@@ -79,7 +79,7 @@
 	        
 	    },
 	    
-	    editable:true,
+	    editable:false,
 	    allDaySlot:false,
 	    selectable: true,  //사용자가 클릭 및 드래그하여 선택을 할 수 있도록
 	    selectHelper: true,//사용자가 드래그되는 동안 "자리"이벤트를 그릴 것인지 여부를 지정할 수 있습니다.
@@ -129,11 +129,8 @@
 			    	console.log(e.responseText);
 			    }
 			});
-		}
-	    	
-	    
-	    
-	});
+		}    
+		});
 	
 	//이전 달 버튼 클릭
 	 $("button.fc-prev-button").click(function() {
@@ -210,8 +207,8 @@ function insertBoard(){
 	
 	var f=document.calForm;
 	var url="<%=cp%>/study/myStudy/${s_num}/calender/created";
-	var formData=$("#calForm").serialize();
-	
+	var formData=$("#calForm").serialize();	//serialize : form의 정보를 data1=? & data2=? 의 식으로 받아옴
+
 	$.ajax({
 		type:"post"
 		,url:url
@@ -220,7 +217,7 @@ function insertBoard(){
 		,success:function(data){
 			var month=data.month;
 			if(data.state=="true"){
-				
+				 $("#calendar").fullCalendar("refetchEvents");//새로고침
 				listPage(1);
 	
 			}else{
@@ -251,6 +248,8 @@ function deleteBoard(num,page){
 		,success:function(data){
 			if(data.state=="true"){
 				listPage(data.page);
+				  $("#calendar").fullCalendar("refetchEvents");//새로고침
+
 			}else{
 				alert("삭제에 실패하였습니다");
 			}
@@ -334,12 +333,12 @@ color:#1abc9c;
 
 <div id='calendar' style=" width:95%; float: left; "></div> 
 
-<div id='listCalendar' style="float: right; width:49%;"></div>
+<div id='listCalendar' style="width:95%;"></div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
   <div class="modal-dialog">
-    <div class="modal-content" style="width: 200px;">
-      <div id="myModalBody" class="modal-body" style="height: 290px; "></div>
+    <div class="modal-content" style="width: 500px; margin-top: 250px; margin-left: 40px;">
+      <div id="myModalBody" class="modal-body" style="height: 400px; "></div>
       <div class="modal-footer" style="margin-top: -5px; height: 45px;">
       	   <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 65px; height: 25px; background: #1abc9c; padding-top: 3px; margin-top: -11px;" onclick="insertBoard();">등록</button>
 	       <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 65px; height: 25px; background: #1abc9c; padding-top: 3px; margin-top: -11px;">취소</button>
