@@ -97,6 +97,17 @@ function sendlogout(){
 	});
 }
 
+function keywordSearch(){
+	var keyword=$("#exampleInputAmount").val();
+	
+	if(keyword==""){
+		return;
+	}
+
+	location.href="<%=cp%>/keyword/search?keyword="+keyword;
+	
+}
+
 </script>
 
 
@@ -200,7 +211,7 @@ function sendlogout(){
 					      <input type="text" class="form-control" id="exampleInputAmount" placeholder="검색어를 입력하세요..." 
 					      style=" border:3px solid #1abc9c; border-right:none; border-top-left-radius: 20px; border-bottom-left-radius: 20px;">
 					      <div class="input-group-addon" style="background:none; border:3px solid #1abc9c; border-left:none; cursor: pointer;  border-top-right-radius: 20px; 
-					      border-bottom-right-radius: 20px;" onclick=""><i class="fa fa-search"></i></div>
+					      border-bottom-right-radius: 20px;" onclick="keywordSearch();"><i class="fa fa-search"></i></div>
 					    </div>
 					  </div>
 				
