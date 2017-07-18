@@ -3,16 +3,16 @@ package com.wooltari.report;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller("help.report.reportController")
+@Controller("report.ReportController")
 public class ReportController {
 	
-	@RequestMapping(value="/help/report/list")
+	@RequestMapping(value="/customer/report/list")
 	public String list() {
 
-		return ".help.report.list";
+		return ".customer.report.list";
 	}
 	
-	@RequestMapping(value="/help/report/created")
+	/*@RequestMapping(value="/help/report/created")
 	public String article() {
 
 		return ".help.report.created";
@@ -22,5 +22,5 @@ public class ReportController {
 	public String created() {
 
 		return ".help.report.article";
-	}
+	}*/
 }

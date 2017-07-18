@@ -71,7 +71,7 @@ public class FaqServiceImpl implements FaqService {
 		int result=0;
 		
 		try{
-			dao.deleteData("faq.deleteFaq", num);
+			result = dao.deleteData("faq.deleteFaq", num);
 		}catch(Exception e){
 		}
 		
@@ -82,10 +82,21 @@ public class FaqServiceImpl implements FaqService {
 		int result=0;
 		
 		try{
-			result=dao.deleteData("deleteList", list);
+			result=dao.deleteData("faq.deleteList", list);
 		}catch(Exception e){			
 		}
 		return result;
+	}
+	
+	@Override
+	public Faq readFaq(int num) {
+		Faq dto=null;
+		
+		try{
+			dto=dao.getReadData("faq.readFaq",num);
+		}catch(Exception e){			
+		}
+		return dto;
 	}
 
 }

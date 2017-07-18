@@ -10,6 +10,7 @@ public interface FaqService {
 
 	public int dataCount(Map<String, Object> map);
 	
+	public Faq readFaq(int num);
 	public int updateFaq(Faq dto);
 	public int deleteFaq(int num);
 	
