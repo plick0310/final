@@ -10,6 +10,9 @@
 .footer{
 	visibility: hidden;
 } 
+.section-question{
+	padding-left: 30px;
+}
 #left-wrap{ 
     width: 60%;
     position: fixed;

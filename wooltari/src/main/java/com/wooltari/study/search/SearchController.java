@@ -30,7 +30,7 @@ public class SearchController {
 	public String listSearch(
 				@RequestParam(value="page", defaultValue="1") int current_page,
 				@RequestParam(value="recruit", defaultValue="0") int recruit,
-				@RequestParam(value="gender", defaultValue="무관") String gender,
+				@RequestParam(value="gender", defaultValue="") String gender,
 				@RequestParam(value="searchValue", defaultValue="") String searchValue,
 				Model model, HttpServletRequest req , HttpSession session
 			) throws Exception{
@@ -66,7 +66,6 @@ public class SearchController {
         // 리스트에 출력할 데이터를 가져오기
         int start = (current_page - 1) * rows + 1;
         int end = current_page * rows;
-        System.out.println("@@@@@@@@@@@@@@" + start + " : " + end);
         map.put("start", start);
         map.put("end", end);
 		
