@@ -305,7 +305,7 @@ function reload(){
 		</div>
 		
 		<ul class="inbox-nav inbox-divider">
-			<li id="notice" class="active">
+			<li id="all" class="active">
 				<a href="#"><i class="fa fa-bell-o" aria-hidden="true"></i> 전체 스케줄</a>
 			</li>
 			

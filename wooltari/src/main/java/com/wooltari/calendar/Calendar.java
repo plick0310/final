@@ -3,16 +3,19 @@ package com.wooltari.calendar;
 public class Calendar {
 	private String sdate,edate;
 	private String month;
+	
+	private String content,subject;
+	private String tableName;
+	private int num;
+	private long s_num;
+	
+
 	public String getMonth() {
 		return month;
 	}
 	public void setMonth(String month) {
 		this.month = month;
 	}
-	private String content,subject;
-	private String tableName;
-	private int num;
-	private long s_num;
 	
 	public long getS_num() {
 		return s_num;
