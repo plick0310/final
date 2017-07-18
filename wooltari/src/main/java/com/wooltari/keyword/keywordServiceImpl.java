@@ -32,6 +32,20 @@ public class keywordServiceImpl implements keywordService {
 		
 		return list;
 	}
+	
+	@Override
+	public List<StudyInfo> allStudyList(Map<String, Object> map) {
+		List<StudyInfo> list=null;
+		
+		try {
+			list=dao.getListData("keyword.allStudy",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;	
+	}
+
 
 
 	@Override
@@ -130,5 +144,7 @@ public class keywordServiceImpl implements keywordService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
 
 }

@@ -52,4 +52,41 @@
 		</where>		
 	</select>
 	
+	<!-- 회원가입한 스터디 번호 -->
+	<select id="memberStudy" resultType="com.wooltari.calendar.Calendar">
+		select s_num from studymember where userid=#{userId}
+	</select>
+	
+	<!-- 회원가입한 스터디 번호 한개만 -->
+	<select id="memberStudyOne" resultType="Integer">
+		select s_num from(
+	 		 select rownum rnum, tb.* from( 
+	      select s_num from studymember where userid=#{userId}
+	      
+	     <![CDATA[	
+			)tb where rownum <= #{end}
+		)where rnum>=#{start}
+		]]>
+	</select>
+	
+	<!-- 통합리스트 -->
+	<select id="allMemberStudy" resultType="com.wooltari.calendar.Calendar">
+		select * from(
+ 		 select rownum rnum, tb.* from(
+ 		 	  select num,s_num,subject,content,to_char(sdate,'YYYY-MM-DD')sdate,to_char(edate,'YYYY-MM-DD')edate from s_${result}_Calendar
+ 		 	  <foreach collection="list" item="dto">
+ 		 	  	union all
+ 		 	  	select num,s_num,subject,content,to_char(sdate,'YYYY-MM-DD')sdate,to_char(edate,'YYYY-MM-DD')edate from s_#{dto.s_num}_Calendar
+			  </foreach> 
+			    where substr(sdate,'4','2') in ${month} or substr(edate,'4','2') in ${month} order by sdate 
+ 		  <![CDATA[	
+			)tb where rownum <= #{end}
+		)where rnum>=#{start}
+		]]>
+	
+	</select>
+	
+	
+	
+	
 </mapper>

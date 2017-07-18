@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="report">
+	
+<select id="seq" resultType="Integer">
+	SELECT report_seq.NEXTVAL FROM dual
+</select>	
+
+<insert id="insertReport" parameterType="com.wooltari.report.Report">
+	INSERT INTO report(repNum, userId, subject, content, groupNum, orderNo, depth, parent )
+	VALUES(#{repNum}, #{userId}, #{subject}, #{content}, #{groupNum}, #{orderNo}, #{depth}, #{parent})
+</insert>
+
+<sql id="where-list">
+	<if test="searchKey=='userId'">
+		userId=#{searchValue}
+	</if>
+	<if test="searchKey=='subject'">
+		INSTR(subject, #{searchValue}) &gt;0
+	</if>
+	<if test="searchKey=='content'">
+		DBMS_LOB.INSTR(content,#{searchValue}) &gt;0
+	</if>
+	<if test="searchKey=='created'">
+		TO_CHAR(created,'YYYY-MM-DD')=#{searchValue}
+		OR TO_CHAR(b.created,'YYYYMMDD') = #{searchValue}
+	</if>
+</sql>
+
+<update id="updateOrderNo" parameterType="map">
+	UPDATE report SET orderNo=orderNo+1
+	<![CDATA[
+		WHERE groupNum=#{groupNum} AND orderNo>#{orderNo}
+	]]>
+</update>
+
+</mapper>

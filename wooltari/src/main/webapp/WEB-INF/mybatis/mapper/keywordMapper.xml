@@ -2,23 +2,43 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="keyword">
+
+	<!-- 스터디 3개만 출력(통합검색) -->
 	<select id="study" resultType="com.wooltari.keyword.StudyInfo">
 		select * from(
 	 		select rownum rnum,tb.* from(
-		  		select s_num, userId,studyName, study_Info, created, gender,recruit, range 
+		  		select s_num, userId,studyName, study_Info, created, gender,recruit, range,imageFileName
 		   		from study
-		   		where DBMS_LOB.INSTR(studyname,'${keyword}') > 0 or DBMS_LOB.INSTR(study_info,'${keyword}') > 0  
-		 	    order by created
 		<![CDATA[
+		   			where range<2 and (DBMS_LOB.INSTR(studyname,'${keyword}') > 0 or DBMS_LOB.INSTR(study_info,'${keyword}') > 0 )
+		 	    order by created
+		
 		  	 )tb where rownum <=#{end}
 		)where rnum >=#{start}
 		]]>
 	</select>
 	
+	<!-- 스터디 총갯수  -->
 	<select id="studyCount" resultType="Integer">
 		select nvl(count(*),0)
 		from study where DBMS_LOB.INSTR(studyname,'${keyword}') > 0 or DBMS_LOB.INSTR(study_info,'${keyword}') > 0
 	</select>
+	
+	<!-- 검색 내의 모든 스터디 -->
+	<select id="allStudy" resultType="com.wooltari.keyword.StudyInfo">
+		select * from(
+	 		select rownum rnum,tb.* from(
+		  		select s_num, userId,studyName, study_Info, created, gender,recruit, range ,imageFileName
+		   		from study
+		<![CDATA[
+		   			where range<2 and (DBMS_LOB.INSTR(studyname,'${keyword}') > 0 or DBMS_LOB.INSTR(study_info,'${keyword}') > 0 )
+		 	    order by created
+		
+		  	 )tb where rownum <=#{end}
+		)where rnum >=#{start}
+		]]>
+	</select>
+	
 	
 </mapper>
 

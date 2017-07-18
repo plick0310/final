@@ -122,7 +122,7 @@ border: 1px solid #EAEAEA;
 	  /* post  */
 	  <c:if test="${mode=='update'}">
 	  function deleteFile(fileNum) {
-			var url="<%=cp%>/download/infoReqBoard/deleteFile";
+			var url="<%=cp%>/customer/faq/deleteFile";
 			$.post(url, {fileNum:fileNum}, function(data){
 				$("#f"+fileNum).remove();
 			}, "JSON");
@@ -214,7 +214,7 @@ border: 1px solid #EAEAEA;
 		
 		 <c:if test="${mode=='update'}">
             <input type="hidden" name="num" value="${dto.num}">
-            <input type="hidden" name="page" value="${page}">
+            <input type="hidden" name="pageNo" value="${pageNo}">
             
         </c:if>
 	</div>

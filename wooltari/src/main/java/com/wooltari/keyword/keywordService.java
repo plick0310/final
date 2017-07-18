@@ -7,6 +7,7 @@ import com.wooltari.promote.Promote;
 
 public interface keywordService {
 	public List<StudyInfo> studyList(Map<String, Object> map);
+	public List<StudyInfo> allStudyList(Map<String, Object> map);
 	public int studyCount(Map<String, Object> map);
 	
 	public List<DownloadBoard> DownloadBoardList(Map<String, Object> map);

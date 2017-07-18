@@ -39,6 +39,36 @@ public class CalendarController {
 		return "study/myStudy/cal";
 	}
 	
+	
+	@RequestMapping(value="/study/myStudy/all/calender")
+	public String calenderAll(
+			HttpSession session
+			)throws Exception {
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		Map<String, Object> map=new HashMap<>();
+		map.put("userId", info.getUserId());
+		
+		List<Calendar> list=service.memberStudy(map);
+		
+		map.put("start", '1');
+			
+		int result=service.memberStudyOne(map);
+		
+		Map<String, Object> map2=new HashMap<>();
+		map2.put("list", list);
+		map2.put("result", result);
+
+
+		
+		List<Calendar> list2=service.allMemberStudy(map2);
+
+		
+		
+		
+		return "study/myStudy/cal";
+	}
+	
 	@RequestMapping(value="/study/myStudy/{s_num}/calender/created",method=RequestMethod.GET)
 	public String createdForm(
 			@PathVariable long s_num,

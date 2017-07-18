@@ -25,11 +25,17 @@ public class StudyInfo {
 	private MultipartFile upload;
 	private String imageFileName;
 	
+	private int listNum;
 	
 
-	
-	
-	
+	public int getListNum() {
+		return listNum;
+	}
+
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
+
 	public String getUserName() {
 		return userName;
 	}

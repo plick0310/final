@@ -2,6 +2,7 @@ package com.wooltari.faq;
 
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -48,7 +49,7 @@ public class FaqController {
 		dto.setUserId(info.getUserId());
 		service.insertFaq(dto);
 		
-		return "redirect:/customer/faq/main";
+		return ".customer.faq.main";
 	}
 	
 	@RequestMapping(value="/customer/faq/main")
@@ -131,7 +132,10 @@ public class FaqController {
 		String paging=myUtil.paging(current_page, total_page);
 		
 		model.addAttribute("dataCount", dataCount);
+		
 		model.addAttribute("pageNo", current_page);
+		model.addAttribute("category", category);
+		
 		model.addAttribute("total_page", total_page);
 		
 		model.addAttribute("list", list);
@@ -143,11 +147,66 @@ public class FaqController {
 		
 		return "customer/faq/list";
 	}
+	
+
+	@RequestMapping(value="/customer/faq/update", method=RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int num,
+			@RequestParam String pageNo,
+			Model model,
+			HttpSession session)throws Exception{
 		
-	@RequestMapping(value="/customer/faq/article")
-	public String article()throws Exception{
+		Faq dto=(Faq)service.readFaq(num);
+		if(dto==null){
+			return "redirect:/customer/faq/main";
+		}
+		model.addAttribute("mode", "update");
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("dto", dto);
 		
-		return ".customer.faq.article";
+		return ".customer.faq.created";
+	}
+	
+	@RequestMapping(value="/customer/faq/update")
+	public String updateSubmit(
+			Faq dto,
+			@RequestParam String category,
+			@RequestParam String pageNo,
+			HttpSession session
+			)throws Exception{
+		
+		service.updateFaq(dto);
+		return "redirect:/customer/faq/main?page="+pageNo+"&category="+category;
+	}
+	
+	
+	@RequestMapping(value="/customer/faq/delete")
+	public String delete(
+			@RequestParam int num,
+			@RequestParam String pageNo,
+			@RequestParam String category,
+			HttpSession session)throws Exception{
+		
+		Faq dto=service.readFaq(num);
+		if(dto==null){
+			return "redirect:/customer/faq/main?page="+pageNo+"&category="+category;
+		}
+		service.deleteFaq(num);
+		
+		return "redirect:/customer/faq/main?page="+pageNo+"&category="+category;
+	}
+	
+	
+	@RequestMapping(value="/customer/faq/deleteList")
+	public String deleteList(
+			Integer[] chk,
+			@RequestParam String pageNo,
+			@RequestParam String category
+			)throws Exception{
+		List<Integer> list=Arrays.asList(chk);
+		service.deleteList(list);
+		
+		return "redirect:/customer/faq/main?page="+pageNo+"&category="+category;
 	}
 	
 }

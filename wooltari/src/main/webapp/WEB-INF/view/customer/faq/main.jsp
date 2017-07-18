@@ -115,8 +115,8 @@ ul.tabs li.active {
 }
 </style>
 <script>
+	//최상단 체크박스 클릭
 	$(document).ready(function() {
-		//최상단 체크박스 클릭
 		$("#allCheck").click(function() {
 			//클릭되었으면
 			if ($("#allCheck").prop("checked")) {
@@ -130,13 +130,15 @@ ul.tabs li.active {
 		});
 
 	});
-	
+	//탭 지정시 색상 
 	$(function() {
 		$(".tab_content").hide();
-		$(".tab_content:first").show();
+		$(".tab_content:first").show();//tab_content 전부 숨긴 것 중에 가장 첫번째껏만 보여준다.
 
 		$("ul.tabs li").click(function() {
+			//<ul class="tabs">에 <li>를 클릭하면,
 			tab = $(this).attr("data-tab");
+			//attr:("data-tab")속성값을 가져와라.<li id="tab-all" class="active" data-tab="all">전체
 			$("ul.tabs li").each(function(){
 				$(this).removeClass("active").css("color", "#333");
 			});
@@ -147,18 +149,19 @@ ul.tabs li.active {
 			
 		});
 	});
-	
+	//1페이지로 가기
 	$(function(){
 		listPage(1);
 	});
 	
 	function listPage(page) {
-		var $tab = $("ul.tabs .active");
+		var $tab = $("ul.tabs .active");//<ul class="tabs">에 <li>
 		var category = $tab.attr("data-tab");
+		//attr:("data-tab")속성값을 가져와라.<li id="tab-all" class="active" data-tab="all">전체
 		
 		var url="<%=cp%>/customer/faq/list";
 		var query="pageNo="+page+"&category="+category;
-		var search=$("form[name=searchForm]").serialize();
+		var search=$("form[name=searchForm]").serialize();//직렬화(포장)
 		query+="&"+search;
 		
 		ajaxHTML(url, "get", query);
@@ -176,9 +179,16 @@ ul.tabs li.active {
 				}
 				
 				$("#tab_content").html(data);
+				//게시판이 들어갈 곳.<div id="tab_content" class="tab_content"></div>
+				//html 태그를 불러옴.
 			}
 		,beforeSend:function(jqXHR){
+			//beforeSend:는 요청을 시작하기전에 호출할 함수를 지정.
+			// jquery ajax의 error는 jqXHR, textStatus, errorThrown 의 세 가지 파라미터를 제공 합니다.
+			// jqXHR.status는 http 오류 번호를 반환하며 케이스별 오류 메시지 판정에 사용하면 유용할 것 같습니다.
 			jqXHR.setRequestHeader("AJAX",true)
+			//인스턴스.setRequestHeader(헤더이름, 헤더값)
+			//ajax에서는 요청을 보내기전 메소드를 사용하여 헤더이름과 값을 요청헤더에 포함할수 있음.
 		}
 		,error : function(jqXHR){
 			if(jqXHR.status==4011){
@@ -188,24 +198,23 @@ ul.tabs li.active {
 				
 			}else{
 				console.log(jqXHR.responseText);
+				//console.log()는 입력한 값을 보여줌.
 			}
 		}
 		});
 	}
 	
 </script>
-<script type="text/javascript">
 
-
-
-</script>
-<div style="width: 900px; height: 600px; margin: 60px auto;">
+<div class="container">
 	<div style="height: 50px; font-size: 20px; text-align: center;">
 		<span style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c;"
 			class="glyphicon glyphicon-pencil"> </span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;
 		</span>R E P O R T
 	</div>
+	
+	<!-- ajax 처리할 탭 -->
 	<div id="tabwrap" style="width: 900px; margin: 0px auto;">
 		<ul class="tabs">
 			<li id="tab-all" class="active" data-tab="all">전체</li>
@@ -219,35 +228,11 @@ ul.tabs li.active {
 		</ul>
 	</div>	
 	
+	<!-- ajax처리되는 실제 게시판  -->
 	<div class="tab_container">
 			<div id="tab_content" class="tab_content"></div>
 	</div>
-
-	<div class="paging" style="width: 900px; margin: 20px auto;text-align: center;">
-		<c:if test="${dataCount==0 }">
-                            등록된 게시물이 없습니다.
-        </c:if>
-        <c:if test="${dataCount!=0 }">
-        	${paging}
-        </c:if></div>
-	<div class="btnArea" style="float: right;">
-	<c:if test="${sessionScope.member.userId=='admin'}">
-		<input type="button" class="clickbtn" 
-		 onclick="javascript:deleteList();" value="삭제">
-	</c:if>	
-		<input type="button" class="clickbtn"
-		 onclick="javascript:location.href='<%=cp%>/customer/faq/created';" value="글쓰기">
-	</div>
-
-<form action="" id="array_form" name="searchForm" method="post">
-	<div class="scArea" style="margin: 30px 10px 30px 200px;">
-		<select name="searchKey" class="where">
-			<option value="subject">제목</option>
-			<option value="content">내용</option>
-		</select>
-		<input type="text" name="searchValue" class="keyword" placeholder="검색"  style="width:120px; "> <input type="button" class="submit" onclick="listPage(1);">
-	</div>
-</form>
+	
 
 
 </div>
