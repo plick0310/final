@@ -55,7 +55,7 @@
 	}
 </style>
 
-<div style="width: 100%;height:30px;margin: 60px auto 13px;">
+<div class="startexam" style="width: 100%;height:30px;margin: 10px auto 13px;">
 	<div style="height: 50px; font-size: 20px; text-align: center; padding-bottom: 50px;">
 		<span style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c;" class="glyphicon glyphicon-pencil"></span>
@@ -63,40 +63,6 @@
       	</span>
 		
 		<span style="color: #404040;font-weight: bolder;">TRIAL EXAMINATION</span> <br/><br/>
-      
-		<table style="margin:0px 0px 5px 0px;width:100%;border: 1px solid #eee; BORDER-BOTTOM: NONE; background:#f8f8f8;/* border-top: 1px solid #eee; */" align="center"><!-- 상단 타이틀 시작. -->
-			<%-- <c:forEach items="${examwishList }" var="dto" varStatus="status">
-			 --%>	<tbody>
-					<tr style="height:45px;">
-						<td style="font-family: 'BareunDotum'; font-weight:bolder; color:#383635; font-size:11pt;" align="center" valign="middle">
-							<strong>정보처리기사 [ 2017년 1회 기출문제 ] 응시 </strong>
-							<span style="font-size:10pt; font-weight:500; color:#878787;">
-								<span style="padding-left:8px; font-weight:500">
-									<strong>Timer</strong>
-								</span>
-								<span id="min" style="width:15px; font-weight:500; text-align:right">15</span>분
-								<span id="sec_info" style="width:15px; font-weight:500; text-align:right">23</span>초
-	               
-								<script>
-			                        var startDate = new Date();
-			                        updateTime();
-			                        
-			                        function updateTime() {
-										var nowTime = new Date();
-										var t = nowTime.getTime() - startDate.getTime();
-										var s = Math.round(t/1000);
-										var ss = s%60;
-										min.innerHTML = Math.floor(s/60);
-										sec_info.innerHTML = ss;
-										setTimeout("updateTime()",500);
-									}
-								</script>
-							</span>
-						</td>
-					</tr>
-				</tbody>
-<%-- 			</c:forEach> --%>	
-		</table>
 
 		<div id="index_div" style="margin: 30px auto 45px; width:715px;" align="center"><!-- 첫화면 컨테이너 시작. -->
 			<table style="width:100%">
@@ -135,12 +101,27 @@
 										<td align="center"><strong style="color: #1abc9c;">응시전</strong>&nbsp;&nbsp;&nbsp;20 문제<span>|</span><br/></td>
 										<td style="text-align: center;">17.07.13<span>|</span></td>
 										<td colspan="1" align="center">
-											<button type="button" value="시작" class="clickbtn" onclick="examStart();">시작</button>
-																						<script>
-												function examStart() {
-													alert("안녕");
-												}
-											</script>
+										<!--	 <button type="button" value="시작" class="clickbtn" onclick="examStart();">시작</button> -->
+											<button type="button" value="시작" class="clickbtn" onclick="javascript:location.href='<%=cp%>/mockTest/mockExam';">시작</button> 
+<%-- 											 	<script>
+													function examStart() {
+													window.location.href="<c:url value='community/mockTest/mockExam.jsp' />";
+													location.replace("<%=cp%>/mockTest/mockExam");
+													
+														var url="<%=cp%>/mockTest/mockExam";
+														var query="tmp="+new Date().getTime();
+													    var f = document.boardForm;
+													    
+													    	$.ajax({
+													    		type:"get"
+													    		,url:url
+													    		,data:query
+													    		,success:function(data) {
+													    			$("#tab-content").html(data);
+													    		}
+													    	});
+													    }
+											</script> --%>
 
                              			</td>
                              		</tr>

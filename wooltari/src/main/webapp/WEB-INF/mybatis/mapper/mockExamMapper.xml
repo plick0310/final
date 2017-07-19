@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mockExam">
+	<select id="examQuestionList" parameterType="map" resultType="com.wooltari.mockExam.MockExam">
+		SELECT * FROM (
+	  		SELECT ROWNUM examNum, tb.* FROM (
+	    		SELECT ed.num, examinfoname, exam, ex_One, ex_two, ex_three, ex_four FROM EXAMTESTLIST etl
+				    JOIN EXAMDB ED ON etl.num = ed.examNum
+				    JOIN EXAMPLENUMBER ep ON ed.num = ep.num
+			<![CDATA[		    
+			) tb WHERE ROWNUM <= #{end}
+		) where examNum >= #{start}
+		]]>
+	</select>
+	
+	<select id="scoring" parameterType="map" resultType="com.wooltari.mockExam.MockExam">
+		select answer from EXAMANSWERDB	
+	</select>
+	
+	<!--  -->
+	
+	
+	
+</mapper>

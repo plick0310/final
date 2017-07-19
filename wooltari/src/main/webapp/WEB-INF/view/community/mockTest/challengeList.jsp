@@ -320,11 +320,14 @@ function oMousePos(canvas, evt) {
   }
 }
 </script>
+
+
 <div style="margin-bottom: 5px; font-size: 15px; width: 100%; text-align: left; margin-top: 55px;
 		">
 	<span style="font-size: 15px; width: 700px;	text-align: left; margin: 50px auto 0;">
-		『 2017년 06월 29일 』</span> 을 기준으로 금일 총 합격률은 80%입니다. 
+		『 2017년 06월 29일 』</span> 을 기준으로 금일 총 합격률은 80%입니다.  
 		<span style="font-size: 10px; color: red; margin-left: 10px;">(※최초 응시할 때의 응시 정보만 반영됩니다)</span>
+		<br/><span>방금 시험을 본 당신의 점수는!!?!!  ---> <strong>${result }</strong> 점입니돠</span>
 </div>
 
 <!-- 차트 -->

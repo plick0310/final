@@ -78,8 +78,29 @@
 		)WHERE rnum>= #{start}
 		]]>	
 	</select>
+	<!-- 글보기 -->
+	<select id="readFaq" resultType="com.wooltari.faq.Faq" parameterType="Integer">
+		SELECT num, category, subject, content, f.userId, created
+		FROM faq f
+		JOIN member m ON f.userId=m.userId WHERE num=#{num}
+	</select>
 	
-
+	<!-- 수정 -->
+	<update id="updateFaq" parameterType="com.wooltari.faq.Faq">
+		UPDATE Faq SET category=#{category}, subject=#{subject}, content=#{content}
+		WHERE num=#{num}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteFaq" parameterType="Integer">
+		DELETE FROM faq WHERE num=#{num}
+	</delete>
+	
+	<!-- 다중삭제  -->
+	<delete id="deleteList" parameterType="java.util.List">
+		DELETE FROM faq WHERE num IN
+		<foreach close=")" separator="," open="(" collection="list" index="index" item="num">#{num}</foreach>
+	</delete>
 	
 	
 </mapper>

@@ -162,10 +162,4 @@ public class MockTestController {
 		return "community/mockTest/challengeList";
 	}
 	
-	@RequestMapping(value="/mockTest/mockExam")
-	public String mockExam() {
-		
-		return "community/mockTest/mockExam";
-	}
-	
 }

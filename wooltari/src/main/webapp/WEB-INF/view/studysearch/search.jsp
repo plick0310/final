@@ -10,6 +10,9 @@
 .footer{
 	visibility: hidden;
 } 
+.section-question{
+	padding-left: 30px;
+}
 #left-wrap{ 
     width: 60%;
     position: fixed;
@@ -30,8 +33,39 @@
 <!-- Map -->
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=tkYb1p5roIP90h3KhPZ_&submodules=geocoder"></script>
 
-<div class="container-study">
+<script type="text/javascript">
+function mapShow() {
+    $('#mapShowButton').hide();
+    var moveRight = $('#map-wrap').css('right');
+    moveRight = (parseInt(moveRight)) * -1;
+    $('#map-wrap').animate({ "right": 0 }, "500");
+    $('#left-wrap .filter').animate({ "right": '40%' }, "500");
+    $('.filter-footer').animate({ "width": '60%' }, "500");
+    $('#left-wrap').animate({ "width": "60%" }, "500", function () {
+        $('#left-wrap').removeAttr('style');
+    })
+    $('.default-list-box,#search-list > div').removeClass('col-lg-3 col-md-6 col-sm-6 col-xs-12 moccozy-item-wrap').addClass('col-lg-4 col-md-6 col-sm-12 col-xs-12 moccozy-item-wrap')
+    $('#mapHideButton').show();
+}
+function mapHide() {
+	$('#mapHideButton').hide();
+	var mapWitdh = ($('#map-wrap').parent().width()) * 3;
+    $('#map-wrap').animate({ "right": '-' + mapWitdh + 'px' }, "500");
+    $('#left-wrap .filter').animate({ "right": '0' }, "500");
+    $('.filter-footer').animate({ "width": '100%' }, "500");
+    $('#left-wrap').animate({ "width": "100%" }, "500", function () {
+        $('.mapShowButton').show();
+    });
+    $('.default-list-box,#search-list > div').removeClass('col-lg-4 col-md-6 col-sm-12 col-xs-12 moccozy-item-wrap').addClass('col-lg-3 col-md-6 col-sm-6 col-xs-12 moccozy-item-wrap')
+    $('#mapShowButton').show();
+}
+</script>
+<div class="container" style="width: 900px;">
 	<div class="leftContent" id="left-wrap">
+	
+	<input type="button" onclick="mapHide();" class="mapHideButton" id="mapHideButton" value="맵숨기기"> 
+	<input type="button" onclick="mapShow();" class="mapShowButton" id="mapShowButton" value="맵보이기" style="display: none;">
+		
 		<div class="section-question">
 		   <div class="question-title">스터디 인원을 입력해 주세요</div>
 		   <div class="question-answer">
@@ -150,44 +184,49 @@
 			</div>
 		</div>
 	               
-		<c:forEach begin="1" end="10" step="1">
+		<c:forEach var="dto" items="${list}">
 			<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 default-list-box study-item-wrap">
-				<a href="/teacher/12">
+				<a href="javascript:location.href='<%=cp%>/study/myStudy/home/${dto.s_num}'">
 					<div class="study-item list-item align-left" data-lat="" data-lng="" data-index="">
 						<div class="study-item-overlay">
 						</div>
-						<div class="header-bg" style="background-image:url('')">
+						<div class="header-bg" style="background-image:url(<%=cp%>/uploads/member/userImg/${dto.imageFileName})">
 						</div>
 						<div class="header-text-container">
 							<div class="isPayment">
-							카테고리
+							카테고리 들어갈 곳
 							</div>
 							<div class="header-text align-left">
 								<div class="title-wrap">
 									<div class="title">
-									스터디 제목
+									${dto.studyName}
 									</div>
 								</div>
 								<div class="tag">
-									<span class="last">#해시태그</span>
+									<span class="last">${dto.study_Info}</span>
 								</div>
 							</div>
 						</div>
 						<div class="item-contents align-left">
-							<div class="profile-image" style="background-image:url('<%=cp%>/resource/img/noprofileimg.png')">
+							<c:if test="${not empty dto.userImg}">
+								<div class="profile-image" style="background-image:url(<%=cp%>/uploads/member/userImg/${dto.userImg})">
+							</c:if>
+							<c:if test="${empty dto.userImg}">
+								<div class="profile-image" style="background-image:url(<%=cp%>/resource/img/noprofileimg.png)">
+							</c:if>
+							
 							</div>
 							<div class="user-name">
-							오세훈씨씨
+							${dto.userName}
 							</div>
 							<div class="location">
 							서울 동작구 사당동
 							</div>
 							<div class="strong-info">
-								<span class="payment"></span> 200,000원 <span class="count"></span>
+								<span class="payment"></span> ${dto.gender} <span class="count"></span>
 							</div>
 							<div class="icon-container">
-								<span class="commentIcon"><img class="icon-img" src="http://moccozy.blob.core.windows.net/icon/comment-icon.png"/></span><span class="info-comment">30</span>
-								<span class="commentIcon"><img class="icon-img" src="http://moccozy.blob.core.windows.net/icon/comment-icon.png"/></span><span class="info-comment">30</span>
+								<i class="fa fa-user-o" aria-hidden="true"></i><span class="info-comment"> ${dto.memcnt}</span>
 							</div>
 						</div>
 					</div>

@@ -1,16 +1,12 @@
-package com.wooltari.photalks;
-
-import javax.servlet.http.HttpSession;
+package com.wooltari.usedshop;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
-@Controller(".photalks.photalksController")
-public class StudywhereController {
+@Controller(".usedshop.usedshopController")
+public class UsedShopController {
 	
 /*	@Autowired
 	private StudyWhereService service;
@@ -20,7 +16,7 @@ public class StudywhereController {
 	
 
 	
-	@RequestMapping(value="/community/photalks/list")
+	@RequestMapping(value="/community/usedshop/list")
 	public String list(
 		/*@RequestParam(name="page",defaultValue="1") int current_page,
 		@RequestParam(name="searchKey",defaultValue="subject") String searchKey,
@@ -124,15 +120,15 @@ public class StudywhereController {
 	model.addAttribute("dataCount",dataCount);
 	model.addAttribute("total_page",total_page);*/
 	
-	return ".community.photalks.list";
+	return ".community.usedshop.list";
 	}
-	
+	/*
 	@RequestMapping(value="/community/photalks/created",method=RequestMethod.GET)
 	public String createdForm(Model model,HttpSession session) throws Exception{
 
 		model.addAttribute("mode","created");
 		return ".community.photalks.created";
-	}
+	}*/
 	/*@RequestMapping(value="/studyboard/studywhere/created",method=RequestMethod.POST)
 	public String createdSubmit(StudyWhere dto,HttpSession session)throws Exception {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
@@ -396,7 +392,9 @@ public class StudywhereController {
 			service.deleteReply(map);
 			
 		}
-		Map<String, Object> model = new HashMap<>();
+		Map<String, Object> model = new HashMa
+		
+		p<>();
 		model.put("state", state);
 		return model;
 		

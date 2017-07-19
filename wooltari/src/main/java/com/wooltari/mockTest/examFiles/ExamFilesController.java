@@ -61,7 +61,6 @@ SessionInfo info = (SessionInfo) session.getAttribute("member");
 	public String examFiles(
 			) throws Exception {
 		
-		
 		return "community/mockTest/examFiles";
 	}
 }
