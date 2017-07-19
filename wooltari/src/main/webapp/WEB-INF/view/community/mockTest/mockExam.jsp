@@ -2,626 +2,1479 @@
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html PUBLIC"-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <%
    String cp = request.getContextPath();
 %>
 
-<html><head> 
-
-<title>[WOOLTARI 모의테스트] 2017년 1회 정보처리기사 CBT</title>
-<link rel="stylesheet" href="<%=cp%>/resource/css/style_qpass.css">
-<link type="image/x-icon" href="/favicon.ico" rel="shortcut icon">
-
-<script type="text/javascript" async="" src="http://stats.g.doubleclick.net/dc.js"></script><script type="text/javascript" async="" src="http://stats.g.doubleclick.net/dc.js"></script><script type="text/javascript" async="" src="http://stats.g.doubleclick.net/dc.js"></script><script type="text/javascript" language="javascript"> // 화면 해상도(문제크기)
-	function a(){document.body.style.zoom='100%'; void(0);}
-	function b(){document.body.style.zoom='125%'; void(0);}
-	function c(){document.body.style.zoom='150%'; void(0);}
-</script>
-
-<script type="text/javascript"> // 구글 애널리틱스
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-19910565-1']);
-  _gaq.push(['_setDomainName', 'gunsys.com']);
-  _gaq.push(['_setAllowLinker', true]);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-<script type="text/javascript"> // 자바스크립트에서 사용하는 전역변수 선언
-var g4_path = "../tn";
-var g4_bbs = "";
-var g4_bbs_img = "";
-var g4_url = "";
-var g4_is_member = "";
-var g4_is_admin = "";
-var g4_bo_table = "";
-var g4_sca = "";
-var g4_charset = "utf-8";
-var g4_cookie_domain = "";
-var g4_is_gecko = navigator.userAgent.toLowerCase().indexOf("gecko") != -1;
-var g4_is_ie = navigator.userAgent.toLowerCase().indexOf("msie") != -1;
-var isMobile = -1;
-</script></head>
-
-
-
+<html>
+	<head> 
+		<title>[WOOLTARI 모의테스트] 2017년 1회 정보처리기사 CBT</title>
+		<link rel="stylesheet" href="<%=cp%>/resource/css/style_qpass.css"/>
+		
+		<script type="text/javascript"> // 자바스크립트에서 사용하는 전역변수 선언
+		var g4_path = "../tn";
+		var g4_bbs = "";
+		var g4_bbs_img = "";
+		var g4_url = "";
+		var g4_is_member = "";
+		var g4_is_admin = "";
+		var g4_bo_table = "";
+		var g4_sca = "";
+		var g4_charset = "utf-8";
+		var g4_cookie_domain = "";
+		var g4_is_gecko = navigator.userAgent.toLowerCase().indexOf("gecko") != -1;
+		var g4_is_ie = navigator.userAgent.toLowerCase().indexOf("msie") != -1;
+		var isMobile = -1;
+		</script>
+	</head>
+	
+	
 <body id="body_style">
-<a name="g4_head"></a>
-<div align="center"><!--Mobile, PC 페이지 컨테이너 가운데 정렬 시작.-->
-<div style="margin:auto; width:1008px; background:#fff; border-radius:8px;"><!--PC 컨테이너 시작.-->
-<div style="padding:15px;"><!--PC 컨테이너 여백 시작.-->
-
-		<span style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
-			<span style="font-size: 19px; color: #1abc9c;" class="glyphicon glyphicon-pencil"></span>
-				WOOLTARI&nbsp;
-      	</span>
-		
-		<span style="color: #404040;font-weight: bolder;">TRIAL EXAMINATION</span> <br><br>
-     
-
-<div style="padding:5px; border:solid 1px #ccc;"><!--PC 시험 영역 시작.-->
-
-
-<table style="margin:0px 0px 5px 0px; width:100%; border:1px solid #ccc; background:#f8f8f8" align="center"><!-- 상단 타이틀 시작. -->
-<tbody><tr style="height:45px;">
-<td style="font-family: 'BareunDotum'; font-weight:bolder; color:#383635; font-size:11pt;" align="center" valign="middle">
-							<strong>정보처리기사 [ 2017년 1회 기출문제 ] 응시 </strong>
-							<span style="font-size:10pt; font-weight:500; color:#878787;">
-								<span style="padding-left:8px; font-weight:500">
-									<strong>Timer</strong>
-								</span>
-								<span id="min" style="width:15px; font-weight:500; text-align:right">3</span>분
-								<span id="sec_info" style="width:15px; font-weight:500; text-align:right">49</span>초
+	<a name="g4_head"></a>
+	
+	<div align="center"><!--Mobile, PC 페이지 컨테이너 가운데 정렬 시작.-->
+		<div style="margin:auto; width:1008px; background:#fff; border-radius:8px;"><!--PC 컨테이너 시작.-->
+			<div style="padding:15px;"><!--PC 컨테이너 여백 시작.-->
+				<span style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
+					<span style="font-size: 19px; color: #1abc9c;" class="glyphicon glyphicon-pencil"></span>
+					WOOLTARI&nbsp;
+				</span>
+				<span style="color: #404040;font-weight: bolder;">TRIAL EXAMINATION</span> <br><br>
+				
+				<div style="padding:5px; border:solid 1px #ccc;"><!--시험 시작.-->
+					<table style="margin:0px 0px 5px 0px; width:100%; border:1px solid #ccc; background:#f8f8f8" align="center"><!-- 상단 타이틀 시작. -->
+						<tbody>
+							<tr style="height:45px;">
+								<td style="font-family: 'BareunDotum'; font-weight:bolder; color:#383635; font-size:11pt;" align="center" valign="middle">
+									<strong>정보처리기사 [ 2017년 1회 기출문제 ] 응시 </strong>
+									<span style="font-size:10pt; font-weight:500; color:#878787;">
+										<span style="padding-left:8px; font-weight:500">
+											<strong>Timer</strong>
+										</span>
+										<span id="min" style="width:15px; font-weight:500; text-align:right">3</span>분
+										<span id="sec_info" style="width:15px; font-weight:500; text-align:right">49</span>초
 	               
-								<script>
-			                        var startDate = new Date();
-			                        updateTime();
-			                        
-			                        function updateTime() {
-										var nowTime = new Date();
-										var t = nowTime.getTime() - startDate.getTime();
-										var s = Math.round(t/1000);
-										var ss = s%60;
-										min.innerHTML = Math.floor(s/60);
-										sec_info.innerHTML = ss;
-										setTimeout("updateTime()",500);
-									}
-								</script>
-							</span>
-						</td>
-<td style="padding-right:5px; text-align:right;" valign="middle">
-	<input type="button" value="중도포기" class="btn01_qpass" style="width:60px; padding:1px; border:1px solid #008000;" onclick="move2main()">
-</td>
-</tr>
-</tbody></table><!-- 상단 타이틀 끝. -->
+										<script>
+											var startDate = new Date();
+											updateTime();
+											
+											function updateTime() {
+												var nowTime = new Date();
+												var t = nowTime.getTime() - startDate.getTime();
+												var s = Math.round(t/1000);
+												var ss = s%60;
+												min.innerHTML = Math.floor(s/60);
+												sec_info.innerHTML = ss;
+												setTimeout("updateTime()",500);
+											}
+										</script>
+									</span>
+								</td>
+								<td style="padding-right:5px; text-align:right;" valign="middle">
+									<input type="button" value="시험 취소" class="btn01_qpass" style="width:65px;padding:1px;border:1px solid #008000;padding-bottom: 4px;" onclick="move2main()">
+								</td>
+							</tr>
+						</tbody>
+					</table><!-- 상단 타이틀 끝. -->
 
-<input type="hidden" id="current_i" value="0" size="3">
-<input type="hidden" id="current_j" value="0" size="3">
-<input type="hidden" id="current_startNum" value="1" size="3">
-<input type="hidden" id="current_questionTotal" value="10" size="3">
-<input type="hidden" id="current_mode" value="first" size="3">
+					<input type="hidden" id="current_i" value="0" size="3"/>
+					<input type="hidden" id="current_j" value="0" size="3"/>
+					<input type="hidden" id="current_startNum" value="1" size="3"/>
+					<input type="hidden" id="current_questionTotal" value="10" size="3"/>
+					<input type="hidden" id="current_mode" value="first" size="3"/>
 
-<form name="test_form" method="post" action="#" style="margin:0">
-  alert("짜잔~");
-	<input type="hidden" name="mode" value="first">
-	<input type="hidden" name="targetDiv" value="">
-	<input type="hidden" name="ansTryList" value="">
-</form>
+					<form name="test_form" method="post" action="#" style="margin:0">
+						<input type="hidden" name="mode" value="first"/>
+						<input type="hidden" name="targetDiv" value=""/>
+						<input type="hidden" name="ansTryList" value=""/>
+					</form>
 
-<script type="text/javascript">
-var subjectNum = 1;
-var mode = 'first';
-var initStartNum = 1;
-var initEachTotal = 20;
-</script>
+					<script type="text/javascript">
+						var subjectNum = 1;
+						var mode = 'first';
+						var initStartNum = 1;
+						var initEachTotal = 20;
+					</script>
 
-<div id="index_div" style="padding-top: 50px; text-align: center; display: none; visibility: hidden;">1문제씩 풀기 로딩 중입니다...</div>
-<script>var max_five = Array(100);</script>
+					<div id="index_div" style="padding-top: 50px; text-align: center; display: none; visibility: hidden;">1문제씩 풀기 로딩 중입니다...</div>
+					<script>var max_five = Array(100);</script>
 
-<table width="100%" align="center" cellspacing="0" cellpadding="0" style="margin:0px" border="0">
-<tbody><tr>
-<td align="left" valign="top"><!-- 문제지 출력 -->
-	<input type="hidden" id="ans_try1" size="3" value="3"><input type="hidden" id="ans_trySame1" size="3" value=""><input type="hidden" id="ans_real1" size="2" value="1"><input type="hidden" id="ans_try2" size="3" value="3"><input type="hidden" id="ans_trySame2" size="3" value=""><input type="hidden" id="ans_real2" size="2" value="1,2,3,4"><input type="hidden" id="ans_try3" size="3" value="3"><input type="hidden" id="ans_trySame3" size="3" value=""><input type="hidden" id="ans_real3" size="2" value="1,2,3,4"><input type="hidden" id="ans_try4" size="3" value="3"><input type="hidden" id="ans_trySame4" size="3" value=""><input type="hidden" id="ans_real4" size="2" value="2"><input type="hidden" id="ans_try5" size="3" value="3"><input type="hidden" id="ans_trySame5" size="3" value=""><input type="hidden" id="ans_real5" size="2" value="2"><input type="hidden" id="ans_try6" size="3" value="3"><input type="hidden" id="ans_trySame6" size="3" value=""><input type="hidden" id="ans_real6" size="2" value="1"><input type="hidden" id="ans_try7" size="3" value="3"><input type="hidden" id="ans_trySame7" size="3" value=""><input type="hidden" id="ans_real7" size="2" value="3"><input type="hidden" id="ans_try8" size="3" value="3"><input type="hidden" id="ans_trySame8" size="3" value=""><input type="hidden" id="ans_real8" size="2" value="3"><input type="hidden" id="ans_try9" size="3" value="3"><input type="hidden" id="ans_trySame9" size="3" value=""><input type="hidden" id="ans_real9" size="2" value="2"><input type="hidden" id="ans_try10" size="3" value="3"><input type="hidden" id="ans_trySame10" size="3" value=""><input type="hidden" id="ans_real10" size="2" value="3"><script>max_five[0] = '19';</script><script>max_five[1] = '19';</script><script>max_five[2] = '19';</script><script>max_five[3] = '19';</script><script>max_five[4] = '19';</script><div id="div00" style="display: block; width: 100%; height: 100%;"><table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0"><tbody><tr><td width="100%" valign="top" class="ed" style="padding-top:5px;"><div id="ques_ox1" style="margin:0px; position:absolute; width:55px; height:45px;"><img src="/wooltari/resource/images/blank.gif" style="width:55px; height:45px;"></div><table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5"><tbody><tr><td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">1.</td><td style="width:98%" valign="top" class="question01_qpass">다음 관계대수 중 순수 관계연산자가 아닌 것은? <br><span id="rate1" class="rightRate" style="display:none">[정답률: 57%]</span></td></tr><tr><td></td><td id="quesitem11" class="question02_qpass"><a href="javascript:answer_check(1, 1)">① 차집합(difference)</a></td></tr><tr><td></td><td id="quesitem12" class="question02_qpass" style="background-repeat: no-repeat;"><a href="javascript:answer_check(1, 2)">② 프로젝트(project)</a></td></tr><tr><td></td><td id="quesitem13" class="question02_qpass" style="background-repeat: no-repeat;"><a href="javascript:answer_check(1, 3)">③ 조인(join)</a></td></tr><tr><td></td><td id="quesitem14" class="question02_qpass" style="background-repeat: no-repeat;"><a href="javascript:answer_check(1, 4)">④ 디비전(division)</a></td></tr></tbody></table><p style="margin:15px 0px 10px 16px;">  <input type="button" value="이전" onclick="previous_div('1과목', 0, 0)" class="btn01_qpass"> <input type="button" value="다음" onclick="next_div('1과목', 0, 0)" class="btn01_qpass"></p></td></tr></tbody></table></div><div id="div01" style="display: none; width: 100%; height: 100%;"><table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0"><tbody><tr><td width="100%" valign="top" class="ed" style="padding-top:5px;"><div id="ques_ox2" style="margin:0px; position:absolute; width:55px; height:45px;"><img src="/wooltari/resource/images/blank.gif" style="width:55px; height:45px;"></div><table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5"><tbody><tr><td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">2.</td><td style="width:98%" valign="top" class="question01_qpass">관계형 대수의 연산자가 아닌 것은? <br><span id="rate2" class="rightRate" style="display:none">[정답률: 64%]</span></td></tr><tr><td></td><td id="quesitem21" class="question02_qpass"><a href="javascript:answer_check(2, 1)">① JOIN</a></td></tr><tr><td></td><td id="quesitem22" class="question02_qpass"><a href="javascript:answer_check(2, 2)">② PROJECT</a></td></tr><tr><td></td><td id="quesitem23" class="question02_qpass"><a href="javascript:answer_check(2, 3)">③ PRODUCT</a></td></tr><tr><td></td><td id="quesitem24" class="question02_qpass"><a href="javascript:answer_check(2, 4)">④ PART</a></td></tr></tbody></table><div id="comment2" style="display:none; color:blue; line-height:1.5; padding:15px; padding-top:0px;"><span style="font-weight:bold; ">해설 : </span> 자격검정 시행기관에서 가답안으로 2번은 답항 4를 발표하였지만 문제 의견 수렴 후 결정한 확정답안에서 전항 정답으로 결정한 문제입니다.<br>
-<br>
-전항 정답으로 결정한 이유는 [성적테이블]에 학점 컬럼을 학번으로 오류 표기함으로써 WHERE 조건절 [A.학번 = B.학번 AND B.과목이름 = “DB”]을 만족하는 결과 값 추출이 불가능하기 때문입니다.</div><p style="margin:15px 0px 10px 16px;">  <input type="button" value="이전" onclick="previous_div('1과목', 0, 1)" class="btn01_qpass"> <input type="button" value="다음" onclick="next_div('1과목', 0, 1)" class="btn01_qpass"></p></td></tr></tbody></table></div><div id="div02" style="display: none; width: 100%; height: 100%;"><table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0"><tbody><tr><td width="100%" valign="top" class="ed" style="padding-top:5px;"><div id="ques_ox3" style="margin:0px; position:absolute; width:55px; height:45px;"><img src="<%=cp%>/resource/images/blank.gif" style="width:55px; height:45px;"></div><table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5"><tbody><tr><td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">3.</td><td style="width:98%" valign="top" class="question01_qpass">데이터베이스의 상태를 변환시키기 위하여 논리적 기능을 수행하는 하나의 작업 단위를 무엇이라고 하는가? <br><span id="rate3" class="rightRate" style="display:none">[정답률: 77%]</span></td></tr><tr><td></td><td id="quesitem31" class="question02_qpass"><a href="javascript:answer_check(3, 1)">① 프로시저</a></td></tr><tr><td></td><td id="quesitem32" class="question02_qpass"><a href="javascript:answer_check(3, 2)">② 트랜잭션</a></td></tr><tr><td></td><td id="quesitem33" class="question02_qpass"><a href="javascript:answer_check(3, 3)">③ 12</a></td></tr><tr><td></td><td id="quesitem34" class="question02_qpass"><a href="javascript:answer_check(3, 4)">④ 도메인</a></td></tr></tbody></table><p style="margin:15px 0px 10px 16px;">  <input type="button" value="이전" onclick="previous_div('1과목', 0, 2)" class="btn01_qpass"> <input type="button" value="다음" onclick="next_div('1과목', 0, 2)" class="btn01_qpass"></p></td></tr></tbody></table></div><div id="div03" style="display: none; width: 100%; height: 100%;"><table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0"><tbody><tr><td width="100%" valign="top" class="ed" style="padding-top:5px;"><div id="ques_ox4" style="margin:0px; position:absolute; width:55px; height:45px;"><img src="/wooltari/resource/images/blank.gif" style="width:55px; height:45px;"></div><table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5"><tbody><tr><td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">4.</td><td style="width:98%" valign="top" class="question01_qpass">뷰에 대한 설명으로 틀린 것은? <br><span id="rate4" class="rightRate" style="display:none">[정답률: 63%]</span></td></tr><tr><td></td><td id="quesitem41" class="question02_qpass"><a href="javascript:answer_check(4, 1)">① 뷰에 대한 사용자의 권한을 제한할 수 있다.</a></td></tr><tr><td></td><td id="quesitem42" class="question02_qpass"><a href="javascript:answer_check(4, 2)">② 뷰 테이블에 행이나 열을 추가할 때에는 ALTER 문을 사용하여야 한다.</a></td></tr><tr><td></td><td id="quesitem43" class="question02_qpass" style="background-repeat: no-repeat;"><a href="javascript:answer_check(4, 3)">③ 뷰는 다른 뷰를 대상으로 설정될 수 있다.</a></td></tr><tr><td></td><td id="quesitem44" class="question02_qpass"><a href="javascript:answer_check(4, 4)">④ 뷰 테이블은 물리적으로 구현된 것은 아니다.</a></td></tr></tbody></table><p style="margin:15px 0px 10px 16px;">  <input type="button" value="이전" onclick="previous_div('1과목', 0, 3)" class="btn01_qpass"> <input type="button" value="다음" onclick="next_div('1과목', 0, 3)" class="btn01_qpass"></p></td></tr></tbody></table></div><div id="div04" style="display: none; width: 100%; height: 100%;"><table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0"><tbody><tr><td width="100%" valign="top" class="ed" style="padding-top:5px;"><div id="ques_ox5" style="margin:0px; position:absolute; width:55px; height:45px;"><img src="/wooltari/resource/images/blank.gif" style="width:55px; height:45px;"></div><table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5"><tbody><tr><td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">5.</td><td style="width:98%" valign="top" class="question01_qpass">깊이가 5인 이진트리에서 가질 수 있는 최대 노드 수는? <br><span id="rate5" class="rightRate" style="display:none">[정답률: 66%]</span></td></tr><tr><td></td><td id="quesitem51" class="question02_qpass"><a href="javascript:answer_check(5, 1)">① 25</a></td></tr><tr><td></td><td id="quesitem52" class="question02_qpass"><a href="javascript:answer_check(5, 2)">② 31</a></td></tr><tr><td></td><td id="quesitem53" class="question02_qpass" style="background-repeat: no-repeat;"><a href="javascript:answer_check(5, 3)">③ 35</a></td></tr><tr><td></td><td id="quesitem54" class="question02_qpass"><a href="javascript:answer_check(5, 4)">④ 42</a></td></tr></tbody></table><p style="margin:15px 0px 10px 16px;">  <input type="button" value="이전" onclick="previous_div('1과목', 0, 4)" class="btn01_qpass"> <input type="button" value="다음" onclick="next_div('1과목', 0, 4)" class="btn01_qpass"></p></td></tr></tbody></table></div><div id="div05" style="display: none; width: 100%; height: 100%;"><table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0"><tbody><tr><td width="100%" valign="top" class="ed" style="padding-top:5px;"><div id="ques_ox6" style="margin:0px; position:absolute; width:55px; height:45px;"><img src="/wooltari/resource/images/blank.gif" style="width:55px; height:45px;"></div><table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5"><tbody><tr><td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">6.</td><td style="width:98%" valign="top" class="question01_qpass">로킹기법에서 2단계 로킹 규약에 대한 설명으로 옳은 것은? <br><span id="rate6" class="rightRate" style="display:none">[정답률: 34%]</span></td></tr><tr><td></td><td id="quesitem61" class="question02_qpass"><a href="javascript:answer_check(6, 1)">① 트랜잭션은 lock만 수행할 수 있고, unlock은 수행할 수 없는 확장단계가 있다.</a></td></tr><tr><td></td><td id="quesitem62" class="question02_qpass"><a href="javascript:answer_check(6, 2)">② 트랜잭션이 unlock과 lock을 동시에 수행할 수 있는 단계를 병렬전환 단계라 한다.</a></td></tr><tr><td></td><td id="quesitem63" class="question02_qpass" style="background-repeat: no-repeat;"><a href="javascript:answer_check(6, 3)">③ 한 트랜잭션이 unlock 후 다른 데이터 아이템을 lock 할 수 있다.</a></td></tr><tr><td></td><td id="quesitem64" class="question02_qpass"><a href="javascript:answer_check(6, 4)">④ 교착상태를 일으키지 않는다.</a></td></tr></tbody></table><p style="margin:15px 0px 10px 16px;">  <input type="button" value="이전" onclick="previous_div('1과목', 0, 5)" class="btn01_qpass"> <input type="button" value="다음" onclick="next_div('1과목', 0, 5)" class="btn01_qpass"></p></td></tr></tbody></table></div><div id="div06" style="display: none; width: 100%; height: 100%;"><table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0"><tbody><tr><td width="100%" valign="top" class="ed" style="padding-top:5px;"><div id="ques_ox7" style="margin:0px; position:absolute; width:55px; height:45px;"><img src="<%=cp%>/resource/images/blank.gif" style="width:55px; height:45px;"></div><table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5"><tbody><tr><td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">7.</td><td style="width:98%" valign="top" class="question01_qpass">자료구조에 대한 설명으로 옳지 않은 것은? <br><span id="rate7" class="rightRate" style="display:none">[정답률: 49%]</span></td></tr><tr><td></td><td id="quesitem71" class="question02_qpass"><a href="javascript:answer_check(7, 1)">① 스택은 Last In - First Out 처리를 수행한다.</a></td></tr><tr><td></td><td id="quesitem72" class="question02_qpass"><a href="javascript:answer_check(7, 2)">② 큐는 First In - First Out 처리를 수행한다.</a></td></tr><tr><td></td><td id="quesitem73" class="question02_qpass"><a href="javascript:answer_check(7, 3)">③ 스택은 서브루틴 호출, 인터럽트 처리, 수식 계산 및 수식 표기법에 응용된다.</a></td></tr><tr><td></td><td id="quesitem74" class="question02_qpass"><a href="javascript:answer_check(7, 4)">④ 큐는 비선형구조에 해당한다.</a></td></tr></tbody></table><p style="margin:15px 0px 10px 16px;">  <input type="button" value="이전" onclick="previous_div('1과목', 0, 6)" class="btn01_qpass"> <input type="button" value="다음" onclick="next_div('1과목', 0, 6)" class="btn01_qpass"></p></td></tr></tbody></table></div><div id="div07" style="display: none; width: 100%; height: 100%;"><table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0"><tbody><tr><td width="100%" valign="top" class="ed" style="padding-top:5px;"><div id="ques_ox8" style="margin:0px; position:absolute; width:55px; height:45px;"><img src="/wooltari/resource/images/blank.gif" style="width:55px; height:45px;"></div><table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5"><tbody><tr><td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">8.</td><td style="width:98%" valign="top" class="question01_qpass">데이터베이스에서 개념적 설계 단계에 대한 설명으로 틀린 것은? <br><span id="rate8" class="rightRate" style="display:none">[정답률: 47%]</span></td></tr><tr><td></td><td id="quesitem81" class="question02_qpass"><a href="javascript:answer_check(8, 1)">① 산출물로 ER-D가 만들어진다.</a></td></tr><tr><td></td><td id="quesitem82" class="question02_qpass"><a href="javascript:answer_check(8, 2)">② DBMS에 독립적인 개념 스키마를 설계한다.</a></td></tr><tr><td></td><td id="quesitem83" class="question02_qpass" style="background-repeat: no-repeat;"><a href="javascript:answer_check(8, 3)">③ 트랜잭션 인터페이스를 설계한다.</a></td></tr><tr><td></td><td id="quesitem84" class="question02_qpass"><a href="javascript:answer_check(8, 4)">④ 논리적 설계 단계의 앞 단계에서 수행된다.</a></td></tr></tbody></table><p style="margin:15px 0px 10px 16px;">  <input type="button" value="이전" onclick="previous_div('1과목', 0, 7)" class="btn01_qpass"> <input type="button" value="다음" onclick="next_div('1과목', 0, 7)" class="btn01_qpass"></p></td></tr></tbody></table></div><div id="div08" style="display: none; width: 100%; height: 100%;"><table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0"><tbody><tr><td width="100%" valign="top" class="ed" style="padding-top:5px;"><div id="ques_ox9" style="margin:0px; position:absolute; width:55px; height:45px;"><img src="<%=cp%>/resource/images/blank.gif" style="width:55px; height:45px;"></div><table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5"><tbody><tr><td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">9.</td><td style="width:98%" valign="top" class="question01_qpass">정규화 과정 중 1NF에서 2NF가 되기 위한 조건은? <br><span id="rate9" class="rightRate" style="display:none">[정답률: 61%]</span></td></tr><tr><td></td><td id="quesitem91" class="question02_qpass"><a href="javascript:answer_check(9, 1)">① 1NF를 만족하고 모든 도메인이 원자 값이어야 한다.</a></td></tr><tr><td></td><td id="quesitem92" class="question02_qpass"><a href="javascript:answer_check(9, 2)">② 1NF를 만족하고 키가 아닌 모든 애트리뷰트들이 기본 키에 이행적으로 함수 종속되지 않아야 한다.</a></td></tr><tr><td></td><td id="quesitem93" class="question02_qpass"><a href="javascript:answer_check(9, 3)">③ 1NF를 만족하고 다치 종속이 제거되어야 한다.</a></td></tr><tr><td></td><td id="quesitem94" class="question02_qpass"><a href="javascript:answer_check(9, 4)">④ 1NF를 만족하고 키가 아닌 모든 속성이 기본 키에 완전 함수적 종속되어야 한다.</a></td></tr></tbody></table><p style="margin:15px 0px 10px 16px;">  <input type="button" value="이전" onclick="previous_div('1과목', 0, 8)" class="btn01_qpass"> <input type="button" value="다음" onclick="next_div('1과목', 0, 8)" class="btn01_qpass"></p></td></tr></tbody></table></div><div id="div09" style="display: none; width: 100%; height: 100%;"><table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0"><tbody><tr><td width="100%" valign="top" class="ed" style="padding-top:5px;"><div id="ques_ox10" style="margin:0px; position:absolute; width:55px; height:45px;"><img src="/wooltari/resource/images/blank.gif" style="width:55px; height:45px;"></div><table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5"><tbody><tr><td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">10.</td><td style="width:98%" valign="top" class="question01_qpass">Which of the following does not belong to the DML statement of SQL? <br><span id="rate10" class="rightRate" style="display:none">[정답률: 65%]</span></td></tr><tr><td></td><td id="quesitem101" class="question02_qpass"><a href="javascript:answer_check(10, 1)">① SELECT</a></td></tr><tr><td></td><td id="quesitem102" class="question02_qpass"><a href="javascript:answer_check(10, 2)">② DELETE</a></td></tr><tr><td></td><td id="quesitem103" class="question02_qpass" style="background-repeat: no-repeat;"><a href="javascript:answer_check(10, 3)">③ CREATE</a></td></tr><tr><td></td><td id="quesitem104" class="question02_qpass"><a href="javascript:answer_check(10, 4)">④ INSERT</a></td></tr></tbody></table><p style="margin:15px 0px 10px 16px;">  <input type="button" value="이전" onclick="previous_div('1과목', 0, 9)" class="btn01_qpass"> <input type="button" value="다음" onclick="next_div('1과목', 0, 9)" class="btn01_qpass"></p></td></tr></tbody></table></div></td>
-<td style="padding-left:4px; border:none; width:130px;" valign="top"><!-- 답안지 출력 -->
-	<div id="ans0" style="display: block;width: 100%;height: 100%;padding-left: 0px;border-bottom: saddlebrown;"><table width="100%" height="30" align="center" cellspacing="0" cellpadding="2"><tbody><tr><td align="center" style="color:green; font-weight:bold; border:solid 1px #ccc; border-bottom:none">답안지</td></tr></tbody></table><table style="width:100%;text-align:center;border-bottom: 1px solid #bdbdbd;" cellspacing="0" cellpadding="0" border="0px"><tbody><tr style="height:25px;"><td id="ans_num1" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(0)" style="color:#008000;">1</a></td><td id="ans_td11" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(1, 1)"><img id="answer11" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td12" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(1, 2)"><img id="answer12" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td13" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(1, 3)"><img id="answer13" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td14" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(1, 4)"><img id="answer14" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num2" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(1)" style="color:#008000;">2</a></td><td id="ans_td21" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(2, 1)"><img id="answer21" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td22" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(2, 2)"><img id="answer22" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td23" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(2, 3)"><img id="answer23" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td24" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(2, 4)"><img id="answer24" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num3" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(2)" style="color:#008000;">3</a></td><td id="ans_td31" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(3, 1)"><img id="answer31" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td32" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(3, 2)"><img id="answer32" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td33" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(3, 3)"><img id="answer33" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td34" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(3, 4)"><img id="answer34" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num4" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(3)" style="color:#008000;">4</a></td><td id="ans_td41" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(4, 1)"><img id="answer41" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td42" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(4, 2)"><img id="answer42" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td43" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(4, 3)"><img id="answer43" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td44" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(4, 4)"><img id="answer44" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num5" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(4)" style="color:#008000;">5</a></td><td id="ans_td51" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(5, 1)"><img id="answer51" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td52" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(5, 2)"><img id="answer52" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td53" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(5, 3)"><img id="answer53" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td54" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(5, 4)"><img id="answer54" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num6" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(5)" style="color:#008000;">6</a></td><td id="ans_td61" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(6, 1)"><img id="answer61" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td62" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(6, 2)"><img id="answer62" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td63" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(6, 3)"><img id="answer63" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td64" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(6, 4)"><img id="answer64" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num7" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(6)" style="color:#008000;">7</a></td><td id="ans_td71" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(7, 1)"><img id="answer71" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td72" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(7, 2)"><img id="answer72" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td73" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(7, 3)"><img id="answer73" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td74" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(7, 4)"><img id="answer74" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num8" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(7)" style="color:#008000;">8</a></td><td id="ans_td81" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(8, 1)"><img id="answer81" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td82" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(8, 2)"><img id="answer82" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td83" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(8, 3)"><img id="answer83" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td84" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(8, 4)"><img id="answer84" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num9" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(8)" style="color:#008000;">9</a></td><td id="ans_td91" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(9, 1)"><img id="answer91" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td92" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(9, 2)"><img id="answer92" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td93" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(9, 3)"><img id="answer93" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td94" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(9, 4)"><img id="answer94" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num10" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(9)" style="color:#008000;">10</a></td><td id="ans_td101" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(10, 1)"><img id="answer101" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td102" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(10, 2)"><img id="answer102" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td103" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(10, 3)"><img id="answer103" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td104" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(10, 4)"><img id="answer104" src="/wooltari/resource/images/num4.gif"></a></td></tr></tbody></table><p id="btnFinish0" align="center" style="display:block; margin: 10px 0px 0px 0px;"><input type="button" value="답안제출" onclick="finish_exam(0);" class="btn01_qpass" style="width:70px;"></p><p id="resultDisplay0" align="center" style="margin: 10px 0px 0px 0px;"></p></div><div id="ans1" style="display:none; width:100%; height:100%; padding-left:0px;"><table width="100%" height="30" align="center" cellspacing="0" cellpadding="2"><tbody><tr><td align="center" style="color:green; font-weight:bold; border:solid 1px #ccc; border-bottom:none">2과목</td></tr></tbody></table><table style="width:100%; text-align:center;" cellspacing="0" cellpadding="0" border="0px"><tbody><tr style="height:25px;"><td id="ans_num21" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(0)" style="color:#008000;">21</a></td><td id="ans_td211" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(21, 1)"><img id="answer211" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td212" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(21, 2)"><img id="answer212" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td213" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(21, 3)"><img id="answer213" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td214" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(21, 4)"><img id="answer214" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num22" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(1)" style="color:#008000;">22</a></td><td id="ans_td221" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(22, 1)"><img id="answer221" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td222" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(22, 2)"><img id="answer222" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td223" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(22, 3)"><img id="answer223" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td224" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(22, 4)"><img id="answer224" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num23" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(2)" style="color:#008000;">23</a></td><td id="ans_td231" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(23, 1)"><img id="answer231" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td232" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(23, 2)"><img id="answer232" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td233" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(23, 3)"><img id="answer233" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td234" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(23, 4)"><img id="answer234" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num24" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(3)" style="color:#008000;">24</a></td><td id="ans_td241" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(24, 1)"><img id="answer241" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td242" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(24, 2)"><img id="answer242" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td243" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(24, 3)"><img id="answer243" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td244" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(24, 4)"><img id="answer244" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num25" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(4)" style="color:#008000;">25</a></td><td id="ans_td251" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(25, 1)"><img id="answer251" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td252" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(25, 2)"><img id="answer252" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td253" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(25, 3)"><img id="answer253" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td254" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(25, 4)"><img id="answer254" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num26" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(5)" style="color:#008000;">26</a></td><td id="ans_td261" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(26, 1)"><img id="answer261" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td262" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(26, 2)"><img id="answer262" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td263" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(26, 3)"><img id="answer263" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td264" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(26, 4)"><img id="answer264" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num27" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(6)" style="color:#008000;">27</a></td><td id="ans_td271" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(27, 1)"><img id="answer271" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td272" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(27, 2)"><img id="answer272" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td273" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(27, 3)"><img id="answer273" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td274" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(27, 4)"><img id="answer274" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num28" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(7)" style="color:#008000;">28</a></td><td id="ans_td281" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(28, 1)"><img id="answer281" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td282" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(28, 2)"><img id="answer282" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td283" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(28, 3)"><img id="answer283" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td284" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(28, 4)"><img id="answer284" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num29" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(8)" style="color:#008000;">29</a></td><td id="ans_td291" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(29, 1)"><img id="answer291" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td292" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(29, 2)"><img id="answer292" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td293" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(29, 3)"><img id="answer293" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td294" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(29, 4)"><img id="answer294" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num30" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(9)" style="color:#008000;">30</a></td><td id="ans_td301" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(30, 1)"><img id="answer301" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td302" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(30, 2)"><img id="answer302" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td303" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(30, 3)"><img id="answer303" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td304" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(30, 4)"><img id="answer304" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num31" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(10)" style="color:#008000;">31</a></td><td id="ans_td311" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(31, 1)"><img id="answer311" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td312" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(31, 2)"><img id="answer312" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td313" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(31, 3)"><img id="answer313" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td314" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(31, 4)"><img id="answer314" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num32" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(11)" style="color:#008000;">32</a></td><td id="ans_td321" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(32, 1)"><img id="answer321" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td322" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(32, 2)"><img id="answer322" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td323" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(32, 3)"><img id="answer323" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td324" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(32, 4)"><img id="answer324" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num33" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(12)" style="color:#008000;">33</a></td><td id="ans_td331" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(33, 1)"><img id="answer331" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td332" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(33, 2)"><img id="answer332" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td333" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(33, 3)"><img id="answer333" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td334" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(33, 4)"><img id="answer334" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num34" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(13)" style="color:#008000;">34</a></td><td id="ans_td341" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(34, 1)"><img id="answer341" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td342" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(34, 2)"><img id="answer342" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td343" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(34, 3)"><img id="answer343" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td344" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(34, 4)"><img id="answer344" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num35" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(14)" style="color:#008000;">35</a></td><td id="ans_td351" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(35, 1)"><img id="answer351" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td352" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(35, 2)"><img id="answer352" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td353" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(35, 3)"><img id="answer353" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td354" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(35, 4)"><img id="answer354" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num36" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(15)" style="color:#008000;">36</a></td><td id="ans_td361" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(36, 1)"><img id="answer361" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td362" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(36, 2)"><img id="answer362" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td363" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(36, 3)"><img id="answer363" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td364" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(36, 4)"><img id="answer364" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num37" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(16)" style="color:#008000;">37</a></td><td id="ans_td371" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(37, 1)"><img id="answer371" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td372" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(37, 2)"><img id="answer372" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td373" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(37, 3)"><img id="answer373" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td374" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(37, 4)"><img id="answer374" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num38" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(17)" style="color:#008000;">38</a></td><td id="ans_td381" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(38, 1)"><img id="answer381" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td382" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(38, 2)"><img id="answer382" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td383" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(38, 3)"><img id="answer383" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td384" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(38, 4)"><img id="answer384" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num39" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(18)" style="color:#008000;">39</a></td><td id="ans_td391" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(39, 1)"><img id="answer391" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td392" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(39, 2)"><img id="answer392" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td393" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(39, 3)"><img id="answer393" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td394" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(39, 4)"><img id="answer394" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num40" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_bottom_qpass"><a href="javascript:move2question(19)" style="color:#008000;">40</a></td><td id="ans_td401" width="24px" align="center" valign="middle" class="td_border_bottom_qpass"><a href="javascript:answer_check(40, 1)"><img id="answer401" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td402" width="24px" align="center" valign="middle" class="td_border_bottom_qpass"><a href="javascript:answer_check(40, 2)"><img id="answer402" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td403" width="24px" align="center" valign="middle" class="td_border_bottom_qpass"><a href="javascript:answer_check(40, 3)"><img id="answer403" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td404" width="24px" align="center" valign="middle" class="td_border_bottomright_qpass"><a href="javascript:answer_check(40, 4)"><img id="answer404" src="/wooltari/resource/images/num4.gif"></a></td></tr></tbody></table><p id="btnFinish1" align="center" style="display:block; margin: 10px 0px 0px 0px;"><input type="button" value="답안제출" onclick="finish_exam(1);" class="btn01_qpass" style="width:70px;"></p><p id="resultDisplay1" align="center" style="margin: 10px 0px 0px 0px;"></p></div><div id="ans2" style="display:none; width:100%; height:100%; padding-left:0px;"><table width="100%" height="30" align="center" cellspacing="0" cellpadding="2"><tbody><tr><td align="center" style="color:green; font-weight:bold; border:solid 1px #ccc; border-bottom:none">3과목</td></tr></tbody></table><table style="width:100%; text-align:center;" cellspacing="0" cellpadding="0" border="0px"><tbody><tr style="height:25px;"><td id="ans_num41" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(0)" style="color:#008000;">41</a></td><td id="ans_td411" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(41, 1)"><img id="answer411" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td412" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(41, 2)"><img id="answer412" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td413" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(41, 3)"><img id="answer413" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td414" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(41, 4)"><img id="answer414" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num42" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(1)" style="color:#008000;">42</a></td><td id="ans_td421" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(42, 1)"><img id="answer421" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td422" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(42, 2)"><img id="answer422" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td423" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(42, 3)"><img id="answer423" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td424" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(42, 4)"><img id="answer424" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num43" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(2)" style="color:#008000;">43</a></td><td id="ans_td431" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(43, 1)"><img id="answer431" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td432" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(43, 2)"><img id="answer432" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td433" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(43, 3)"><img id="answer433" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td434" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(43, 4)"><img id="answer434" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num44" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(3)" style="color:#008000;">44</a></td><td id="ans_td441" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(44, 1)"><img id="answer441" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td442" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(44, 2)"><img id="answer442" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td443" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(44, 3)"><img id="answer443" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td444" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(44, 4)"><img id="answer444" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num45" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(4)" style="color:#008000;">45</a></td><td id="ans_td451" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(45, 1)"><img id="answer451" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td452" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(45, 2)"><img id="answer452" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td453" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(45, 3)"><img id="answer453" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td454" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(45, 4)"><img id="answer454" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num46" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(5)" style="color:#008000;">46</a></td><td id="ans_td461" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(46, 1)"><img id="answer461" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td462" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(46, 2)"><img id="answer462" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td463" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(46, 3)"><img id="answer463" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td464" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(46, 4)"><img id="answer464" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num47" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(6)" style="color:#008000;">47</a></td><td id="ans_td471" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(47, 1)"><img id="answer471" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td472" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(47, 2)"><img id="answer472" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td473" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(47, 3)"><img id="answer473" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td474" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(47, 4)"><img id="answer474" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num48" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(7)" style="color:#008000;">48</a></td><td id="ans_td481" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(48, 1)"><img id="answer481" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td482" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(48, 2)"><img id="answer482" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td483" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(48, 3)"><img id="answer483" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td484" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(48, 4)"><img id="answer484" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num49" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(8)" style="color:#008000;">49</a></td><td id="ans_td491" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(49, 1)"><img id="answer491" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td492" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(49, 2)"><img id="answer492" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td493" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(49, 3)"><img id="answer493" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td494" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(49, 4)"><img id="answer494" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num50" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(9)" style="color:#008000;">50</a></td><td id="ans_td501" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(50, 1)"><img id="answer501" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td502" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(50, 2)"><img id="answer502" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td503" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(50, 3)"><img id="answer503" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td504" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(50, 4)"><img id="answer504" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num51" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(10)" style="color:#008000;">51</a></td><td id="ans_td511" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(51, 1)"><img id="answer511" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td512" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(51, 2)"><img id="answer512" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td513" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(51, 3)"><img id="answer513" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td514" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(51, 4)"><img id="answer514" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num52" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(11)" style="color:#008000;">52</a></td><td id="ans_td521" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(52, 1)"><img id="answer521" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td522" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(52, 2)"><img id="answer522" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td523" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(52, 3)"><img id="answer523" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td524" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(52, 4)"><img id="answer524" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num53" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(12)" style="color:#008000;">53</a></td><td id="ans_td531" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(53, 1)"><img id="answer531" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td532" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(53, 2)"><img id="answer532" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td533" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(53, 3)"><img id="answer533" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td534" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(53, 4)"><img id="answer534" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num54" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(13)" style="color:#008000;">54</a></td><td id="ans_td541" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(54, 1)"><img id="answer541" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td542" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(54, 2)"><img id="answer542" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td543" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(54, 3)"><img id="answer543" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td544" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(54, 4)"><img id="answer544" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num55" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(14)" style="color:#008000;">55</a></td><td id="ans_td551" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(55, 1)"><img id="answer551" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td552" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(55, 2)"><img id="answer552" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td553" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(55, 3)"><img id="answer553" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td554" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(55, 4)"><img id="answer554" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num56" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(15)" style="color:#008000;">56</a></td><td id="ans_td561" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(56, 1)"><img id="answer561" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td562" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(56, 2)"><img id="answer562" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td563" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(56, 3)"><img id="answer563" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td564" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(56, 4)"><img id="answer564" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num57" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(16)" style="color:#008000;">57</a></td><td id="ans_td571" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(57, 1)"><img id="answer571" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td572" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(57, 2)"><img id="answer572" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td573" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(57, 3)"><img id="answer573" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td574" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(57, 4)"><img id="answer574" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num58" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(17)" style="color:#008000;">58</a></td><td id="ans_td581" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(58, 1)"><img id="answer581" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td582" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(58, 2)"><img id="answer582" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td583" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(58, 3)"><img id="answer583" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td584" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(58, 4)"><img id="answer584" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num59" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(18)" style="color:#008000;">59</a></td><td id="ans_td591" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(59, 1)"><img id="answer591" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td592" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(59, 2)"><img id="answer592" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td593" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(59, 3)"><img id="answer593" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td594" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(59, 4)"><img id="answer594" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num60" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_bottom_qpass"><a href="javascript:move2question(19)" style="color:#008000;">60</a></td><td id="ans_td601" width="24px" align="center" valign="middle" class="td_border_bottom_qpass"><a href="javascript:answer_check(60, 1)"><img id="answer601" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td602" width="24px" align="center" valign="middle" class="td_border_bottom_qpass"><a href="javascript:answer_check(60, 2)"><img id="answer602" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td603" width="24px" align="center" valign="middle" class="td_border_bottom_qpass"><a href="javascript:answer_check(60, 3)"><img id="answer603" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td604" width="24px" align="center" valign="middle" class="td_border_bottomright_qpass"><a href="javascript:answer_check(60, 4)"><img id="answer604" src="/wooltari/resource/images/num4.gif"></a></td></tr></tbody></table><p id="btnFinish2" align="center" style="display:block; margin: 10px 0px 0px 0px;"><input type="button" value="답안제출" onclick="finish_exam(2);" class="btn01_qpass" style="width:70px;"></p><p id="resultDisplay2" align="center" style="margin: 10px 0px 0px 0px;"></p></div><div id="ans3" style="display:none; width:100%; height:100%; padding-left:0px;"><table width="100%" height="30" align="center" cellspacing="0" cellpadding="2"><tbody><tr><td align="center" style="color:green; font-weight:bold; border:solid 1px #ccc; border-bottom:none">4과목</td></tr></tbody></table><table style="width:100%; text-align:center;" cellspacing="0" cellpadding="0" border="0px"><tbody><tr style="height:25px;"><td id="ans_num61" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(0)" style="color:#008000;">61</a></td><td id="ans_td611" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(61, 1)"><img id="answer611" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td612" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(61, 2)"><img id="answer612" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td613" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(61, 3)"><img id="answer613" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td614" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(61, 4)"><img id="answer614" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num62" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(1)" style="color:#008000;">62</a></td><td id="ans_td621" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(62, 1)"><img id="answer621" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td622" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(62, 2)"><img id="answer622" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td623" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(62, 3)"><img id="answer623" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td624" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(62, 4)"><img id="answer624" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num63" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(2)" style="color:#008000;">63</a></td><td id="ans_td631" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(63, 1)"><img id="answer631" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td632" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(63, 2)"><img id="answer632" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td633" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(63, 3)"><img id="answer633" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td634" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(63, 4)"><img id="answer634" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num64" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(3)" style="color:#008000;">64</a></td><td id="ans_td641" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(64, 1)"><img id="answer641" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td642" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(64, 2)"><img id="answer642" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td643" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(64, 3)"><img id="answer643" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td644" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(64, 4)"><img id="answer644" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num65" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(4)" style="color:#008000;">65</a></td><td id="ans_td651" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(65, 1)"><img id="answer651" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td652" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(65, 2)"><img id="answer652" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td653" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(65, 3)"><img id="answer653" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td654" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(65, 4)"><img id="answer654" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num66" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(5)" style="color:#008000;">66</a></td><td id="ans_td661" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(66, 1)"><img id="answer661" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td662" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(66, 2)"><img id="answer662" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td663" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(66, 3)"><img id="answer663" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td664" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(66, 4)"><img id="answer664" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num67" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(6)" style="color:#008000;">67</a></td><td id="ans_td671" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(67, 1)"><img id="answer671" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td672" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(67, 2)"><img id="answer672" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td673" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(67, 3)"><img id="answer673" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td674" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(67, 4)"><img id="answer674" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num68" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(7)" style="color:#008000;">68</a></td><td id="ans_td681" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(68, 1)"><img id="answer681" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td682" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(68, 2)"><img id="answer682" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td683" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(68, 3)"><img id="answer683" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td684" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(68, 4)"><img id="answer684" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num69" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(8)" style="color:#008000;">69</a></td><td id="ans_td691" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(69, 1)"><img id="answer691" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td692" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(69, 2)"><img id="answer692" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td693" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(69, 3)"><img id="answer693" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td694" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(69, 4)"><img id="answer694" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num70" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(9)" style="color:#008000;">70</a></td><td id="ans_td701" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(70, 1)"><img id="answer701" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td702" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(70, 2)"><img id="answer702" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td703" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(70, 3)"><img id="answer703" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td704" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(70, 4)"><img id="answer704" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num71" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(10)" style="color:#008000;">71</a></td><td id="ans_td711" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(71, 1)"><img id="answer711" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td712" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(71, 2)"><img id="answer712" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td713" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(71, 3)"><img id="answer713" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td714" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(71, 4)"><img id="answer714" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num72" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(11)" style="color:#008000;">72</a></td><td id="ans_td721" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(72, 1)"><img id="answer721" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td722" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(72, 2)"><img id="answer722" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td723" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(72, 3)"><img id="answer723" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td724" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(72, 4)"><img id="answer724" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num73" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(12)" style="color:#008000;">73</a></td><td id="ans_td731" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(73, 1)"><img id="answer731" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td732" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(73, 2)"><img id="answer732" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td733" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(73, 3)"><img id="answer733" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td734" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(73, 4)"><img id="answer734" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num74" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(13)" style="color:#008000;">74</a></td><td id="ans_td741" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(74, 1)"><img id="answer741" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td742" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(74, 2)"><img id="answer742" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td743" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(74, 3)"><img id="answer743" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td744" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(74, 4)"><img id="answer744" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num75" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(14)" style="color:#008000;">75</a></td><td id="ans_td751" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(75, 1)"><img id="answer751" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td752" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(75, 2)"><img id="answer752" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td753" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(75, 3)"><img id="answer753" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td754" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(75, 4)"><img id="answer754" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num76" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(15)" style="color:#008000;">76</a></td><td id="ans_td761" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(76, 1)"><img id="answer761" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td762" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(76, 2)"><img id="answer762" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td763" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(76, 3)"><img id="answer763" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td764" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(76, 4)"><img id="answer764" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num77" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(16)" style="color:#008000;">77</a></td><td id="ans_td771" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(77, 1)"><img id="answer771" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td772" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(77, 2)"><img id="answer772" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td773" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(77, 3)"><img id="answer773" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td774" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(77, 4)"><img id="answer774" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num78" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(17)" style="color:#008000;">78</a></td><td id="ans_td781" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(78, 1)"><img id="answer781" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td782" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(78, 2)"><img id="answer782" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td783" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(78, 3)"><img id="answer783" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td784" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(78, 4)"><img id="answer784" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num79" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(18)" style="color:#008000;">79</a></td><td id="ans_td791" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(79, 1)"><img id="answer791" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td792" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(79, 2)"><img id="answer792" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td793" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(79, 3)"><img id="answer793" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td794" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(79, 4)"><img id="answer794" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num80" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_bottom_qpass"><a href="javascript:move2question(19)" style="color:#008000;">80</a></td><td id="ans_td801" width="24px" align="center" valign="middle" class="td_border_bottom_qpass"><a href="javascript:answer_check(80, 1)"><img id="answer801" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td802" width="24px" align="center" valign="middle" class="td_border_bottom_qpass"><a href="javascript:answer_check(80, 2)"><img id="answer802" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td803" width="24px" align="center" valign="middle" class="td_border_bottom_qpass"><a href="javascript:answer_check(80, 3)"><img id="answer803" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td804" width="24px" align="center" valign="middle" class="td_border_bottomright_qpass"><a href="javascript:answer_check(80, 4)"><img id="answer804" src="/wooltari/resource/images/num4.gif"></a></td></tr></tbody></table><p id="btnFinish3" align="center" style="display:block; margin: 10px 0px 0px 0px;"><input type="button" value="답안제출" onclick="finish_exam(3);" class="btn01_qpass" style="width:70px;"></p><p id="resultDisplay3" align="center" style="margin: 10px 0px 0px 0px;"></p></div><div id="ans4" style="display:none; width:100%; height:100%; padding-left:0px;"><table width="100%" height="30" align="center" cellspacing="0" cellpadding="2"><tbody><tr><td align="center" style="color:green; font-weight:bold; border:solid 1px #ccc; border-bottom:none">5과목</td></tr></tbody></table><table style="width:100%; text-align:center;" cellspacing="0" cellpadding="0" border="0px"><tbody><tr style="height:25px;"><td id="ans_num81" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(0)" style="color:#008000;">81</a></td><td id="ans_td811" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(81, 1)"><img id="answer811" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td812" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(81, 2)"><img id="answer812" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td813" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(81, 3)"><img id="answer813" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td814" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(81, 4)"><img id="answer814" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num82" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(1)" style="color:#008000;">82</a></td><td id="ans_td821" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(82, 1)"><img id="answer821" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td822" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(82, 2)"><img id="answer822" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td823" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(82, 3)"><img id="answer823" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td824" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(82, 4)"><img id="answer824" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num83" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(2)" style="color:#008000;">83</a></td><td id="ans_td831" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(83, 1)"><img id="answer831" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td832" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(83, 2)"><img id="answer832" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td833" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(83, 3)"><img id="answer833" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td834" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(83, 4)"><img id="answer834" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num84" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(3)" style="color:#008000;">84</a></td><td id="ans_td841" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(84, 1)"><img id="answer841" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td842" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(84, 2)"><img id="answer842" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td843" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(84, 3)"><img id="answer843" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td844" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(84, 4)"><img id="answer844" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num85" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(4)" style="color:#008000;">85</a></td><td id="ans_td851" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(85, 1)"><img id="answer851" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td852" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(85, 2)"><img id="answer852" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td853" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(85, 3)"><img id="answer853" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td854" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(85, 4)"><img id="answer854" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num86" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(5)" style="color:#008000;">86</a></td><td id="ans_td861" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(86, 1)"><img id="answer861" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td862" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(86, 2)"><img id="answer862" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td863" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(86, 3)"><img id="answer863" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td864" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(86, 4)"><img id="answer864" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num87" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(6)" style="color:#008000;">87</a></td><td id="ans_td871" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(87, 1)"><img id="answer871" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td872" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(87, 2)"><img id="answer872" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td873" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(87, 3)"><img id="answer873" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td874" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(87, 4)"><img id="answer874" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num88" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(7)" style="color:#008000;">88</a></td><td id="ans_td881" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(88, 1)"><img id="answer881" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td882" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(88, 2)"><img id="answer882" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td883" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(88, 3)"><img id="answer883" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td884" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(88, 4)"><img id="answer884" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num89" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(8)" style="color:#008000;">89</a></td><td id="ans_td891" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(89, 1)"><img id="answer891" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td892" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(89, 2)"><img id="answer892" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td893" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(89, 3)"><img id="answer893" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td894" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(89, 4)"><img id="answer894" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num90" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(9)" style="color:#008000;">90</a></td><td id="ans_td901" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(90, 1)"><img id="answer901" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td902" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(90, 2)"><img id="answer902" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td903" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(90, 3)"><img id="answer903" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td904" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(90, 4)"><img id="answer904" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num91" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(10)" style="color:#008000;">91</a></td><td id="ans_td911" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(91, 1)"><img id="answer911" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td912" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(91, 2)"><img id="answer912" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td913" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(91, 3)"><img id="answer913" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td914" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(91, 4)"><img id="answer914" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num92" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(11)" style="color:#008000;">92</a></td><td id="ans_td921" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(92, 1)"><img id="answer921" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td922" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(92, 2)"><img id="answer922" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td923" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(92, 3)"><img id="answer923" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td924" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(92, 4)"><img id="answer924" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num93" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(12)" style="color:#008000;">93</a></td><td id="ans_td931" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(93, 1)"><img id="answer931" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td932" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(93, 2)"><img id="answer932" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td933" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(93, 3)"><img id="answer933" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td934" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(93, 4)"><img id="answer934" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num94" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(13)" style="color:#008000;">94</a></td><td id="ans_td941" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(94, 1)"><img id="answer941" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td942" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(94, 2)"><img id="answer942" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td943" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(94, 3)"><img id="answer943" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td944" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(94, 4)"><img id="answer944" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num95" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(14)" style="color:#008000;">95</a></td><td id="ans_td951" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(95, 1)"><img id="answer951" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td952" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(95, 2)"><img id="answer952" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td953" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(95, 3)"><img id="answer953" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td954" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(95, 4)"><img id="answer954" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num96" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(15)" style="color:#008000;">96</a></td><td id="ans_td961" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(96, 1)"><img id="answer961" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td962" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(96, 2)"><img id="answer962" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td963" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(96, 3)"><img id="answer963" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td964" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(96, 4)"><img id="answer964" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num97" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(16)" style="color:#008000;">97</a></td><td id="ans_td971" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(97, 1)"><img id="answer971" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td972" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(97, 2)"><img id="answer972" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td973" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(97, 3)"><img id="answer973" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td974" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(97, 4)"><img id="answer974" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num98" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(17)" style="color:#008000;">98</a></td><td id="ans_td981" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(98, 1)"><img id="answer981" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td982" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(98, 2)"><img id="answer982" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td983" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(98, 3)"><img id="answer983" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td984" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(98, 4)"><img id="answer984" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num99" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass"><a href="javascript:move2question(18)" style="color:#008000;">99</a></td><td id="ans_td991" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(99, 1)"><img id="answer991" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td992" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(99, 2)"><img id="answer992" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td993" width="24px" align="center" valign="middle" class="td_border_common_qpass"><a href="javascript:answer_check(99, 3)"><img id="answer993" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td994" width="24px" align="center" valign="middle" class="td_border_right_qpass"><a href="javascript:answer_check(99, 4)"><img id="answer994" src="/wooltari/resource/images/num4.gif"></a></td></tr><tr style="height:25px;"><td id="ans_num100" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_bottom_qpass"><a href="javascript:move2question(19)" style="color:#008000;">100</a></td><td id="ans_td1001" width="24px" align="center" valign="middle" class="td_border_bottom_qpass"><a href="javascript:answer_check(100, 1)"><img id="answer1001" src="/wooltari/resource/images/num1.gif"></a></td><td id="ans_td1002" width="24px" align="center" valign="middle" class="td_border_bottom_qpass"><a href="javascript:answer_check(100, 2)"><img id="answer1002" src="/wooltari/resource/images/num2.gif"></a></td><td id="ans_td1003" width="24px" align="center" valign="middle" class="td_border_bottom_qpass"><a href="javascript:answer_check(100, 3)"><img id="answer1003" src="/wooltari/resource/images/num3.gif"></a></td><td id="ans_td1004" width="24px" align="center" valign="middle" class="td_border_bottomright_qpass"><a href="javascript:answer_check(100, 4)"><img id="answer1004" src="/wooltari/resource/images/num4.gif"></a></td></tr></tbody></table><p id="btnFinish4" align="center" style="display:block; margin: 10px 0px 0px 0px;"><input type="button" value="답안제출" onclick="finish_exam(4);" class="btn01_qpass" style="width:70px;"></p><p id="resultDisplay4" align="center" style="margin: 10px 0px 0px 0px;"></p></div></td>
-</tr>
-</tbody></table>
-
-<script src="../q/js/jquery.js" type="text/javascript"></script>
-<script src="../q/js/quest_insert.js" type="text/javascript"></script>
-
-
-<script>
-/* 첫화면으로 이동*/
-function move2main() {
-  if(confirm("포기하실거에요?")) {
-    opener.document.location.href="<%=cp%>/mockTest/main"
-    /* 여기에 값 넣어서 부모창 새로고침 후, 응시일의 해당 과목은 '중도포기'로 0점 처리를 시켜 응시내역으로 보내준다. */
-    self.close();
-  }
-}
-
-/* 인덱스에서의 선택 처리*/
-function start_test(i, mode, startNum, eachTotal, n) {
-	var f = document.test_form;
-	targetDiv = i-1;
-
-	index_div.style.display='none';
-
-	f.mode.value = mode;
-	document.getElementById('current_mode').value = mode;
-	document.getElementById('current_startNum').value = startNum;
-	document.getElementById('current_questionTotal').value = eachTotal;
-
-	var finishBtn = document.getElementById('btnFinish'+ targetDiv);
-	var resultDisplay = document.getElementById('resultDisplay'+targetDiv);
-	resultDisplay.innerHTML = "";
-
-	if(mode == "first") { /* 응시하기*/
-	}
-	else if(mode == "restudy") { /* 다시풀기*/
-		unscoring_targetDiv(targetDiv, startNum, eachTotal);
-		finishBtn.style.display = "block";
-	}	
-	else if(mode == "restudyCheck") { /* 다시풀기 결과확인하기*/
-		scoring_targetDiv(targetDiv, startNum, eachTotal, "");
-		finishBtn.style.display = "none";
-}
-	else if(mode == "check") { /* 응시결과 확인하기*/
-		unscoring_targetDiv(targetDiv, startNum, eachTotal); /* 체크후 답안제출없이 첫화면으로 이동시 리셋이 필요*/
-		resave_ansTry(startNum, eachTotal);
-		scoring_targetDiv(targetDiv, startNum, eachTotal, "");
-		finishBtn.style.display = "none";
-	}	
-	else if(mode == "incorrect") { /* 틀린문제 다시풀기*/
-		unscoring_targetDiv(targetDiv, startNum, eachTotal); /* 체크후 답안제출없이 첫화면으로 이동시 리셋이 필요*/
-		resave_ansTry(startNum, eachTotal);
-		scoring_targetDiv(targetDiv, startNum, eachTotal, "");
-		finishBtn.style.display = "block";
-	}	
-	else if(mode == "incorrectCheck") { /* 틀린문제 다시풀기 결과확인하기*/
-		scoring_targetDiv(targetDiv, startNum, eachTotal, "");
-		finishBtn.style.display = "none";
-	}	
-
-	if(typeof(n) == "undefined" || !n) n = 0;
-		replace_div(targetDiv, n);
-		document.getElementById('index_div').style.visibility = 'hidden';
-}
-
-function resave_ansTry(startNum, eachTotal) {
-	var tryNum;
-	var endNum = startNum + eachTotal - 1;
-
-	for(var i=startNum; i <= endNum; i++) {
-		tryNum = document.getElementById('ans_trySame'+i).value;
-		document.getElementById('ans_try'+i).value = tryNum;
-	}
-}
-
-
-function restore_exam(targetDiv, course) {
-	if(!confirm(course + " 시험을 정말 응시이전의 상태로 되돌립니까?\t")) return;
-	var f = document.test_form;
-	f.mode.value = "return";
-	f.targetDiv.value = targetDiv;
-	f.submit();
-}
-
-/* 해당 구역으로 이동*/
-function replace_div(divNum, fiveNum) {
-	/* 현재 블럭 감추기*/
-	var currentI = document.getElementById('current_i').value;
-	var currentJ = document.getElementById('current_j').value;
-	var currentDiv = document.getElementById('div'+ currentI + currentJ);
-	currentDiv.style.display = "none";
+					<table width="100%" align="center" cellspacing="0" cellpadding="0" style="margin:0px" border="0">
+						<tbody>
+							<tr>
+								<td align="left" valign="top"><!-- 문제지 출력 -->
+								<!-- try: 선택한 답 || trysame: 같은지 여부(?) || real: 정답 -->
+									<input type="hidden" id="ans_try1" size="3" value=""/>
+									<input type="hidden" id="ans_trySame1" size="3" value=""/>
+									<input type="hidden" id="ans_real1" size="2" value="1"/>
+									<input type="hidden" id="ans_try2" size="3" value=""/>
+									<input type="hidden" id="ans_trySame2" size="3" value=""/>
+									<input type="hidden" id="ans_real2" size="2" value="1,2,3,4"/>
+									<input type="hidden" id="ans_try3" size="3" value="">
+									<input type="hidden" id="ans_trySame3" size="3" value="">
+									<input type="hidden" id="ans_real3" size="2" value="1,2,3,4">
+									<input type="hidden" id="ans_try4" size="3" value="">
+									<input type="hidden" id="ans_trySame4" size="3" value="">
+									<input type="hidden" id="ans_real4" size="2" value="2">
+									<input type="hidden" id="ans_try5" size="3" value="">
+									<input type="hidden" id="ans_trySame5" size="3" value="">
+									<input type="hidden" id="ans_real5" size="2" value="2">
+									<input type="hidden" id="ans_try6" size="3" value="">
+									<input type="hidden" id="ans_trySame6" size="3" value="">
+									<input type="hidden" id="ans_real6" size="2" value="1">
+									<input type="hidden" id="ans_try7" size="3" value="">
+									<input type="hidden" id="ans_trySame7" size="3" value="">
+									<input type="hidden" id="ans_real7" size="2" value="3">
+									<input type="hidden" id="ans_try8" size="3" value="">
+									<input type="hidden" id="ans_trySame8" size="3" value="">
+									<input type="hidden" id="ans_real8" size="2" value="3">
+									<input type="hidden" id="ans_try9" size="3" value="">
+									<input type="hidden" id="ans_trySame9" size="3" value="">
+									<input type="hidden" id="ans_real9" size="2" value="2">
+									<input type="hidden" id="ans_try10" size="3" value="">
+									<input type="hidden" id="ans_trySame10" size="3" value="">
+									<input type="hidden" id="ans_real10" size="2" value="3">
+									<script>max_five[0] = '19';</script>
+									<script>max_five[1] = '19';</script>
+									<script>max_five[2] = '19';</script>
+									<script>max_five[3] = '19';</script>
+									<script>max_five[4] = '19';</script>
+									
+<%-- 							<!-- 문제 foreach로 돌리기 - 출력은 되나,  -->				
+								<c:forEach items="${examList }" var="dto" varStatus="status">
+									<div id="div00" style="display: block; width: 100%; height: 100%;">
+										<table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0">
+											<tbody>
+												<tr>
+													<td width="100%" valign="top" class="ed" style="padding-top:5px;">
+														<div id="ques_ox1" style="margin:0px; position:absolute; width:55px; height:45px;">
+															<img src="<%=cp%>/resource/images/blank.gif" style="width:55px; height:45px;"/>
+														</div>
+														<table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5">
+															<tbody>
+																<tr>
+																	<td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">${dto.examNum}.</td>
+																	<td style="width:98%" valign="top" class="question01_qpass">${dto.exam}<br>
+																		<span id="rate1" class="rightRate" style="display:none">[정답률: 57%]</span>
+																	</td>
+																</tr>
+																
+																<!-- [보기 1-1] -->
+																<tr>
+																	<td></td>
+																	<td id="quesitem11" class="question02_qpass">
+																		<a href="javascript:answer_check(1, 1)">① ${dto.ex_One}</a>
+																	</td>
+																</tr>
+																
+																<!-- [보기 1-2] -->
+																<tr>
+																	<td></td>
+																	<td id="quesitem12" class="question02_qpass" style="background-repeat: no-repeat;">
+																		<a href="javascript:answer_check(1, 2)">② ${dto.ex_Two}</a>
+																	</td>
+																</tr>
+																
+																<!-- [보기 1-3] -->
+																<tr>
+																	<td></td>
+																	<td id="quesitem13" class="question02_qpass" style="background-repeat: no-repeat;">
+																		<a href="javascript:answer_check(1, 3)">③ ${dto.ex_Three}</a>
+																	</td>
+																</tr>
+																
+																<tr>
+																	<td></td>
+																	<td id="quesitem14" class="question02_qpass" style="background-repeat: no-repeat;">
+																		<a href="javascript:answer_check(1, 4)">④ ${dto.ex_Four}</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														
+														<p style="margin:15px 0px 10px 16px;">
+															<input type="button" value="이전" onclick="previous_div('1과목', 0, 0)" class="btn01_qpass"/>
+															<input type="button" value="다음" onclick="next_div('1과목', 0, 0)" class="btn01_qpass"/>
+														</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</c:forEach> --%>
 	
-	/* 대상 블럭 보이기*/
-	var targetDiv = document.getElementById("div"+ divNum + fiveNum);
-	targetDiv.style.display = "block";
-	/*alert(fiveNum); return;*/
 
-	/* 해당 답안지 변경*/
-	var targetAns = document.getElementById("ans"+divNum);
-	targetAns.style.display = "block";
+									<div id="div00" style="display: block; width: 100%; height: 100%;">
+										<table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0">
+											<tbody>
+												<tr>
+													<td width="100%" valign="top" class="ed" style="padding-top:5px;height: 282px;padding: 35px 27px;">
+														<div id="ques_ox1" style="margin:0px; position:absolute; width:55px; height:45px;">
+															<img src="<%=cp%>/resource/images/blank.gif" style="width:55px; height:45px;"/>
+														</div>
+														<table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5">
+															<tbody>
+																<tr>
+																	<td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">1.</td>
+																	<td style="width:98%" valign="top" class="question01_qpass">다음 관계대수 중 순수 관계연산자가 아닌 것은?<br>
+																		<span id="rate1" class="rightRate" style="display:none">[정답률: 57%]</span>
+																	</td>
+																</tr>
+																
+																<!-- [보기 1-1] -->
+																<tr>
+																	<td></td>
+																	<td id="quesitem11" class="question02_qpass">
+																		<a href="javascript:answer_check(1, 1)">① 차집합(difference)</a>
+																	</td>
+																</tr>
+																
+																<!-- [보기 1-2] -->
+																<tr>
+																	<td></td>
+																	<td id="quesitem12" class="question02_qpass" style="background-repeat: no-repeat;">
+																		<a href="javascript:answer_check(1, 2)">② 프로젝트(project)</a>
+																	</td>
+																</tr>
+																
+																<!-- [보기 1-3] -->
+																<tr>
+																	<td></td>
+																	<td id="quesitem13" class="question02_qpass" style="background-repeat: no-repeat;">
+																		<a href="javascript:answer_check(1, 3)">③ 조인(join)</a>
+																	</td>
+																</tr>
+																
+																<tr>
+																	<td></td>
+																	<td id="quesitem14" class="question02_qpass" style="background-repeat: no-repeat;">
+																		<a href="javascript:answer_check(1, 4)">④ 디비전(division)</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														
+														<p style="margin:15px 0px 10px 16px;">
+															<input type="button" value="이전" onclick="previous_div('1과목', 0, 0)" class="btn01_qpass"/>
+															<input type="button" value="다음" onclick="next_div('1과목', 0, 0)" class="btn01_qpass"/>
+														</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									
+									<!-- [문제 2] -->
+									<div id="div01" style="display: none; width: 100%; height: 100%;">
+										<table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0">
+											<tbody>
+												<tr>
+													<td width="100%" valign="top" class="ed" style="padding-top:5px;">
+														<div id="ques_ox2" style="margin:0px; position:absolute; width:55px; height:45px;">
+															<img src="<%=cp%>/resource/images/blank.gif" style="width:55px; height:45px;">
+														</div>
+														<table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5">
+															<tbody>
+																<tr>
+																	<td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">2.</td>
+																	<td style="width:98%" valign="top" class="question01_qpass">관계형 대수의 연산자가 아닌 것은? <br>
+																		<span id="rate2" class="rightRate" style="display:none">[정답률: 64%]</span>
+																	</td>
+																</tr>
+																
+																<!-- [보기 2-1] -->
+																<tr>
+																	<td></td>
+																	<td id="quesitem21" class="question02_qpass">
+																		<a href="javascript:answer_check(2, 1)">① JOIN</a>
+																	</td>
+																</tr>
+																
+																<!-- [보기 2-2] -->
+																<tr>
+																	<td></td>
+																	<td id="quesitem22" class="question02_qpass">
+																		<a href="javascript:answer_check(2, 2)">② PROJECT</a>
+																	</td>
+																</tr>
+																
+																<!-- [보기 2-3] -->
+																<tr>
+																	<td></td>
+																	<td id="quesitem23" class="question02_qpass">
+																		<a href="javascript:answer_check(2, 3)">③ PRODUCT</a>
+																	</td>
+																</tr>
+																
+																<!-- [보기 2-4] -->
+																<tr>
+																	<td></td>
+																	<td id="quesitem24" class="question02_qpass">
+																		<a href="javascript:answer_check(2, 4)">④ PART</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														
+														<div id="comment2" style="display:none; color:blue; line-height:1.5; padding:15px; padding-top:0px;">
+															<span style="font-weight:bold; ">해설 : </span>
+															자격검정 시행기관에서 가답안으로 2번은 답항 4를 발표하였지만 문제 의견 수렴 후 결정한 확정답안에서 전항 정답으로 결정한 문제입니다.<br/><br/>
+															전항 정답으로 결정한 이유는 [성적테이블]에 학점 컬럼을 학번으로 오류 표기함으로써 WHERE 조건절 [A.학번 = B.학번 AND B.과목이름 = “DB”]을 만족하는 결과 값 추출이 불가능하기 때문입니다.
+														</div>
+														
+														<p style="margin:15px 0px 10px 16px;">
+															<input type="button" value="이전" onclick="previous_div('1과목', 0, 1)" class="btn01_qpass"/>
+															<input type="button" value="다음" onclick="next_div('1과목', 0, 1)" class="btn01_qpass"/>
+														</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									
+									<!-- [문제 3] -->
+									<div id="div02" style="display: none; width: 100%; height: 100%;">
+										<table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0">
+											<tbody>
+												<tr>
+													<td width="100%" valign="top" class="ed" style="padding-top:5px;">
+														<div id="ques_ox3" style="margin:0px; position:absolute; width:55px; height:45px;">
+															<img src="<%=cp%>/resource/images/blank.gif" style="width:55px; height:45px;">
+														</div>
+														<table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5">
+															<tbody>
+																<tr>
+																	<td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">3.</td>
+																	<td style="width:98%" valign="top" class="question01_qpass">데이터베이스의 상태를 변환시키기 위하여 논리적 기능을 수행하는 하나의 작업 단위를 무엇이라고 하는가? <br>
+																		<span id="rate3" class="rightRate" style="display:none">[정답률: 77%]</span>
+																	</td>
+																</tr>
+																
+																<!-- [보기 3-1] -->
+																<tr>
+																	<td></td>
+																	<td id="quesitem31" class="question02_qpass">
+																		<a href="javascript:answer_check(3, 1)">① 프로시저</a>
+																	</td>
+																</tr>
+																
+																<!-- [보기 3-2] -->
+																<tr>
+																	<td></td>
+																	<td id="quesitem32" class="question02_qpass">
+																		<a href="javascript:answer_check(3, 2)">② 트랜잭션</a>
+																	</td>
+																</tr>
+																
+																<!-- [보기 3-3] -->
+																<tr>
+																	<td></td>
+																	<td id="quesitem33" class="question02_qpass">
+																		<a href="javascript:answer_check(3, 3)">③ 12</a>
+																	</td>
+																</tr>
+																
+																<!-- [보기 3-4] -->
+																<tr>
+																	<td></td>
+																	<td id="quesitem34" class="question02_qpass">
+																		<a href="javascript:answer_check(3, 4)">④ 도메인</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														
+														<p style="margin:15px 0px 10px 16px;">
+															<input type="button" value="이전" onclick="previous_div('1과목', 0, 2)" class="btn01_qpass"/>
+															<input type="button" value="다음" onclick="next_div('1과목', 0, 2)" class="btn01_qpass"/>
+														</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									
+									<!-- [문제 4] -->
+									<div id="div03" style="display: none; width: 100%; height: 100%;">
+										<table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0">
+											<tbody>
+												<tr>
+													<td width="100%" valign="top" class="ed" style="padding-top:5px;">
+														<div id="ques_ox4" style="margin:0px; position:absolute; width:55px; height:45px;">
+															<img src="<%=cp%>/resource/images/blank.gif" style="width:55px; height:45px;">
+														</div>
+														<table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5">
+															<tbody>
+																<tr>	
+																	<td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">4.</td>
+																	<td style="width:98%" valign="top" class="question01_qpass">뷰에 대한 설명으로 틀린 것은? <br>
+																		<span id="rate4" class="rightRate" style="display:none">[정답률: 63%]</span>
+																	</td>
+																</tr>
+																
+																<tr>
+																	<td></td>
+																	<td id="quesitem41" class="question02_qpass">
+																		<a href="javascript:answer_check(4, 1)">① 뷰에 대한 사용자의 권한을 제한할 수 있다.</a>
+																	</td>
+																</tr>
+																
+																<tr>
+																	<td></td>
+																	<td id="quesitem42" class="question02_qpass">
+																		<a href="javascript:answer_check(4, 2)">② 뷰 테이블에 행이나 열을 추가할 때에는 ALTER 문을 사용하여야 한다.</a>
+																	</td>
+																</tr>
+																
+																<tr>
+																	<td></td>
+																	<td id="quesitem43" class="question02_qpass" style="background-repeat: no-repeat;">
+																		<a href="javascript:answer_check(4, 3)">③ 뷰는 다른 뷰를 대상으로 설정될 수 있다.</a>
+																	</td>
+																</tr>
+																
+																<tr>
+																	<td></td>
+																	<td id="quesitem44" class="question02_qpass">
+																		<a href="javascript:answer_check(4, 4)">④ 뷰 테이블은 물리적으로 구현된 것은 아니다.</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													<p style="margin:15px 0px 10px 16px;">
+														<input type="button" value="이전" onclick="previous_div('1과목', 0, 3)" class="btn01_qpass">
+														<input type="button" value="다음" onclick="next_div('1과목', 0, 3)" class="btn01_qpass">
+													</p>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								
+								<!-- [문제 5] -->
+								<div id="div04" style="display: none; width: 100%; height: 100%;">
+									<table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0">
+										<tbody>
+											<tr>
+												<td width="100%" valign="top" class="ed" style="padding-top:5px;">
+													<div id="ques_ox5" style="margin:0px; position:absolute; width:55px; height:45px;">
+														<img src="<%=cp%>/resource/images/blank.gif" style="width:55px; height:45px;">
+													</div>
+													<table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5">
+														<tbody>
+															<tr>
+																<td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">5.</td>
+																<td style="width:98%" valign="top" class="question01_qpass">깊이가 5인 이진트리에서 가질 수 있는 최대 노드 수는? <br>
+																	<span id="rate5" class="rightRate" style="display:none">[정답률: 66%]</span>
+																</td>
+															</tr>
+															<tr>
+																<td></td>
+																<td id="quesitem51" class="question02_qpass">
+																	<a href="javascript:answer_check(5, 1)">① 25</a>
+																</td>
+															</tr>
+															<tr>
+																<td></td>
+																<td id="quesitem52" class="question02_qpass">
+																	<a href="javascript:answer_check(5, 2)">② 31</a>
+																</td>
+															</tr>
+															<tr>
+																<td></td>
+																<td id="quesitem53" class="question02_qpass" style="background-repeat: no-repeat;">
+																	<a href="javascript:answer_check(5, 3)">③ 35</a>
+																</td>
+															</tr>
+															<tr>
+																<td></td>
+																<td id="quesitem54" class="question02_qpass">
+																	<a href="javascript:answer_check(5, 4)">④ 42</a>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+													<p style="margin:15px 0px 10px 16px;">
+														<input type="button" value="이전" onclick="previous_div('1과목', 0, 4)" class="btn01_qpass">
+														<input type="button" value="다음" onclick="next_div('1과목', 0, 4)" class="btn01_qpass">
+													</p>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								
+								<!-- [문제 6] -->
+								<div id="div05" style="display: none; width: 100%; height: 100%;">
+									<table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0">
+										<tbody>
+											<tr>
+												<td width="100%" valign="top" class="ed" style="padding-top:5px;">
+													<div id="ques_ox6" style="margin:0px; position:absolute; width:55px; height:45px;">
+														<img src="<%=cp%>/resource/images/blank.gif" style="width:55px; height:45px;">
+													</div>
+													<table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5">
+														<tbody>
+															<tr>
+																<td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">6.</td>
+																<td style="width:98%" valign="top" class="question01_qpass">로킹기법에서 2단계 로킹 규약에 대한 설명으로 옳은 것은? <br>
+																	<span id="rate6" class="rightRate" style="display:none">[정답률: 34%]</span>
+																</td>
+															</tr>
+															<tr>
+																<td></td>
+																<td id="quesitem61" class="question02_qpass">
+																	<a href="javascript:answer_check(6, 1)">① 트랜잭션은 lock만 수행할 수 있고, unlock은 수행할 수 없는 확장단계가 있다.</a>
+																</td>
+															</tr>
+															<tr>
+																<td></td>
+																<td id="quesitem62" class="question02_qpass">
+																	<a href="javascript:answer_check(6, 2)">② 트랜잭션이 unlock과 lock을 동시에 수행할 수 있는 단계를 병렬전환 단계라 한다.</a>
+																</td>
+															</tr>
+															<tr>
+																<td></td>
+																<td id="quesitem63" class="question02_qpass" style="background-repeat: no-repeat;">
+																	<a href="javascript:answer_check(6, 3)">③ 한 트랜잭션이 unlock 후 다른 데이터 아이템을 lock 할 수 있다.</a>
+																</td>
+															</tr>
+															<tr>
+																<td></td>
+																<td id="quesitem64" class="question02_qpass">
+																	<a href="javascript:answer_check(6, 4)">④ 교착상태를 일으키지 않는다.</a>
+																</td>
+															</tr>
+														</tbody>
+													</table>
+													<p style="margin:15px 0px 10px 16px;">
+														<input type="button" value="이전" onclick="previous_div('1과목', 0, 5)" class="btn01_qpass">
+														<input type="button" value="다음" onclick="next_div('1과목', 0, 5)" class="btn01_qpass">
+													</p>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							
+								<!-- [문제 7] -->
+								<div id="div06" style="display: none; width: 100%; height: 100%;">
+									<table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0">
+											<tbody>
+												<tr>
+													<td width="100%" valign="top" class="ed" style="padding-top:5px;">
+														<div id="ques_ox7" style="margin:0px; position:absolute; width:55px; height:45px;">
+															<img src="<%=cp%>/resource/images/blank.gif" style="width:55px; height:45px;">
+														</div>
+														<table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5">
+															<tbody>
+																<tr>
+																	<td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">7.</td>
+																	<td style="width:98%" valign="top" class="question01_qpass">자료구조에 대한 설명으로 옳지 않은 것은? <br>
+																		<span id="rate7" class="rightRate" style="display:none">[정답률: 49%]</span>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem71" class="question02_qpass">
+																		<a href="javascript:answer_check(7, 1)">① 스택은 Last In - First Out 처리를 수행한다.</a>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem72" class="question02_qpass">
+																		<a href="javascript:answer_check(7, 2)">② 큐는 First In - First Out 처리를 수행한다.</a>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem73" class="question02_qpass">
+																		<a href="javascript:answer_check(7, 3)">③ 스택은 서브루틴 호출, 인터럽트 처리, 수식 계산 및 수식 표기법에 응용된다.</a>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem74" class="question02_qpass">
+																		<a href="javascript:answer_check(7, 4)">④ 큐는 비선형구조에 해당한다.</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														<p style="margin:15px 0px 10px 16px;">
+															<input type="button" value="이전" onclick="previous_div('1과목', 0, 6)" class="btn01_qpass">
+															<input type="button" value="다음" onclick="next_div('1과목', 0, 6)" class="btn01_qpass">
+														</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									
+									<!-- [문제 8] -->
+									<div id="div07" style="display: none; width: 100%; height: 100%;">
+										<table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0">
+											<tbody>
+												<tr>
+													<td width="100%" valign="top" class="ed" style="padding-top:5px;">
+														<div id="ques_ox8" style="margin:0px; position:absolute; width:55px; height:45px;">
+															<img src="<%=cp%>/resource/images/blank.gif" style="width:55px; height:45px;">
+														</div>
+														<table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5">
+															<tbody>
+																<tr>
+																	<td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">8.</td>
+																	<td style="width:98%" valign="top" class="question01_qpass">데이터베이스에서 개념적 설계 단계에 대한 설명으로 틀린 것은? <br>
+																		<span id="rate8" class="rightRate" style="display:none">[정답률: 47%]</span>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem81" class="question02_qpass">
+																		<a href="javascript:answer_check(8, 1)">① 산출물로 ER-D가 만들어진다.</a>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem82" class="question02_qpass">
+																		<a href="javascript:answer_check(8, 2)">② DBMS에 독립적인 개념 스키마를 설계한다.</a>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem83" class="question02_qpass" style="background-repeat: no-repeat;">
+																		<a href="javascript:answer_check(8, 3)">③ 트랜잭션 인터페이스를 설계한다.</a>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem84" class="question02_qpass">
+																		<a href="javascript:answer_check(8, 4)">④ 논리적 설계 단계의 앞 단계에서 수행된다.</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														<p style="margin:15px 0px 10px 16px;">
+															<input type="button" value="이전" onclick="previous_div('1과목', 0, 7)" class="btn01_qpass">
+															<input type="button" value="다음" onclick="next_div('1과목', 0, 7)" class="btn01_qpass">
+														</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									
+									<!-- [문제 9] -->
+									<div id="div08" style="display: none; width: 100%; height: 100%;">
+										<table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0">
+											<tbody>
+												<tr>
+													<td width="100%" valign="top" class="ed" style="padding-top:5px;">
+														<div id="ques_ox9" style="margin:0px; position:absolute; width:55px; height:45px;">
+															<img src="<%=cp%>/resource/images/blank.gif" style="width:55px; height:45px;">
+														</div>
+														<table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5">
+															<tbody>
+																<tr>
+																	<td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">9.</td>
+																	<td style="width:98%" valign="top" class="question01_qpass">정규화 과정 중 1NF에서 2NF가 되기 위한 조건은? <br>
+																		<span id="rate9" class="rightRate" style="display:none">[정답률: 61%]</span>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem91" class="question02_qpass">
+																		<a href="javascript:answer_check(9, 1)">① 1NF를 만족하고 모든 도메인이 원자 값이어야 한다.</a>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem92" class="question02_qpass">
+																		<a href="javascript:answer_check(9, 2)">② 1NF를 만족하고 키가 아닌 모든 애트리뷰트들이 기본 키에 이행적으로 함수 종속되지 않아야 한다.</a>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem93" class="question02_qpass">
+																		<a href="javascript:answer_check(9, 3)">③ 1NF를 만족하고 다치 종속이 제거되어야 한다.</a>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem94" class="question02_qpass">
+																		<a href="javascript:answer_check(9, 4)">④ 1NF를 만족하고 키가 아닌 모든 속성이 기본 키에 완전 함수적 종속되어야 한다.</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														<p style="margin:15px 0px 10px 16px;">
+															<input type="button" value="이전" onclick="previous_div('1과목', 0, 8)" class="btn01_qpass">
+															<input type="button" value="다음" onclick="next_div('1과목', 0, 8)" class="btn01_qpass">
+														</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									
+									<!-- [문제 10] -->
+									<div id="div09" style="display: none; width: 100%; height: 100%;">
+										<table width="100%" cellspacing="0" cellpadding="0" style="margin-top:0px;" border="0">
+											<tbody>
+												<tr>
+													<td width="100%" valign="top" class="ed" style="padding-top:5px;">
+														<div id="ques_ox10" style="margin:0px; position:absolute; width:55px; height:45px;">
+															<img src="<%=cp%>/resource/images/blank.gif" style="width:55px; height:45px;">
+														</div>
+														<table style="margin-bottom:10px; width:100%; height:150px; border:0" cellspacing="0" cellpadding="5">
+															<tbody>
+																<tr>
+																	<td style="padding-left:8px; width:25px; text-align:right" valign="top" class="count_qpass">10.</td>
+																	<td style="width:98%" valign="top" class="question01_qpass">Which of the following does not belong to the DML statement of SQL? <br>
+																		<span id="rate10" class="rightRate" style="display:none">[정답률: 65%]</span>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem101" class="question02_qpass">
+																		<a href="javascript:answer_check(10, 1)">① SELECT</a>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem102" class="question02_qpass">
+																		<a href="javascript:answer_check(10, 2)">② DELETE</a>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem103" class="question02_qpass" style="background-repeat: no-repeat;">
+																		<a href="javascript:answer_check(10, 3)">③ CREATE</a>
+																	</td>
+																</tr>
+																<tr>
+																	<td></td>
+																	<td id="quesitem104" class="question02_qpass">
+																		<a href="javascript:answer_check(10, 4)">④ INSERT</a>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+														<p style="margin:15px 0px 10px 16px;">
+															<input type="button" value="이전" onclick="previous_div('1과목', 0, 9)" class="btn01_qpass">
+															<input type="button" value="다음" onclick="next_div('1과목', 0, 9)" class="btn01_qpass">
+														</p>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div> 
+								
+								<td style="padding-left:4px; border:none; width:130px;" valign="top"><!-- 답안지 출력 -->
+									<div id="ans0" style="display: block;width: 100%;height: 100%;padding-left: 0px;border-bottom: saddlebrown;">
+										<table width="100%" height="30" align="center" cellspacing="0" cellpadding="2">
+											<tbody>
+												<tr>
+													<td align="center" style="color:green; font-weight:bold; border:solid 1px #ccc; border-bottom:none">답안지</td>
+												</tr>
+											</tbody>
+										</table>
+													
+										<table style="width:100%;text-align:center;border-bottom: 1px solid #bdbdbd;" cellspacing="0" cellpadding="0" border="0px">
+											<tbody>
+												<tr style="height:25px;">
+													<td id="ans_num1" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass">
+														<a href="javascript:move2question(0)" style="color:#008000;">1</a>
+													</td>
+													<td id="ans_td11" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(1, 1)"><img id="answer11" src="/wooltari/resource/images/num1.gif"></a>
+													</td>
+													<td id="ans_td12" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(1, 2)"><img id="answer12" src="/wooltari/resource/images/num2.gif"></a>
+													</td>
+													<td id="ans_td13" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(1, 3)"><img id="answer13" src="/wooltari/resource/images/num3.gif"></a>
+													</td>
+													<td id="ans_td14" width="24px" align="center" valign="middle" class="td_border_right_qpass">
+														<a href="javascript:answer_check(1, 4)"><img id="answer14" src="/wooltari/resource/images/num4.gif"></a>
+													</td>
+												</tr>
 
-	document.getElementById('current_i').value = divNum;
-	document.getElementById('current_j').value = fiveNum;
-}
-
-/* 채점 표시 전부 없애기*/
-function unscoring_targetDiv(targetDiv, startNum, eachTotal) {
-	var f = document.test_form;
-	var ans_try, ans_real;
-	var endNum = startNum + eachTotal - 1;
-	var itemType;
-
-	for(var i=startNum; i <= endNum; i++) {
-		/* 문제지 번호*/
-		document.getElementById('ques_ox'+i).style.backgroundImage = "";
-			
-		/* 문제지 문항*/
-		for(var j=1; j<=4; j++) {
-			itemType = document.getElementById('quesitem'+i+j);
-			if(itemType != null) document.getElementById('quesitem'+i+j).style.backgroundImage = "";
-		}
-
-		// 정답률
-		if(
-			document.getElementById('rate'+i) ) {
-			document.getElementById('rate'+i).style.display = "none";
-		}
-
-		/* 해설 안보이게 처리 */
-		if(
-			document.getElementById('comment'+i) ) {
-			document.getElementById('comment'+i).style.display = "none";
-		}
-		
-		/* 답안지 번호*/
-		document.getElementById('ans_num'+i).style.backgroundImage = "";
-
-		/* 답안지 문항*/
-		for(var j=1; j<=4; j++) {
-		itemType = document.getElementById('answer'+i+j);
-
-		/*if(i>= 4) alert("type01 : "+ i+ j + itemType);*/
-		if(itemType != null) document.getElementById('answer'+i+j).src = "<%=cp%>/resource/images/num"+ j + ".gif";
-		else if( document.getElementById('ansInsert_text'+i) ) { /* 주관식*/
-			var insSpan = document.getElementById('ansInsert_span'+i);
-			var insText = document.getElementById('ansInsert_text'+i);
-
-			insSpan.style.display = "none";
-			insText.value = "";
-			insText.style.display = "";
-		}
-		}
-		
-		/* 답안지 정답 체크*/
-		for(var j=1; j<=4; j++) {
-			itemType = document.getElementById('ans_td'+i+j);
-			if(itemType != null) document.getElementById('ans_td'+i+j).style.backgroundImage = "";
-		}
-		
-		/* 응시기록 리셋*/
-		document.getElementById('ans_try'+i).value = "";
-	}
-}
-
-function scoring_targetDiv(targetDiv, startNum, eachTotal, answerMode) {
-	var f = document.test_form;
-	var ans_try, ans_real, selectType, oxState;
-	var correctCount=0;
-	var mode = document.getElementById('current_mode').value;
-	var endNum = eval(startNum) + eval(eachTotal) - 1;
-
-	for(var i=startNum; i <= endNum; i++) {
-		ans_try = document.getElementById('ans_try'+i).value;
-		ans_real = document.getElementById('ans_real'+i).value;
-
-		/* 주관/객관 설정변수*/
-		if( document.getElementById('ansInsert_span'+i) ) selectType = 1;
-		else { selectType = 0; }
-
-		oxState = get_OX_state(ans_try, ans_real, selectType);
-
-		// 정답률
-		if( mode != "incorrect" && document.getElementById('rate'+i) ) { document.getElementById('rate'+i).style.display = "inline"; }
-
-		/* 해설 뷰*/
-		if( document.getElementById('comment'+i) ) {
-			if(mode != "incorrect" || answerMode == "one") { document.getElementById('comment'+i).style.display = "block"; }
-		}
-
-		/* 1단계 : 문제지 문항, 답안지 문항에 정답,오답 표시*/
-		if(oxState.substr(0,1) == "1") { /* 정답*/
-			correctCount++;
-
-			/* 문제지 문제번호에 o 표시*/
-			document.getElementById('ques_ox'+i).style.backgroundImage = "url('<%=cp%>/resource/images/re_o.gif')";
-
-			/* 답안지 문제번호에 o 표시*/
-			document.getElementById('ans_num'+i).style.backgroundImage = "url('<%=cp%>/resource/images/ans_O.gif')";
-			document.getElementById('ans_num'+i).style.backgroundRepeat = "no-repeat";
-		
-		}
-		else { /* 오답*/
-			if(mode != "incorrect" || answerMode == "one") { /* 틀린문제풀기에서 오답은 그냥둠*/
-				/* 문제지 문제번호에 x 표시*/
-				document.getElementById('ques_ox'+i).style.backgroundImage = "url('<%=cp%>/resource/images/re_x.gif')";
+												<tr style="height:25px;">
+													<td id="ans_num2" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass">
+														<a href="javascript:move2question(1)" style="color:#008000;">2</a>
+													</td>
+													<td id="ans_td21" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(2, 1)"><img id="answer21" src="/wooltari/resource/images/num1.gif"></a>
+													</td>
+													<td id="ans_td22" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(2, 2)"><img id="answer22" src="/wooltari/resource/images/num2.gif"></a>
+													</td>
+													<td id="ans_td23" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(2, 3)"><img id="answer23" src="/wooltari/resource/images/num3.gif"></a>
+													</td>
+													<td id="ans_td24" width="24px" align="center" valign="middle" class="td_border_right_qpass">
+														<a href="javascript:answer_check(2, 4)"><img id="answer24" src="/wooltari/resource/images/num4.gif"></a>
+													</td>
+												</tr>
+												
+												<tr style="height:25px;">
+													<td id="ans_num3" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass">
+														<a href="javascript:move2question(2)" style="color:#008000;">3</a>
+													</td>
+													<td id="ans_td31" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(3, 1)"><img id="answer31" src="/wooltari/resource/images/num1.gif"></a>
+													</td>
+													<td id="ans_td32" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(3, 2)"><img id="answer32" src="/wooltari/resource/images/num2.gif"></a>
+													</td>
+													<td id="ans_td33" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(3, 3)"><img id="answer33" src="/wooltari/resource/images/num3.gif"></a>
+													</td>
+													<td id="ans_td34" width="24px" align="center" valign="middle" class="td_border_right_qpass">
+														<a href="javascript:answer_check(3, 4)"><img id="answer34" src="/wooltari/resource/images/num4.gif"></a>
+													</td>
+												</tr>
+												
+												<tr style="height:25px;">
+													<td id="ans_num4" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass">
+														<a href="javascript:move2question(3)" style="color:#008000;">4</a>
+													</td>
+													
+													<td id="ans_td41" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(4, 1)"><img id="answer41" src="/wooltari/resource/images/num1.gif"></a>
+													</td>
+													<td id="ans_td42" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(4, 2)"><img id="answer42" src="/wooltari/resource/images/num2.gif"></a>
+													</td>
+													<td id="ans_td43" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(4, 3)"><img id="answer43" src="/wooltari/resource/images/num3.gif"></a>
+													</td>
+													<td id="ans_td44" width="24px" align="center" valign="middle" class="td_border_right_qpass">
+														<a href="javascript:answer_check(4, 4)"><img id="answer44" src="/wooltari/resource/images/num4.gif"></a>
+													</td>
+												</tr>
+												
+												<tr style="height:25px;">
+													<td id="ans_num5" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass">
+														<a href="javascript:move2question(4)" style="color:#008000;">5</a>
+													</td>
+													
+													<td id="ans_td51" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(5, 1)"><img id="answer51" src="/wooltari/resource/images/num1.gif"></a>
+													</td>
+													<td id="ans_td52" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(5, 2)"><img id="answer52" src="/wooltari/resource/images/num2.gif"></a>
+													</td>
+													<td id="ans_td53" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(5, 3)"><img id="answer53" src="/wooltari/resource/images/num3.gif"></a>
+													</td>
+													<td id="ans_td54" width="24px" align="center" valign="middle" class="td_border_right_qpass">
+														<a href="javascript:answer_check(5, 4)"><img id="answer54" src="/wooltari/resource/images/num4.gif"></a>
+													</td>
+												</tr>
+												
+												<tr style="height:25px;">
+													<td id="ans_num6" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass">
+														<a href="javascript:move2question(5)" style="color:#008000;">6</a>
+													</td>
+													
+													<td id="ans_td61" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(6, 1)"><img id="answer61" src="/wooltari/resource/images/num1.gif"></a>
+													</td>
+													<td id="ans_td62" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(6, 2)"><img id="answer62" src="/wooltari/resource/images/num2.gif"></a>
+													</td>
+													<td id="ans_td63" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(6, 3)"><img id="answer63" src="/wooltari/resource/images/num3.gif"></a>
+													</td>
+													<td id="ans_td64" width="24px" align="center" valign="middle" class="td_border_right_qpass">
+														<a href="javascript:answer_check(6, 4)"><img id="answer64" src="/wooltari/resource/images/num4.gif"></a>
+													</td>
+												</tr>
+												
+												<tr style="height:25px;">
+													<td id="ans_num7" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass">
+														<a href="javascript:move2question(6)" style="color:#008000;">7</a>
+													</td>
+													
+													<td id="ans_td71" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(7, 1)"><img id="answer71" src="/wooltari/resource/images/num1.gif"></a>
+													</td>
+													<td id="ans_td72" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(7, 2)"><img id="answer72" src="/wooltari/resource/images/num2.gif"></a>
+													</td>
+													<td id="ans_td73" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(7, 3)"><img id="answer73" src="/wooltari/resource/images/num3.gif"></a>
+													</td>
+													<td id="ans_td74" width="24px" align="center" valign="middle" class="td_border_right_qpass">
+														<a href="javascript:answer_check(7, 4)"><img id="answer74" src="/wooltari/resource/images/num4.gif"></a>
+													</td>
+												</tr>
+												
+												<tr style="height:25px;">
+													<td id="ans_num8" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass">
+														<a href="javascript:move2question(7)" style="color:#008000;">8</a>
+													</td>
+													
+													<td id="ans_td81" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(8, 1)"><img id="answer81" src="/wooltari/resource/images/num1.gif"></a>
+													</td>
+													<td id="ans_td82" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(8, 2)"><img id="answer82" src="/wooltari/resource/images/num2.gif"></a>
+													</td>
+													<td id="ans_td83" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(8, 3)"><img id="answer83" src="/wooltari/resource/images/num3.gif"></a>
+													</td>
+													<td id="ans_td84" width="24px" align="center" valign="middle" class="td_border_right_qpass">
+														<a href="javascript:answer_check(8, 4)"><img id="answer84" src="/wooltari/resource/images/num4.gif"></a>
+													</td>
+												</tr>
+												
+												<tr style="height:25px;">
+													<td id="ans_num9" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass">
+														<a href="javascript:move2question(8)" style="color:#008000;">9</a>
+													</td>
+													
+													<td id="ans_td91" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(9, 1)"><img id="answer91" src="/wooltari/resource/images/num1.gif"></a>
+													</td>
+													<td id="ans_td92" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(9, 2)"><img id="answer92" src="/wooltari/resource/images/num2.gif"></a>
+													</td>
+													<td id="ans_td93" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(9, 3)"><img id="answer93" src="/wooltari/resource/images/num3.gif"></a>
+													</td>
+													<td id="ans_td94" width="24px" align="center" valign="middle" class="td_border_right_qpass">
+														<a href="javascript:answer_check(9, 4)"><img id="answer94" src="/wooltari/resource/images/num4.gif"></a>
+													</td>
+												</tr>
+												
+												<tr style="height:25px;">
+													<td id="ans_num10" style="font-weight:bold; color:#008000; text-align:center;" class="td_border_common_qpass">
+														<a href="javascript:move2question(9)" style="color:#008000;">10</a>
+													</td>
+													
+													<td id="ans_td101" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(10, 1)"><img id="answer101" src="/wooltari/resource/images/num1.gif"></a>
+													</td>
+													<td id="ans_td102" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(10, 2)"><img id="answer102" src="/wooltari/resource/images/num2.gif"></a>
+													</td>
+													<td id="ans_td103" width="24px" align="center" valign="middle" class="td_border_common_qpass">
+														<a href="javascript:answer_check(10, 3)"><img id="answer103" src="/wooltari/resource/images/num3.gif"></a>
+													</td>
+													<td id="ans_td104" width="24px" align="center" valign="middle" class="td_border_right_qpass">
+														<a href="javascript:answer_check(10, 4)"><img id="answer104" src="/wooltari/resource/images/num4.gif"></a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										
+										<p id="btnFinish0" align="center" style="display:block; margin: 10px 0px 0px 0px;">
+											<input type="button" value="답안제출" onclick="finish_exam(0);" class="btn01_qpass" style="width:70px;"/>
+										</p>
+										<p id="resultDisplay0" align="center" style="margin: 10px 0px 0px 0px;"></p>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+									
+					<script src="../q/js/jquery.js" type="text/javascript"></script>
+					<script src="../q/js/quest_insert.js" type="text/javascript"></script>
 					
-				/* 답안지 문제번호에 x 표시*/
-				document.getElementById('ans_num'+i).style.backgroundImage = "url('<%=cp%>/resource/images/x24.gif')";
-				document.getElementById('ans_num'+i).style.backgroundRepeat = "no-repeat";
-			}
-		}
-
-		/* 2단계 : 답안지에서 정답 표시(복수정답 고려)*/
-		if( selectType == 0 ) { /* 객관식*/
-			if(mode == "incorrect" && oxState.substr(0,1) == "0" && answerMode == "") { /* 틀린문제풀기에서 오답이면 패스*/	}
-			else {			
-				if(oxState.length == 1) { /* 단수정답*/
-				document.getElementById('ans_td'+i+ans_real).style.backgroundImage = "url('<%=cp%>/resource/images/circle_blue22.gif')";
-				document.getElementById('ans_td'+i+ans_real).style.backgroundRepeat = "no-repeat";
-				}
-				else { /* 복수정답*/
-					for(var j=1; j <= oxState.length-1; j++) { /* 1, 0 자리 고려*/
-						ans_index = oxState.substr(j,1);
-						document.getElementById('ans_td'+i+ans_index).style.backgroundImage = "url('<%=cp%>/resource/images/circle_blue22.gif')";
-						document.getElementById('ans_td'+i+ans_index).style.backgroundRepeat = "no-repeat";
-					}
-				}
-			}
-		}
-		else if( document.getElementById('ansInsert_span'+i) ) { /* 주관식*/
-		var insSpan = document.getElementById('ansInsert_span'+i);
-			var insText = document.getElementById('ansInsert_text'+i);
-
-			insSpan.innerHTML = "<span style='color:blue; font-weight:bold'>"+ ans_real + "</span>/" + ans_try;
-
-			if(mode == "incorrect" && oxState.substr(0,1) == "0") {
-				insSpan.style.display = "none";
-			insText.style.display = "";
-			}
-			else { /* 정답이면 ans_try에 값 세팅*/
-				insSpan.style.display = "";
-				insText.value = ans_try;
-				insText.style.display = "none";
-			}
-		}
-
-		/* 3단계 : 문제지 답항표시(복수정답 고려), 답안지에서 시도답항 표시*/
-		if(selectType == 0) {
-			if(mode == "incorrect" && oxState.substr(0,1) == "0" && answerMode == "") { /* 틀린문제풀기에서 오답은 그냥둠*/	}
-			else {
-				/* 문제지 표시*/
-				if(oxState.length == 1) { /* 단수정답*/
-					if(oxState == "1") { /* 정답 */
-						document.getElementById('quesitem'+i+ans_real).style.backgroundImage = "url('<%=cp%>/resource/images/ov38.gif')";
-						document.getElementById('quesitem'+i+ans_real).style.backgroundRepeat = "no-repeat";
-					}
-					else { /* 오답*/
-						/* 정답 단독표시*/
-						document.getElementById('quesitem'+i+ans_real).style.backgroundImage = "url('<%=cp%>/resource/images/o3524.gif')";
-						document.getElementById('quesitem'+i+ans_real).style.backgroundRepeat = "no-repeat";
-						if(ans_try > 0) { /* 시도는 했는데 오답*/
-						document.getElementById('quesitem'+i+ans_try).style.backgroundImage = "url('<%=cp%>/resource/images/red_v38.gif')";
-							document.getElementById('quesitem'+i+ans_try).style.backgroundRepeat = "no-repeat";
+					<script>
+						/* 첫화면으로 이동*/
+						function move2main() {
+						  if(confirm("포기하실거에요?")) {
+						    self.close();
+						  }
 						}
-					}
-				}
-				else { /* 복수정답*/
-					var circleType;
-			
-					for(var j=1; j <= oxState.length-1; j++) { /* 1, 0 자리 고려*/
-						ans_index = oxState.substr(j,1);
-
-						if(ans_try > 0 && ans_try == ans_index) circleType = "ov38"; /* 둥근원+체크표시*/
-						else { circleType = "o3524"; }
-
-						document.getElementById('quesitem'+i+ans_index).style.backgroundImage = "url('<%=cp%>/resource/images/"+ circleType +".gif')";
-						document.getElementById('quesitem'+i+ans_index).style.backgroundRepeat = "no-repeat";
-					}
-				}
-				/* 답안지 시도문항 표시*/
-				if(ans_try > 0) document.getElementById('answer'+i+ans_try).src = "<%=cp%>/resource/images/num"+ ans_try + "_gray.gif";
-			}
-		}
-	}
-	/* 결과 표시*/
-	var resultDisplay = document.getElementById('resultDisplay'+targetDiv);
-	if(answerMode != "one") { resultDisplay.innerHTML = correctCount + " / " + eachTotal; }
-}
-
-function get_OX_state(ans_try, ans_real, selectType) { /* selectType 주관식 여부.*/
-	ans_try = spaceOut_qpass(ans_try);
-	ans_real = spaceOut_qpass(ans_real);
-
-	if(ans_try == ans_real) return "1"; /* 주관/객관 공용*/
-		if(selectType == 0) { /* 객관식*/
-			if(ans_real.length == 1) { return "0"; } /* 답안과 정답이 다른데, 단수정답이면 오답*/
-				else { /* 다수정답인 경우*/
-					if( ans_try !='' && ans_real.indexOf(ans_try) != -1) /* 시도를 하고, 정답이 들어있으면 정답열을 리턴*/
-						return '1' + all_answer_num(ans_real);
-					else
-						return '0' + all_answer_num(ans_real);
-				}
-			}
-			else { /* 주관식*/
-				return compare_strings(ans_real, ans_try);
-		}
-}
-
-function compare_strings(ans_real, ans_try) {
-	if(ans_try == "") return "0";
-	ans_try = spaceOut_qpass(ans_try);
-
-	var realList = ans_real.split(",");
-	for(var i=0; i < realList.length; i++) {
-		if(spaceOut_qpass(realList[i]) == ans_try) return "1";
-	}
-	return "0";
-}
-
-function all_answer_num(str) {
-	var new_str = "";
-	var ch = '';
-	for(var i=0; i < str.length; i++) {
-		ch = str.substr(i,1);
-		if(ch != ',' && ch !='/' && ch != '') new_str = new_str + '' + ch;
-	}
-	return new_str;
-}
-
-function spaceOut_qpass(str) {
-	var newStr="", ch="";
-	for(var i=0; i < str.length; i++) {
-		ch = str.substr(i,1);
-		if(ch != " ") newStr = newStr + "" + ch;
-	}
-	return newStr;
-}
-
-function get_ansReal(question_num) {
-	var targetDiv = document.getElementById('current_i').value;
-}
-
-function answer_check(question_num, ans_num) {
-	var currentMode = document.getElementById('current_mode').value;
-	var incorrectRight="";
-	if(currentMode == "incorrect") {
-		var ans_try = document.getElementById('ans_trySame'+question_num).value;
-		var ans_real = document.getElementById('ans_real'+question_num).value;
-		incorrectRight = get_OX_state(ans_try, ans_real);
-	}
-	if(currentMode == "check" || currentMode == "restudyCheck" || currentMode == "incorrectCheck") {
-		alert("지금은 문제별 응시결과 확인 중 입니다.\n\n다시풀기는 첫화면으로 가셔서 '다시풀어보기' \n\n또는 '틀린문제 다시풀기'를 선택하세요.");
-		return;
-	}
-	else if(incorrectRight.substr(0,1)=="1") {
-		alert("지금은 틀린 문제만 다시 풀고 계십니다. \n\n이미 맞힌 문제는 넘어가세요.");
-		return;
-	}
-	var ans = document.getElementById('answer'+question_num+ans_num);
-	var ques = document.getElementById('quesitem'+question_num+ans_num);
-
-	/* 먼저 기존 칠한게 있으면 지우기*/
-	for(i=1; i <= 4 ; i++) {
-		document.getElementById('answer'+question_num+i).src = "<%=cp%>/resource/images/num"+ i + ".gif";
-		document.getElementById('quesitem'+question_num+i).style.backgroundImage = "";
-	}
-
-	var ansIndex = question_num - document.getElementById('current_startNum').value;
-	move2question(ansIndex);
-	ques.style.backgroundImage = "url('<%=cp%>/resource/images/red_v38.gif')";
-	ques.style.backgroundRepeat = "no-repeat";
-	ans.src = "<%=cp%>/resource/images/num"+ ans_num + "_gray.gif";
-
-	/* 폼에 값 저장하기*/
-	document.getElementById('ans_try'+question_num).value = ans_num;
-}
-
-
-function previous_div(courseName, divIndex, fiveIndex) {
-	if(fiveIndex == 0) {
-		alert("해당 문제가 첫번째 문제입니다.");
-		return;
-	}
-	nextFive = eval(fiveIndex) - eval(1);
-	replace_div(divIndex, nextFive); 
-}
-
-function next_div(courseName, divIndex, fiveIndex) {
-	if(fiveIndex == max_five[divIndex]-10) {
-		alert("마지막 문제입니다.");
-		return;
-	}
-	nextFive = eval(fiveIndex) + eval(1);
-	replace_div(divIndex, nextFive);
-}
-
-
-function move2question(ansIndex) {
-	var divNum = document.getElementById('current_i').value;
-	var fiveNum = Math.floor(ansIndex / 1);
-	replace_div(divNum, fiveNum);
-}
-
-
-function get_notTriedNum(startNum, endNum) {
-	var ans_try;
-	for(var i=startNum; i <= endNum; i++) {
-		ans_try = document.getElementById('ans_try'+i).value;
-		if(ans_try == "") return i;
-	}
-	return -1;
-}
-
-function finish_exam(divIndex) {
-	/* 안푼 문제가 있는지 체크*/
-	var startNum = document.getElementById('current_startNum').value;
-	var eachTotal = (document.getElementById('current_questionTotal').value) - 10;
-	var endNum = eval(startNum) + eval( eachTotal ) - 1;
-
-	/* 주관식 문제 이전*/
-	for(var i=startNum; i <= endNum; i++) {
-		if( document.getElementById('ansInsert_text'+i) ) {
-			document.getElementById('ans_try'+i).value = document.getElementById('ansInsert_text'+i).value;
-		}
-	}
-
-	var notTriedNum = get_notTriedNum(startNum, endNum);
-	if(notTriedNum != -1) {
-	var ansIndex = notTriedNum - document.getElementById('current_startNum').value;
-
-		if( !confirm("아직 풀지 않은 문제가 있습니다.\n\n이대로 채점하시려면 [확인]을 선택하시고,\n\n모두 푸시려면 [취소]를 선택하신 후\n\n답안란의 풀지 않은 문제번호를 선택하시면 \n\n해당 문제로 이동합니다.") ) {
-			move2question(ansIndex);
-			return;
-		}
-	}
-
-	var f = document.test_form;
-	nextSameIndex = divIndex + 1;
-	if(f.mode.value == 'first') {
-		var tryList="";
-
-		for(var i=startNum; i <= endNum; i++) {
-			ans_try = document.getElementById('ans_try'+i).value;
-			tryList = tryList + ans_try + "|Q|";
-		}
-		
-		f.ansTryList.value = tryList;
-		/*alert(tryList); return;*/
-
-		f.targetDiv.value = document.getElementById('current_i').value;
-		
-		//alert("전송전차단");
-		f.submit();
-	}
-	else if(f.mode.value == 'restudy') start_test(nextSameIndex, "restudyCheck", startNum, eachTotal);
-	else if(f.mode.value == 'incorrect') start_test(nextSameIndex, "incorrectCheck", startNum, eachTotal);
-}
-
-
-function resultCheck(i, j) {
-	var baseNum = "1" - 1;
-	//alert(i + " and "+ j + " and " + baseNum);
-
-	var targetDiv = i;
-	var startNum = eval(baseNum) + eval(j) + eval(1);
-	
-	scoring_targetDiv(targetDiv, startNum, 1, "one");
-	document.getElementById('btnResult'+i+j).style.display = "none";
-	document.getElementById('btnReverse'+i+j).style.display = "inline";
-}
-
-function checkReverse(i, j) {
-	var targetDiv = i;
-	var baseNum = "1" - 1;
-	var startNum = eval(baseNum) + eval(j) + eval(1);
-	
-	
-	unscoring_targetDiv(targetDiv, startNum, 1);
-	document.getElementById('btnReverse'+i+j).style.display = "none";
-	document.getElementById('btnResult'+i+j).style.display = "inline";
-}
-
-	start_test(1, "first", 1, 20, 0);
-</script>
-
-</div><!--PC 시험 영역 끝.-->
-
-</div><!--PC 컨테이너 여백 끝.-->
-</div><!--PC 컨테이너 끝.-->
-</div><!--Mobile, PC 페이지 컨테이너 가운데 정렬 끝.-->
-
-
+						
+						/* 인덱스에서의 선택 처리*/
+						function start_test(i, mode, startNum, eachTotal, n) {
+							var f = document.test_form;
+							targetDiv = i-1;
+						
+							index_div.style.display='none';
+						
+							f.mode.value = mode;
+							document.getElementById('current_mode').value = mode;
+							document.getElementById('current_startNum').value = startNum;
+							document.getElementById('current_questionTotal').value = eachTotal;
+						
+							var finishBtn = document.getElementById('btnFinish'+ targetDiv);
+							var resultDisplay = document.getElementById('resultDisplay'+targetDiv);
+							resultDisplay.innerHTML = "";
+						
+							if(mode == "first") { /* 응시하기*/
+							}
+							else if(mode == "restudy") { /* 다시풀기*/
+								unscoring_targetDiv(targetDiv, startNum, eachTotal);
+								finishBtn.style.display = "block";
+							}	
+							else if(mode == "restudyCheck") { /* 다시풀기 결과확인하기*/
+								scoring_targetDiv(targetDiv, startNum, eachTotal, "");
+								finishBtn.style.display = "none";
+						}
+							else if(mode == "check") { /* 응시결과 확인하기*/
+								unscoring_targetDiv(targetDiv, startNum, eachTotal); /* 체크후 답안제출없이 첫화면으로 이동시 리셋이 필요*/
+								resave_ansTry(startNum, eachTotal);
+								scoring_targetDiv(targetDiv, startNum, eachTotal, "");
+								finishBtn.style.display = "none";
+							}	
+							else if(mode == "incorrect") { /* 틀린문제 다시풀기*/
+								unscoring_targetDiv(targetDiv, startNum, eachTotal); /* 체크후 답안제출없이 첫화면으로 이동시 리셋이 필요*/
+								resave_ansTry(startNum, eachTotal);
+								scoring_targetDiv(targetDiv, startNum, eachTotal, "");
+								finishBtn.style.display = "block";
+							}	
+							else if(mode == "incorrectCheck") { /* 틀린문제 다시풀기 결과확인하기*/
+								scoring_targetDiv(targetDiv, startNum, eachTotal, "");
+								finishBtn.style.display = "none";
+							}	
+						
+							if(typeof(n) == "undefined" || !n) n = 0;
+								replace_div(targetDiv, n);
+								document.getElementById('index_div').style.visibility = 'hidden';
+						}
+						
+						function resave_ansTry(startNum, eachTotal) {
+							var tryNum;
+							var endNum = startNum + eachTotal - 1;
+						
+							for(var i=startNum; i <= endNum; i++) {
+								tryNum = document.getElementById('ans_trySame'+i).value;
+								document.getElementById('ans_try'+i).value = tryNum;
+							}
+						}
+						
+						
+						function restore_exam(targetDiv, course) {
+							if(!confirm(course + " 시험을 정말 응시이전의 상태로 되돌립니까?\t")) return;
+							var f = document.test_form;
+							f.mode.value = "return";
+							f.targetDiv.value = targetDiv;
+							f.submit();
+						}
+						
+						/* 해당 구역으로 이동*/
+						function replace_div(divNum, fiveNum) {
+							/* 현재 블럭 감추기*/
+							var currentI = document.getElementById('current_i').value;
+							var currentJ = document.getElementById('current_j').value;
+							var currentDiv = document.getElementById('div'+ currentI + currentJ);
+							currentDiv.style.display = "none";
+							
+							/* 대상 블럭 보이기*/
+							var targetDiv = document.getElementById("div"+ divNum + fiveNum);
+							targetDiv.style.display = "block";
+							/*alert(fiveNum); return;*/
+						
+							/* 해당 답안지 변경*/
+							var targetAns = document.getElementById("ans"+divNum);
+							targetAns.style.display = "block";
+						
+							document.getElementById('current_i').value = divNum;
+							document.getElementById('current_j').value = fiveNum;
+						}
+						
+						/* 채점 표시 전부 없애기*/
+						function unscoring_targetDiv(targetDiv, startNum, eachTotal) {
+							var f = document.test_form;
+							var ans_try, ans_real;
+							var endNum = startNum + eachTotal - 1;
+							var itemType;
+						
+							for(var i=startNum; i <= endNum; i++) {
+								/* 문제지 번호*/
+								document.getElementById('ques_ox'+i).style.backgroundImage = "";
+									
+								/* 문제지 문항*/
+								for(var j=1; j<=4; j++) {
+									itemType = document.getElementById('quesitem'+i+j);
+									if(itemType != null) document.getElementById('quesitem'+i+j).style.backgroundImage = "";
+								}
+						
+								// 정답률
+								if(
+									document.getElementById('rate'+i) ) {
+									document.getElementById('rate'+i).style.display = "none";
+								}
+						
+								/* 해설 안보이게 처리 */
+								if(
+									document.getElementById('comment'+i) ) {
+									document.getElementById('comment'+i).style.display = "none";
+								}
+								
+								/* 답안지 번호*/
+								document.getElementById('ans_num'+i).style.backgroundImage = "";
+						
+								/* 답안지 문항*/
+								for(var j=1; j<=4; j++) {
+								itemType = document.getElementById('answer'+i+j);
+						
+								/*if(i>= 4) alert("type01 : "+ i+ j + itemType);*/
+								if(itemType != null) document.getElementById('answer'+i+j).src = "<%=cp%>/resource/images/num"+ j + ".gif";
+								else if( document.getElementById('ansInsert_text'+i) ) { /* 주관식*/
+									var insSpan = document.getElementById('ansInsert_span'+i);
+									var insText = document.getElementById('ansInsert_text'+i);
+						
+									insSpan.style.display = "none";
+									insText.value = "";
+									insText.style.display = "";
+								}
+								}
+								
+								/* 답안지 정답 체크*/
+								for(var j=1; j<=4; j++) {
+									itemType = document.getElementById('ans_td'+i+j);
+									if(itemType != null) document.getElementById('ans_td'+i+j).style.backgroundImage = "";
+								}
+								
+								/* 응시기록 리셋*/
+								document.getElementById('ans_try'+i).value = "";
+							}
+						}
+						
+						function scoring_targetDiv(targetDiv, startNum, eachTotal, answerMode) {
+							var f = document.test_form;
+							var ans_try, ans_real, selectType, oxState;
+							var correctCount=0;
+							var mode = document.getElementById('current_mode').value;
+							var endNum = eval(startNum) + eval(eachTotal) - 1;
+						
+							for(var i=startNum; i <= endNum; i++) {
+								ans_try = document.getElementById('ans_try'+i).value;
+								ans_real = document.getElementById('ans_real'+i).value;
+						
+								/* 주관/객관 설정변수*/
+								if( document.getElementById('ansInsert_span'+i) ) selectType = 1;
+								else { selectType = 0; }
+						
+								oxState = get_OX_state(ans_try, ans_real, selectType);
+						
+								// 정답률
+								if( mode != "incorrect" && document.getElementById('rate'+i) ) { document.getElementById('rate'+i).style.display = "inline"; }
+						
+								/* 해설 뷰*/
+								if( document.getElementById('comment'+i) ) {
+									if(mode != "incorrect" || answerMode == "one") { document.getElementById('comment'+i).style.display = "block"; }
+								}
+						
+								/* 1단계 : 문제지 문항, 답안지 문항에 정답,오답 표시*/
+								if(oxState.substr(0,1) == "1") { /* 정답*/
+									correctCount++;
+						
+									/* 문제지 문제번호에 o 표시*/
+									document.getElementById('ques_ox'+i).style.backgroundImage = "url('<%=cp%>/resource/images/re_o.gif')";
+						
+									/* 답안지 문제번호에 o 표시*/
+									document.getElementById('ans_num'+i).style.backgroundImage = "url('<%=cp%>/resource/images/ans_O.gif')";
+									document.getElementById('ans_num'+i).style.backgroundRepeat = "no-repeat";
+								
+								}
+								else { /* 오답*/
+									if(mode != "incorrect" || answerMode == "one") { /* 틀린문제풀기에서 오답은 그냥둠*/
+										/* 문제지 문제번호에 x 표시*/
+										document.getElementById('ques_ox'+i).style.backgroundImage = "url('<%=cp%>/resource/images/re_x.gif')";
+											
+										/* 답안지 문제번호에 x 표시*/
+										document.getElementById('ans_num'+i).style.backgroundImage = "url('<%=cp%>/resource/images/x24.gif')";
+										document.getElementById('ans_num'+i).style.backgroundRepeat = "no-repeat";
+									}
+								}
+						
+								/* 2단계 : 답안지에서 정답 표시(복수정답 고려)*/
+								if( selectType == 0 ) { /* 객관식*/
+									if(mode == "incorrect" && oxState.substr(0,1) == "0" && answerMode == "") { /* 틀린문제풀기에서 오답이면 패스*/	}
+									else {			
+										if(oxState.length == 1) { /* 단수정답*/
+										document.getElementById('ans_td'+i+ans_real).style.backgroundImage = "url('<%=cp%>/resource/images/circle_blue22.gif')";
+										document.getElementById('ans_td'+i+ans_real).style.backgroundRepeat = "no-repeat";
+										}
+										else { /* 복수정답*/
+											for(var j=1; j <= oxState.length-1; j++) { /* 1, 0 자리 고려*/
+												ans_index = oxState.substr(j,1);
+												document.getElementById('ans_td'+i+ans_index).style.backgroundImage = "url('<%=cp%>/resource/images/circle_blue22.gif')";
+												document.getElementById('ans_td'+i+ans_index).style.backgroundRepeat = "no-repeat";
+											}
+										}
+									}
+								}
+								else if( document.getElementById('ansInsert_span'+i) ) { /* 주관식*/
+								var insSpan = document.getElementById('ansInsert_span'+i);
+									var insText = document.getElementById('ansInsert_text'+i);
+						
+									insSpan.innerHTML = "<span style='color:blue; font-weight:bold'>"+ ans_real + "</span>/" + ans_try;
+						
+									if(mode == "incorrect" && oxState.substr(0,1) == "0") {
+										insSpan.style.display = "none";
+									insText.style.display = "";
+									}
+									else { /* 정답이면 ans_try에 값 세팅*/
+										insSpan.style.display = "";
+										insText.value = ans_try;
+										insText.style.display = "none";
+									}
+								}
+						
+								/* 3단계 : 문제지 답항표시(복수정답 고려), 답안지에서 시도답항 표시*/
+								if(selectType == 0) {
+									if(mode == "incorrect" && oxState.substr(0,1) == "0" && answerMode == "") { /* 틀린문제풀기에서 오답은 그냥둠*/	}
+									else {
+										/* 문제지 표시*/
+										if(oxState.length == 1) { /* 단수정답*/
+											if(oxState == "1") { /* 정답 */
+												document.getElementById('quesitem'+i+ans_real).style.backgroundImage = "url('<%=cp%>/resource/images/ov38.gif')";
+												document.getElementById('quesitem'+i+ans_real).style.backgroundRepeat = "no-repeat";
+											}
+											else { /* 오답*/
+												/* 정답 단독표시*/
+												document.getElementById('quesitem'+i+ans_real).style.backgroundImage = "url('<%=cp%>/resource/images/o3524.gif')";
+												document.getElementById('quesitem'+i+ans_real).style.backgroundRepeat = "no-repeat";
+												if(ans_try > 0) { /* 시도는 했는데 오답*/
+												document.getElementById('quesitem'+i+ans_try).style.backgroundImage = "url('<%=cp%>/resource/images/red_v38.gif')";
+													document.getElementById('quesitem'+i+ans_try).style.backgroundRepeat = "no-repeat";
+												}
+											}
+										}
+										else { /* 복수정답*/
+											var circleType;
+									
+											for(var j=1; j <= oxState.length-1; j++) { /* 1, 0 자리 고려*/
+												ans_index = oxState.substr(j,1);
+						
+												if(ans_try > 0 && ans_try == ans_index) circleType = "ov38"; /* 둥근원+체크표시*/
+												else { circleType = "o3524"; }
+						
+												document.getElementById('quesitem'+i+ans_index).style.backgroundImage = "url('<%=cp%>/resource/images/"+ circleType +".gif')";
+												document.getElementById('quesitem'+i+ans_index).style.backgroundRepeat = "no-repeat";
+											}
+										}
+										/* 답안지 시도문항 표시*/
+										if(ans_try > 0) document.getElementById('answer'+i+ans_try).src = "<%=cp%>/resource/images/num"+ ans_try + "_gray.gif";
+									}
+								}
+							}
+							/* 결과 표시*/
+							var resultDisplay = document.getElementById('resultDisplay'+targetDiv);
+							if(answerMode != "one") { resultDisplay.innerHTML = correctCount + " / " + eachTotal; }
+						}
+						
+						function get_OX_state(ans_try, ans_real, selectType) { /* selectType 주관식 여부.*/
+							ans_try = spaceOut_qpass(ans_try);
+							ans_real = spaceOut_qpass(ans_real);
+						
+							if(ans_try == ans_real) return "1"; /* 주관/객관 공용*/
+								if(selectType == 0) { /* 객관식*/
+									if(ans_real.length == 1) { return "0"; } /* 답안과 정답이 다른데, 단수정답이면 오답*/
+										else { /* 다수정답인 경우*/
+											if( ans_try !='' && ans_real.indexOf(ans_try) != -1) /* 시도를 하고, 정답이 들어있으면 정답열을 리턴*/
+												return '1' + all_answer_num(ans_real);
+											else
+												return '0' + all_answer_num(ans_real);
+										}
+									}
+									else { /* 주관식*/
+										return compare_strings(ans_real, ans_try);
+								}
+						}
+						
+						function compare_strings(ans_real, ans_try) {
+							if(ans_try == "") return "0";
+							ans_try = spaceOut_qpass(ans_try);
+						
+							var realList = ans_real.split(",");
+							for(var i=0; i < realList.length; i++) {
+								if(spaceOut_qpass(realList[i]) == ans_try) return "1";
+							}
+							return "0";
+						}
+						
+						function all_answer_num(str) {
+							var new_str = "";
+							var ch = '';
+							for(var i=0; i < str.length; i++) {
+								ch = str.substr(i,1);
+								if(ch != ',' && ch !='/' && ch != '') new_str = new_str + '' + ch;
+							}
+							return new_str;
+						}
+						
+						function spaceOut_qpass(str) {
+							var newStr="", ch="";
+							for(var i=0; i < str.length; i++) {
+								ch = str.substr(i,1);
+								if(ch != " ") newStr = newStr + "" + ch;
+							}
+							return newStr;
+						}
+						
+						function get_ansReal(question_num) {
+							var targetDiv = document.getElementById('current_i').value;
+						}
+						
+						function answer_check(question_num, ans_num) {
+							var currentMode = document.getElementById('current_mode').value;
+							var incorrectRight="";
+							if(currentMode == "incorrect") {
+								var ans_try = document.getElementById('ans_trySame'+question_num).value;
+								var ans_real = document.getElementById('ans_real'+question_num).value;
+								incorrectRight = get_OX_state(ans_try, ans_real);
+							}
+							if(currentMode == "check" || currentMode == "restudyCheck" || currentMode == "incorrectCheck") {
+								alert("지금은 문제별 응시결과 확인 중 입니다.\n\n다시풀기는 첫화면으로 가셔서 '다시풀어보기' \n\n또는 '틀린문제 다시풀기'를 선택하세요.");
+								return;
+							}
+							else if(incorrectRight.substr(0,1)=="1") {
+								alert("지금은 틀린 문제만 다시 풀고 계십니다. \n\n이미 맞힌 문제는 넘어가세요.");
+								return;
+							}
+							var ans = document.getElementById('answer'+question_num+ans_num);
+							var ques = document.getElementById('quesitem'+question_num+ans_num);
+						
+							/* 먼저 기존 칠한게 있으면 지우기*/
+							for(i=1; i <= 4 ; i++) {
+								document.getElementById('answer'+question_num+i).src = "<%=cp%>/resource/images/num"+ i + ".gif";
+								document.getElementById('quesitem'+question_num+i).style.backgroundImage = "";
+							}
+						
+							var ansIndex = question_num - document.getElementById('current_startNum').value;
+							move2question(ansIndex);
+							ques.style.backgroundImage = "url('<%=cp%>/resource/images/red_v38.gif')";
+							ques.style.backgroundRepeat = "no-repeat";
+							ans.src = "<%=cp%>/resource/images/num"+ ans_num + "_gray.gif";
+						
+							/* 폼에 값 저장하기*/
+							document.getElementById('ans_try'+question_num).value = ans_num;
+						}
+						
+						
+						function previous_div(courseName, divIndex, fiveIndex) {
+							if(fiveIndex == 0) {
+								alert("해당 문제가 첫번째 문제입니다.");
+								return;
+							}
+							nextFive = eval(fiveIndex) - eval(1);
+							replace_div(divIndex, nextFive); 
+						}
+						
+						function next_div(courseName, divIndex, fiveIndex) {
+							if(fiveIndex == max_five[divIndex]-10) {
+								alert("마지막 문제입니다.");
+								return;
+							}
+							nextFive = eval(fiveIndex) + eval(1);
+							replace_div(divIndex, nextFive);
+						}
+						
+						
+						function move2question(ansIndex) {
+							var divNum = document.getElementById('current_i').value;
+							var fiveNum = Math.floor(ansIndex / 1);
+							replace_div(divNum, fiveNum);
+						}
+						
+						
+						function get_notTriedNum(startNum, endNum) {
+							var ans_try;
+							for(var i=startNum; i <= endNum; i++) {
+								ans_try = document.getElementById('ans_try'+i).value;
+								if(ans_try == "") return i;
+							}
+							return -1;
+						}
+						
+						function finish_exam(divIndex) {
+							/* 안푼 문제가 있는지 체크*/
+							var startNum = document.getElementById('current_startNum').value;
+							var eachTotal = (document.getElementById('current_questionTotal').value) - 10;
+							var endNum = eval(startNum) + eval( eachTotal ) - 1;
+						
+							/* 주관식 문제 이전*/ 
+							for(var i=startNum; i <= endNum; i++) {
+								if( document.getElementById('ansInsert_text'+i) ) {
+									document.getElementById('ans_try'+i).value = document.getElementById('ansInsert_text'+i).value;
+								}
+							}
+						
+							var notTriedNum = get_notTriedNum(startNum, endNum);
+							if(notTriedNum != -1) {
+								var ansIndex = notTriedNum - document.getElementById('current_startNum').value;
+						
+								if( !confirm("아직 풀지 않은 문제가 있습니다.\n\n취소를 누르시면 풀지 않은 문제로,\n\n이대로 포기하시려면 [확인]을 눌러주세요") ) {
+									move2question(ansIndex); // 취소했을 때 풀지않은 인덱스로 돌아감
+									return;
+								}
+							}
+						
+							var f = document.test_form;
+							
+							nextSameIndex = divIndex + 1;
+							if(f.mode.value == 'first') {
+								var tryList="";
+						
+								for(var i=startNum; i <= endNum; i++) {
+									ans_try = document.getElementById('ans_try'+i).value;
+									if(ans_try != "") {
+										tryList = tryList + ans_try + ",";
+									}
+								}
+								
+								if(tryList == "") {
+									alert("시험을 포기합니다.\n다음에는 끝까지 풀어주세요");
+									window.close();
+								} else {
+									f.ansTryList.value = tryList;
+									f.targetDiv.value = document.getElementById('current_i').value;
+									
+									alert("수고하셨습니다!!!");
+									
+									goSubmit();
+								}
+							}
+							else if(f.mode.value == 'restudy') start_test(nextSameIndex, "restudyCheck", startNum, eachTotal);
+							else if(f.mode.value == 'incorrect') start_test(nextSameIndex, "incorrectCheck", startNum, eachTotal);
+						}
+						
+						function goSubmit() {
+							window.opener.name="parentPage";
+							document.test_form.target = "parentPage";
+							document.test_form.action = "<%=cp%>/mockTest/mockExam";
+							document.test_form.submit();
+							self.close();
+						}
+						
+						
+						function resultCheck(i, j) {
+							var baseNum = "1" - 1;
+							//alert(i + " and "+ j + " and " + baseNum);
+						
+							var targetDiv = i;
+							var startNum = eval(baseNum) + eval(j) + eval(1);
+							
+							scoring_targetDiv(targetDiv, startNum, 1, "one");
+							document.getElementById('btnResult'+i+j).style.display = "none";
+							document.getElementById('btnReverse'+i+j).style.display = "inline";
+						}
+						
+						function checkReverse(i, j) {
+							var targetDiv = i;
+							var baseNum = "1" - 1;
+							var startNum = eval(baseNum) + eval(j) + eval(1);
+							
+							
+							unscoring_targetDiv(targetDiv, startNum, 1);
+							document.getElementById('btnReverse'+i+j).style.display = "none";
+							document.getElementById('btnResult'+i+j).style.display = "inline";
+						}
+						
+						start_test(1, "first", 1, 20, 0);
+					</script>
+				</div><!--PC 시험 끝.-->
+			</div><!--PC 컨테이너 여백 끝.-->
+		</div><!--PC 컨테이너 끝.-->
+	</div><!--Mobile, PC 페이지 컨테이너 가운데 정렬 끝.-->
 </body></html>

@@ -182,7 +182,7 @@ $(function(){
 	        alert("응시일을 지정하세요. ");
 	        return;
 	    }
-
+	    
 	    $.ajax({
 	      type:"post"
 	      ,url:url
@@ -269,14 +269,16 @@ $(function(){
      }); 
 });	 
 	function popupLink(popHeight,popWidth){ 
-	var winHeight = document.body.clientHeight;   // 현재창의 높이
-	var winWidth = document.body.clientWidth;   // 현재창의 너비
-	var winX = window.screenX || window.screenLeft || 0;   // 현재창의 x좌표
-	var winY = window.screenY || window.screenTop || 0;   // 현재창의 y좌표
-	
-	var popX = winX + (winWidth - popWidth)/2;
-	var popY = winY + (winHeight - popHeight)/2;
-	window.open("<%=cp%>/mockTest/mockExam", "popup",
+		var winHeight = document.body.clientHeight;   // 현재창의 높이
+		var winWidth = document.body.clientWidth;   // 현재창의 너비
+		var winX = window.screenX || window.screenLeft || 0;   // 현재창의 x좌표
+		var winY = window.screenY || window.screenTop || 0;   // 현재창의 y좌표
+		
+		var popX = winX + (winWidth - popWidth)/2;
+		var popY = winY + (winHeight - popHeight)/2;
+<%-- 	window.open("<%=cp%>/mockTest/examFiles", "popup",
+			"width="+ popWidth + "px,height=" + popHeight + "px,top=" + popY+ ",left=" + popX); --%>
+		window.open("<%=cp%>/mockTest/examFiles", "popup",
 			"width="+ popWidth + "px,height=" + popHeight + "px,top=" + popY+ ",left=" + popX);
 	}
 </script>
@@ -449,8 +451,11 @@ function updateTime() {
 		<!-- 응시할 시험 리스트 끝 ----------------------------------------------------------------------->
 	</form>		
 	
+		
+	
 		<!-- 문제  / 응시내역 탭 -->
 			<div style="margin-bottom: 5px;">
+				<span>아아 ${result }점</span>
 				<span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">문제은행</span>
 			</div>
 			
