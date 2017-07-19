@@ -218,7 +218,7 @@ line-height: normal;
 			<div style="background: #eee; width: 100%; padding: 10px;line-height: 25px; margin-top: 70px; margin-bottom: -60px;" >
 				<div class="row" >
 					<div class="col-md-12" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-pencil"></i>카테고리 :${dto.name }</span></div>
-				 	<div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-flag"></i>지역 :${dto.cityName }</span></div>
+				 	<div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-flag"></i>지역 :</span></div>
 				  	<div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-heart"></i>성별 :${dto.gender }</span></div>
 				</div>
 					
@@ -232,10 +232,8 @@ line-height: normal;
 						<li class="_likes_btn">
 							<div title="" id="countLikeStudyWhere"  style="height: 20px;">
 								<br/>
-							</div>
-								
-						</li>
-						
+							</div>	
+						</li>					
 					</ul>
 				
 						<input type="hidden" id="hiddenNum" value="${dto.num }">

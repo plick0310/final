@@ -17,12 +17,19 @@ public class Promote {
 	
 	private String studyName,gender;
 	private int recruit;
+	private int range;
 	
 	private long gap;
 	
 	
 	public long getGap() {
 		return gap;
+	}
+	public int getRange() {
+		return range;
+	}
+	public void setRange(int range) {
+		this.range = range;
 	}
 	public void setGap(long gap) {
 		this.gap = gap;

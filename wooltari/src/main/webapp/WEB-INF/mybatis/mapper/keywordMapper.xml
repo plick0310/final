@@ -7,7 +7,7 @@
 	<select id="study" resultType="com.wooltari.keyword.StudyInfo">
 		select * from(
 	 		select rownum rnum,tb.* from(
-		  		select s_num, userId,studyName, study_Info, created, gender,recruit, range,imageFileName
+		  		select s_num, userId,studyName, study_Info, to_char(created,'YYYY-MM-DD')created, gender,recruit, range,imageFileName
 		   		from study
 		<![CDATA[
 		   			where range<2 and (DBMS_LOB.INSTR(studyname,'${keyword}') > 0 or DBMS_LOB.INSTR(study_info,'${keyword}') > 0 )
@@ -28,7 +28,7 @@
 	<select id="allStudy" resultType="com.wooltari.keyword.StudyInfo">
 		select * from(
 	 		select rownum rnum,tb.* from(
-		  		select s_num, userId,studyName, study_Info, created, gender,recruit, range ,imageFileName
+		  		select s_num, userId,studyName, study_Info, to_char(created,'YYYY-MM-DD')created, gender,recruit, range ,imageFileName
 		   		from study
 		<![CDATA[
 		   			where range<2 and (DBMS_LOB.INSTR(studyname,'${keyword}') > 0 or DBMS_LOB.INSTR(study_info,'${keyword}') > 0 )
@@ -38,6 +38,141 @@
 		)where rnum >=#{start}
 		]]>
 	</select>
+	
+	<!-- 홍보 3개만출력  -->
+	<select id="PromoteList" resultType="com.wooltari.keyword.Promote">
+	select * from(
+	 		select rownum rnum,tb.* from(
+				select p.num,p.subject,p.content,p.hitcount,p.imagefilename,to_char(p.created,'YYYY-MM-DD')created,p.s_num,p.userid,range
+				from promotelist p
+				join study s on p.s_num=s.s_num			
+	<![CDATA[
+				 where range<2 and (DBMS_LOB.INSTR(p.subject,'${keyword}') > 0 or DBMS_LOB.INSTR(p.content,'${keyword}') > 0 )
+				order by created
+			 )tb where rownum <=#{end}
+	)where rnum >=#{start}
+	]]>
+			
+	</select>
+	
+	<!-- 홍보 총갯수  -->
+	<select id="PromoteCount" resultType="Integer">
+		select nvl(count(*),0)
+		from promotelist where DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0
+	</select>
+	
+	<!-- 홍보 전체  -->
+	<select id="allPromoteList" resultType="com.wooltari.keyword.Promote">
+		select * from(
+	 		select rownum rnum,tb.* from(
+				select p.num,p.subject,p.content,p.hitcount,p.imagefilename,to_char(p.created,'YYYY-MM-DD')created,p.s_num,p.userid,range
+				from promotelist p
+				join study s on p.s_num=s.s_num			
+	<![CDATA[
+				 where range<2 and (DBMS_LOB.INSTR(p.subject,'${keyword}') > 0 or DBMS_LOB.INSTR(p.content,'${keyword}') > 0 )
+				order by created
+			 )tb where rownum <=#{end}
+	)where rnum >=#{start}
+	]]>
+	
+	</select>
+	
+	<!-- 다운로드게시판 3개만출력  -->
+	<select id="DownloadBoardList">
+	
+	</select>
+	
+	<!-- 다운로드게시판 총갯수  -->
+	<select id="DownloadBoardCount" resultType="Integer">
+	
+	</select>
+	
+	<!-- 다운로드게시판 전체  -->
+	<select id="allDownloadBoardList">
+	
+	</select>
+	
+	<!-- 모의테스트 3개만출력  -->
+	<select id="MockTestList">
+	
+	</select>
+	
+	<!-- 모의테스트 총갯수  -->
+	<select id="MockTestCount" resultType="Integer">
+	
+	</select>
+	
+	<!-- 모의테스트 전체  -->
+	<select id="allMockTestList">
+	
+	</select>
+	
+	<!-- 리뷰 3개만출력  -->
+	<select id="ReviewList" resultType="com.wooltari.keyword.Review">
+	select * from(
+	 	select rownum rnum,tb.* from(	
+			select r.num,r.subject,r.content,r.hitcount,r.imagefilename,to_char(r.created,'YYYY-MM-DD')created,r.s_num,r.userid,range
+					from reviewlist r
+					join study s on r.s_num=s.s_num
+	<![CDATA[
+				 where range<2 and (DBMS_LOB.INSTR(r.subject,'${keyword}') > 0 or DBMS_LOB.INSTR(r.content,'${keyword}') > 0 )
+				order by created
+			 )tb where rownum <=#{end}
+	)where rnum >=#{start}
+	]]>
+	</select>
+	
+	<!-- 리뷰 총갯수  -->
+	<select id="ReviewCount" resultType="Integer">
+		select nvl(count(*),0)
+		from reviewlist where DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0    
+	</select>
+	
+	<!-- 리뷰 전체  -->
+	<select id="allReviewList" resultType="com.wooltari.keyword.Review">
+	select * from(
+	 	select rownum rnum,tb.* from(	
+			select r.num,r.subject,r.content,r.hitcount,r.imagefilename,to_char(r.created,'YYYY-MM-DD')created,r.s_num,r.userid,range
+					from reviewlist r
+					join study s on r.s_num=s.s_num
+	<![CDATA[
+				 where range<2 and (DBMS_LOB.INSTR(r.subject,'${keyword}') > 0 or DBMS_LOB.INSTR(r.content,'${keyword}') > 0 )
+				order by created
+			 )tb where rownum <=#{end}
+	)where rnum >=#{start}
+	]]>
+	</select>
+	
+	<!-- 스터디마켓 3개만출력  -->
+	<select id="StudyMarketBoardList">
+	
+	</select>
+	
+	<!-- 스터디마켓 총갯수  -->
+	<select id="StudyMarketBoardCount" resultType="Integer">
+	
+	</select>
+	
+	<!-- 스터디마켓 전체  -->
+	<select id="allStudyMarketBoardList">
+	
+	</select>
+	
+	<!-- 어디서하지 3개만출력  -->
+	<select id="StudyWhereList">
+	
+	</select>
+	
+	<!-- 어디서하지 총갯수  -->
+	<select id="StudyWhereCount">
+	
+	</select>
+	
+	<!-- 어디서하지 전체  -->
+	<select id="allStudyWhereList">
+	
+	</select>
+	
 	
 	
 </mapper>
