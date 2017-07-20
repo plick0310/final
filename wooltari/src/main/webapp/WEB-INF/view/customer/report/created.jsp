@@ -5,6 +5,7 @@
 <%
 	String cp = request.getContextPath();
 %>
+<!-- 신고 건의 -->
 <style>
 input {
 	height: 30px;
@@ -28,8 +29,84 @@ border: 1px solid #EAEAEA;
 
 }
 </style>
+<script type="text/javascript" src="<%=cp%>/resource/se/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript">
+function check(){
+	var f=document.write_form;
+	
+	var str=f.subject.value;
+	if(!str){
+		f.subject.focus();
+		return false;
+	}
+	
+	str = f.content.value;
+	if(!str){
+		f.content.focus();
+		return false;
+	}
+	
+	var mode="${mode}";
+	if(mode=="created")
+		f.action="<%=cp%>/report/created";
+	else if(mode=="update")
+		f.action="<%=cp%>/report/update";
+	
+	
+	return true;
+}
 
-<form name="write_form" id="write_form" enctype="multipart/form-data" method="post" style="margin: 60px auto; width: 900px;">
+</script>
+<script type="text/javascript">
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "content",
+	sSkinURI: "<%=cp%>/resource/se/SmartEditor2Skin.html",	
+	htParams : {bUseToolbar : true,
+		fOnBeforeUnload : function(){
+			// alert("아싸!");
+		}
+	}, //boolean
+	fOnAppLoad : function(){
+		//예제 코드
+		//oEditors.getById["content"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+	},
+	fCreator: "createSEditor2"
+});
+
+function pasteHTML() {
+	var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+	oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
+}
+
+function showHTML() {
+	var sHTML = oEditors.getById["content"].getIR();
+	alert(sHTML);
+}
+	
+function submitContents(elClickedObj) {
+	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+	
+	// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("content").value를 이용해서 처리하면 됩니다.
+	
+	try {
+		// elClickedObj.form.submit();
+		return check();
+	} catch(e) {}
+}
+
+function setDefaultFont() {
+	var sDefaultFont = '돋움';
+	var nFontSize = 24;
+	oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
+}
+</script>
+
+
+<form name="write_form" id="write_form" onsubmit="return submitContents(this);"
+enctype="multipart/form-data" method="post" style="margin: 60px auto; width: 900px;">
+
 <div  style="height:50px; font-size: 20px;text-align: center; border-bottom: 1px solid #eee;">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
@@ -46,53 +123,45 @@ border: 1px solid #EAEAEA;
 			</tr>
 			<tr>
 				<th>카테고리</th>
-				<td style=""><input type="checkbox" value="ww">
-					<input type="checkbox" value="ww">
-					<input type="checkbox" value="ww">
+				<td style="">
+				<select name="category">
+					<option value="accuse">신고</option>
+					<option value="suggest">건의</option>
+				</select>
 				</td>
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="writer" maxlength="8"
-					style="width: 200px;" /></td>
+				<td>${sessionScope.member.userId}</td>
 			</tr>
-			<tr>
-				<th>패스워드</th>
-				<td><input type="password" name="password" maxlength="20"
-					style="width: 200px;"/><span style="font-size: 13px; font-weight:200;">&nbsp;&nbsp;글 삭제시 필요합니다.</span></td>
-			</tr>
-
-			<tr>
-				<th>E-MAIL</th>
-				<td><input type="text" name="email" style="width: 300px;" /></td>
-			</tr>
-
-			<tr>
-				<td colspan="2"><textarea name="ment" id="ment" 
-						style="width: 100%; height: 300px;" ></textarea></td>
-			</tr>
-
-			<tr>
-				<th>첨부파일</th>
-				<td><input type="file" name="file1" id="file1" style="border: none;">
-				</td>
-			</tr>
-
-			<tr>
-				<th>파일이름</th>
-				<td><input type="checkbox"
-					name="file1_del" id="file1_del"><label for="file1_del"></label>
-				</td>
-			</tr>
-
-		
-
-
+             <tr>
+                 <td class="td1" colspan="4" style="padding-bottom: 0px;">내용</td>
+             </tr>			
+             <tr>
+                 <td colspan="4" class="td4">
+                 	<textarea id="content" name="content" class="form-control" rows="15" style="max-width: 99%;">${dto.content}</textarea>
+                 </td>
+             </tr>
 		</tbody>
 	</table>
 	
 	<div class="read_btnArea">
-		<button class="clickbtn">등록하기</button>
-		<button class="clickbtn">돌아가기</button>
+		<button class="clickbtn">${mode=='update'?'수정완료':'등록하기'}</button>
+		<button type="reset" class="clickbtn">다시입력</button>
+		<button class="clickbtn">${mode=='update'?'수정취소':'등록취소'}</button>
+		
+		<%-- 
+		<c:if test="${mode=='update'}">
+			<input type="hidden" name="repNum" value="${dto.repNum}">
+			<input type="hidden" name="pageNo" value="${pageNo}">
+		</c:if>
+		<c:if test="${mode=='reply'}">
+			<input type="hidden" name="pageNo" value="${pageNo}">
+			<input type="hidden" name="groupNum" value="${dto.groupNum}">
+			<input type="hidden" name="orderNo" value="${dto.orderNo}">
+			<input type="hidden" name="depth" value="${dto.depth}">
+			<input type="hidden" name="parent" value="${dto.repNum}">
+		</c:if>
+		 --%>
 	</div>
 </form>
