@@ -97,7 +97,7 @@ display: block;
 .reply-list li .legend-info {
 float: left;
 margin-left: 17px;
-width: 500px;
+
 }
 
 .reply-list strong {
@@ -230,7 +230,7 @@ function listPage2(replyCount, num) {
 	</div>
 	<div style="clear: both; padding-top: 10px; float: left; width: 620px;">
 		<textarea id="rcontent_${num}" name ="content"  rows="1"  
-			style="resize:none; display: block; width: 95%;padding: 6px 12px;border:none; box-sizing: border-box;height: 38px;"></textarea>
+			style="resize:none; display: block; width: 57%;padding: 6px 12px;border:none; box-sizing: border-box;height: 38px;"></textarea>
 	</div>
 	<div style="text-align: right; padding-top: 10px;  ">
 		<button type="button" class="" onclick="sendReply(${num});"

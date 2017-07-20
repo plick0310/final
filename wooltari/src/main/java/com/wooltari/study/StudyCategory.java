@@ -2,8 +2,16 @@ package com.wooltari.study;
 
 public class StudyCategory {
 	private int categoryNum;
-	private String subject;
+	private String subject , p_subject;
 	private int parent;
+	
+	
+	public String getP_subject() {
+		return p_subject;
+	}
+	public void setP_subject(String p_subject) {
+		this.p_subject = p_subject;
+	}
 	public int getCategoryNum() {
 		return categoryNum;
 	}
@@ -22,7 +30,5 @@ public class StudyCategory {
 	public void setParent(int parent) {
 		this.parent = parent;
 	}
-	
-	
 	
 }

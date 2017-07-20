@@ -31,8 +31,7 @@ public class StudyController {
 	@Autowired
 	private TeamService tservice;
 	
-	
-	
+/* 스터디 생성  */	
 	@RequestMapping(value="/study/created")
 	public String StudyCratedForm(Model model) throws Exception{
 		
@@ -41,18 +40,45 @@ public class StudyController {
 		
 		model.addAttribute("listBigCategory", listBigCategory);
 		model.addAttribute("listBigCity",listBigCity);
+		model.addAttribute("mode", "created");
+		
 		return "/study/manage/create";
 	}
+	  
 	
+	@RequestMapping(value="/study/getCategory", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ThemeList(@RequestParam int parent) throws Exception{
+		
+		List<StudyCategory> listSmallCategory = new ArrayList<>();
+		listSmallCategory = service.listSmallCategory(parent);
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("listSmallCategory", listSmallCategory);
 	
+		return model;
+	}
+	 
+	@RequestMapping(value="/study/getCity", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> CityList(@RequestParam int parent) throws Exception{
+		
+		List<StudyCity> listSmallCity = new ArrayList<>();
+		listSmallCity = service.listSmallCity(parent);
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("listSmallCity", listSmallCity);
+	
+		return model;
+	}     
+	  
 	@RequestMapping(value="/study/created", method=RequestMethod.POST)
 	public String StudyCratedSubmit(
 			StudyInfo dto,  Model model ,HttpSession session) throws Exception{
-		  
-		try {
+		  try {
 			
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
-	
+		
 		String root=session.getServletContext().getRealPath("/");
 		String path=root+File.separator+"uploads"+File.separator+"member"+
 				File.separator+"userImg";
@@ -73,49 +99,98 @@ public class StudyController {
 		
 		
 		} catch (Exception e) {
-			System.out.println("실패");
-			  
 			//study 테이블 삭제........ 
 			service.deleteStudy(dto.getS_num());
-			model.addAttribute("messaage","스터디 생성 실패");
+			model.addAttribute("message","스터디 생성 실패");
 			
 			return "main/msg";
-		} 
-		
-		//model.addAttribute("dto",dto);
-		
+		}  
 		
 		return "redirect:/study/myStudy/home/"+dto.getS_num();
 	}
+	 
+	
+	
+/* 스터디 수정  */
+	@RequestMapping(value="/study/update")
+	public String StudyUpdateForm(Model model ,@RequestParam long s_num ,HttpSession session) throws Exception{
+	
+		try {
+			
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		StudyInfo dto = service.readMyStudy(s_num);
+		
+		
+		//leader만 수정권한
+			if(! dto.getUserId().equals(info.getUserId()) ){
+				model.addAttribute("message","리더만 접근 가능합니다.");
+			
+				return "main/msg";
+			}
+		
+		
+		List<StudyCategory> listBigCategory=service.listBigCategory();
+		//List<StudyCity> listBigCity = service.listBigCity();
+	
+		
+		model.addAttribute("listBigCategory", listBigCategory);
+		//model.addAttribute("listBigCity",listBigCity);
+		
+		model.addAttribute("s_num",s_num);
+		model.addAttribute("vdto", dto);
+		model.addAttribute("mode", "update");
+		
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "/study/manage/create";
+	}
+	      
+	@RequestMapping(value="/{s_num}/study/update", method=RequestMethod.POST)
+	public String StudyUpdateSubmit(StudyInfo vdto,@PathVariable long s_num, Model model ,HttpSession session) throws Exception{
+		try {     
+			
+			
+			String root=session.getServletContext().getRealPath("/");
+			String path=root+File.separator+"uploads"+File.separator+"member"+
+					File.separator+"userImg";
+			
+			service.updateStudy(vdto, path);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 
+		  
+		return "redirect:/study/myStudy/home/"+s_num;
+	}
+	
+	@RequestMapping(value="/study/{s_num}/getMyCategory", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getMyCategory(@PathVariable long s_num) throws Exception{
+	
+		List<StudyCategory> categoryList =new ArrayList<>();
+		categoryList = service.readMyCategory(s_num);
+
+		Map<String, Object> model = new HashMap<>();
+		model.put("categoryList",categoryList);
+		return model;
+	}      
+	   
+	@RequestMapping(value="/study/{s_num}/getMyLocal", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getMyLocal(@PathVariable long s_num) throws Exception{
+	
+		List<StudyInfo> localList= service.readMyLocal(s_num);
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("localList",localList);
+		
+		return model;
+	}
 	
 
-	@RequestMapping(value="/study/getCategory", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> ThemeList(@RequestParam int parent) throws Exception{
-		
-		List<StudyCategory> listSmallCategory = new ArrayList<>();
-		listSmallCategory = service.listSmallCategory(parent);
-		
-		Map<String, Object> model = new HashMap<>();
-		model.put("listSmallCategory", listSmallCategory);
-	
-		return model;
-	}
-	
-	@RequestMapping(value="/study/getCity", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> CityList(@RequestParam int parent) throws Exception{
-		
-		List<StudyCity> listSmallCity = new ArrayList<>();
-		listSmallCity = service.listSmallCity(parent);
-		
-		Map<String, Object> model = new HashMap<>();
-		model.put("listSmallCity", listSmallCity);
-	
-		return model;
-	}
-	
-	
+/*  스터디 리스트   */
 	@RequestMapping(value="/study/mylist")
 	   public String list(Model model , HttpSession session ,HttpServletRequest req){
 	     
@@ -126,7 +201,7 @@ public class StudyController {
 		model.addAttribute("Mylist",list);	
 		model.addAttribute("Mylist2",list2);	
 		
-		  
+		      
 	    return ".study.mystudylist.mylist";
 	}
 	
@@ -135,6 +210,8 @@ public class StudyController {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		StudyInfo dto = service.readMyStudy(s_num);
 		List<Team> teamList = tservice.listTeam(s_num);
+		List<Team> waitList = tservice.listWait(s_num);
+		
 		
 		Iterator<Team> it = teamList.iterator();
         while(it.hasNext()){
@@ -146,6 +223,7 @@ public class StudyController {
         	model.addAttribute("state", "false");
         }
 		
+        model.addAttribute("waitList",waitList);
 		model.addAttribute("dto",dto);
 		model.addAttribute("teamList", teamList);
 		return ".study.myStudy.home";

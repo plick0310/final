@@ -281,23 +281,7 @@ background: rgba(26,188,156,0.1);
 
 </style>
  
-<script>
-$(function() {
-    $("input").not($(":button")).keypress(
-          function(evt) {
-             if (evt.keyCode == 13) {
-                var fields = $(this).parents('form:eq(0),body').find(
-                      'button,input,textarea,select');
-                var index = fields.index(this);
-                if (index > -1 && (index + 1) < fields.length) {
-                   fields.eq(index + 1).focus();
-                }
-                return false;
-             }
-          });
- });
- 
- 
+<script> 
 function insertStudy(){
     var f=document.studyForm;
     
@@ -309,11 +293,15 @@ function insertStudy(){
   	  alert("스터디명을 입력해주세요");
   	  return false;
     }
- 
+    var mode="${mode}";
+	if(mode=="created")
     f.action="<%=cp%>/study/created";
+    else if(mode="update")
+    f.action="<%=cp%>/${s_num}/study/update";
+   
     f.submit();
  }
- 
+
 </script>
 
 </head>
@@ -331,7 +319,7 @@ function insertStudy(){
                   <div class="question-title">스터디 명을 입력해 주세요</div>
                   <p class="help-block">40자 이내로 입력해 주세요.</p>
                   <div class="question-answer">
-                     <input id="studyName" name="studyName" type="text" class="form-control">
+                     <input id="studyName" name="studyName" type="text" class="form-control" value="${vdto.studyName }">
 
 
                   </div>
@@ -343,7 +331,7 @@ function insertStudy(){
                   <div class="question-title">스터디 한줄 소개를 입력해 주세요</div>
                   <p class="help-block">100자 이내로 입력해 주세요.</p>
                   <div class="question-answer">
-                     <textarea class="form-control"rows="6%" cols="80%" name="study_Info" id="study_Info" style="border-radius: 0; border: 1px solid #ccc; resize: none;" onchange=""></textarea>
+                     <textarea class="form-control"rows="6%" cols="80%" name="study_Info" id="study_Info" style="border-radius: 0; border: 1px solid #ccc; resize: none;" onchange="">${vdto.study_Info}</textarea>
                   </div>
                </div>
             </div>
@@ -353,12 +341,25 @@ function insertStudy(){
                   <div class="question-answer">
                      <div class="upload-label">
                         <div class="fileBox" >
-                        <img id="blah" src="#" alt="" style="width: 250px; height: 250px;"/>
+                     
+                        <c:if test="${mode=='created'}">
+                        <img id="blah" src="" alt="" style="width: 250px; height: 250px;"/>
                            <label id="blahbtn" for="uploadBtn"  class="btn btn-large uploadLabel " style="position: absolute; top: 94px; left: 0px;">사진올리기
                            <i class="glyphicon glyphicon-cloud-upload"></i></label>
                            <input type="file" name="upload" id="uploadBtn" class="uploadBtn tts" >
+                        </c:if>
+                        
+                       <c:if test="${mode=='update'}">
+                       <img id="blaha" src="<%=cp%>/uploads/member/userImg/${vdto.imageFileName}" alt="" style="width: 250px; height: 250px;"/>
+                           <label id="blahbtn" for="uploadBtn"  class="btn btn-large uploadLabel " style="position: absolute; top: 94px; left: 0px;">사진바꾸기
+                           </label>
+                           <input type="file" name="upload" id="uploadBtn" class="uploadBtn tts" >
+                       
+                        </c:if>
+                        
+                        
                         </div>
-
+			
 
 
                      </div>
@@ -380,11 +381,11 @@ function insertStudy(){
                   
                   <div class="question-answer">
                      <select name="recruit" style="    border-radius: 0;">
-                        <option value="2">2명</option>
-                        <option value="3">3명</option>
-                        <option value="4">4명</option>
-                        <option value="5">5명</option>
-                        <option value="6">6명 이상</option>
+                        <option value="2" ${vdto.recruit== 2 ? "selected='selected'" : ""}>2명</option>
+                        <option value="3" ${vdto.recruit== 3 ? "selected='selected'" : ""}>3명</option>
+                        <option value="4" ${vdto.recruit== 4 ? "selected='selected'" : ""}>4명</option>
+                        <option value="5" ${vdto.recruit== 5 ? "selected='selected'" : ""}>5명</option>
+                        <option value="6" ${vdto.recruit== 6 ? "selected='selected'" : ""}>6명 이상</option>
                      </select>
 
                   </div>
@@ -396,7 +397,8 @@ function insertStudy(){
                   <div class="question-answer">
                      <div class="row targetWrap" style="margin: 0;">
 
-
+			
+                      
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
                            <input type="checkbox" name="target" id="LTA00" value="초등학생" />
@@ -417,14 +419,14 @@ function insertStudy(){
 
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="checkbox" name="target" id="LTA03" value="대학생" />
+                           <input type="checkbox" name="target" id="LTA03" value="대학생"/>
                            <label class="targetProperty" for="LTA03">대학생</label>
                         </div>
 
 
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="checkbox" name="target" id="LTA04" value="직장인" />
+                           <input type="checkbox" name="target" id="LTA04" value="직장인"/>
                            <label class="targetProperty" for="LTA04">직장인</label>
                         </div>
                         
@@ -438,11 +440,10 @@ function insertStudy(){
                         
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="checkbox" name="target" id="LTA06" value="입시생" />
+                           <input type="checkbox" name="target" id="LTA06" value="입시생"/>
                            <label class="targetProperty" for="LTA06">입시생</label>
                         </div>
-                        
-
+                
                      </div>
 
                   </div>
@@ -456,19 +457,19 @@ function insertStudy(){
                      <div class="row targetWrap">
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="radio" name="gender" id="LTB00" value="무관" />
+                           <input type="radio" name="gender" id="LTB00" value="무관" ${vdto.gender=="무관" ? "checked='checked'" : ""} />
                            <label class="targetProperty" for="LTB00">무관</label>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="radio" name="gender" id="LTB01" value="여자" />
+                           <input type="radio" name="gender" id="LTB01" value="여자" ${vdto.gender== "여자" ? "checked='checked'" : ""} />
                            <label class="targetProperty" for="LTB01">여자</label>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 targetBox"
                            style="padding: 2px;">
-                           <input type="radio" name="gender" id="LTB02" value="남자" />
+                           <input type="radio" name="gender" id="LTB02" value="남자" ${vdto.gender== "남자" ? "checked='checked'" : ""} />
                            <label class="targetProperty" for="LTB02">남자</label>
                         	
                         	
@@ -497,8 +498,8 @@ function insertStudy(){
                            <option value="">:: 중분류 ::</option>
                         </select>
                         
-                        <div id="select_category">
-                       </div>
+                        <div id="select_category"></div>
+                        
                         </div>
 
                      </div>
@@ -662,60 +663,78 @@ function insertStudy(){
                <div class="section-verticalLine"></div>
 
 
-               <div class="section-question" >
-                  <div class="question-title" style="margin-bottom: 38px;">스터디 공개범위를 선택해 주세요</div>
-                  <div class="question-answer">
+					<div class="section-question">
+						<div class="question-title" style="margin-bottom: 38px;">스터디
+							공개범위를 선택해 주세요</div>
+						<div class="question-answer">
 
-                     <div class="row">
-                        <div class="col-sm-6 col-md-4">
-                           <div class="thumbnail" id="thum1">
-                              <label style="margin-left: 31px;">
-                              <input type="radio" name="range" value="0" id="range0"/>
-                                 <img class="icon"src="<%=cp%>/resource/img/group.png" alt="..."> 
-                              </label>
-                              <div class="caption">
-                                 <h4>전체공개</h4>
-                                 <p style="font-size: 13px;color: #858585;font-weight: lighter;">누구나 스터디를 검색해 찾을 수 있고,홈페이지 회원 모두 게시물을 볼 수 있습니다.</p>
-                              </div>
-                           </div>
+							<div class="row">
+								<div class="col-sm-6 col-md-4">
+									<label style="margin-left: 31px;">
+										<div class="thumbnail" id="thum1">
+											<input type="radio" name="range" id="range0" value="0"
+												${vdto.range == 0 ? "checked='checked'" : ""} /> <img
+												class="icon" src="<%=cp%>/resource/img/group.png" alt="...">
+											<div class="caption">
+												<h4>전체공개</h4>
+												<p
+													style="font-size: 13px; color: #858585; font-weight: lighter;">누구나
+													스터디를 검색해 찾을 수 있고,홈페이지 회원 모두 게시물을 볼 수 있습니다.</p>
+											</div>
+										</div>
+									</label>
+								</div>
 
-                        </div>
+								<div class="col-sm-6 col-md-4">
+									<label style="margin-left: 31px;">
+										<div class="thumbnail" id="thum2">
+											<input type="radio" name="range" id="range1" value="1"
+												${vdto.range== 1 ? "checked='checked'" : ""} /> <img
+												class="icon" src="<%=cp%>/resource/img/user.png" alt="...">
 
-                        <div class="col-sm-6 col-md-4">
-                           <div class="thumbnail" id="thum2">
-                              <label style="margin-left: 31px;">
-                              <input type="radio" name="range" value="1" id="range1"/>
-                                 <img class="icon" src="<%=cp%>/resource/img/user.png" alt="..." >
-                              </label>
-                              
-                              <div class="caption">
-                                 <h4>스터디명 공개</h4>
-                                 <p style="font-size: 13px;color: #858585;font-weight: lighter;">누구나 스터디를 검색해 찾을 수 있지만, 게시물은 멤버만 볼 수 있습니다.</p>
-                              </div>
-                           </div>
-                        </div>
+											<div class="caption">
+												<h4>스터디명 공개</h4>
+												<p
+													style="font-size: 13px; color: #858585; font-weight: lighter;">누구나
+													스터디를 검색해 찾을 수 있지만, 게시물은 멤버만 볼 수 있습니다.</p>
+											</div>
+										</div>
+									</label>
+								</div>
 
-                        <div class="col-sm-6 col-md-4">
-                           <div class="thumbnail" id="thum3">
-                              <label style="margin-left: 31px;"> <input type="radio" name="range" value="2" id="range2"/>
-							    <img class="icon" src="<%=cp%>/resource/img/padlock.png" alt="...">
-                              </label>
-                              <div class="caption">
-                                 <h4>비공개</h4>
-                                 <p style="font-size: 13px;color: #858585;font-weight: lighter;">스터디와 게시글이 공개되지 않습니다. 초대를 통해서만 가입할 수 있습니다.</p>
-                              </div>
-                           </div>
-                        </div>
-                        
-                     </div>
-                  </div>
-               </div>
-            
-            
-               <div class="section-question" >
-                  <input type="button" id="uploadBtn2" class="uploadBtn tts" onclick="insertStudy();" >
+								<div class="col-sm-6 col-md-4">
+									<label style="margin-left: 31px;">
+										<div class="thumbnail" id="thum3">
+											<input type="radio" name="range" id="range2" value="2"
+												${vdto.range== 2 ? "checked='checked'" : ""} /> <img
+												class="icon" src="<%=cp%>/resource/img/padlock.png"
+												alt="...">
+											<div class="caption">
+												<h4>비공개</h4>
+												<p
+													style="font-size: 13px; color: #858585; font-weight: lighter;">스터디와
+													게시글이 공개되지 않습니다. 초대를 통해서만 가입할 수 있습니다.</p>
+											</div>
+										</div>
+									</label>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+					<div class="section-question" >
+				<c:if test="${mode=='created'}">                 <input type="button" id="uploadBtn2" class="uploadBtn tts" onclick="insertStudy();" >
                   <label for="uploadBtn2" class="btn btn-large uploadLabel">스터디 만들기</label>
                   <input type="button" id="uploadBtn2" class="uploadBtn tts">
+                </c:if>
+ 				  <c:if test="${mode=='update'}">
+ 				  <input type="button" id="uploadBtn2" class="uploadBtn tts" onclick="insertStudy();" >
+                  <label for="uploadBtn2" class="btn btn-large uploadLabel">스터디 수정하기</label>
+                  <input type="button" id="uploadBtn2" class="uploadBtn tts">
+                </c:if>
+ 
                   <label for="uploadBtn2" class="btn btn-large uploadLabel" style="float: right;">취소</label>
                </div>
             
@@ -735,8 +754,8 @@ function insertStudy(){
 
    
 
-   <!-- Initialize Swiper -->
-   <script>
+<!-- ---------------swiper-------------------- -->
+<script>
       var swiper = new Swiper('.swiper-container', {
          pagination : '.swiper-pagination',
          paginationClickable : false,
@@ -748,26 +767,79 @@ function insertStudy(){
          prevButton : '.swiper-button-prev',
          spaceBetween : 0
       });
-   </script>
-
-   <script>
-
-	function deleteCategory(item) {//x버튼 클릭시 제거
+</script>
+<!-- ---------------스터디 생성 ------------------- -->
+<script> 
+ 
+   	//x버튼 클릭시 제거
+	function deleteCategory(item) {
 		var $item =$("#"+item);
-		$item.next().next().next().remove();
+	/* 	$item.next().next().next().remove();
 		$item.next().next().remove();
+		$item.next().remove();
+		$item.remove();
+		cnt--; */
+		
 		$item.next().remove();
 		$item.remove();
 		cnt--;
 	}
+   	
+   	function deleteCity(item) {
+   		var $item =$("#"+item);
+   		 	$item.next().next().next().remove();
+   			$item.next().next().remove();
+   			$item.next().remove();
+   			$item.remove();
+   			cnt--; 
+	}
 	   
-    
-    /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	$(function() {
+	
+	//엔터처리
+		$("input").not($(":button")).keypress(
+		          function(evt) {
+		             if (evt.keyCode == 13) {
+		                var fields = $(this).parents('form:eq(0),body').find(
+		                      'button,input,textarea,select');
+		                var index = fields.index(this);
+		                if (index > -1 && (index + 1) < fields.length) {
+		                   fields.eq(index + 1).focus();
+		                }
+		                return false;
+		             }
+		          });
+	
+	//이미지 미리보기
+        $(function() {
+            $('#blah').attr('src', '<%=cp%>/resource/images/white.png'); 
+            $("#uploadBtn").on('change', function(){
+                $("#uploadBtn").empty();
+
+                readURL(this);
+            });
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+            	$('#blahbtn').html("사진 바꾸기");
+				$('#blah').attr('src', e.target.result); 
+				$('#blaha').attr('src', e.target.result); 
+            
+                }
+
+              reader.readAsDataURL(input.files[0]);
+            }
+        }
 		
+        
+	  //범위 색바꾸기
 		 $("input:radio[name=range]").change(function () {
-			var $me =  $(this).parent().siblings();
+		
 			var radioValue = $(this).val();
 			if (radioValue == "0") {
 				$("#thum1").css("background","rgba(26,188,156,0.1)");
@@ -784,12 +856,112 @@ function insertStudy(){
 				$("#thum3").css("background","rgba(26,188,156,0.1)");
 			}
 		
-		});
+		});  
+		
+	
+	
+      	
+     //스터디대상3이하로 막기
+         $('input[type=checkbox]').click(function() {
+            var count = $('input:checkbox[name="target"]:checked').length;
+            if (count > 2) {
+            	 $("#help-target").html("2개 이하로 선택해 주세요").css("color","#f27979");
+               $(this).attr("checked", false);
+            }
+
+         });
+      });
+    
+    
+    
+	// 스터디 지역 
+		var vdx = null;
+		var vnt = 0;
+		var cnt = 0;
 		
 		
-		
-         var cnt=0, vnt=0;
-         $("#smallCategory").change(function() { //카테고리 선택하면 박스추가   
+    	function addStudyLocal() {
+            if(cnt>=3){
+                $("#help-city").html("3개이하만 선택 가능합니다.").css("color","#f27979");
+                return;
+            } 
+            var flag = true;
+			$("input[id='choiceCity']").each(function() {
+				//$("#"+vdx).next().val()
+				if(searchLocal == this.value){
+					$("#help-city").html("중복된 지역을 선택하였습니다.").css("color","#f27979");
+					flag = false;
+					return;
+				}
+			});
+			if(!flag){
+				return;
+			}
+			cnt++;
+			vnt++;
+			var vdx ="my_city"+vnt;
+			$("#select_city").append(" <div id='"+vdx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb; '>"
+			+"<div style='display: inline-block; font-size: 17px; line-height: 40px; color: white;'>"
+			+searchLocal+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"
+			+" width='20px' height='20px' onclick='deleteCity(\""+vdx+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
+			+"<input type='hidden' value='"+searchLocal+"' name='choiceCity' id='choiceCity'>"
+			+"<input type='hidden' value='"+pointx+"' name='pointx' id='pointx'>"
+			+"<input type='hidden' value='"+pointy+"' name='pointy' id='pointy'>");
+		} 
+    	
+    	
+    	
+   	//카테고리 selectbox 동적생성
+    function themeList() {
+    	       var bigCategory=$("#bigCategory").val();
+    	       if(bigCategory=="") {
+    	          $("#smallCategory option").each(function() {
+    	             $("#smallCategory option:eq(0)").remove();
+    	          });
+
+    	          $("#smallCategory").append("<option value=''>:: 중분류 ::</option>");
+    	          return false;
+    	       }
+    	       
+    	       var url="<%=cp%>/study/getCategory";
+    	       var query = "parent=" + bigCategory;
+    	         //alert(query);
+    	         $.ajax({
+    	                  type : "post",
+    	                  url : url,
+    	                  data : query,
+    	                  dataType : "json",
+    	                  success : function(data) {
+    	                     $("#smallCategory option").each(function() {
+    	                        $("#smallCategory option:eq(0)").remove();
+    	                     });
+
+    	                     $("#smallCategory").append(
+    	                           "<option value=''>:: 중분류 ::</option>");
+
+    	                   //  var cn;// = "${dto.categoryNum}";
+    	                     var s;
+    	                     for (var idx = 0; idx < data.listSmallCategory.length; idx++) {
+    	                        s = "";
+    	                        if (data.listSmallCategory[idx].categoryNum)
+    	                           s = " selected='selected'";
+    	                        $("#smallCategory")
+    	                              .append(
+    	                                    "<option value='"+data.listSmallCategory[idx].categoryNum+"' " + s +">"
+    	                                          + data.listSmallCategory[idx].subject
+    	                                          + "</option>");
+    	                     }
+    	                  },
+    	                  error : function(e) {
+    	                     alert(e.responseText);
+    	                  }
+    	               });
+    	      }
+    	
+    	
+     //스터디 카테고리 박스 추가
+       var cnt=0, vnt=0;
+       $("#smallCategory").change(function() { 
             if($("input[name='choiceCategory']").length>=3){
                $("#help-cate").html("3개이하만 선택 가능합니다.").css("color","#f27979");
                return;
@@ -817,7 +989,6 @@ function insertStudy(){
 			}	
 
 			
-			
             $("#select_category").append(" <div id='"+idx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb;'>"
                     +"<div style='display: inline-block; font-size: 17px; line-height: 40px; color: white;'>"
                       +s+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"
@@ -825,133 +996,116 @@ function insertStudy(){
                         	+"<input type='hidden' value='"+index2.val()+"' name='choiceCategory' id='choiceCategory'>");
         
            
-         });
-      	
-         
-         $('input[type=checkbox]').click(function() { //스터디대상3이하로 막기
-            var count = $('input:checkbox[name="target"]:checked').length;
-            if (count > 2) {
-            	 $("#help-target").html("2개 이하로 선택해 주세요").css("color","#f27979");
-               $(this).attr("checked", false);
-            }
+        	 });
+      
+      
+</script>
 
-         });
-      });
-    
-    
-    
-    
-		var vdx = null;
-		var vnt = 0;
-		var cnt = 0;
-    	function addStudyLocal() {
-    		// 3개 초과인지 검사
-            if(cnt>=3){
-                $("#help-city").html("3개이하만 선택 가능합니다.").css("color","#f27979");
-                return;
-            } 
-            var flag = true;
-			$("input[id='choiceCity']").each(function() {
-				//$("#"+vdx).next().val()
-				if(searchLocal == this.value){
-					$("#help-city").html("중복된 카테고리를 선택하였습니다.").css("color","#f27979");
-					flag = false;
-					return;
+<!-- ---------------스터디 수정-------------------- -->
+<script> 
+$(function() {
+
+		//대상
+			var s_target = [];
+			var n = 0;
+		
+			<c:forEach var="vo" items="${vdto.target}">
+			s_target[n] = "${vo}";
+
+			$('input:checkbox[name=target]').each(function() {
+				if ($(this).val() == s_target[n]) {
+					$(this).attr('checked', true);
 				}
 			});
-			if(!flag){
-				return;
+
+			n++;
+			</c:forEach>
+
+			
+			
+		//범위
+		if ($('input:radio[name=range]:checked')) {
+				$('input:radio[name=range]:checked').parent().css("background",
+						"rgba(26,188,156,0.1)");
 			}
-			cnt++;
-			vnt++;
-			var vdx ="my_city"+vnt;
-			$("#select_city").append(" <div id='"+vdx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb; '>"
+		
+		//스터디 지역
+		
+		
+		
+		//스터디 카테고리 
+		
+		if("${mode=='update'}"){
+			
+			var url ="<%=cp%>/study/${s_num}/getMyCategory";
+			$.ajax({
+				type:"POST"
+				,url:url
+				,dataType:"JSON"
+				,success: function(data){
+					printBox(data);
+				},error: function(e){
+					console.log(e.responseText);
+				}
+				
+			});
+		
+			var url2 ="<%=cp%>/study/${s_num}/getMyLocal";
+			$.ajax({
+				type:"POST"
+				,url:url2
+				,dataType:"JSON"
+				,success: function(data){
+					printBox2(data);
+				},error: function(e){
+					console.log(e.responseText);
+				}
+				
+			});
+
+	
+	}
+	
+});
+		
+function printBox(data) {
+	
+	for(var idx=0; idx<data.categoryList.length; idx++) {
+		var parent= data.categoryList[idx].parent;
+		var child = data.categoryList[idx].categoryNum;
+		var p_subject = data.categoryList[idx].p_subject;
+		var c_subject = data.categoryList[idx].subject;
+		
+		
+		 $("#select_category").append(" <div id='"+idx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb;'>"
+                 +"<div style='display: inline-block; font-size: 17px; line-height: 40px; color: white;'>"
+                   +p_subject+"-"+c_subject+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"
+                     +" width='20px' height='20px' onclick='deleteCategory(\""+idx+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
+                     	+"<input type='hidden' value='"+child+"' name='choiceCategory' id='choiceCategory'>");
+     
+		
+	}}
+	
+function printBox2(data) {	
+	
+
+	for(var vdx=0; vdx<data.localList.length; vdx++) {
+		var searchLocal = data.localList[vdx].city;
+		var pointx = data.localList[vdx].point_x;
+		var pointy = data.localList[vdx].point_y;
+		
+		$("#select_city").append(" <div id='"+vdx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb; '>"
 			+"<div style='display: inline-block; font-size: 17px; line-height: 40px; color: white;'>"
 			+searchLocal+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"
-			+" width='20px' height='20px' onclick='deleteCategory(\""+vdx+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
+			+" width='20px' height='20px' onclick='deleteCity(\""+vdx+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
 			+"<input type='hidden' value='"+searchLocal+"' name='choiceCity' id='choiceCity'>"
 			+"<input type='hidden' value='"+pointx+"' name='pointx' id='pointx'>"
 			+"<input type='hidden' value='"+pointy+"' name='pointy' id='pointy'>");
-		} 
-    	
-    	
-    	
-      /////////////////////////////////////////////////////////////////////////////////////////////////////
-  
-      function themeList() {
-       var bigCategory=$("#bigCategory").val();
-       if(bigCategory=="") {
-          $("#smallCategory option").each(function() {
-             $("#smallCategory option:eq(0)").remove();
-          });
-
-          $("#smallCategory").append("<option value=''>:: 중분류 ::</option>");
-          return false;
-       }
-       
-       var url="<%=cp%>/study/getCategory";
-         var query = "parent=" + bigCategory;
-         //alert(query);
-         $
-               .ajax({
-                  type : "post",
-                  url : url,
-                  data : query,
-                  dataType : "json",
-                  success : function(data) {
-                     $("#smallCategory option").each(function() {
-                        $("#smallCategory option:eq(0)").remove();
-                     });
-
-                     $("#smallCategory").append(
-                           "<option value=''>:: 중분류 ::</option>");
-
-                     var cn = "${dto.categoryNum}";
-                     var s;
-                     for (var idx = 0; idx < data.listSmallCategory.length; idx++) {
-                        s = "";
-                        if (cn == data.listSmallCategory[idx].categoryNum)
-                           s = " selected='selected'";
-                        $("#smallCategory")
-                              .append(
-                                    "<option value='"+data.listSmallCategory[idx].categoryNum+"' " + s +">"
-                                          + data.listSmallCategory[idx].subject
-                                          + "</option>");
-                     }
-                  },
-                  error : function(e) {
-                     alert(e.responseText);
-                  }
-               });
-      }
-      
-   </script>
+}	
+}
+</script>
 
 
-   <script type="text/javascript">
-        $(function() {
-            $('#blah').attr('src', '<%=cp%>/resource/images/white.png'); 
-            $("#uploadBtn").on('change', function(){
-                $("#uploadBtn").empty();
 
-                readURL(this);
-            });
-        });
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-            	$('#blahbtn').html("사진 바꾸기");
-				$('#blah').attr('src', e.target.result); 
-               		/* alert(e.target.result);
-                    $('#blah').style.backgroundImage = "url('"e.target.result"')"; */
-                }
-
-              reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
 </body>
 </html>

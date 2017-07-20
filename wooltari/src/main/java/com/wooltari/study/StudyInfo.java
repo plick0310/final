@@ -12,8 +12,10 @@ public class StudyInfo {
 	
 	private String userName , userImg;
 	
-	private String[] target =null;// 모집대상
+	/*private String[] target =null;// 모집대상*/
 	private String s_target;
+	private List<String> target ;
+
 	
 	private List<String> choiceCategory; // 선택카테고리
 	private String category;
@@ -89,14 +91,22 @@ public class StudyInfo {
 	public void setUserImg(String userImg) {
 		this.userImg = userImg;
 	}
-	public String[] getTarget() {
+/*	public String[] getTarget() {
 		return target;
 	}
 	public void setTarget(String[] target) {
 		this.target = target;
-	}
+	}*/
+	
+	
 	public String getS_target() {
 		return s_target;
+	}
+	public List<String> getTarget() {
+		return target;
+	}
+	public void setTarget(List<String> target) {
+		this.target = target;
 	}
 	public void setS_target(String s_target) {
 		this.s_target = s_target;
