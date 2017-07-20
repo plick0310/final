@@ -18,27 +18,45 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wooltari.common.MyUtilBootstrap;
 import com.wooltari.member.SessionInfo;
+import com.wooltari.study.StudyCategory;
+import com.wooltari.study.StudyCity;
+import com.wooltari.study.StudyService;
 
 @Controller("study.search.SearchController")
 public class SearchController {
 	@Autowired
-	private SearchService service;
+	private SearchService searchService;
+	
+	@Autowired
+	private StudyService studyService;
+	
 	@Autowired
 	private MyUtilBootstrap myUtil;
 
-	@RequestMapping(value="/study/search")
-	public String listSearch(
+	@RequestMapping(value="/study/search", method=RequestMethod.GET)
+	public String search(Model model, HttpSession session)throws Exception {
+		return ".studysearch.search";
+	}
+	
+	@RequestMapping(value="/study/map", method=RequestMethod.GET)
+	public String map(Model model, HttpSession session)throws Exception {
+		return "studysearch/map";
+	}
+	
+	@RequestMapping(value="/study/list")
+	public String list(
 				@RequestParam(value="page", defaultValue="1") int current_page,
 				@RequestParam(value="recruit", defaultValue="0") int recruit,
+				@RequestParam(value="choiceCity", defaultValue="0") int choiceCity,
 				@RequestParam(value="gender", defaultValue="") String gender,
 				@RequestParam(value="searchValue", defaultValue="") String searchValue,
 				Model model, HttpServletRequest req , HttpSession session
 			) throws Exception{
-		
+		System.out.println("넘어온 쿼리 : page:"+current_page+"/recruit:"+recruit+"/choiceCity:"+choiceCity+"/gender:"+gender+"/searchValue:"+searchValue);
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		String cp = req.getContextPath();
 		
-		int rows=12;
+		int rows=3;
 		int total_page = 0;
 		int dataCount = 0;
 		
@@ -54,7 +72,7 @@ public class SearchController {
 		map.put("recruit", recruit);
 		map.put("gender", gender);
 		map.put("searchValue", searchValue);
-		dataCount = service.dataCount(map);
+		dataCount = searchService.dataCount(map);
 		
 		if(dataCount != 0)
 			total_page = myUtil.pageCount(rows, dataCount);
@@ -70,34 +88,26 @@ public class SearchController {
         map.put("end", end);
 		
         // 쪽지 리스트
-        List<StudySearch> list = service.listSearch(map);
-        /*
-        // 리스트 번호
-        int listNum, n = 0;
-        Iterator<StudySearch> it = list.iterator();
-        while(it.hasNext()){
-        	StudySearch data = it.next();
-        	listNum = dataCount - (start + n - 1);
-            data.setListNum(listNum);
-            n++;
-        }
-        */
+        List<StudySearch> list = searchService.listSearch(map);
+        
         String query = "";
-        //String listUrl = cp+"/search/list";
         String articleUrl = cp+"/study/search?page=" + current_page;
         if(searchValue.length()!=0) {
         	query = "recruit=" + recruit + "&gender=" + gender + "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");	
         }
         
         if(query.length()!=0) {
-        	//listUrl = cp+"/search/list?" + query;
         	articleUrl = cp+"/study/search?page=" + current_page + "&"+ query;
         }
         
         
         String paging = myUtil.pagingMethod(current_page, total_page, "paging");
         System.out.println("recruit : " + recruit + " / page : " + current_page + " / searchValue : " + searchValue);
-        
+        List<StudyCategory> listBigCategory=studyService.listBigCategory();
+		List<StudyCity> listBigCity = studyService.listBigCity();
+		
+		model.addAttribute("listBigCategory", listBigCategory);
+		model.addAttribute("listBigCity",listBigCity);
         model.addAttribute("list", list);
         model.addAttribute("articleUrl", articleUrl);
         model.addAttribute("page", current_page);
@@ -105,14 +115,6 @@ public class SearchController {
         model.addAttribute("total_page", total_page);
         model.addAttribute("paging", paging);	
         
-		return ".studysearch.search";
+		return "studysearch/list";
 	}
-	
-	@RequestMapping(value="/study/search2", method=RequestMethod.GET)
-	public String search2(Model model, HttpSession session)throws Exception {
-		
-		
-		return ".studysearch.search";
-	}
-	
 }

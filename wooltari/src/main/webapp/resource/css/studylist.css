@@ -1,4 +1,14 @@
 ﻿@CHARSET "UTF-8";
+
+.filter .filter-section, .filter .option-section {
+    color: #666;
+    font-weight: 300;
+    font-size: 14px;
+    min-height: 55px;
+    padding: 10px 25px;
+    border-top: 1px solid #f2f1f1;
+} 
+
 .pic-list .pic-list-padding {
     padding: 10px;
 }
@@ -6,17 +16,6 @@
 select>optgroup:disabled, select>option:disabled{
     -moz-user-select : none;
     -webkit-user-select : none;
-}
-
-/*페이지 번호 통일*/
-.pagination>li>a, .pagination>li>span{
-    color:#666;
-    padding:8px 14px;
-}
-
-.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus{
-    background-color: #00b7ee;
-    border-color: #00b7ee;
 }
 
 /*최대 넓이가 1000px인 container*/
@@ -64,7 +63,7 @@ select>optgroup:disabled, select>option:disabled{
 }
 /*[button]포인트 버튼*/
 .btn-point{
-    background-color:#00b7ee;
+    background-color:#1abc9c;
     color:#fff;
 }
 /*[button]포인트 버튼 마우스 오버시*/
@@ -123,7 +122,6 @@ select>optgroup:disabled, select>option:disabled{
     top:-8px ;
 }
 
-
 /*[label] 회색의 label*/
 label.tag {
     padding: 8px 20px;
@@ -139,7 +137,7 @@ label.tag {
 }
 
 label.tag.check{
-    background-color:#00b7ee;
+    background-color:#1abc9c;
     color:#fff;
 }
 
@@ -161,7 +159,7 @@ label.tag > em {
 .school-certify {
     font-size:13px;
     font-weight:normal;
-    background:#00b7ee;
+    background:#1abc9c;
     color:#fff;
     border-radius:4px;
     padding: 1px 10px;
@@ -170,14 +168,14 @@ label.tag > em {
 /*모꼬지 버튼*/
 .btn-moccozy {
     width:100%;
-    background-color: #00B7EE;
+    background-color: #1abc9c;
     color:#fff;
     padding: 12px 22px;
 }
 .btn-moccozy:hover, .btn-moccozy:focus {
-    color:#00B7EE;
+    color:#1abc9c;
     background-color:#fff;
-    border:1px solid #00B7EE;
+    border:1px solid #1abc9c;
     
     -webkit-transition:background-color 0.3s;
     transition: background-color 0.3s;
@@ -187,126 +185,6 @@ label.tag > em {
 .no-letter-spacing {
     letter-spacing:0;
 }
-
-/*달력 CSS 시작*/
-/*#tab-content {
-    background-color: #f5f5f5;
-}
-
-.registTitle {
-    background-color: #e6eaed !important;
-}
-
-#userInfo-modifyDesc .help-block {
-    font-size: 13px;
-}
-
-    #userInfo-modifyDesc .help-block em {
-        font-size: 14px;
-        color: red;
-    }
-table.ui-datepicker-calendar th{
-    text-align:center !important;
-        color: #a0a0a0;
-}
-table.ui-datepicker-calendar td{
-    text-align:center !important;
-}
-table.ui-datepicker-calendar .ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled{
-    text-align: center;
-}
-div#ui-datepicker-div {
-    width: 280px;
-    background-color: white;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    display:none;
-}
-
-div#ui-datepicker-div > div {
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.ui-datepicker-calendar {
-    width: 100%;
-    margin-top:10px;
-}
-.ui-widget{
-    font-size:13px;
-}
-a.ui-state-default.ui-state-active{
-    color: #00bef7;
-    font-weight: bold;
-}
-.ui-datepicker .ui-state-default, .ui-datepicker .ui-widget-content .ui-state-default, .ui-datepicker .ui-widget-header .ui-state-default {
-    border: none;
-    font-weight: 300;
-    color: #666;
-    text-decoration: none !important;
-    top: -8px;
-    border-radius: 20px;
-    background: none;
-    font-size: 14px;
-}
-.ui-datepicker-today{
-    background-color: #ddd;
-    opacity: 1 !important;
-    border-radius: 4px;
-}
-.ui-datepicker-today>.ui-state-default{
-    color:white;
-}
-
-div#slider-range-min .ui-state-default.ui-state-hover, div#slider-range-min .ui-widget-content .ui-state-default.ui-state-hover, div#slider-range-min .ui-state-header .ui-sate-default.ui-state-hover {
-    border: solid 1px #00B7EE !important;
-}
-
-.ui-datepicker-prev ui-corner-all {
-    float: left;
-}
-
-.ui-widget-header .ui-icon {
-    margin: 2px;
-}
-
-span.ui-icon.ui-icon-circle-triangle-w {
-    float: left;
-    border-top: 4px solid #fff;
-    border-left: 4px solid #fff;
-    height: 13px;
-    width: 13px;
-    -webkit-transform: rotate(315deg);
-    -moz-transform: rotate(315deg);
-    transform: rotate(315deg);
-    position: absolute;
-    top: 4px;
-    left: 11px;}
-
-span.ui-icon.ui-icon-circle-triangle-e {
-    float: right;
-    border-top: 4px solid #fff;
-    border-left: 4px solid #fff;
-    height: 13px;
-    width: 13px;
-    -webkit-transform: rotate(135deg);
-    -moz-transform: rotate(135deg);
-    transform: rotate(135deg);
-    position: absolute;
-    top: 4px;
-    right: 13px;
-}
-
-.ui-datepicker-title {
-    text-align: center;
-    padding-top: 4px;
-    padding-bottom: 1px;
-    font-size: 13px;
-}*/
-/*달력 CSS 끝*/
-
 
 /*[비동기 통신] 로딩아이콘*/
 .loading-spinner {
@@ -495,7 +373,7 @@ textarea{
 }
 .explanation em {
     padding-right: 4px;
-    color: #00b7ee;
+    color: #1abc9c;
 }
 .loading_image_box {
     position: fixed;
@@ -728,7 +606,7 @@ textarea{
 .study-item .item-contents .strong-info{
     font-size:16px;
     margin-top: 1px;
-    color:#00b7ee;
+    color:#1abc9c;
     font-weight:500;
     text-align:center;
     padding: 0 16px;

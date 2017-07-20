@@ -6,22 +6,22 @@
 	<!-- 인원 조건 -->
 	<sql id="recruit-list">
     	<if test="recruit==0">
-		recruit > 0
+		AND recruit > 0
 		</if>
     	<if test="recruit==2">
-		recruit = 2
+		AND recruit = 2
 		</if>
 		<if test="recruit==3">
-		recruit = 3
+		AND recruit = 3
 		</if>
 		<if test="recruit==4">
-		recruit = 4
+		AND recruit = 4
 		</if>
 		<if test="recruit==5">
-		recruit = 5
+		AND recruit = 5
 		</if>
 		<if test="recruit==6">
-		recruit = 6
+		AND recruit = 6
 		</if>
 	</sql>
 	
@@ -29,30 +29,14 @@
 	<sql id="gender-list">
 		<if test="gender!=null and gender!=''">
 		</if>
-	   	<if test="gender=='무관'">
-		AND gender = '무관'
-		</if>
 		<if test="gender=='여자'">
-		AND gender = '여자'
+		AND (gender = '여자' OR gender = '무관')
 		</if>
 		<if test="gender=='남자'">
-		AND gender = '남자'
+		AND (gender = '남자' OR gender = '무관')
 		</if>
 	</sql>
 
-	<!-- 공개 조건 -->
-	<sql id="range-list">
-	   	<if test="range==0">
-			 range = 0
-		</if>
-		<if test="range==1">
-			 range = 1
-		</if>
-		<if test="range==2">
-			 range = 2
-		</if>
-	</sql>
-	
 	<!-- 스터디명/스터디소개 검색 -->
 	<sql id="search-value">
 		<if test="searchValue != null and searchValue != ''">
@@ -70,12 +54,11 @@
                  GROUP BY s_num)tb, study s JOIN member m  ON s.userId = m.userId
            WHERE tb.s_num = s.s_num
            GROUP BY s.s_num, s.userId, created, studyName , study_Info, gender, recruit, range, imageFilename, userName , userImg, memcnt
-           HAVING
+           HAVING (range = 0 OR range = 1)
 			<include refid="recruit-list"/>
 			<include refid="gender-list"/>
 			<include refid="search-value"/>
 	)
-		
 	</select>
 	
 	<!-- 리스트 가져오기 -->
@@ -87,7 +70,7 @@
                            GROUP BY s_num)tb, study s JOIN member m  ON s.userId = m.userId
                      WHERE tb.s_num = s.s_num
                      GROUP BY s.s_num, s.userId, created, studyName , study_Info, gender, recruit, range, imageFilename, userName , userImg, memcnt
-                     HAVING
+                     HAVING (range = 0 OR range = 1)
 					<include refid="recruit-list"/>
 					<include refid="gender-list"/>
 					<include refid="search-value"/>
