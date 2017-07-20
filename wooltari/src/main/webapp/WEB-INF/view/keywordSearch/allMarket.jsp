@@ -32,6 +32,7 @@
     background-color: #fff;
   border: none;
 }
+
 .thumb {
     float: left;
     left: 0;
@@ -63,16 +64,18 @@ dl > dt:FIRST-OF-TYPE {
 }
 
 
+
+
 </style>
 
 <div style="margin: auto; width: 57%;">
 	<div style="padding-top: 20px; font-size: 17px; ">
 		<ul class="tab_menu" style="width:100%; float: left; display: block; text-align: left; border-top: 1px solid #f1f3f6; border-bottom: 1px solid #e2e2e2; padding-top: 10px; padding-bottom: 10px;">
-			<li class="active" style="float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif;" data-tab="exam" ><a  style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/search?keyword=${keyword }'">통합검색</a></li>
+			<li class="active" style="float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif;" data-tab="exam" ><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/search?keyword=${keyword }'">통합검색</a></li>
 			<li style="margin-left:30px; float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/studySearch?keyword=${keyword }'">스터디</a></li>
-			<li style="margin-left:30px; float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a style="cursor: pointer; color: #1abc9c;" onclick="location.href='<%=cp%>/keyword/promoteSearch?keyword=${keyword }'">홍보</a></li>
+			<li style="margin-left:30px; float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/promoteSearch?keyword=${keyword }'">홍보</a></li>
 			<li style="margin-left:30px; float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/reviewSearch?keyword=${keyword }'">리뷰</a></li>
-			<li style="margin-left:30px; float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/marketSearch?keyword=${keyword }'">스터디마켓</a></li>
+			<li style="margin-left:30px; float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a style="cursor: pointer; color: #1abc9c;" onclick="location.href='<%=cp%>/keyword/marketSearch?keyword=${keyword }'">스터디마켓</a></li>
 			<li style="margin-left:30px; float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/whereSearch?keyword=${keyword }'">어디서하지</a></li>
 			<li style="margin-left:30px; float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/downloadSearch?keyword=${keyword }'">다운로드</a></li>
 			<li style="margin-left:30px; float: right; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a href="#">도움말</a></li>
@@ -80,20 +83,22 @@ dl > dt:FIRST-OF-TYPE {
 	</div>
 	
 
-	<div style="clear: both; font-size: 14px; font-weight: bolder; color: black; margin-bottom: 20px;">홍보게시판[검색결과:${dataCount }개]</div>
+	<div style="clear: both; font-size: 14px; font-weight: bolder; color: black; margin-bottom: 20px;">스터디마켓[검색결과:${dataCount }개]</div>
 	<c:forEach var="dto" items="${list }">
 		<ul>
 						<li style="clear: both;">
-						<c:if test="${dto.imageFileName != null }">
+						<c:if test="${dto.urlContent != null }">
 							<div class="thumb" >
-								<img src="<%=cp%>/uploads/photo/${dto.imageFileName}" style="width: 82px; height: 82px;" onerror="this.src='<%=cp%>/resource/images/reviewPhoto/noImage.png'">
+								<%-- <img style="width: 82px; height: 82px; background-image:url('http://img.youtube.com/vi/${dto.urlContent}/hqdefault.jpg'); background-size: contain;" onerror="this.src='<%=cp%>/resource/images/reviewPhoto/noImage.png'"> --%>
+								<img src="http://img.youtube.com/vi/${dto.urlContent}/hqdefault.jpg" style="width: 82px; height: 82px;" onerror="this.src='<%=cp%>/resource/images/reviewPhoto/noImage.png'">
 							</div>
-						</c:if>
+						</c:if>	
 							<dl style="padding-top: 3px; overflow: hidden; line-height: 19px; display: block;">
-								<dt style="display: inline; clear: both; margin-right: 5px; "><a onclick="location.href='<%=cp%>/keyword/promote/article?num=${dto.num }'" style="cursor: pointer; color: blue;">제목:&nbsp;&nbsp;&nbsp;${dto.subject }</a>&nbsp;&nbsp;</dt>
-								<dd class="txt_inline" style="clear: both; margin: 2px 0 1px; font-size: 12px; line-height: 18px; display: inline;">작성일|${dto.created }</dd>
-							<dt>[스터디명:${dto.studyName }][조회수&nbsp;&nbsp;${dto.hitCount }]</dt>								
-								<dd>&nbsp;&nbsp;&nbsp;${dto.content }</dd>																											
+								<dt style="display: inline; clear: both; margin-right: 5px; "><a onclick="" style="cursor: pointer; color: blue;">제목:&nbsp;&nbsp;&nbsp;${dto.subject }</a></dt>
+								<dd class="txt_inline" style="clear: both; margin: 2px 0 1px; font-size: 12px; line-height: 18px; display: inline;">&nbsp;&nbsp;작성일|${dto.created }</dd>
+								<dt>[강사명:${dto.userId }][조회수&nbsp;&nbsp;${dto.hitCount }]</dt>
+
+								<dd>&nbsp;&nbsp;&nbsp;${dto.content }</dd>										
 							</dl>
 						</li>
 					</ul>

@@ -196,7 +196,7 @@ line-height: normal;
 	<thead>
 		<tr>
 			<th class="informations" style="    border-top: 2px solid rgba(56, 54, 53, 0.23);">
-				제목 : ${dto.subject } 
+				스터디명>${dto.studyName } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;제목 > ${dto.subject } 
 				<span class="inforArea">
 					<strong>작성일</strong> ${dto.created }
 					<span class="__dotted"></span>

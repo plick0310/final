@@ -31,7 +31,7 @@
 		select * from(
 			select rownum rnum, tb.* from(
 				select distinct p.num,p.subject,p.content,hitcount,p.imagefilename,userName,c.choicecategory,s.subject name,target,recruit,gender,
-					p.created,p.s_num,p.userId,(select nvl(count(*),0) from promotereply where num=p.num)replyCount
+					p.created,p.s_num,p.userId,(select nvl(count(*),0) from promotereply where num=p.num)replyCount,study.studyName
 					from promotelist p 
 			       	  join member m on p.userId=m.userId
 		              join studycategory c on p.s_num=c.s_num
@@ -71,7 +71,7 @@
 	<!-- 글 보기 -->
 	<select id="readBoard" parameterType="map" resultType="com.wooltari.promote.Promote">
 		select p.num,p.subject,p.content,hitcount,p.created,p.imageFilename,p.s_num,p.userId,userName,target,study.recruit,gender,
-        c.choicecategory,s.subject name
+        c.choicecategory,s.subject name,study.studyName
         from promotelist p
         join member m on p.userId=m.userId 
         join studycategory c on p.s_num=c.s_num

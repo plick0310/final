@@ -7,6 +7,32 @@
 %>
 
 <style>
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #1abc9c;
+    /* border-color: #337ab7; */
+    /* text-align: center; */
+}
+
+.pagination-sm > li > a, .pagination-sm > li > span {
+    padding: 8px 9px;
+    
+    font-size: 11px;
+}
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #1abc9c;
+    text-decoration: none;
+    background-color: #fff;
+  border: none;
+}
 .thumb {
     float: left;
     left: 0;
@@ -32,26 +58,45 @@
     display: inline;
 }
 
+dl > dt:FIRST-OF-TYPE {
+	color: blue;
+	border-bottom: 1px solid blue;
+}
+
 
 </style>
 
-<div style="margin-left: 400px; margin-right: 600px;">
+<div style="margin: auto; width: 57%;">
+	<div style="padding-top: 20px; font-size: 17px; ">
+		<ul class="tab_menu" style="width:100%; float: left; display: block; text-align: left; border-top: 1px solid #f1f3f6; border-bottom: 1px solid #e2e2e2; padding-top: 10px; padding-bottom: 10px;">
+			<li class="active" style="float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif;" data-tab="exam" ><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/search?keyword=${keyword }'">통합검색</a></li>
+			<li style="margin-left:30px; float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a style="cursor: pointer; color: #1abc9c;" onclick="location.href='<%=cp%>/keyword/studySearch?keyword=${keyword }'">스터디</a></li>
+			<li style="margin-left:30px; float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/promoteSearch?keyword=${keyword }'">홍보</a></li>
+			<li style="margin-left:30px; float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/reviewSearch?keyword=${keyword }'">리뷰</a></li>
+			<li style="margin-left:30px; float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/marketSearch?keyword=${keyword }'">스터디마켓</a></li>
+			<li style="margin-left:30px; float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/whereSearch?keyword=${keyword }'">어디서하지</a></li>
+			<li style="margin-left:30px; float: left; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/downloadSearch?keyword=${keyword }'">다운로드</a></li>
+			<li style="margin-left:30px; float: right; position: relative; list-style-type: none; font-family: '굴림',gulim,helvetica,sans-serif"><a href="#">도움말</a></li>
+		</ul>
+	</div>
 
-	<div>블로그[검색결과:${studyCount }개]</div>
+	<div style="clear: both; font-size: 14px; font-weight: bolder; color: black; margin-bottom: 20px;">스터디[검색결과:${studyCount }개]</div>
 	<c:forEach var="dto" items="${list }">
 		<ul>
 			<li style="clear: both;">
-				<div class="thumb" >
-					<img src="<%=cp%>/uploads/member/userImg/${dto.imageFileName}" style="width: 82px; height: 82px;" onerror="this.src='<%=cp%>/resource/images/reviewPhoto/noImage.png'">
-				</div>
+				<c:if test="${dto.imageFileName != null }">
+					<div class="thumb" >
+						<c:if test="${dto.imageFileName!='' }"><img src="<%=cp%>/uploads/member/userImg/${dto.imageFileName}" style="width: 82px; height: 82px;" onerror="this.src='<%=cp%>/resource/images/reviewPhoto/noImage.png'"></c:if>
+					</div>
+				</c:if>	
 				<dl style="padding-top: 3px; overflow: hidden; line-height: 19px; display: block;">
-					<dt style="display: inline; clear: both; margin-right: 5px; ">스터디명:&nbsp;&nbsp;&nbsp;${dto.studyName }</dt>&nbsp;&nbsp;&nbsp;&nbsp;
+					<c:if test="${dto.range=='0' }"><dt style="display: inline; clear: both; margin-right: 5px; "><a onclick="location.href='<%=cp%>/study/myStudy/home/${dto.s_num}'" style="cursor: pointer; color: blue;">스터디명:&nbsp;&nbsp;&nbsp;${dto.studyName }</a></dt>&nbsp;&nbsp;</c:if>
+					<c:if test="${dto.range=='1' }"><dt style="display: inline; clear: both; margin-right: 5px; "><a style="cursor: pointer; color: blue;">스터디명:&nbsp;&nbsp;&nbsp;${dto.studyName }</a></dt>&nbsp;&nbsp;&nbsp;&nbsp;</c:if>
 					<dd class="txt_inline" style="clear: both; margin: 2px 0 1px; font-size: 12px; line-height: 18px; display: inline;">생성일${dto.created }</dd>
 					<c:if test="${dto.range=='0'}"><dt>[전체공개][${dto.gender }][${dto.recruit }명]</dt></c:if>
 					<c:if test="${dto.range=='1'}"><dt>[비공개][${dto.gender }][${dto.recruit }명]</dt></c:if>
 					<dd>&nbsp;&nbsp;&nbsp;${dto.study_Info }</dd>
-										
-					<c:if test="${dto.range=='0' }"><dd><a onclick="location.href='<%=cp%>/study/myStudy/home/${dto.s_num}'">스터디 구경하기</a></dd></c:if>
+	
 				</dl>
 			</li>
 		</ul>

@@ -43,7 +43,7 @@
 	<select id="PromoteList" resultType="com.wooltari.keyword.Promote">
 	select * from(
 	 		select rownum rnum,tb.* from(
-				select p.num,p.subject,p.content,p.hitcount,p.imagefilename,to_char(p.created,'YYYY-MM-DD')created,p.s_num,p.userid,range
+				select p.num,p.subject,p.content,p.hitcount,p.imagefilename,to_char(p.created,'YYYY-MM-DD')created,p.s_num,p.userid,range,studyname
 				from promotelist p
 				join study s on p.s_num=s.s_num			
 	<![CDATA[
@@ -65,7 +65,7 @@
 	<select id="allPromoteList" resultType="com.wooltari.keyword.Promote">
 		select * from(
 	 		select rownum rnum,tb.* from(
-				select p.num,p.subject,p.content,p.hitcount,p.imagefilename,to_char(p.created,'YYYY-MM-DD')created,p.s_num,p.userid,range
+				select p.num,p.subject,p.content,p.hitcount,p.imagefilename,to_char(p.created,'YYYY-MM-DD')created,p.s_num,p.userid,range,studyname
 				from promotelist p
 				join study s on p.s_num=s.s_num			
 	<![CDATA[
@@ -78,17 +78,37 @@
 	</select>
 	
 	<!-- 다운로드게시판 3개만출력  -->
-	<select id="DownloadBoardList">
-	
+	<select id="DownloadBoardList" resultType="com.wooltari.keyword.DownloadBoard">
+	select * from(
+	 		select rownum rnum,tb.* from(		
+				select num,subject,content,hitcount,created,userid
+		    	from downloadboard
+	<![CDATA[
+				 where (DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0 )
+				order by created
+			 )tb where rownum <=#{end}
+	)where rnum >=#{start}
+	]]>
 	</select>
 	
 	<!-- 다운로드게시판 총갯수  -->
 	<select id="DownloadBoardCount" resultType="Integer">
-	
+		select nvl(count(*),0)
+		from downloadboard where DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0
 	</select>
 	
 	<!-- 다운로드게시판 전체  -->
-	<select id="allDownloadBoardList">
+	<select id="allDownloadBoardList" resultType="com.wooltari.keyword.DownloadBoard">
+	select * from(
+	 		select rownum rnum,tb.* from(		
+				select num,subject,content,hitcount,created,userid
+		    	from downloadboard
+	<![CDATA[
+				 where (DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0 )
+				order by created
+			 )tb where rownum <=#{end}
+	)where rnum >=#{start}
+	]]>
 	
 	</select>
 	
@@ -144,33 +164,75 @@
 	</select>
 	
 	<!-- 스터디마켓 3개만출력  -->
-	<select id="StudyMarketBoardList">
+	<select id="StudyMarketBoardList" resultType="com.wooltari.keyword.StudyMarketBoard">
+	select * from(
+	 	select rownum rnum,tb.* from(	
+		 select b.num,subject,content,hitcount,created,userid,urlcontent,address
+		  from studymarketboard b
+	<![CDATA[
+				 where (DBMS_LOB.INSTR(b.subject,'${keyword}') > 0 or DBMS_LOB.INSTR(b.content,'${keyword}') > 0 )
+				order by created
+			 )tb where rownum <=#{end}
+	)where rnum >=#{start}
+	]]>	  
 	
 	</select>
 	
 	<!-- 스터디마켓 총갯수  -->
 	<select id="StudyMarketBoardCount" resultType="Integer">
-	
+		select nvl(count(*),0)
+		from studymarketboard where DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0 
 	</select>
 	
 	<!-- 스터디마켓 전체  -->
-	<select id="allStudyMarketBoardList">
+	<select id="allStudyMarketBoardList" resultType="com.wooltari.keyword.StudyMarketBoard">
+	select * from(
+	 	select rownum rnum,tb.* from(	
+		 select b.num,subject,content,hitcount,created,userid,urlcontent,address
+		  from studymarketboard b
+	<![CDATA[
+				 where (DBMS_LOB.INSTR(b.subject,'${keyword}') > 0 or DBMS_LOB.INSTR(b.content,'${keyword}') > 0 )
+				order by created
+			 )tb where rownum <=#{end}
+	)where rnum >=#{start}
+	]]>	  
 	
 	</select>
 	
 	<!-- 어디서하지 3개만출력  -->
-	<select id="StudyWhereList">
-	
+	<select id="StudyWhereList" resultType="com.wooltari.keyword.StudyWhere">
+	select * from(
+	 	select rownum rnum,tb.* from(	
+			select num,subject,content,imagefilename,hitcount,created,placename,region,octime,userid,address,tel
+			from studywhereboard
+	<![CDATA[
+				 where DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0 or DBMS_LOB.INSTR(placename,'${keyword}') > 0 
+				 or DBMS_LOB.INSTR(region,'${keyword}') > 0
+				order by created
+			 )tb where rownum <=#{end}
+	)where rnum >=#{start}
+	]]>	  		
 	</select>
 	
 	<!-- 어디서하지 총갯수  -->
-	<select id="StudyWhereCount">
-	
+	<select id="StudyWhereCount" resultType="Integer">
+	select nvl(count(*),0) from studywhereboard
+     where DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0 or DBMS_LOB.INSTR(placename,'${keyword}') > 0   or DBMS_LOB.INSTR(region,'${keyword}') > 0
 	</select>
 	
 	<!-- 어디서하지 전체  -->
-	<select id="allStudyWhereList">
-	
+	<select id="allStudyWhereList" resultType="com.wooltari.keyword.StudyWhere">
+	select * from(
+	 	select rownum rnum,tb.* from(	
+			select num,subject,content,imagefilename,hitcount,created,placename,region,octime,userid,address,tel
+			from studywhereboard
+	<![CDATA[
+				 where DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0 or DBMS_LOB.INSTR(placename,'${keyword}') > 0 
+				 or DBMS_LOB.INSTR(region,'${keyword}') > 0
+				order by created
+			 )tb where rownum <=#{end}
+	)where rnum >=#{start}
+	]]>	  		
 	</select>
 	
 	

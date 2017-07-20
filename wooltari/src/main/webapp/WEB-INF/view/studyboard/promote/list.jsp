@@ -177,7 +177,7 @@ function search(){
 				<td>
 					<div style="position:relative;">
 						
-						<a href="${articleUrl}&num=${dto.num}" class="subject">카테고리>${dto.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;성별>${dto.gender}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;대상>${dto.target }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정원>${dto.recruit }명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${dto.subject}</a><span class="comment">[${dto.replyCount}]</span>
+						<a href="${articleUrl}&num=${dto.num}" class="subject">카테고리>${dto.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;성별>${dto.gender}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;대상>${dto.target }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정원>${dto.recruit }명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;스터디명>${dto.studyName} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;제목>${dto.subject}</a><span class="comment">[${dto.replyCount}]</span>
 					
 						 <c:if test="${dto.gap < 1}">
 			               <img src='<%=cp%>/resource/images/new.gif'>

@@ -421,4 +421,25 @@ public class StudywhereController {
 		
 	}
 	
+	@RequestMapping(value="/keyword/studywhere/article")
+	public String article(
+				@RequestParam int num,
+				Model model
+			) throws Exception {
+		
+
+		service.updateHitCount(num);
+		StudyWhere dto = service.readStudyWhere(num);
+
+
+		// 공감개수
+		int countLikeBoard=service.countLikeStudyWhere(num);
+
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("countLikeBoard", countLikeBoard);
+		
+		return ".studyboard.studywhere.article";
+	}
+	
 }
