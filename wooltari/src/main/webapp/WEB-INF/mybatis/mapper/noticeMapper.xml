@@ -88,7 +88,8 @@
 	
 	<!-- 이전글 -->
 	<select id="preReadNotice" resultType="com.wooltari.notice.Notice" parameterType="map">
-		SELECT tb.* FROM(SELECT num, n.userId, subject FROM notice n JOIN member m ON n.userId=m.userId
+		SELECT tb.* FROM
+		(SELECT num, n.userId, subject FROM notice n JOIN member m ON n.userId=m.userId
 		<where>
 			<if test="searchValue !=null and searchValue!=''">
 				<include refid="where-list"/>

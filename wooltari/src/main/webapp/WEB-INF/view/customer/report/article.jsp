@@ -5,13 +5,18 @@
 <%
    String cp = request.getContextPath();
 %>
+<!-- wooltari 신고 건의 게시판  -->
 <style>
 .dnu{
 border: none;
 background: none;
 }
 </style>
+<script type="text/javascript">
+//alert('${preReadDto.subject}');
+	
 
+</script>
 <div  style=" margin: 60px auto; height:50px; font-size: 20px;text-align: center;">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
@@ -21,13 +26,12 @@ background: none;
 	<thead>
 		<tr>
 			<th class="informations">
-				제목입니다...
+				${dto.subject}
 				<span class="inforArea">
-					<strong>작성일</strong> [datetime]
+					<strong>작성일</strong> ${dto.created}
 					<span class="__dotted"></span>
-					<strong>작성자</strong> [writer]
-					<span class="__dotted"></span>
-					<strong>조회수</strong> [hit]
+					<strong>작성자</strong> ${dto.userId}
+					
 				</span>
 			</th>
 		</tr>
@@ -36,7 +40,10 @@ background: none;
 		<tr>
 			<td class="read_contArea">
 				<div id="board_memo_area">
-					
+				<c:if test="${dto.depth!=0}">
+	     		  [Re]
+	  			 </c:if>
+					${dto.content}
 				</div>
 		
 				<form name="read_likeAreaForm" class="_read_likesArea" ajaxAction="modules/board/read.likes.submit.php" ajaxType="html">
@@ -45,70 +52,43 @@ background: none;
 					<input type="hidden" name="mode" value="" />
 					<ul class="_read_likesArea" style="border-bottom: 1px solid #eee;">
 						<li class="_likes_btn">
-							<a href="#" title="">
-								13<br/>
-								<span class="__count" style="color: #1abc9c;">추천</span>
-							</a>
+							
 						</li>
 						
 					</ul>
 				</form>
-<!-- 				<tr> -->
-<!-- 				<td> 이전글</td> -->
-<!-- 				</tr> -->
-				
-<!-- 				<tr> -->
-<!-- 				<td>다음글</td> -->
-<!-- 				</tr> -->
 				<ul>
-					
 					<li>
-						<strong>이전글 :</strong>
+						<strong>이전글 : </strong>
+						<c:if test="${not empty preReadDto}">
+							<a href="<%=cp%>/customer/report/article?${query}&repNum=${preReadDto.repNum}">
+							${preReadDto.subject}</a>
+						</c:if>
 					</li>
-		
-					
-					
 				</ul>
 				<ul>
-					
 					<li>
-						<strong>다음글 :</strong>
+						<strong>다음글 : </strong>
+						<c:if test="${not empty nextReadDto}">
+							<a href="<%=cp%>/customer/report/article?${query}&repNum=${nextReadDto.repNum}">
+							${nextReadDto.subject}</a>
+						</c:if>
 					</li>
-		
-					
-					
 				</ul>
-				
-				<ul class="fileBox">
-					
-					<li>
-						<strong>첨부파일</strong>[file1]
-					</li>
 		
-					
-					
-				</ul>
-				
-		
-				<div class="commentBox">
-					<div class="_CALLING_COMMENT"><strong style="font-size: 18px;">
-					<span style="font-size: 16px; color: #1abc9c; " class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;리플입니다...</strong>
-					</div>
-					<div class="_CALLING_COMMENT">
-					<span class="inforArea">
-					<strong>작성일</strong> [datetime]
-					<span class="__dotted"></span>
-					<strong>작성자</strong> [writer]
-					<span class="__dotted"></span>
-					<strong>조회수</strong> [hit]
-					</span>
-					<div style="float: right;">
-					<input class="dnu" type="button" value="삭제">
-					<input class="dnu" type="button" value="수정">
-					</div>
-					</div>
-					
-				</div> 
+			<div style="float: right;">
+				<%-- <c:if test="${sessionScope.member.userId=='' }"> --%>
+					<button class="dnu" type="button" value="답변" onclick="replyForm('${dto.repNum}','${pageNo}');">답변</button>
+				<%-- </c:if> --%>
+				<%-- <c:if test=	"${sessionScope.member.userId=='' }"> --%>
+					<button class="dnu" type="button" onclick="updateForm('${dto.repNum}','${pageNo}');">수정</button>
+				<%-- </c:if> --%>
+				<%-- <c:if test="${sessionScope.member.userId=='' ||sessionScope.member.userId=='' }"> --%>
+					<button class="dnu" type="button"  onclick="deleteReport('${dto.repNum}','${pageNo}');">삭제</button>
+				<%-- </c:if> --%>
+					<button class="dnu" type="button" onclick="listPage('${pageNo}');">리스트</button>
+			</div>	
+			
 			</td>
 		</tr>
 	</tbody>

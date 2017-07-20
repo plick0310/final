@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 public interface ReportService {
-	public int insertBoard(Report dto, String mode);
+	public int insertReport(Report dto, String mode);
 	public int dataCount(Map<String, Object> map);
 	
-	public List<Report> listBoard(Map<String, Object> map);
+	public List<Report> listReport(Map<String, Object> map);
 	
-	public Report readBoard(int num);
+	public Report readReport(int num);
 	
-	public Report preReadBoard(Map<String, Object> map);
-	public Report nextReadBoard(Map<String, Object> map);
+	public Report preReadReport(Map<String, Object> map);
+	public Report nextReadReport(Map<String, Object> map);
 	
-	public int updateBoard(Report dto);
-	public int deleteBoard(int num);
+	public int updateReport(Report dto);
+	public int deleteReport(int num);
 }
