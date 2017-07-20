@@ -182,7 +182,7 @@ function readBoard(num){
 							</div>
 						</c:if>	
 							<dl style="padding-top: 3px; overflow: hidden; line-height: 19px; display: block;">
-								<dt style="display: inline; clear: both; margin-right: 5px; "><a onclick="" style="cursor: pointer; color: blue;">力格:&nbsp;&nbsp;&nbsp;${dto.subject }</a></dt>
+								<dt style="display: inline; clear: both; margin-right: 5px; "><a onclick="location.href='<%=cp %>/keyword/studyMarketBoard/article?num=${dto.num }'" style="cursor: pointer; color: blue;">力格:&nbsp;&nbsp;&nbsp;${dto.subject }</a></dt>
 								<dd class="txt_inline" style="clear: both; margin: 2px 0 1px; font-size: 12px; line-height: 18px; display: inline;">&nbsp;&nbsp;累己老|${dto.created }</dd>
 								<dt>[碍荤疙:${dto.userId }][炼雀荐&nbsp;&nbsp;${dto.hitCount }]</dt>
 
@@ -237,7 +237,7 @@ function readBoard(num){
 						<li style="clear: both;">
 	
 							<dl style="padding-top: 3px; overflow: hidden; line-height: 19px; display: block;">
-								<dt style="display: inline; clear: both; margin-right: 5px; "><a onclick="" style="cursor: pointer; color: blue;">力格:&nbsp;&nbsp;&nbsp;${dto.subject }</a></dt>
+								<dt style="display: inline; clear: both; margin-right: 5px; "><a onclick="location.href='<%=cp %>/keyword/downloadBoard/article?num=${dto.num }'" style="cursor: pointer; color: blue;">力格:&nbsp;&nbsp;&nbsp;${dto.subject }</a></dt>
 								<dd class="txt_inline" style="clear: both; margin: 2px 0 1px; font-size: 12px; line-height: 18px; display: inline;">&nbsp;&nbsp;累己老|${dto.created }</dd>
 
 

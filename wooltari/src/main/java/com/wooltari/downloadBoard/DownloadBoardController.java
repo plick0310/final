@@ -499,5 +499,33 @@ public class DownloadBoardController {
 			
 		return "download/downloadBoard/listReply";	
 		}
+		
+		
+		@RequestMapping(value="/keyword/downloadBoard/article")
+		public String Keywordarticle(
+				@RequestParam(value="num") int num,
+				Model model
+		) throws Exception {
+		
+			service.updateHitCount(num);
+			
+			DownloadBoard dto= service.readBoard(num);
+	
+			dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+			
+			
+			//파일
+			List<DownloadBoard> listFile= service.listFile(num);
+			
+			//좋아요.
+			int countLikeBoard=service.countLikeBoard(num);
+			
+			
+			model.addAttribute("dto", dto);
+			model.addAttribute("listFile", listFile);
+			model.addAttribute("countLikeBoard", countLikeBoard);
+			
+			return ".download.downloadBoard.article";
+		}
 }
 	
