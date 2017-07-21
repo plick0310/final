@@ -21,7 +21,7 @@
 		]]>
 	</select>
 	
-	<delete id="deletefreeTalk" parameterType="map">
+	<delete id="deleteFreeTalk" parameterType="map">
 		DELETE FROM freeTalk WHERE num=#{num}
 			<if test="userId!='admin'">
 				AND userId=#{userId}

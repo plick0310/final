@@ -25,9 +25,9 @@ public class FreeTalkController {
 	@Autowired
 	private MyUtil myUtil;
 	
-	@RequestMapping("/freeTalk/freetalk")
-	public String freetalk() throws Exception {
-		return ".freeTalk.freetalk";
+	@RequestMapping("/freeTalk/talk")
+	public String talk() throws Exception {
+		return ".freeTalk.talk";
 	}
 	
 	@RequestMapping(value="/freeTalk/insert", method=RequestMethod.POST)
