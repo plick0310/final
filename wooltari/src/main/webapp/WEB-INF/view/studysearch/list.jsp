@@ -15,7 +15,9 @@
 				</div>
 				<div class="header-text-container">
 					<div class="isPayment">
-					카테고리 들어갈 곳
+						<c:forEach var="vo" items="${dto.listCategory}">
+							${vo.subject}&nbsp; 
+						</c:forEach>
 					</div>
 					<div class="header-text align-left">
 						<div class="title-wrap">

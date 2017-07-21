@@ -63,7 +63,7 @@ public class SearchController {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		String cp = req.getContextPath();
 		
-		int rows=3;
+		int rows=12;
 		int total_page = 0;
 		int dataCount = 0;
 		
