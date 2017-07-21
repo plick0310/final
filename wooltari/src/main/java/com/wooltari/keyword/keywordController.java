@@ -109,6 +109,8 @@ public class keywordController {
 			,HttpServletRequest req
 			)throws Exception{
 	
+		String cp=req.getContextPath();
+		
 		int rows=10;
 		int total_page;
 		int studyCount;
@@ -140,8 +142,9 @@ public class keywordController {
 			n++;
 		}
 		
-		String paging=myUtil.paging(currentPage, total_page);
-
+		String listUrl=cp+"/keyword/studySearch?keyword="+keyword;
+		
+		String paging=myUtil.paging(currentPage, total_page,listUrl);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("paging", paging);
@@ -162,6 +165,7 @@ public class keywordController {
 			,HttpServletRequest req
 			)throws Exception{
 		
+		String cp=req.getContextPath();
 		
 		int rows=10;
 		int total_page;
@@ -195,7 +199,9 @@ public class keywordController {
 			n++;
 		}
 		
-		String paging=myUtil.paging(currentPage, total_page);
+		String listUrl=cp+"/keyword/promoteSearch?keyword="+keyword;
+		
+		String paging=myUtil.paging(currentPage, total_page,listUrl);
 		
 
 		model.addAttribute("list", list);
@@ -217,6 +223,7 @@ public class keywordController {
 			,HttpServletRequest req
 			)throws Exception{
 		
+		String cp=req.getContextPath();
 		
 		int rows=10;
 		int total_page;
@@ -250,7 +257,9 @@ public class keywordController {
 			n++;
 		}
 		
-		String paging=myUtil.paging(currentPage, total_page);
+		String listUrl=cp+"/keyword/reviewSearch?keyword="+keyword;
+		
+		String paging=myUtil.paging(currentPage, total_page,listUrl);
 		
 
 		model.addAttribute("list", list);
@@ -271,7 +280,7 @@ public class keywordController {
 			,Model model
 			,HttpServletRequest req
 			)throws Exception{
-		
+		String cp=req.getContextPath();
 		
 		int rows=10;
 		int total_page;
@@ -305,7 +314,9 @@ public class keywordController {
 			n++;
 		}
 		
-		String paging=myUtil.paging(currentPage, total_page);
+		String listUrl=cp+"/keyword/marketSearch?keyword="+keyword;
+		
+		String paging=myUtil.paging(currentPage, total_page,listUrl);
 		
 
 		model.addAttribute("list", list);
@@ -326,7 +337,7 @@ public class keywordController {
 			,Model model
 			,HttpServletRequest req
 			)throws Exception{
-		
+		String cp=req.getContextPath();
 		
 		int rows=10;
 		int total_page;
@@ -371,7 +382,9 @@ public class keywordController {
 		}
 		
 		
-		String paging=myUtil.paging(currentPage, total_page);
+		String listUrl=cp+"/keyword/whereSearch?keyword="+keyword;
+		
+		String paging=myUtil.paging(currentPage, total_page,listUrl);
 		
 
 		model.addAttribute("list", list);
@@ -392,7 +405,7 @@ public class keywordController {
 				,Model model
 				,HttpServletRequest req
 				)throws Exception{
-			
+			String cp=req.getContextPath();
 			
 			int rows=10;
 			int total_page;
@@ -426,7 +439,9 @@ public class keywordController {
 				n++;
 			}
 			
-			String paging=myUtil.paging(currentPage, total_page);
+			String listUrl=cp+"/keyword/downloadSearch?keyword="+keyword;
+			
+			String paging=myUtil.paging(currentPage, total_page,listUrl);
 			
 
 			model.addAttribute("list", list);
