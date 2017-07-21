@@ -353,6 +353,26 @@ function searchList() {
 
 	listPage(1);
 }
+
+function goSubmit(tryList) {
+	var url="<%=cp%>/mockTest/mockExam";
+	var query = "ansTryList="+tryList;
+	alert(query);
+	
+	ajaxSubmit(url, "post", query);
+}
+
+function ajaxSubmit(url, type, query) {
+	$.ajax({
+		type:type
+		,url:url
+		,data:query
+		,success:function(data) {
+			alert("에이잭스 성공!");
+		}
+	});
+}
+
 </script>
 
 <!--

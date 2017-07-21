@@ -28,6 +28,22 @@ p{text-align:center;}
 }
 </style>
 
+<style>
+.scrolltbody {
+    display: block;
+    border-collapse: collapse;
+}
+.scrolltbody tbody {
+    display: block;
+    height: 500px;
+    overflow: auto;
+    width: 100%;
+}
+.scrolltbody tr {
+    width: 100%;
+}
+
+</style>
 
 
 
@@ -37,13 +53,14 @@ p{text-align:center;}
     </div>
 
 <form name="challListForm">
-	<table cellpadding="0" cellspacing="0" style="width: 430px;margin-bottom: 60px;float: right;"
+	<table class="scrolltbody" cellpadding="0" cellspacing="0" width="430px" style="margin-bottom: 60px;float: right;"
 		class="board_table array">
+		<tbody>
 		<c:forEach items="${challengeList }" var="dto" varStatus="status" >
 			<tr>
 				<td class="___number"
 					style="font-size: 11px; color: #666; text-align: center; font-weight: bold;">${dto.challNum }</td>
-				<td style="padding: 9px 5px; border-bottom: 1px solid #EEEEEE;">
+				<td style="padding: 9px 5px; border-bottom: 1px solid #EEEEEE; width: 100%;">
 					<div style="position: relative;">
 						<a href="#" class="subject"
 							style="font-size: 15px; font-weight: bold; color: #373737;">${dto.examinfoName }</a>
@@ -71,4 +88,3 @@ p{text-align:center;}
 		</tbody>
 	</table>
 </form>
-${paging2 }

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wooltari.member.SessionInfo;
 
@@ -36,13 +37,16 @@ public class MockExamController {
 	}
 	
 	@RequestMapping(value="/mockTest/mockExam", method=RequestMethod.POST)
+	@ResponseBody
 	public String checkExam(
-			@RequestParam(value="ansTryList", defaultValue="") String answerList, 
-			@RequestParam(value="name", defaultValue="정보처리기사") String name,
+			@RequestParam(value="ansTryList", defaultValue="") String answerList,/* 
+			@RequestParam(value="name", defaultValue="정보처리기사") String name,*/
 			HttpServletRequest req,
 			Model model,
 			HttpSession session
 			) throws Exception {
+
+		String name = "정보처리기사";
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		

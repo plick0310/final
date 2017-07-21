@@ -1432,21 +1432,23 @@
 									f.targetDiv.value = document.getElementById('current_i').value;
 									
 									alert("수고하셨습니다!!!");
+									opener.goSubmit(tryList);
 									
-									goSubmit();
+									window.close();
 								}
 							}
 							else if(f.mode.value == 'restudy') start_test(nextSameIndex, "restudyCheck", startNum, eachTotal);
 							else if(f.mode.value == 'incorrect') start_test(nextSameIndex, "incorrectCheck", startNum, eachTotal);
 						}
 						
-						function goSubmit() {
+				   <%-- function goSubmit() {
+							
 							window.opener.name="parentPage";
 							document.test_form.target = "parentPage";
 							document.test_form.action = "<%=cp%>/mockTest/mockExam";
 							document.test_form.submit();
 							self.close();
-						}
+						} --%>
 						
 						
 						function resultCheck(i, j) {
