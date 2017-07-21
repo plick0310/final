@@ -11,7 +11,7 @@
 		   		from study
 		<![CDATA[
 		   			where range<2 and (DBMS_LOB.INSTR(studyname,'${keyword}') > 0 or DBMS_LOB.INSTR(study_info,'${keyword}') > 0 )
-		 	    order by created
+		 	    order by created desc
 		
 		  	 )tb where rownum <=#{end}
 		)where rnum >=#{start}
@@ -32,7 +32,7 @@
 		   		from study
 		<![CDATA[
 		   			where range<2 and (DBMS_LOB.INSTR(studyname,'${keyword}') > 0 or DBMS_LOB.INSTR(study_info,'${keyword}') > 0 )
-		 	    order by created
+		 	    order by created desc
 		
 		  	 )tb where rownum <=#{end}
 		)where rnum >=#{start}
@@ -48,7 +48,7 @@
 				join study s on p.s_num=s.s_num			
 	<![CDATA[
 				 where range<2 and (DBMS_LOB.INSTR(p.subject,'${keyword}') > 0 or DBMS_LOB.INSTR(p.content,'${keyword}') > 0 )
-				order by created
+				order by created desc
 			 )tb where rownum <=#{end}
 	)where rnum >=#{start}
 	]]>
@@ -70,7 +70,7 @@
 				join study s on p.s_num=s.s_num			
 	<![CDATA[
 				 where range<2 and (DBMS_LOB.INSTR(p.subject,'${keyword}') > 0 or DBMS_LOB.INSTR(p.content,'${keyword}') > 0 )
-				order by created
+				order by created desc
 			 )tb where rownum <=#{end}
 	)where rnum >=#{start}
 	]]>
@@ -85,7 +85,7 @@
 		    	from downloadboard
 	<![CDATA[
 				 where (DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0 )
-				order by created
+				order by created desc
 			 )tb where rownum <=#{end}
 	)where rnum >=#{start}
 	]]>
@@ -105,7 +105,7 @@
 		    	from downloadboard
 	<![CDATA[
 				 where (DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0 )
-				order by created
+				order by created desc
 			 )tb where rownum <=#{end}
 	)where rnum >=#{start}
 	]]>
@@ -136,7 +136,7 @@
 					join study s on r.s_num=s.s_num
 	<![CDATA[
 				 where range<2 and (DBMS_LOB.INSTR(r.subject,'${keyword}') > 0 or DBMS_LOB.INSTR(r.content,'${keyword}') > 0 )
-				order by created
+				order by created desc
 			 )tb where rownum <=#{end}
 	)where rnum >=#{start}
 	]]>
@@ -157,7 +157,7 @@
 					join study s on r.s_num=s.s_num
 	<![CDATA[
 				 where range<2 and (DBMS_LOB.INSTR(r.subject,'${keyword}') > 0 or DBMS_LOB.INSTR(r.content,'${keyword}') > 0 )
-				order by created
+				order by created desc
 			 )tb where rownum <=#{end}
 	)where rnum >=#{start}
 	]]>
@@ -171,7 +171,7 @@
 		  from studymarketboard b
 	<![CDATA[
 				 where (DBMS_LOB.INSTR(b.subject,'${keyword}') > 0 or DBMS_LOB.INSTR(b.content,'${keyword}') > 0 )
-				order by created
+				order by created desc
 			 )tb where rownum <=#{end}
 	)where rnum >=#{start}
 	]]>	  
@@ -192,7 +192,7 @@
 		  from studymarketboard b
 	<![CDATA[
 				 where (DBMS_LOB.INSTR(b.subject,'${keyword}') > 0 or DBMS_LOB.INSTR(b.content,'${keyword}') > 0 )
-				order by created
+				order by created desc
 			 )tb where rownum <=#{end}
 	)where rnum >=#{start}
 	]]>	  
@@ -208,7 +208,7 @@
 	<![CDATA[
 				 where DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0 or DBMS_LOB.INSTR(placename,'${keyword}') > 0 
 				 or DBMS_LOB.INSTR(region,'${keyword}') > 0
-				order by created
+				order by created desc
 			 )tb where rownum <=#{end}
 	)where rnum >=#{start}
 	]]>	  		
@@ -229,7 +229,7 @@
 	<![CDATA[
 				 where DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0 or DBMS_LOB.INSTR(placename,'${keyword}') > 0 
 				 or DBMS_LOB.INSTR(region,'${keyword}') > 0
-				order by created
+				order by created desc
 			 )tb where rownum <=#{end}
 	)where rnum >=#{start}
 	]]>	  		
