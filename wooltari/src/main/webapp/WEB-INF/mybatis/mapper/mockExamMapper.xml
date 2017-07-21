@@ -15,11 +15,14 @@
 	</select>
 	
 	<select id="scoring" parameterType="map" resultType="com.wooltari.mockExam.MockExam">
-		select answer from EXAMANSWERDB	
+		select answer from EXAMANSWERDB<!-- 	where examnum = #{testNum} -->
 	</select>
 	
-	<!--  -->
-	
+	<!-- 점수 결과 저장 -->
+	<insert id="insertResult" parameterType="com.wooltari.mockExam.MockExam">
+		INSERT INTO passResult (num, examinfoName, result, userId, pass)
+			VALUES (pr_num.NEXTVAL,#{examinfoName}, #{result}, #{userId}, #{pass})
+	</insert>
 	
 	
 </mapper>

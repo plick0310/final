@@ -8,6 +8,8 @@
    String cp = request.getContextPath();
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/mock.css" />
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
 
 <style>
  .footer {
@@ -248,7 +250,7 @@ $(function(){
             $tab = $(".tab_menu .active");
             tab = $tab.attr("data-tab");           
     		url = "<%=cp%>/mockTest/"+tab;
-    		 
+
         $.ajax({
            dataType:"html"
            ,url:"<%=cp%>/mockTest/"+tab
@@ -257,8 +259,8 @@ $(function(){
       		if(tab != 'exam') {
     			$("#examSearch").attr({
     				style : 'display:none;'
-    				
     			});
+    			chart();
     		} else if(tab == 'exam') {
     			$("#examSearch").attr({
     				style : 'margin-top:0; float:right;'
@@ -267,8 +269,34 @@ $(function(){
            }
         });
      }); 
-});	 
-	function popupLink(popHeight,popWidth){ 
+});
+
+function chart(){
+	var name = '7월 응시 리스트';
+	var url="<%=cp%>/hchart/line1";
+	$.getJSON(url, function (csv) {
+		$('#lineContainer1').highcharts({
+	        title: {
+	            text: name,
+	        },
+	        xAxis: {
+	            categories: ['1회', '2회', '3회', '4회', '5회', '6회', '7회', '8회', '9회', '10회',
+	            	'11회', '12회', '13회', '14회', '15회', '16회', '17회', '18회', '19회', '20회',
+	            	'21회', '22회', '23회', '24회', '25회', '26회', '27회', '28회', '29회', '30회',
+	            	'31회', '32회', '33회', '34회', '35회', '36회', '37회', '38회', '39회', '40회',
+	            	'41회', '42회', '43회', '44회', '45회', '46회', '47회', '48회', '49회', '50회']
+	        },
+	        yAxis: {
+	            title: {
+	                text: '점수(Score)'
+	            },
+	        },
+	        series:csv.series
+		});
+	});	
+}
+
+	function popupLink(popHeight,popWidth,examInfoName){ 
 		var winHeight = document.body.clientHeight;   // 현재창의 높이
 		var winWidth = document.body.clientWidth;   // 현재창의 너비
 		var winX = window.screenX || window.screenLeft || 0;   // 현재창의 x좌표
@@ -278,8 +306,13 @@ $(function(){
 		var popY = winY + (winHeight - popHeight)/2;
 <%-- 	window.open("<%=cp%>/mockTest/examFiles", "popup",
 			"width="+ popWidth + "px,height=" + popHeight + "px,top=" + popY+ ",left=" + popX); --%>
-		window.open("<%=cp%>/mockTest/examFiles", "popup",
-			"width="+ popWidth + "px,height=" + popHeight + "px,top=" + popY+ ",left=" + popX);
+		if(examInfoName == '정보처리기사') {
+			window.open("<%=cp%>/mockTest/examFiles", "popup",
+				"width="+ popWidth + "px,height=" + popHeight + "px,top=" + popY+ ",left=" + popX);
+		} else {
+			window.open("<%=cp%>/mockTest/examJFiles", "popup",
+					"width="+ popWidth + "px,height=" + popHeight + "px,top=" + popY+ ",left=" + popX);
+		}
 	}
 </script>
 
@@ -320,6 +353,26 @@ function searchList() {
 
 	listPage(1);
 }
+
+function goSubmit(tryList) {
+	var url="<%=cp%>/mockTest/mockExam";
+	var query = "ansTryList="+tryList;
+	alert(query);
+	
+	ajaxSubmit(url, "post", query);
+}
+
+function ajaxSubmit(url, type, query) {
+	$.ajax({
+		type:type
+		,url:url
+		,data:query
+		,success:function(data) {
+			alert("에이잭스 성공!");
+		}
+	});
+}
+
 </script>
 
 <!--
@@ -455,7 +508,6 @@ function updateTime() {
 	
 		<!-- 문제  / 응시내역 탭 -->
 			<div style="margin-bottom: 5px;">
-				<span>아아 ${result }점</span>
 				<span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">문제은행</span>
 			</div>
 			
@@ -478,7 +530,7 @@ function updateTime() {
 	<form name="array_form" id="array_form" style="width: 900px;">
 			<div id="wrap">
 				<div id="box">
-					<div style="width: 100%;float: left;margin: 0px auto;">
+					<div style="width: 100%;float: left;margin: 0px auto;height: 670px;">
 						<ul class="tab_menu">
 			               <li class="active" id="exam" style="border-right:none; float:left;" data-tab="exam"><a href="#">문 제</a></li>
 			               <li id="challengeList" style="border-right:none; float:left;" data-tab="challengeList"><a href="#">응시내역</a></li>
@@ -487,7 +539,7 @@ function updateTime() {
 						<div class="tab_cont"></div>
 					</div>
 				</div>
-			</div>	
+			</div>	 
 		</form>
 			<form name="mockTestSearchForm" action="" method="post">
 			    <input type="hidden" name="searchKey" value="examInfoName"/>

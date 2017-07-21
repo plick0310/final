@@ -37,7 +37,7 @@
 	
 						<div class="likes" style="font-size: 13px; width: 60px;">
 							응시하기<br> <span class="num" style="color: #1abc9c;">
-							<a target="_blank" onclick="popupLink(500,1050)"
+							<a target="_blank" onclick="popupLink(500,1050,'${dto.examInfoName}')"
 								style="width: 100px; height: 100px;">
 								<span class="glyphicon glyphicon-circle-arrow-right"></span>
 							</a>

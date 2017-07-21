@@ -86,7 +86,7 @@
 		                            [시험 범위] 1과목 ~ 5과목 종합 랜덤 시험 (10문제)<br/>
 		                            [시험시간] 특별한 제약없이 15분 응시 가능<br/>
 		                            [합격점수] 60점 이상 (100문제 중 60문제 이상 득점)<br/>
-		                            [불합격] 7문제 이하 득점시, 불합격처리<br/>
+		                            [불합격] 5문제 이하 득점시, 불합격처리<br/>
 	                        	</span>
 	                     	</div>   
 	                  	</td> 
@@ -98,31 +98,11 @@
 								<tbody>
 									<tr style="padding:10px 2px 1px 2px;font-size:14px;height:33px;font-family: 'BareunDotum';background: #eee;/* padding: 38px; */">
 										<td align="center">종합<span>|</span></td>
-										<td align="center"><strong style="color: #1abc9c;">응시전</strong>&nbsp;&nbsp;&nbsp;20 문제<span>|</span><br/></td>
-										<td style="text-align: center;">17.07.13<span>|</span></td>
+										<td align="center"><strong style="color: #1abc9c;">응시전</strong>&nbsp;&nbsp;&nbsp;10 문제<span>|</span><br/></td>
+										<td style="text-align: center;">난이도 : 상<span>|</span></td>
 										<td colspan="1" align="center">
 										<!--	 <button type="button" value="시작" class="clickbtn" onclick="examStart();">시작</button> -->
 											<button type="button" value="시작" class="clickbtn" onclick="javascript:location.href='<%=cp%>/mockTest/mockExam';">시작</button> 
-<%-- 											 	<script>
-													function examStart() {
-													window.location.href="<c:url value='community/mockTest/mockExam.jsp' />";
-													location.replace("<%=cp%>/mockTest/mockExam");
-													
-														var url="<%=cp%>/mockTest/mockExam";
-														var query="tmp="+new Date().getTime();
-													    var f = document.boardForm;
-													    
-													    	$.ajax({
-													    		type:"get"
-													    		,url:url
-													    		,data:query
-													    		,success:function(data) {
-													    			$("#tab-content").html(data);
-													    		}
-													    	});
-													    }
-											</script> --%>
-
                              			</td>
                              		</tr>
                         		</tbody>
