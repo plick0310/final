@@ -2,6 +2,7 @@ package com.wooltari.report;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -13,12 +14,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.support.SessionStatus;
 
 import com.wooltari.common.MyUtil;
 import com.wooltari.member.SessionInfo;
@@ -36,8 +34,8 @@ public class ReportController {
 	public String createdForm(
 			Model model) throws Exception {
 		
-		model.addAttribute("pageNo", "1");
 		model.addAttribute("mode","created");
+		model.addAttribute("pageNo", "1");
 		
 		return ".customer.report.created";
 	}
@@ -64,7 +62,7 @@ public class ReportController {
 	
 	@RequestMapping(value="/customer/report/list")
 	public String list(
-			@RequestParam(value="pageNo", defaultValue="1") int current_page,
+			@RequestParam(value="page", defaultValue="1") int current_page,
 			@RequestParam(value="searchKey", defaultValue="subject") String searchKey,
 			@RequestParam(value="searchValue", defaultValue="") String searchValue,
 			HttpServletRequest req,
@@ -102,15 +100,29 @@ public class ReportController {
 			data.setListNum(listNum);
 			n++;
 		}
+		String cp= req.getContextPath();
+		
+		String query="";
+		String listUrl= cp+"/customer/report/list";
+		String articleUrl = cp+"/customer/report/article?pageNo="+current_page;
+		if(searchValue.length()!=0){
+			query="searchKey="+searchKey+
+					"&searchValue="+URLEncoder.encode(searchValue,"utf-8");
+		}
+		if(query.length()!=0){
+			listUrl=cp+"/customer/report/list" + query;
+			articleUrl=cp+"/customer/report/article?pageNo="+current_page+"&"+query;
+		}
 		
 		//ajax(인수 2개짜리)..ajax 안썼음 확인요.
-		String paging = myUtil.paging(current_page, total_page);
+		String paging = myUtil.paging(current_page, total_page, listUrl);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("pageNo", current_page);
 		model.addAttribute("paging", paging);
 		model.addAttribute("total_page", total_page);
+		model.addAttribute("articleUrl", articleUrl);
 		
 		return ".customer.report.list";
 	}
@@ -153,64 +165,55 @@ public class ReportController {
 			model.addAttribute("preReadDto", preReadDto);
 			model.addAttribute("nextReadDto", nextReadDto);
 			
+			model.addAttribute("repNum", repNum);
 			model.addAttribute("pageNo", pageNo);
 			model.addAttribute("query", query);			
 		
 		return ".customer.report.article";
 	}
 
-	@RequestMapping(value="customer/report/update", method=RequestMethod.GET)
+	@RequestMapping(value="/customer/report/update", method=RequestMethod.GET)
 	public String udpateForm(
 			@RequestParam(value="repNum") int repNum,
 			@RequestParam(value="pageNo") String pageNo,
 			HttpSession session,
 			Model model) throws Exception{
-		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		Report dto=service.readReport(repNum);
-		if(dto==null) {
-			return "customer/error";
-		}
 		
-		if(! info.getUserId().equals(dto.getUserId())) {
-			return "customer/error";
-		}
+		Report dto=service.readReport(repNum);
 		
 		model.addAttribute("mode", "update");
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("dto", dto);	
 		
-		return "customer/report/created";
+		return ".customer.report.created";
 	}
 	
-/*	@RequestMapping(value="/customer/report/update")
-	@ResponseBody
-	public Map<String, Object> updateSubmit(
+	@RequestMapping(value="/customer/report/update", method=RequestMethod.POST)
+	//@ResponseBody
+	//public Map<String, Object> updateSubmit(
+	public String updateSubmit(
 			Report dto,
+			@RequestParam String pageNo,
 			HttpSession session) throws Exception{
 		
-		String state="true";
+		//String state="true";
 		service.updateReport(dto);
 		
+		//Map<String, Object> model= new HashMap<>();
+		//model.put("state", state);
+		//return model;
 		
-		return model;
+		return "redirect:/customer/report/list?pageNo="+pageNo;
 		
 	}
-	*/
+	
 	@RequestMapping(value="/customer/report/reply", method=RequestMethod.GET)
 	public String replyForm(
 			@RequestParam(value="repNum") int repNum,
 			@RequestParam(value="pageNo") String pageNo,
 			HttpSession session,
 			Model model)throws Exception{
-		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		Report dto=service.readReport(repNum);
-		if(dto==null) {
-			return "customer/error";
-		}
-		
-		if(! info.getUserId().equals(dto.getUserId())) {
-			return "customer/error";
-		}
 		
 		String str = "["+dto.getSubject()+"] 에 대한 답변입니다.\n";
 		dto.setContent(str);
@@ -220,24 +223,47 @@ public class ReportController {
 		model.addAttribute("dto", dto);		
 
 		
-		return "customer/board/created";
+		return ".customer.report.created";
 	}
 	
-	@RequestMapping(value="/customer/report/reply")
-	@ResponseBody
-	public Map<String, Object> replySubmit(
+	@RequestMapping(value="/customer/report/reply", method=RequestMethod.POST)
+	//@ResponseBody
+	//public Map<String, Object> replySubmit(
+	public String replySubmit(
 			Report dto,
+			@RequestParam(value="pageNo") String pageNo,
 			HttpSession session) throws Exception {
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		String state="true";
+		//String state="true";
 		
 		dto.setUserId(info.getUserId());
 		service.insertReport(dto, "reply");
 		
-		Map<String, Object> model=new HashMap<>();
-		model.put("state", state);
-		return model;		
+		//Map<String, Object> model=new HashMap<>();
+		//model.put("state", state);
+		
+		//return model;
+		return "redirect:/customer/report/list?pageNo="+pageNo;
 	}
-	
+	@RequestMapping(value="/customer/report/delete")
+	public String delete(
+			@RequestParam int repNum,
+			@RequestParam String pageNo,
+			HttpSession session)throws Exception{
+		Report dto=service.readReport(repNum);
+
+		service.deleteReport(repNum);		
+		
+		return "redirect:/customer/report/list?pageNo"+pageNo;
+	}
+	@RequestMapping(value="/customer/report/deleteList")
+	public String deleteList(
+			Integer[] chk,
+			@RequestParam String pageNo
+			)throws Exception{
+		List<Integer> list= Arrays.asList(chk);
+		service.deleteList(list);
+		return "redirect:/customer/report/list?pageNo"+pageNo;
+	}
 }

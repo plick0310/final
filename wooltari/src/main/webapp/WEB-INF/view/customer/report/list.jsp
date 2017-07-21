@@ -180,7 +180,7 @@ function check(){
 			f.chk.checked=false;
 	}
 }
-
+//리스트 삭제
 function deleteList(){
 	var f=document.array_form;
 	var cnt=0;
@@ -204,7 +204,7 @@ function deleteList(){
 		return false;
 	}
 	if(confirm("선택한 게시물을 삭제하시겠습니까?")){		
-	    f.action="<%=cp%>/customer/report/deleteList"; 
+	    f.action="<%=cp%>/customer/report/deleteList?pageNo="+${pageNo}; 
 		f.submit();
 	}
 	
@@ -306,11 +306,14 @@ function deleteAction(){
 				<td style="text-align:right; width:65px; padding: 5px 18px;">
 				<input type="checkbox" name="chk" value="${dto.repNum}"></td>
 				
-				<td class="___number">${dto.listNum}</td>
+				<td class="___number">[ ${dto.category} ]</td>
 				<td>
 					<div style="position:relative;">
 						<!--[category_name]-->
-					
+						<c:forEach var="n" begin="1" end="${dto.depth}">
+              			 &nbsp;
+           				</c:forEach>
+           				<c:if test="${dto.depth!=0}">└&nbsp;</c:if>
 						<a href="javaScript:location.href='<%=cp%>/customer/report/article?pageNo=${pageNo}&repNum=${dto.repNum}';"
 						 class="subject">${dto.subject}</a>
 						<span class="comment"></span>

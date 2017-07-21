@@ -368,7 +368,7 @@ function deleteAction(){
 		 onclick="javascript:deleteList();" value="삭제">
 	</c:if>	
 		<input type="button" class="clickbtn"
-		 onclick="javascript:location.href='<%=cp%>/customer/notice/created';" value="글쓰기">
+		 onclick="javascript:location.href='<%=cp%>/customer/notice/created?';" value="글쓰기">
 	</div>
 
 <form action="" id="array_form" name="searchForm" method="post">

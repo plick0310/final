@@ -126,6 +126,16 @@ public class ReportServiceImpl implements ReportService {
 		return result;
 	}
 
+	@Override
+	public int deleteList(List<Integer> list) {
+		int result=0;
+		try{
+			result=dao.deleteData("report.deleteList", list);
+		}catch(Exception e){			
+		}
+		return result;
+	}
+
 	
 	
 }

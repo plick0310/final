@@ -44,9 +44,9 @@ public class StudyMarketBoardController {
 	
 		//삽입
 		@RequestMapping(value="/studyMarket/studyMarketBoard/created", method=RequestMethod.GET)
-		public String createdForm(Model model,HttpSession session) throws Exception {
+		public String createdForm(@RequestParam String page, Model model,HttpSession session) throws Exception {
 			model.addAttribute("mode","created");
-			
+			model.addAttribute("page",page);
 			return ".studyMarket.studyMarketBoard.created";
 		}
 		

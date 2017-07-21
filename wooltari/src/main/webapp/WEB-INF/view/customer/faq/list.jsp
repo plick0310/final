@@ -83,9 +83,9 @@ function deleteList(){
 				      <h4 class="panel-title">
 				        <span><small><input type="checkbox" id="chk" name="chk" value="${dto.num}"></small></span>
 				        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse${dto.listNum}" aria-expanded="false" aria-controls="collapse${dto.listNum}">
-				        <span><small>${dto.listNum}</small></span> &nbsp;&nbsp;&nbsp;<span>제목 : ${dto.subject}</span>
-				         <small>작성자 : ${dto.userId} </small>&nbsp;&nbsp;&nbsp;<small>작성일 : ${dto.created}</small>&nbsp;&nbsp;&nbsp;
-				         <small>카테고리 : ${dto.category}</small>
+				        <span><small>[${dto.category}]</small></span> &nbsp;&nbsp;&nbsp;<span><small>${dto.subject}</small></span>
+				         
+				         
 				         	<input type="button" class="clickbtn"
 							 onclick="javascript:location.href='<%=cp%>/customer/faq/update?pageNo=${pageNo}&num=${dto.num}';" value="수정하기">
 				        </a>

@@ -252,7 +252,7 @@ padding: 40px;
 	<div class="btnArea" style="float: right;">
 			
 		<input type="button" class="clickbtn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"
-		 onclick="javascript:location.href='<%=cp%>/studyMarket/studyMarketBoard/created';" value="글쓰기">
+		 onclick="javascript:location.href='<%=cp%>/studyMarket/studyMarketBoard/created?page='+${page};" value="글쓰기">
 	
 	</div>
 	

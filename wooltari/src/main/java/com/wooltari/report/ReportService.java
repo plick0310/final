@@ -16,4 +16,6 @@ public interface ReportService {
 	
 	public int updateReport(Report dto);
 	public int deleteReport(int num);
+	
+	public int deleteList(List<Integer> list);
 }
