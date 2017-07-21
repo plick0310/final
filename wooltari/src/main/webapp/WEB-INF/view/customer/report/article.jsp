@@ -14,7 +14,22 @@ background: none;
 </style>
 <script type="text/javascript">
 //alert('${preReadDto.subject}');
+function replyForm() {
+//alert("repNum:" + '${repNum}' + " / pageNo:" + '${pageNo}');
+	location.href="<%=cp%>/customer/report/reply?pageNo="+'${pageNo}'+"&repNum="+'${repNum}';
+}
+
+function updateForm() {
+	location.href="<%=cp%>/customer/report/update?pageNo=" + '${pageNo}' + "&repNum=" + '${repNum}';
+}
+
+function deleteReport(){
+	location.href="<%=cp%>/customer/report/delete?pageNo=" + '${pageNo}' + "&repNum=" + '${repNum}';
+}
+function listPage(){
+	location.href="<%=cp%>/customer/report/list?pageNo=" + '${pageNo}' + "&repNum=" + '${repNum}';
 	
+}
 
 </script>
 <div  style=" margin: 60px auto; height:50px; font-size: 20px;text-align: center;">
@@ -77,16 +92,16 @@ background: none;
 				</ul>
 		
 			<div style="float: right;">
-				<%-- <c:if test="${sessionScope.member.userId=='' }"> --%>
-					<button class="dnu" type="button" value="답변" onclick="replyForm('${dto.repNum}','${pageNo}');">답변</button>
+				<%-- <c:if test="${sessionScope.member.userId=='admin' }"> --%>
+					<input class="dnu" type="button" value="답변" onclick="javaScript:location.href='<%=cp%>/customer/report/reply?pageNo=${pageNo}&repNum=${repNum}';">
 				<%-- </c:if> --%>
-				<%-- <c:if test=	"${sessionScope.member.userId=='' }"> --%>
-					<button class="dnu" type="button" onclick="updateForm('${dto.repNum}','${pageNo}');">수정</button>
+				<%-- <c:if test=	"${sessionScope.member.userId=='admin' }"> --%>
+					<button class="dnu" type="button" onclick="updateForm();">수정</button>
 				<%-- </c:if> --%>
-				<%-- <c:if test="${sessionScope.member.userId=='' ||sessionScope.member.userId=='' }"> --%>
-					<button class="dnu" type="button"  onclick="deleteReport('${dto.repNum}','${pageNo}');">삭제</button>
+				<%-- <c:if test="${sessionScope.member.userId=='' ||sessionScope.member.userId=='admin' }"> --%>
+					<button class="dnu" type="button"  onclick="deleteReport();">삭제</button>
 				<%-- </c:if> --%>
-					<button class="dnu" type="button" onclick="listPage('${pageNo}');">리스트</button>
+					<button class="dnu" type="button" onclick="listPage();">리스트</button>
 			</div>	
 			
 			</td>

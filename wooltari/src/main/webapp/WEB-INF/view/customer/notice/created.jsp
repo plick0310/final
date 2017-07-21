@@ -5,8 +5,9 @@
 <%
 	String cp = request.getContextPath();
 %>
-<style>
 
+<!-- wooltari 공지 -->
+<style>
 .clickbtn {
    background-color: white;
    border-style: solid;
@@ -81,9 +82,9 @@ border: 1px solid #EAEAEA;
 		
 		var mode="${mode}";
 		if(mode=="created")
-    		f.action="<%=cp%>/infoReqBoard/created";
+    		f.action="<%=cp%>/customer/notice/created";
     	else if(mode=="update")
-    		f.action="<%=cp%>/infoReqBoard/update";
+    		f.action="<%=cp%>/customer/notice/update";
 		
 		
 		return true;

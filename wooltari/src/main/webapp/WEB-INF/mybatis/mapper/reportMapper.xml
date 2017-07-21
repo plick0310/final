@@ -111,4 +111,9 @@
                (SELECT repNum FROM report START WITH  repNum = #{repNum}
 	            CONNECT BY PRIOR repNum = parent)
 </delete>
+
+<delete id="deleteList" parameterType="java.util.List">
+	DELETE FROM report WHERE repNum IN
+	<foreach close=")" separator="," open="(" collection="list" index="index" item="repNum">#{repNum}</foreach>
+</delete>
 </mapper>
