@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chall">
+
+	<select id="challengeList" parameterType="map" resultType="com.wooltari.mockTest.challengeList.ChallengeList">
+		SELECT * FROM (
+			SELECT ROWNUM challNum, tb.* FROM (
+				SELECT eif.examinfoName, questionSubject, examdate, examinfoOrgan, result, pass FROM passResult erl
+				JOIN EXAMINFO eif ON erl.examinfoName = eif.examinfoName
+		        JOIN EXAMTESTLIST etl ON erl.examinfoName = etl.examinfoName where userId=#{userId}
+		<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) where challNum >= #{start}
+		]]>
+		order by examDate desc
+	</select>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM passResult el 
+  		JOIN examinfo e ON el.examinfoName = e.examinfoName  WHERE userId = #{userId}
+	</select>
+	
+	<select id="highChartList" parameterType="map" resultType="com.wooltari.mockTest.challengeList.ChallengeList">
+		select result, examDate from passresult where userId=#{userId} AND examinfoName=#{examinfoName} order by examdate desc
+	</select>
+	
+</mapper>

@@ -153,13 +153,4 @@ public class MockTestController {
 		
 		return model;
 	}
-	
-	// 탭 기능-----------------------------------------------------------------------------
-	// 응시내역
-	@RequestMapping(value="/mockTest/challengeList")
-	public String callengeList() {
-		
-		return "community/mockTest/challengeList";
-	}
-	
 }

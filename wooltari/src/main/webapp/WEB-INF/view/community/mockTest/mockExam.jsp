@@ -93,7 +93,7 @@
 						var subjectNum = 1;
 						var mode = 'first';
 						var initStartNum = 1;
-						var initEachTotal = 20;
+						var initEachTotal = 10;
 					</script>
 
 					<div id="index_div" style="padding-top: 50px; text-align: center; display: none; visibility: hidden;">1문제씩 풀기 로딩 중입니다...</div>
@@ -1392,6 +1392,7 @@
 							var startNum = document.getElementById('current_startNum').value;
 							var eachTotal = (document.getElementById('current_questionTotal').value) - 10;
 							var endNum = eval(startNum) + eval( eachTotal ) - 1;
+							
 						
 							/* 주관식 문제 이전*/ 
 							for(var i=startNum; i <= endNum; i++) {

@@ -40,4 +40,16 @@ public class MockExamServiceImpl implements MockExamService{
 	}
 
 
+	@Override
+	public int insertResult(Map<String, Object> map) {
+		int result = 0;
+		
+		try {
+			result = dao.insertData("mockExam.insertResult", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

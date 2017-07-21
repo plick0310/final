@@ -14,6 +14,7 @@ public class MockTest {
 	private String examwishDate;
 	private String checkMode;
 	
+	
 	// 모의 테스트 & 문제 DB
 	private int testNum; // 시험번호
 	private String created; // 생성일

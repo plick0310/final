@@ -3,6 +3,7 @@ package com.wooltari.mockExam;
 public class MockExam {
 	private int num;
 	private int examNum;
+	private int testNum;
 	private int result;
 	private String exam;
 	private String ex_One;
@@ -12,9 +13,22 @@ public class MockExam {
 	private String examinfoname;
 	private String select_answer;
 	private String answer;
+	private String pass;
 	
 	
 	
+	public int getTestNum() {
+		return testNum;
+	}
+	public void setTestNum(int testNum) {
+		this.testNum = testNum;
+	}
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
 	public int getResult() {
 		return result;
 	}
