@@ -773,25 +773,18 @@ function insertStudy(){
  
    	//x버튼 클릭시 제거
 	function deleteCategory(item) {
-		var $item =$("#"+item);
-	/* 	$item.next().next().next().remove();
+		var $item =$("#category"+item);
+		$item.next().remove();
+		$item.remove();
+		categorycnt--;
+	}
+   	function deleteCity(item) {
+   		var $item =$("#local"+item);
+	 	$item.next().next().next().remove();
 		$item.next().next().remove();
 		$item.next().remove();
 		$item.remove();
-		cnt--; */
-		
-		$item.next().remove();
-		$item.remove();
-		cnt--;
-	}
-   	
-   	function deleteCity(item) {
-   		var $item =$("#"+item);
-   		 	$item.next().next().next().remove();
-   			$item.next().next().remove();
-   			$item.next().remove();
-   			$item.remove();
-   			cnt--; 
+		localcnt--;
 	}
 	   
 
@@ -861,7 +854,7 @@ function insertStudy(){
 	
 	
       	
-     //스터디대상3이하로 막기
+		//스터디대상3이하로 막기
          $('input[type=checkbox]').click(function() {
             var count = $('input:checkbox[name="target"]:checked').length;
             if (count > 2) {
@@ -869,19 +862,16 @@ function insertStudy(){
                $(this).attr("checked", false);
             }
 
-         });
-      });
+		});
+	});
     
     
     
-	// 스터디 지역 
-		var vdx = null;
-		var vnt = 0;
-		var cnt = 0;
-		
-		
+		// 스터디 지역 
+		var localcnt = 0;
+		var localvnt = 0;
     	function addStudyLocal() {
-            if(cnt>=3){
+            if(localcnt>=3){
                 $("#help-city").html("3개이하만 선택 가능합니다.").css("color","#f27979");
                 return;
             } 
@@ -897,13 +887,12 @@ function insertStudy(){
 			if(!flag){
 				return;
 			}
-			cnt++;
-			vnt++;
-			var vdx ="my_city"+vnt;
-			$("#select_city").append(" <div id='"+vdx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb; '>"
+			localcnt++;
+			localvnt++;
+			$("#select_city").append(" <div id='local"+localvnt+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb; '>"
 			+"<div style='display: inline-block; font-size: 17px; line-height: 40px; color: white;'>"
 			+searchLocal+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"
-			+" width='20px' height='20px' onclick='deleteCity(\""+vdx+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
+			+" width='20px' height='20px' onclick='deleteCity(\""+localvnt+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
 			+"<input type='hidden' value='"+searchLocal+"' name='choiceCity' id='choiceCity'>"
 			+"<input type='hidden' value='"+pointx+"' name='pointx' id='pointx'>"
 			+"<input type='hidden' value='"+pointy+"' name='pointy' id='pointy'>");
@@ -959,9 +948,10 @@ function insertStudy(){
     	      }
     	
     	
-     //스터디 카테고리 박스 추가
-       var cnt=0, vnt=0;
-       $("#smallCategory").change(function() { 
+		//스터디 카테고리 박스 추가
+		var categorycnt=0;
+		var categoryvnt=0;
+		$("#smallCategory").change(function() { 
             if($("input[name='choiceCategory']").length>=3){
                $("#help-cate").html("3개이하만 선택 가능합니다.").css("color","#f27979");
                return;
@@ -969,11 +959,10 @@ function insertStudy(){
             	
             }
          
-            cnt++;
+            categorycnt++;
             var index1 = $("#bigCategory option:selected");
             var index2 = $("#smallCategory option:selected");
             var s = index1.text() + "-" + index2.text();
-			var idx="my_category"+cnt;
 			
 			
 		     var state1=false;
@@ -989,13 +978,11 @@ function insertStudy(){
 			}	
 
 			
-            $("#select_category").append(" <div id='"+idx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb;'>"
+            $("#select_category").append(" <div id='category"+categoryvnt+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb;'>"
                     +"<div style='display: inline-block; font-size: 17px; line-height: 40px; color: white;'>"
                       +s+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"
-                        +" width='20px' height='20px' onclick='deleteCategory(\""+idx+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
+                        +" width='20px' height='20px' onclick='deleteCategory(\""+categoryvnt+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
                         	+"<input type='hidden' value='"+index2.val()+"' name='choiceCategory' id='choiceCategory'>");
-        
-           
         	 });
       
       
@@ -1006,20 +993,20 @@ function insertStudy(){
 $(function() {
 
 		//대상
-			var s_target = [];
-			var n = 0;
-		
-			<c:forEach var="vo" items="${vdto.target}">
-			s_target[n] = "${vo}";
+		var s_target = [];
+		var n = 0;
+	
+		<c:forEach var="vo" items="${vdto.target}">
+		s_target[n] = "${vo}";
 
-			$('input:checkbox[name=target]').each(function() {
-				if ($(this).val() == s_target[n]) {
-					$(this).attr('checked', true);
-				}
-			});
+		$('input:checkbox[name=target]').each(function() {
+			if ($(this).val() == s_target[n]) {
+				$(this).attr('checked', true);
+			}
+		});
 
-			n++;
-			</c:forEach>
+		n++;
+		</c:forEach>
 
 			
 			
@@ -1034,8 +1021,7 @@ $(function() {
 		
 		
 		//스터디 카테고리 
-		
-		if("${mode=='update'}"){
+		if(${mode=='update'}){
 			
 			var url ="<%=cp%>/study/${s_num}/getMyCategory";
 			$.ajax({
@@ -1060,16 +1046,13 @@ $(function() {
 				},error: function(e){
 					console.log(e.responseText);
 				}
-				
 			});
-
-	
-	}
-	
+		}
 });
 		
 function printBox(data) {
-	
+	categorycnt = data.categoryList.length;
+	categoryvnt = data.categoryList.length;
 	for(var idx=0; idx<data.categoryList.length; idx++) {
 		var parent= data.categoryList[idx].parent;
 		var child = data.categoryList[idx].categoryNum;
@@ -1077,7 +1060,7 @@ function printBox(data) {
 		var c_subject = data.categoryList[idx].subject;
 		
 		
-		 $("#select_category").append(" <div id='"+idx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb;'>"
+		 $("#select_category").append(" <div id='category"+idx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb;'>"
                  +"<div style='display: inline-block; font-size: 17px; line-height: 40px; color: white;'>"
                    +p_subject+"-"+c_subject+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"
                      +" width='20px' height='20px' onclick='deleteCategory(\""+idx+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"
@@ -1087,14 +1070,14 @@ function printBox(data) {
 	}}
 	
 function printBox2(data) {	
-	
-
+	localcnt = data.localList.length;
+	localvnt = data.localList.length;
 	for(var vdx=0; vdx<data.localList.length; vdx++) {
 		var searchLocal = data.localList[vdx].city;
-		var pointx = data.localList[vdx].point_x;
-		var pointy = data.localList[vdx].point_y;
+		var pointx = data.localList[vdx].pointx;
+		var pointy = data.localList[vdx].pointy;
 		
-		$("#select_city").append(" <div id='"+vdx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb; '>"
+		$("#select_city").append(" <div id='local"+vdx+"' style='width: 536px; height: 40px; margin: 5px auto; background-color: #75ccbb; '>"
 			+"<div style='display: inline-block; font-size: 17px; line-height: 40px; color: white;'>"
 			+searchLocal+"</div> <div style=' float: right;'> <img alt='' src='<%=cp%>/resource/img/delete.png'"
 			+" width='20px' height='20px' onclick='deleteCity(\""+vdx+"\");' style='margin: 10px 7px; cursor: pointer;'> </div> </div>"

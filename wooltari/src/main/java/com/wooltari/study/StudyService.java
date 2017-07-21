@@ -25,5 +25,5 @@ public interface StudyService {
 	
 	public StudyInfo readMyStudy(long s_num);
 	public List<StudyCategory> readMyCategory(long s_num);
-	public List<StudyInfo> readMyLocal(long s_num);
+	public List<StudyLocal> readMyLocal(long s_num);
 }

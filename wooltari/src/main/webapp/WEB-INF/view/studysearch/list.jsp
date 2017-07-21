@@ -39,7 +39,9 @@
 						${dto.userName}
 					</div>
 					<div class="location">
-						서울 동작구 사당동
+						<c:forEach var="vo" items="${dto.listLocal}" end="0">
+							<h3>${vo.city}</h3> 
+						</c:forEach>
 					</div>
 					<div class="strong-info">
 						<span class="payment"></span> ${dto.gender} <span class="count"></span>

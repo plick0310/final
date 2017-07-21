@@ -169,8 +169,7 @@ public class StudyController {
 	@ResponseBody
 	public Map<String, Object> getMyCategory(@PathVariable long s_num) throws Exception{
 	
-		List<StudyCategory> categoryList =new ArrayList<>();
-		categoryList = service.readMyCategory(s_num);
+		List<StudyCategory> categoryList = service.readMyCategory(s_num);
 
 		Map<String, Object> model = new HashMap<>();
 		model.put("categoryList",categoryList);
@@ -181,8 +180,8 @@ public class StudyController {
 	@ResponseBody
 	public Map<String, Object> getMyLocal(@PathVariable long s_num) throws Exception{
 	
-		List<StudyInfo> localList= service.readMyLocal(s_num);
-		
+		List<StudyLocal> localList= service.readMyLocal(s_num);
+
 		Map<String, Object> model = new HashMap<>();
 		model.put("localList",localList);
 		
