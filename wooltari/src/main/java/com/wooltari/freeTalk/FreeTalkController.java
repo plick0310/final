@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wooltari.common.MyUtil;
 import com.wooltari.member.SessionInfo;
 
-@Controller("guest.guestController")
+@Controller("freetalk.freetalkController")
 public class FreeTalkController {
 	@Autowired
 	private FreeTalkService service;
@@ -25,9 +25,9 @@ public class FreeTalkController {
 	@Autowired
 	private MyUtil myUtil;
 	
-	@RequestMapping("/freeTalk/freeTalk")
-	public String guest() throws Exception {
-		return ".freeTalk.freeTalk";
+	@RequestMapping("/freeTalk/talk")
+	public String talk() throws Exception {
+		return ".freeTalk.talk";
 	}
 	
 	@RequestMapping(value="/freeTalk/insert", method=RequestMethod.POST)

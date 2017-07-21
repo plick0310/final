@@ -275,8 +275,8 @@ public class StudyServiceImpl implements StudyService {
    }
 	
 	@Override
-	public List<StudyInfo> readMyLocal(long s_num) {
-		List<StudyInfo> listLocal = new ArrayList<>();
+	public List<StudyLocal> readMyLocal(long s_num) {
+		List<StudyLocal> listLocal = new ArrayList<>();
 		try {
 			listLocal = dao.getListData("study.readMyLocal", s_num);
 		} catch (Exception e) {

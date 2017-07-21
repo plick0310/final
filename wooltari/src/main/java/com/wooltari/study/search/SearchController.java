@@ -3,6 +3,7 @@ package com.wooltari.study.search;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.wooltari.common.MyUtilBootstrap;
 import com.wooltari.member.SessionInfo;
 import com.wooltari.study.StudyCategory;
-import com.wooltari.study.StudyCity;
+import com.wooltari.study.StudyInfo;
+import com.wooltari.study.StudyLocal;
 import com.wooltari.study.StudyService;
 
 @Controller("study.search.SearchController")
@@ -35,6 +37,11 @@ public class SearchController {
 
 	@RequestMapping(value="/study/search", method=RequestMethod.GET)
 	public String search(Model model, HttpSession session)throws Exception {
+		
+		List<StudyCategory> listBigCategory=studyService.listBigCategory();
+		
+		model.addAttribute("listBigCategory", listBigCategory);
+		
 		return ".studysearch.search";
 	}
 	
@@ -56,7 +63,7 @@ public class SearchController {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		String cp = req.getContextPath();
 		
-		int rows=3;
+		int rows=12;
 		int total_page = 0;
 		int dataCount = 0;
 		
@@ -87,9 +94,17 @@ public class SearchController {
         map.put("start", start);
         map.put("end", end);
 		
-        // 쪽지 리스트
-        List<StudySearch> list = searchService.listSearch(map);
-        
+        // 스터디 리스트
+        List<StudyInfo> list = searchService.listSearch(map);
+        //스터디별로 카테고리,지역 리스트 가져오기
+        Iterator<StudyInfo> it = list.iterator();
+        while(it.hasNext()){
+        	StudyInfo data = it.next();
+        	List<StudyCategory> categoryList = studyService.readMyCategory(data.getS_num());
+        	List<StudyLocal> localList= studyService.readMyLocal(data.getS_num());
+        	data.setListCategory(categoryList);
+        	data.setListLocal(localList);
+        }
         String query = "";
         String articleUrl = cp+"/study/search?page=" + current_page;
         if(searchValue.length()!=0) {
@@ -101,13 +116,10 @@ public class SearchController {
         }
         
         
+        
         String paging = myUtil.pagingMethod(current_page, total_page, "paging");
         System.out.println("recruit : " + recruit + " / page : " + current_page + " / searchValue : " + searchValue);
-        List<StudyCategory> listBigCategory=studyService.listBigCategory();
-		List<StudyCity> listBigCity = studyService.listBigCity();
-		
-		model.addAttribute("listBigCategory", listBigCategory);
-		model.addAttribute("listBigCity",listBigCity);
+        
         model.addAttribute("list", list);
         model.addAttribute("articleUrl", articleUrl);
         model.addAttribute("page", current_page);

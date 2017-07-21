@@ -175,7 +175,7 @@ $(function(){
 
 								<div class="row">
 									<div class="col-sm-2"><a href="<%=cp%>/mockTest/main">모의 테스트</a></div>
-									<div class="col-sm-2"><a href="<%=cp%>/community/freeTalk/freetalk">한줄톡톡</a></div>
+									<div class="col-sm-2"><a href="<%=cp%>/freeTalk/talk">한줄톡톡</a></div>
 									<div class="col-sm-2"><a href="#">자유광장</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/community/photalks/list">포톡스</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/community/usedshop/list">교재중고장터</a></div>

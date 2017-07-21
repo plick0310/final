@@ -109,6 +109,9 @@ $( function() {
 	
 	</c:if>
 	
+	function cancel() {
+		location.href="<%=cp%>/studyMarket/studyMarketBoard/list?page="+'${page}'; 
+	}
 </script>
 
 
@@ -177,8 +180,7 @@ $( function() {
 	
 	<div class="read_btnArea">
 		<button class="clickbtn">${mode='update'?'수정하기':'등록하기'}</button>
-		<button class="clickbtn">${mode='update'?'수정취소':'등록취소'}</button>
-		
+		<input type="button" class="clickbtn" onclick="cancel();" value="${mode='update'?'수정취소':'등록취소'}">
 		<c:if test="${mode=='update'}">
 			<input type="hidden" name="num" value="${dto.num}">
 			<input type="hidden" name="page" value="${page}">
