@@ -291,6 +291,9 @@ function chart(){
 	                text: '점수(Score)'
 	            },
 	        },
+	        credits: {
+	            enabled: false
+	        },
 	        series:csv.series
 		});
 	});	

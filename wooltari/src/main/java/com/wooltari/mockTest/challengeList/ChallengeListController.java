@@ -156,7 +156,7 @@ public class ChallengeListController {
 		ob.put("data", Arrays.toString(resultArray));
 		arr.add(ob);
 		
-		ob=new JSONObject();
+/*		ob=new JSONObject();
 		ob.put("name", "JLPT N3");
 		ob.put("data", new double[]{});
 		arr.add(ob);
@@ -165,7 +165,7 @@ public class ChallengeListController {
 		ob.put("name", "한국사능력검정시험 1급");
 		ob.put("data", new double[]{});
 		arr.add(ob); 
-	
+	*/
 		JSONObject job=new JSONObject();
 		job.put("year", "2017");
 		job.put("series", arr);
