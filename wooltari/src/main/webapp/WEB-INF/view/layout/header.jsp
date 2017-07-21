@@ -103,10 +103,26 @@ function keywordSearch(){
 	if(keyword==""){
 		return;
 	}
-
 	location.href="<%=cp%>/keyword/search?keyword="+keyword;
-	
 }
+
+function enterkey() {
+    if (window.event.keyCode == 13) {
+		alert(window.event.keyCode);
+         // 엔터키가 눌렸을 때 실행할 내용
+        keywordSearch();
+        
+    }
+}
+
+$(function(){
+	$("#exampleInputAmount").keydown(function(e){
+		if(e.keyCode==13) {
+			keywordSearch();
+			return false;
+		}
+	});
+});
 
 </script>
 

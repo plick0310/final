@@ -70,9 +70,9 @@ dl  a{
 
 </style>
 
-<div style="margin: auto; width: 57%;">
-	<div style="padding-top: 20px; font-size: 17px; ">
-		<table class="tab_menu" style="width:100%; float: left; display: block; text-align: left; border-top: 1px solid #f1f3f6; border-bottom: 1px solid #e2e2e2; ">
+<div style="margin: auto; width: 900px;">
+	<div style="padding-top: 50px; font-size: 17px; ">
+		<table class="tab_menu" style="width:100%; float: left; display: block; text-align: left;  border-bottom: 1px solid #e2e2e2; margin-bottom: 50px; ">
 			<tr>
 				<td style="height:50px; line-height:50px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif;" data-tab="exam" ><a style="cursor: pointer; "  onclick="location.href='<%=cp%>/keyword/search?keyword=${keyword }'">통합검색</a></td>
 				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif; border-bottom:2px solid #1abc9c;"><a style="cursor: pointer;  color: #1abc9c;" onclick="location.href='<%=cp%>/keyword/studySearch?keyword=${keyword }'">스터디</a></td>
@@ -81,7 +81,7 @@ dl  a{
 				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/marketSearch?keyword=${keyword }'">스터디마켓</a></td>
 				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/whereSearch?keyword=${keyword }'">어디서하지</a></td>
 				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/downloadSearch?keyword=${keyword }'">다운로드</a></td>
-				<td style="height:50px; line-height:50px; margin-left:30px; float: right; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif"><a href="#">도움말</a></td>
+				<td style="height:50px; line-height:50px; margin-left:30px; float: right; position: relative; width:306px; text-align:right; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif"><a href="#">도움말</a></td>
 			</tr>
 		</table>
 		

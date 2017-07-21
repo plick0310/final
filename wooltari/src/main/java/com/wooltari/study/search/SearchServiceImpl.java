@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wooltari.common.dao.CommonDAO;
+import com.wooltari.study.StudyInfo;
 
 @Service("study.search.SearchService")
 public class SearchServiceImpl implements SearchService{
@@ -14,8 +15,8 @@ public class SearchServiceImpl implements SearchService{
 	private CommonDAO dao;
 	
 	@Override
-	public List<StudySearch> listSearch(Map<String, Object> map) {
-		List<StudySearch> list=null;
+	public List<StudyInfo> listSearch(Map<String, Object> map) {
+		List<StudyInfo> list=null;
 		try {
 			list = dao.getListData("search.listSearch", map);
 		} catch (Exception e) {

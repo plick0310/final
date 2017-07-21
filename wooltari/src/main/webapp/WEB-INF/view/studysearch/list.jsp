@@ -15,7 +15,9 @@
 				</div>
 				<div class="header-text-container">
 					<div class="isPayment">
-					카테고리 들어갈 곳
+						<c:forEach var="vo" items="${dto.listCategory}">
+							${vo.subject}&nbsp; 
+						</c:forEach>
 					</div>
 					<div class="header-text align-left">
 						<div class="title-wrap">
@@ -39,7 +41,9 @@
 						${dto.userName}
 					</div>
 					<div class="location">
-						서울 동작구 사당동
+						<c:forEach var="vo" items="${dto.listLocal}" end="0">
+							<h3>${vo.city}</h3> 
+						</c:forEach>
 					</div>
 					<div class="strong-info">
 						<span class="payment"></span> ${dto.gender} <span class="count"></span>

@@ -119,8 +119,8 @@
 			WHERE s_num=#{s_num} 
   	</select>
   	
-  	<select id="readMyLocal" parameterType="Long" resultType="com.wooltari.study.StudyInfo">
-  		SELECT choiceCity city, pointX point_X, pointY point_Y FROM studyLocal WHERE s_num=#{s_num}
+  	<select id="readMyLocal" parameterType="Long" resultType="com.wooltari.study.StudyLocal">
+  		SELECT choiceCity city, pointX , pointY FROM studyLocal WHERE s_num=#{s_num}
   	</select>
   	
   	
