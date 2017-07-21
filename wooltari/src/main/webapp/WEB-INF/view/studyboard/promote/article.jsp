@@ -196,7 +196,7 @@ line-height: normal;
 	<thead>
 		<tr>
 			<th class="informations" style="    border-top: 2px solid rgba(56, 54, 53, 0.23);">
-				제목 : ${dto.subject } 
+				스터디명>${dto.studyName } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;제목 > ${dto.subject } 
 				<span class="inforArea">
 					<strong>작성일</strong> ${dto.created }
 					<span class="__dotted"></span>
@@ -218,7 +218,7 @@ line-height: normal;
 			<div style="background: #eee; width: 100%; padding: 10px;line-height: 25px; margin-top: 70px; margin-bottom: -60px;" >
 				<div class="row" >
 					<div class="col-md-12" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-pencil"></i>카테고리 :${dto.name }</span></div>
-				 	<div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-flag"></i>지역 :${dto.cityName }</span></div>
+				 	<div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-flag"></i>지역 :</span></div>
 				  	<div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-heart"></i>성별 :${dto.gender }</span></div>
 				</div>
 					
@@ -232,10 +232,8 @@ line-height: normal;
 						<li class="_likes_btn">
 							<div title="" id="countLikeStudyWhere"  style="height: 20px;">
 								<br/>
-							</div>
-								
-						</li>
-						
+							</div>	
+						</li>					
 					</ul>
 				
 						<input type="hidden" id="hiddenNum" value="${dto.num }">

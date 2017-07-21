@@ -288,7 +288,9 @@
 margin-left: 0;
 }
 
-
+#lable-li{
+position: absolute; height: 80px; margin:0px; font-size: 15px; font-weight: 700; color: #999; width: 80px; top: 0; border-radius: 0; height: 80px;
+}
 </style>
 
 
@@ -470,11 +472,11 @@ function printBoard(data){
 	
 	
 function createBoard() {
-		
+	if(confirm("게시물을 등록하시겠습니까 ?")){
 		//var query =$("form[name=createForm]").serialize(); //폼태그내 자동 인코더
 		var f= document.createForm;
 		var query = new FormData(f); //파일처리
-		alert(f.upload2.value);
+		//alert(f.upload2.value);
 		$.ajax({
 			type:"POST"
 			,url:"<%=cp%>/study/myStudy/home/${s_num}/boardCreated"
@@ -483,15 +485,20 @@ function createBoard() {
 			,data : query
 			,dataType:"json"
 			,success:function(data){
-				alert("성공");
+				
 			
 				$("#content2").val("");
-				$("#uploadBtn2").val("");
-				$('#b_image').removeAttr('src');
 				$('#c_photo').show();
 				$('#plus_box').hide();
 				
+				for(var i=3; i < f.upload2.length+3;  i++ ){
+					$('#b_image'+i).removeAttr('src');
+					$('#b_image'+i).remove();
+					$("#uploadBtn"+i).val("");
+					$("#uploadBtn"+i).remove();
+				}
 				
+				idx=2;
 				listPage(bbs_count);
 				
 				
@@ -501,6 +508,7 @@ function createBoard() {
 			alert(e.responsText);
 		}
 	});
+	}
 }
 
 function check() {
@@ -556,7 +564,7 @@ $(document).ready(function () {
 			    		listPage(bbs_count);
 			    		
 						submit_chk = true;
-					}, 1200);
+					}, 1500);
 			    }
 			}
 		}
@@ -577,12 +585,14 @@ $(document).ready(function () {
 	
 	
 });
-
+var idx= 2;
 //이미지 미리보기
 $(function() {
 
-    $("#uploadBtn2").on('change', function(){
-    	  
+   /*  $("#uploadBtn2").on('change', function(){ */
+  $("body").on("change", "input[name=upload2]", function(){
+	  idx++;
+
 	var src = getFileExtension($(this).val());
 					if (!((src.toLowerCase() == "gif")
 							|| (src.toLowerCase() == "jpg") || (src
@@ -591,21 +601,37 @@ $(function() {
 						return;
 					}
 
-					$("#uploadBtn2").empty();
+				/* 	$("#uploadBtn2").empty(); */
+					$(this).empty();
 					$('#c_photo').hide();
 					$('#plus_box').show();
-					readURL2(this);
+					
+					
+					var out="";
+					out+="<img id='b_image"+idx+"' src=''  width='80px' height='80px' style='float: left;  margin-left: 10px;' >";
+					out+="<input type='file' name='upload2' id='uploadBtn"+idx+"' class='uploadBtn tts' style='display:none;'>";
+					$('#plus_box').before(out);
+		
+					
+					var out2="";
+					out2+="<label for='uploadBtn"+idx+"' id='lable-li'>";
+					out2+="<img alt='' src='<%=cp%>/resource/img/add.png' style='margin: 28px 0;'> </label>";
+					$('#plus_box').append(out2);
+					
+					
+					readURL2(this , idx);
+					
 				});
 });
 
-function readURL2(input) {
+function readURL2(input , idx) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
 
 			reader.onload = function(e) {
 				
 				
-				$('#b_image').show().attr('src', e.target.result);
+				$('#b_image'+idx).show().attr('src', e.target.result);
 				
 				
 			}
@@ -615,9 +641,7 @@ function readURL2(input) {
 	}	
 
 
-function changeImg() {
-	$('#b_image2').innerHTML='ggg';
-}
+
 </script>
 
 
@@ -675,31 +699,25 @@ function changeImg() {
 										</label>
 									</div>
 
-									<div id="b_image2">
-									<img id="b_image" src="" width="80px" height="80px" style="float: left;" onmousemove="changeImg();" >
-									</div>	
-									<div id="plus_box"
-										style="width: 80px; height: 80px; border: 1px solid #ccc; float: left; margin-left: 10px;">
-
-										<label for="uploadBtn3" id="lable-li" style="position: absolute; height: 80px; margin:0px; font-size: 15px; font-weight: 700; color: #999; width: 80px; top: 0; border-radius: 0; height: 80px;">
-											<img alt="" src="<%=cp%>/resource/img/add.png" style="margin: 28px 0;"> <br>
-										</label>
-
+								
+										
+									<div id="plus_box" style="margin-left:10px; width: 80px; height: 80px; border: 1px solid #ccc; float: left; ">
+										
 									</div>
+									
+									
 								</div>
 							</div>
 
 
 						</div>
 
-						<input type="file" name="upload2" id="uploadBtn2" onclick="addFile();"
-						class="uploadBtn tts"
-							style="opacity: 0; position: relative; width: 0px; margin: -15px;">
+						<input type="file" name="upload2" id="uploadBtn2" class="uploadBtn tts" style="opacity: 0; position: relative; width: 0px; margin: -15px;">
 							
-							
+						<!-- 	
 						<input type="file" name="upload2" id="uploadBtn3"
 							class="uploadBtn tts"
-							style="opacity: 0; position: relative; width: 0px; margin: -15px;">
+							style="opacity: 0; position: relative; width: 0px; margin: -15px;"> -->
 
 					</form>
 

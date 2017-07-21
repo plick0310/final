@@ -1,7 +1,11 @@
 package com.wooltari.photalks;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
@@ -123,13 +127,13 @@ public class StudywhereController {
 	return ".community.photalks.list";
 	}
 	
-	/*@RequestMapping(value="/studyboard/studywhere/created",method=RequestMethod.GET)
+	@RequestMapping(value="/community/photalks/created",method=RequestMethod.GET)
 	public String createdForm(Model model,HttpSession session) throws Exception{
 
 		model.addAttribute("mode","created");
-		return ".studyboard.studywhere.created";
+		return ".community.photalks.created";
 	}
-	@RequestMapping(value="/studyboard/studywhere/created",method=RequestMethod.POST)
+	/*@RequestMapping(value="/studyboard/studywhere/created",method=RequestMethod.POST)
 	public String createdSubmit(StudyWhere dto,HttpSession session)throws Exception {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		if(info==null){

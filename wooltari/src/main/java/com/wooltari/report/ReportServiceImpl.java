@@ -9,13 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.wooltari.common.dao.CommonDAO;
 
-@Service("report.reportService")
+//울타리 신고 건의
+@Service("report.ReportService")
 public class ReportServiceImpl implements ReportService {
 	@Autowired
 	private CommonDAO dao;
 	
 	@Override
-	public int insertBoard(Report dto, String mode) {
+	public int insertReport(Report dto, String mode) {
 		int result=0;
 		
 		try{
@@ -30,12 +31,12 @@ public class ReportServiceImpl implements ReportService {
 				map.put("groupNum", dto.getGroupNum());
 				map.put("orderNo", dto.getOrderNo());
 				
-				dao.updateData("board.updateOrderNo", map);
+				dao.updateData("report.updateOrderNo", map);
 				
 				dto.setDepth(dto.getDepth()+1);
 				dto.setOrderNo(dto.getOrderNo()+1);
 			}
-			result=dao.insertData("report.insertBoard", dto);
+			result=dao.insertData("report.insertReport", dto);
 		}catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -45,44 +46,84 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public int dataCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		try{
+			result= dao.getIntValue("report.dataCount", map);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override
-	public List<Report> listBoard(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Report> listReport(Map<String, Object> map) {
+		List<Report> list = null;
+		
+		try{
+			list=dao.getListData("report.listReport", map);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		
+		return list;
 	}
 
 	@Override
-	public Report readBoard(int num) {
-		// TODO Auto-generated method stub
-		return null;
+	public Report readReport(int repNum) {
+		Report dto= null;
+		try{
+			dto=dao.getReadData("report.readReport",repNum);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return dto;
 	}
 
 	@Override
-	public Report preReadBoard(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public Report preReadReport(Map<String, Object> map) {
+		Report dto=null;
+		
+		try{
+			dto=dao.getReadData("report.preReadReport",map);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return dto;
 	}
 
 	@Override
-	public Report nextReadBoard(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public Report nextReadReport(Map<String, Object> map) {
+		Report dto=null;
+		
+		try{
+			dto=dao.getReadData("report.nextReadReport",map);
+		}catch(Exception e){
+			System.out.println(e.toString());
+		}
+		return dto;
 	}
 
 	@Override
-	public int updateBoard(Report dto) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateReport(Report dto) {
+		int result=0;
+		
+		try{
+			result=dao.updateData("report.updateReport", dto);
+		}catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override
-	public int deleteBoard(int num) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteReport(int repNum) {
+		int result=0;
+		
+		try{
+			result=dao.deleteData("report.deleteReport", repNum);
+		}catch(Exception e) {
+		}
+		return result;
 	}
 
 	

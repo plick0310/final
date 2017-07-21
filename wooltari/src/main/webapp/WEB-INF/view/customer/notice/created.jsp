@@ -65,7 +65,7 @@ border: 1px solid #EAEAEA;
 </style>
 <script type="text/javascript">
 	function check(){
-		var f=document.boardForm;
+		var f=document.write_form;
 		
 		var str=f.subject.value;
 		if(!str){
@@ -173,7 +173,7 @@ border: 1px solid #EAEAEA;
 			</tr>
   			-->
 			<tr>
-				<td colspan="2"><textarea name="content" id="ment" 
+				<td colspan="2"><textarea name="content" id="content"
 						style="width: 100%; height: 300px;" >${dto.content}</textarea></td>
 			</tr>
 			<%-- 

@@ -1,9 +1,9 @@
 package com.wooltari.report;
 
 public class Report {
-	private int listNum, repNum;
+	private int num, listNum, repNum;
 	private String userId, subject;
-	private String content, created;
+	private String content, created, category;
 	
 	private int groupNum;
 	private int depth;
@@ -11,6 +11,24 @@ public class Report {
 	private int parent;
 	
 	private long gap;
+
+	
+	
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
 	public int getListNum() {
 		return listNum;

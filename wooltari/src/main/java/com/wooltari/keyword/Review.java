@@ -10,8 +10,15 @@ public class Review {
 	private MultipartFile upload;
 	private int star;
 	private String studyName;
+	private int range;
 	
 	
+	public int getRange() {
+		return range;
+	}
+	public void setRange(int range) {
+		this.range = range;
+	}
 	public String getStudyName() {
 		return studyName;
 	}

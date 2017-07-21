@@ -5,6 +5,7 @@
 <%
    String cp = request.getContextPath();
 %>
+<!-- wooltari 공지사항 게시판 -->
 <style>
 
 .clickbtn {

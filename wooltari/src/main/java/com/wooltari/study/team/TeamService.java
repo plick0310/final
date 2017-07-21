@@ -13,5 +13,6 @@ public interface TeamService {
 	public int teamCount(Long s_num);
 	public List<Team> listTeam(Long s_num);
 	
+	
 	public void updateTeam (Map<String, Object> map) throws Exception;
 }

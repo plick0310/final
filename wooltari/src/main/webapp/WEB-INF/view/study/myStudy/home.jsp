@@ -100,7 +100,8 @@ label {
 
 <script type="text/javascript">
 $(document).ready(function(){
-		
+	
+	
 	
 	$.ajax({
 			url:"<%=cp%>/study/myStudy/${s_num}/board",
@@ -189,6 +190,23 @@ $(function() {
 					$("#uploadBtn").empty();
 					readURL(this);
 				});
+    
+    
+  //스터디 가입중 띄우기
+	var waitList = [];
+	var n = 0;
+
+	<c:forEach var="vo" items="${waitList}">
+	waitList[n] = "${vo.userId}";
+
+	
+	if ("${sessionScope.member.userId}"== waitList[n]) {
+		 $('#joinstudy').html("가입신청 중").attr('disabled', true);
+		}
+	
+	n++;
+	</c:forEach>
+    
 	});
 	
 //파일의 확장자를 가져옴
@@ -241,7 +259,13 @@ function readURL(input) {
 				style="width: 170px; height: 170px; background-image: url('<%=cp%>/uploads/member/userImg/${dto.imageFileName}'); background-size: cover;">
 			</div>
 			<div style="width: 170px; height: 3px; background-color: #1abc9c;"></div>
+			<c:if test="${dto.userId ==sessionScope.member.userId }">
+				<a href="<%=cp%>/study/update?s_num=${dto.s_num}">[스터디 정보 수정]</a>
+				
+			</c:if>
+			<c:if  test="${dto.userId !=sessionScope.member.userId }">
 			<Strong>LEADER</Strong><span style="font-size: 14px;">&nbsp;&nbsp;${dto.userId }</span>
+			</c:if>
 		</div>
 	
 			
@@ -252,10 +276,7 @@ function readURL(input) {
 				<c:if test="${state == false}">
 						<a href="#joinStudy" data-toggle="modal" id="joinstudy" title="Compose"  class="btn btn-compose" style="border-radius: 0px;">스터디 가입하기</a>
 				</c:if>
-
-
-	<!-- 	<a href="#joinStudy" data-toggle="modal" id="joinstudy" title="Compose"  class="btn btn-compose" style="border-radius: 0px;">스터디 가입하기</a>
-	 -->		
+	
 			 
 			 
 			<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="joinStudy" class="modal fade" style="display: none;">

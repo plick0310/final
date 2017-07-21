@@ -5,7 +5,7 @@
 <%
    String cp = request.getContextPath();
 %>
-
+<!-- wooltari 신고건의 report  -->
 
 
 <style type="text/css">
@@ -154,7 +154,7 @@ border: 1px solid #EAEAEA;
 <script>
 function searchList() {
 	var f=document.searchForm;
-	f.action="<%=cp%>/download/infoReqBoard/list"; 
+	f.action="<%=cp%>/customer/report/list"; 
 	f.submit();
 }
 
@@ -252,7 +252,7 @@ function deleteAction(){
 		,success:function(data){
 			var state=data.state;
 			if(state=="true"){
-				deleteList(num);				
+				deleteList(repNum);				
 			}else if(state=="false") {
 				alert("삭제할 대상을 선택 하세요.");
 			} else if(state=="loginFail") {
@@ -274,9 +274,9 @@ function deleteAction(){
 <div  style="height:50px; font-size: 20px;text-align: center; ">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
-			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>정보요청게시판</div> 
+			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>신고/건의</div> 
 <form name="array_form" id="array_form" style="width: 900px;" method="post"> 
-	<input type="hidden" name="page" value="${page}" />
+	<input type="hidden" name="page" value="${pageNo}" />
 	
 	<!-- List Start-->
 	<div class="settingArea">
@@ -303,36 +303,27 @@ function deleteAction(){
 	<c:forEach var="dto" items="${list}">
 			<tr>
 				
-				<td style="text-align:right; width:65px; padding: 5px 18px;"><input type="checkbox" name="chk" value="${dto.num}"></td>
+				<td style="text-align:right; width:65px; padding: 5px 18px;">
+				<input type="checkbox" name="chk" value="${dto.repNum}"></td>
 				
 				<td class="___number">${dto.listNum}</td>
 				<td>
 					<div style="position:relative;">
 						<!--[category_name]-->
 					
-						<a href="${articleUrl}&num=${dto.num}" class="subject">${dto.subject}</a><span class="comment">(${dto.replyCount})</span>
+						<a href="javaScript:location.href='<%=cp%>/customer/report/article?pageNo=${pageNo}&repNum=${dto.repNum}';"
+						 class="subject">${dto.subject}</a>
+						<span class="comment"></span>
 					
 						<div class="info">
 							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">${dto.created}</span>
 							<span class="__dotted"></span>
 							<strong>작성자 </strong><span>${dto.userId}</span>
-							<span class="__dotted"></span>
-							<strong>조회수 </strong><span>${dto.hitCount}</span>
 						</div>
-												
-						<div class="likes">
-							${dto.likeCount}<br>
-							<span class="num" style="color: #1abc9c;">추천</span>
-							<!--[unlikes]-->
-						</div>						
 					</div>
 				</td>
 			</tr>
 	</c:forEach>	
-			
-			
-		
-			
 		</tbody>
 	</table>
 

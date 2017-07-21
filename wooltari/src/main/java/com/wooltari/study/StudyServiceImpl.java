@@ -109,8 +109,8 @@ public class StudyServiceImpl implements StudyService {
             dao.insertData("study.insertstudyCity", dto);
          }
          
-         for(int i=0; i<dto.getTarget().length ; i++){
-            dto.setS_target(dto.getTarget()[i]);
+         for(int i=0; i<dto.getTarget().size() ; i++){
+            dto.setS_target(dto.getTarget().get(i));
             dao.insertData("study.insertstudyTarget", dto);
          }
          
@@ -124,19 +124,58 @@ public class StudyServiceImpl implements StudyService {
       
    }
 
+
    @Override
-   public void deleteStudy(long s_num)  throws Exception {
-      try {
-         dao.deleteData("study.dropStudyBoard", s_num);
-         dao.deleteData("study.dropStudyPhoto", s_num);
-         dao.deleteData("study.deletestudyCategory", s_num);
-         dao.deleteData("study.deletestudyCity", s_num);
-         dao.deleteData("study.deletestudyTarget", s_num);
-         
-      } catch (Exception e) {
-         System.out.println(e.toString());
-      }
-      
+   public void updateStudy(StudyInfo dto,String path ) throws Exception {
+		try {
+			
+			
+			//이미지 수정
+			
+			// 업로드한 파일이 존재한 경우
+				if(dto.getUpload()!=null && !dto.getUpload().isEmpty()) {
+					String newFilename = fileManager.doFileUpload(dto.getUpload(), path);
+					
+					if (newFilename != null) {
+						// 이전 파일 지우기
+						if(dto!=null && dto.getImageFileName()!=null) {
+							fileManager.doFileDelete(dto.getImageFileName(), path);
+						}
+								
+						dto.setImageFileName(newFilename);
+					}			
+				}else{
+					dto.setImageFileName(dto.getImageFileName());//기존이미지 유지...
+				}
+				
+	
+			dao.deleteData("study.deletestudyCategory", dto.getS_num());
+			dao.deleteData("study.deletestudyCity", dto.getS_num());
+	        dao.deleteData("study.deletestudyTarget",dto.getS_num());
+	        dao.updateData("study.updateStudy",dto);
+	        
+	        for(int i=0; i<dto.getChoiceCategory().size(); i++){
+	            dto.setCategory(dto.getChoiceCategory().get(i));
+	            dao.insertData("study.insertstudyCategory", dto);
+	         }
+	      
+	        for(int i=0; i<dto.getChoiceCity().size(); i++){
+	            dto.setCity(dto.getChoiceCity().get(i));
+	            dto.setPoint_x(dto.getPointx().get(i));
+	            dto.setPoint_y(dto.getPointy().get(i));
+	            dao.insertData("study.insertstudyCity", dto);
+	         }
+	         
+	         for(int i=0; i<dto.getTarget().size() ; i++){
+	            dto.setS_target(dto.getTarget().get(i));
+	            dao.insertData("study.insertstudyTarget", dto);
+	         }
+	        
+	         
+		}catch (Exception e) {
+			throw e;
+		}
+	   
    }
 
    @Override
@@ -157,6 +196,23 @@ public class StudyServiceImpl implements StudyService {
       }
    
    }
+   
+   @Override
+   public void deleteStudy(long s_num)  throws Exception {
+      try {
+         dao.deleteData("study.dropStudyBoard", s_num);
+         dao.deleteData("study.dropStudyPhoto", s_num);
+         dao.deleteData("study.deletestudyCategory", s_num);
+         dao.deleteData("study.deletestudyCity", s_num);
+         dao.deleteData("study.deletestudyTarget", s_num);
+         
+      } catch (Exception e) {
+        throw e;
+      }
+      
+   }
+   
+
 
    @Override
    public void dropStudyTable(long s_num) throws Exception {
@@ -195,11 +251,41 @@ public class StudyServiceImpl implements StudyService {
       
       try {
          dto = dao.getReadData("study.readMyStudy", s_num);
-      } catch (Exception e) {
          
+         List<String> target = dao.getListData("study.readMyTarget",s_num);
+         dto.setTarget(target);
+         
+      } catch (Exception e) {
+    	  System.out.println(e.toString());
       }
       return dto;
    }
 
+   @Override
+   public List<StudyCategory> readMyCategory(long s_num) {
+	   List<StudyCategory> listCategory = new ArrayList<>();
+	   try {
+		
+		   listCategory = dao.getListData("study.readMyCategory", s_num);
+	} catch (Exception e) {
+		System.out.println(e.toString());
+	}
+	   
+	   return listCategory;
+   }
+	
+	@Override
+	public List<StudyInfo> readMyLocal(long s_num) {
+		List<StudyInfo> listLocal = new ArrayList<>();
+		try {
+			listLocal = dao.getListData("study.readMyLocal", s_num);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return listLocal;
+	}
+	
+	
 
 }

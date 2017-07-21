@@ -195,6 +195,29 @@ public class PromoteController {
 		return ".studyboard.promote.article";
 	}
 	
+	@RequestMapping(value="/keyword/promote/article")
+	public String article(
+				@RequestParam(value="num") int num,
+				Model model, HttpSession session
+			)throws Exception{
+		
+	/*	SessionInfo info=(SessionInfo)session.getAttribute("member");
+		if(info==null)
+			return "redirect:/main";*/
+		
+		service.updateHitCount(num);
+		
+		Promote dto=service.readBoard(num);
+		
+		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+			
+		//model 스프링, map은 자바. 어떤거든 상관없음
+		model.addAttribute("dto", dto);
+
+		
+		return ".studyboard.promote.article";
+	}
+	
 	@RequestMapping(value="/promote/updateBoard", method=RequestMethod.GET)
 	public String updateBoard(
 			@RequestParam int num,

@@ -57,6 +57,14 @@
   		INSERT INTO studyTarget (s_num , target) VALUES(#{s_num},#{s_target})
   	</insert>
   	
+  	<!-- 스터디 수정 -->
+  	<update id="updateStudy" parameterType="com.wooltari.study.StudyInfo">
+  		UPDATE study SET studyName=#{studyName} , study_Info=#{study_Info} , imageFileName=#{imageFileName,jdbcType=VARCHAR}, recruit=#{recruit}, gender=#{gender}, range=#{range}
+  		WHERE s_num=#{s_num}
+  	</update>
+  	
+  	
+  	
   	<!-- 스터디 삭제 -->
   	<delete id="deleteStudy" parameterType="Long">
   		DELETE FROM study WHERE s_num=#{s_num}
@@ -67,7 +75,7 @@
   	</delete>
   	
   	<delete id="deletestudyCity" parameterType="Long">
-  		DELETE FROM studyCity WHERE s_num=#{s_num}
+  		DELETE FROM studyLocal WHERE s_num=#{s_num}
   	</delete>
   	
   	<delete id="deletestudyTarget" parameterType="Long">
@@ -84,17 +92,37 @@
   	
   	<!-- 가입한 스터디 리스트 -->
   	<select id="listMyStudy2" parameterType="String" resultType="com.wooltari.study.StudyInfo">      
-	    SELECT s.s_num  ,s.userId ,s.imageFileName , created, studyName ,study_Info, me.userName , me.userImg 
-	    FROM STUDY s
-	    JOIN STUDYMEMBER m ON m.s_num = s.s_num 
-      	JOIN MEMBER me ON m.userId = me.userId
-    	where me.userId=#{userId} AND m.enabled=1
+		SELECT tb.* FROM(
+		    SELECT s_num, s.userId, imageFileName , created , studyName ,study_Info ,userImg ,userName
+		    FROM study s
+		    JOIN member m ON s.userId= m.userId
+		      WHERE s.userId != #{userId}
+		  )tb JOIN studyMember sm ON tb.s_num= sm.s_num
+		  WHERE sm.userId=#{userId} AND enabled=1 
   	</select>
   	
   	<!-- 스터디 전체 정보 -->
   	<select id="readMyStudy" parameterType="Long" resultType="com.wooltari.study.StudyInfo">
   		SELECT * FROM study WHERE s_num = #{s_num}
   	</select>
+  	
+  	<select id="readMyTarget" parameterType="Long" resultType="String">
+  		SELECT target FROM studyTarget WHERE s_num=#{s_num} 
+  	</select>
+  	
+  	<select id="readMyCategory" parameterType="Long" resultType="com.wooltari.study.StudyCategory">
+  		SELECT tb.* FROM
+  			(SELECT p.CATEGORYNUM  , p.subject , c.CATEGORYNUM parent ,c.SUBJECT p_subject
+				FROM s_category p
+				JOIN s_category c ON c.CATEGORYNUM = p.parent
+			)tb JOIN STUDYCATEGORY sc ON tb.CATEGORYNUM = sc.CHOICECATEGORY
+			WHERE s_num=#{s_num} 
+  	</select>
+  	
+  	<select id="readMyLocal" parameterType="Long" resultType="com.wooltari.study.StudyInfo">
+  		SELECT choiceCity city, pointX point_X, pointY point_Y FROM studyLocal WHERE s_num=#{s_num}
+  	</select>
+  	
   	
   	<!-- 스터디 내 게시판동적 생성 -->
   	<!--자유게시판 -->

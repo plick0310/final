@@ -492,4 +492,34 @@ public class StudyMarketBoardController {
 			
 			return "studyMarket/studyMarketBoard/listReply";
 		}
+		
+		  @RequestMapping(value="/keyword/studyMarketBoard/article")
+			public String Keywordarticle(
+					@RequestParam(value="num") int num,
+					Model model) throws Exception {
+					
+				service.updateHitCount(num);
+				
+				StudyMarketBoard dto= service.readBoard(num);
+			
+				dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+
+				
+				//파일
+				List<StudyMarketBoard> listFile= service.listFile(num);
+				
+				//좋아요.
+				int countLikeBoard=service.countLikeBoard(num);
+				
+				
+				//String urlContent = dto.getUrlContent().substring(32,43);
+				//model.addAttribute("urlContent", urlContent);
+			
+				model.addAttribute("dto", dto);
+				model.addAttribute("listFile", listFile);
+				model.addAttribute("countLikeBoard", countLikeBoard);
+				
+				return ".studyMarket.studyMarketBoard.article";
+			}
+			
 }

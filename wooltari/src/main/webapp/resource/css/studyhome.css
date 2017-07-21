@@ -48,12 +48,12 @@ body .no-padding {
 	-o-border-radius: 4px;
 	border-radius: 4px;
 	float: left;
-	width: 100%;
+	width: 108%;
 }
 
 .status-upload form {
 	float: left;
-	width: 100%;
+	width: 108%;
 }
 
 .status-upload form textarea {

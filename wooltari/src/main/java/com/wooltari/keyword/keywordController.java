@@ -1,13 +1,12 @@
 package com.wooltari.keyword;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,20 +39,68 @@ public class keywordController {
 		Map<String, Object> map=new HashMap<>();
 		map.put("keyword", keyword);
 		
-		int dataCount=service.studyCount(map);
+		int studyCount=service.studyCount(map);
+		int promoteCount=service.PromoteCount(map);
+		int studyMarketCount=service.StudyMarketBoardCount(map);
+		int studyWhereCount=service.StudyWhereCount(map);
+		int downloadCount=service.DownloadBoardCount(map);
+		int reviewCount=service.ReviewCount(map);
+		
+		System.out.println(promoteCount+"갯수");
 		
 		map.put("start", start);
 		map.put("end", end);
 		
 		List<StudyInfo> list= service.studyList(map);
+		List<Promote> promoteList=service.PromoteList(map);
+		List<StudyMarketBoard> marketList=service.StudyMarketBoardList(map);
+		List<StudyWhere> whereList=service.StudyWhereList(map);
+		List<DownloadBoard> downloadList=service.DownloadBoardList(map);
+		List<Review> reviewList=service.ReviewList(map);
 		
-		model.addAttribute("list",list);
-		model.addAttribute("dataCount",dataCount);
+		Iterator<StudyWhere> ite = whereList.iterator();
+		int bestlistNum, b=0;
+		while(ite.hasNext()) {
+			StudyWhere dto = ite.next();
+			bestlistNum=b+1;
+			dto.setBestlistNum(bestlistNum);
+			Pattern pattern  =  Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
+			String content = dto.getContent();
+			Matcher match = pattern.matcher(content);	
+			String imgTag = null;
+			if(match.find()){
+			    imgTag = match.group(1);
+			}
+			dto.setContent(imgTag);
+			b++;
+			
+		}
+		
+		
 		model.addAttribute("keyword",keyword);
 		
+		model.addAttribute("list",list);
+		model.addAttribute("studyCount",studyCount);
+		model.addAttribute("marketList", marketList);
+		model.addAttribute("whereList", whereList);
+		model.addAttribute("downloadList", downloadList);
+		model.addAttribute("reviewList", reviewList);
+		
+		model.addAttribute("promoteList",promoteList);
+		model.addAttribute("promoteCount",promoteCount);
+		model.addAttribute("studyMarketCount", studyMarketCount);
+		model.addAttribute("studyWhereCount", studyWhereCount);
+		model.addAttribute("downloadCount", downloadCount);
+		model.addAttribute("reviewCount", reviewCount);
+		
+		model.addAttribute("keyword", keyword);
+		
+	
+	
 		return ".keywordSearch.union";
 	}
 	
+	//스터디 전체
 	@RequestMapping("/keyword/studySearch")
 	public String StudyList(
 			@RequestParam String keyword
@@ -61,18 +108,16 @@ public class keywordController {
 			,Model model
 			,HttpServletRequest req
 			)throws Exception{
-		
-		String cp=req.getContextPath();
-		
+	
 		int rows=10;
 		int total_page;
-		int dataCount;
+		int studyCount;
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("keyword", keyword);
 		
-		dataCount=service.studyCount(map);
-		total_page=myUtil.pageCount(rows, dataCount);
+		studyCount=service.studyCount(map);
+		total_page=myUtil.pageCount(rows, studyCount);
 		
 		if(currentPage>total_page)
 			currentPage=total_page;
@@ -89,6 +134,61 @@ public class keywordController {
 		Iterator<StudyInfo> it=list.iterator();
 		while(it.hasNext()){
 			StudyInfo dto=(StudyInfo)it.next();
+			listNum=studyCount-(start+n-1);
+			dto.setListNum(listNum);
+			
+			n++;
+		}
+		
+		String paging=myUtil.paging(currentPage, total_page);
+
+		
+		model.addAttribute("list", list);
+		model.addAttribute("paging", paging);
+		model.addAttribute("studyCount", studyCount);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("page", currentPage);
+		model.addAttribute("keyword", keyword);
+		
+		return ".keywordSearch.allStudy";
+	}
+	
+	//홍보전체
+	@RequestMapping("/keyword/promoteSearch")
+	public String promoteList(
+			@RequestParam String keyword
+			,@RequestParam(value="page",defaultValue="1")int currentPage
+			,Model model
+			,HttpServletRequest req
+			)throws Exception{
+		
+		
+		int rows=10;
+		int total_page;
+		int dataCount;
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("keyword", keyword);
+		
+		dataCount=service.PromoteCount(map);
+		total_page=myUtil.pageCount(rows, dataCount);
+		
+	
+		if(currentPage>total_page)
+			currentPage=total_page;
+		
+		int start=(currentPage-1)*rows+1;
+		int end=currentPage*rows;
+		
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<Promote>list=service.allPromoteList(map);
+		
+		int listNum,n=0;
+		Iterator<Promote> it=list.iterator();
+		while(it.hasNext()){
+			Promote dto=(Promote)it.next();
 			listNum=dataCount-(start+n-1);
 			dto.setListNum(listNum);
 			
@@ -97,15 +197,245 @@ public class keywordController {
 		
 		String paging=myUtil.paging(currentPage, total_page);
 		
-		String query=cp+"/study/myStudy/home/";
-		
+
 		model.addAttribute("list", list);
 		model.addAttribute("paging", paging);
 		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("total_page", total_page);
-		model.addAttribute("query", query);
 		model.addAttribute("page", currentPage);
+		model.addAttribute("keyword", keyword);
 		
-		return ".keywordSearch.allStudy";
+		return ".keywordSearch.allPromote";
 	}
+	
+	//리뷰전체
+	@RequestMapping("/keyword/reviewSearch")
+	public String reviewList(
+			@RequestParam String keyword
+			,@RequestParam(value="page",defaultValue="1")int currentPage
+			,Model model
+			,HttpServletRequest req
+			)throws Exception{
+		
+		
+		int rows=10;
+		int total_page;
+		int dataCount;
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("keyword", keyword);
+		
+		dataCount=service.ReviewCount(map);
+		total_page=myUtil.pageCount(rows, dataCount);
+		
+	
+		if(currentPage>total_page)
+			currentPage=total_page;
+		
+		int start=(currentPage-1)*rows+1;
+		int end=currentPage*rows;
+		
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<Review>list=service.allReviewList(map);
+		
+		int listNum,n=0;
+		Iterator<Review> it=list.iterator();
+		while(it.hasNext()){
+			Review dto=(Review)it.next();
+			listNum=dataCount-(start+n-1);
+			dto.setListNum(listNum);
+			
+			n++;
+		}
+		
+		String paging=myUtil.paging(currentPage, total_page);
+		
+
+		model.addAttribute("list", list);
+		model.addAttribute("paging", paging);
+		model.addAttribute("dataCount", dataCount);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("page", currentPage);
+		model.addAttribute("keyword", keyword);
+		
+		return ".keywordSearch.allReview";
+	}
+	
+	//마켓전체
+	@RequestMapping("/keyword/marketSearch")
+	public String marketList(
+			@RequestParam String keyword
+			,@RequestParam(value="page",defaultValue="1")int currentPage
+			,Model model
+			,HttpServletRequest req
+			)throws Exception{
+		
+		
+		int rows=10;
+		int total_page;
+		int dataCount;
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("keyword", keyword);
+		
+		dataCount=service.StudyMarketBoardCount(map);
+		total_page=myUtil.pageCount(rows, dataCount);
+		
+	
+		if(currentPage>total_page)
+			currentPage=total_page;
+		
+		int start=(currentPage-1)*rows+1;
+		int end=currentPage*rows;
+		
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<StudyMarketBoard>list=service.allStudyMarketBoardList(map);
+		
+		int listNum,n=0;
+		Iterator<StudyMarketBoard> it=list.iterator();
+		while(it.hasNext()){
+			StudyMarketBoard dto=(StudyMarketBoard)it.next();
+			listNum=dataCount-(start+n-1);
+			dto.setListNum(listNum);
+			
+			n++;
+		}
+		
+		String paging=myUtil.paging(currentPage, total_page);
+		
+
+		model.addAttribute("list", list);
+		model.addAttribute("paging", paging);
+		model.addAttribute("dataCount", dataCount);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("page", currentPage);
+		model.addAttribute("keyword", keyword);
+		
+		return ".keywordSearch.allMarket";
+	}
+	
+	//어디서하지전체
+	@RequestMapping("/keyword/whereSearch")
+	public String whereList(
+			@RequestParam String keyword
+			,@RequestParam(value="page",defaultValue="1")int currentPage
+			,Model model
+			,HttpServletRequest req
+			)throws Exception{
+		
+		
+		int rows=10;
+		int total_page;
+		int dataCount;
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("keyword", keyword);
+		
+		dataCount=service.StudyWhereCount(map);
+		total_page=myUtil.pageCount(rows, dataCount);
+		
+	
+		if(currentPage>total_page)
+			currentPage=total_page;
+		
+		int start=(currentPage-1)*rows+1;
+		int end=currentPage*rows;
+		
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<StudyWhere>list=service.allStudyWhereList(map);
+		
+		int listNum,n=0;
+	
+		Iterator<StudyWhere> ite = list.iterator();
+
+		while(ite.hasNext()) {
+			StudyWhere dto = ite.next();
+			listNum=dataCount-(start+n-1);
+			dto.setListNum(listNum);
+			Pattern pattern  =  Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
+			String content = dto.getContent();
+			Matcher match = pattern.matcher(content);	
+			String imgTag = null;
+			if(match.find()){
+			    imgTag = match.group(1);
+			}
+			dto.setContent(imgTag);
+			n++;
+			
+		}
+		
+		
+		String paging=myUtil.paging(currentPage, total_page);
+		
+
+		model.addAttribute("list", list);
+		model.addAttribute("paging", paging);
+		model.addAttribute("dataCount", dataCount);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("page", currentPage);
+		model.addAttribute("keyword", keyword);
+		
+		return ".keywordSearch.allWhere";
+	}
+	
+	//다운로드전체
+		@RequestMapping("/keyword/downloadSearch")
+		public String downloadList(
+				@RequestParam String keyword
+				,@RequestParam(value="page",defaultValue="1")int currentPage
+				,Model model
+				,HttpServletRequest req
+				)throws Exception{
+			
+			
+			int rows=10;
+			int total_page;
+			int dataCount;
+			
+			Map<String, Object> map=new HashMap<>();
+			map.put("keyword", keyword);
+			
+			dataCount=service.DownloadBoardCount(map);
+			total_page=myUtil.pageCount(rows, dataCount);
+			
+		
+			if(currentPage>total_page)
+				currentPage=total_page;
+			
+			int start=(currentPage-1)*rows+1;
+			int end=currentPage*rows;
+			
+			map.put("start", start);
+			map.put("end", end);
+			
+			List<DownloadBoard>list=service.allDownloadBoardList(map);
+			
+			int listNum,n=0;
+			Iterator<DownloadBoard> it=list.iterator();
+			while(it.hasNext()){
+				DownloadBoard dto=(DownloadBoard)it.next();
+				listNum=dataCount-(start+n-1);
+				dto.setListNum(listNum);
+				
+				n++;
+			}
+			
+			String paging=myUtil.paging(currentPage, total_page);
+			
+
+			model.addAttribute("list", list);
+			model.addAttribute("paging", paging);
+			model.addAttribute("dataCount", dataCount);
+			model.addAttribute("total_page", total_page);
+			model.addAttribute("page", currentPage);
+			model.addAttribute("keyword", keyword);
+			
+			return ".keywordSearch.allDownload";
+		}
 }
