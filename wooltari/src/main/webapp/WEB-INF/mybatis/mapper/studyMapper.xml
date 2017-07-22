@@ -101,6 +101,10 @@
 		  WHERE sm.userId=#{userId} AND enabled=1 
   	</select>
   	
+  	<!-- 내가 가입된 스터디(리더/멤버 포함) -->
+  	
+  	
+  	
   	<!-- 스터디 전체 정보 -->
   	<select id="readMyStudy" parameterType="Long" resultType="com.wooltari.study.StudyInfo">
   		SELECT * FROM study WHERE s_num = #{s_num}

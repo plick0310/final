@@ -189,7 +189,7 @@ public class StudyController {
 	}
 	
 
-/*  스터디 리스트   */
+	/*  스터디 리스트   */
 	@RequestMapping(value="/study/mylist")
 	   public String list(Model model , HttpSession session ,HttpServletRequest req){
 	     
