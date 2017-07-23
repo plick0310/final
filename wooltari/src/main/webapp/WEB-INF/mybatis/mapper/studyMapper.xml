@@ -85,24 +85,36 @@
   	
   	<!-- (내가만든)나의 스터디 리스트 -->
   	<select id="listMyStudy" parameterType="String" resultType="com.wooltari.study.StudyInfo">
-		SELECT s.s_num ,s.userId, created, studyName , study_Info , imageFilename , userName , userImg
-		FROM study s JOIN member m  ON s.userId = m.userId  
-		WHERE s.userId = #{userId}
+		SELECT s.s_num ,s.userId, created, studyName , study_Info , imageFilename , userName , userImg ,memCnt
+		FROM( SELECT s_num, NVL(COUNT(*),0) AS memCnt 
+			  FROM studymember
+			  GROUP BY s_num ) ts , study s JOIN member m  ON s.userId = m.userId  
+		WHERE s.userId = #{userId} AND ts.s_num = s.s_num
   	</select>
   	
   	<!-- 가입한 스터디 리스트 -->
   	<select id="listMyStudy2" parameterType="String" resultType="com.wooltari.study.StudyInfo">      
 		SELECT tb.* FROM(
-		    SELECT s_num, s.userId, imageFileName , created , studyName ,study_Info ,userImg ,userName
-		    FROM study s
-		    JOIN member m ON s.userId= m.userId
-		      WHERE s.userId != #{userId}
+			    SELECT s.s_num, s.userId, imageFileName , created , studyName ,study_Info ,userImg ,userName,memCnt
+			    FROM (	SELECT s_num, NVL(COUNT(*),0) AS memCnt 
+						FROM studymember
+						GROUP BY s_num )ts , study s
+				JOIN member m ON s.userId= m.userId
+			    WHERE s.userId !=  #{userId} AND ts.s_num = s.s_num
 		  )tb JOIN studyMember sm ON tb.s_num= sm.s_num
-		  WHERE sm.userId=#{userId} AND enabled=1 
+		   WHERE sm.userId= #{userId} AND enabled=1 
   	</select>
   	
   	<!-- 내가 가입된 스터디(리더/멤버 포함) -->
-  	
+  	<select id="listMyStudy3"  parameterType="String" resultType="com.wooltari.study.StudyInfo">
+  	 SELECT s.s_num  ,s.userId ,s.imageFileName , created, studyName ,study_Info, me.userName , me.userImg  ,memCnt
+	 	FROM (	SELECT s_num, NVL(COUNT(*),0) AS memCnt 
+					FROM studymember
+					GROUP BY s_num ) ts , STUDY s
+	    JOIN STUDYMEMBER m ON m.s_num = s.s_num 
+      	JOIN MEMBER me ON m.userId = me.userId
+      	WHERE s.userId= #{userId} AND m.enabled=1 AND ts.s_num=s.s_num;
+  	</select>	
   	
   	
   	<!-- 스터디 전체 정보 -->
