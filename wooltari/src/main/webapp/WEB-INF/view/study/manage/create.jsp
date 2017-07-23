@@ -354,7 +354,8 @@ function insertStudy(){
                            <label id="blahbtn" for="uploadBtn"  class="btn btn-large uploadLabel " style="position: absolute; top: 94px; left: 0px;">사진바꾸기
                            </label>
                            <input type="file" name="upload" id="uploadBtn" class="uploadBtn tts" >
-                       
+                        <input type="hidden" name="imageFileName" value="${vdto.imageFileName}">	
+                       	 
                         </c:if>
                         
                         
