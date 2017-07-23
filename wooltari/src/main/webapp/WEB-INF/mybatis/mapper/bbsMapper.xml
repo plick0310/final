@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bbs">
+	<insert id="insertBoard" parameterType="com.wooltari.bbs.Board">
+		insert into freeBbs(num,userid,subject,content)values
+		(ft_cnum.nextval,#{userId},#{subject},#{content})
+	</insert>
+	
+	<!-- 조건검색 -->
+	<sql id="where-list">
+		<!-- 제목 -->
+		<if test="searchKey=='subject'">
+			INSTR(subject, #{searchValue})&gt;=1
+		</if>
+		
+		<!-- 작성자 -->
+		<if test="searchKey=='userName'">
+			INSTR(name, #{searchValue})=1
+		</if>
+		
+		<!-- 내용 -->
+		<if test="searchKey=='content'">
+			DBMS_LOB.INSTR(content, #{searchValue})&gt;=1
+		</if>
+		
+		<!-- 등록일 -->
+		<if test="searchKey=='created'">
+			TO_CHAR(created, 'YYYY-MM-DD')=#{searchValue} OR TO_CHAR(created,'YYYY-MM-DD')=#{searchValue}
+		</if>
+	</sql>
+	
+	<select id="dataCount" resultType="Integer" parameterType="map">
+		SELECT NVL(COUNT(*),0) FROM freeBbs b JOIN member m ON b.userId = m.userId
+		<where>
+			<if test="searchValue!=null and searchValue!=''">
+				<include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+	<select id="listBoard" parameterType="map" resultType="com.wooltari.bbs.Board">
+<!--  [ 기 존 리 스 트 ]
+		SELECT * FROM (
+		  SELECT ROWNUM rnum, tb.* FROM (
+		    SELECT num, m.userId, m.userName, subject, content, hitCount, TO_CHAR(created, 'YYYY-MM-DD') created, saveFileName
+		    FROM bbs b JOIN member1 m ON b.userId = m.userId		    
+		    <where>
+				   <if test="searchValue != null and searchValue != '' ">
+				    	<include refid="where-list"/>
+				   </if>
+			</where>
+			ORDER BY num DESC
+				    <![CDATA[
+				  ) tb WHERE ROWNUM <= #{end}
+				) WHERE rnum >= #{start}
+				]]>
+-->
+		<!-- Count over로 만들어도 큰 문제는 없지만 일단 JOIN을 하는 방식으로.. -->
+			SELECT * FROM (
+			    SELECT ROWNUM rnum, tb.* FROM (
+			       SELECT tbBbs.num, userId, userName,
+			           subject, created, hitCount,
+			           NVL(replyCount, 0) replyCount, NVL(likeCount, 0) likeCount
+			       FROM
+			       (
+			           (
+				         SELECT num, b.userId, userName, subject
+				           ,TO_CHAR(b.created, 'YYYY-MM-DD') created
+						   ,hitCount
+				         FROM freebbs b JOIN member m ON b.userId=m.userId
+	                    <where>
+	                         <if test="searchValue != null and searchValue != ''">
+				                  <include refid="where-list"/>
+			                 </if>
+		                </where>
+		                ) tbBbs
+				        LEFT OUTER JOIN
+				        (
+				            SELECT num, COUNT(*) replyCount
+	                                    FROM freebbsReply WHERE answer=0 GROUP BY num
+				        ) tbReply ON tbBbs.num = tbReply.num
+                		LEFT OUTER JOIN
+				        (
+				            SELECT num, COUNT(*) likeCount
+	                                    FROM freebbsLike WHERE answer=0 GROUP BY num
+				        ) tbLike ON tbBbs.num = tbLike.num
+		            )
+		           ORDER BY num DESC
+		<![CDATA[
+		        ) tb WHERE ROWNUM <= #{end}
+		    ) WHERE rnum >= #{start}
+		]]>
+	</select>
+	
+	<select id="readBoard" parameterType="Integer" resultType="com.wooltari.bbs.Board">
+		SELECT num, m.userId, m.username, subject, content, hitCount, created
+		FROM freebbs b JOIN member m ON b.userId = m.userId WHERE num=#{num}
+	</select>
+	
+	<select id="updateHitCount" parameterType="Integer">
+		UPDATE freebbs SET hitCount=hitCount+1 WHERE num=#{num}
+	</select>
+	
+	<select id="preReadBoard" parameterType="map" resultType="com.wooltari.bbs.Board">
+		SELECT tb.* FROM (
+			SELECT num, subject FROM freebbs
+			<where>
+				<if test="searchValue != null and searchValue != '' ">
+					<include refid="where-list"/>
+				</if>
+				
+				<![CDATA[
+					AND (num > #{num})
+				]]>
+			</where>
+			ORDER BY num ASC
+		)tb WHERE ROWNUM=1
+	</select>
+	
+	<select id="nextReadBoard" parameterType="map" resultType="com.wooltari.bbs.Board">
+		SELECT tb.* FROM (
+			SELECT num, subject FROM freebbs
+			<where>
+				<if test="searchValue != null and searchValue != '' ">
+					<include refid="where-list"/>
+				</if>
+				
+				<![CDATA[
+					AND (num < #{num})
+				]]>
+			</where>
+			ORDER BY num DESC
+		)tb WHERE ROWNUM=1
+	</select>
+	
+	<!-- 게시판 수정 -->
+	<update id="updateBoard" parameterType="com.wooltari.bbs.Board">
+		UPDATE freebbs SET subject=#{subject}, content=#{content} WHERE num=#{num}
+	</update>
+	
+	<!-- 게시판 삭제 -->
+	<delete id="deleteBoard" parameterType="Integer">
+		DELETE FROM freebbs WHERE num=#{num}
+	</delete>
+	
+	<!-- 게시물 공감 -->
+	<insert id="insertLikeBoard" parameterType="com.wooltari.bbs.Board">
+		INSERT INTO freebbsLike(num, userId) VALUES (#{num},#{userId})
+	</insert>
+	
+	<!-- 게시물 공감 개수 -->
+	<select id="countLikeBoard" resultType="Integer" parameterType="Integer">
+		SELECT NVL(COUNT(*),0) FROM freebbsLike WHERE num=#{num}
+	</select>
+	
+	<!-- 댓글 달기 -->
+	<insert id="insertReply" parameterType="com.wooltari.bbs.Reply">
+		INSERT INTO freebbsReply (replyNum, num, userId, content, answer)
+			VALUES (bbsReply_seq.NEXTVAL, #{num}, #{userId}, #{content}, #{answer})
+	</insert>
+	
+	<!-- 댓글개수  -->
+	<select id="replyDataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM freebbsReply WHERE num=#{num} AND answer=0
+	</select>
+	
+	<!-- 댓글리스트 -->
+	<select id="listReply" parameterType="map" resultType="com.wooltari.bbs.Reply">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM(
+				SELECT replyNum, num, r.userId, userName, content, created
+				FROM freebbsReply r
+				JOIN member m ON r.userId = m.userId
+				WHERE num=#{num} AND answer=0
+				ORDER BY replyNum DESC
+			<![CDATA[
+				  ) tb WHERE ROWNUM <= #{end}
+				) WHERE rnum >= #{start}
+			]]>
+	</select>
+
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply" parameterType="map">
+		DELETE freebbsReply WHERE
+		<if test="mode=='num'">
+			num=#{num}
+		</if>
+		<if test="mode=='reply'">
+			replyNum=#{replyNum}
+		</if>
+	</delete>
+</mapper>

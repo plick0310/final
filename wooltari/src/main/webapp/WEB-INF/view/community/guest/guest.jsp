@@ -6,6 +6,8 @@
    String cp = request.getContextPath();
 %>
 
+
+
 <script type="text/javascript">
 $(function(){
 	listPage(1);
@@ -135,7 +137,7 @@ function deleteGuest(num, page) {
 
 </head>
 
-<div class="body-container" style="width: 700px;">
+<div class="body-container" style="width: 900px; height: 100%; margin: 60px auto;">
     <div class="body-title">
         <h3><span style="font-family: Webdings">2</span> 한 줄 TALK?TALK! </h3>
     </div>
