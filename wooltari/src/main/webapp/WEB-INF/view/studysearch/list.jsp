@@ -6,78 +6,99 @@
 	String cp=request.getContextPath();
 %>
 <script type="text/javascript">
-
-
+//맵 및 배열 초기화
+var map = new naver.maps.Map("map", {
+    zoom: 3,
+    center: new naver.maps.LatLng(36.2253017, 127.6460516),
+    zoomControl: true,
+    zoomControlOptions: {
+        position: naver.maps.Position.TOP_LEFT,
+        style: naver.maps.ZoomControlStyle.SMALL
+    }
+}),
+markers = [],
+infoWindows = [], 
+contentString = [];
 //맵에 다중 마커 추가
-var map = new naver.maps.Map('map', {
-    center: new naver.maps.LatLng(37.3595704, 127.105399),
-    zoom: 10
-});
-
-var markers = [],
-    infoWindows = [];
-    
 $(function addMarker(){
 	<c:forEach items="${list}" var="dto" >
-		//alert(${dto.s_num});
-		<c:forEach items="${dto.listLocal}" var="vo" >
-			//"${dto.studyName}": ['${vo.pointx}', '${vo.pointy}'],
+		<c:forEach items="${dto.listLocal}" var="local" >
 			marker = new naver.maps.Marker({
 	        map: map,
-	        position: new naver.maps.LatLng(${vo.pointy}, ${vo.pointx}),
+	        position: new naver.maps.LatLng('${local.pointy}', '${local.pointx}'),
 	        title: '${dto.studyName}',
 	        icon: {
-	            url: '<%=cp%>/resource/img/marker.png',
-	            size: new naver.maps.Size(24, 37),
-	            anchor: new naver.maps.Point(12, 37),
-	            //origin: new naver.maps.Point(MARKER_SPRITE_POSITION[key][0], MARKER_SPRITE_POSITION[key][1])
+	            url: '<%=cp%>/resource/img/marker4.png',
+	            size: new naver.maps.Size(30, 30),
+	            origin: new naver.maps.Point(0, 0),
+	            anchor: new naver.maps.Point(25, 25)
 	        },
 	        zIndex: 100
 		    });
-			var studyimg = '<%=cp%>/uploads/member/userImg/${dto.imageFileName}';
-			var userimg = '<%=cp%>/uploads/member/userImg/${dto.userImg}';
-		    infoWindow = new naver.maps.InfoWindow({
-
-		        borderWidth: 0,
-		        disableAnchor: true,
-		        backgroundColor: 'transparent',
-
-		        pixelOffset: new naver.maps.Point(0, -28),
-		        content: 
-		        +	'<div class="study-item list-item align-left">'
-		        +		'<div class="study-item-overlay"></div>'
-		        + 		'<div class="header-bg" style="background-image:url('+studyimg+')"></div>'
-		        + 		'<div class="header-text-container">'
-				+ 			'<div class="isPayment">'
-				  				<c:forEach var="vo" items="${dto.listCategory}">
-				+ 				'${vo.subject}'
-				  				</c:forEach>
-				+ 			'</div>'
-				+ 			'<div class="header-text align-left">'
-				+ 				'<div class="title-wrap">'
-				+ 					'<div class="title">'
-				+ 					'${dto.studyName}'
-				+ 					'</div>'
-				+ 				'</div>'
-				+ 				'<div class="tag">'
-				+ 					'<span class="last">${dto.study_Info}</span>'
-				+ 				'</div>'
-				+ 			'</div>'
-				+ 		'</div>'
-				+		'<div class="item-contents align-left">'
+			studyimg = '<%=cp%>/uploads/member/userImg/${dto.imageFileName}';
+			userimg = '<%=cp%>/uploads/member/userImg/${dto.userImg}';
+			nouserimg = '<%=cp%>/resource/img/noprofileimg.png'; 
+			studyurl = '<%=cp%>/study/myStudy/home/${dto.s_num}';
+			contentString = [
+				'<a href="'+ studyurl+'">',
+				'<div class="iw_inner">',
+					'<div class="study-item list-item align-left">',
+						'<div class="study-item-overlay"></div>',
+						'<div class="header-bg" style="background-image:url('+studyimg+')"></div>',
+						'<div class="header-text-container">',
+							'<div class="isPayment">',
+								<c:forEach var="category" items="${dto.listCategory}" end='0'>
+								'${category.p_subject} > ${category.subject}',
+								</c:forEach>
+							'</div>',
+							'<div class="header-text align-left">',
+								'<div class="title-wrap">',
+									'<div class="title">',
+									'${dto.studyName}',
+									'</div>',
+								'</div>',
+								'<div class="tag">',
+									'<span class="last">${dto.study_Info}</span>',
+								'</div>',
+							'</div>',
+						'</div>',
+						'<div class="item-contents align-left">',
 							<c:if test="${not empty dto.userImg}">
-				+			'<div class="profile-image" style="background-image:url('+userimg+')"></div>'		
+							'<div class="profile-image" style="background-image:url('+userimg+')"></div>',      
 							</c:if>
-				+			'<div class="user-name">'
-                +			'${dto.userName}'
-                +			'</div>'
-                +			'<div class="location">'
-                			<c:forEach var="vo" items="${dto.listLocal}" end="0">
-                +			'<h3>${vo.city}</h3>' 
-                            </c:forEach>
-                +			'</div>'
-				+		'</div>'
-		        + 	'</div>'
+							<c:if test="${empty dto.userImg}">
+							'<div class="profile-image" style="background-image:url('+nouserimg+')"></div>',
+							</c:if>
+							'<div class="user-name">',
+							'${dto.userName}',
+							'</div>',
+							'<div class="location" style="width:250px;">',
+								<c:forEach var="local" items="${dto.listLocal}" end="0">
+								'<h3>${local.city}</h3>',
+								</c:forEach>
+							'</div>',
+							'<div class="strong-info">',
+								'<span class="payment"></span> ${dto.gender} <span class="count"></span>',
+							'</div>',
+							'<div class="icon-container">',
+							'<i class="fa fa-user-o" aria-hidden="true"></i><span class="info-comment"> ${dto.memcnt}</span>',
+							'</div>',
+						'</div>',
+					'</div>',
+					'</div>', 
+				'</a>'
+			].join('');
+						 
+		    infoWindow = new naver.maps.InfoWindow({
+		    	content: contentString,
+		        maxWidth: 250,
+		        backgroundColor: "#fff",
+		        borderColor: "#1abc9c",
+		        borderWidth: 3,
+		        anchorSize: new naver.maps.Size(30, 20),
+		        anchorSkew: false,
+		        anchorColor: "#fff",
+		        pixelOffset: new naver.maps.Point(20, 0)
 		    });
 		
 		    markers.push(marker);
@@ -85,7 +106,7 @@ $(function addMarker(){
 		</c:forEach> 
 	</c:forEach>
 });
-
+//맵 범위안에 있는 마커만 보이게
 naver.maps.Event.addListener(map, 'idle', function() {
     updateMarkers(map, markers);
 });
@@ -107,20 +128,17 @@ function updateMarkers(map, markers) {
         }
     }
 }
-
+//마커 보이기
 function showMarker(map, marker) {
-
     if (marker.setMap()) return;
     marker.setMap(map);
 }
-
+//마커 숨기기
 function hideMarker(map, marker) {
-
     if (!marker.setMap()) return;
     marker.setMap(null);
 }
-
-// 해당 마커의 인덱스를 seq라는 클로저 변수로 저장하는 이벤트 핸들러를 반환합니다.
+//해당 마커의 인덱스를 seq라는 클로저 변수로 저장하는 이벤트 핸들러를 반환
 function getClickHandler(seq) {
     return function(e) {
         var marker = markers[seq],
@@ -133,11 +151,11 @@ function getClickHandler(seq) {
         }
     }
 }
-
+//마커 클릭이벤트 설정
 for (var i=0, ii=markers.length; i<ii; i++) {
     naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
 }
-
+//마우스 오버된 스터디의 마커가 있는 지역으로 맵 이동
 function moveXY(s_num) {
 	var query = {"s_num" : s_num};
 	$.ajax({
@@ -148,10 +166,9 @@ function moveXY(s_num) {
         	var city = data.city;
 			var pointx = data.pointx;
 			var pointy = data.pointy;
-			//alert("지역 : " + city + "pointx : " + pointx + "pointy : " + pointy);
 			var myaddr = new naver.maps.Point(pointx, pointy);
-	        map.setCenter(myaddr); 
-	        map.setZoom(13);
+	        map.setCenter(myaddr);
+	        map.setZoom(11);
         },
         error:function(jqXHR, textStatus, errorThrown){
             alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
@@ -161,20 +178,12 @@ function moveXY(s_num) {
 }
 </script>
 <style>
-#list-header > .select, .option-section .add-filter-btn {
-    width: 118px;
-    border-radius: 0;
-    height: 38px;
-    font-size: 13px;
-}
-.inline {
-    display: inline-block !important;
+#list-header {
+ 	margin-top: 50px;
 }
 </style>
 <div id="list-header">
-	<div class="result-box inline">
-		검색결과 <span class="result-num">${dataCount}</span>개
-	</div>
+	검색결과 ${dataCount}개
 </div>
 
 <div id="list-box">
@@ -189,8 +198,8 @@ function moveXY(s_num) {
 						</div>
 						<div class="header-text-container">
 							<div class="isPayment">
-								<c:forEach var="vo" items="${dto.listCategory}">
-									${vo.subject}&nbsp; 
+								<c:forEach var="category" items="${dto.listCategory}" end='0'>
+								${category.p_subject} > ${category.subject}
 								</c:forEach>
 							</div>
 							<div class="header-text align-left">
@@ -215,8 +224,8 @@ function moveXY(s_num) {
 								${dto.userName}
 							</div>
 							<div class="location">
-								<c:forEach var="vo" items="${dto.listLocal}" end="0">
-									<h3>${vo.city}</h3> 
+								<c:forEach var="local" items="${dto.listLocal}" end="0">
+									<h3>${local.city}</h3> 
 								</c:forEach>
 							</div>
 							<div class="strong-info">
