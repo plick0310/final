@@ -1,5 +1,8 @@
 ﻿@CHARSET "UTF-8";
 
+h3{
+	font-size: 14px; 
+}
 .filter .filter-section, .filter .option-section {
     color: #666;
     font-weight: 300;
@@ -578,8 +581,8 @@ textarea{
     height:160px;
     background-color:#fff;
     border-top:1px solid #efefef;
-    position:relative;
-    padding-top:48px;
+    position:relative; 
+    padding-top:28px;
     text-align:center;
     font-weight:300;
     color:#666;
@@ -604,7 +607,7 @@ textarea{
 }
 
 .study-item .item-contents .strong-info{
-    font-size:16px;
+    font-size:14px;
     margin-top: 1px;
     color:#1abc9c;
     font-weight:500;
@@ -697,7 +700,7 @@ textarea{
 
 .study-item .item-contents.align-left .location, .study-item .item-contents.align-left .strong-info {
     text-align:left;
-    padding-left:25px;
+    //padding-left:25px;
     padding-right:25px;
 }
 

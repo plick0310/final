@@ -113,7 +113,7 @@
 					GROUP BY s_num ) ts , STUDY s
 	    JOIN STUDYMEMBER m ON m.s_num = s.s_num 
       	JOIN MEMBER me ON m.userId = me.userId
-      	WHERE s.userId= #{userId} AND m.enabled=1 AND ts.s_num=s.s_num;
+      	WHERE s.userId= #{userId} AND m.enabled=1 AND ts.s_num=s.s_num
   	</select>	
   	
   	
