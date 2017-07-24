@@ -16,16 +16,10 @@ var map = new naver.maps.Map('map', {
     zoom: 10
 });
 
-var bounds = map.getBounds(),
-    southWest = bounds.getSW(),
-    northEast = bounds.getNE(),
-    lngSpan = northEast.lng() - southWest.lng(),
-    latSpan = northEast.lat() - southWest.lat();
-
 var markers = [],
     infoWindows = [];
     
-$(function addMarker() {
+$(function addMarker(){
 	<c:forEach items="${list}" var="dto" >
 		//alert(${dto.s_num});
 		<c:forEach items="${dto.listLocal}" var="vo" >
@@ -111,8 +105,8 @@ $(function(){
 	  });
 });
 */
-function moveXY(listLocal) {
-	alert('<%=listLocal.getPointx%>');
+function moveXY(s_num) {
+	alert(s_num);
 }
 </script>
 <style>
@@ -138,7 +132,7 @@ function moveXY(listLocal) {
 			<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 default-list-box study-item-wrap">
 				<a href="javascript:location.href='<%=cp%>/study/myStudy/home/${dto.s_num}'">
 					<div class="study-item list-item align-left">
-						<div class="study-item-overlay" onmouseover="moveXY('${dto.listLocal}');" >
+						<div class="study-item-overlay" onmouseover="moveXY('${dto.s_num}');" >
 						</div>
 						<div class="header-bg" style="background-image:url(<%=cp%>/uploads/member/userImg/${dto.imageFileName})">
 						</div>
