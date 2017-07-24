@@ -175,6 +175,26 @@ var query = "parent=" + bigCategory;
 	});
 }
 
+//텍스트박스 엔터 입력시
+$(function(){
+	$("#location-search, #title-search").keydown(function(e){
+		if($(this).val() != "" && e.keyCode==13) {
+			page=1;
+			studyLoad();
+			return false;
+		}
+	});
+});
+
+//셀렉트박스 값 변경시
+$(function(){
+	$("#bigCategory, #smallCategory, #selectTarget, #selectRecruit, #selectGender, #selectSort").change(function(e){
+		page=1;
+		studyLoad();
+		return false;
+	});
+});
+
 
 
 </script>
@@ -245,6 +265,17 @@ var query = "parent=" + bigCategory;
 								<option value="여자">여자</option>
 							</select>
 						</div>
+						
+						<div class="col-lg-1 col-md-6 pt-sm pb-sm"> 정렬</div>
+                		<div class="col-md-2"> 
+							<select id="selectSort" name="sort" class="form-control">
+								<option value="0" selected>최근 개설순</option>
+								<option value="1">오래된 개설순</option>
+								<option value="2">멤버순</option>
+								<option value="3">후기순</option>
+							</select>
+						</div>
+						
 	                </div>
 	            </div>
 	            <div class="filter-section default-section">

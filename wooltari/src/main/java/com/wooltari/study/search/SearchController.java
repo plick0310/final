@@ -53,15 +53,15 @@ public class SearchController {
 	public String list(
 				@RequestParam(value="bigCategory", defaultValue="0") int bigCategory,
 				@RequestParam(value="smallCategory", defaultValue="0") int smallCategory,
-				@RequestParam(value="target", defaultValue="") String target,
 				@RequestParam(value="page", defaultValue="1") int current_page,
 				@RequestParam(value="recruit", defaultValue="0") int recruit,
+				@RequestParam(value="sort", defaultValue="0") int sort,
+				@RequestParam(value="target", defaultValue="") String target,
 				@RequestParam(value="choiceCity", defaultValue="") String choiceCity,
 				@RequestParam(value="gender", defaultValue="") String gender,
-				@RequestParam(value="searchValue", defaultValue="") String searchValue,
+				@RequestParam(value="searchValue", defaultValue="") String searchValue, 
 				Model model, HttpServletRequest req , HttpSession session
 			) throws Exception{
-		System.out.println("넘어온 쿼리 : bigCategory:"+bigCategory+"/smallCategory:"+smallCategory+"/target:"+target+"/page:"+current_page+"/recruit:"+recruit+"/choiceCity:"+choiceCity+"/gender:"+gender+"/searchValue:"+searchValue);
 		
 		String cp = req.getContextPath();
 		
@@ -80,8 +80,9 @@ public class SearchController {
 		
 		map.put("bigCategory", bigCategory);
 		map.put("smallCategory", smallCategory);
-		map.put("target", target);
+		map.put("sort", sort);
 		map.put("recruit", recruit);
+		map.put("target", target);
 		map.put("choiceCity", choiceCity);
 		map.put("gender", gender);
 		map.put("searchValue", searchValue);
