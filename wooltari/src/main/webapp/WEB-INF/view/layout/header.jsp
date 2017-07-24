@@ -6,6 +6,16 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/member-form-elements.css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/member-form-style.css">
 <!-- 카카오톡 로그인 -->
+<style>
+#info li a{
+ color: #767676;
+ }  
+#info li a:HOVER {
+	background: none;
+	color: #393635;
+	font-weight: bold;
+}
+</style>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type='text/javascript'>
 $(document).ready(function() {
@@ -175,8 +185,8 @@ $(function(){
 
 								<div class="row">
 									<div class="col-sm-2"><a href="<%=cp%>/mockTest/main">모의 테스트</a></div>
-									<div class="col-sm-2"><a href="<%=cp%>/freeTalk/talk">한줄톡톡</a></div>
-									<div class="col-sm-2"><a href="#">자유광장</a></div>
+									<div class="col-sm-2"><a href="<%=cp%>/guest/guest">한줄톡톡</a></div>
+									<div class="col-sm-2"><a href="<%=cp%>/bbs/list">자유광장</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/community/photalks/list">포톡스</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/community/usedshop/list">교재중고장터</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/community/playZone/home">놀이터</a></div>
@@ -244,7 +254,7 @@ $(function(){
 					</c:if>
 					<c:if test="${not empty sessionScope.member}">
 						<strong style="margin-right: 5px">${sessionScope.member.userName}</strong>
-						<c:if test="${empty sessionScope.member.userImg}">
+						<c:if test="${empty sessionScope.member.userImg}"> 
 							<a href="#" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
 								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-circle" width="35px" height="35px" style="padding:1px; box-shadow: 2px 2px 5px grey;"> 
 							</a>
@@ -254,22 +264,48 @@ $(function(){
 								<img src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}" class="img-circle" width="35px" height="35px" style="padding:1px; box-shadow: 2px 2px 5px grey;">
 							</a>
 						</c:if>
-						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<ul id="info" class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="top: 48px;
+    border: none;
+
+    /* border: 2px solid #eee; */
+    border-top: none;
+    width: 160px;
+    border-radius: 7px;
+    right: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background: white;
+    line-height: 41px;">
+    <!-- <li style="position: absolute;
+    top: -20px;
+    color: white;
+    right: 24px;
+    font-size: 19px;"><i class="glyphicon glyphicon-triangle-top"></i></li> -->
 							<c:if test="${empty sessionScope.member.userImg}">
-								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-thumbnail" width="100%" height="100%">
+								<img src="<%=cp%>/resource/img/noprofileimg.png" class="img-thumbnail" width="100%" height="100%" style="    height: 60px;
+    width: 60px;
+    border: none;
+    box-shadow: none;
+    margin-left: 53px;
+    border: 1px solid #eee;">
 							</c:if>
 							<c:if test="${not empty sessionScope.member.userImg}">
-								<img src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}" class="img-thumbnail" width="100%" height="100%">
+								<img src="<%=cp%>/uploads/member/userImg/${sessionScope.member.userImg}" class="img-thumbnail" width="100%" height="100%" style="    height: 60px;
+    width: 60px;
+    border: none;
+    box-shadow: none;
+    margin-left: 53px;
+    border: 1px solid #eee;">
 							</c:if>
-							<li><h3 style="text-align: center;">${sessionScope.member.userName} 님</h3></li>
+							<li><h3 style="text-align: center; color:#393635;   font-size: 14px; margin: 7px 0;">${sessionScope.member.userName} 님</h3></li>
 							<c:if test="${sessionScope.member.userId == 'admin'}"> 
-							<li><a href="<%=cp%>/admin/index">관리자 페이지</a></li>
+							<li><a style="     background: #eee;   font-weight: 100;        border-top: 1px solid #eee;    font-size: 13px;" href="<%=cp%>/admin/index">관리자 페이지</a></li>
 							</c:if>
-							<li><a href="<%=cp%>/member/mypage?pageName=my_info">나의 정보</a></li>
-							<li><a href="<%=cp%>/study/mylist">나의 스터디</a></li>
-							<li><a href="<%=cp%>/member/mypage?pageName=my_msg">나의 쪽지함</a></li>
-							<li><a href="<%=cp%>/member/mypage?pageName=my_calender">나의 스케줄</a></li>
-							<li><a href="javascript:sendlogout();">로그아웃</a></li>
+							<li><a style="     font-weight: 100;      border-top: 1px solid #eee;   font-size: 13px;" href="<%=cp%>/member/mypage?pageName=my_info">나의 정보/수정</a></li>
+							<li><a style="      background: #eee;  font-weight: 100;       border-top: 1px solid #eee;   font-size: 13px;" href="<%=cp%>/study/mylist">나의 스터디</a></li>
+							<li><a style="    font-weight: 100;        border-top: 1px solid #eee;   font-size: 13px;" href="<%=cp%>/member/mypage?pageName=my_msg">나의 쪽지함</a></li>
+							<li><a style="      background: #eee;  font-weight: 100;         border-top: 1px solid #eee;   font-size: 13px;" href="<%=cp%>/member/mypage?pageName=my_calender">나의 스케줄</a></li>
+							<li><a style="     font-weight: 100;     border-top: 1px solid #eee;   font-size: 13px;" href="javascript:sendlogout();">로그아웃</a></li>
 						</ul>
 					</c:if>
 				</div>
