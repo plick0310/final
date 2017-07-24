@@ -33,7 +33,7 @@ border: 1px solid #EAEAEA;
 </style>
 <script type="text/javascript">
 $(function name(){
-	alert('${dto.depth}');
+	//alert('${dto.depth}');
 });
 
 function check(){
@@ -50,7 +50,7 @@ function check(){
 		return false;
 	}
 	var mode="${mode}";
-	alert(mode);
+	//alert(mode);
 	if(mode=="created"){
 		f.action="<%=cp%>/customer/report/created";
 	}else if(mode=="update"){
@@ -58,6 +58,12 @@ function check(){
 	}else if(mode=="reply"){
 		f.action="<%=cp%>/customer/report/reply";
 	}return true;
+}
+
+function refresh(){
+	location.reload(true);
+	location.href = location.href;
+	history.go(-1);
 }
 
 </script>
@@ -113,7 +119,7 @@ enctype="multipart/form-data" method="post" style="margin: 60px auto; width: 900
 	
 	<div class="read_btnArea">
 		<button type="submit" class="clickbtn">${mode=='update'?'수정완료':'등록하기'}</button>
-		<button type="reset" class="clickbtn">다시입력</button>
+		<!-- <button type="reset" class="clickbtn" value="" onclick="refresh()">다시입력</button> -->
 		<button class="clickbtn" onclick="javaScript:location.href='<%=cp%>/customer/report/list?pageNo=${pageNo}';">${mode=='update'?'수정취소':'등록취소'}</button>
 		
 		<c:if test="${mode=='update'}">
@@ -176,4 +182,6 @@ function setDefaultFont() {
 	var nFontSize = 24;
 	oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
 }
+
+
 </script> 

@@ -25,7 +25,7 @@
 	 <!-- mapper에 리스트에서 사용  -->
 	<sql id="where-list">
 	  <if test="searchKey=='userId'">
-	      userId=#{searchValue}
+	      i.userId=#{searchValue}
 	  </if>
 	  <if test="searchKey=='subject'">
 	      INSTR(subject, #{searchValue}) &gt; 0

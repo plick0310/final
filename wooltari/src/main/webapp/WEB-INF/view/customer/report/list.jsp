@@ -271,10 +271,11 @@ function deleteAction(){
 </script>
 
 <div style="width: 900px; margin: 60px auto;">
-<div  style="height:50px; font-size: 20px;text-align: center; ">
+<div  style="height:50px; font-size: 20px;text-align: center; margin: 50px 0; ">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
 			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>신고/건의</div> 
+
 <form name="array_form" id="array_form" style="width: 900px;" method="post"> 
 	<input type="hidden" name="page" value="${pageNo}" />
 	
@@ -284,13 +285,12 @@ function deleteAction(){
 			<tr>
 				<td colspan="2" style="text-align:left;">
 					 
-					<ul id="category">
-						<li><a href="">게시판</a></li>						
+					<ul id="">
+						<li><a href=""></a></li>						
 					</ul>
 					 
 					<div style="position:absolute; bottom:10px; right: -15px;"> 
 						<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" onclick="check()"/><label for="allCheck">전체선택</label>			
-										
 					</div>
 				</td>
 			</tr>
@@ -306,7 +306,7 @@ function deleteAction(){
 				<td style="text-align:right; width:65px; padding: 5px 18px;">
 				<input type="checkbox" name="chk" value="${dto.repNum}"></td>
 				
-				<td class="___number">[ ${dto.category} ]</td>
+				<td class="___number" style="">[ ${dto.category} ]</td>
 				<td>
 					<div style="position:relative;">
 						<!--[category_name]-->
@@ -357,6 +357,7 @@ function deleteAction(){
 			<option value="subject">제목</option>
 			<option value="content">내용</option>
 			<option value="userId">작성자</option>
+			<option value="created">작성일</option>
 		</select>
 		<input type="text" name="searchValue" class="keyword" placeholder="검색"  style="width:120px; "> <input type="button" class="submit">
 	</div>
