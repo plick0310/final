@@ -84,8 +84,7 @@ function updateBoard(){
 </c:if>
 }
 </script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcO1EZpm4c5VVFmWf1h0dwX1QVbsx3Gb4&libraries=places"></script>
+
 
 <script type="text/javascript">
 //게시물 공감 개수
@@ -243,9 +242,12 @@ $(function(){
         });
       }
     </script>
+   <!-- 
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcO1EZpm4c5VVFmWf1h0dwX1QVbsx3Gb4&callback=initMap">
     </script>
+ 	-->
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=MXeCbH9k35apBk0LHUUl"></script>
 
 <div  style=" margin: 60px auto; height:50px; font-size: 20px;text-align: center;">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
@@ -271,7 +273,7 @@ $(function(){
 			<td class="read_contArea">
 				<span id="" >강의 시작일  : ${dto.startdate}</span>&nbsp;&nbsp;&nbsp;<span id="" >강의 종료일 : ${dto.enddate}</span>
 				
-				
+	<%-- 			
 	<!-- 지도  -->
 	<div class="panel panel-default" style="border: none; box-shadow: none;">
 			
@@ -300,6 +302,8 @@ $(function(){
 				</div>
 			</div>
 	</div>
+	 --%>
+	<div id="map" style="width:100%;height:400px;"></div>
 		
 				<!-- 유튜브 동영상 -->
 				<div class="">
@@ -384,3 +388,15 @@ $(function(){
 		</tbody>
 	</table>
     <div id="listReply">    </div>
+    
+    <script type="text/javascript">
+        var map = null;
+
+        function initMap() {
+            map = new naver.maps.Map('map', {
+                center: new naver.maps.LatLng(37.3595704, 127.105399),
+                zoom: 10
+            });
+        }
+    </script>
+    

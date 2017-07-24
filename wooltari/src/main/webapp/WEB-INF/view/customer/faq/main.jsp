@@ -311,6 +311,7 @@ background: white;
 		<input type="checkbox" id="allCheck" name="allCheck"
 			class="checkbox-style" /><label for="allCheck">전체선택</label>
 	</div>
+	
 	<!-- ajax처리되는 실제 게시판  -->
 	<div class="tab_container">
 			<div id="tab_content" class="tab_content"></div>
