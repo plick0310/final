@@ -7,8 +7,11 @@
 	<select id="study" resultType="com.wooltari.keyword.StudyInfo">
 		select * from(
 	 		select rownum rnum,tb.* from(
-		  		select s_num, userId,studyName, study_Info, to_char(created,'YYYY-MM-DD')created, gender,recruit, range,imageFileName
-		   		from study
+		  		select s.s_num, s.userId,s.studyName,s. study_Info, to_char(s.created,'YYYY-MM-DD')created, gender,recruit, range,imageFileName,cate.subject category,userName
+		   		from study s
+		          join studycategory sc on s.s_num=sc.s_num
+		          join s_category  cate on sc.choicecategory=cate.categorynum
+		          join member m on s.userId=m.userId
 		<![CDATA[
 		   			where range<2 and (DBMS_LOB.INSTR(studyname,'${keyword}') > 0 or DBMS_LOB.INSTR(study_info,'${keyword}') > 0 )
 		 	    order by created desc
@@ -28,8 +31,11 @@
 	<select id="allStudy" resultType="com.wooltari.keyword.StudyInfo">
 		select * from(
 	 		select rownum rnum,tb.* from(
-		  		select s_num, userId,studyName, study_Info, to_char(created,'YYYY-MM-DD')created, gender,recruit, range ,imageFileName
-		   		from study
+		  		select s.s_num, s.userId,s.studyName,s. study_Info, to_char(s.created,'YYYY-MM-DD')created, gender,recruit, range,imageFileName,cate.subject category,userName
+		   		from study s
+		          join studycategory sc on s.s_num=sc.s_num
+		          join s_category  cate on sc.choicecategory=cate.categorynum
+		          join member m on s.userId=m.userId
 		<![CDATA[
 		   			where range<2 and (DBMS_LOB.INSTR(studyname,'${keyword}') > 0 or DBMS_LOB.INSTR(study_info,'${keyword}') > 0 )
 		 	    order by created desc
@@ -235,6 +241,52 @@
 	]]>	  		
 	</select>
 	
+	
+	<!-- 중고장터 3개 -->
+	<select id="usedShopList" resultType="com.wooltari.keyword.UsedShop">
+		SELECT * FROM (
+			    SELECT ROWNUM rnum, tb.* FROM (
+			       SELECT num,price,userId,category,subject,del,pointuse,created,content
+			       FROM
+			       (
+			           (
+				         SELECT num,price,m.userId,category,subject,del,pointuse,created,content
+				         FROM usedshop u JOIN member m ON u.userId=m.userId
+                 where DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0
+		                ) tbBbs
+		            )
+		           ORDER BY num DESC
+		<![CDATA[
+		        ) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+		]]>
+	</select>
+	
+	<!-- 중고장터 글개수  -->
+	<select id="usedShopCount" resultType="Integer">
+	select nvl(count(*),0) from usedShop
+     where DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0
+	</select>
+	
+	<!-- 중고장터전체  -->
+	<select id="allUsedShopList" resultType="com.wooltari.keyword.UsedShop">
+		SELECT * FROM (
+			    SELECT ROWNUM rnum, tb.* FROM (
+			       SELECT num,price,userId,category,subject,del,pointuse,created,content
+			       FROM
+			       (
+			           (
+				         SELECT num,price,m.userId,category,subject,del,pointuse,created,content
+				         FROM usedshop u JOIN member m ON u.userId=m.userId
+                 where DBMS_LOB.INSTR(subject,'${keyword}') > 0 or DBMS_LOB.INSTR(content,'${keyword}') > 0
+		                ) tbBbs
+		            )
+		           ORDER BY num DESC
+		<![CDATA[
+		        ) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+		]]>
+	</select>
 	
 	
 </mapper>

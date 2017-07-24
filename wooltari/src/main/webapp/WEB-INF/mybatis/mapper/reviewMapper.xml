@@ -11,13 +11,16 @@
 	
 	<!-- 리뷰 리스트 -->
 	<select id="listBoard" parameterType="map" resultType="com.wooltari.review.Review">
-		select * from(
-			select rownum rnum, tb.* from(
-				select studyname,num,subject,r.content,hitcount,r.imagefilename,userName,
-				to_char(r.created,'yyyy-mm-dd')created,r.s_num,r.userId
+	select * from(
+		select rownum rnum,tb.* from(
+		select studyname,r.num,r.subject,r.content,r.hitcount,r.imagefilename,userName,range,nvl(star,0)star
+				,to_char(r.created,'yyyy-mm-dd')created,r.s_num,r.userId,cate.subject category
 				from reviewlist r 
     	    	join member m on r.userId=m.userId
-      		  	join study s on r.s_num=s.s_num
+            join study s on r.s_num=s.s_num
+            join studycategory sc on s.s_num=sc.s_num
+            join s_category cate on sc.choicecategory = cate.categorynum
+           left outer join reviewstar star on r.num=star.num
 				order by num desc
 		<![CDATA[		
 			)tb where rownum <= #{end}

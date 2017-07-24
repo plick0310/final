@@ -41,7 +41,7 @@ public class ReviewController {
 		String cp=req.getContextPath();
 		
 		
-		int rows=8;
+		int rows=12;
 		int total_page;
 		int dataCount;
 		

@@ -283,4 +283,43 @@ public class keywordServiceImpl implements keywordService {
 		return result;
 	}
 
+	@Override
+	public List<UsedShop> UsedShopList(Map<String, Object> map) {
+		List<UsedShop> list = null;
+
+		try {
+			list = dao.getListData("keyword.usedShopList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<UsedShop> allUsedShopList(Map<String, Object> map) {
+		List<UsedShop> list = null;
+
+		try {
+			list = dao.getListData("keyword.allUsedShopList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
+	@Override
+	public int UsedShopCount(Map<String, Object> map) {
+		int result = 0;
+
+		try {
+			result = dao.getIntValue("keyword.usedShopCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
 }

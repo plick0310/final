@@ -11,7 +11,23 @@ public class Review {
 	private int star;
 	private String studyName;
 	
+	private String category;
+	private int range;
 	
+	
+	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public int getRange() {
+		return range;
+	}
+	public void setRange(int range) {
+		this.range = range;
+	}
 	public String getStudyName() {
 		return studyName;
 	}

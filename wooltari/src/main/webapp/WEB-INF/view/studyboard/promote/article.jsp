@@ -212,7 +212,9 @@ line-height: normal;
 		
 			<td class="read_contArea" style="padding: 15px;">
 				<div id="board_memo_area">
-				<img src="<%=cp%>/uploads/photo/${dto.imageFileName}" style="max-width: 400px; height: 160px; margin-bottom:10px; resize: both;" onerror="this.src='<%=cp%>/resource/images/reviewPhoto/promote.PNG'">
+				<c:if test="${dto.imageFileName!=null }">
+				<img src="<%=cp%>/uploads/photo/${dto.imageFileName}" style="max-width: 400px; height: 160px; margin-bottom:10px; resize: both;">
+				</c:if>
 					<br>${dto.content }
 				</div>
 			<div style="background: #eee; width: 100%; padding: 10px;line-height: 25px; margin-top: 70px; margin-bottom: -60px;" >

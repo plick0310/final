@@ -32,4 +32,9 @@ public interface keywordService {
 	public List<StudyWhere> allStudyWhereList(Map<String, Object> map);
 	public int StudyWhereCount(Map<String, Object> map);
 	
+	public List<UsedShop> UsedShopList(Map<String, Object> map);
+	public List<UsedShop> allUsedShopList(Map<String, Object> map);
+	public int UsedShopCount(Map<String, Object> map);
+	
+
 }

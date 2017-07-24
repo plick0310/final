@@ -45,8 +45,8 @@ public class keywordController {
 		int studyWhereCount=service.StudyWhereCount(map);
 		int downloadCount=service.DownloadBoardCount(map);
 		int reviewCount=service.ReviewCount(map);
+		int usedShopCount=service.UsedShopCount(map);
 		
-		System.out.println(promoteCount+"갯수");
 		
 		map.put("start", start);
 		map.put("end", end);
@@ -57,6 +57,11 @@ public class keywordController {
 		List<StudyWhere> whereList=service.StudyWhereList(map);
 		List<DownloadBoard> downloadList=service.DownloadBoardList(map);
 		List<Review> reviewList=service.ReviewList(map);
+		
+		map.put("start", '1');
+		map.put("end", '4');
+		
+		List<UsedShop> usedShopList=service.UsedShopList(map);
 		
 		Iterator<StudyWhere> ite = whereList.iterator();
 		int bestlistNum, b=0;
@@ -76,6 +81,30 @@ public class keywordController {
 			
 		}
 		
+		int point =0;
+		int listNum, n=0;
+		Iterator<UsedShop> it = usedShopList.iterator();
+		while(it.hasNext()) {
+			UsedShop dto = it.next();
+			listNum=usedShopCount-(start+n-1);
+			dto.setListNum(listNum);
+			
+			point = dto.getPrice() /10;
+			Pattern pattern  =  Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
+			String content = dto.getContent();
+			
+			Matcher match = pattern.matcher(content);
+			String imgTag = null;
+			if(match.find()){
+			    imgTag = match.group(1);
+			}
+			dto.setContent(imgTag);
+			dto.setPointprice(point);
+			n++;
+			
+			
+		}
+		
 		
 		model.addAttribute("keyword",keyword);
 		
@@ -85,6 +114,7 @@ public class keywordController {
 		model.addAttribute("whereList", whereList);
 		model.addAttribute("downloadList", downloadList);
 		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("usedShopList", usedShopList);
 		
 		model.addAttribute("promoteList",promoteList);
 		model.addAttribute("promoteCount",promoteCount);
@@ -92,6 +122,7 @@ public class keywordController {
 		model.addAttribute("studyWhereCount", studyWhereCount);
 		model.addAttribute("downloadCount", downloadCount);
 		model.addAttribute("reviewCount", reviewCount);
+		model.addAttribute("usedShopCount", usedShopCount);
 		
 		model.addAttribute("keyword", keyword);
 		
