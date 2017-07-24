@@ -14,6 +14,4 @@ public interface CalendarService {
 	public List<Calendar> listCal(Map<String, Object> map);
 	
 	public List<Calendar> memberStudy(Map<String, Object>map);
-	public int memberStudyOne(Map<String, Object>map);
-	public List<Calendar> allMemberStudy(Map<String, Object>map);
 }

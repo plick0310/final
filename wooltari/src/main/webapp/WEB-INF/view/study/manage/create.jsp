@@ -671,7 +671,7 @@ function insertStudy(){
 
 							<div class="row">
 								<div class="col-sm-6 col-md-4">
-									<label style="margin-left: 31px;">
+									<label>
 										<div class="thumbnail" id="thum1">
 											<input type="radio" name="range" id="range0" value="0"
 												${vdto.range == 0 ? "checked='checked'" : ""} /> <img
@@ -687,7 +687,7 @@ function insertStudy(){
 								</div>
 
 								<div class="col-sm-6 col-md-4">
-									<label style="margin-left: 31px;">
+									<label>
 										<div class="thumbnail" id="thum2">
 											<input type="radio" name="range" id="range1" value="1"
 												${vdto.range== 1 ? "checked='checked'" : ""} /> <img
@@ -704,7 +704,7 @@ function insertStudy(){
 								</div>
 
 								<div class="col-sm-6 col-md-4">
-									<label style="margin-left: 31px;">
+									<label>
 										<div class="thumbnail" id="thum3">
 											<input type="radio" name="range" id="range2" value="2"
 												${vdto.range== 2 ? "checked='checked'" : ""} /> <img

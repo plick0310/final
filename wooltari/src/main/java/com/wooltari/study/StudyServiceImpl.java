@@ -244,6 +244,18 @@ public class StudyServiceImpl implements StudyService {
          return list;
    }
    
+   @Override
+   public List<StudyInfo> list3MyStudy(String userId) {
+         List<StudyInfo> list = new ArrayList<>();
+         try {
+            list =dao.getListData("study.listMyStudy3",userId);
+            
+         } catch (Exception e) {
+            System.out.println(e.toString());
+         }
+         return list;
+   }
+   
    
    @Override
    public StudyInfo readMyStudy(long s_num) {

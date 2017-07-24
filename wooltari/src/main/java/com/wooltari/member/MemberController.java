@@ -227,11 +227,9 @@ public class MemberController {
 	public String my_Calender(Model model , HttpSession session){
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		Member mdto = mservice.readMember(info.getUserId());
-		List<StudyInfo> studyList = sservice.list2MyStudy(info.getUserId());
-		
+		List<StudyInfo> studyList = sservice.list3MyStudy(info.getUserId());
 		model.addAttribute("mdto", mdto);
 		model.addAttribute("studyList", studyList);
-		
 		return "member/my_calender";
 	}
 	@RequestMapping(value="/member/my_point", method=RequestMethod.GET)

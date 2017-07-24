@@ -175,6 +175,26 @@ var query = "parent=" + bigCategory;
 	});
 }
 
+//텍스트박스 엔터 입력시
+$(function(){
+	$("#location-search, #title-search").keydown(function(e){
+		if($(this).val() != "" && e.keyCode==13) {
+			page=1;
+			studyLoad();
+			return false;
+		}
+	});
+});
+
+//셀렉트박스 값 변경시
+$(function(){
+	$("#bigCategory, #smallCategory, #selectTarget, #selectRecruit, #selectGender, #selectSort").change(function(e){
+		page=1;
+		studyLoad();
+		return false;
+	});
+});
+
 
 
 </script>
@@ -190,7 +210,7 @@ var query = "parent=" + bigCategory;
 	                        <div class="row">
 	                            <div class="col-sm-4">
 	                                <div class="select select-box">
-	                                    <select id="bigCategory" class="form-control" data-title="category" onchange="themeList();">
+	                                    <select id="bigCategory" name="bigCategory" class="form-control" data-title="category" onchange="themeList();">
 	                                        <option value="">:: 대분류 ::</option>
 											<c:forEach var="vo" items="${listBigCategory}">
 												<option value="${vo.categoryNum}">${vo.subject}</option>
@@ -200,7 +220,7 @@ var query = "parent=" + bigCategory;
 	                            </div>
 	                            <div class="col-sm-4">
 	                                <div class="select select-box">
-	                                    <select id="smallCategory" class="form-control" data-title="category">
+	                                    <select id="smallCategory" name="smallCategory" class="form-control" data-title="category">
 	                                        <option value="">:: 중분류 ::</option>
 	                                    </select>
 	                                </div>
@@ -245,6 +265,17 @@ var query = "parent=" + bigCategory;
 								<option value="여자">여자</option>
 							</select>
 						</div>
+						
+						<div class="col-lg-1 col-md-6 pt-sm pb-sm"> 정렬</div>
+                		<div class="col-md-2"> 
+							<select id="selectSort" name="sort" class="form-control">
+								<option value="0" selected>최근 개설순</option>
+								<option value="1">오래된 개설순</option>
+								<option value="2">멤버순</option>
+								<option value="3">후기순</option>
+							</select>
+						</div>
+						
 	                </div>
 	            </div>
 	            <div class="filter-section default-section">

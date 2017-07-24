@@ -19,12 +19,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wooltari.common.MyUtil;
 import com.wooltari.member.SessionInfo;
+import com.wooltari.study.StudyInfo;
+import com.wooltari.study.StudyService;
 
 @Controller("myStudy.calendarController")
 public class CalendarController {
 	
 	@Autowired
 	private CalendarService service;
+	
+	@Autowired
+	private StudyService studyservice;
+	
 	@Autowired
 	private MyUtil myUtil;
 	
@@ -35,36 +41,6 @@ public class CalendarController {
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("s_num", s_num);
-		
-		return "study/myStudy/cal";
-	}
-	
-	
-	@RequestMapping(value="/study/myStudy/all/calender")
-	public String calenderAll(
-			HttpSession session
-			)throws Exception {
-		
-		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		Map<String, Object> map=new HashMap<>();
-		map.put("userId", info.getUserId());
-		
-		List<Calendar> list=service.memberStudy(map);
-		
-		map.put("start", '1');
-			
-		int result=service.memberStudyOne(map);
-		
-		Map<String, Object> map2=new HashMap<>();
-		map2.put("list", list);
-		map2.put("result", result);
-
-
-		
-		List<Calendar> list2=service.allMemberStudy(map2);
-
-		
-		
 		
 		return "study/myStudy/cal";
 	}

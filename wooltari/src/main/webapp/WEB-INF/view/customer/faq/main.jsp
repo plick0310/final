@@ -75,7 +75,6 @@ ul.tabs {
 	float: left;
 	list-style: none;
 	height: 32px;
-	border-left: 1px solid #eee;
 	width: 900px;
 	font-family: "dotum";
 	font-size: 12px;
@@ -83,24 +82,25 @@ ul.tabs {
 }
 
 ul.tabs li {
-	float: left;
-	text-align: center;
-	cursor: pointer;
-	width: 82px;
-	height: 31px;
-	line-height: 31px;
-	border: 1px solid #eee;
-	border-left: none;
-	font-weight: bold;
-	background: #fafafa;
-	overflow: hidden;
-	position: relative;
+	    float: left;
+    text-align: center;
+    cursor: pointer;
+    width: 170px;
+    height: 170px;
+    line-height: 25px;
+    border: 1px solid #eee;
+padding: 0 10px;
+    font-weight: bold;
+    background: #fafafa;
+    overflow: hidden;
+    position: relative;
+    margin: 0 27px;
 }
 
 ul.tabs li.active {
 	background: #FFFFFF;
-	border-bottom: 1px solid #FFFFFF;
-}
+	
+} 
 
 .tab_container {
 	border-top: none;
@@ -113,7 +113,23 @@ ul.tabs li.active {
 .info {
 	padding-top: 7px;
 }
-</style>
+.col-sm-3{ 
+width: 180px;
+height: 180px;
+background: white;
+    margin: 0 10px;
+        box-shadow: 1px 1px 3px grey;
+        cursor: pointer;
+} 
+
+.col-sm-3:HOVER {
+	
+	background: #eeeeee;
+	color: white; 
+	
+	
+}
+</style> 
 <script>
 	//최상단 체크박스 클릭
 	$(document).ready(function() {
@@ -207,12 +223,42 @@ ul.tabs li.active {
 </script>
 
 <div class="container">
-	<div style="height: 50px; font-size: 20px; text-align: center;">
+	<div style="height: 50px; font-size: 20px; text-align: center; margin-top: 50px;"> 
 		<span style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c;"
 			class="glyphicon glyphicon-pencil"> </span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;
 		</span>R E P O R T
-	</div>
+	</div> 
+	
+	<!-- <div style="width: 900px; height: 450px;     margin: 0 auto 30px;">
+	<hr>    
+		<div style=" width: 800px; margin: 0 auto; padding: 135px 0;" class="row">   
+			<div class="col-sm-3">asd</div> 
+			<div class="col-sm-3">asd</div> 
+			<div class="col-sm-3">asd</div>
+			<div class="col-sm-3">
+				<div style="margin: 0 auto; width: 42px;font-size: 42px;
+   					 color: #8bcdc0;"><i style="margin-top: 25px;" class="glyphicon glyphicon-credit-card"></i>
+    			</div>
+    			<div style="width: 100%;text-align: center;">
+    			<strong>결제관련문의</strong>
+    			  
+    			<p style="    font-size: 11px;    line-height: 20px;     margin-top: 10px;"> 
+    			결제에 관련한 자주묻는 질문들을 확인할 수 있습니다.
+    			</p>
+    			
+    			
+    			</div>
+			
+			</div>
+			
+		  
+		</div>
+	
+	</div> -->
+	
+	
+	
 	
 	<!-- ajax 처리할 탭 -->
 	<div id="tabwrap" style="width: 900px; margin: 0px auto;">
@@ -220,7 +266,20 @@ ul.tabs li.active {
 			<li id="tab-all" class="active" data-tab="all">전체</li>
 			<li id="tab-frequentask" data-tab="frequentask">자주묻는 질문</li>
 			<li id="tab-using" data-tab="using">이용관련</li>
-			<li id="tab-payment" data-tab="payment">결제 관련</li>
+			<li id="tab-payment" data-tab="payment">
+			<div style="margin: 0 auto; width: 42px;font-size: 42px;
+   					 color: #8bcdc0;"><i style="margin-top: 25px;" class="glyphicon glyphicon-credit-card"></i>
+    			</div>
+    			<div style="width: 100%;text-align: center;">
+    			<strong>결제관련문의</strong>
+    			  
+    			<p style="    font-size: 11px; font-weight:100;   line-height: 20px;     margin-top: 10px;"> 
+    			결제에 관련한 자주묻는 질문들을 확인할 수 있습니다.
+    			</p>
+    			
+    			
+    			</div>
+			</li>
 			<div style="float: right; margin: 8px 0;">
 				<input type="checkbox" id="allCheck" name="allCheck"
 					class="checkbox-style" /><label for="allCheck">전체선택</label>
