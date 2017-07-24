@@ -185,8 +185,8 @@ $(function(){
 
 								<div class="row">
 									<div class="col-sm-2"><a href="<%=cp%>/mockTest/main">모의 테스트</a></div>
-									<div class="col-sm-2"><a href="<%=cp%>/freeTalk/talk">한줄톡톡</a></div>
-									<div class="col-sm-2"><a href="#">자유광장</a></div>
+									<div class="col-sm-2"><a href="<%=cp%>/guest/guest">한줄톡톡</a></div>
+									<div class="col-sm-2"><a href="<%=cp%>/bbs/list">자유광장</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/community/photalks/list">포톡스</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/community/usedshop/list">교재중고장터</a></div>
 									<div class="col-sm-2"><a href="<%=cp%>/community/playZone/home">놀이터</a></div>
@@ -266,7 +266,7 @@ $(function(){
 						</c:if>
 						<ul id="info" class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="top: 48px;
     border: none;
-    height: 250px;
+
     /* border: 2px solid #eee; */
     border-top: none;
     width: 160px;
