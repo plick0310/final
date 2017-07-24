@@ -7,7 +7,7 @@
 %>
 <div id=map style="width: 100%; height: 100%;"></div>
 <script type="text/javascript">
-		
+<%-- 		
 var HOME_PATH = window.HOME_PATH || '.';
 var MARKER_SPRITE_X_OFFSET = 29,
     MARKER_SPRITE_Y_OFFSET = 50,
@@ -121,5 +121,5 @@ function hideMarker(map, marker) {
     if (!marker.setMap()) return;
     marker.setMap(null);
 }
-
+ --%>
 </script>
