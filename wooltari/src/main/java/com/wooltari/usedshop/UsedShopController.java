@@ -1,35 +1,58 @@
 package com.wooltari.usedshop;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.wooltari.common.MyUtil;
+import com.wooltari.member.SessionInfo;
+
+
 
 
 
 @Controller(".usedshop.usedshopController")
 public class UsedShopController {
 	
-/*	@Autowired
-	private StudyWhereService service;
-	*/
-	/*@Autowired
-	private MyUtil myUtil;*/
+	@Autowired
+	private UsedShopService service;
+	
+	@Autowired
+	private MyUtil myUtil;
 	
 
 	
 	@RequestMapping(value="/community/usedshop/list")
 	public String list(
-		/*@RequestParam(name="page",defaultValue="1") int current_page,
+		@RequestParam(name="page",defaultValue="1") int current_page,
 		@RequestParam(name="searchKey",defaultValue="subject") String searchKey,
 		@RequestParam(name="searchValue",defaultValue="")String searchValue,
 		HttpServletRequest req,
-		Model model*/
+		Model model
 		)throws Exception{
-/*	
+	
 	if(req.getMethod().equalsIgnoreCase("GET")) {
 		searchValue= URLDecoder.decode(searchValue, "UTF-8");
 	}
 	
-	int rows=10;
+	int rows=9;
 	int total_page=0;
 	int dataCount=0;
 	
@@ -52,46 +75,31 @@ public class UsedShopController {
 	map.put("start", start);
 	map.put("end", end);
 	
-	List<StudyWhere> list = service.listStudyWhere(map);
+	List<UsedShop> list = service.listUsedShop(map);
 
 	
-	
+	int point =0;
 	int listNum, n=0;
-	Iterator<StudyWhere> it = list.iterator();
+	Iterator<UsedShop> it = list.iterator();
 	while(it.hasNext()) {
-		StudyWhere dto = it.next();
+		UsedShop dto = it.next();
 		listNum=dataCount-(start+n-1);
 		dto.setListNum(listNum);
 		
+		point = dto.getPrice() /10;
 		Pattern pattern  =  Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
 		String content = dto.getContent();
-		Matcher match = pattern.matcher(content);	
-		String imgTag = null;
-		if(match.find()){
-		    imgTag = match.group(1);
-		}
-		dto.setContent(imgTag);
 		
-		n++;
-	}
-	
-	
-	List<StudyWhere> bestlist = service.bestStudyWhere(map);
-	int bestlistNum, b=0;
-	Iterator<StudyWhere> ite = bestlist.iterator();
-	while(ite.hasNext()) {
-		StudyWhere dto = ite.next();
-		bestlistNum=b+1;
-		dto.setBestlistNum(bestlistNum);
-		Pattern pattern  =  Pattern.compile("<img[^>]*src=[\"']?([^>\"']+)[\"']?[^>]*>");
-		String content = dto.getContent();
-		Matcher match = pattern.matcher(content);	
+		Matcher match = pattern.matcher(content);
 		String imgTag = null;
 		if(match.find()){
 		    imgTag = match.group(1);
 		}
 		dto.setContent(imgTag);
-		b++;
+		dto.setPointprice(point);
+		n++;
+		
+		
 	}
 
 	
@@ -103,8 +111,8 @@ public class UsedShopController {
 		query="searchKey="+searchKey+"&searchValue="+URLEncoder.encode(searchValue,"UTF-8");
 	}
 	String cp = req.getContextPath();
-	listUrl=cp+"/studyboard/studywhere/list";
-	articleUrl=cp+"/studyboard/studywhere/article?page="+current_page;
+	listUrl=cp+"/community/usedshop/list";
+	articleUrl=cp+"/community/usedshop/article?page="+current_page;
 	if(query.length()!=0) {
 		listUrl +="?"+query;
 		articleUrl+="&"+query;
@@ -112,39 +120,75 @@ public class UsedShopController {
 	
 	String paging = myUtil.paging(current_page, total_page, listUrl);
 	
-	model.addAttribute("bestlist",bestlist);
+	
+	
+
 	model.addAttribute("list",list);
 	model.addAttribute("articleUrl",articleUrl);
 	model.addAttribute("paging",paging);
 	model.addAttribute("page", current_page);
 	model.addAttribute("dataCount",dataCount);
-	model.addAttribute("total_page",total_page);*/
+	model.addAttribute("total_page",total_page);
 	
 	return ".community.usedshop.list";
 	}
-	/*
-	@RequestMapping(value="/community/photalks/created",method=RequestMethod.GET)
+
+	@RequestMapping(value="/community/usedshop/created",method=RequestMethod.GET)
 	public String createdForm(Model model,HttpSession session) throws Exception{
 
+		List<UsedShop> listBigCategory=service.listbiccate();
+	
+		
+		model.addAttribute("listBigCategory", listBigCategory);
 		model.addAttribute("mode","created");
-		return ".community.photalks.created";
-	}*/
-	/*@RequestMapping(value="/studyboard/studywhere/created",method=RequestMethod.POST)
-	public String createdSubmit(StudyWhere dto,HttpSession session)throws Exception {
+		
+		return ".community.usedshop.created";
+	}
+	
+	@RequestMapping(value="/community/usedshop/getCategory", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ThemeList(@RequestParam int parent) throws Exception{
+		System.out.println("======================"+parent);
+		List<UsedShop> listSmallCategory = new ArrayList<>();
+		listSmallCategory = service.listsmallcate(parent);
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("listSmallCategory", listSmallCategory);
+	
+		return model;
+	}
+	
+	@RequestMapping(value="/community/usedshop/created",method=RequestMethod.POST)
+	public String createdSubmit(
+			@RequestParam(name="smcate",defaultValue="0") int smcate,
+			@RequestParam(name="delchk",defaultValue="0") int delchk,
+			@RequestParam(name="pointchk",defaultValue="0") int pointchk,
+		
+			UsedShop dto,HttpSession session)throws Exception {
+		System.out.println("============================");
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		if(info==null){
 			return "redirect:/member/login";
 		}
-				dto.setUserId(info.getUserId());
-				String root=session.getServletContext().getRealPath("/");
+			
+				/*Map<String, Object> map = new HashMap<>();
+				map.put("price", price);
+				map.put("userId", info.getUserId());
+				map.put("category", smcate);
+				map.put("del", delchk);
+				map.put("pointuse", pointchk);
+				*/
+		dto.setPointuse(pointchk);
+		dto.setDel(delchk);
+		dto.setCategory(smcate);
+		dto.setUserId(info.getUserId());
+		service.insertUsedShop(dto);
 				
-				String pathname=root+"uploads"+File.separator+"studywhere";
-				
-				service.insertStudyWhere(dto, pathname);
-		return "redirect:/studyboard/studywhere/list";
+/*		service.insertUsedShop(dto);*/
+		return "redirect:/community/usedshop/list";
 	}
 	
-
+/*
 	@RequestMapping(value="/studyboard/studywhere/article")
 	public String article(
 				@RequestParam int num,

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="usedshop">
+
+	
+	
+	
+	<!--  카테고리 대분류 -->
+	<select id="listBigCategory" resultType="com.wooltari.usedshop.UsedShop">
+	    SELECT categoryNum, subject FROM s_category
+	          WHERE parent IS NULL
+	          ORDER BY categoryNum ASC
+	</select>
+	
+	<!--  카테고리 중분류 -->
+	<select id="listSmallCategory" parameterType="Integer" resultType="com.wooltari.usedshop.UsedShop">
+	    SELECT categoryNum, subject catetitle, parent FROM s_category
+	          WHERE parent = #{parent}
+	          ORDER BY categoryNum ASC
+	</select>
+	
+	<!-- 중고장터 글 생성 --> 
+	<insert id="insertUsedShop" parameterType="com.wooltari.usedshop.UsedShop">
+		insert into usedshop(num,price,userId,category,subject,content,del,pointuse) 
+		values (usedshoplist_seq.nextval,#{price},#{userId},#{category},#{subject},#{content},#{del},#{pointuse})
+  	</insert>
+
+  	<!-- (내가만든)나의 스터디 리스트 -->
+  	<select id="listUsedShop" parameterType="map" resultType="com.wooltari.usedshop.UsedShop">
+		SELECT * FROM (
+			    SELECT ROWNUM rnum, tb.* FROM (
+			       SELECT num,price,userId,category,subject,del,pointuse,created,content
+			       FROM
+			       (
+			           (
+				         SELECT num,price,m.userId,category,subject,del,pointuse,created,content
+				         FROM usedshop u JOIN member m ON u.userId=m.userId
+		                ) tbBbs
+		            )
+		           ORDER BY num DESC
+		           		<![CDATA[
+		        ) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+		]]>
+  	</select>
+  	
+  	<select id="dataCount" resultType="Integer" parameterType="map">
+			SELECT NVL(COUNT(*),0) FROM usedshop
+		<!-- <where>
+			<if test="searchValue!=null and searchValue!=''">
+				<include refid="where-list"/>
+			</if>
+		</where> -->
+	</select>
+<!-- 
+	
+	스터디번호 가져오기 
+	<select id="maxStudySeq" resultType="Long">
+		SELECT NVL(MAX(s_num),0) FROM study
+	</select>
+	
+
+  	<insert id="insertstudyCategory" parameterType="com.wooltari.study.StudyInfo">
+  		INSERT INTO studyCategory (s_num , choiceCategory) VALUES(#{s_num},#{category})
+  	</insert>
+  	
+  	<insert id="insertstudyCity" parameterType="com.wooltari.study.StudyInfo">
+  		INSERT INTO studyLocal (s_num , choiceCity, pointx, pointy) VALUES(#{s_num},#{city},#{point_x},#{point_y})
+  	</insert>
+  	
+  	<insert id="insertstudyTarget" parameterType="com.wooltari.study.StudyInfo">
+  		INSERT INTO studyTarget (s_num , target) VALUES(#{s_num},#{s_target})
+  	</insert>
+  	
+  	스터디 삭제
+  	<delete id="deleteStudy" parameterType="Long">
+  		DELETE FROM study WHERE s_num=#{s_num}
+  	</delete>
+  	
+  	<delete id="deletestudyCategory" parameterType="Long">
+  		DELETE FROM studyCategory WHERE s_num=#{s_num}
+  	</delete>
+  	
+  	<delete id="deletestudyCity" parameterType="Long">
+  		DELETE FROM studyCity WHERE s_num=#{s_num}
+  	</delete>
+  	
+  	<delete id="deletestudyTarget" parameterType="Long">
+  		DELETE FROM studyTarget WHERE s_num=#{s_num}
+  	</delete>
+  	
+  	
+  	
+  	가입한 스터디 리스트
+  	<select id="listMyStudy2" parameterType="String" resultType="com.wooltari.study.StudyInfo">      
+	    SELECT s.s_num  ,s.userId ,s.imageFileName , created, studyName ,study_Info, me.userName , me.userImg 
+	    FROM STUDY s
+	    JOIN STUDYMEMBER m ON m.s_num = s.s_num 
+      	JOIN MEMBER me ON m.userId = me.userId
+    	where me.userId=#{userId} AND m.enabled=1
+  	</select>
+  	
+  	스터디 전체 정보
+  	<select id="readMyStudy" parameterType="Long" resultType="com.wooltari.study.StudyInfo">
+  		SELECT * FROM study WHERE s_num = #{s_num}
+  	</select>
+  	
+  	스터디 내 게시판동적 생성
+  	자유게시판
+	<update id="createStudyBoard" parameterType="Long">
+	CREATE TABLE  s_${value}_Board(
+  		 num NUMBER NOT NULL
+  		 ,s_num NUMBER NOT NULL
+  		 ,content VARCHAR2(4000) NOT NULL
+   		 ,created DATE default SYSDATE
+   		 ,hitCount NUMBER DEFAULT 0
+   		 ,userId VARCHAR2(50) NOT NULL
+   		 ,imageFileName VARCHAR2(1000)
+   		 ,PRIMARY KEY(num)
+   		 ,FOREIGN KEY(s_num) REFERENCES study(s_num) ON DELETE CASCADE
+   		 ,FOREIGN KEY(userId) REFERENCES member(userId)
+	)
+
+	
+	</update>
+	
+	<update id="dropStudyBoard" parameterType="long">
+		drop table s_${value}_Board purge
+	</update>
+	
+	
+	자유게시판 사진첨부
+	<update id="createStudyPhoto" parameterType="Long">
+		CREATE TABLE s_${value}_Photo(
+ 		  num NUMBER NOT NULL
+  		 ,imageFileName VARCHAR2(1000) NOT NULL
+  		 ,PRIMARY KEY(num, imageFileName)
+  		 ,FOREIGN KEY(num) REFERENCES s_${value}_Board(num) ON DELETE CASCADE
+		)
+	
+	</update>
+	
+	<update id="dropStudyPhoto" parameterType="long">
+		drop table s_${value}_Photo purge
+	</update>
+	
+
+	자유게시판 댓글 
+	<update id="StudyBoardReply" parameterType="Long">
+	CREATE TABLE s_${value}_BoardReply(
+	    reNum number NOT NULL
+	   ,num number NOT NULL
+	   ,userId VARCHAR2(50) NOT NULL
+	   ,content VARCHAR2(500) NOT NULL
+	   ,created DATE DEFAULT SYSDATE
+	   ,PRIMARY KEY(reNum)
+	   ,FOREIGN KEY(num) REFERENCES s_${value}_Board(num) ON DELETE CASCADE
+	   ,FOREIGN KEY(userId) REFERENCES member(userId)
+   
+	)
+	</update>
+	
+	<update id="dropBoardReply" parameterType="long">
+		drop table s_${value}_BoardReply purge
+	</update>
+	
+	
+	자유게시판좋아요
+	<update id="StudyBoardLike" parameterType="Long">
+	CREATE TABLE s_${value}_BoardLike(
+	    num NUMBER NOT NULL
+	   ,userId VARCHAR2(50) NOT NULL
+	   ,PRIMARY KEY(num,userId)
+	   ,FOREIGN KEY(num) REFERENCES s_${value}_Board(num) ON DELETE CASCADE
+	   ,FOREIGN KEY(userId) REFERENCES member(userId)
+	)
+	</update>
+	
+	<update id="dropBoardLike" parameterType="long">
+		drop table s_${value}_BoardLike purge
+	</update>
+	
+	
+	일정게시판 
+	<update id="createStudyCalendar" parameterType="Long">
+	CREATE TABLE s_${value}_Calendar(
+   num number NOT NULL
+   ,s_num number NOT NULL
+   ,subject VARCHAR2(100) NOT NULL
+   ,content VARCHAR2(500)
+   ,sdate date NOT NULL
+   ,edate date
+   ,PRIMARY KEY(num)
+   ,FOREIGN KEY(s_num) REFERENCES study(s_num) ON DELETE CASCADE
+)
+	</update>
+	
+	<update id="dropStudyCalendar" parameterType="long">
+		drop table s_${value}_Calendar purge
+	</update>
+	
+	일정게시판 댓글 
+	<update id="StudyCalendarReply" parameterType="Long">
+	CREATE TABLE s_${value}_CalendarReply(
+   reNum number NOT NULL
+   ,num number NOT NULL
+   ,content VARCHAR2(500) NOT NULL
+   ,PRIMARY KEY(reNum)
+   ,FOREIGN KEY(num) REFERENCES s_${value}_Calendar(num) ON DELETE CASCADE
+)
+	</update>
+	
+	<update id="dropCalendarReply" parameterType="long">
+		drop table s_${value}_CalendarReply purge
+	</update> -->
+  	
+</mapper>
