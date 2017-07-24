@@ -2,6 +2,7 @@ package com.wooltari.study.search;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wooltari.common.MyUtilBootstrap;
 import com.wooltari.study.StudyCategory;
@@ -136,4 +138,30 @@ public class SearchController {
         
 		return "studysearch/list";
 	}
+	
+	@RequestMapping(value="/study/getmarker")
+	@ResponseBody
+	public Map<String, Object> readMessageList(@RequestParam(value="s_num") int s_num) throws Exception {
+		Map<String, Object> model = new HashMap<>();
+		String state = "false";
+		List<StudyLocal> localList = new ArrayList<>();
+		try {
+			localList= studyService.readMyLocal(s_num);
+		} catch (Exception e) {
+			model.put("state", state);
+			return model;
+		}
+		String city = localList.get(0).getCity();
+		String pointx = localList.get(0).getPointx();
+		String pointy = localList.get(0).getPointy();
+		
+		state = "true";
+		model.put("state", state);
+		model.put("city", city);
+		model.put("pointx", pointx);
+		model.put("pointy", pointy);
+		
+		return model;
+	}
+	
 }

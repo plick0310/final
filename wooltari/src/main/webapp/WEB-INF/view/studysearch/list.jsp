@@ -9,8 +9,6 @@
 
 
 //맵에 다중 마커 추가
-var HOME_PATH = window.HOME_PATH || '.';
-
 var map = new naver.maps.Map('map', {
     center: new naver.maps.LatLng(37.3595704, 127.105399),
     zoom: 10
@@ -28,17 +26,58 @@ $(function addMarker(){
 	        map: map,
 	        position: new naver.maps.LatLng(${vo.pointy}, ${vo.pointx}),
 	        title: '${dto.studyName}',
-	        /* icon: {
-	            url: HOME_PATH +'/img/example/sp_pins_spot_v3.png',
+	        icon: {
+	            url: '<%=cp%>/resource/img/marker.png',
 	            size: new naver.maps.Size(24, 37),
 	            anchor: new naver.maps.Point(12, 37),
-	            origin: new naver.maps.Point(MARKER_SPRITE_POSITION[key][0], MARKER_SPRITE_POSITION[key][1])
-	        }, */
+	            //origin: new naver.maps.Point(MARKER_SPRITE_POSITION[key][0], MARKER_SPRITE_POSITION[key][1])
+	        },
 	        zIndex: 100
 		    });
-		
+			var studyimg = '<%=cp%>/uploads/member/userImg/${dto.imageFileName}';
+			var userimg = '<%=cp%>/uploads/member/userImg/${dto.userImg}';
 		    infoWindow = new naver.maps.InfoWindow({
-		        content: '<div style="width:150px;text-align:center;padding:10px;">The Letter is <b>"'+ '${dto.studyName}' +'"</b>.</div>'
+
+		        borderWidth: 0,
+		        disableAnchor: true,
+		        backgroundColor: 'transparent',
+
+		        pixelOffset: new naver.maps.Point(0, -28),
+		        content: 
+		        +	'<div class="study-item list-item align-left">'
+		        +		'<div class="study-item-overlay"></div>'
+		        + 		'<div class="header-bg" style="background-image:url('+studyimg+')"></div>'
+		        + 		'<div class="header-text-container">'
+				+ 			'<div class="isPayment">'
+				  				<c:forEach var="vo" items="${dto.listCategory}">
+				+ 				'${vo.subject}'
+				  				</c:forEach>
+				+ 			'</div>'
+				+ 			'<div class="header-text align-left">'
+				+ 				'<div class="title-wrap">'
+				+ 					'<div class="title">'
+				+ 					'${dto.studyName}'
+				+ 					'</div>'
+				+ 				'</div>'
+				+ 				'<div class="tag">'
+				+ 					'<span class="last">${dto.study_Info}</span>'
+				+ 				'</div>'
+				+ 			'</div>'
+				+ 		'</div>'
+				+		'<div class="item-contents align-left">'
+							<c:if test="${not empty dto.userImg}">
+				+			'<div class="profile-image" style="background-image:url('+userimg+')"></div>'		
+							</c:if>
+				+			'<div class="user-name">'
+                +			'${dto.userName}'
+                +			'</div>'
+                +			'<div class="location">'
+                			<c:forEach var="vo" items="${dto.listLocal}" end="0">
+                +			'<h3>${vo.city}</h3>' 
+                            </c:forEach>
+                +			'</div>'
+				+		'</div>'
+		        + 	'</div>'
 		    });
 		
 		    markers.push(marker);
@@ -98,15 +137,27 @@ function getClickHandler(seq) {
 for (var i=0, ii=markers.length; i<ii; i++) {
     naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
 }
-/* 
-$(function(){
-	  $('.study-item-overlay').mouseenter(function(){
-		  alert(${dto.studyName});
-	  });
-});
-*/
+
 function moveXY(s_num) {
-	alert(s_num);
+	var query = {"s_num" : s_num};
+	$.ajax({
+        url:"<%=cp%>/study/getmarker",
+        type:'POST',
+        data: query,
+        success:function(data){
+        	var city = data.city;
+			var pointx = data.pointx;
+			var pointy = data.pointy;
+			//alert("지역 : " + city + "pointx : " + pointx + "pointy : " + pointy);
+			var myaddr = new naver.maps.Point(pointx, pointy);
+	        map.setCenter(myaddr); 
+	        map.setZoom(13);
+        },
+        error:function(jqXHR, textStatus, errorThrown){
+            alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+            self.close();
+        }
+    });
 }
 </script>
 <style>
