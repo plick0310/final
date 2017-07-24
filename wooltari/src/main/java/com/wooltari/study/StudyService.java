@@ -21,7 +21,8 @@ public interface StudyService {
 	public void dropStudyTable(long s_num) throws Exception;
 	
 	public List<StudyInfo> listMyStudy(String userId); 
-	public List<StudyInfo> list2MyStudy(String userId); 
+	public List<StudyInfo> list2MyStudy(String userId);
+	public List<StudyInfo> list3MyStudy(String userId); 
 	
 	public StudyInfo readMyStudy(long s_num);
 	public List<StudyCategory> readMyCategory(long s_num);

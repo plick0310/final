@@ -105,31 +105,5 @@ public class CalendarServiceImpl implements CalendarService {
 		
 		return list;
 	}
-
-	@Override
-	public List<Calendar> allMemberStudy(Map<String, Object> map) {
-		List<Calendar> list=null;
-		
-		try {
-			list=dao.getListData("calendar.allMemberStudy",map);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return list;
-	}
-
-	@Override
-	public int memberStudyOne(Map<String, Object> map) {
-		int result=0;
-		
-		try {
-			result=dao.getIntValue("calendar.memberStudyOne",map);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
 	
 }
