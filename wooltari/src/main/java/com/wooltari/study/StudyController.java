@@ -189,7 +189,7 @@ public class StudyController {
 	}
 	
 
-/*  스터디 리스트   */
+	/*  스터디 리스트   */
 	@RequestMapping(value="/study/mylist")
 	   public String list(Model model , HttpSession session ,HttpServletRequest req){
 	     
@@ -197,6 +197,27 @@ public class StudyController {
 		
 		List<StudyInfo> list = service.listMyStudy(info.getUserId());
 		List<StudyInfo> list2 = service.list2MyStudy(info.getUserId());
+		
+		 Iterator<StudyInfo> it = list.iterator();
+	        while(it.hasNext()){
+	        	StudyInfo data = it.next();
+	        	List<StudyCategory> categoryList = service.readMyCategory(data.getS_num());
+	        	List<StudyLocal> localList= service.readMyLocal(data.getS_num());
+	        	data.setListCategory(categoryList);
+	        	data.setListLocal(localList);
+	        }
+		
+	        
+	   	 Iterator<StudyInfo> it2 = list2.iterator();
+	        while(it2.hasNext()){
+	        	StudyInfo data = it2.next();
+	        	List<StudyCategory> categoryList = service.readMyCategory(data.getS_num());
+	        	List<StudyLocal> localList= service.readMyLocal(data.getS_num());
+	        	data.setListCategory(categoryList);
+	        	data.setListLocal(localList);
+	        }
+	        
+	        
 		model.addAttribute("Mylist",list);	
 		model.addAttribute("Mylist2",list2);	
 		

@@ -133,7 +133,7 @@ public class BoardController {
 		List<Board> list = service.listBoard(map);
 		
 		Iterator<Board> it = list.iterator();
-		
+		  
 		while(it.hasNext()){
 			Board dto = it.next();
 			dto.setContent(dto.getContent().replaceAll("\n", "<br>"));

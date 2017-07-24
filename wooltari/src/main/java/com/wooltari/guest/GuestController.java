@@ -28,7 +28,7 @@ public class GuestController {
 	
 	@RequestMapping("/guest/guest")
 	public String guest() throws Exception {
-		return ".guest.guest";
+		return ".community.guest.guest";
 	}
 	
 	@RequestMapping(value="/guest/insert", method=RequestMethod.POST)

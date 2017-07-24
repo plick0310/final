@@ -1,10 +1,17 @@
-package com.wooltari.freeTalk;
+package com.wooltari.bbs;
 
-public class FreeTalk {
-	private int num;
+public class Reply {
+	private int replyNum, num;
 	private String userId, userName, content, created;
+	private int answer;
+
 	
-	
+	public int getReplyNum() {
+		return replyNum;
+	}
+	public void setReplyNum(int replyNum) {
+		this.replyNum = replyNum;
+	}
 	public int getNum() {
 		return num;
 	}
@@ -34,5 +41,11 @@ public class FreeTalk {
 	}
 	public void setCreated(String created) {
 		this.created = created;
+	}
+	public int getAnswer() {
+		return answer;
+	}
+	public void setAnswer(int answer) {
+		this.answer = answer;
 	}
 }

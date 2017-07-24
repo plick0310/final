@@ -360,7 +360,6 @@ function searchList() {
 function goSubmit(tryList) {
 	var url="<%=cp%>/mockTest/mockExam";
 	var query = "ansTryList="+tryList;
-	alert(query);
 	
 	ajaxSubmit(url, "post", query);
 }
@@ -371,7 +370,7 @@ function ajaxSubmit(url, type, query) {
 		,url:url
 		,data:query
 		,success:function(data) {
-			alert("에이잭스 성공!");
+			
 		}
 	});
 }

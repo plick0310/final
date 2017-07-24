@@ -904,7 +904,9 @@ textarea{
 				</div>
 				<div class="header-text-container">
 					<div class="isPayment">
-					카테고리
+					<c:forEach var="vo" items="${dto.listCategory}">
+							${vo.subject}&nbsp; 
+						</c:forEach>
 					</div>
 					<div class="header-text align-left">
 						<div class="title-wrap">
@@ -924,12 +926,14 @@ textarea{
 					${dto.userName}
 					</div>
 					<div class="location">
-					서울 동작구 사당동
+					<c:forEach var="vo" items="${dto.listLocal}" end="0">
+							<h3>${vo.city}</h3> 
+						</c:forEach>
 					</div>
 					
 					<div class="icon-container">
 						<span class="commentIcon"><img class="icon-img" src="http://moccozy.blob.core.windows.net/icon/comment-icon.png"/></span><span class="info-comment">30</span>
-						<span class="commentIcon"><img class="icon-img" src="http://moccozy.blob.core.windows.net/icon/comment-icon.png"/></span><span class="info-comment">30</span>
+					<i class="fa fa-user-o" aria-hidden="true"></i><span class="info-comment"> ${dto.memcnt}</span>
 					</div>
 				</div>
 			</div>
@@ -959,7 +963,9 @@ textarea{
 				</div>
 				<div class="header-text-container">
 					<div class="isPayment">
-					카테고리
+					<c:forEach var="vo" items="${dto.listCategory}">
+							${vo.subject}&nbsp; 
+						</c:forEach>
 					</div>
 					<div class="header-text align-left">
 						<div class="title-wrap">
@@ -979,13 +985,15 @@ textarea{
 					${dto.userName}
 					</div>
 					<div class="location">
-					서울 동작구 사당동
+					<c:forEach var="vo" items="${dto.listLocal}" end="0">
+							<h3>${vo.city}</h3> 
+						</c:forEach>
 					</div>
 					
 					<div class="icon-container">
 						<span class="commentIcon"><img class="icon-img" src="http://moccozy.blob.core.windows.net/icon/comment-icon.png"/></span><span class="info-comment">30</span>
-						<span class="commentIcon"><img class="icon-img" src="http://moccozy.blob.core.windows.net/icon/comment-icon.png"/></span><span class="info-comment">30</span>
-					</div>
+					<i class="fa fa-user-o" aria-hidden="true"></i><span class="info-comment"> ${dto.memcnt}</span>
+			</div>
 				</div>
 			</div>
 			
