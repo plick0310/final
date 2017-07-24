@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wooltari.common.MyUtilBootstrap;
-import com.wooltari.member.SessionInfo;
 import com.wooltari.study.StudyCategory;
 import com.wooltari.study.StudyInfo;
 import com.wooltari.study.StudyLocal;
@@ -52,15 +51,18 @@ public class SearchController {
 	
 	@RequestMapping(value="/study/list")
 	public String list(
+				@RequestParam(value="bigCategory", defaultValue="0") int bigCategory,
+				@RequestParam(value="smallCategory", defaultValue="0") int smallCategory,
+				@RequestParam(value="target", defaultValue="") String target,
 				@RequestParam(value="page", defaultValue="1") int current_page,
 				@RequestParam(value="recruit", defaultValue="0") int recruit,
-				@RequestParam(value="choiceCity", defaultValue="0") int choiceCity,
+				@RequestParam(value="choiceCity", defaultValue="") String choiceCity,
 				@RequestParam(value="gender", defaultValue="") String gender,
 				@RequestParam(value="searchValue", defaultValue="") String searchValue,
 				Model model, HttpServletRequest req , HttpSession session
 			) throws Exception{
-		System.out.println("넘어온 쿼리 : page:"+current_page+"/recruit:"+recruit+"/choiceCity:"+choiceCity+"/gender:"+gender+"/searchValue:"+searchValue);
-		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		System.out.println("넘어온 쿼리 : bigCategory:"+bigCategory+"/smallCategory:"+smallCategory+"/target:"+target+"/page:"+current_page+"/recruit:"+recruit+"/choiceCity:"+choiceCity+"/gender:"+gender+"/searchValue:"+searchValue);
+		
 		String cp = req.getContextPath();
 		
 		int rows=12;
@@ -75,8 +77,12 @@ public class SearchController {
 		
 		//전체 페이지 수
 		Map<String, Object> map = new HashMap<String, Object>();
-		//map.put("userId", info.getUserId());
+		
+		map.put("bigCategory", bigCategory);
+		map.put("smallCategory", smallCategory);
+		map.put("target", target);
 		map.put("recruit", recruit);
+		map.put("choiceCity", choiceCity);
 		map.put("gender", gender);
 		map.put("searchValue", searchValue);
 		dataCount = searchService.dataCount(map);

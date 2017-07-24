@@ -44,20 +44,64 @@
 		</if>
 	</sql>
 	
+	<!-- 카테고리 조건 -->
+    <sql id="category-value">
+        <if test="bigCategory != 0">
+        parent = #{bigCategory}
+        </if>
+        <if test="smallCategory != 0">
+        AND sc.choicecategory = #{smallCategory}
+        </if>
+    </sql>
 	
+	<!-- 대상 조건 -->
+	<sql id="target-value">
+		<if test="target != null and target != ''">
+		target = #{target}
+		</if>
+	</sql>
+	
+	<!-- 지역 조건 -->
+	<sql id="local-value">
+		<if test="choiceCity != null and choiceCity != ''">
+		DBMS_LOB.INSTR(choiceCity, #{choiceCity}) &gt; 0 
+		</if>
+	</sql>
 	
 	<!-- 리스트 개수 카운트 -->
-       <select id="dataCount" parameterType="map" resultType="Integer">
-       SELECT NVL(COUNT(*),0) AS studycnt FROM(
-           SELECT s.s_num, s.userId, created, studyName , study_Info, gender, recruit, range, imageFilename, userName , userImg, memcnt
-           FROM (SELECT s_num, NVL(COUNT(*),0) AS memCnt FROM studymember
-                 GROUP BY s_num)tb, study s JOIN member m  ON s.userId = m.userId
-           WHERE tb.s_num = s.s_num
-           GROUP BY s.s_num, s.userId, created, studyName , study_Info, gender, recruit, range, imageFilename, userName , userImg, memcnt
-           HAVING (range = 0 OR range = 1)
-			<include refid="recruit-list"/>
-			<include refid="gender-list"/>
-			<include refid="search-value"/>
+	<select id="dataCount" parameterType="map" resultType="Integer">
+	SELECT NVL(COUNT(*),0) AS studycnt
+	FROM(
+		SELECT s.s_num, s.userId, created, studyName , study_Info, gender, recruit, range, imageFilename, userName , userImg, memcnt
+		FROM (
+				SELECT sm.s_num, choicecategory, parent, NVL(COUNT(*),0) AS memCnt
+				FROM studymember sm JOIN (
+											SELECT sc.s_num, sc.choicecategory, c.parent
+											FROM studycategory sc JOIN (
+																		SELECT st.s_num, target 
+																		FROM studytarget st JOIN (
+																								SELECT s_num,choiceCity city, pointX , pointY FROM studyLocal
+																								<where>
+																									<include refid="local-value"/>
+														    									</where>
+																								)tb ON st.s_num = tb.s_num
+											                            <where>
+																			<include refid="target-value"/>
+								    									</where>
+											                            )tb ON sc.s_num = tb.s_num
+											JOIN s_category c ON sc.choicecategory = c.categorynum
+											<where>
+												<include refid="category-value"/>
+								    		</where>
+											)tb ON sm.s_num = tb.s_num
+				GROUP BY sm.s_num, choicecategory, parent
+				)tb, study s JOIN member m  ON s.userId = m.userId
+		WHERE tb.s_num = s.s_num
+		GROUP BY s.s_num, s.userId, created, studyName , study_Info, gender, recruit, range, imageFilename, userName , userImg, memcnt
+		HAVING (range = 0 OR range = 1)
+		<include refid="recruit-list"/>
+		<include refid="gender-list"/>
+		<include refid="search-value"/>
 	)
 	</select>
 	
@@ -65,12 +109,33 @@
 	<select id="listSearch" parameterType="map" resultType="com.wooltari.study.StudyInfo">
        SELECT * FROM (
               SELECT ROWNUM rnum, tb.* FROM (
-                     SELECT s.s_num, s.userId, created, studyName , study_Info, gender, recruit, range, imageFilename, userName , userImg, memcnt
-                     FROM (SELECT s_num, NVL(COUNT(*),0) AS memCnt FROM studymember
-                           GROUP BY s_num)tb, study s JOIN member m  ON s.userId = m.userId
-                     WHERE tb.s_num = s.s_num
-                     GROUP BY s.s_num, s.userId, created, studyName , study_Info, gender, recruit, range, imageFilename, userName , userImg, memcnt
-                     HAVING (range = 0 OR range = 1)
+					SELECT s.s_num, s.userId, created, studyName , study_Info, gender, recruit, range, imageFilename, userName , userImg, memcnt
+					FROM (
+					      SELECT sm.s_num, choicecategory, parent, NVL(COUNT(*),0) AS memCnt
+					      FROM studymember sm JOIN (
+					                                SELECT sc.s_num, sc.choicecategory, c.parent
+													FROM studycategory sc JOIN (
+																				SELECT st.s_num, target 
+																				FROM studytarget st JOIN (
+																										SELECT s_num,choiceCity city, pointX , pointY FROM studyLocal
+																										<where>
+																											<include refid="local-value"/>
+																    									</where>
+																										)tb ON st.s_num = tb.s_num
+													                            <where>
+																					<include refid="target-value"/>
+										    									</where>
+													                            )tb ON sc.s_num = tb.s_num
+													JOIN s_category c ON sc.choicecategory = c.categorynum
+					                                <where>
+														<include refid="category-value"/>
+											    	</where>
+					                                )tb ON sm.s_num = tb.s_num
+					                                GROUP BY sm.s_num, choicecategory, parent)tb,
+					      study s JOIN member m  ON s.userId = m.userId
+					WHERE tb.s_num = s.s_num
+					GROUP BY s.s_num, s.userId, created, studyName , study_Info, gender, recruit, range, imageFilename, userName , userImg, memcnt
+					HAVING (range = 0 OR range = 1)
 					<include refid="recruit-list"/>
 					<include refid="gender-list"/>
 					<include refid="search-value"/>

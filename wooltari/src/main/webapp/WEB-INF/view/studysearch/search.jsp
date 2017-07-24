@@ -190,7 +190,7 @@ var query = "parent=" + bigCategory;
 	                        <div class="row">
 	                            <div class="col-sm-4">
 	                                <div class="select select-box">
-	                                    <select id="bigCategory" class="form-control" data-title="category" onchange="themeList();">
+	                                    <select id="bigCategory" name="bigCategory" class="form-control" data-title="category" onchange="themeList();">
 	                                        <option value="">:: 대분류 ::</option>
 											<c:forEach var="vo" items="${listBigCategory}">
 												<option value="${vo.categoryNum}">${vo.subject}</option>
@@ -200,7 +200,7 @@ var query = "parent=" + bigCategory;
 	                            </div>
 	                            <div class="col-sm-4">
 	                                <div class="select select-box">
-	                                    <select id="smallCategory" class="form-control" data-title="category">
+	                                    <select id="smallCategory" name="smallCategory" class="form-control" data-title="category">
 	                                        <option value="">:: 중분류 ::</option>
 	                                    </select>
 	                                </div>
