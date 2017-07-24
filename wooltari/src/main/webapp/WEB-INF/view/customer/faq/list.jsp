@@ -76,7 +76,7 @@ function deleteList(){
 }
 </script>
 <div class="container" style="height: 50px; font-size: 20px; text-align: auto;">
-	<form action="" id="array_form" name="searchForm" method="post">
+	<form action="" id="array_form" name="searchForm" method="post" style="    margin-top: 212px;">
 			<c:forEach var="dto" items="${list}">
 				 <div class="panel panel">
 				    <div class="panel-heading" role="tab" id="heading${dto.listNum}">
