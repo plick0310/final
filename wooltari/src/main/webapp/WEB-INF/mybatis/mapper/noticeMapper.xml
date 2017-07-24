@@ -21,7 +21,7 @@
 	
 	<sql id="where-list">
 		<if test="searchKey=='userId'">
-			userId=#{userId}
+			n.userId=#{userId}
 		</if>
 		<if test="searchKey=='subject'">
 			subject LIKE '%' || #{searchValue} || '%'

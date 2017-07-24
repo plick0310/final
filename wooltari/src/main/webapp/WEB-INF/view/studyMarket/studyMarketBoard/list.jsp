@@ -112,6 +112,7 @@ border: 1px solid #EAEAEA;
 .panel-heading{
 border-radius: 0px;
 background-color: #eee;
+style:float=left;
 }
 .conttd td{
 margin: 0px 10px;
@@ -166,9 +167,9 @@ padding: 40px;
 				</div>
 
 				<div class="caption">
-					<h3 style="font-size: 18px;">
-						${dto.subject} <small style="margin-left: 33px;">추천&nbsp;&nbsp;</small><span
-							style="font-size: 35px; color: #1abc9c; font-weight: lighter;">${dto.likeCount }</span>
+					<h3 style="font-size: 18px;">${dto.subject}
+						<small style="margin-left: 80px;">추천</small>
+						<span style="font-size: 35px; color: #1abc9c; font-weight: lighter;">${dto.likeCount}</span>
 					</h3>
 					<p>강사명  : ${dto.userId}</p>
 					<p style="text-align: right;">
@@ -200,7 +201,7 @@ padding: 40px;
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse${dto.listNum}" aria-expanded="false" aria-controls="collapse${dto.listNum}">
         <span><small>${dto.listNum}</small></span> &nbsp;&nbsp;&nbsp;<span>${dto.subject}</span> <small>작성자 : ${dto.userId} </small>&nbsp;&nbsp;&nbsp;<small>작성일 : ${dto.created}</small>
         <small>조회수 : ${dto.hitCount} </small><small class="likes"> 추천 : ${dto.likeCount} </small>
-        <input type="button" class="clickbtn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"
+        <input type="button" class="clickbtn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="float: right;"
 		 onclick="javascript:location.href='${articleUrl}&num=${dto.num}';" value="동영상 보기">
         </a>
       </h4>
@@ -210,9 +211,9 @@ padding: 40px;
         <div style="width: 150px;height: 150px;background-color: #eee;padding: 30px;float: left; background-size:cover; background-image: url('http://img.youtube.com/vi/${dto.urlContent}/hqdefault.jpg');">
         <!-- <div style="width: 150px;height: 150px;background-color: #eee;padding: 30px;float: left; background-size:cover; background-image: url('<%=cp%>/uploads/member/userImg/${dto.userImg}');"> -->
         </div>
-        <div style="float: left; margin-left: 15px;">C O N T E N T : ${dto.content} </div>
+        <div style="float: left; margin-left: 15px; position: relative; width: 300px;">C O N T E N T : ${dto.content} </div>
         
-        	<div class="tbl_st1">
+        	<div class="tbl_st1" style="position: relative; float: right; width: 300px;">
 			<table>
 				<colgroup>
 					<col width="100px">

@@ -59,6 +59,7 @@ public class FaqController {
 	
 	@RequestMapping(value="/customer/faq/list")
 	public String list(
+			//@RequestParam(value="num") int num,
 			@RequestParam(value="pageNo", defaultValue="1") int current_page,
 			@RequestParam(value="searchKey", defaultValue="subject") String searchKey,
 			@RequestParam(value="searchValue", defaultValue="") String searchValue,
@@ -71,6 +72,10 @@ public class FaqController {
 		int rows=10;
 		int total_page=0;
 		int dataCount=0;
+		
+		//Faq dto=service.readFaq(num);
+		//dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+		
 		
 		//검색값
 		if(req.getMethod().equalsIgnoreCase("GET")){
@@ -86,6 +91,7 @@ public class FaqController {
 		dataCount=service.dataCount(map);
 		if(dataCount !=0)
 			total_page=myUtil.pageCount(rows, dataCount);
+		
 		
 		//다른 사람이 자료를 삭제하여 전체페이지수가 변화된 경우
 		if(total_page<current_page)
@@ -112,6 +118,7 @@ public class FaqController {
 			Faq data=(Faq)it.next();
 			listNum=dataCount-(start+n-1);
 			data.setListNum(listNum);
+			data.setContent(data.getContent().replaceAll("\n", "<br>"));
 			
 			//심플 데이터 포맷 이용 비긴데이트(생성일 구하기)
 			SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

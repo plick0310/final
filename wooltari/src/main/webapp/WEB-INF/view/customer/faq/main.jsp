@@ -146,8 +146,9 @@ background: white;
 		});
 
 	});
+	
 	//탭 지정시 색상 
-	$(function() {
+	 $(function() {
 		$(".tab_content").hide();
 		$(".tab_content:first").show();//tab_content 전부 숨긴 것 중에 가장 첫번째껏만 보여준다.
 
@@ -164,7 +165,7 @@ background: white;
 			listPage(1);
 			
 		});
-	});
+	}); 
 	//1페이지로 가기
 	$(function(){
 		listPage(1);
@@ -246,26 +247,51 @@ background: white;
     			<p style="    font-size: 11px;    line-height: 20px;     margin-top: 10px;"> 
     			결제에 관련한 자주묻는 질문들을 확인할 수 있습니다.
     			</p>
-    			
-    			
     			</div>
-			
 			</div>
-			
-		  
 		</div>
-	
 	</div> -->
-	
-	
-	
 	
 	<!-- ajax 처리할 탭 -->
 	<div id="tabwrap" style="width: 900px; margin: 0px auto;">
 		<ul class="tabs">
-			<li id="tab-all" class="active" data-tab="all">전체</li>
-			<li id="tab-frequentask" data-tab="frequentask">자주묻는 질문</li>
-			<li id="tab-using" data-tab="using">이용관련</li>
+			<li id="tab-all" class="active" data-tab="all">
+				<div style="margin: 0 auto; width: 42px;font-size: 42px;
+	   					 color: #8bcdc0;"><i style="margin-top: 25px;" class="glyphicon glyphicon-menu-hamburger"></i>
+    			</div>
+    			<div style="width: 100%;text-align: center;">
+	    			<strong>전체</strong>
+	    			<p style="    font-size: 11px; font-weight:100;   line-height: 20px;     margin-top: 10px;"> 
+	    			울타리 사용과 관련된 모든 질문을 확인 할 수 있습니다.
+	    			</p>
+    			</div>
+			</li>
+			
+			<li id="tab-frequentask" data-tab="frequentask">
+				<div style="margin: 0 auto; width: 42px;font-size: 42px;
+		   					 color: #8bcdc0;"><i style="margin-top: 25px;" class="glyphicon glyphicon-question-sign"></i>
+	    			</div>
+		    			<div style="width: 100%;text-align: center;">
+		    			<strong>자주묻는 질문</strong>
+			    			<p style="    font-size: 11px; font-weight:100;   line-height: 20px;     margin-top: 10px;"> 
+			    			사용자 분들이 자주하는 질문을 확인 할 수 있습니다.
+			    			</p>
+	    			</div>
+			</li>
+			
+			<li id="tab-using" data-tab="using">
+				<div style="margin: 0 auto; width: 42px;font-size: 42px;
+   					 color: #8bcdc0;"><i style="margin-top: 25px;" class="glyphicon glyphicon-info-sign"></i>
+    			</div>
+    			<div style="width: 100%;text-align: center;">
+    			<strong>이용관련</strong>
+    			  
+    			<p style="    font-size: 11px; font-weight:100;   line-height: 20px;     margin-top: 10px;"> 
+    			이용방법을 확인할 수 있습니다.
+    			</p>
+    			
+    			</div>
+			</li>
 			<li id="tab-payment" data-tab="payment">
 			<div style="margin: 0 auto; width: 42px;font-size: 42px;
    					 color: #8bcdc0;"><i style="margin-top: 25px;" class="glyphicon glyphicon-credit-card"></i>
@@ -276,17 +302,15 @@ background: white;
     			<p style="    font-size: 11px; font-weight:100;   line-height: 20px;     margin-top: 10px;"> 
     			결제에 관련한 자주묻는 질문들을 확인할 수 있습니다.
     			</p>
-    			
-    			
     			</div>
 			</li>
-			<div style="float: right; margin: 8px 0;">
-				<input type="checkbox" id="allCheck" name="allCheck"
-					class="checkbox-style" /><label for="allCheck">전체선택</label>
-			</div>
 		</ul>
 	</div>	
 	
+	<div style="float: right; margin: 8px 0; position: absolute; top: 453px; left: 216px;">
+		<input type="checkbox" id="allCheck" name="allCheck"
+			class="checkbox-style" /><label for="allCheck">전체선택</label>
+	</div>
 	<!-- ajax처리되는 실제 게시판  -->
 	<div class="tab_container">
 			<div id="tab_content" class="tab_content"></div>

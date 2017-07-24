@@ -137,12 +137,12 @@ $( function() {
 			</tr>			
 
 			<tr>
-				<th>강의 시작일, 종료일</th>				
+				<th>시작, 종료일</th>				
 				<td><a>StartDate: <input type="text" name="startdate" id="datepicker1" value="${dto.startdate}"></a>&nbsp;
 				    <a>EndDate: <input type="text"  name="enddate" id="datepicker2" value="${dto.enddate}"></a></td>
 			</tr>
 			<tr>
-				<th>오프라인 강의실 주소</th>
+				<th>강의실 주소</th>
 				<td><input type="text" name="address" 
 					style="width: 200px;" value="${dto.address}"/></td>
 			</tr>

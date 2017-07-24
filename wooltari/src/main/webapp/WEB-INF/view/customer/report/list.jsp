@@ -266,8 +266,16 @@ function deleteAction(){
 }
 
 
-
+$(document).ready(function(){
+	if($("${dto.category}=='accuse'").val("신고")){
+	
+	}else if($("${dto.category}=='report'").val("건의")){
 		
+	}else if($("${dto.category}=='reply'").val("답글")){
+		
+	}
+});
+
 </script>
 
 <div style="width: 900px; margin: 60px auto;">
@@ -306,7 +314,7 @@ function deleteAction(){
 				<td style="text-align:right; width:65px; padding: 5px 18px;">
 				<input type="checkbox" name="chk" value="${dto.repNum}"></td>
 				
-				<td class="___number" style="">[ ${dto.category} ]</td>
+				<td class="___number" style="">[ ${dto.category} ] </td>
 				<td>
 					<div style="position:relative;">
 						<!--[category_name]-->

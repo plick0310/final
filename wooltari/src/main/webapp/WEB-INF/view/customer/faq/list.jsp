@@ -76,17 +76,19 @@ function deleteList(){
 }
 </script>
 <div class="container" style="height: 50px; font-size: 20px; text-align: auto;">
-	<form action="" id="array_form" name="searchForm" method="post" style="    margin-top: 212px;">
+	<form action="" id="array_form" name="searchForm" method="post" style="    margin-top: 212px; width:900px; width: 900px;
+    margin: 193px 100px;">
 			<c:forEach var="dto" items="${list}">
 				 <div class="panel panel">
 				    <div class="panel-heading" role="tab" id="heading${dto.listNum}">
 				      <h4 class="panel-title">
-				        <span><small><input type="checkbox" id="chk" name="chk" value="${dto.num}"></small></span>
+				        <div style="width: 100px; float: left;"><small><input type="checkbox" id="chk" name="chk" value="${dto.num}"></small></div>
 				        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse${dto.listNum}" aria-expanded="false" aria-controls="collapse${dto.listNum}">
-				        <span><small>[${dto.category}]</small></span> &nbsp;&nbsp;&nbsp;<span><small>${dto.subject}</small></span>
+				        <div style="width:100px; float:left;"><small>[${dto.category}]</small></div> &nbsp;&nbsp;&nbsp;
+				        <span><small>${dto.subject}</small></span>
 				         
 				         
-				         	<input type="button" class="clickbtn"
+				         	<input type="button" class="clickbtn" style="float: right;"
 							 onclick="javascript:location.href='<%=cp%>/customer/faq/update?pageNo=${pageNo}&num=${dto.num}';" value="수정하기">
 				        </a>
 				      </h4>
