@@ -61,7 +61,7 @@ $(document).ready(function() {
 		
 	$('#calendar').fullCalendar({
 	    locale:'en',	//언어설정
-	    height: 450,	
+	    height: 550,	
 	//    header: {
 	     	/* left: 'prev ,next today myCustomButton ',
 	     	left:"", */
@@ -72,13 +72,13 @@ $(document).ready(function() {
 	        
 	   // },
 	    
-	    header: {
+	/*      header: {
 	     	left: 'prev ,next today myCustomButton ',
 	        center: 'title', 
-	        right: 'month,agendaWeek,agendaDay'
+	        right: ''
 	        
-	    },
-	    
+	    }, */
+	     
 	    editable:false,
 	    allDaySlot:false,
 	    selectable: true,  //사용자가 클릭 및 드래그하여 선택을 할 수 있도록
@@ -107,8 +107,7 @@ $(document).ready(function() {
 	    		end:new Date(y,m+1,d+3)
 	    	}
 	    ]  */
-	    
-	    ,events: function(start, end, timezone, callback){
+		  ,events: function(start, end, timezone, callback){
 			// 캘린더가 처음 실행되거나 월이 변경되면
 			var startDay=start.format("YYYY-MM-DD");
 			var endDay=end.add("-1","days").format("YYYY-MM-DD");
@@ -321,17 +320,37 @@ function deleteBoard(num,page){
 -moz-box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
 box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
 		}
-/* h2{
-font-size: 20px;
-padding-top: 15px;
+
+ h2{
+font-size: 25px;
+padding-top: 5px;
 color:#1abc9c;
-} */
+}
+.fc-scroller.fc-day-grid-container{
+height: auto;
+overflow: none;
 
-
+}
+.btn{
+	margin: 0px 62px;
+	padding: 12px;
+	background: #1abc9d;
+	color: white;
+	width:30%;
+	float:left;
+	border-radius: 0px;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+.btn-block + .btn-block{
+ 	margin-top:0px;
+}
 </style>
 
 
-<div id='calendar' style=" width:95%; float: left; "></div> 
+<div id='calendar' style=" width:100%; float: left; "></div> 
 
 <div id='listCalendar' style="width:95%;"></div>
 
@@ -339,10 +358,16 @@ color:#1abc9c;
   <div class="modal-dialog">
     <div class="modal-content" style="width: 500px; margin-top: 250px; margin-left: 40px;">
       <div id="myModalBody" class="modal-body" style="height: 400px; "></div>
-      <div class="modal-footer" style="margin-top: -5px; height: 45px;">
+      <div class="modal-footer" style="margin-top: -10px; height: 70px;">
+      	 
+      	 <!-- 
       	   <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 65px; height: 25px; background: #1abc9c; padding-top: 3px; margin-top: -11px;" onclick="insertBoard();">등록</button>
 	       <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 65px; height: 25px; background: #1abc9c; padding-top: 3px; margin-top: -11px;">취소</button>
-         
+           -->
+          
+          	<button type="button" class="btn btn-block"  data-dismiss="modal" >Cancel</button>		
+			<button type="button" class="btn btn-block submit-form valid"  data-dismiss="modal" onclick="insertBoard();">Submit</button>
+				
       </div>
     </div>
   </div>
