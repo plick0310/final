@@ -20,11 +20,13 @@
 </tr>
 
 <!-- c:forEach로 list 돌림 -->
+<c:forEach var="vo" begin="1" end="10">
 <tr>
-	<td>admin</td>
-	<td>관리자</td>
+	<td>hong${vo}</td>
+	<td>홍길동${vo}</td>
 	<td>정상<!-- c:if문써서 0이면 정지/탈퇴 1이면 정상으로 출력 --></td>
 </tr>
+</c:forEach>
 <!-- c:forEach 끝나는 곳 -->
 </table>
 

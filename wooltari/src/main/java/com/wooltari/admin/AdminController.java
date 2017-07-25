@@ -11,8 +11,16 @@ public class AdminController {
 	private AdminService service;
 	
 	@RequestMapping(value="/admin/index", method=RequestMethod.GET)
-	public String adminDashBoard(){
-		
+	public String adminIndex(){
 		return "admin/index";
+	}
+	@RequestMapping(value="/admin/dashboard", method=RequestMethod.GET)
+	public String adminDashBoard(){
+		return "admin/dashboard";
+	}
+	
+	@RequestMapping(value="/admin/member", method=RequestMethod.GET)
+	public String adminMember(){
+		return "admin/member";
 	}
 }
