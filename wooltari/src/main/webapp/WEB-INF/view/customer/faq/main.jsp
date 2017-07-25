@@ -228,7 +228,7 @@ background: white;
 		<span style="font-size: 20px; color: #BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c;"
 			class="glyphicon glyphicon-pencil"> </span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;
-		</span>R E P O R T
+		</span>FAQ
 	</div> 
 	
 	<!-- <div style="width: 900px; height: 450px;     margin: 0 auto 30px;">
@@ -307,7 +307,7 @@ background: white;
 		</ul>
 	</div>	
 	
-	<div style="float: right; margin: 8px 0; position: absolute; top: 453px; left: 216px;">
+	<div style="float: right; margin: 8px 0; position: absolute; top: 453px; left: 1060px;">
 		<input type="checkbox" id="allCheck" name="allCheck"
 			class="checkbox-style" /><label for="allCheck">전체선택</label>
 	</div>

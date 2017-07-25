@@ -9,7 +9,7 @@
    /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 100%;
+        height: 100%; 
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -208,47 +208,6 @@ function deleteReply(replyNum, page){
 
 </script>
 
-<script type="text/javascript">
-
-$(function(){
-	$('#collapseTwo').on('shown.bs.collapse', function () {
-		initialize();
-   });		
-});
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 8,
-          center: {lat: -34.397, lng: 150.644}
-        });
-        var geocoder = new google.maps.Geocoder();
-
-        document.getElementById('submit').addEventListener('click', function() {
-          geocodeAddress(geocoder, map);
-        });
-      }
-
-      function geocodeAddress(geocoder, resultsMap) {
-        var address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status === 'OK') {
-            resultsMap.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        });
-      }
-    </script>
-   <!-- 
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcO1EZpm4c5VVFmWf1h0dwX1QVbsx3Gb4&callback=initMap">
-    </script>
- 	-->
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=MXeCbH9k35apBk0LHUUl"></script>
-
 <div  style=" margin: 60px auto; height:50px; font-size: 20px;text-align: center;">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
@@ -272,7 +231,6 @@ $(function(){
 		<tr>
 			<td class="read_contArea">
 				<span id="" >강의 시작일  : ${dto.startdate}</span>&nbsp;&nbsp;&nbsp;<span id="" >강의 종료일 : ${dto.enddate}</span>
-				
 	<%-- 			
 	<!-- 지도  -->
 	<div class="panel panel-default" style="border: none; box-shadow: none;">
@@ -295,16 +253,14 @@ $(function(){
 				<div id="floating-panel">
      				 <input id="address" type="textbox" value="${dto.address}">
      				 <input id="submit" type="button" value="Geocode">
-    			</div>
+    			
     			<div id="map"></div>
 
 					</div>
 				</div>
 			</div>
-	</div>
-	 --%>
-	<div id="map" style="width:100%;height:400px;"></div>
-		
+		</div>
+		 --%>
 				<!-- 유튜브 동영상 -->
 				<div class="">
 					<iframe width="560" height="315" src="https://www.youtube.com/embed/${dto.urlContent}" frameborder="0" allowfullscreen></iframe>
@@ -388,15 +344,4 @@ $(function(){
 		</tbody>
 	</table>
     <div id="listReply">    </div>
-    
-    <script type="text/javascript">
-        var map = null;
-
-        function initMap() {
-            map = new naver.maps.Map('map', {
-                center: new naver.maps.LatLng(37.3595704, 127.105399),
-                zoom: 10
-            });
-        }
-    </script>
     

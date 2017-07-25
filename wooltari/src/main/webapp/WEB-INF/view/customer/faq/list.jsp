@@ -5,6 +5,8 @@
 <%
 	String cp = request.getContextPath();
 %>
+<!-- faq 리스트  -->
+
 <style type="text/css">
 
 .clickbtn {
@@ -74,12 +76,14 @@ function deleteList(){
 		f.submit();
 	}
 }
+
+</script>
 </script>
 <div class="container" style="height: 50px; font-size: 20px; text-align: auto;">
 	<form action="" id="array_form" name="searchForm" method="post" style="    margin-top: 212px; width:900px; width: 900px;
     margin: 193px 100px;">
 			<c:forEach var="dto" items="${list}">
-				 <div class="panel panel">
+				 <div class="panel panel" style="box-shadow:1px;">
 				    <div class="panel-heading" role="tab" id="heading${dto.listNum}">
 				      <h4 class="panel-title">
 				        <div style="width: 100px; float: left;"><small><input type="checkbox" id="chk" name="chk" value="${dto.num}"></small></div>

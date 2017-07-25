@@ -139,8 +139,6 @@ padding: 40px;
 </style>
 <script type="text/javascript">
 
-
-
 </script>
 <!-- 게시판 이름 -->
 <div style="width:900px; margin: 60px auto; ">
@@ -153,7 +151,7 @@ padding: 40px;
 
 <!-- 베스트 강좌 -->
 <div class="row"
-		style="margin-bottom: 20px; width: 900px; margin-left: 0;">
+		style="margin-bottom: -20px; width: 900px; margin-left: 0;">
 		<c:forEach var="dto" items="${bestlist}">
 		<div class="col-sm-6 col-md-4">
 			<div class="thumbnail" onclick="javascript:location.href='${articleUrl}&num=${dto.num}'">
@@ -183,7 +181,7 @@ padding: 40px;
 </div>
 <hr style="width: 100%; height: 1px; background-color: #eee; margin-bottom: 50px;">
 
-<div style="text-align: center; width: 900px; margin: 10px auto;">
+<div style="text-align: center; width: 900px; margin: 10px auto; margin-top:-60px">
 
 
 
@@ -226,7 +224,9 @@ padding: 40px;
 				 <c:forEach var="vo" items="${dto.innerList}"><!--${dto.innerList}에서 dto는 부모 forEach의 var="dto"의 dto   -->
 				<tr>
 					<td class="subject"><a href="${articleUrl}&num=${vo.num}">${vo.subject}</a></td>
-					<td class="created">${vo.created}</td>
+					<td class="created">${vo.created} </td>
+					<%-- <fmt:parseDate value="${vo.created}" var="dateFmt" pattern="yyyyMMddHHmmss"/>
+    				<fmt:formatDate value="${vo.created}"  pattern="yyyy-MM-dd"/>  --%>
 				</tr>
 				</c:forEach>
 				
@@ -268,7 +268,7 @@ padding: 40px;
 		<input type="text" name="searchValue" class="keyword" placeholder="검색"  style="width:120px; "> <input type="button" class="submit">
 	</div>
 	</form>
-</div>	
+	</div>	
 </div>
 
 

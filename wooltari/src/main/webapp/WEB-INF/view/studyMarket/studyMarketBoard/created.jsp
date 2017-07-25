@@ -130,7 +130,7 @@ $( function() {
 				<td><input type="text" name="subject" 
 					class="subject" maxlength="100" style="width: 450px;" value="${dto.subject}" /></td>
 			</tr>
-			
+			<%-- 
 			<tr>
 				<th>작성자</th>
 				<td>${sessionScope.member.userId}</td>
@@ -146,6 +146,7 @@ $( function() {
 				<td><input type="text" name="address" 
 					style="width: 200px;" value="${dto.address}"/></td>
 			</tr>
+			 --%>
 			<tr>
 				<th>url</th>				
 				<td><input type="text" name="urlContent"  style="width: 200px;"value="${dto.urlContent}" /></td>

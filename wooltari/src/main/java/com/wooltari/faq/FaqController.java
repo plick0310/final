@@ -133,6 +133,21 @@ public class FaqController {
 			data.setCreated(data.getCreated().substring(0,10));
 					
 			n++;
+			switch (data.getCategory()) {
+			case "frequentask":
+				data.setCategory("자주묻는 질문");
+				break;
+			case "using":
+				data.setCategory("이용관련");
+				break;
+			case "payment":
+				data.setCategory("결제관련 문의");
+				break;
+
+			default:
+				break;
+			}
+			
 		}
 		
 		//페이징		

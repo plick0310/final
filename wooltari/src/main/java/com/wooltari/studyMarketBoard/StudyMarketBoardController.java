@@ -53,7 +53,9 @@ public class StudyMarketBoardController {
 		@RequestMapping(value="/studyMarket/studyMarketBoard/created" ,  method=RequestMethod.POST)
 		public String createdSubmit(StudyMarketBoard dto, HttpSession session) throws Exception {
 			
+				
 			dto.setUrlContent(dto.getUrlContent().substring(32,43));
+						
 			SessionInfo info=(SessionInfo)session.getAttribute("member");
 			String root = session.getServletContext().getRealPath("/");
 			String pathname=root+File.separator+"uploads"+File.separator+"studyMarketBoard";
@@ -137,14 +139,15 @@ public class StudyMarketBoardController {
 				
 				data.setCreated(data.getCreated().substring(0,10));
 				
+				
 				//이너리스트 만들기 위해 맵에 userId와 
 				map1.put("userId", data.getUserId());
 				map1.put("num", data.getNum());
+				//map1.put("created", data.getCreated().substring(0,10));
 				data.setInnerList(service.innerStudyMarket(map1));
 				//서비스임플에 innerStudyMarket(맵퍼)으로 userId와 num을 넣고, 그것을 setInnerlist로 innerlist로 담는다.
 				
 				n++;
-				
 			}
 			
 			String query="";

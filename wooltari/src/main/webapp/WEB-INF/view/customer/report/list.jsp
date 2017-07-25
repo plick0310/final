@@ -265,17 +265,6 @@ function deleteAction(){
 	});
 }
 
-
-$(document).ready(function(){
-	if($("${dto.category}=='accuse'").val("신고")){
-	
-	}else if($("${dto.category}=='report'").val("건의")){
-		
-	}else if($("${dto.category}=='reply'").val("답글")){
-		
-	}
-});
-
 </script>
 
 <div style="width: 900px; margin: 60px auto;">
