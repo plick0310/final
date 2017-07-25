@@ -14,8 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wooltari.common.MyUtilBootstrap;
+import com.wooltari.member.Member;
 import com.wooltari.member.MemberService;
 import com.wooltari.member.SessionInfo;
 
@@ -88,6 +90,38 @@ public class PointController {
 		return "member/point/log";
 	}
 	
+	@RequestMapping(value="/point/update", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> updatePoint(
+			@RequestParam(value="value") int value,
+			@RequestParam(value="info") String info,
+			HttpSession session
+			){
+		SessionInfo sessionInfo=(SessionInfo)session.getAttribute("member");
+		Member member = mservice.readMember(sessionInfo.getUserId());
+		Map<String, Object> ajax = new HashMap<String, Object>();
+		
+		//포인트가 감소되는 작업일때 회원의 포인트 검사(감소가 가능한지)
+		if(value < 0 && member.getPoint() < value){
+			//보유 포인트보다 감소될 포인트가 작으면 "false" 리턴
+			ajax.put("state", "false");
+			return ajax;
+		}
+		//보유 포인트가 감소될 포인트보다 크면 실행
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			map.put("userId", sessionInfo.getUserId()); //포인트를 적용시킬 유저 아이디
+			map.put("value", value); //추가 or 감소시킬 포인트양 (양수는 그냥 적으면되고 감소는 마이너스 붙임)
+			map.put("info", info); //포인트 적용되는 이유(ex:글 작성,댓글 작성 등등..)
+			pservice.insertLog(map); //서비스에서 insertLog를 호출하면 memberPoint 테이블에 로그가 insert 되면서 회원의 포인트가 적용 됨
+		} catch (Exception e) {
+			e.printStackTrace(); //포인트 적용 실패시 예외를 받는 곳(트랜잭션 처리함)
+			ajax.put("state", "false");
+			return ajax;
+		}
+		ajax.put("state", "true");
+		return ajax;
+	}
 	@RequestMapping(value="/point/pay", method=RequestMethod.GET)
 	public String payPoint(){
 		

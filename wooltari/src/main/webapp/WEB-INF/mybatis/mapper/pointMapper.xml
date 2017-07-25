@@ -19,8 +19,9 @@
 	INSERT INTO memberpoint(userId, value, info)
 	VALUES (#{userId}, #{value}, #{info})	
 	</insert>
-	<update id="updatePoint" parameterType="map">
 	
+	<update id="updatePoint" parameterType="map">
+	UPDATE member SET point=point+${value} WHERE userId = #{userId}
 	</update>
 	
 	<select id="dataCount" parameterType="map" resultType="Integer">

@@ -15,12 +15,13 @@ public class PointServiceImpl implements PointService {
 	private CommonDAO dao;
 	
 	@Override
-	public void insertLog(Map<String, Object> map) {
+	public void insertLog(Map<String, Object> map) throws Exception{
 		try {
 			dao.insertData("point.insertLog", map);
 			dao.updateData("point.updatePoint", map);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.toString());
+			throw e;
 		}
 	}
 	

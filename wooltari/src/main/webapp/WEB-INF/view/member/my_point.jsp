@@ -33,6 +33,24 @@ function reload(){
 		$('.content').html(data);
 		}
 	});
+	
+	<%-- 
+	var query = { "info":"글 작성", "value":30}
+	$.ajax({
+		url:"<%=cp%>/point/update",
+		data:query,
+		type:"post",
+		dataType:"json",
+		success : function(data) {
+			var state = data.state;
+			if(state == "true"){
+				alert("포인트 적용 성공");
+			}else{
+				alert("포인트 적용 실패");
+			}
+		}
+	});
+	--%>
 }
 
 </script>
