@@ -32,18 +32,6 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
 			Authentication authentication) throws ServletException, IOException {
 
 		Member dto = service.readMember(authentication.getName());
-
-		
-		System.out.println("-------------------로그인 판단중-------------------");
-		// enabled가 0이면 로그인 불가
-		/*if(dto.getEnabled() == 0){
-			System.out.println("-------------------enabled가" +  dto.getEnabled() + "인 회원-------------------");
-			request.setAttribute("message", "탈퇴한 회원이거나 운영자에 의해 활동이 정지된 회원입니다.");
-			forward(request, response, "login");
-		}*/
-		System.out.println("-------------------enabled가" +  dto.getEnabled() + "인 회원-------------------");
-		
-		// 로그인 날짜 수정(아이디:authentication.getName() )
 		service.updateLastLogin(authentication.getName());
 		SessionInfo info = new SessionInfo();
 		info.setUserId(dto.getUserId());
