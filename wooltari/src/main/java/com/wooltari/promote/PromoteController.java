@@ -32,6 +32,7 @@ public class PromoteController {
 	@Autowired
 	private MyUtil myUtil;
 	
+	
 	@RequestMapping("/promote/list")
 	public String list(
 			@RequestParam(value="page", defaultValue="1")int currentPage,
@@ -84,14 +85,29 @@ public class PromoteController {
 	        Date beginDate = formatter.parse(dto.getCreated());
 			
 	        
-			gap=(endDate.getTime() - beginDate.getTime()) / (60*60* 1000);
+			gap=(endDate.getTime() - beginDate.getTime()) / 1000;
             dto.setGap(gap);
             
             dto.setCreated(dto.getCreated().substring(0, 10));
             
+            if(dto.getGap()<60){
+            	dto.setAgo("방금");
+            }else if(dto.getGap() >= 60 && dto.getGap() < 3600) {
+            	String s= (dto.getGap()/60)+"분 전";	
+               dto.setAgo(s);
+            }else if(dto.getGap() >= 3600 && dto.getGap() < 86400) {
+            	String s= (dto.getGap()/3600)+"시간 전";	
+                dto.setAgo(s);
+            }else if(dto.getGap() >= 86400 && dto.getGap() < 2419200) {
+            	String s= (dto.getGap()/86400)+"일 전";	
+                dto.setAgo(s);
+            }else{
+            	String s= "몇 달 전";	
+                dto.setAgo(s);
+            }
+              
 			n++;
-			
-			
+					
 		}
 		
 		String query="";

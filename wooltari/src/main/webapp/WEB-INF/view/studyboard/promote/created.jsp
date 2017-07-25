@@ -64,6 +64,17 @@ function insertBoard(){
 
 	}
 	
+	var query = { "info":"홍보글 작성", "value":-30}
+	$.ajax({
+	   url:"<%=cp%>/point/update",
+	   data:query,
+	   type:"post",
+	   dataType:"json",
+	   success : function(data) {
+	     
+	   }
+	});
+	
 	if(mode=="update"){
 		f.action="<%=cp%>/promote/updateBoard";
 		f.submit();
@@ -75,6 +86,7 @@ function insertBoard(){
 	
 	
 }
+
 
 
 
