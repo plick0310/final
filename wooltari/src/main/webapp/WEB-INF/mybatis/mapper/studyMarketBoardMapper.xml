@@ -79,7 +79,7 @@
 	<!-- 내부에 사용할 글리스트 -->
 	<select id="innerStudyMarket" parameterType="map"
 	            resultType="com.wooltari.studyMarketBoard.StudyMarketBoard">
-	SELECT s.num, s.userId, subject, created
+	SELECT s.num, s.userId, subject,TO_CHAR(created, 'YYYY/MM/DD') created
 	FROM studyMarketBoard s
 	JOIN member m ON s.userId= m.userId
    	WHERE s.userId = #{userId} AND s.num != #{num}
@@ -91,7 +91,7 @@
 	            resultType="com.wooltari.studyMarketBoard.StudyMarketBoard">
 		SELECT * FROM (
 		    SELECT ROWNUM rnum, tb.* FROM (
-			    SELECT s.num, s.userId, subject, created, hitCount, content, startdate, enddate, address, urlContent
+			    SELECT s.num, s.userId, subject,created, hitCount, content, startdate, enddate, address, urlContent
 			    
 			   ,NVL(likeCount, 0) likeCount, NVL(replyCount, 0) replyCount, userImg	
 			       

@@ -99,6 +99,19 @@ public class ReportController {
 			listNum = dataCount - (start + n - 1);
 			data.setListNum(listNum);
 			n++;
+			switch (data.getCategory()) {
+				case "accuse":
+					data.setCategory("신고");
+					break;
+				case "suggest":
+					data.setCategory("건의");
+					break;
+				case "reply":
+					data.setCategory("답글");
+					break;
+				default:
+					break;
+			}
 		}
 		String cp= req.getContextPath();
 		
