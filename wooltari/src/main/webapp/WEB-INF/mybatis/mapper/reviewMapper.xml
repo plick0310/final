@@ -11,21 +11,27 @@
 	
 	<!-- 리뷰 리스트 -->
 	<select id="listBoard" parameterType="map" resultType="com.wooltari.review.Review">
-	select * from(
-		select rownum rnum,tb.* from(
-		select studyname,r.num,r.subject,r.content,r.hitcount,r.imagefilename,userName,range,nvl(star,0)star
-				,to_char(r.created,'yyyy-mm-dd')created,r.s_num,r.userId,cate.subject category
-				from reviewlist r 
-    	    	join member m on r.userId=m.userId
-            join study s on r.s_num=s.s_num
-            join studycategory sc on s.s_num=sc.s_num
-            join s_category cate on sc.choicecategory = cate.categorynum
-           left outer join reviewstar star on r.num=star.num
-				order by num desc
-		<![CDATA[		
-			)tb where rownum <= #{end}
-		)where rnum>=#{start}
-		]]>
+	select * from(    
+	  select rownum rnum,td.* from 
+	    (select distinct list.*,nvl(star,0)star from
+		      (select studyname,r.num,r.subject,r.content,r.hitcount,r.imagefilename,userName,range
+		        ,to_char(r.created,'yyyy-mm-dd')created,r.s_num,r.userId,cate.subject category
+		          from reviewlist r 
+		          join member m on r.userId=m.userId
+		          join study s on r.s_num=s.s_num
+		          join studycategory sc on s.s_num=sc.s_num
+		          join s_category cate on sc.choicecategory = cate.categorynum
+		        )list
+			left outer	join
+		      (select (select round(nvl((select nvl(sum(star),0) from reviewstar )/nullif((select (count(*)) 
+		        from reviewstar),0),0)) from dual)star,num from reviewstar)starlist
+		        on list.num=starlist.num
+		        order by list.num desc
+	 <![CDATA[	
+        )td where rownum <= #{end}
+	)where rnum>=#{start}
+	]]>
+		
 	</select>
 	
 	<!-- 글 개수 -->
@@ -41,9 +47,12 @@
 	
 	<!-- 글 보기 -->
 	<select id="readBoard" parameterType="map" resultType="com.wooltari.review.Review">
-		select studyname,num,subject,r.content,hitcount,r.created,r.imageFilename,r.s_num,r.userId,userName from reviewlist r
+		select s.studyname,num,r.subject,r.content,hitcount,r.created,r.imageFilename,r.s_num,r.userId,userName,s.range,cate.subject category
+ 		 from reviewlist r
 		join member m on r.userId=m.userId
     	join study s on r.s_num=s.s_num
+     	 join studycategory sc on s.s_num=sc.s_num
+      	join s_category cate on cate.categorynum=sc.choicecategory
     	where num=#{num}
 	</select>
 	

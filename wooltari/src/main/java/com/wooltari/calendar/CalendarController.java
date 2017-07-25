@@ -73,11 +73,13 @@ public class CalendarController {
 			e.printStackTrace();
 		}	
 		
+		
+		
 		model.addAttribute("month",month);
 		model.addAttribute("s_num",s_num);
 		model.addAttribute("sdate",sdate);
 		model.addAttribute("edate",edate);
-
+		
 		return "study/myStudy/calCreated";
 	}
 	

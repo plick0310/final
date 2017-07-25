@@ -504,9 +504,135 @@ input[type=text]::-ms-clear {
 #btnright:HOVER {
 	border-left: 1px solid gray;
 }
+
+/* 이까지 */
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+figure.snip1384 {
+      position: relative;
+    float: left;
+    overflow: hidden;
+    margin: 10px 1%;
+    min-width: 195px;
+    max-width: 300px;
+    width: 195px;
+    color: #ffffff;
+    height: 300px;
+    text-align: left;
+    font-size: 16px;
+}
+figure.snip1384 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+figure.snip1384 img {
+  max-width: 100%;
+  backface-visibility: hidden;
+  vertical-align: top;
+}
+figure.snip1384:after,
+figure.snip1384 figcaption {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+figure.snip1384:after {
+  content: '';
+  background-color: rgba(0, 0, 0, 0.65);
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+  opacity: 0;
+}
+figure.snip1384 figcaption {
+  z-index: 1;
+  padding: 40px;
+  text-align: center; 
+}
+figure.snip1384 h3,
+figure.snip1384 .links {
+  width: 100%;
+  margin: 5px 0;
+  padding: 0;
+}
+figure.snip1384 h3 {
+  line-height: 1.1em;
+  font-weight: 700;
+  font-size: 1.4em;
+  text-transform: uppercase;
+  opacity: 0;
+}
+figure.snip1384 p {
+  font-size: 0.8em;
+  font-weight: 300;
+  letter-spacing: 1px;
+  opacity: 0;
+  top: 50%;
+  -webkit-transform: translateY(40px);
+  transform: translateY(40px);
+}
+figure.snip1384 i {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 20px 25px;
+  font-size: 34px;
+  opacity: 0;
+  -webkit-transform: translateX(-10px);
+  transform: translateX(-10px);
+}
+figure.snip1384 a {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+figure.snip1384:hover img,
+figure.snip1384.hover img {
+  zoom: 5;
+  filter: alpha(opacity=50);
+  -webkit-opacity: 0.5;
+  opacity: 0.3;
+}
+figure.snip1384:hover:after,
+figure.snip1384.hover:after {
+  opacity: 1;
+  position: absolute;
+  width:195px;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+}
+figure.snip1384:hover h3,
+figure.snip1384.hover h3,
+
+figure.snip1384:hover p,
+figure.snip1384.hover p,
+figure.snip1384:hover i,
+figure.snip1384.hover i {
+  -webkit-transform: translate(0px, 0px);
+  transform: translate(0px, 0px);
+  opacity: 1;
+}
+
+
 </style>
 
 <script>
+$(".hover").mouseleave(
+		  function () {
+		    $(this).removeClass("hover");
+		  }
+		);
+	
+
+
 	(function(window, document) {
 
 		// Tabs
@@ -552,41 +678,43 @@ input[type=text]::-ms-clear {
 				}
 			});
 		}
-
+ 
 		$(function() {
 			initTopTabs();
-			$("div.gnb-cont").drawer();
+	
 		});
 	}(this, this.document));
+	
+	
+	
+	
 </script>
 <!--------------------------- 중고장터 헤더 --------------------------------->
 <div>
+<form method="post">
 	<table style="width: 900px; margin: 20px auto 5px;">
 		<tr>
-			<td
-				style="font-size: 30px; width: 40px; font-weight: bolder; color: #1abc9c;"><img
-				class="img-circle" alt="" src=""> W</td>
-			<td
-				style="font-size: 32px; font-weight: bold; color: #393635; width: 193px;">교재중고장터</td>
+			<td style="font-size: 37px;width: 40px;font-weight: bolder;color: #1abc9c;text-shadow: 1px 1px 4px #eee;">W</td>
+			<td style="width: 193px;"><a href="<%=cp %>/community/usedshop/list" style="font-size: 32px; font-weight: bold; color: #393635; ">교재중고장터</a></td>   
+				
 			<td style="padding-left: 15px; width: 215px;">
-				<div
-					style="border-bottom: 4px solid #1abc9c; width: 210px; padding: 3px; color: #1abc9c;">
-					<input type="text" style="border: none;">
+				<div style="border-bottom: 4px solid #1abc9c; width: 210px; padding: 3px; color: #1abc9c;">
+					<input type="text" style="border: none;" name="searchValue">
 					<div style="float: right;">
 						<i class="glyphicon glyphicon-search" style="font-size: 20px;"></i>
 					</div>
 				</div>
 			</td>
+			
 			<td style="text-align: right; width: 77px; color: #393635;"><a
 				href="">인기상품</a></td>
 			<td style="color: #eee;">|</td>
-			<td style="text-align: left;"><a href="<%=cp %>/community/usedshop/created"
-				style="color: #1abc9c; font-weight: bold;"><i
-					class="glyphicon glyphicon-camera"
-					style="font-size: 19px; vertical-align: middle;"></i> 내 상품팔기</a></td>
+			<td style="text-align: left;"><a href="<%=cp %>/community/usedshop/created" style="color: #1abc9c; font-weight: bold;">
+			<i class="glyphicon glyphicon-camera" style="font-size: 19px; vertical-align: middle;"></i> 내 상품팔기</a></td>
 		</tr>
 
 	</table>
+</form>
 
 </div>
 <!--------------------------- 중고장터 카테고리 --------------------------------->
@@ -653,52 +781,52 @@ input[type=text]::-ms-clear {
 			<div class="tabpanel">
 				<ul>
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=12000000">육아</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=12">육아</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=13000000">반려동물</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=13">반려동물</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=40000000">금융/재테크</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=14">금융/재테크</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=12000000">상담/컨설팅</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=15">상담/컨설팅</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=13000000">건강/웰빙</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=16">건강/웰빙</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=40000000">사주/타로</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=17">사주/타로</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=12000000">독서/글쓰기</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=18">독서/글쓰기</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=13000000">사진/영상</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=19">사진/영상</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=40000000">키덜트</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=20">키덜트</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=12000000">생활공예</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=21">생활공예</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=13000000">요리/베이킹</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=22">요리/베이킹</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=40000000">인테리어</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=23">인테리어</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=40000000">바리스타/바텐더</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=24">바리스타/바텐더</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=12000000">봉사활동</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=25">봉사활동</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=13000000">웨딩</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=26">웨딩</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=40000000">라이프스타일 기타</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=27">라이프스타일 기타</a></li>
 
 				</ul>
 			</div>
@@ -707,65 +835,28 @@ input[type=text]::-ms-clear {
 				<ul>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=30000000">토익</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=28">토익</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=16000000">토플</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=29">토플</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=17000000">텝스</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=30">텝스</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=52000000">토스/오픽</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=31">토스/오픽</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=30000000">영어회화</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=32">영어회화</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=16000000">작문/독해</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=33">작문/독해</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=17000000">미드정복</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=34">미드정복</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=52000000">영어 기타</a></li>
-
-
-				</ul>
-			</div>
-
-			<div class="tabpanel">
-				<ul>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=09000000">중국어</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=31000000">일본어</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=20000000">독일어</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=32000000">아랍어</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=49000000">태국어</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=09000000">스페인어</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=31000000">러시아어</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=20000000">프랑스어</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=32000000">베트남어</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=49000000">외국어 기타</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=35">영어 기타</a></li>
 
 
 				</ul>
@@ -775,73 +866,35 @@ input[type=text]::-ms-clear {
 				<ul>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=27000000">응용프로그래밍</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=36">중국어</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=23000000">웹프로그래밍</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=37">일본어</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=75000000">모바일프로그래밍</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=38">독일어</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=28000000">데이터베이스/서버</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=39">아랍어</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=44000000">게임프로그래밍</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=40">태국어</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=51000000">문서작성/편집</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=41">스페인어</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=19000000">컴퓨터자격증</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=42">러시아어</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=38000000">사물인터넷</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=43">프랑스어</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=64000000">하드웨어</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=44">베트남어</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=42000000">컴퓨터 기타</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=45">외국어 기타</a></li>
 
-				</ul>
-			</div>
-
-			<div class="tabpanel">
-				<ul>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=33000000">웹/모바일디자인</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=45000000">일러스트/삽화</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=46000000">광고/영상</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=10000000">만화/웹툰</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=99000000">편집디자인</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=33000000">패션디자인</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=45000000">3D/VFX</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=46000000">도예/세라믹</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=10000000">캘리그라피</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=99000000">회화</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=99000000">디자인 기타</a></li>
 
 				</ul>
 			</div>
@@ -850,34 +903,34 @@ input[type=text]::-ms-clear {
 				<ul>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=02000000">행정</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=46">응용프로그래밍</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=14000000">교육</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=47">웹프로그래밍</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=15000000">경찰</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=48">모바일프로그래밍</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=07000000">소방</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=49">데이터베이스/서버</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=53000000">의료/보건</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=50">게임프로그래밍</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=02000000">사법</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=51">문서작성/편집</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=14000000">기술</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=52">컴퓨터자격증</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=15000000">회계</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=53">사물인터넷</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=07000000">국방</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=54">하드웨어</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=53000000">공무원 기타</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=55">컴퓨터 기타</a></li>
 
 				</ul>
 			</div>
@@ -886,28 +939,37 @@ input[type=text]::-ms-clear {
 				<ul>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=22000000">자소서/면접</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=56">웹/모바일디자인</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=01000000">인적성</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=57">일러스트/삽화</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=50000000">스피치</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=58">광고/영상</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=43000000">자격증</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=59">만화/웹툰</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=22000000">기업공채</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=60">편집디자인</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=01000000">공모전/대외활동</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=61">패션디자인</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=50000000">창업/스타트업</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=62">3D/VFX</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=43000000">취업 기타</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=63">도예/세라믹</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=64">캘리그라피</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=65">회화</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=66">디자인 기타</a></li>
 
 				</ul>
 			</div>
@@ -916,28 +978,34 @@ input[type=text]::-ms-clear {
 				<ul>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=21000000">기타/우쿠렐라</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=67">행정</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=37000000">피아노/키보드</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=68">교육</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=08000000">보컬/음악이론</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=69">경찰</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=48000000">작사/작곡</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=70">소방</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=72000000">밴드</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=71">의료/보건</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=73000000">뮤지컬</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=72">사법</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=76000000">마술</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=73">기술</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=21000000">음악/공연 기타</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=74">회계</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=75">국방</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=76">공무원 기타</a></li>
 
 				</ul>
 			</div>
@@ -946,34 +1014,28 @@ input[type=text]::-ms-clear {
 				<ul>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=18000000">축구</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=77">자소서/면접</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=05000000">야구</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=78">인적성</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=18000000">농구</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=79">스피치</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=05000000">테니스</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=80">자격증</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=18000000">배드민턴</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=81">기업공채</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=05000000">수영</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=82">공모전/대외활동</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=05000000">골프</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=83">창업/스타트업</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=18000000">자전거</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=05000000">헬스</a></li>
-
-					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=18000000">스포츠 기타</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=84">취업 기타</a></li>
 
 				</ul>
 			</div>
@@ -982,25 +1044,28 @@ input[type=text]::-ms-clear {
 				<ul>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=29000000">헤어</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=85">기타/우쿠렐라</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=34000000">마사지</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=86">피아노/키보드</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=03000000">네일아트</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=87">보컬/음악이론</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=71000000">피부관리</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=88">작사/작곡</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=29000000">메이크업</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=89">밴드</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=34000000">스타일/코디</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=90">뮤지컬</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=03000000">뷰티/미용 기타</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=91">마술</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=92">음악/공연 기타</a></li>
 
 				</ul>
 			</div>
@@ -1009,19 +1074,82 @@ input[type=text]::-ms-clear {
 				<ul>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=04000000">LOL</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=93">축구</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=57000000">피파온라인</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=94">야구</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=55000000">온라인게임</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=95">농구</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=04000000">PC게임</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=96">테니스</a></li>
 
 					<li class=""><a
-						href="/corner/UsedMarket.aspx?category=57000000">게임 기타</a></li>
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=97">배드민턴</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=98">수영</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=99">골프</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=100">자전거</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=101">헬스</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=102">스포츠 기타</a></li>
+
+				</ul>
+			</div>
+
+			<div class="tabpanel">
+				<ul>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=103">헤어</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=104">마사지</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=105">네일아트</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=106">피부관리</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=107">메이크업</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=108">스타일/코디</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=109">뷰티/미용 기타</a></li>
+
+				</ul>
+			</div>
+
+			<div class="tabpanel">
+				<ul>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=110">LOL</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=111">피파온라인</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=112">온라인게임</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=113">PC게임</a></li>
+
+					<li class=""><a
+						href="<%=cp%>/community/usedshop/list?searchKey=category&searchValue=114">게임 기타</a></li>
 
 				</ul>
 			</div>
@@ -1043,6 +1171,7 @@ input[type=text]::-ms-clear {
 <div style="width: 900px; margin: 30px auto 10px;"></div>
 <br style="clear: both;">
 <div class="row" style="width: 900px; margin: 0 auto;">
+<form method="post">
 
 	<div style="clear: both">
 	
@@ -1053,23 +1182,23 @@ input[type=text]::-ms-clear {
 		<div class="btn-group btn-group-justified" role="group"
 			aria-label="..." style="float: left; width: 180px; margin-top: 9px;">
 			<div class="btn-group" role="group">
-				<button type="button" class="btn btn-default">신규등록순</button>
+				<button type="submit" class="btn btn-default">신규등록순</button>
 			</div>
 
 			<div class="btn-group" role="group">
-				<button type="button" class="btn btn-default" id="btnright"
+				<button type="submit" class="btn btn-default" id="btnright" name="bun" value="ASC"
 					style="border-left: none;">마감임박순</button>
 			</div>
 		</div>
 	</div>
 	<br style="clear: both">
-
+</form>
 	<!-- list 시작 -->
 <c:forEach var="dto" items="${list }">
-	<div class="col-sm-3">
+<div class="col-sm-3">
 		<div class="thum">
-			<div
-				style="width: 195x; height: 195px; background: gray; background-image: url('${dto.content}');
+			<div onclick="javascript:location.href='${articleUrl }&num=${dto.num}'" 
+			style="cursor:pointer; width: 195x; height: 195px; background: gray; background-image: url('${dto.content}');
 		background-size:cover;">
 			</div>
 			<div style="padding: 2px">
@@ -1077,7 +1206,7 @@ input[type=text]::-ms-clear {
 					<a href="" style="font-size: 12px; color: #393635;">${dto.subject }</a>
 				</div>
 				<div style="position: absolute; bottom: 18px; right: 0;">
-					<div
+					<div 
 						style="font-size: 11px; text-align: right; font-weight: 100; color: #b2b2b2;">
 						판매가 <span
 							style="font-weight: 100; font-size: 18px; color: #393635;">${dto.price}</span><span
@@ -1113,11 +1242,65 @@ input[type=text]::-ms-clear {
 					<a href=""><i class="glyphicon glyphicon-home"></i>${dto.userId }</a>
 				</div>
 			</div>
-		</div>
+		
 	</div>
+	</div>
+<%-- 	<figure class="snip1384"> 
+	<div style="width: 195x; height: 195px; background: gray; background-image: url('${dto.content}');
+		background-size:cover;"></div> 
+		<div style="padding: 2px">
+				<div style="height: 35px; overflow: hidden; margin: 13px 0;">
+					<a href="" style="    font-size: 12px;
+    color: #393635;
+    position: relative;">${dto.subject }</a>
+				</div>
+				<div style="position: absolute; bottom: 18px; right: 0;">
+					<div 
+						style="font-size: 11px; text-align: right; font-weight: 100; color: #b2b2b2;">
+						판매가 <span
+							style="font-weight: 100; font-size: 18px; color: #393635;">${dto.price}</span><span
+							style="color: gray">원</span>
+					</div>
+					<c:if test="${dto.pointuse eq 1 }">
+					<div
+						style="font-size: 11px; text-align: right; font-weight: 100; color: #b2b2b2;">
+						포인트판매가 <span
+							style="font-weight: 100; font-size: 18px; color: #393635;">${dto.pointprice}</span><span
+							style="color: gray; font-size: 17px; font-weight: 100;">P</span>
+					</div>
+					</c:if>
+				</div>
+				<div>
+							<c:choose>
+                              <c:when test="${dto.del eq 1 }">
+                                 <span style="font-size: 10px; padding: 0px 4px; border-radius: 7px; font-weight: 100; background: #76d9c5; color: white; position: absolute; bottom: 20px;">무료배송</span>
+                              </c:when>
+                             
+                              <c:otherwise>
+                              	<span style="font-size: 10px; padding: 0px 4px; border-radius: 7px; font-weight: 100; background: gray; color: white; position: absolute; bottom: 20px;">유료배송</span>
+                              </c:otherwise>
+                              </c:choose>
+
+							
+			
+				<!-- 	<span style="font-size: 10px; padding: 0px 4px; border-radius: 7px; font-weight: 100; background: #76d9c5; color: white; position: absolute; bottom: 20px;">무료배송</span> -->
+				</div>
+			
+				<div
+					style="font-size: 12px; position: absolute; bottom: 0; color: #393635;">
+					<div style="color: #888888;
+    font-weight: 100;"><span class="glyphicon glyphicon-home"></span>${dto.userId }</div>
+				</div>
+			</div>
+  <figcaption>  
+    <h3>마감시간</h3>
+    <p>${dto.created }</p> 
+  </figcaption>
+  <a href="#"></a> 
+</figure> --%>
 	</c:forEach>
 	<!-- 끝 -->
-
+ 
 	
 
 </div>

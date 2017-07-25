@@ -3,7 +3,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="usedshop">
 
+	<sql id="where-list">
+		
+		<if test="searchKey=='subject'">
+			INSTR(subject, #{searchValue})&gt;=1
+		</if>
+		
 	
+		 <if test="searchKey=='category'">
+			INSTR(category, #{searchValue})=1
+		</if>
+		
+		<!--
+		<if test="searchKey=='content'">
+			DBMS_LOB.INSTR(content, #{searchValue})&gt;=1
+		</if> -->
+
+	</sql>
 	
 	
 	<!--  카테고리 대분류 -->
@@ -26,7 +42,7 @@
 		values (usedshoplist_seq.nextval,#{price},#{userId},#{category},#{subject},#{content},#{del},#{pointuse})
   	</insert>
 
-  	<!-- (내가만든)나의 스터디 리스트 -->
+
   	<select id="listUsedShop" parameterType="map" resultType="com.wooltari.usedshop.UsedShop">
 		SELECT * FROM (
 			    SELECT ROWNUM rnum, tb.* FROM (
@@ -36,9 +52,14 @@
 			           (
 				         SELECT num,price,m.userId,category,subject,del,pointuse,created,content
 				         FROM usedshop u JOIN member m ON u.userId=m.userId
+				         <where>
+	                         <if test="searchValue != null and searchValue != ''">
+				                  <include refid="where-list"/>
+			                 </if>
+		                </where>
 		                ) tbBbs
 		            )
-		           ORDER BY num DESC
+		           ORDER BY num ${mode}
 		           		<![CDATA[
 		        ) tb WHERE ROWNUM <= #{end}
 		) WHERE rnum >= #{start}
@@ -47,13 +68,63 @@
   	
   	<select id="dataCount" resultType="Integer" parameterType="map">
 			SELECT NVL(COUNT(*),0) FROM usedshop
-		<!-- <where>
+		<where>
 			<if test="searchValue!=null and searchValue!=''">
 				<include refid="where-list"/>
 			</if>
-		</where> -->
+		</where>
 	</select>
+	
+	<select id="readUsedShop" parameterType="Integer" resultType="com.wooltari.usedshop.UsedShop">
+		SELECT num,b.userid,subject,category,content,del,price,pointuse,
+				           TO_CHAR(b.created, 'YYYY-MM-DD') created
+		FROM usedshop b JOIN member m ON b.userId = m.userId WHERE num=#{num}
+	</select>
+	
+	
+	<select id="preReadUsedShop" parameterType="map" resultType="com.wooltari.usedshop.UsedShop">
+		SELECT tb.* FROM (
+			SELECT num, subject FROM usedshop	
+			<where>
+				<if test="searchValue != null and searchValue != '' ">
+					<include refid="where-list"/>
+				</if>
+				
+				<![CDATA[
+					AND (num > #{num})
+				]]>
+			</where>
+			ORDER BY num ASC
+		)tb WHERE ROWNUM=1
+	</select>
+	
+	<select id="nextReadUsedShop" parameterType="map" resultType="com.wooltari.usedshop.UsedShop">
+		SELECT tb.* FROM (
+			SELECT num, subject FROM usedshop
+			<where>
+				<if test="searchValue != null and searchValue != '' ">
+					<include refid="where-list"/>
+				</if>
+				
+				<![CDATA[
+					AND (num < #{num})
+				]]>
+			</where>
+			ORDER BY num DESC
+		)tb WHERE ROWNUM=1
+	</select>
+	
+	<delete id="deleteUsedShop" parameterType="Integer">
+		DELETE FROM usedshop WHERE num=#{num}
+	</delete>
+	
+	<update id="updateUsedShop" parameterType="com.wooltari.usedshop.UsedShop">
+		UPDATE usedshop SET subject=#{subject}, content=#{content},
+		category=#{category},del=#{del},price=#{price},pointuse=#{pointuse} WHERE num=#{num}
+	</update>
 <!-- 
+	
+	
 	
 	스터디번호 가져오기 
 	<select id="maxStudySeq" resultType="Long">

@@ -54,32 +54,70 @@ public class UsedShopServiceImpl implements UsedShopService{
 
 	@Override
 	public UsedShop readUsedShop(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		UsedShop dto = null;
+		
+		try {
+			dto=dao.getReadData("usedshop.readUsedShop",num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 	@Override
 	public UsedShop preReadUsedShop(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		UsedShop dto = null;
+		try {
+			dto=dao.getReadData("usedshop.preReadUsedShop",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 	@Override
 	public UsedShop nextReadUsedShop(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		UsedShop dto = null;
+		try {
+			dto=dao.getReadData("usedshop.nextReadUsedShop",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 	@Override
 	public int updateUsedShop(UsedShop dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		try {
+			
+			dao.updateData("usedshop.updateUsedShop", dto);
+			result=1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
-	public int deleteUsedShop(int num, String pathname, String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteUsedShop(int num, String userId) {
+		int result= 0;
+		
+		try {
+			UsedShop dto = readUsedShop(num);
+			if(dto!=null) {
+				if(! dto.getUserId().equals(userId)&&!userId.equals("admin")) {
+					return result;
+				}
+				
+			}
+			dao.deleteData("usedshop.deleteUsedShop", num);
+			result=1;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	@Override
