@@ -65,13 +65,26 @@ var page = 1;
 var recruit = 0;
 var gender = "";
 var searchValue = "";
+var bigCategory = '${bigCategory}';
+var smallCategory = '${smallCategory}';
+
 $(document).ready(function(){
-	studyLoad();
+	//studyLoad();
 	mapLoad();
 	$("#search-btn").click(function () {
 		page=1;
 		studyLoad();
 	});
+	
+		var params = { "bigCategory":bigCategory, "smallCategory":smallCategory};
+		$.ajax({
+			url:"<%=cp%>/study/list",
+			data : params,
+			dataType:"html",
+			success : function(data) {
+			$('.listContent').html(data);
+			}
+		});
 });
 function paging(paging) {
 	page = paging;
