@@ -54,6 +54,17 @@ function insertBoard(){
 		return false;
 	}
 	
+	var query = { "info":"리뷰글 작성", "value":30}
+	$.ajax({
+	   url:"<%=cp%>/point/update",
+	   data:query,
+	   type:"post",
+	   dataType:"json",
+	   success : function(data) {
+	     
+	   }
+	});
+	
 	f.action="<%=cp%>/review/created";
 	f.submit();
 	

@@ -113,6 +113,9 @@ input[id=allCheck]:checked + label:before {
    border: 1px solid #EAEAEA;
 }
 
+.coco:HOVER{
+background: #eee;
+}
            
 </style>
 <script>
@@ -172,26 +175,38 @@ function search(){
 	<table cellpadding="0" cellspacing="0" style="width:100%;" class="board_table array">
 		<tbody>	
 		<c:forEach var="dto" items="${list }">
-			<tr>			
+			<tr class="coco">			
 				<td class="___number">${dto.listNum }</td>
 				<td>
-					<div style="position:relative;">
+					<div style="position:relative; float: left; width: 500px; margin-top: 13px;">
 						
-						<a href="${articleUrl}&num=${dto.num}" class="subject">카테고리>${dto.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;성별>${dto.gender}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;대상>${dto.target }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정원>${dto.recruit }명&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;스터디명>${dto.studyName} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;제목>${dto.subject}</a><span class="comment">[${dto.replyCount}]</span>
+						<a href="${articleUrl}&num=${dto.num}" class="subject">${dto.subject}</a>
 					
-						 <c:if test="${dto.gap < 1}">
+					 
+						 <c:if test="${dto.gap < 3600}">
 			               <img src='<%=cp%>/resource/images/new.gif'>
 			             </c:if>
 			             
-						<div class="info">
-							<strong>작성일 </strong> <span class="dateWrap" title="[datetime]">${dto.created}</span>
+						<div class="info" style="">
+							<strong>카테고리| </strong><span>${dto.name }</span>
+							<span class="__dotted"></span>	
+							<strong>작성자| </strong><span>${dto.userName }</span>
 							<span class="__dotted"></span>
-							<strong>작성자 </strong><span>${dto.userName }</span>
+							<strong>성별| </strong><span>${dto.gender }</span>
 							<span class="__dotted"></span>
-							<strong>조회수 </strong><span>${dto.hitCount}</span>
+							<strong>대상| </strong><span>${dto.target }</span>
+							<span class="__dotted"></span>	
+							<strong>${dto.ago }</span>		
 						</div>
 						
 					</div>	
+					<div style="float: right; margin-top: 10px;">
+						<div style="border: 1px solid #e2e2e2; width: 57px; height: 55px; float: left; text-align: center; padding: 3px;">${dto.hitCount }<br>view</div>
+			             <div style="border: 1px solid #e2e2e2; width: 57px; height: 55px; float: left; margin-left: 10px; text-align: center; padding: 3px;">${dto.replyCount }<br>reply</div>
+			             <div style="border: 1px solid #e2e2e2; width: 57px; height: 55px; float: left; margin-left: 10px; text-align: center; padding: 3px;">${dto.recruit }<br>member</div>
+					</div>
+					
+		
 				</td>		
 			</tr>
 			</c:forEach>

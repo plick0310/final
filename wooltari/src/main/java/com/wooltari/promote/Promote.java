@@ -20,7 +20,17 @@ public class Promote {
 	
 	private long gap;
 	
+	private String ago;
 	
+	
+	
+	
+	public String getAgo() {
+		return ago;
+	}
+	public void setAgo(String ago) {
+		this.ago = ago;
+	}
 	public long getGap() {
 		return gap;
 	}

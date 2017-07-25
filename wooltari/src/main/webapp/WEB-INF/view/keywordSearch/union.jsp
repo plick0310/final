@@ -931,20 +931,20 @@ function readBoard(num){
 	<div style="padding-top: 50px; font-size: 17px; ">
 		<table class="tab_menu" style="width:100%; float: left; display: block; text-align: left;  border-bottom: 1px solid #e2e2e2; margin-bottom: 50px; ">
 			<tr>
-				<td style="height:50px; line-height:50px; border-bottom:2px solid #1abc9c;float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif;" data-tab="exam" ><a style="cursor: pointer; color: #1abc9c;"  onclick="location.href='<%=cp%>/keyword/search?keyword=${keyword }'">통합검색</a></td>
-				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/studySearch?keyword=${keyword }'">스터디</a></td>
-				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/promoteSearch?keyword=${keyword }'">홍보</a></td>
-				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/reviewSearch?keyword=${keyword }'">리뷰</a></td>
-				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/marketSearch?keyword=${keyword }'">스터디마켓</a></td>
-				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/whereSearch?keyword=${keyword }'">어디서하지</a></td>
-				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/downloadSearch?keyword=${keyword }'">다운로드</a></td>
-				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif"><a style="cursor: pointer;" onclick="location.href='<%=cp%>/keyword/downloadSearch?keyword=${keyword }'">중고장터</a></td>
+				<td style="height:50px; line-height:50px; border-bottom:2px solid #1abc9c;float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif;" data-tab="exam" onclick="" ><a style="cursor: pointer; color: #1abc9c;"  onclick="location.href='<%=cp%>/keyword/search?keyword=${keyword }'">통합검색</a></td>
+				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif" onclick="location.href='<%=cp%>/keyword/studySearch?keyword=${keyword }'"><a style="cursor: pointer;" onclick="">스터디</a></td>
+				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif" onclick="location.href='<%=cp%>/keyword/promoteSearch?keyword=${keyword }'"><a style="cursor: pointer;" onclick="">홍보</a></td>
+				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif" onclick="location.href='<%=cp%>/keyword/reviewSearch?keyword=${keyword }'"><a style="cursor: pointer;" onclick="">리뷰</a></td>
+				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif" onclick="location.href='<%=cp%>/keyword/marketSearch?keyword=${keyword }'"><a style="cursor: pointer;" onclick="">스터디마켓</a></td>
+				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif" onclick="location.href='<%=cp%>/keyword/whereSearch?keyword=${keyword }'"><a style="cursor: pointer;" onclick="">어디서하지</a></td>
+				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif" onclick="location.href='<%=cp%>/keyword/downloadSearch?keyword=${keyword }'"><a style="cursor: pointer;" onclick="">다운로드</a></td>
+				<td style="height:50px; line-height:50px; margin-left:30px; float: left; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif" onclick="location.href='<%=cp%>/keyword/downloadSearch?keyword=${keyword }'"><a style="cursor: pointer;" onclick="">중고장터</a></td>
 				
 			</tr>
 		</table>
 		
 	</div>
-	<h3 style="height:50px; position: relative; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif; color: #1abc9c; font-size: 23px;">'${keyword }'검색결과</h3>
+	<h3 style="height:50px; list-style-type: none; font-family: 'BareunDotum',gulim,helvetica,sans-serif; color: #1abc9c; font-size: 23px;">'${keyword }'검색결과</h3>
 			
 			<!-- 스터디 -->	
 			<c:if test="${studyCount!='0' }">		

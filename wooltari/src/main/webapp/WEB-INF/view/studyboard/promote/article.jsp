@@ -61,6 +61,18 @@ function insertReply(){
 		$("#content").focus();
 		return false;
 	}
+	
+	var query = { "info":"홍보댓글 작성", "value":10}
+	$.ajax({
+	   url:"<%=cp%>/point/update",
+	   data:query,
+	   type:"post",
+	   dataType:"json",
+	   success : function(data) {
+	     
+	   }
+	});
+	
 	var query="num="+num+"&content="+encodeURIComponent(content);
 	
 	$.ajax({
@@ -96,6 +108,17 @@ function deleteReply(prNum,pageNo){
 	if(!confirm("삭제하시겠습니까?")){
 		return;
 	}
+	
+	var query = { "info":"홍보댓글 삭제", "value":-30}
+	$.ajax({
+	   url:"<%=cp%>/point/update",
+	   data:query,
+	   type:"post",
+	   dataType:"json",
+	   success : function(data) {
+	     
+	   }
+	});
 	
 	var query="prNum="+prNum+"&page="+pageNo;
 	$.ajax({

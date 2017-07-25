@@ -10,11 +10,6 @@
 <style>
 
 
-
-.row {
-   margin-top: 50px;
-}
-
 .imagebox {
    width: 250px;
    height: 200px;
@@ -109,6 +104,17 @@ function insertStar() {
 	if(!confirm(msg)){
 		return;
 	}
+	
+	var query = { "info":"리뷰평점추가", "value":10}
+	$.ajax({
+	   url:"<%=cp%>/point/update",
+	   data:query,
+	   type:"post",
+	   dataType:"json",
+	   success : function(data) {
+	     
+	   }
+	});
 		
 	var url="<%=cp%>/review/insertStar"
 		
@@ -160,6 +166,17 @@ function deleteBoard(){
 	
 	if(confirm("글을 삭제하시겠습니까?"))
 		location.href=url;
+	
+	var query = { "info":"리뷰글 삭제", "value":-30}
+	$.ajax({
+	   url:"<%=cp%>/point/update",
+	   data:query,
+	   type:"post",
+	   dataType:"json",
+	   success : function(data) {
+	     
+	   }
+	});
 	
 }
 
