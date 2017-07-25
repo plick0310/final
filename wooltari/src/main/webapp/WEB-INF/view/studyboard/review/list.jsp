@@ -216,8 +216,8 @@ function deleteBoard(){
 <c:if test="${dto.range=='0' }"><div style="margin-top: 10px;">[전체공개][${dto.category }]</div></c:if>
 <c:if test="${dto.range=='1' }"><div style="margin-top: 10px;">[멤버공개][${dto.category }]</div></c:if>
 <div class='price' style="bottom: 10px; right: 10px; color: #3e92d6; font-size: 18px; line-height: 19px; position: absolute;">
-<span style="color: #3e92d6; font-size: 12px; ">
-	<c:if test="${dto.star =='5'}">
+			<span style="color: #3e92d6; font-size: 12px; ">
+							<c:if test="${dto.star =='5'}">
 								<i class="glyphicon glyphicon-star" style="color: #1abc9c;"></i>
 								<i class="glyphicon glyphicon-star" style="color: #1abc9c;"></i>
 								<i class="glyphicon glyphicon-star" style="color: #1abc9c;"></i>
@@ -259,7 +259,7 @@ function deleteBoard(){
 								<i class="glyphicon glyphicon-star-empty" style="color: #1abc9c;"></i>
 								<i class="glyphicon glyphicon-star-empty" style="color: #1abc9c;"></i>
 							</c:if>
-</span>
+			</span>
 </div>
 </div>
 
@@ -283,9 +283,9 @@ function deleteBoard(){
 <!-- Modal --> 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
   <div class="modal-dialog">
-    <div class="modal-content" style="padding: 15px;">
-      <div id="myModalBody" class="modal-body" style="height: 500px; "></div>
-      <div class="modal-footer" style="margin-top: -5px;">
+    <div class="modal-content" style="margin-left: -223px; width: 900px; height: 900px;">
+      <div id="myModalBody" class="modal-body" style="height: 845px; "></div>
+      <div class="modal-footer" style="padding-top: 66px;">
       		
          <button type="button" class="btn btn-default" style="width: 65px; height: 30px; background: #1abc9c; padding-top: 3px; padding-left: 13px;" onclick="deleteBoard();">삭제</button>
        
