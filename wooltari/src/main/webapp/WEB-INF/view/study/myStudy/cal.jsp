@@ -94,6 +94,7 @@ $(document).ready(function() {
 	    	var sdate=start.format();
 			var edate=end.add("-1","days").format();
 	    	
+	    	
 	        createdForm(sdate,edate);
 	    }
 	    /* events:[
@@ -128,7 +129,11 @@ $(document).ready(function() {
 			    	console.log(e.responseText);
 			    }
 			});
-		}    
+		
+		  
+		 }
+      
+
 		});
 	
 	//이전 달 버튼 클릭
@@ -181,6 +186,7 @@ function createdForm(sdate,edate){
 	if(! userId){
 		alert("로그인하세요");
 		$("#myModal").modal("hide");
+		
 		return;
 	} 
 	
@@ -193,6 +199,7 @@ function createdForm(sdate,edate){
 		,success:function(data){
 			$("#myModalBody").html(data);//주소일때는 load/ html일때는 html
 	    	$("#myModal").modal("show");
+	    	
 		}
 		,error:function(e){
 			console.log(e.responseText);
@@ -217,6 +224,7 @@ function insertBoard(){
 			var month=data.month;
 			if(data.state=="true"){
 				 $("#calendar").fullCalendar("refetchEvents");//새로고침
+				 $("a.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end").css("background-color",'rgb(26, 188, 11)');
 				listPage(1);
 	
 			}else{
@@ -350,9 +358,9 @@ overflow: none;
 </style>
 
 
-<div id='calendar' style=" width:100%; float: left; "></div> 
+<div id='calendar' style=" width:90%; float: left; margin-bottom: 30px;"></div> 
 
-<div id='listCalendar' style="width:95%;"></div>
+<div id='listCalendar' style="width:90%; float:left;"></div>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
   <div class="modal-dialog">
