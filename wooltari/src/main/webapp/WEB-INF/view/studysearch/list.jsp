@@ -199,11 +199,13 @@ function moveXY(s_num) {
 						<div class="header-bg" style="background-image:url(<%=cp%>/uploads/member/userImg/${dto.imageFileName})">
 						</div>
 						<div class="header-text-container">
+							<%-- 
 							<c:forEach var="category" items="${dto.listCategory}"> 
 							<div class="isPayment">
 								${category.subject}
 							</div>
 							</c:forEach>
+							 --%>
 							<div class="header-text align-left">
 								<div class="title-wrap">
 									<div class="title">
@@ -211,8 +213,15 @@ function moveXY(s_num) {
 									</div>
 								</div>
 								<div class="tag">
+									<c:forEach var="category" items="${dto.listCategory}">
+										<p><span class="last">#${category.subject}</span></p>
+									</c:forEach>
+								</div>
+								<%-- 
+								<div class="tag">
 									<span class="last">${dto.study_Info}</span>
 								</div>
+								 --%>
 							</div>
 						</div>
 						<div class="item-contents align-left">
