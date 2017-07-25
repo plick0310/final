@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="point">
+	
+	<!-- 보기 조건 -->
+	<sql id="mode-list">
+    	<if test="mode=='all'">
+		</if>
+		<if test="mode=='increase'">
+		AND value > 0
+		</if>
+		<if test="mode=='decrease'">
+		AND 0 > value
+		</if>
+    </sql>
+	
+	<insert id="insertLog" parameterType="map">
+	INSERT INTO memberpoint(userId, value, info)
+	VALUES (#{userId}, #{value}, #{info})	
+	</insert>
+	<update id="updatePoint" parameterType="map">
+	
+	</update>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+	SELECT NVL(COUNT(*),0)
+	FROM memberpoint mp
+	JOIN member m
+	ON mp.userId = m.userId
+	WHERE mp.userId = #{userId}
+	<include refid="mode-list"/>
+	</select>
+	
+	<select id="listLog" parameterType="map" resultType="com.wooltari.point.Point">
+	SELECT * FROM(
+		SELECT ROWNUM rnum, tb.* FROM(
+				SELECT term, value, info
+				FROM memberpoint mp
+				JOIN member m ON mp.userId = m.userId
+				WHERE mp.userId = #{userId}
+				<include refid="mode-list"/> 
+				ORDER BY term DESC
+	<![CDATA[
+			)tb WHERE ROWNUM <=#{end}
+		)WHERE rnum>= #{start}
+	]]>
+	</select>
+	
+</mapper>

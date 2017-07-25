@@ -463,7 +463,7 @@ function searchMsg() {
 		
 		<div class="inbox-body">
 			<div class="content">
-			<!-- 여기가 쪽지 리스트 -->
+			<!-- content -->
 			</div>
 		</div>
 	</aside>

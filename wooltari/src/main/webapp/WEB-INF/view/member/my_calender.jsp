@@ -5,254 +5,6 @@
 <%
 	String cp=request.getContextPath();
 %>
-<style>
-.form-horizontal {
-	padding: 10px;
-}
-.modal-dialog {
-	width: 600px;
-	height: 600px;
-    margin: 5% auto;
-}
-.body-box {
-	min-height:800px;
-    border-collapse: collapse;
-    border-spacing: 0;
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-}
-.body-box aside {
-    display: table-cell;
-    float: none;
-    height: 100%;
-    padding: 0;
-    vertical-align: top;
-}
-.body-box .sm-side {
-    background: none repeat scroll 0 0 #e5e8ef;
-    border-radius: 4px 0 0 4px;
-    width: 25%;
-}
-.body-box .lg-side {
-    background: none repeat scroll 0 0 #fff;
-    border-radius: 0 4px 4px 0;
-    width: 75%;
-}
-.body-box .sm-side .user-head {
-    background: none repeat scroll 0 0 #029e81;
-    border-radius: 4px 0 0;
-    color: #fff;
-    min-height: 80px;
-    padding: 10px;
-}
-.user-head .inbox-avatar {
-    float: left;
-    width: 65px;
-}
-.user-head .inbox-avatar img {
-    border-radius: 4px;
-}
-.user-head .user-name {
-    display: inline-block;
-    margin: 0 0 0 10px;
-}
-.user-head .user-name h5 {
-    font-size: 14px;
-    font-weight: 300;
-    margin-bottom: 0;
-    margin-top: 15px;
-}
-.user-head .user-name h5 a {
-    color: #fff;
-}
-.user-head .user-name span a {
-    color: #87e2e7;
-    font-size: 12px;
-}
-a.mail-dropdown {
-    background: none repeat scroll 0 0 #80d3d9;
-    border-radius: 2px;
-    color: #01a7b3;
-    font-size: 10px;
-    margin-top: 20px;
-    padding: 3px 5px;
-}
-.btn-compose {
-    background: none repeat scroll 0 0 #ff6c60;
-    color: #fff;
-    padding: 12px 0;
-    text-align: center;
-    width: 100%;
-}
-.btn-compose:hover {
-    background: none repeat scroll 0 0 #f5675c;
-    color: #fff;
-}
-ul.inbox-nav {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-.inbox-divider {
-    border-bottom: 1px solid #d5d8df;
-}
-ul.inbox-nav li {
-    display: inline-block;
-    line-height: 45px;
-    width: 100%;
-}
-ul.inbox-nav li a {
-    color: #6a6a6a;
-    display: inline-block;
-    line-height: 45px;
-    padding: 0 20px;
-    width: 100%;
-}
-ul.inbox-nav li a:hover, ul.inbox-nav li.active a, ul.inbox-nav li a:focus {
-    background: none repeat scroll 0 0 #d5d7de;
-    color: #6a6a6a;
-}
-ul.inbox-nav li a i {
-    color: #6a6a6a;
-    font-size: 16px;
-    padding-right: 10px;
-}
-ul.inbox-nav li a span.label {
-    margin-top: 13px;
-}
-ul.labels-info li h4 {
-    color: #5c5c5e;
-    font-size: 13px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 5px;
-    text-transform: uppercase;
-}
-ul.labels-info li {
-    margin: 0;
-}
-ul.labels-info li a {
-    border-radius: 0;
-    color: #6a6a6a;
-}
-ul.labels-info li a:hover, ul.labels-info li a:focus {
-    background: none repeat scroll 0 0 #d5d7de;
-    color: #6a6a6a;
-}
-ul.labels-info li a i {
-    padding-right: 10px;
-}
-.nav.nav-pills.nav-stacked.labels-info p {
-    color: #9d9f9e;
-    font-size: 11px;
-    margin-bottom: 0;
-    padding: 0 22px;
-}
-.inbox-head {
-    background: none repeat scroll 0 0 #1abc9c;
-    border-radius: 0 4px 0 0;
-    color: #fff;
-    min-height: 80px;
-    padding: 20px;
-}
-.inbox-head h3 {
-    display: inline-block;
-    font-weight: 300;
-    margin: 0;
-    padding-top: 6px;
-}
-.inbox-head .sr-input {
-    border: medium none;
-    border-radius: 4px 0 0 4px;
-    box-shadow: none;
-    color: #8a8a8a;
-    float: left;
-    height: 40px;
-    padding: 0 10px;
-}
-.inbox-head .sr-btn {
-    background: none repeat scroll 0 0 #00a6b2;
-    border: medium none;
-    border-radius: 0 4px 4px 0;
-    color: #fff;
-    height: 40px;
-    padding: 0 20px;
-}
-.table-inbox {
-    border: 1px solid #d3d3d3;
-    margin-bottom: 0;
-}
-.table-inbox tr td {
-    padding: 12px !important;
-}
-.table-inbox tr td:hover {
-    cursor: pointer;
-}
-.table-inbox tr td .fa-star.inbox-started, .table-inbox tr td .fa-star:hover {
-    color: #f78a09;
-}
-.table-inbox tr td .fa-star {
-    color: #d5d5d5;
-}
-.table-inbox tr.unread td {
-    background: none repeat scroll 0 0 #f7f7f7;
-    font-weight: 600;
-}
-.mail-option {
-    display: inline-block;
-    margin-bottom: 10px;
-    width: 100%;
-}
-.mail-option .chk-all, .mail-option .btn-group {
-    margin-right: 5px;
-}
-.mail-option .chk-all, .mail-option .btn-group a.btn {
-    background: none repeat scroll 0 0 #fcfcfc;
-    border: 1px solid #e7e7e7;
-    border-radius: 3px !important;
-    color: #afafaf;
-    display: inline-block;
-    padding: 5px 10px;
-}
-.mail-option .chk-all input[type="checkbox"] {
-    margin-top: 0;
-}
-.mail-option .btn-group a.all {
-    border: medium none;
-    padding: 0;
-}
-.inbox-body .modal .modal-body input, .inbox-body .modal .modal-body textarea {
-    border: 1px solid #e6e6e6;
-    box-shadow: none;
-}
-.btn-send, .btn-send:hover {
-    background: none repeat scroll 0 0 #00a8b3;
-    color: #fff;
-}
-.btn-send:hover {
-    background: none repeat scroll 0 0 #009da7;
-}
-.modal-header h4.modal-title {
-    font-family: "Open Sans",sans-serif;
-    font-weight: 300;
-}
-.modal-body label {
-    font-family: "Open Sans",sans-serif;
-    font-weight: 400;
-}
-ul {
-    list-style-type: none;
-    padding: 0px;
-    margin: 0px;
-}
-ul.inbox-pagination {
-    float: right;
-	font-size: 12px;
-	font-weight: 600;
-}
-</style>
 <script type="text/javascript">
 var s_num = ${studyList[0].s_num};
 
@@ -305,6 +57,7 @@ function reload(){
 		<div class="inbox-body">
 		</div>
 		
+		<div style="text-overflow:ellipsis; overflow:hidden">
 		<ul class="inbox-nav inbox-divider">
 			<!-- 
 			<li id="all" class="active">
@@ -326,16 +79,15 @@ function reload(){
 			</li>
 		</c:if>
 		</c:forEach>
-			
-		</ul>
+		</ul> 
+		</div>
 	</aside>
-	
 	
 	<aside class="lg-side">
 		
 		<div class="inbox-body">
 			<div class="content">
-			<!-- 여기가 쪽지 리스트 -->
+			<!-- content -->
 			</div>
 		</div>
 	</aside>
