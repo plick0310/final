@@ -37,12 +37,17 @@ public class SearchController {
 	private MyUtilBootstrap myUtil;
 
 	@RequestMapping(value="/study/search", method=RequestMethod.GET)
-	public String search(Model model, HttpSession session)throws Exception {
+	public String search(
+			@RequestParam(value="bigCategory", defaultValue="0") int bigCategory,
+			@RequestParam(value="smallCategory", defaultValue="0") int smallCategory,
+			Model model, HttpServletRequest req , HttpSession session
+			)throws Exception {
 		
 		List<StudyCategory> listBigCategory=studyService.listBigCategory();
 		
 		model.addAttribute("listBigCategory", listBigCategory);
-		
+		model.addAttribute("bigCategory", bigCategory);
+		model.addAttribute("smallCategory", smallCategory);
 		return ".studysearch.search";
 	}
 	
@@ -64,7 +69,7 @@ public class SearchController {
 				@RequestParam(value="searchValue", defaultValue="") String searchValue, 
 				Model model, HttpServletRequest req , HttpSession session
 			) throws Exception{
-		
+		System.out.println("bigCategory:"+bigCategory+"/smallCategory"+smallCategory);
 		String cp = req.getContextPath();
 		
 		int rows=12;
