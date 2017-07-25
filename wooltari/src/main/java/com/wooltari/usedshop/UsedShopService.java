@@ -15,5 +15,5 @@ public interface UsedShopService {
 	public UsedShop preReadUsedShop(Map<String, Object>map);
 	public UsedShop nextReadUsedShop(Map<String, Object>map);
 	public int updateUsedShop(UsedShop dto);
-	public int deleteUsedShop(int num,String pathname,String userId);
+	public int deleteUsedShop(int num,String userId);
 }

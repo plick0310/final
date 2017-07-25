@@ -44,15 +44,16 @@ public class UsedShopController {
 		@RequestParam(name="page",defaultValue="1") int current_page,
 		@RequestParam(name="searchKey",defaultValue="subject") String searchKey,
 		@RequestParam(name="searchValue",defaultValue="")String searchValue,
+		@RequestParam(name="bun",defaultValue="DESC")String bun,
 		HttpServletRequest req,
 		Model model
 		)throws Exception{
-	
+	System.out.println("================="+bun);
 	if(req.getMethod().equalsIgnoreCase("GET")) {
 		searchValue= URLDecoder.decode(searchValue, "UTF-8");
 	}
 	
-	int rows=9;
+	int rows=12;
 	int total_page=0;
 	int dataCount=0;
 	
@@ -60,6 +61,7 @@ public class UsedShopController {
 	Map<String, Object> map = new HashMap<>();
 	map.put("searchKey", searchKey);
 	map.put("searchValue", searchValue);
+	map.put("mode", bun);
 	
 	dataCount=service.dataCount(map);
 	if(dataCount!=0) {
@@ -165,7 +167,7 @@ public class UsedShopController {
 			@RequestParam(name="pointchk",defaultValue="0") int pointchk,
 		
 			UsedShop dto,HttpSession session)throws Exception {
-		System.out.println("============================");
+		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		if(info==null){
 			return "redirect:/member/login";
@@ -188,8 +190,8 @@ public class UsedShopController {
 		return "redirect:/community/usedshop/list";
 	}
 	
-/*
-	@RequestMapping(value="/studyboard/studywhere/article")
+
+	@RequestMapping(value="/community/usedshop/article")
 	public String article(
 				@RequestParam int num,
 				@RequestParam int page,
@@ -200,15 +202,12 @@ public class UsedShopController {
 		
 		searchValue=URLDecoder.decode(searchValue,"UTF-8");
 		
-		service.updateHitCount(num);
-		StudyWhere dto = service.readStudyWhere(num);
- #이제필요없음#	
-	if(dto==null) {
-			return "redirect:/bbs/list?page="+page;
-		}
+		
+		UsedShop dto = service.readUsedShop(num);
+
 
 		
-		dto.setContent(myUtil.htmlSymbols(dto.getContent()));
+/*		dto.setContent(myUtil.htmlSymbols(dto.getContent()));*/
 		
 		// 이전글, 다음글
 		Map<String, Object> map = new HashMap<>();
@@ -216,11 +215,9 @@ public class UsedShopController {
 		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
 		
-		StudyWhere preReadDto = service.preReadStudyWhere(map);
-		StudyWhere nextReadDto = service.nextReadStudyWhere(map);
+		UsedShop preReadDto = service.preReadUsedShop(map);
+		UsedShop nextReadDto = service.nextReadUsedShop(map);
 		
-		// 공감개수
-		int countLikeBoard=service.countLikeStudyWhere(num);
 		
 		String query="page="+page;
 		if(searchValue.length()!=0) {
@@ -233,12 +230,56 @@ public class UsedShopController {
 		model.addAttribute("query", query);
 		model.addAttribute("preReadDto", preReadDto);
 		model.addAttribute("nextReadDto", nextReadDto);
-		model.addAttribute("countLikeBoard", countLikeBoard);
+
 		
-		return ".studyboard.studywhere.article";
+		return ".community.usedshop.article";
 	}
 	
 	
+	@RequestMapping(value="/community/usedshop/purchase",method=RequestMethod.GET)
+	public String purchaseForm(Model model,HttpSession session) throws Exception{
+
+
+	
+		
+		
+		model.addAttribute("mode","purchase");
+		
+		return ".community.usedshop.purchase";
+	}
+	
+	/*@RequestMapping(value="/community/usedshop/purchase",method=RequestMethod.POST)
+	public String purchaseSubmit(
+			@RequestParam(name="smcate",defaultValue="0") int smcate,
+			@RequestParam(name="delchk",defaultValue="0") int delchk,
+			@RequestParam(name="pointchk",defaultValue="0") int pointchk,
+		
+			UsedShop dto,HttpSession session)throws Exception {
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		if(info==null){
+			return "redirect:/member/login";
+		}
+			
+				Map<String, Object> map = new HashMap<>();
+				map.put("price", price);
+				map.put("userId", info.getUserId());
+				map.put("category", smcate);
+				map.put("del", delchk);
+				map.put("pointuse", pointchk);
+				
+		dto.setPointuse(pointchk);
+		dto.setDel(delchk);
+		dto.setCategory(smcate);
+		dto.setUserId(info.getUserId());
+		service.insertUsedShop(dto);
+				
+		service.insertUsedShop(dto);
+		return "redirect:/community/usedshop/list";
+	}*/
+	
+
+	/*
 	@RequestMapping(value="/studyboard/studywhere/insertLikeStudyWhere",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> insertLikeStudyWhere(StudyWhere dto, HttpSession session) throws Exception {
@@ -261,9 +302,9 @@ public class UsedShopController {
 		model.put("state", state);
 		model.put("countLikeStudyWhere", countLikeStudyWhere);
 		return model;
-	}
+	}*/
 	
-	@RequestMapping(value="/studyboard/studywhere/update", method=RequestMethod.GET)
+	@RequestMapping(value="/community/usedshop/update", method=RequestMethod.GET)
 	public String updateForm(
 				@RequestParam int num,
 				@RequestParam String page,
@@ -275,23 +316,27 @@ public class UsedShopController {
 			return "redirect:/member/login";
 		}
 		
-		StudyWhere dto = service.readStudyWhere(num);
+		UsedShop dto = service.readUsedShop(num);
 		if(dto==null) {
-			return "redirect:/studyboard/studywhere/list?page="+page;
+			return "redirect:/community/usedshop/list?page="+page;
 		}
 		if(! info.getUserId().equals(dto.getUserId())) {
-			return "redirect:/studyboard/studywhere/list?page="+page;
+			return "redirect:/community/usedshop/list?page="+page;
 		}
+		List<UsedShop> listBigCategory=service.listbiccate();
+	
+		
+		model.addAttribute("listBigCategory", listBigCategory);	
 		model.addAttribute("dto",dto);
 		model.addAttribute("mode", "update");
 		model.addAttribute("page", page);
 		
-		return ".studyboard.studywhere.created";
+		return ".community.usedshop.created";
 	}
 	
-	@RequestMapping(value="/studyboard/studywhere/update",method=RequestMethod.POST)
+	@RequestMapping(value="/community/usedshop/update",method=RequestMethod.POST)
 	public String updateSubmit(
-			StudyWhere dto,
+			UsedShop dto,
 				@RequestParam String page,
 				HttpSession session) throws Exception {
 		
@@ -302,11 +347,27 @@ public class UsedShopController {
 		
 		
 
-		service.updateStudyWhere(dto);
+		service.updateUsedShop(dto);
 		
-		return "redirect:/studyboard/studywhere/list?page="+page;
+		return "redirect:/community/usedshop/list?page="+page;
 	}
 	
+
+	@RequestMapping(value="/community/usedshop/delete")
+	public String delete(
+				@RequestParam int num,
+				@RequestParam String page,
+				HttpSession session) throws Exception {
+		SessionInfo info=(SessionInfo) session.getAttribute("member");
+		if(info==null) {
+			return "redirect:/member/login";
+		}
+		
+		service.deleteUsedShop(num, info.getUserId());
+		
+		return "redirect:/community/usedshop/list?page="+page;
+	}
+	/*
 	@RequestMapping(value="/studyboard/studywhere/deleteFile", method=RequestMethod.GET)
 	public String deleteFile(
 				@RequestParam int num,
@@ -336,23 +397,6 @@ public class UsedShopController {
 		return "redirect:/studyboard/studywhere/update?num="+num+"&page="+page;
 	}
 	
-	@RequestMapping(value="/studyboard/studywhere/delete")
-	public String delete(
-				@RequestParam int num,
-				@RequestParam String page,
-				HttpSession session) throws Exception {
-		SessionInfo info=(SessionInfo) session.getAttribute("member");
-		if(info==null) {
-			return "redirect:/member/login";
-		}
-		
-		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"bbs";
-		
-		service.deleteStudyWhere(num, pathname, info.getUserId());
-		
-		return "redirect:/studyboard/studywhere/list?page="+page;
-	}
 	
 	
 

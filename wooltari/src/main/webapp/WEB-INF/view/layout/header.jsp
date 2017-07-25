@@ -141,7 +141,7 @@ $(function(){
 <div data-spy="scroll" data-target=".navbar" data-offset="80">
 	<div class="mainlogo">
 		<div class="mainimg">
-			<a href="<%=cp%>/"> <img alt="" src="<%=cp%>/resource/images/logofifi.png"></a>
+			<a href="<%=cp%>/"> <img alt="" src="<%=cp%>/resource/images/logofi2.png"></a>
 		</div>
 		
 	</div>
@@ -228,7 +228,7 @@ $(function(){
 
 				</ul>
 				<div class="col-lg-4"
-					style="margin-left: 70px; padding-right: 0px; width: 245px;">
+					style="padding-right: 0px;width: 245px; position: absolute; right: 130px;"> 
 					<form class="form-inline" style="margin: 7.5px;">
 					  <div class="form-group">
 					    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
@@ -302,10 +302,11 @@ $(function(){
 							<li><a style="     background: #eee;   font-weight: 100;        border-top: 1px solid #eee;    font-size: 13px;" href="<%=cp%>/admin/index">관리자 페이지</a></li>
 							</c:if>
 							<li><a style="     font-weight: 100;      border-top: 1px solid #eee;   font-size: 13px;" href="<%=cp%>/member/mypage?pageName=my_info">나의 정보/수정</a></li>
-							<li><a style="      background: #eee;  font-weight: 100;       border-top: 1px solid #eee;   font-size: 13px;" href="<%=cp%>/study/mylist">나의 스터디</a></li>
-							<li><a style="    font-weight: 100;        border-top: 1px solid #eee;   font-size: 13px;" href="<%=cp%>/member/mypage?pageName=my_msg">나의 쪽지함</a></li>
-							<li><a style="      background: #eee;  font-weight: 100;         border-top: 1px solid #eee;   font-size: 13px;" href="<%=cp%>/member/mypage?pageName=my_calender">나의 스케줄</a></li>
-							<li><a style="     font-weight: 100;     border-top: 1px solid #eee;   font-size: 13px;" href="javascript:sendlogout();">로그아웃</a></li>
+							<li><a style="     background: #eee; font-weight: 100;        border-top: 1px solid #eee;   font-size: 13px;" href="<%=cp%>/member/mypage?pageName=my_point">나의 포인트</a></li>
+							<li><a style="        font-weight: 100;       border-top: 1px solid #eee;   font-size: 13px;" href="<%=cp%>/study/mylist">나의 스터디</a></li>
+							<li><a style="   background: #eee; font-weight: 100;        border-top: 1px solid #eee;   font-size: 13px;" href="<%=cp%>/member/mypage?pageName=my_msg">나의 쪽지함</a></li>
+							<li><a style="      font-weight: 100;         border-top: 1px solid #eee;   font-size: 13px;" href="<%=cp%>/member/mypage?pageName=my_calender">나의 스케줄</a></li>
+							<li><a style="    background: #eee; font-weight: 100;     border-top: 1px solid #eee;   font-size: 13px;" href="javascript:sendlogout();">로그아웃</a></li>
 						</ul>
 					</c:if>
 				</div>

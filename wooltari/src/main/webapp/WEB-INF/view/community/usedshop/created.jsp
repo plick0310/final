@@ -174,7 +174,7 @@ border: 1px solid #EAEAEA;
 			</tr>
 			<tr>
 				<th><small>가격</small></th>
-				<td><input type="text" name="price" value="${dto.address }"
+				<td><input type="text" name="price" value="${dto.price }"
 					style="    width: 507px;" />
 					
 					
@@ -189,7 +189,7 @@ border: 1px solid #EAEAEA;
 			
 			<tr>
 				<th><small>배송비</small></th>
-				<td><input type="text" name="del" value="${dto.address }"
+				<td><input type="text" name="del" value="${dto.del==1?'무료배송':dto.del }"
 					style="    width: 507px;" />
 				
 					무료배송<input name="delchk" value="1" id="delchk" type="checkbox">
