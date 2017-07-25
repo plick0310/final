@@ -8,7 +8,7 @@ public class StudyInfo {
 	private long s_num;
 	private String userId ;
 	private String studyName, study_Info, created, gender; // 스터디명,스터디한줄소개,스터디생성일
-	private int recruit, range, memcnt;// 모집인원 , 스터디 공개 범위, 회원수
+	private int recruit, range, memcnt, star;// 모집인원 , 스터디 공개 범위, 회원수, 후기별점
 	
 	private String userName , userImg;
 	
@@ -31,6 +31,7 @@ public class StudyInfo {
 	
 	private MultipartFile upload;
 	private String imageFileName;
+	
 	
 	public long getS_num() {
 		return s_num;
@@ -85,6 +86,12 @@ public class StudyInfo {
 	}
 	public void setMemcnt(int memcnt) {
 		this.memcnt = memcnt;
+	}
+	public int getStar() {
+		return star;
+	}
+	public void setStar(int star) {
+		this.star = star;
 	}
 	public String getUserName() {
 		return userName;
@@ -182,7 +189,5 @@ public class StudyInfo {
 	public void setImageFileName(String imageFileName) {
 		this.imageFileName = imageFileName;
 	}
-	
-	
 	
 }

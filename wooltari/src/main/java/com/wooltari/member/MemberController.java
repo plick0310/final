@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.wooltari.point.PointService;
 import com.wooltari.study.StudyInfo;
 import com.wooltari.study.StudyService;
 
@@ -29,6 +30,9 @@ public class MemberController {
 	@Autowired
 	private StudyService sservice;
 
+	@Autowired
+    private PointService pservice;
+	
 	@RequestMapping(value="/member/login", method=RequestMethod.GET)
 	public String loginForm(
 			String error_code, Model model
@@ -104,6 +108,16 @@ public class MemberController {
 			model.addAttribute("message", "회원가입이 실패했습니다.");
 			return "main/msg";
 		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+	         map.put("userId", dto.getUserId()); //포인트를 적용시킬 유저 아이디
+	         map.put("value", 100); //추가 or 감소시킬 포인트양 (양수는 그냥 적으면되고 감소는 마이너스 붙임)
+	         map.put("info", "회원가입 축하 포인트"); //포인트 적용되는 이유(ex: 글 작성, 댓글 작성 등등..)
+	         pservice.insertLog(map); //서비스에서 insertLog를 호출하면 memberPoint 테이블에 로그가 insert 되면서 회원의 포인트가 적용 됨
+	      } catch (Exception e) {
+	         e.printStackTrace(); //포인트 적용 실패시 예외를 받는 곳(트랜잭션 처리함)
+	      }
 		model.addAttribute("message", "울타리의 회원이 되신것을 환영합니다.<br>마이페이지에서 추가정보를 입력하시면 원할한 서비스 이용이 가능합니다.");
 		return "main/msg";
 	}

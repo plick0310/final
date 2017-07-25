@@ -509,6 +509,7 @@ textarea{
 }
 
 .study-item .header-text-container {
+	padding-left: 5px; 
     width:100%;
     height:260px;
     max-height:220px;
@@ -670,14 +671,13 @@ textarea{
 }
 
 .study-item .header-text.align-left .title-wrap {
-    height:70%;
+    height:60%;
 }
 .study-item .header-text.align-left .title{
     font-size: 24px;
-    height: 70%;
-    padding-top: 65px;
+    height: 60%; 
+    padding-top: 40px;
     display: block;
-    display: -webkit-box;
     max-width: 100%;
     height: 136px;
     -webkit-line-clamp: 2;
@@ -691,7 +691,11 @@ textarea{
     top:0;
     bottom:0;
     left:0;
-    height:30%;
+    height:25%;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .study-item .item-contents.align-left{
@@ -737,13 +741,12 @@ textarea{
 }
 
 .study-item .header-text-container .isPayment{
-    position:absolute;
-    top:25px;
-    left: 25px;
+	margin:10px 0 0 2px;
+	display:inline-block;
     color:#fff;
-    font-size:12px;
+    font-size:14px;
     border:1px solid #fff;
-    padding:4px 6px;
+    padding:2px 2px;
 }
 
 /* list css */ 

@@ -3,48 +3,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="search">
 
-	<!-- 인원 조건 -->
-	<sql id="recruit-list">
-    	<if test="recruit==0">
-		AND recruit > 0
-		</if>
-    	<if test="recruit==2">
-		AND recruit = 2
-		</if>
-		<if test="recruit==3">
-		AND recruit = 3
-		</if>
-		<if test="recruit==4">
-		AND recruit = 4
-		</if>
-		<if test="recruit==5">
-		AND recruit = 5
-		</if>
-		<if test="recruit==6">
-		AND recruit = 6
-		</if>
-	</sql>
-	
-	<!-- 성별 조건 -->
-	<sql id="gender-list">
-		<if test="gender!=null and gender!=''">
-		</if>
-		<if test="gender=='여자'">
-		AND (gender = '여자' OR gender = '무관')
-		</if>
-		<if test="gender=='남자'">
-		AND (gender = '남자' OR gender = '무관')
-		</if>
-	</sql>
+    <!-- 인원 조건 -->
+    <sql id="recruit-list">
+        <if test="recruit==0">
+        AND recruit > 0
+        </if>
+        <if test="recruit==2">
+        AND recruit = 2
+        </if>
+        <if test="recruit==3">
+        AND recruit = 3
+        </if>
+        <if test="recruit==4">
+        AND recruit = 4
+        </if>
+        <if test="recruit==5">
+        AND recruit = 5
+        </if>
+        <if test="recruit==6">
+        AND recruit = 6
+        </if>
+    </sql>
 
-	<!-- 스터디명/스터디소개 검색 -->
-	<sql id="search-value">
-		<if test="searchValue != null and searchValue != ''">
-		AND ((studyName LIKE '%' || #{searchValue} || '%') OR (study_info LIKE '%' || #{searchValue} || '%'))
-		</if>
-	</sql>
-	
-	<!-- 카테고리 조건 -->
+    <!-- 성별 조건 -->
+    <sql id="gender-list">
+        <if test="gender!=null and gender!=''">
+        </if>
+        <if test="gender=='여자'">
+        AND (gender = '여자' OR gender = '무관')
+        </if>
+        <if test="gender=='남자'">
+        AND (gender = '남자' OR gender = '무관')
+        </if>
+    </sql>
+
+    <!-- 스터디명/스터디소개 검색 -->
+    <sql id="search-value">
+        <if test="searchValue != null and searchValue != ''">
+        AND ((studyName LIKE '%' || #{searchValue} || '%') OR (study_info LIKE '%' || #{searchValue} || '%'))
+        </if>
+    </sql>
+
+    <!-- 카테고리 조건 -->
     <sql id="category-value">
         <if test="bigCategory != 0">
         AND parent = #{bigCategory}
@@ -53,89 +53,89 @@
         AND choicecategory = #{smallCategory}
         </if>
     </sql>
-	
-	<!-- 대상 조건 -->
-	<sql id="target-value">
-		<if test="target != null and target != ''">
-		AND target = #{target}
-		</if>
-	</sql>
-	
-	<!-- 지역 조건 -->
-	<sql id="local-value">
-		<if test="choiceCity != null and choiceCity != ''">
-		AND DBMS_LOB.INSTR(choiceCity, #{choiceCity}) &gt; 0 
-		</if>
-	</sql>
-	
-	<!-- 정렬 조건 -->
-	<sql id="sort-value">
-		<if test="sort==0">
-		ORDER BY created DESC
-		</if>
-		<if test="sort==1">
-		ORDER BY created ASC
-		</if>
-		<if test="sort==2">
-		ORDER BY memcnt DESC
-		</if>
-		<if test="sort==3">
-		</if>
-	</sql>
-	
-	<!-- 리스트 개수 카운트 -->
-	<select id="dataCount" parameterType="map" resultType="Integer">
-	SELECT NVL(COUNT(*),0) AS studycnt
-	FROM(
-		SELECT DISTINCT s.s_num, s.userId, created, studyName , study_Info, gender, recruit, range, imageFilename, userName , userImg FROM
-		study s
-		JOIN member m ON s.userId = m.userId
-		JOIN studyCategory sc ON s.s_num = sc.s_num
-		JOIN s_category category ON sc.choicecategory = category.categorynum
-		JOIN studyTarget st ON s.s_num = st.s_num
-		JOIN studyLocal sl ON s.s_num = sl.s_num
-		WHERE s.s_num > 0
-		<include refid="local-value"/>
-		<include refid="target-value"/>
-		<include refid="category-value"/>
-		<include refid="recruit-list"/>
-		<include refid="gender-list"/>
-		<include refid="search-value"/>
-	)
-	</select>
-	<!-- 리스트 가져오기 -->
-	<select id="listSearch" parameterType="map" resultType="com.wooltari.study.StudyInfo">
-	SELECT * FROM (
-		SELECT ROWNUM rnum, tb.* FROM (
-			SELECT list.*, memcnt FROM(
-			(
-			SELECT DISTINCT s.s_num, s.userId, created, studyName , study_Info, gender, recruit, range, imageFilename, userName , userImg FROM
-			study s
-			JOIN member m ON s.userId = m.userId
-			JOIN studyCategory sc ON s.s_num = sc.s_num
-			JOIN s_category category ON sc.choicecategory = category.categorynum
-			JOIN studyTarget st ON s.s_num = st.s_num
-			JOIN studyLocal sl ON s.s_num = sl.s_num
-			WHERE s.s_num > 0
-			<include refid="local-value"/>
-			<include refid="target-value"/>
-			<include refid="category-value"/>
-			<include refid="recruit-list"/>
-			<include refid="gender-list"/>
-			<include refid="search-value"/>
-			)list
-			JOIN
-			(
-			SELECT sm.s_num, NVL(COUNT(*),0) AS memcnt FROM studyMember sm
-			JOIN study s ON sm.s_num = s.s_num
-			GROUP BY sm.s_num
-			)count
-			ON list.s_num = count.s_num
-			)
-			<include refid="sort-value"/>
-		<![CDATA[
-	        ) tb WHERE ROWNUM <= #{end}
-	    ) WHERE rnum >= #{start}
-	]]>
-	</select>
+
+    <!-- 대상 조건 -->
+    <sql id="target-value">
+        <if test="target != null and target != ''">
+        AND target = #{target}
+        </if>
+    </sql>
+
+    <!-- 지역 조건 -->
+    <sql id="local-value">
+        <if test="choiceCity != null and choiceCity != ''">
+        AND DBMS_LOB.INSTR(choiceCity, #{choiceCity}) &gt; 0
+        </if>
+    </sql>
+
+    <!-- 정렬 조건 -->
+    <sql id="sort-value">
+        <if test="sort==0">
+        ORDER BY created DESC
+        </if>
+        <if test="sort==1">
+        ORDER BY created ASC
+        </if>
+        <if test="sort==2">
+        ORDER BY memcnt DESC
+        </if>
+        <if test="sort==3">
+        </if>
+    </sql>
+
+    <!-- 리스트 개수 카운트 -->
+    <select id="dataCount" parameterType="map" resultType="Integer">
+    SELECT NVL(COUNT(*),0) AS studycnt
+    FROM(
+        SELECT DISTINCT s.s_num, s.userId, created, studyName , study_Info, gender, recruit, range, imageFilename, userName , userImg FROM
+        study s
+        JOIN member m ON s.userId = m.userId
+        JOIN studyCategory sc ON s.s_num = sc.s_num
+        JOIN s_category category ON sc.choicecategory = category.categorynum
+        JOIN studyTarget st ON s.s_num = st.s_num
+        JOIN studyLocal sl ON s.s_num = sl.s_num
+        WHERE s.s_num > 0
+        <include refid="local-value"/>
+        <include refid="target-value"/>
+        <include refid="category-value"/>
+        <include refid="recruit-list"/>
+        <include refid="gender-list"/>
+        <include refid="search-value"/>
+    )
+    </select>
+    <!-- 리스트 가져오기 -->
+    <select id="listSearch" parameterType="map" resultType="com.wooltari.study.StudyInfo">
+    SELECT * FROM (
+        SELECT ROWNUM rnum, tb.* FROM (
+            SELECT list.*, memcnt FROM(
+            (
+            SELECT DISTINCT s.s_num, s.userId, created, studyName , study_Info, gender, recruit, range, imageFilename, userName , userImg FROM
+            study s
+            JOIN member m ON s.userId = m.userId
+            JOIN studyCategory sc ON s.s_num = sc.s_num
+            JOIN s_category category ON sc.choicecategory = category.categorynum
+            JOIN studyTarget st ON s.s_num = st.s_num
+            JOIN studyLocal sl ON s.s_num = sl.s_num
+            WHERE s.s_num > 0
+            <include refid="local-value"/>
+            <include refid="target-value"/>
+            <include refid="category-value"/>
+            <include refid="recruit-list"/>
+            <include refid="gender-list"/>
+            <include refid="search-value"/>
+            )list
+            JOIN
+            (
+            SELECT sm.s_num, NVL(COUNT(*),0) AS memcnt FROM studyMember sm
+            JOIN study s ON sm.s_num = s.s_num
+            GROUP BY sm.s_num
+            )count
+            ON list.s_num = count.s_num
+            )
+            <include refid="sort-value"/>
+        <![CDATA[
+            ) tb WHERE ROWNUM <= #{end}
+        ) WHERE rnum >= #{start}
+    ]]>
+    </select>
 </mapper>

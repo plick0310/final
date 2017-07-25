@@ -46,11 +46,11 @@ $(function addMarker(){
 						'<div class="study-item-overlay"></div>',
 						'<div class="header-bg" style="background-image:url('+studyimg+')"></div>',
 						'<div class="header-text-container">',
-							'<div class="isPayment">',
-								<c:forEach var="category" items="${dto.listCategory}" end='0'>
-								'${category.p_subject} > ${category.subject}',
-								</c:forEach>
-							'</div>',
+							<c:forEach var="category" items="${dto.listCategory}">
+								'<div class="isPayment">',
+								'${category.subject}',
+								'</div>',
+							</c:forEach>
 							'<div class="header-text align-left">',
 								'<div class="title-wrap">',
 									'<div class="title">',
@@ -199,11 +199,11 @@ function moveXY(s_num) {
 						<div class="header-bg" style="background-image:url(<%=cp%>/uploads/member/userImg/${dto.imageFileName})">
 						</div>
 						<div class="header-text-container">
+							<c:forEach var="category" items="${dto.listCategory}"> 
 							<div class="isPayment">
-								<c:forEach var="category" items="${dto.listCategory}" end='0'>
-								${category.p_subject} > ${category.subject}
-								</c:forEach>
+								${category.subject}
 							</div>
+							</c:forEach>
 							<div class="header-text align-left">
 								<div class="title-wrap">
 									<div class="title">

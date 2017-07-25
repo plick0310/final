@@ -8,9 +8,9 @@
 <table class="table table-striped">
 <caption>포인트 이용내역</caption>
 <colgroup>
-<col width="110"/>
-<col width="243"/>
-<col width="242"/>
+<col width="100"/>
+<col width="300"/>
+<col width="100"/>
 </colgroup>
 <tr>
 	<th scope="col">발생일자</th>
