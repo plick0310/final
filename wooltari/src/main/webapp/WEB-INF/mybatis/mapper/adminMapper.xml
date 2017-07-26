@@ -29,8 +29,8 @@
 	<select id="listBoard" parameterType="map" resultType="com.wooltari.member.Member">
 		SELECT * FROM (
 		    SELECT ROWNUM rnum, tb.* FROM (
-			    SELECT userId, userName, point, enabled
-			       FROM member 
+			    SELECT m.userId, userName, point, enabled, birth, tel, zipcode, addr1, addr2
+			       FROM member m JOIN memberInfo i ON m.userId = i.userId
 					<where>
                          <if test="searchValue != null and searchValue != ''">
 			                  <include refid="where-list"/>

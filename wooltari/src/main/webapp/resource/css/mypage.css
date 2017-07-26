@@ -93,6 +93,15 @@
 }
 
 /* 탭 페이지 */
+.content {
+	padding: 10px;
+}
+#innerContent {
+	margin-top: 10px;
+}
+#innerFooter {
+	padding-top: 10px;
+}
 .form-horizontal {
 	padding: 10px;
 }

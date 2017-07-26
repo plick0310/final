@@ -17,7 +17,7 @@ textarea {
 	border-radius: 5px;
 	border: 1px solid #EAEAEA; 
 	
-}
+} 
 .clickbtn{
 background-color: white;
 border-style: solid;

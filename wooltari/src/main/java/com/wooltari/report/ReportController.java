@@ -107,7 +107,7 @@ public class ReportController {
 					data.setCategory("건의");
 					break;
 				case "reply":
-					data.setCategory("답글");
+					data.setCategory("Re");
 					break;
 				default:
 					break;

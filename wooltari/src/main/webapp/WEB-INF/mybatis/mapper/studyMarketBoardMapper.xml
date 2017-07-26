@@ -10,8 +10,8 @@
 
 	<!-- DB에 글 삽입  -->
 	<insert id="insertBoard" parameterType="com.wooltari.studyMarketBoard.StudyMarketBoard">
-		INSERT INTO studyMarketBoard(num, subject, content, userId, urlContent, startdate,enddate, address)
-		VALUES(studyMarketBoard_seq.NEXTVAL, #{subject}, #{content}, #{userId}, #{urlContent}, #{startdate},#{enddate}, #{address})	
+		INSERT INTO studyMarketBoard(num, subject, content, userId, urlContent)
+		VALUES(studyMarketBoard_seq.NEXTVAL, #{subject}, #{content}, #{userId}, #{urlContent})	
 	</insert>
 	
 	
@@ -156,8 +156,7 @@
 	
 	<!-- 수정  -->
 	<update id="updateBoard" parameterType="com.wooltari.studyMarketBoard.StudyMarketBoard">
-		UPDATE studyMarketBoard SET subject=#{subject}, content=#{content}, startdate=#{startdate}, enddate=#{enddate},
-				urlContent=#{urlContent}, address=#{address}				
+		UPDATE studyMarketBoard SET subject=#{subject}, content=#{content}, urlContent=#{urlContent}				
 				WHERE num=#{num}				 
 	</update>
 	

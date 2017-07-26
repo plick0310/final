@@ -288,7 +288,7 @@
 margin-left: 0;
 }
 
-#lable-li{
+.lable-li{
 position: absolute; height: 80px; margin:0px; font-size: 15px; font-weight: 700; color: #999; width: 80px; top: 0; border-radius: 0; height: 80px;
 }
 </style>
@@ -486,19 +486,13 @@ function createBoard() {
 			,dataType:"json"
 			,success:function(data){
 				
-			
+			 
 				$("#content2").val("");
 				$('#c_photo').show();
 				$('#plus_box').hide();
 				
-				for(var i=3; i < f.upload2.length+3;  i++ ){
-					$('#b_image'+i).removeAttr('src');
-					$('#b_image'+i).remove();
-					$("#uploadBtn"+i).val("");
-					$("#uploadBtn"+i).remove();
-				}
-				
-				idx=2;
+				location.href="<%=cp%>/study/myStudy/home/${s_num}";
+		
 				listPage(bbs_count);
 				
 				
@@ -508,6 +502,22 @@ function createBoard() {
 			alert(e.responsText);
 		}
 	});
+		
+		var query2 = { "info":"스터디 내 게시글 작성", "value":1}
+		   $.ajax({
+		      url:"<%=cp%>/point/update",
+		      data:query2,
+		      type:"post",
+		      dataType:"json",
+		      success : function(data) {
+		         var state = data.state;
+		         if(state == "true"){
+		          //  alert("포인트 적용 성공");
+		         }else{
+		         //   alert("포인트 적용 실패");
+		         }
+		      }
+		   });
 	}
 }
 
@@ -585,14 +595,13 @@ $(document).ready(function () {
 	
 	
 });
-var idx= 2;
+var idx= 2; 
 //이미지 미리보기
 $(function() {
 
-   /*  $("#uploadBtn2").on('change', function(){ */
   $("body").on("change", "input[name=upload2]", function(){
-	  idx++;
-
+	$('.lable-li').remove();
+	idx++;
 	var src = getFileExtension($(this).val());
 					if (!((src.toLowerCase() == "gif")
 							|| (src.toLowerCase() == "jpg") || (src
@@ -602,6 +611,7 @@ $(function() {
 					}
 
 				/* 	$("#uploadBtn2").empty(); */
+				
 					$(this).empty();
 					$('#c_photo').hide();
 					$('#plus_box').show();
@@ -614,7 +624,7 @@ $(function() {
 		
 					
 					var out2="";
-					out2+="<label for='uploadBtn"+idx+"' id='lable-li'>";
+					out2+="<label for='uploadBtn"+idx+"' class='lable-li'>";
 					out2+="<img alt='' src='<%=cp%>/resource/img/add.png' style='margin: 28px 0;'> </label>";
 					$('#plus_box').append(out2);
 					
@@ -629,8 +639,7 @@ function readURL2(input , idx) {
 			var reader = new FileReader();
 
 			reader.onload = function(e) {
-				
-				
+		
 				$('#b_image'+idx).show().attr('src', e.target.result);
 				
 				
@@ -693,17 +702,16 @@ function readURL2(input , idx) {
 									style="margin: 20px; overflow: hidden; position: relative; height: 80px;">
 
 									<div id="c_photo">
-										<label for="uploadBtn2" id="lable-li" style="margin:0px; width: 100%; mardisplay: inline-block; overflow: hidden; position: relative; height: 80px; font-size: 15px; font-weight: 700; color: #999;">
+										<label for="uploadBtn2" class="lable-li" style=" width: 100%; mardisplay: inline-block; overflow: hidden; position: relative; height: 80px; font-size: 15px; font-weight: 700; color: #999;">
 											<img id="a_image" alt="" src="<%=cp%>/resource/img/camera.png" style="width: 50px; height: 50px;"> <br>
 											<span style="color: #1abc9d;">사진 추가하기</span>
 										</label>
 									</div>
-
+									<input type="file" name="upload2" id="uploadBtn2" class="uploadBtn tts" style="opacity: 0; position: relative; width: 0px; margin: -15px;"> 
+					
 								
 										
-									<div id="plus_box" style="margin-left:10px; width: 80px; height: 80px; border: 1px solid #ccc; float: left; ">
-										
-									</div>
+									<div id="plus_box" style="margin-left:10px; width: 80px; height: 80px; border: 1px solid #ccc; float: left; "></div>
 									
 									
 								</div>
@@ -712,7 +720,6 @@ function readURL2(input , idx) {
 
 						</div>
 
-						<input type="file" name="upload2" id="uploadBtn2" class="uploadBtn tts" style="opacity: 0; position: relative; width: 0px; margin: -15px;">
 							
 						<!-- 	
 						<input type="file" name="upload2" id="uploadBtn3"

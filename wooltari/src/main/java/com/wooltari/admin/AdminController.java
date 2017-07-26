@@ -92,7 +92,7 @@ public class AdminController {
 			//articleUrl = cp + "/admin/member?page="+ current_page+"&"+query;
 		}
 		
-		String paging = myUtil.paging(current_page, total_page, listUrl);
+		String paging = myUtil.pagingMethod(current_page, total_page, "paging");
 		
 		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("page", current_page);

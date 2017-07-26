@@ -461,10 +461,8 @@ function searchMsg() {
 			</form>
 		</div>
 		
-		<div class="inbox-body">
-			<div class="content">
-			<!-- content -->
-			</div>
+		<div class="content">
+		<!-- content -->
 		</div>
 	</aside>
 </div>

@@ -22,7 +22,7 @@
     background-color: #1abc9c;
     /* border-color: #337ab7; */
     /* text-align: center; */
-}
+} 
 
 .pagination-sm > li > a, .pagination-sm > li > span {
     padding: 8px 9px;

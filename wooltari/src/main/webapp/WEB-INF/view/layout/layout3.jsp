@@ -14,6 +14,7 @@
 <meta charset="UTF-8">
 <title>Wooltari</title>
 
+<link rel="shortcut icon" href="<%=cp%>/resource/favicon.ico">
 <link rel="stylesheet" href="<%=cp%>/resource/css/bootstrap.css">
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/resource/css/header.css">
