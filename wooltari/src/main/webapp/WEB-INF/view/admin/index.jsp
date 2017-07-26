@@ -5,6 +5,7 @@
 <%
 	String cp=request.getContextPath();
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,11 +60,15 @@
 	<script type="text/javascript">
 	var mode = "dashboard";
 	var page = 1;
+	var searchKey = "userId";
 	var searchValue = "";
 	$(document).ready(function(){
 		pageload();
 		$("#side-menu li").click(function () {
 			mode = $(this).attr('id');
+			page=1;
+			searchKey = "userId";
+			searchValue = "";
 			$("#side-menu li").removeClass("active");
 			$(this).addClass("active");
 			pageload();
@@ -71,13 +76,19 @@
 	});
 	
 	function paging(paging) {
+		alert(paging);
 		page = paging;
-		reload();
+		pageload();
 	}
 
+	function search(){
+		searchKey=$('#searchKey').val();
+		searchValue=$('#searchValue').val();
+		pageload();
+	}
 	function pageload(){
 		$.ajax({
-			url:"<%=cp%>/admin/" + mode + "?page=" + page + "&searchValue=" + searchValue,
+			url:"<%=cp%>/admin/" + mode + "?page=" + page + "&searchKey=" + searchKey + "&searchValue=" + searchValue,
 			dataType:"html",
 			success : function(data) {
 			$('#page-wrapper').html(data);
@@ -234,10 +245,6 @@
             </ul>
             <!-- 우측 상단 드랍다운 메뉴 끝 -->
 
-
-
-
-
 			<!-- 좌측 사이드 메뉴 시작 -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -271,12 +278,10 @@
             <!-- 좌측 사이드 메뉴 끝 -->
         </nav>
         <!-- 우측/좌측 메뉴 끝 -->
-        
 	
         <div id="page-wrapper">
         <!-- 페이지가 들어가는 곳 -->
         </div>
-        
 
     </div>
     <!-- 페이지 끝 -->
