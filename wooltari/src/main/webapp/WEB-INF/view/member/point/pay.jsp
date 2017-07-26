@@ -39,10 +39,9 @@ function removeChar(event) {
 */
 //결제 요청
 function payRequest() {
-	alert($('#chk-price').val());
 	var payAmount = $('#chk-price:checked').val();
-	if(payAmount.length == 0){
-		alert("결제 금액을 입력해 주세요.")
+	if(payAmount == null){
+		alert("결제 상품을 선택해 주세요.")
 		return;
 	}
 	IMP.request_pay({
@@ -100,8 +99,6 @@ function payRequest() {
 			<li>충전 후, 사용하신 상품은 해지 및 취소/변경을 하실 수 없습니다.</li>
 			<li>포인트로만 제휴컨텐츠 이용이 가능합니다.</li>
 			<li>결제 환불 및 취소, 변경 하시는 경우 고객센터로 문의해주시기 바랍니다.</li>
-			<li>모든 상품은 결제시 부가세 10%가 포함됩니다.</li>
-			<li>결제 후 사용내역이 없을 경우 결제 월(月) 중 환불이 가능합니다.</li>
 		</ul>
 		
 		<table id="pointTable" class="table" style="margin-top: 20px;">

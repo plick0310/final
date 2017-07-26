@@ -183,20 +183,33 @@ public class PointController {
 			
 			//할인 적용 금액 계산
 			pointpay.setSaleprice(pointpay.getPrice()-(pointpay.getPrice()/pointpay.getSale()));
-			System.out.println(pointpay.getSale() + " / " + pointpay.getSaleprice());
+			
 			//포인트 충전량 계산
 			pointpay.setPoint(pointpay.getPrice()/10);
-						
+			int point = pointpay.getPoint();
+			System.out.println("충전량 계산 후의 충전 포인트 : " + point);
+			
+			//마일리지 추가 계산
+			int addpoint=0;
+			if(pointpay.getMileage() > 0){
+				pointpay.setPoint(pointpay.getPoint() + (pointpay.getPoint()/pointpay.getMileage()));
+				addpoint = pointpay.getPoint();
+				System.out.println("마일리지 추가 계산 후의 충전 포인트 : " + pointpay.getPoint());
+			}
+			
+			
 			map.put("userId", sessionInfo.getUserId()); //포인트를 적용시킬 유저 아이디
 			map.put("value", pointpay.getPoint()); //추가 or 감소시킬 포인트양 (양수는 그냥 적으면되고 감소는 마이너스 붙임)
-			map.put("info", pointpay.getPoint() + " 포인트 결제 [카드승인번호 : " + apply_num + "]"); //포인트 적용되는 이유(ex: 글 작성, 댓글 작성 등등..)
-
+			if(addpoint > 0){
+				map.put("info", point + " 포인트 결제(추가 적립 : " + (addpoint - point) + ") [카드승인번호 : " + apply_num + "]"); //포인트 적용되는 이유(ex: 글 작성, 댓글 작성 등등..)
+			}else{
+				map.put("info", point + " 포인트 결제 [카드승인번호 : " + apply_num + "]"); //포인트 적용되는 이유(ex: 글 작성, 댓글 작성 등등..)
+			}
 	         pservice.insertLog(map); //서비스에서 insertLog를 호출하면 memberPoint 테이블에 로그가 insert 되면서 회원의 포인트가 적용 됨
 	      } catch (Exception e) {
 	         e.printStackTrace(); //포인트 적용 실패시 예외를 받는 곳(트랜잭션 처리함)
 	      }
 		Map<String, Object> ajax = new HashMap<>();
-		ajax.put("state", "true");
 		ajax.put("state", "true");
 		return ajax;
 	}
