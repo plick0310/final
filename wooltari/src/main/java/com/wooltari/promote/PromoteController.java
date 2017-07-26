@@ -143,8 +143,7 @@ public class PromoteController {
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
-		if(info==null)
-			return "redirect:/main";
+	
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("userId", info.getUserId());
@@ -165,8 +164,7 @@ public class PromoteController {
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
-		if(info==null)
-			return "redirect:/main";
+		
 		
 		dto.setUserId(info.getUserId());
 		
@@ -186,8 +184,7 @@ public class PromoteController {
 			)throws Exception{
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		if(info==null)
-			return "redirect:/main";
+		
 		
 		service.updateHitCount(num);
 		
@@ -243,9 +240,7 @@ public class PromoteController {
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
-		if(info==null){
-			return "redirect:/main";
-		}
+		
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("userId", info.getUserId());
@@ -283,8 +278,7 @@ public class PromoteController {
 			)throws Exception{
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		if(info==null)
-			return "redirect:/main";
+		
 		
 		String root=session.getServletContext().getRealPath("/");
 		String pathname=root+File.separator+"uploads"+File.separator+"photo";
