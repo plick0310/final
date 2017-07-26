@@ -46,11 +46,6 @@ $(function addMarker(){
 						'<div class="study-item-overlay"></div>',
 						'<div class="header-bg" style="background-image:url('+studyimg+')"></div>',
 						'<div class="header-text-container">',
-							<c:forEach var="category" items="${dto.listCategory}">
-								'<div class="isPayment">',
-								'${category.subject}',
-								'</div>',
-							</c:forEach>
 							'<div class="header-text align-left">',
 								'<div class="title-wrap">',
 									'<div class="title">',
@@ -58,9 +53,9 @@ $(function addMarker(){
 									'</div>',
 								'</div>',
 								'<div class="tag">',
-									'<span class="last">',
-									'${dto.study_Info}',
-									'</span>',
+								<c:forEach var="category" items="${dto.listCategory}">
+									'<p><span class="last">#${category.subject}</span></p>',
+								</c:forEach>
 								'</div>',
 							'</div>',
 						'</div>',

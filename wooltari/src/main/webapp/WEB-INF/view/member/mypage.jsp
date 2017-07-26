@@ -7,6 +7,7 @@
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/mypage.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 <script type="text/javascript">
 var noreadCount = null;
 var pageName = '${pageName}';

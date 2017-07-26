@@ -27,7 +27,7 @@ function paging(paging) {
 
 function reload(){
 	$.ajax({
-		url:"<%=cp%>/point/log?mode=" + mode + "&page=" + page + "&searchValue=" + searchValue,
+		url:"<%=cp%>/point/"+ mode + "?&page=" + page + "&searchValue=" + searchValue,
 		dataType:"html",
 		success : function(data) {
 		$('.content').html(data);
