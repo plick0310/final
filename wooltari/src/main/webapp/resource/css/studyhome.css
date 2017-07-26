@@ -85,11 +85,11 @@ body .no-padding {
 	width: auto;
 }
 
-.status-upload ul>li ,#lable-li {
+.status-upload ul>li ,.lable-li {
 	float: left;
 }
 
-.status-upload ul>li>a ,#lable-li{
+.status-upload ul>li>a ,.lable-li{
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	-ms-border-radius: 4px;
@@ -111,7 +111,7 @@ body .no-padding {
 	cursor: pointer;
 }
 
-.status-upload ul>li>a:hover ,#lable-li:hover{
+.status-upload ul>li>a:hover ,.lable-li:hover{
 	background: none repeat scroll 0 0 #606060;
 	color: #fff;
 }
