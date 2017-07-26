@@ -2,12 +2,12 @@ package com.wooltari.point;
 
 import java.net.URLDecoder;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.sound.midi.MidiDevice.Info;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,8 +42,6 @@ public class PointController {
 			) throws Exception {
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		String cp = req.getContextPath();
-		
 		
 		int rows=15;
 		int total_page = 0;
@@ -75,7 +73,7 @@ public class PointController {
         map.put("start", start);
         map.put("end", end);
 		
-        // 쪽지 리스트
+        // 리스트
         List<Point> list = pservice.listLog(map);
         
         String paging = myUtil.pagingMethod(current_page, total_page, "paging");
@@ -124,11 +122,54 @@ public class PointController {
 		return ajax;
 	}
 	@RequestMapping(value="/point/pay", method=RequestMethod.GET)
-	public String payPoint(Model model, HttpSession session){
+	public String payPoint(
+			@RequestParam(value="page", defaultValue="1") int current_page,
+			Model model, HttpSession session
+			){
 		SessionInfo sessionInfo=(SessionInfo)session.getAttribute("member");
 		Member member = mservice.readMember(sessionInfo.getUserId());
 		
+		int rows=10;
+		int total_page = 0;
+		int dataCount = 0;
+		
+		dataCount = pservice.countPointPay();
+		
+		//개수가 0이 아니면 페이지 개수를 구함
+		if(dataCount != 0)
+			total_page = myUtil.pageCount(rows, dataCount);
+		//자료를 삭제하여 전체 페이지수가 변화 된 경우
+		if(total_page < current_page) 
+            current_page = total_page;
+		
+		//리스트에 출력할 데이터를 가져오기
+		Map<String, Object> map = new HashMap<String, Object>();
+        int start = (current_page - 1) * rows + 1;
+        int end = current_page * rows;
+        map.put("start", start);
+        map.put("end", end);
+        
+        //시작,끝값으로 리스트 가져오기
+		List<PointPay> pointList = pservice.listPointPay(map);
+		
+		Iterator<PointPay> it = pointList.iterator();
+		while(it.hasNext()){
+			PointPay pointpay = it.next();
+			//할인 적용 금액 계산
+			pointpay.setSaleprice(pointpay.getPrice()-(pointpay.getPrice()/pointpay.getSale()));
+			System.out.println(pointpay.getSale() + " / " + pointpay.getSaleprice());
+			//포인트 충전량 계산
+			pointpay.setPoint(pointpay.getPrice()/10);
+		}
+		
+		String paging = myUtil.pagingMethod(current_page, total_page, "paging");
+		
 		model.addAttribute("dto", member);
+		model.addAttribute("page", current_page);
+		model.addAttribute("pointList", pointList);
+		model.addAttribute("dataCount", dataCount);
+        model.addAttribute("total_page", total_page);
+        model.addAttribute("paging", paging);	
 		
 		return "member/point/pay";
 	}
@@ -138,14 +179,24 @@ public class PointController {
 		SessionInfo sessionInfo=(SessionInfo)session.getAttribute("member");
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-	         map.put("userId", sessionInfo.getUserId()); //포인트를 적용시킬 유저 아이디
-	         map.put("value", paid_amount); //추가 or 감소시킬 포인트양 (양수는 그냥 적으면되고 감소는 마이너스 붙임)
-	         map.put("info", "포인트 결제 [카드승인번호 : " + apply_num + "]"); //포인트 적용되는 이유(ex: 글 작성, 댓글 작성 등등..)
+			PointPay pointpay = pservice.readPointPay(paid_amount);
+			
+			//할인 적용 금액 계산
+			pointpay.setSaleprice(pointpay.getPrice()-(pointpay.getPrice()/pointpay.getSale()));
+			System.out.println(pointpay.getSale() + " / " + pointpay.getSaleprice());
+			//포인트 충전량 계산
+			pointpay.setPoint(pointpay.getPrice()/10);
+						
+			map.put("userId", sessionInfo.getUserId()); //포인트를 적용시킬 유저 아이디
+			map.put("value", pointpay.getPoint()); //추가 or 감소시킬 포인트양 (양수는 그냥 적으면되고 감소는 마이너스 붙임)
+			map.put("info", pointpay.getPoint() + " 포인트 결제 [카드승인번호 : " + apply_num + "]"); //포인트 적용되는 이유(ex: 글 작성, 댓글 작성 등등..)
+
 	         pservice.insertLog(map); //서비스에서 insertLog를 호출하면 memberPoint 테이블에 로그가 insert 되면서 회원의 포인트가 적용 됨
 	      } catch (Exception e) {
 	         e.printStackTrace(); //포인트 적용 실패시 예외를 받는 곳(트랜잭션 처리함)
 	      }
 		Map<String, Object> ajax = new HashMap<>();
+		ajax.put("state", "true");
 		ajax.put("state", "true");
 		return ajax;
 	}

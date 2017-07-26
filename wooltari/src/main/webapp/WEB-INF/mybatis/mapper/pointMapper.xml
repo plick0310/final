@@ -48,4 +48,47 @@
 	]]>
 	</select>
 	
+	
+	<!-- 포인트 결제 금액/할인율/마일리지 -->
+
+	<!-- 리드 -->
+	<select id="readPointPay" resultType="com.wooltari.point.PointPay" parameterType="Integer">
+	SELECT * FROM pointpay
+	WHERE price = #{price}
+	</select>
+	
+	<!-- 개수 -->
+	<select id="countPointPay" resultType="Integer">
+	SELECT NVL(COUNT(*),0)
+	FROM pointpay
+	</select>
+	
+	<!-- 리스트 -->
+	<select id="listPointPay" resultType="com.wooltari.point.PointPay" parameterType="map">
+	SELECT * FROM(
+		SELECT ROWNUM rnum, tb.* FROM(
+				SELECT price, sale, mileage
+				FROM pointpay
+				ORDER BY price ASC
+	<![CDATA[
+			)tb WHERE ROWNUM <=#{end}
+		)WHERE rnum>= #{start}
+	]]>
+	</select>
+	
+	<!-- 추가 -->
+	<insert id="insertPointPay" parameterType="map">
+	INSERT INTO pointpay (price, sale, mileage) VALUES (#{price}, #{sale, jdbcType=VARCHAR}, #{mileage, jdbcType=VARCHAR});
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="updatePointPay" parameterType="map">
+	UPDATE pointpay SET price=#{price},sale=#{sale},mileage=#{mileage}
+	</update>
+	
+	<!-- 삭제  -->
+	<delete id="deletePointPay" parameterType="map">
+	DELETE FROM pointpay WHERE price=#{price} 
+	</delete>
+	
 </mapper>

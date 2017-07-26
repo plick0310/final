@@ -5,11 +5,15 @@
 <%
 	String cp=request.getContextPath();
 %>
+<style>
 
+</style>
 <script type="text/javascript">
 //window.IMP 변수 초기화
 var IMP = window.IMP; //생략가능
 IMP.init('imp73997630'); //아임포트 회원가입 후 발급된 가맹점 고유 코드를 사용해주세요. 예시는 KCP공식 아임포트 데모 계정입니다.
+
+/* 
 //금액 문자 입력 제한
 function onlyNumber(event){
 	event = event || window.event;
@@ -19,7 +23,12 @@ function onlyNumber(event){
 	else
 		return false;
 }
+//금액 한글 입력 제한,충전 포인트 계산
 function removeChar(event) {
+	//포인트 계산
+	var pointAmount = $('#payAmount').val().trim();
+	$('#amount-point').text(pointAmoun/10 + " Point");
+	//한글 입력 제한
 	event = event || window.event;
 	var keyID = (event.which) ? event.which : event.keyCode;
 	if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
@@ -27,9 +36,11 @@ function removeChar(event) {
 	else
 		event.target.value = event.target.value.replace(/[^0-9]/g, "");
 }
+*/
 //결제 요청
 function payRequest() {
-	var payAmount = $('#payAmount').val().trim(); 
+	alert($('#chk-price').val());
+	var payAmount = $('#chk-price:checked').val();
 	if(payAmount.length == 0){
 		alert("결제 금액을 입력해 주세요.")
 		return;
@@ -39,7 +50,7 @@ function payRequest() {
 	    pay_method : 'card', //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
 	    merchant_uid : 'Wooltari_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
 	    name : 'WooltariPoint',
-	    amount : $('#payAmount').val(),
+	    amount : payAmount,
 	    buyer_email : '${dto.userId}',
 	    buyer_name : '${dto.userName}',
 	    buyer_tel : '${dto.tel}',
@@ -80,5 +91,70 @@ function payRequest() {
 	});
 }
 </script>
-<input type="text" id="payAmount" placeholder="결제할 포인트 입력" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)">
-<input type="button" onclick="payRequest();" value="결제요청">
+<!-- 충전금액 선택 -->
+<div id="innerSection">
+	<div id="innerTitle">포인트 충전</div>
+	<div id="innerContent">
+		<p>결제상품 이용안내</p>
+		<ul style="list-style: circle; margin-left: 30px;">
+			<li>충전 후, 사용하신 상품은 해지 및 취소/변경을 하실 수 없습니다.</li>
+			<li>포인트로만 제휴컨텐츠 이용이 가능합니다.</li>
+			<li>결제 환불 및 취소, 변경 하시는 경우 고객센터로 문의해주시기 바랍니다.</li>
+			<li>모든 상품은 결제시 부가세 10%가 포함됩니다.</li>
+			<li>결제 후 사용내역이 없을 경우 결제 월(月) 중 환불이 가능합니다.</li>
+		</ul>
+		
+		<table id="pointTable" class="table" style="margin-top: 20px;">
+			<colgroup>
+				<col width="50">
+				<col width="100">
+				<col width="150"> 
+				<col width="150">
+				<col width="200">
+				<col width="150">
+			</colgroup>
+				<tr>
+					<th scope="col"></th>
+					<th scope="col">판매금액</th>
+					<th scope="col">할인률</th>
+					<th scope="col">할인적용금액</th>
+					<th scope="col">적립포인트</th>
+					<th scope="col">마일리지</th>
+				</tr>
+			<tbody>
+				<c:forEach var="dto" items="${pointList}">
+					<tr class="point">
+					
+						<!-- 라디오버튼 -->
+						<td class="check"><input type="radio" name="point" id="chk-price" class="input-radio" value="${dto.price}"></td>
+						
+						<!-- 결제가격 -->
+						<td class="price">${dto.price}</td>
+
+						<!-- 할인율 -->
+						<td class="sale">${dto.sale}%</td>
+						
+						<!-- 할인 적용 금액 -->
+						<td class="saleprice">${dto.saleprice}</td>
+						
+						<!-- 실제 적립 포인트 -->
+						<td class="point"><strong>${dto.point} P</strong></td>
+						
+						<!-- 마일리지 추가적립 -->
+						<c:if test="${dto.mileage != 0}">
+						<td class="mileage">${dto.mileage}% 추가적립</td>
+						</c:if>
+						<c:if test="${dto.mileage == 0}">
+						<td class="mileage">-</td>
+						</c:if>
+						
+					</tr>
+				</c:forEach>
+			</tbody> 
+		</table>
+	</div>
+	<div id="innerFooter" style="float: right;">
+		<input type="button" onclick="payRequest();" value="결제요청">
+	</div>
+</div>
+

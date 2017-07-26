@@ -132,7 +132,6 @@ public class SearchController {
         
         
         String paging = myUtil.pagingMethod(current_page, total_page, "paging");
-        System.out.println("recruit : " + recruit + " / page : " + current_page + " / searchValue : " + searchValue);
         
         model.addAttribute("list", list);
         model.addAttribute("articleUrl", articleUrl);
