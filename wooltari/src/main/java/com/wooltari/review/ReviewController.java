@@ -88,9 +88,7 @@ public class ReviewController {
 	public String createdForm(Model model, HttpSession session)throws Exception{
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		if(info==null){
-			return "redirect:/main";
-		}
+		
 		Map<String, Object> map=new HashMap<>();
 		map.put("userId", info.getUserId());
 		List<Review> list=service.pushStudy(map);
@@ -108,8 +106,7 @@ public class ReviewController {
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
-		if(info==null)
-			return "redirect:/main";
+		
 		
 
 		dto.setUserId(info.getUserId());
@@ -198,8 +195,7 @@ public class ReviewController {
 			)throws Exception{
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		if(info==null)
-			return "redirect:/main";
+		
 		
 		Review dto=service.readBoard(num);
 		if(dto==null){
