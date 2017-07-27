@@ -13,11 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wooltari.member.SessionInfo;
+import com.wooltari.point.PointService;
 
 
 
 @Controller("community.playZone.playZoneController")
 public class PlayZoneController {
+	//컨트롤러 상단에 PointService 선언
+    @Autowired
+    private PointService pservice;
 	
 	@Autowired
 	private PlayZoneService service;
@@ -56,15 +60,24 @@ public class PlayZoneController {
 			@RequestParam(name="hid", defaultValue="")Integer coin,
 			HttpSession session
 			)throws Exception{
-	
+		int poi=0;
+		int change=0;
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-			
+		
+		Map<String, Object> smap=new HashMap<>();
+		smap.put("userId", info.getUserId());
+		poi=service.pointlist(smap);
+		change = coin-poi;
+		Map<String, Object> pmap = new HashMap<String, Object>();
+		pmap.put("userId", info.getUserId());
+		pmap.put("value", change);
+        pmap.put("info", "룰렛"); 
+        pservice.insertLog(pmap); 
 		Map<String, Object> map=new HashMap<>();
 		map.put("userId", info.getUserId());
 		map.put("point", coin);
 		
 		service.pointupdate(map);
-		
 		Map<String, Object> model = new HashMap<>();
 		model.put("state", "true");
 		

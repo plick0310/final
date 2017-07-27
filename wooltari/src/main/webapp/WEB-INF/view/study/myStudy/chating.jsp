@@ -40,7 +40,7 @@
     text-align: left;
     padding: 5px 5px 5px 5px;
 
-    box-shadow: 0px 0px 10px #e1e1e1;
+
 }
 
 #chatMsgContainer{
@@ -635,7 +635,7 @@ function writeToScreen(message) {
     </div>
     
     <div style="clear: both;">
-        <div style="float: left; width: 300px;">
+        <div style="float: left; width: width: 421px;;">
             <div style="clear: both; padding-bottom: 5px;">
                 
                 <span style="font-weight: 600; color: #424951;">List</span>

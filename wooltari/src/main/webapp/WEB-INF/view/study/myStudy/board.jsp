@@ -291,6 +291,11 @@ margin-left: 0;
 .lable-li{
 position: absolute; height: 80px; margin:0px; font-size: 15px; font-weight: 700; color: #999; width: 80px; top: 0; border-radius: 0; height: 80px;
 }
+#imgloa{
+width: 50px;
+height: 50px;
+margin: 0 auto;
+}
 </style>
 
 
@@ -566,7 +571,7 @@ $(document).ready(function () {
 				if(submit_chk == true) {
 			    	submit_chk = false;		// 이벤트가 실행될때 false로 변경해주어 이중실행이 되지 않게 막는다.
 			    	/* 로딩중 이미지 띄움 */
-			    	$('#image_loading').html('<img src="<%=cp%>/resource/img/loading.gif">');
+			    	$('#image_loading').html('<img id="imgloa" src="<%=cp%>/resource/img/loading.gif">');
 			    	bbs_count = parseInt(bbs_count) + 5;
 			    	/* 로딩 대기 시간 */
 			    	setTimeout(function() {
@@ -745,4 +750,5 @@ function readURL2(input , idx) {
     </ul>
 </div>
 
-<div id="image_loading"></div>
+<div id="image_loading" style="    width: 50px;
+    margin: 0 auto;"></div>

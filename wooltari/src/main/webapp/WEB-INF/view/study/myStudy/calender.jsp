@@ -232,10 +232,10 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
 
 </style>
 
-
+ 
 <div id='wrap'>
 
-<div id='calendar'></div>
+<div><div id='calendar'></div></div>
 
 <div style='clear:both'></div>
 </div>

@@ -78,10 +78,10 @@ function deleteList(){
 }
 
 </script>
-</script>
+<div>
 <div class="container" style="height: 50px; font-size: 20px; text-align: auto;">
 	<form action="" id="array_form" name="searchForm" method="post" style="    margin-top: 212px; width:900px; width: 900px;
-    margin: 193px 100px;">
+    margin: 193px 100px 0;">
 			<c:forEach var="dto" items="${list}">
 				 <div class="panel panel" style="box-shadow:1px;">
 				    <div class="panel-heading" role="tab" id="heading${dto.listNum}">
@@ -134,4 +134,5 @@ function deleteList(){
 		</div>
 	</form>
 			 
+</div>
 </div>
