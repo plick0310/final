@@ -32,6 +32,8 @@
 		
 		<intercept-url pattern="/member/login" access="permitAll"/>
 		<intercept-url pattern="/member/member" access="permitAll"/>
+		<intercept-url pattern="/member/join" access="permitAll"/>
+		<intercept-url pattern="/member/join_submit" access="permitAll"/>
 		<intercept-url pattern="/member/userIdCheck" access="permitAll"/>
 		<intercept-url pattern="/resource/**" access="permitAll"/>
 
