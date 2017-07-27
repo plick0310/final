@@ -215,10 +215,10 @@ public class StudyController {
 	        	List<StudyCategory> categoryList = service.readMyCategory(data.getS_num());
 	        	List<StudyLocal> localList= service.readMyLocal(data.getS_num());
 	        	data.setListCategory(categoryList);
-	        	data.setListLocal(localList);
+	          	data.setListLocal(localList);
 	        }
-	        
-	        
+	  
+	             
 		model.addAttribute("Mylist",list);	
 		model.addAttribute("Mylist2",list2);	
 		

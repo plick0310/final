@@ -29,7 +29,7 @@
   width: 50%;
   float: left;
   clear: left;
-  margin-left: 0;
+  margin :0;
 }
 .timeline > li:before,
 .timeline > li:after {
@@ -308,7 +308,7 @@ $(document).ready(function(){
    for(i=0;i<my_posts.length;i++){
       the_post = $(my_posts[i]);
 
-      if(the_post.hasClass('invert') && size >=767 ){
+      if(the_post.hasClass('invert') && size >=536 ){
          the_post.tooltip({ placement: 'left'});
          the_post.css("cursor","pointer");
       }else{
@@ -326,7 +326,7 @@ var dataCount =${dataCount};
 
 $(function(){
 	
-	listPage('5');
+	listPage('6');
 	$('#b_image').hide();
 	$('#plus_box').hide();
 	
@@ -431,10 +431,10 @@ function printBoard(data){
 		
 			if(num%2==0){
 				out+=" <li  class='timeline-inverted'>";
-			}
+			 }
 			else{
 				out+= 	"<li>";
-			}
+			} 
 			out+=    "<div class='timeline-badge primary'>" ;
 			out+=	"			<a><i  class='glyphicon glyphicon-record' rel='tooltip' title="+created+" id=''></i></a> " ;
 			out+=	"		</div><div class='timeline-panel'>" ;
@@ -468,7 +468,7 @@ function printBoard(data){
 			out+=	"	<div class='well' id='listReply_" +num+ "'></div>";
 			out+=	" </div></div></div></li> ";
 	
-			out+="<li class='clearfix' style='float: none; height:30px;'></li>"
+			out+="<li class='clearfix' style='float: none; margin-top: 0px; height:100px;'></li>"
 			}
 		}
 		$("#listBoard").html(out);
@@ -477,8 +477,12 @@ function printBoard(data){
 	
 	
 function createBoard() {
-	if(confirm("게시물을 등록하시겠습니까 ?")){
-		//var query =$("form[name=createForm]").serialize(); //폼태그내 자동 인코더
+	if(${state==false}){
+		alert("스터디 가입후 작성 가능합니다.");
+		$("#content2").val("");
+		return;
+	}
+	
 		var f= document.createForm;
 		var query = new FormData(f); //파일처리
 		//alert(f.upload2.value);
@@ -490,15 +494,11 @@ function createBoard() {
 			,data : query
 			,dataType:"json"
 			,success:function(data){
-				
-			 
-				$("#content2").val("");
-				$('#c_photo').show();
-				$('#plus_box').hide();
+			
 				
 				location.href="<%=cp%>/study/myStudy/home/${s_num}";
 		
-				listPage(bbs_count);
+				
 				
 				
 		}		
@@ -523,7 +523,7 @@ function createBoard() {
 		         }
 		      }
 		   });
-	}
+	
 }
 
 function check() {

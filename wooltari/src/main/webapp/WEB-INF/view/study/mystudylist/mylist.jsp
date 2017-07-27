@@ -871,6 +871,10 @@ textarea{
     border:1px solid #fff;
     padding:4px 6px;
 }
+.study-list{
+	
+    display: inline-block;
+}
 </style>
 
 
@@ -887,7 +891,7 @@ textarea{
       </span>M Y S T U D Y
    </div>
    
-   
+ <div class="study-list">
  <div style="margin-bottom: 5px; font-size: 15px;">
  <i class="glyphicon glyphicon-align-left" style="color: #1abc9c; margin-bottom: 20px;"></i>
     <strong style="font-size: 20px;"><span style="color:rgba(183, 183, 183, 0.65); font-size: 20px;">${sessionScope.member.userName}</span></strong> 회원님의&nbsp; <span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">
@@ -943,9 +947,11 @@ textarea{
 		</div>
 	</c:forEach>
 	
+	</div>
 	
 	
-	<div style="margin-bottom: 5px; font-size: 15px; margin-top: 470px;">
+<div class="study-list">
+	<div style="margin-bottom: 5px; font-size: 15px; margin-top: 100px;">
      <i class="glyphicon glyphicon-align-left" style="color: #1abc9c; margin-bottom: 20px;"></i>
       <strong style="font-size: 20px;"><span style="color:rgba(183, 183, 183, 0.65); font-size: 20px;">${sessionScope.member.userName}</span></strong> 
       회원님이&nbsp;<span style="font-size: 20px; color: #1abc9c; font-weight: bolder;">
@@ -1001,6 +1007,7 @@ textarea{
 			
 		</div>
 	</c:forEach>
+</div>
    
 </div>
 </div>

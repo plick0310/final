@@ -271,97 +271,112 @@ function deleteBoard(num,page){
 
 
 <style>
-
-	#listCalendar {
-	    margin-bottom: 40px;
-		text-align: center;
-		font-size: 14px;
-		font-family: 'Roboto', sans-serif;
-		}
-		
-	#wrap {
-		width: 1100px;
-		margin: 0 auto;
-		}
-		
-	#external-events {
-		float: left;
-		width: 150px;
-		padding: 0 10px;
-		text-align: left;
-		}
-		
-	#external-events h4 {
-		font-size: 16px;
-		margin-top: 0;
-		padding-top: 1em;
-		}
-		
-	.external-event { /* try to mimick the look of a real event */
-		margin: 10px 0;
-		padding: 2px 4px;
-		background: #3366CC;
-		color: #fff;
-		font-size: .85em;
-		cursor: pointer;
-		}
-		
-	#external-events p {
-		margin: 1.5em 0;
-		font-size: 11px;
-		color: #666;
-		}
-		
-	#external-events p input {
-		margin: 0;
-		vertical-align: middle;
-		}
-
-	#calendar {
-/* 		float: right; */
-    /*     margin: 0 auto; */
-		width: 900px;
-		background-color: #FFFFFF;
-		  border-radius: 6px;
-        box-shadow: 0 1px 2px #C3C3C3;
-		-webkit-box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
--moz-box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
-box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
-		}
-
- h2{
-font-size: 25px;
-padding-top: 5px;
-color:#1abc9c;
+#listCalendar {
+	margin-bottom: 40px;
+	text-align: center;
+	font-size: 14px;
+	font-family: 'Roboto', sans-serif;
 }
-.fc-scroller.fc-day-grid-container{
-height: auto;
-overflow: none;
 
+#wrap {
+	width: 1100px;
+	margin: 0 auto;
 }
-.btn{
-	margin: 0px 62px;
+
+#external-events {
+	float: left;
+	width: 150px;
+	padding: 0 10px;
+	text-align: left;
+}
+
+#external-events h4 {
+	font-size: 16px;
+	margin-top: 0;
+	padding-top: 1em;
+}
+
+.external-event { /* try to mimick the look of a real event */
+	margin: 10px 0;
+	padding: 2px 4px;
+	background: #3366CC;
+	color: #fff;
+	font-size: .85em;
+	cursor: pointer;
+}
+
+#external-events p {
+	margin: 1.5em 0;
+	font-size: 11px;
+	color: #666;
+}
+
+#external-events p input {
+	margin: 0;
+	vertical-align: middle;
+}
+
+#calendar {
+	/* 		float: right; */
+	/*     margin: 0 auto; */
+	width: 900px;
+	background-color: #FFFFFF;
+	border-radius: 6px;
+	box-shadow: 0 1px 2px #C3C3C3;
+	-webkit-box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
+	-moz-box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
+	box-shadow: 0px 0px 21px 2px rgba(0, 0, 0, 0.18);
+}
+
+h2 {
+	font-size: 25px;
+	padding-top: 5px;
+	color: #1abc9c;
+}
+
+.fc-scroller.fc-day-grid-container {
+	height: auto;
+	overflow: none;
+}
+
+.btn2 {
+	margin: 5px 62px;
 	padding: 12px;
 	background: #1abc9d;
 	color: white;
-	width:30%;
-	float:left;
+	width: 30%;
+	float: left;
+	display: inline-block;
 	border-radius: 0px;
-	-webkit-transition: all .3s ease-in-out;
-	-moz-transition: all .3s ease-in-out;
-	-o-transition: all .3s ease-in-out;
-	transition: all .3s ease-in-out;
+	font-size : 14px;
+	font-weight: normal;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	font-size: 14px;
 }
-.btn-block + .btn-block{
- 	margin-top:0px;
+
+.btn2-block+.btn2-block {
+	margin-top: 0px;
 }
 </style>
 
-
+<div style="margin-left: 83px; ">
 <div id='calendar' style=" width:90%; float: left; margin-bottom: 30px;"></div> 
 
 <div id='listCalendar' style="width:90%; float:left;"></div>
-
+</div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
   <div class="modal-dialog">
     <div class="modal-content" style="width: 500px; margin-top: 250px; margin-left: 40px;">
@@ -373,8 +388,8 @@ overflow: none;
 	       <button type="button" class="btn btn-default" data-dismiss="modal" style="width: 65px; height: 25px; background: #1abc9c; padding-top: 3px; margin-top: -11px;">취소</button>
            -->
           
-          	<button type="button" class="btn btn-block"  data-dismiss="modal" >Cancel</button>		
-			<button type="button" class="btn btn-block submit-form valid"  data-dismiss="modal" onclick="insertBoard();">Submit</button>
+          	<button type="button" class="btn2 btn-block"  data-dismiss="modal" >Cancel</button>		
+			<button type="button" class="btn2 btn-block submit-form valid"  data-dismiss="modal" onclick="insertBoard();">Submit</button>
 				
       </div>
     </div>

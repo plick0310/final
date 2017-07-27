@@ -371,6 +371,26 @@ function readURL(input) {
 	</div>
 </div>
 </c:if>
-<c:if test="${dto.range==1|| state==false }">
-스터디 가입 후 접근 가능합니다.
+<c:if test="${dto.range==1&&state==false }">
+<div id="wrap">
+<div id="box">
+	<div style="width: 800px;
+    margin: 0px 25px 35px;
+    height: 580px;
+    background: white;
+    float: left;
+    box-shadow: 0px 3px 5px 1px #eee;">
+    
+    <p style="margin: 215px 372px 10px;">
+    <img src='<%=cp%>/resource/img/book.png'>
+    </p>
+	<span style="    text-align: center;
+    width: 218px;
+    font-size: 15px;
+    display: inline-flex;
+    margin-left: 295px;
+    font-weight: 900;">	스터디에 가입해 보세요!<br>멤버만 게시글을 볼 수 있습니다. </span>
+</div>
+</div>
+</div>
 </c:if>

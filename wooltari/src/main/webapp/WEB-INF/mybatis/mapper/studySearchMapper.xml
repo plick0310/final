@@ -128,6 +128,7 @@
             (
             SELECT sm.s_num, NVL(COUNT(*),0) AS memcnt FROM studyMember sm
             JOIN study s ON sm.s_num = s.s_num
+            WHERE sm.enabled=1
             GROUP BY sm.s_num
             )count
             ON list.s_num = count.s_num
