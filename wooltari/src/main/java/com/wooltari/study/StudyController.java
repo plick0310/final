@@ -191,8 +191,9 @@ public class StudyController {
 
 	/*  스터디 리스트   */
 	@RequestMapping(value="/study/mylist")
-	   public String list(Model model , HttpSession session ,HttpServletRequest req){
-	     
+	   public String list(Model model , HttpSession session ,HttpServletRequest req) throws Exception{
+	     try {
+	    	 
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		
 		List<StudyInfo> list = service.listMyStudy(info.getUserId());
@@ -221,6 +222,11 @@ public class StudyController {
 		model.addAttribute("Mylist",list);	
 		model.addAttribute("Mylist2",list2);	
 		
+		} catch (Exception e) {
+			model.addAttribute("message","로그인을 해");
+			
+			return "main/msg";
+		}
 		      
 	    return ".study.mystudylist.mylist";
 	}
@@ -232,6 +238,7 @@ public class StudyController {
 		List<Team> teamList = tservice.listTeam(s_num);
 		List<Team> waitList = tservice.listWait(s_num);
 		
+
 		
 		Iterator<Team> it = teamList.iterator();
         while(it.hasNext()){

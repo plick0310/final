@@ -350,7 +350,7 @@ function readURL(input) {
 		<div
 			style="margin: 20px 0; border-top: 1px solid #eee; padding: 20px 0; width: 170px;">${dto.study_Info }</div>
 	</div>
-
+<c:if test="${dto.range==0 || state==true}">
 	<div id="wrap">
 		<div id="box">
 			<div
@@ -370,4 +370,7 @@ function readURL(input) {
 		</div>
 	</div>
 </div>
-
+</c:if>
+<c:if test="${dto.range==1|| state==false }">
+스터디 가입 후 접근 가능합니다.
+</c:if>

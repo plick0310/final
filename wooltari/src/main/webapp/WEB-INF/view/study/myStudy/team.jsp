@@ -219,7 +219,7 @@ function printWait(data){
 			out+= "</div>";
 		
 		if (leader == uid) {
-					out += "<p id='a_check'><a onclick='admit(\""+userId+"\")';>승인 </a>|<a onclick=';'> 거절</a></p></li>";
+					out += "<span style= 'display: inline-block; margin-left: 30px; margin-top: 5px;'><a onclick='admit(\""+userId+"\")';>승인 </a>|<a onclick=';'> 거절</a></span></li>";
 				}
 
 			}
@@ -261,15 +261,15 @@ function printTeam(data) {
 			out+= "</div>";
 			
 			if (userId == uid) {
-				out+="<p id='a_check'><label for='ct' class='btn btn-large uploadLabel'> <img";
+				out+="<span style='margin-left: 70px; margin-top: 5px;><label for='ct' class='btn btn-large uploadLabel'> <img";
 				out+=		" alt='' src='<%=cp%>/resource/img/set.png'>";
-				out+=	"</label>"
+				out+=	"</label></span>"
 			}else{
-			out+="<p id='a_check'><label for='at' class='btn btn-large uploadLabel'> <img";
+			out+="<span style='display: inline-block; margin-left: 16px; margin-top: 5px;'><label for='at' class='btn btn-large uploadLabel'> <img";
 			out+=		" alt='' src='<%=cp%>/resource/img/information.png'>";
 			out+=	"</label> <label for='bt' class='btn btn-large uploadLabel'> <img";
 			out+=		" alt='' src='<%=cp%>/resource/img/envelope.png'></a>";
-			out+="</label></p>";
+			out+="</label></span>";
 			}
 				
 			out+="<button class='img_bt' type='button' id='at' onclick='' />";
