@@ -137,7 +137,7 @@ border: 1px solid #EAEAEA;
 <div  style="height:50px; font-size: 20px;text-align: center; border-bottom: 1px solid #eee;">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
-			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>W R I T E . . .</div>
+			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>정보요청게시판</div>
 	<table cellpadding="0" cellspacing="0" id="read_table"
 		style="background-color:#F5F5F5; color: #353535; border-top: none;
 		box-shadow: 60px 0px 100px -90px #000000, -60px 0px 100px -90px #000000;"class="board_table">
