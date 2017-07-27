@@ -17,7 +17,7 @@
 </tr>
 
 <c:forEach var="dto" items="${list }">
-    <tr height='35' style='background: #eee;'>
+    <tr height='35' style='border: 2px solid white;'>
        <td width='50%' style='padding:5px 5px; border:1px solid #cccccc; border-right:none;'>
            <span><b>${dto.userName }</b></span>
         </td>

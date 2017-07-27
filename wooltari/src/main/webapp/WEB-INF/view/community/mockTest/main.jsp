@@ -37,31 +37,31 @@
     color: #1abc9c;
     text-decoration: none;
     background-color: #fff;
-  border: none;
+  	border: none;
 }
  .scArea {
  	margin-bottom: -28px;
  }
-	ui.tab_menu {
-		margin:0;
-		padding:0;
-		float:left;
-		list-style:none;
-		height:32px;
-		border-left:1px solid #eee;
-		width:900px;
-		font-family: "dotum";
-		font-size: 12px;
+ ui.tab_menu {
+	margin:0;
+	padding:0;
+	float:left;
+	list-style:none;
+	height:32px;
+	border-left:1px solid #eee;
+	width:900px;
+	font-family: "dotum";
+	font-size: 12px;
  }
-	 .tab_menu li {
+ .tab_menu li {
  	padding: 5px 18px;
  	border: 1px solid #eeeeee;
  	border-bottom: none;
  }
  
-  .tab_menu li a:active{
-  	color: #1abc9c;
-  }
+ .tab_menu li a:active{
+	color: #1abc9c;
+ }
 </style>
  
  <!-- 먼저 실행되야 할 것들 -->
@@ -120,20 +120,23 @@ $(function(){
 	function deleteList() {
 	   var f=document.array_form;
 	   var cnt=0;
-	   
+
 	   if(f.nums==undefined) {
-	      return false;      
+		  alert("실패");
+	      return false;
 	   }
 	   
 	   if(f.nums.length!=undefined) {// 체크박스가 둘 이상인 경우
 	      for(var i=0; i<f.nums.length; i++) {
-	         if(f.nums[i].checked)
+	         if(f.nums[i].checked) {
 	            cnt++;
+	         }
 	      }
 	   } else {
 	      // 체크박스가 하나인 경우
-	      if(f.nums.checked)
+	      if(f.nums.checked) {
 	         cnt++;
+	      }
 	   }
 	   
 	   if(cnt==0) {
@@ -141,7 +144,7 @@ $(function(){
 	      return false;
 	   }
 	   
-	   if(confirm("선택한 게시물을 삭제하시겠습니까 ? ")) {
+	   if(confirm("선택한 게시물을 삭제하시겠습니까 ?")) {
 	      f.action="<%=cp%>/mockTest/deleteList";
 	      f.submit();
 	   }
@@ -154,7 +157,6 @@ $(function(){
 		$("#createBtn").attr('style','display');
 		$("#updateBtn").attr('style','display: none;');
 		$("#exampleModal").modal("show");
-		
 	}
 
 	// 수정 폼
@@ -265,10 +267,10 @@ $(function(){
     			$("#examSearch").attr({
     				style : 'margin-top:0; float:right;'
     			});
-    		}
+    		 }
            }
         });
-     }); 
+    }); 
 });
 
 function chart(){
@@ -433,7 +435,7 @@ function updateTime() {
 				<tbody>
 					<tr>
 						<td style="text-align: right; width: 65px; padding: 5px 18px;">
-							<input type="checkbox" name="nums" value="${dto.num }">
+							<input type="checkbox" name="nums" value="${dto.num }"/>
 						</td>
 
 						<td class="___number">${dto.wishlistNum}</td>
@@ -504,7 +506,7 @@ function updateTime() {
 			</div>
 		</c:if>
 		<!-- 응시할 시험 리스트 끝 ----------------------------------------------------------------------->
-	</form>		
+	</form>
 	
 		
 	
@@ -528,8 +530,9 @@ function updateTime() {
 					</div>
 				</div> 
          </form>			
-         
-	<form name="array_form" id="array_form" style="width: 900px;">
+        
+        <!-- 여기에 form 이름중복 --> 
+	    <form id="array_form" style="width: 900px;">
 			<div id="wrap">
 				<div id="box">
 					<div style="width: 100%;float: left;margin: 0px auto;height: 670px;">
@@ -543,10 +546,11 @@ function updateTime() {
 				</div>
 			</div>	 
 		</form>
-			<form name="mockTestSearchForm" action="" method="post">
-			    <input type="hidden" name="searchKey" value="examInfoName"/>
-			    <input type="hidden" name="searchValue" value=""/>
-			</form>
+		
+		<form name="mockTestSearchForm" action="" method="post">
+		    <input type="hidden" name="searchKey" value="examInfoName"/>
+		    <input type="hidden" name="searchValue" value=""/>
+		</form>
 <!-- 	
 			<div class="tab_container">
 				<div id="tab1" class="tab_content">

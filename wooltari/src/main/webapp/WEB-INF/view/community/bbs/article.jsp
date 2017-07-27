@@ -6,7 +6,14 @@
    String cp = request.getContextPath();
 %>
 
-<style>
+<style> 
+	.btn {
+		background-color: white;
+	    border-style: solid;
+	    padding: 5px 20px;
+	    margin-right: 10px;
+	    border: 1px solid #EAEAEA;
+	}
 	.btnLike{
 		color: $333;
 		font-weight: 500;

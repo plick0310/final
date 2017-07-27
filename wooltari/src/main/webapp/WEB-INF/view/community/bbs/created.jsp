@@ -6,6 +6,16 @@
    String cp = request.getContextPath();
 %>
 
+<style>
+	.btn { 
+		background-color: white;
+	    border-style: solid;
+	    padding: 5px 20px;
+	    margin-right: 10px;
+	    border: 1px solid #EAEAEA;
+	}
+</style>
+
 <script type="text/javascript">
     function sendOk() {
         var f = document.boardForm;
