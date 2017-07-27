@@ -36,14 +36,13 @@ function insertBoard(){
 	
 	var str=f.subject.value;
 	if(!str){
-		alert("제목을 입력하세요.");
 		f.subject.focus();
 		return;
 	}
 
 	str=f.content.value;
 	if(!str){
-		alert("내용을 입력하세요.");
+
 		f.content.focus();
 		return false;
 	}

@@ -57,7 +57,6 @@ function insertReply(){
 	var num="${dto.num}";
 	var content=$.trim($("#replyContent").val());
 	if(! content ) {
-		alert("내용을 입력하세요");
 		$("#content").focus();
 		return false;
 	}
@@ -135,7 +134,6 @@ function deleteReply(prNum,pageNo){
 			}else if(state=="false"){
 				alert("삭제에 실패하였습니다.")
 			}else if(state=="loginFail"){
-				alert("로그인하세요");
 				location.href="<%=cp%>/main";
 			}
 			
