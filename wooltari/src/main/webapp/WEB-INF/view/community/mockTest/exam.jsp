@@ -11,11 +11,6 @@
 	<c:forEach items="${examtestList }" var="dto" varStatus="status">
 		<tbody>
 			<tr>
-			<c:if test="${sessionScope.member.userId eq 'admin' }">
-				<td style="text-align: right; width: 65px; padding: 5px 18px;">
-					<input type="checkbox" name="nums" value="${dto.num }">
-				</td>
-			</c:if>
 				<td class="___number"
 					style="font-size: 11px; color: #666; text-align: center; font-weight: bold;">${dto.examlistNum}</td>
 				<td style="padding: 9px 5px; border-bottom: 1px solid #EEEEEE;">

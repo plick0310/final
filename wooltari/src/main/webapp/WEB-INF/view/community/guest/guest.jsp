@@ -6,7 +6,15 @@
    String cp = request.getContextPath();
 %>
 
-
+<style>
+	.btn {
+		background-color: white;
+	    border-style: solid;
+	    padding: 5px 20px;
+	    margin-right: 10px;
+	    border: 1px solid #EAEAEA;
+	}
+</style>
 
 <script type="text/javascript">
 $(function(){
@@ -56,9 +64,9 @@ function printGuest(data) {
 			var content=data.list[idx].content;
 			var created=data.list[idx].created;
 			
-			out+="    <tr height='35' bgcolor='#eeeeee'>";
-			out+="      <td width='50%' style='padding-left: 5px; border:1px solid #cccccc; border-right:none;'>"+ userName+"</td>";
-			out+="      <td width='50%' align='right' style='padding-right: 5px; border:1px solid #cccccc; border-left:none;'>" + created;
+			out+="    <tr height='35'>";
+			out+="      <td width='50%' style='padding-left: 5px; border-top:1px solid #cccccc; border-right:none;'><strong>"+ userName+"</strong></td>";
+			out+="      <td width='50%' align='right' style='padding-right: 5px; border-top:1px solid #cccccc; border-left:none;'>" + created;
 			if(uid==userId || uid=="admin") {
 				out+=" | <a onclick='deleteGuest(\""+num+"\", \""+pageNo+"\");'>삭제</a></td>" ;
 			} else {

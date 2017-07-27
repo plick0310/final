@@ -321,7 +321,7 @@ margin: 5px 3px;
     width: calc(100% / 4);
     -webkit-transition: 0.4s all linear;
     transition: 0.4s all linear;
-    }
+}
     .fadeInLeft {
     -webkit-animation-name: fadeInLeft;
     animation-name: fadeInLeft;
@@ -350,7 +350,7 @@ border: 1px solid #EAEAEA;
 
 }
     
-	</style>
+</style>
 
 	
 	<div class="wrapper" style="background: white; margin-top: 60px;"> 
@@ -406,42 +406,41 @@ border: 1px solid #EAEAEA;
     margin: 0 auto 0px;
     clear: both;
     height: 100%;"> 
-    <a href="" class="hvr-grow-shadow" style="    visibility: visible;"
->
+    <a href="" class="hvr-grow-shadow"style="background-image: url('<%=cp %>/resource/images/photolist/photolist9.jpg');background-size: cover; visibility: visible;">
     	<img alt="" src="">
  
   	</a>
-  		<div class="hvr-grow-shadow">
-  	sad
+  		<div class="hvr-grow-shadow" style="background-image: url('<%=cp %>/resource/images/photolist/photolist7.jpg');background-size: cover;">
+  			
   		</div>
-  		<div class="hvr-grow-shadow">
+  		<div class="hvr-grow-shadow" style="background-image: url('<%=cp %>/resource/images/photolist/photolist8.jpg');background-size: cover;">
   	asd
   		</div>
   	
   	</div> 
   	<div class="row" style="width: 1140px;margin: 0 auto 0"> 
-  		<div class="hvr-grow-shadow" style="background-image: url('<%=cp %>/resource/images/slide1_blurred.jpg');background-size: cover;">
+  		<div class="hvr-grow-shadow" style="background-image: url('<%=cp %>/resource/images/photolist/photolist1.png');background-size: cover;">
   	asd
   		</div>
   		
-  		<div class="hvr-grow-shadow">
+  		<div class="hvr-grow-shadow" style="background-image: url('<%=cp %>/resource/images/photolist/photolist2.jpg');background-size: cover;">
   	sad
   		</div>
-  		<div class="hvr-grow-shadow">
-  	asd
+  		<div class="hvr-grow-shadow" style="background-image: url('<%=cp %>/resource/images/photolist/photolist3.jpg');background-size: cover;">
+  	asd 
   		</div>
   	
   	</div> 
    
   	<div class="row" style="width: 1140px;margin: 0 auto 100px; "> 
-  		<div class="hvr-grow-shadow">
+  		<div class="hvr-grow-shadow" style="background-image: url('<%=cp %>/resource/images/photolist/photolist4.png');background-size: cover;">
   	asd
   		</div>
   		
-  		<div class="hvr-grow-shadow">
+  		<div class="hvr-grow-shadow" style="background-image: url('<%=cp %>/resource/images/photolist/photolist5.jpg');background-size: cover;">
   	sad
   		</div>
-  		<div class="hvr-grow-shadow">
+  		<div class="hvr-grow-shadow" style="background-image: url('<%=cp %>/resource/images/photolist/photolist6.jpg');background-size: cover;">
   	asd
   		</div>
   	
