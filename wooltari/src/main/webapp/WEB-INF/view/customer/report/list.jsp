@@ -287,7 +287,9 @@ function deleteAction(){
 					</ul>
 					 
 					<div style="position:absolute; bottom:10px; right: -15px;"> 
-						<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" onclick="check()"/><label for="allCheck">전체선택</label>			
+						<c:if test="${sessionScope.member.userId=='admin'}">
+							<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" onclick="check()"/><label for="allCheck">전체선택</label>			
+						</c:if>
 					</div>
 				</td>
 			</tr>
@@ -301,8 +303,10 @@ function deleteAction(){
 			<tr>
 				
 				<td style="text-align:right; width:65px; padding: 5px 18px;">
-				<input type="checkbox" name="chk" value="${dto.repNum}"></td>
-				
+					<c:if test="${sessionScope.member.userId=='admin'}">
+						<input type="checkbox" name="chk" value="${dto.repNum}">
+					</c:if>
+				</td>
 				<td class="___number" style="">[ ${dto.category} ] </td>
 				<td>
 					<div style="position:relative;">

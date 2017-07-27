@@ -326,7 +326,7 @@ $(function(){
 							<div class="member-inner">
 								<div class="login-msg">
 									<h3></h3>
-									<a href="<%=cp%>/member/findmember"><strong>로그인이 안되시나요?</strong></a>
+									<a href="<%=cp%>/customer/faq/main"><strong>로그인이 안되시나요?</strong></a>
 								</div>
 							
 							
@@ -353,12 +353,12 @@ $(function(){
 											<button type="submit" class="member_btn">로그인</button>
 										</form>
 										<div style="margin-top: 25px">
-											<a href="<%=cp%>/member/findmember"><strong>아이디/비밀번호찾기</strong></a> |
+											<a href="#"><strong>아이디/비밀번호찾기</strong></a> |
 											<a href="<%=cp%>/member/join"><strong> 회원가입</strong></a>
 										</div>
 									</div>
 								</div>
-							
+								<!-- 
 								<div class="login-social">
 									<h3>소셜 계정 로그인</h3>
 									<div class="social-login-buttons">
@@ -371,6 +371,7 @@ $(function(){
 										</a>
 									</div>
 								</div>
+								 -->
 							</div>
 						</div>
 					</div>

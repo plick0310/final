@@ -41,12 +41,6 @@ function myPageLoad() {
 	
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
         <div class="btn-group" role="group">
-            <button type="button" id="my_main" class="btn btn-default" data-toggle="tab">
-            	<i class="fa fa-star-o" aria-hidden="true"></i>
-                <div class="hidden-xs">마이페이지</div>
-            </button>
-        </div>
-        <div class="btn-group" role="group">
             <button type="button" id="my_msg" class="btn btn-default" data-toggle="tab">
             	<i class="fa fa-envelope-o" aria-hidden="true"></i>
                 <div class="hidden-xs">쪽지함</div>

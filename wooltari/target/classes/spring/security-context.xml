@@ -27,23 +27,70 @@
 		<csrf disabled="true"/>
 		
 		
+		
+		<!-- 모두가 접근 가능 -->
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
 		<intercept-url pattern="/main" access="permitAll"/>
-		
 		<intercept-url pattern="/member/login" access="permitAll"/>
 		<intercept-url pattern="/member/member" access="permitAll"/>
 		<intercept-url pattern="/member/join" access="permitAll"/>
 		<intercept-url pattern="/member/join_submit" access="permitAll"/>
 		<intercept-url pattern="/member/userIdCheck" access="permitAll"/>
 		<intercept-url pattern="/resource/**" access="permitAll"/>
-
+		<intercept-url pattern="/resource/**" access="permitAll"/>
+		
+		<!-- 게시판리스트/공지사항/자주묻는질문/맞춤스터디는 전체공개 -->
+		<!-- 리스트 띄우기 싫으면 해당 게시판 인터셉터만 지우면 됨 -->
+		
+		<!-- 맞춤 스터디 찾기 -->
+		<intercept-url pattern="/study/search" access="permitAll"/>
+		<intercept-url pattern="/study/map" access="permitAll"/>
+		<intercept-url pattern="/study/list" access="permitAll"/>
+		<intercept-url pattern="/study/getmarker" access="permitAll"/>
+		
+		<!-- 스터디 홍보 -->
+		<intercept-url pattern="/promote/list" access="permitAll"/>
+		
+		<!-- 스터디 어디서 하지 -->
+		<intercept-url pattern="/studyboard/studywhere/list" access="permitAll"/>
+		
+		<!-- 스터기 후기 -->
+		<intercept-url pattern="/review/list" access="permitAll"/>
+		
+		<!-- 자유 광장 -->
+		<intercept-url pattern="/bbs/list" access="permitAll"/>
+		
+		<!-- 포톡스 -->
+		<intercept-url pattern="/community/photalks/list" access="permitAll"/>
+		
+		<!-- 교재 중고 장터 -->
+		<intercept-url pattern="/community/usedshop/list" access="permitAll"/>
+		
+		<!-- 스터디 마켓 -->
+		<intercept-url pattern="/studyMarket/studyMarketBoard/list" access="permitAll"/>
+		
+		<!-- 정보 요청 -->
+		<intercept-url pattern="/download/infoReqBoard/list" access="permitAll"/>
+		
+		<!-- 자료 다운 -->
+		<intercept-url pattern="/download/downloadBoard/list" access="permitAll"/>
+		
+		<!-- 공지사항 -->
+		<intercept-url pattern="/customer/notice/list" access="permitAll"/>
+		<intercept-url pattern="/customer/notice/article" access="permitAll"/>
+		
+		<!-- 자주 묻는 질문 -->
+		<intercept-url pattern="/customer/faq/main" access="permitAll"/>
+		<intercept-url pattern="/customer/faq/list" access="permitAll"/>
+		
+		<!-- 관리자 페이지는 관리자만 접근 가능 -->
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-		<!-- 여기서 페이지 풀어주기  -->
+		
+		<!-- 그 외 모든 페이지는 유저권한을 가진 사람만 접근 가능-->
 		<intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
 		<!-- <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/> -->
 		
 		<!-- 권한을 두개 줄때 -->
-
 		<!-- <intercept-url pattern="/study/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/> -->
 		
 		

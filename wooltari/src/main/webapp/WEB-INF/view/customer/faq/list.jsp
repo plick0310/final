@@ -78,52 +78,63 @@ function deleteList(){
 }
 
 </script>
-<div>
-<div class="container" style="height: 50px; font-size: 20px; text-align: auto;">
+<div style="font-size: 20px; text-align: auto; clear: both;">
 	<form action="" id="array_form" name="searchForm" method="post" style="    margin-top: 212px; width:900px; width: 900px;
     margin: 193px 100px 0;">
 			<c:forEach var="dto" items="${list}">
 				 <div class="panel panel" style="box-shadow:1px;">
 				    <div class="panel-heading" role="tab" id="heading${dto.listNum}">
 				      <h4 class="panel-title">
-				        <div style="width: 100px; float: left;"><small><input type="checkbox" id="chk" name="chk" value="${dto.num}"></small></div>
+				      
+				        <div style="width: 100px; float: left;">
+				        	<c:if test="${sessionScope.member.userId=='admin'}">
+					        	<small><input type="checkbox" id="chk" name="chk" value="${dto.num}"></small>
+							</c:if>	
+				        </div>
+				        
 				        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse${dto.listNum}" aria-expanded="false" aria-controls="collapse${dto.listNum}">
-				        <div style="width:100px; float:left;"><small>[${dto.category}]</small></div> &nbsp;&nbsp;&nbsp;
+				        
+				        <div style="width:100px; float:left;">
+				        	<small>[${dto.category}]</small>
+				        </div> &nbsp;&nbsp;&nbsp;
+				        
 				        <span><small>${dto.subject}</small></span>
-				         
-				         
+				        
+				        
+				        <c:if test="${sessionScope.member.userId=='admin'}">
 				         	<input type="button" class="clickbtn" style="float: right;"
 							 onclick="javascript:location.href='<%=cp%>/customer/faq/update?pageNo=${pageNo}&num=${dto.num}';" value="수정하기">
+						</c:if>	
 				        </a>
 				      </h4>
 				    </div>
 				    <div id="collapse${dto.listNum}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading${dto.listNum}">
 				      <div class="panel-body">				        
-				        <div style="float: left; margin-left: 15px;">C O N T E N T : ${dto.content} </div>
+				        <div style="float: left; margin-left: 15px;">${dto.content} </div>
 				      </div>
 				    </div>
 				  </div>
 			 </c:forEach>
 
 			 
-			 	<!-- 페이징 처리, 글쓰기, 삭제 버튼 -->
-	<div class="paging" style="width: 900px; margin: 20px auto;text-align: center;">
-		<c:if test="${dataCount==0 }">
-                            등록된 게시물이 없습니다.
-        </c:if>
-        <c:if test="${dataCount!=0 }">
-        	${paging}
-        </c:if></div>
-	<div class="btnArea" style="float: right;">
-	<c:if test="${sessionScope.member.userId=='admin'}">
-		<input type="button" class="clickbtn" 
-		 onclick="deleteList();" value="삭제">
-	</c:if>	
-		<input type="button" class="clickbtn"
-		 onclick="javascript:location.href='<%=cp%>/customer/faq/created';" value="글쓰기">
-	</div>
+		<!-- 페이징 처리, 글쓰기, 삭제 버튼 -->
+		<div class="paging" style="width: 900px; margin: 20px auto;text-align: center;">
+			<c:if test="${dataCount==0 }">
+	                            등록된 게시물이 없습니다.
+	        </c:if>
+	        <c:if test="${dataCount!=0 }">
+	        	${paging}
+	        </c:if></div>
+		<div class="btnArea" style="float: right;">
+		<c:if test="${sessionScope.member.userId=='admin'}">
+			<input type="button" class="clickbtn" 
+			 onclick="deleteList();" value="삭제">
+			<input type="button" class="clickbtn"
+			 onclick="javascript:location.href='<%=cp%>/customer/faq/created';" value="글쓰기">
+		</c:if>	
+		</div>
 	
-	<!-- 서치키 -->
+		<!-- 서치키 -->
 		<div class="scArea" style="margin: 30px 10px 30px 200px;">
 			<select name="searchKey" class="where">
 				<option value="subject">제목</option>
@@ -133,6 +144,4 @@ function deleteList(){
 			<input type="button" class="submit" onclick="listPage(1);">
 		</div>
 	</form>
-			 
-</div>
 </div>

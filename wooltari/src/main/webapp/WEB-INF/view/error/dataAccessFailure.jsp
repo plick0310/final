@@ -2,10 +2,10 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <%
    String cp = request.getContextPath();
 %>
+
 <style type="text/css">
 
 .alert-error {
@@ -31,13 +31,13 @@
 
 <div class="boxLayout">  
     <div class="alert alert-error">
-            <h4><strong>경고!</strong></h4>
-               해당 정보를 접근 할 수 있는 권한 이 없습니다.
+            <h4><strong>에러!</strong></h4>
+              데이터 처리중 오류가 발생했습니다 잠시후 다시 시도하시기 바랍니다.
     </div>
 
     <p>
           <button type="button" class="btn btn-default btn-lg btn-block" onclick="javascript:location.href='<%=cp%>/';"> 메인화면으로 이동 &raquo; </button>
     </p>
 </div>    
-
+    
 </div>

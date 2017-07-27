@@ -223,6 +223,7 @@ public class MemberController {
 		model.addAttribute("dto", dto);
 		return "member/my_main";
 	}
+	
 	@RequestMapping(value="/member/my_msg", method=RequestMethod.GET)
 	public String my_Msg(Model model , HttpSession session){
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
