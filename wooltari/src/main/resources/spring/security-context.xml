@@ -26,7 +26,7 @@
 		<!-- spring 4.x때 추가된 옵션으로 ssl을 사용하지 않을 경우 csrf는 disalbed=true로 설정. -->
 		<csrf disabled="true"/>
 		
-		<intercept-url pattern="/**" access="permitAll"/>
+		
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
 		<intercept-url pattern="/main" access="permitAll"/>
 		
@@ -36,11 +36,14 @@
 		<intercept-url pattern="/resource/**" access="permitAll"/>
 
 		<intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-		
+		<!-- 여기서 페이지 풀어주기  -->
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
 		<!-- <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/> -->
 		
 		<!-- 권한을 두개 줄때 -->
-		<!-- <intercept-url pattern="/**/" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/> -->
+
+		<!-- <intercept-url pattern="/study/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/> -->
+		
 		
 		<!-- 폼태그 설정 -->
 		<form-login

@@ -223,7 +223,6 @@ public class StudyController {
 		model.addAttribute("Mylist2",list2);	
 		
 		} catch (Exception e) {
-			model.addAttribute("message","로그인을 해");
 			
 			return "main/msg";
 		}
