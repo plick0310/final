@@ -15,16 +15,21 @@
 <table class="table table-striped">
 <caption>회원 관리</caption>
 <colgroup>
-<col width="50"/>
-<col width="150"/>
-<col width="150"/>
-<col width="50"/>
+<col width="50"/><!-- 선택 -->
+<col width="150"/><!-- 아이디 -->
+<col width="50"/><!-- 이름 -->
+<col width="50"/><!-- 상태 -->
+<col width="50"/><!-- 전화번호 -->
+<col width="500"/><!-- 주소 -->
+
 </colgroup>
 <tr>
 	<th scope="col">선택</th>
 	<th scope="col">아이디</th>
 	<th scope="col">이름</th>
 	<th scope="col">상태</th>
+	<th scope="col">전화번호</th>
+	<th scope="col">주소</th>
 </tr>
 
 <!-- c:forEach로 list 돌림 -->
@@ -35,6 +40,8 @@
 	<td class="userName">${vo.userName}</td>
 	<!-- c:if문써서 0이면 정지/탈퇴 1이면 정상으로 출력 -->
 	<td class="enabled">${vo.enabled}</td>
+	<td class="tel">${vo.tel}</td>
+	<td class="zipcode">(${vo.zipcode})${vo.addr1}${vo.addr2}</td>
 	
 </tr>
 </c:forEach>

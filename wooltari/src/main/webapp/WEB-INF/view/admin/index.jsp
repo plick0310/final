@@ -76,7 +76,7 @@
 	});
 	
 	function paging(paging) {
-		alert(paging);
+		//alert(paging);
 		page = paging;
 		pageload();
 	}
@@ -271,11 +271,7 @@
                                 </li>
                             </ul>
                              -->
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- 좌측 사이드 메뉴 끝 -->
+                      사이드 메뉴 끝 
         </nav>
         <!-- 우측/좌측 메뉴 끝 -->
 	
