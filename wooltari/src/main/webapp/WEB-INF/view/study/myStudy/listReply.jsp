@@ -225,16 +225,19 @@ function listPage2(replyCount, num) {
 
 <div id="reply-insert">
 	<div style="clear: both;">
-		<span style="font-weight: bold;">댓글 쓰기</span><span style="font-size: 13px;"> - 타인을 비방하거나
+		<span style="font-weight: bold; font-size:15px;">댓글 쓰기</span><span style="font-size: 13px;"> - 타인을 비방하거나
 			개인정보를 유출하는 글의 게시를 삼가 주세요.</span>
 	</div>
-	<div style="clear: both; padding-top: 10px; float: left; width: 620px;">
-		<textarea id="rcontent_${num}" name ="content"  rows="1"  
+	<div style="clear: both; padding-top: 10px; float: left; width: 280px;">
+		<%-- <textarea id="rcontent_${num}" name ="content"  rows="1"  
 			style="resize:none; display: block; width: 57%;padding: 6px 12px;border:none; box-sizing: border-box;height: 38px;"></textarea>
+	 --%>	 <input id="rcontent_${num}" name="content" type="text" style="resize:none; width:100%; display: block;padding: 6px 12px;border:none; box-sizing: border-box;height: 33px;">
+		
+	
 	</div>
 	<div style="text-align: right; padding-top: 10px;  ">
 		<button type="button" class="" onclick="sendReply(${num});"
-			style="padding: 8px 25px; background: white; border: 1px solid #eee; ">등록하기</button>
+			style="padding: 6px 14px; background: white; border: 1px solid #eee; ">등록</button>
 	</div>
 </div>
 

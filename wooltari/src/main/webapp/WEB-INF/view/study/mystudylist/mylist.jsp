@@ -872,7 +872,7 @@ textarea{
     padding:4px 6px;
 }
 .study-list{
-	
+	width:100%;
     display: inline-block;
 }
 </style>

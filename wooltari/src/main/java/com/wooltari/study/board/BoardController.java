@@ -121,8 +121,8 @@ public class BoardController {
 		int start = 1;
 		int end = 0;	
 		
-		if(bbs_count>5){
-			end=5;
+		if(bbs_count>6){
+			end=6;
 		}
 		    
 		end = bbs_count;

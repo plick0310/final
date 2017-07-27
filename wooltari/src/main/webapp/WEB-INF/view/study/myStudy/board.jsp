@@ -320,7 +320,7 @@ $(document).ready(function(){
 
 
 
-var bbs_count =5;
+var bbs_count =6;
 var dataCount =${dataCount};
 
 
@@ -468,8 +468,8 @@ function printBoard(data){
 			out+=	"	<div class='well' id='listReply_" +num+ "'></div>";
 			out+=	" </div></div></div></li> ";
 	
-			out+="<li class='clearfix' style='float: none; margin-top: 0px; height:100px;'></li>"
-			}
+		 	out+="<li class='clearfix' style='float: none; margin: 0px;  width: 0px; height:100px;'></li>"
+		 	}
 		}
 		$("#listBoard").html(out);
 		
@@ -477,11 +477,11 @@ function printBoard(data){
 	
 	
 function createBoard() {
-	if(${state==false}){
+	/* if(${state==false}){
 		alert("스터디 가입후 작성 가능합니다.");
 		$("#content2").val("");
 		return;
-	}
+	} */
 	
 		var f= document.createForm;
 		var query = new FormData(f); //파일처리
@@ -572,7 +572,7 @@ $(document).ready(function () {
 			    	submit_chk = false;		// 이벤트가 실행될때 false로 변경해주어 이중실행이 되지 않게 막는다.
 			    	/* 로딩중 이미지 띄움 */
 			    	$('#image_loading').html('<img id="imgloa" src="<%=cp%>/resource/img/loading.gif">');
-			    	bbs_count = parseInt(bbs_count) + 5;
+			    	bbs_count = parseInt(bbs_count) + 6;
 			    	/* 로딩 대기 시간 */
 			    	setTimeout(function() {
 			    		$('#image_loading').html('');

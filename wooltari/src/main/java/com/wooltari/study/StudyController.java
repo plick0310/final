@@ -217,7 +217,7 @@ public class StudyController {
 	        	data.setListCategory(categoryList);
 	          	data.setListLocal(localList);
 	        }
-	  
+	        
 	             
 		model.addAttribute("Mylist",list);	
 		model.addAttribute("Mylist2",list2);	
