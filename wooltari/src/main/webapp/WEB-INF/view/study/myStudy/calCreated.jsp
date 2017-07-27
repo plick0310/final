@@ -408,12 +408,14 @@
 		<div class="input-container">
 		
 		<table style=" margin-top: -30px; margin-bottom: 15px;">
-			<tr style="font-size: 20px; ">
-				<td style="color: #1abc9c;">start-day<br>
-					<input type="text" style="  width:130px; text-align:center;  border: none; color: gray" value="${sdate }" name="sdate" readonly="readonly">
+			<tr style="font-size: 19px; ">
+				<td style="color: #1abc9c; padding-left: 20px;">start-day<br>
+					<input type="text" style=" height:28px; width:130px; text-align:center;  border: none; color: gray" value="${sdate }" name="sdate" readonly="readonly">
+					<i class="glyphicon glyphicon-calendar" aria-hidden="true" style="padding-left:10px;"/>
 				</td>
-				<td style="color: #1abc9c; padding-left: 100px;">end-day<br>
-					<input type="text" style=" width:130px; text-align:center; border: none; color: gray" value="${edate }" name="edate" readonly="readonly">
+				<td style="color: #1abc9c; padding-left: 50px;">end-day<br>
+					<input type="text" style="height:28px;  width:130px; text-align:center; border: none; color: gray" value="${edate }" name="edate" readonly="readonly">
+					<i class="glyphicon glyphicon-calendar" aria-hidden="true" style="padding-left:10px;"/>
 				</td>
 			</tr></table>
 		

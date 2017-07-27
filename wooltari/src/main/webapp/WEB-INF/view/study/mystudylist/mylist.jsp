@@ -918,8 +918,8 @@ textarea{
 							${dto.studyName}
 							</div>
 						</div>
-						<div class="tag">
-							<span class="last">#해시태그</span>
+						<div class="tag"  style="top:-40px;">
+							<span class="last">${dto.study_Info}</span>
 						</div>
 					</div>
 				</div>
@@ -929,7 +929,7 @@ textarea{
 					<div class="user-name">
 					${dto.userName}
 					</div>
-					<div class="location">
+					<div class="location" style="width: 220px; padding-left: 10px;">
 					<c:forEach var="vo" items="${dto.listLocal}" end="0">
 							<h3>${vo.city}</h3> 
 						</c:forEach>
@@ -979,8 +979,8 @@ textarea{
 							${dto.studyName}
 							</div>
 						</div>
-						<div class="tag">
-							<span class="last">#해시태그</span>
+						<div class="tag" style="top:-40px;">
+							<span class="last" >${dto.study_Info}</span>
 						</div>
 					</div>
 				</div>
@@ -990,7 +990,7 @@ textarea{
 					<div class="user-name">
 					${dto.userName}
 					</div>
-					<div class="location">
+					<div class="location" style="width: 220px; padding-left: 10px;">
 					<c:forEach var="vo" items="${dto.listLocal}" end="0">
 							<h3>${vo.city}</h3> 
 						</c:forEach>
