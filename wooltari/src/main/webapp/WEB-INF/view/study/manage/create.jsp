@@ -564,7 +564,7 @@ function insertStudy(){
 						        coordType: naver.maps.Service.CoordType.TM128
 						    }, function(status, response) {
 						        if (status === naver.maps.Service.Status.ERROR) {
-						            return alert('Something Wrong!');
+						            return alert('시/동/읍/면으로만 검색이 가능합니다!');
 						        }
 								//onclick='deleteCategory(\""+idx+"\");'
 						        var item = response.result.items[0],
@@ -593,7 +593,7 @@ function insertStudy(){
 						        address: address
 						    }, function(status, response) {
 						        if (status === naver.maps.Service.Status.ERROR) {
-						            return alert('Something Wrong!');
+						            return alert('시/동/읍/면으로만 검색이 가능합니다!');
 						        }
 
 						        var item = response.result.items[0],
