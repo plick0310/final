@@ -65,10 +65,10 @@
  	</websocket:handlers>
  	<bean id="mySocketHandler" class="com.wooltari.study.MySocketHandler" />
 
-  
+  <!-- 
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver">
         <property name="order" value="1" />
-     </bean>
+     </bean> -->
 
     <bean id="exceptionResolver"
                class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
