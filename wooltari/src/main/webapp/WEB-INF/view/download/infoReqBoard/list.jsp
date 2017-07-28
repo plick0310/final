@@ -274,7 +274,7 @@ function deleteAction(){
 <div  style="height:50px; font-size: 20px;text-align: center; ">
 			<span style="font-size: 20px;color:#BDBDBD; font-weight: bold;">
 			<span style="font-size: 19px; color: #1abc9c; " class="glyphicon glyphicon-pencil">
-			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>정보요청게시판</div> 
+			</span>&nbsp;&nbsp;&nbsp;WOOLTARI&nbsp;&nbsp;&nbsp;</span>정보공유게시판</div> 
 <form name="array_form" id="array_form" style="width: 900px;" method="post"> 
 	<input type="hidden" name="page" value="${page}" />
 	
