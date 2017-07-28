@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main">
+
+	<select id="countMain" resultType="com.wooltari.main.CountMain">
+	SELECT a.count_study, b.count_member, c.count_category FROM
+    (SELECT NVL(count(*),0) count_study FROM study) a,
+    (SELECT NVL(COUNT(*),0) count_member FROM member) b,
+    (SELECT NVL(COUNT(*),0) count_category FROM s_category) c
+	</select>
+
+</mapper>

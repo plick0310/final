@@ -92,7 +92,7 @@ width:  100%;
             <h2>카테고리</h2>
             <hr>
             <div class="clearfix"></div>
-            <p>울타리의 스터디는 100여개의 카테고리로 분류됩니다. 원하는 카테고리를 찾아 시작해보세요.   </p>
+            <p>울타리의 스터디는 100여개의 카테고리로 분류됩니다. 원하는 카테고리를 찾아 시작해보세요.	</p>
          </div>
          <div class="categories">
             <ul class="cat">
@@ -339,25 +339,25 @@ width:  100%;
          <div class="row">
             <div class="col-md-3 col-sm-3">
                <div class="achievement-box">
-                  <span class="count">210</span>
+                  <span class="count">${dto.count_study}</span>
                   <h4>모든스터디</h4>
                </div>
             </div>
             <div class="col-md-3 col-sm-3">
                <div class="achievement-box">
-                  <span class="count">9,500</span>
+                  <span class="count">67</span>
                   <h4>오늘 접속자</h4>
                </div>
             </div>
             <div class="col-md-3 col-sm-3">
                <div class="achievement-box">
-                  <span class="count">590</span>
+                  <span class="count">${dto.count_member}</span>
                   <h4>모든 회원</h4>
                </div>
             </div>
             <div class="col-md-3 col-sm-3">
                <div class="achievement-box">
-                  <span class="count">124</span>
+                  <span class="count">${dto.count_category}</span>
                   <h4>모든 카테고리</h4>
                </div>
             </div>
