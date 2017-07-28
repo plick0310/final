@@ -366,7 +366,7 @@ border: 1px solid #EAEAEA;
               </div>
             <div class="image">
               <a href="http://www.bucketlistly.com" target="_blank">
-                <img src="<%=cp %>/resource/images/slide1.jpg" alt="Slider 1">
+                <img src="<%=cp %>/resource/images/slide00.jpg" alt="Slider 1">
               </a>
             </div>
           </div>
@@ -377,7 +377,7 @@ border: 1px solid #EAEAEA;
               Send your favorite YouTube videos from your Android phone or tablet to TV with the touch of a button. It’s easy. No wires, no setup, no nothing. Find out more here.</p>
             </div>
             <div class="image">
-             <a href="http://www.bucketlistly.com/apps" target="_blank"> <img src="img/slide2.jpg" alt="Slider 1"></a>
+             <a href="http://www.bucketlistly.com/apps" target="_blank"> <img src="<%=cp %>/resource/images/photolist/photolist3.jpg" alt="Slider 1"></a>
             </div>
           </div>
           <div class="slide" data-blurred="img/slide3_blurred.jpg">
@@ -387,7 +387,7 @@ border: 1px solid #EAEAEA;
               Send your favorite YouTube videos from your Android phone or tablet to TV with the touch of a button. It’s easy. No wires, no setup, no nothing. Find out more here.</p>
             </div>
             <div class="image">
-              <a href="http://www.thepetedesign.com" target="_blank"><img src="img/slide3.jpg" alt="Slider 1"></a>
+              <a href="http://www.thepetedesign.com" target="_blank"><img src="<%=cp %>/resource/images/photolist/photolist4.png" alt="Slider 1"></a>
             </div>
           </div>
           
