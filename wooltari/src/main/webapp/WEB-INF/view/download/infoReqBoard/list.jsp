@@ -288,9 +288,10 @@ function deleteAction(){
 						<li><a href="">게시판</a></li>						
 					</ul>
 					 -->
-					<div style="position:absolute; bottom:10px; right: -15px;"> 
-						<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" onclick="check()"/><label for="allCheck">전체선택</label>			
-										
+					<div style="position:absolute; bottom:10px; right: -15px;">
+						<c:if test="${sessionScope.member.userId=='admin'}">
+							<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" onclick="check()"/><label for="allCheck">전체선택</label>			
+						</c:if>
 					</div>
 				</td>
 			</tr>
@@ -303,7 +304,11 @@ function deleteAction(){
 	<c:forEach var="dto" items="${list}">
 			<tr>
 				
-				<td style="text-align:right; width:65px; padding: 5px 18px;"><input type="checkbox" name="chk" value="${dto.num}"></td>
+				<td style="text-align:right; width:65px; padding: 5px 18px;">
+					<c:if test="${sessionScope.member.userId=='admin'}">
+						<input type="checkbox" name="chk" value="${dto.num}">
+					</c:if>
+				</td>
 				
 				<td class="___number">${dto.listNum}</td>
 				<td>

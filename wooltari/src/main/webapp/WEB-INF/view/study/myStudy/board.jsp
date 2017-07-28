@@ -546,7 +546,6 @@ function deleteBoard(num){
 			,data:"num="+num
 			,dataType:"JSON"
 			,success:function(data){
-				alert("삭제성공");
 				bbs_count = bbs_count - 1;
 				listPage(bbs_count);
 			}
@@ -623,7 +622,8 @@ $(function() {
 					
 					
 					var out="";
-					out+="<img id='b_image"+idx+"' src=''  width='80px' height='80px' style='float: left;  margin-left: 10px;' >";
+					out+="<div id='image"+idx+"' style='display:inline-block; width:80px; height=80px; margin-right:10px;'><img id='b_image"+idx+"'  src=''  width='80px' height='80px' style='position: absolute; ' >";
+					out+="<img src='<%=cp%>/resource/img/delete.png' style='width:24px;cursor: pointer;position: relative; top: 0px;left: 56px;' onclick='deleteimage("+idx+")'></div>"
 					out+="<input type='file' name='upload2' id='uploadBtn"+idx+"' class='uploadBtn tts' style='display:none;'>";
 					$('#plus_box').before(out);
 		
@@ -638,6 +638,12 @@ $(function() {
 					
 				});
 });
+
+function deleteimage(idx) {
+	$('#image'+idx).remove();
+	idx--;
+	$('#uploadBtn'+idx).remove();
+}
 
 function readURL2(input , idx) {
 		if (input.files && input.files[0]) {
@@ -707,16 +713,16 @@ function readURL2(input , idx) {
 									style="margin: 20px; overflow: hidden; position: relative; height: 80px;">
 
 									<div id="c_photo">
-										<label for="uploadBtn2" class="lable-li" style=" width: 100%; mardisplay: inline-block; overflow: hidden; position: relative; height: 80px; font-size: 15px; font-weight: 700; color: #999;">
+										<label for="uploadBtn2" class="lable-li" style=" width: 100%; mardisplay: inline-block; overflow: hidden; height: 80px; font-size: 15px; font-weight: 700; color: #999;">
 											<img id="a_image" alt="" src="<%=cp%>/resource/img/camera.png" style="width: 50px; height: 50px;"> <br>
 											<span style="color: #1abc9d;">사진 추가하기</span>
 										</label>
 									</div>
-									<input type="file" name="upload2" id="uploadBtn2" class="uploadBtn tts" style="opacity: 0; position: relative; width: 0px; margin: -15px;"> 
+									<input type="file" name="upload2" id="uploadBtn2" class="uploadBtn tts" style="opacity: 0; position: relative;height:30px; width: 0px; margin: -15px;"> 
 					
 								
 										
-									<div id="plus_box" style="margin-left:10px; width: 80px; height: 80px; border: 1px solid #ccc; float: left; "></div>
+									<div id="plus_box" style=" margin-right:10px; width: 80px; height: 80px; border: 1px solid #e0dfdf; float: left; "></div>
 									
 									
 								</div>

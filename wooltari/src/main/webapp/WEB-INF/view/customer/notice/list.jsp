@@ -289,9 +289,10 @@ function deleteAction(){
 					</ul>
 					 -->
 					<div style="position:absolute; bottom:10px; right: -15px;">
-						<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" onclick="check()"/><label for="allCheck">전체선택</label>			
-										
-					</div>
+						<c:if test="${sessionScope.member.userId=='admin'}">
+							<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" onclick="check()"/><label for="allCheck">전체선택</label>			
+						</c:if>
+s					</div>
 				</td>
 			</tr>
 		</table>
@@ -328,7 +329,11 @@ function deleteAction(){
 	<!-- 일반 글 -->
 	<c:forEach var="dto" items="${list}">
 			<tr>
-				<td style="text-align:right; width:65px; padding: 5px 18px;"><input type="checkbox" name="chk" value="${dto.num}"></td>
+				<td style="text-align:right; width:65px; padding: 5px 18px;">
+					<c:if test="${sessionScope.member.userId=='admin'}">
+						<input type="checkbox" name="chk" value="${dto.num}">
+					</c:if>
+				</td>
 				<td class="___number">${dto.listNum}</td>				
 				<td>
 					<div style="position:relative;">
@@ -366,9 +371,10 @@ function deleteAction(){
 	<c:if test="${sessionScope.member.userId=='admin'}">
 		<input type="button" class="clickbtn" 
 		 onclick="javascript:deleteList();" value="삭제">
-	</c:if>	
-		<input type="button" class="clickbtn"
+		 <input type="button" class="clickbtn"
 		 onclick="javascript:location.href='<%=cp%>/customer/notice/created?';" value="글쓰기">
+	</c:if>	
+		
 	</div>
 
 <form action="" id="array_form" name="searchForm" method="post">

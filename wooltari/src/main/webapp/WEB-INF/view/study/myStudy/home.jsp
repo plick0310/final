@@ -359,7 +359,7 @@ function readURL(input) {
 					<li class="board"><a href="#">H O M E</a></li>
 					<li class="calender"><a href="#">C A L E N D E R</a></li>
 					<li class="team"><a href="#">M E M B E R</a></li>
-					<li class="chating"><a href="#">C H A T H I N G</a></li>
+					<li class="chating"><a href="#">C H A T T H I N G</a></li>
 				</ul>
 
 			</div>
