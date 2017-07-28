@@ -224,7 +224,7 @@ public class StudyController {
 		
 		} catch (Exception e) {
 			
-			return "main/msg";
+			       
 		}
 		      
 	    return ".study.mystudylist.mylist";
