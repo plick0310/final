@@ -163,10 +163,10 @@
 	<select id="listReply" resultType="com.wooltari.downloadBoard.Reply" parameterType="map">
 		SELECT * FROM(
 			SELECT ROWNUM rnum, tb.* FROM(
-				SELECT tbreply.replyNum, num, userId, content, created, tbreply.answer									
+				SELECT tbreply.replyNum, num, userId, content, created									
 				FROM				
 					(
-						SELECT replyNum, r.num, r.userId, r.content, r.created, answer
+						SELECT replyNum, r.num, r.userId, r.content, r.created
 							FROM downloadReply r
 							JOIN downloadBoard d ON r.num=d.num
 							JOIN member m ON r.userId=m.userId

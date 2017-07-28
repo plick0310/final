@@ -309,7 +309,7 @@ background: white;
 	
 	<div style="float: right; margin: 8px 0; position: absolute; top: 453px; left: 1060px;">
 		<c:if test="${sessionScope.member.userId=='admin'}">
-			<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" /><label for="allCheck">전체선택</label>
+			<!-- <input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" /><label for="allCheck"></label> -->
 		</c:if>
 	</div>
 	
