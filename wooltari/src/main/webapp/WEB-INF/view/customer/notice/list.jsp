@@ -292,7 +292,7 @@ function deleteAction(){
 						<c:if test="${sessionScope.member.userId=='admin'}">
 							<input type="checkbox" id="allCheck" name="allCheck" class="checkbox-style" onclick="check()"/><label for="allCheck">전체선택</label>			
 						</c:if>
-s					</div>
+					</div>
 				</td>
 			</tr>
 		</table>
