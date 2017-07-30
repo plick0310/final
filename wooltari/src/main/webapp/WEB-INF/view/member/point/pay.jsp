@@ -37,6 +37,17 @@ function removeChar(event) {
 		event.target.value = event.target.value.replace(/[^0-9]/g, "");
 }
 */
+
+
+//연락처,주소정보가 없으면 '나의 정보'페이지로 이동시킴
+$(document).ready(function(){
+	if(!'${dto.tel}' || !'${dto.addr1}' || !'${dto.addr2}'){
+		alert("포인트 충전 기능을 이용하기 위해서는 연락처와 주소정보가 필요합니다.");
+		location.href = "<%=cp%>/member/mypage?pageName=my_info";
+	}
+});
+
+
 //결제 요청
 function payRequest() {
 	var payAmount = $('#chk-price:checked').val();
