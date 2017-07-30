@@ -67,7 +67,7 @@
 		    f.action = "<%=cp%>/member/login_check";
 		    f.submit();
 		}
-		
+		<%-- 
 		//<![CDATA[
 		// 사용할 앱의 JavaScript 키를 설정해 주세요.
 		Kakao.init('510168497a3434cba4caf707891b2cca');
@@ -117,6 +117,7 @@
 				}
 			});
 		}
+		--%>
 		</script>
 	</head>
    	<body class="member-body">

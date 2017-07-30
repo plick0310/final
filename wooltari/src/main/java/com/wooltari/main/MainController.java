@@ -17,10 +17,6 @@ public class MainController {
 	public String method(Model model) {
 		
 		CountMain dto = mservice.countMain();
-		System.out.println(dto.getCount_study());
-		System.out.println(dto.getCount_member());
-		System.out.println(dto.getCount_category());
-		
 		model.addAttribute("dto", dto);
 		return "/main/main";
 	}
