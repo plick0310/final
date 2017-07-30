@@ -191,7 +191,7 @@ public class MemberController {
 		model.put("passed", passed);
 		return model;
 	}
-	
+	/*
 	@RequestMapping(value="/member/login_kakao", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> Login_kakao(@RequestParam String userId, @RequestParam String userName, @RequestParam String userImg, HttpSession session) throws Exception {
@@ -206,7 +206,7 @@ public class MemberController {
 		model.put("userId", userId);
 		return model;
 	}
-	
+	*/
 	@RequestMapping(value="/member/mypage", method=RequestMethod.GET)
 	public String myPage(@RequestParam(value="pageName", defaultValue="my_main") String pageName, Model model , HttpSession session) {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
@@ -214,14 +214,6 @@ public class MemberController {
 		model.addAttribute("pageName", pageName);
 		model.addAttribute("dto", dto);
 		return ".member.mypage";
-	}
-	
-	@RequestMapping(value="/member/my_main", method=RequestMethod.GET)
-	public String my_Main(Model model , HttpSession session){
-		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		Member dto = mservice.readMember(info.getUserId());
-		model.addAttribute("dto", dto);
-		return "member/my_main";
 	}
 	
 	@RequestMapping(value="/member/my_msg", method=RequestMethod.GET)

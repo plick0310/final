@@ -32,16 +32,12 @@
 		<intercept-url pattern="/index.jsp" access="permitAll"/>
 		<intercept-url pattern="/main" access="permitAll"/>
 		<intercept-url pattern="/member/login" access="permitAll"/>
-		<intercept-url pattern="/member/member" access="permitAll"/>
-		<intercept-url pattern="/member/member/userIdCheck" access="permitAll"/>
 		<intercept-url pattern="/member/join" access="permitAll"/>
 		<intercept-url pattern="/member/join_submit" access="permitAll"/>
 		<intercept-url pattern="/member/userIdCheck" access="permitAll"/>
-		<intercept-url pattern="/resource/**" access="permitAll"/>
+		<intercept-url pattern="/member/member/userIdCheck" access="permitAll"/>
 		<intercept-url pattern="/resource/**" access="permitAll"/>
 		<intercept-url pattern="/uploads/**" access="permitAll"/>
-		
-		
 		
 		
 		<!-- 게시판리스트/공지사항/자주묻는질문/맞춤스터디는 전체공개 -->
