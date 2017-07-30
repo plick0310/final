@@ -1,6 +1,8 @@
 package com.wooltari.study.board;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -105,7 +107,7 @@ public class BoardController {
 	public Map<String, Object> list(
 			@PathVariable long s_num, 
 			@RequestParam (value="bbs_count", defaultValue="1") int bbs_count, //현재 화면에 출력할 개수
-			HttpSession session){
+			HttpSession session) throws Exception{
 		
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 	
@@ -131,9 +133,11 @@ public class BoardController {
 		map.put("end", end);
 		
 		List<Board> list = service.listBoard(map);
-		
 		Iterator<Board> it = list.iterator();
-		  
+		
+		Date endDate = new Date();
+		long gap;
+		   
 		while(it.hasNext()){
 			Board dto = it.next();
 			dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
@@ -147,6 +151,29 @@ public class BoardController {
 				if(photolist.size()!=0){
 					dto.setImageFileName(photolist.get(0));
 				}
+				
+		    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    Date beginDate = formatter.parse(dto.getCreated());
+				
+			gap=(endDate.getTime() - beginDate.getTime()) / 1000;
+			dto.setGap(gap);
+			dto.setCreated(dto.getCreated().substring(0, 10));
+	        
+			 if(dto.getGap()<60){
+	            	dto.setCreated("방금");
+	            }else if(dto.getGap() >= 60 && dto.getGap() < 3600) {
+	            	String s= (dto.getGap()/60)+"분전";	
+	               dto.setCreated(s);
+	            }else if(dto.getGap() >= 3600 && dto.getGap() < 86400) {
+	            	String s= (dto.getGap()/3600)+"시간전";	
+	                dto.setCreated(s);
+	            }else if(dto.getGap() >= 86400 && dto.getGap() < 2419200) {
+	            	String s= (dto.getGap()/86400)+"일전";	
+	                dto.setCreated(s);
+	            }else{
+	            	String s= "몇달전";	
+	                dto.setCreated(s);
+	            }
 			
 		}
 		
@@ -159,6 +186,27 @@ public class BoardController {
 		
 		return model;
 	}
+	
+/*************************** 글보기  ******************************/	
+	@RequestMapping(value="/study/myStudy/{s_num}/article")
+	public String readArticle(@PathVariable long s_num, @RequestParam int num, Model model) throws Exception{
+		
+		Map<String, Object> map = new HashMap<>();
+		String tableName="s_"+s_num;		
+		map.put("tableName",tableName);
+		map.put("num", num);
+		List<String> photolist = service.readPhoto(map);
+		Board dto = service.readBoard(map);
+		int countLikeBoard = service.countLikeBoard(map);
+		
+		
+		model.addAttribute("s_num", s_num);
+		model.addAttribute("photolist", photolist);
+		model.addAttribute("countLike", countLikeBoard);
+		model.addAttribute("dto",dto);
+		return "/study/myStudy/article";
+	}
+	
 	
 /*************************** 좋아요  ******************************/	
 	//좋아요

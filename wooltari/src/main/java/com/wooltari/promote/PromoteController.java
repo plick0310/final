@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wooltari.common.MyUtil;
 import com.wooltari.member.SessionInfo;
+import com.wooltari.study.StudyCategory;
+import com.wooltari.study.StudyLocal;
+import com.wooltari.study.StudyService;
 
 @Controller("study.promoteController")
 public class PromoteController {
@@ -32,6 +35,8 @@ public class PromoteController {
 	@Autowired
 	private MyUtil myUtil;
 	
+	@Autowired
+	private StudyService studyService;
 	
 	@RequestMapping("/promote/list")
 	public String list(
@@ -107,6 +112,11 @@ public class PromoteController {
             }
               
 			n++;
+			
+			List<StudyCategory> categoryList = studyService.readMyCategory(dto.getS_num());
+        	List<StudyLocal> localList= studyService.readMyLocal(dto.getS_num());
+        	dto.setListCategory(categoryList);
+        	dto.setListLocal(localList);
 					
 		}
 		
@@ -163,8 +173,6 @@ public class PromoteController {
 		String pathname=root+File.separator+"uploads"+File.separator+"photo";
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		
-		
 		
 		dto.setUserId(info.getUserId());
 		

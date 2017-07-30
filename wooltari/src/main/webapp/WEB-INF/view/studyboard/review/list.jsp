@@ -230,8 +230,10 @@ function deleteBoard(){
 </div>
 <div class='content-box' style="height: 90px; padding: 10px; border: 1px solid #e0e0e0; border-top: 0; position: relative; overflow: hidden;">
 <div class='name' style="font-size: 14px; color: #424242; font-weight: 600; line-height: 20px; text-overflow: ellipsis; overflow: hidden; word-wrap:break-word; display: -webkit-box; -webkit-line-clamp:2; height: 40px; -webkit-box-orient:vertical;">${dto.subject } </div>
-<c:if test="${dto.range=='0' }"><div style="margin-top: 10px;">[전체공개][${dto.category }]</div></c:if>
-<c:if test="${dto.range=='1' }"><div style="margin-top: 10px;">[멤버공개][${dto.category }]</div></c:if>
+<c:if test="${dto.range=='0' }"><div style="margin-top: 10px;">[전체공개]
+	<c:forEach var="category" items="${dto.listCategory}">[${category.subject }]</c:forEach>
+							</div></c:if>
+<c:if test="${dto.range=='1' }"><div style="margin-top: 10px;">[멤버공개]<c:forEach var="category" items="${dto.listCategory}">[${category.subject }]</c:forEach></div></c:if>
 <div class='price' style="bottom: 10px; right: 10px; color: #3e92d6; font-size: 18px; line-height: 19px; position: absolute;">
 			<span style="color: #3e92d6; font-size: 12px; ">
 							<c:if test="${dto.star =='5'}">

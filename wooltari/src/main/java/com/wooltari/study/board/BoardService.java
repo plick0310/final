@@ -11,6 +11,7 @@ public interface BoardService {
 	public void deleteBoard(Map<String, Object>map)throws Exception;
 	public void insertPhoto(Map<String, Object>map)throws Exception;
 	public List<String> readPhoto(Map<String, Object> map);
+	public Board readBoard(Map<String, Object> map);
 	
 	public int insertLikeBoard(Map<String, Object>map);
 	public int countLikeBoard(Map<String, Object>map);

@@ -30,7 +30,7 @@
 	<select id="listBoard" parameterType="map" resultType="com.wooltari.promote.Promote">
 		select * from(
 			select rownum rnum, tb.* from(
-				select distinct p.num,p.subject,p.content,hitcount,p.imagefilename,userName,c.choicecategory,s.subject name,target,recruit,gender,
+					select distinct p.num,p.subject,p.content,hitcount,p.imagefilename,userName,recruit,gender,
 					p.created,p.s_num,p.userId,(select nvl(count(*),0) from promotereply where num=p.num)replyCount,study.studyName
 					from promotelist p 
 			       	  join member m on p.userId=m.userId

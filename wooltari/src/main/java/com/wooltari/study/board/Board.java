@@ -8,6 +8,7 @@ public class Board {
 	private int num , hitCount;
 	private String userId, content , created , userName;
 	private long s_num;
+	private long gap;
 	
 	private List<MultipartFile> upload2;
 	private String imageFileName;
@@ -25,6 +26,14 @@ public class Board {
 	
 	
 	
+	public long getGap() {
+		return gap;
+	}
+
+	public void setGap(long gap) {
+		this.gap = gap;
+	}
+
 	public List<MultipartFile> getUpload2() {
 		return upload2;
 	}

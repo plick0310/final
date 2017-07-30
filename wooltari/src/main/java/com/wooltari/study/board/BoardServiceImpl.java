@@ -208,6 +208,17 @@ public class BoardServiceImpl implements BoardService{
 		return result;
 	}
 
+	@Override
+	public Board readBoard(Map<String, Object> map) {
+		Board dto = null ;
+		try {
+			dto = dao.getReadData("studyBoard.readBoard", map);
+		} catch (Exception e) {
+		
+		}
+		return dto;
+	}
+
 
 
 }

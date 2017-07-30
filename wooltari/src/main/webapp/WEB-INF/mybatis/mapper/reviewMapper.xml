@@ -15,7 +15,7 @@
 	  select rownum rnum,td.* from 
 	    (select distinct list.*,nvl(star,0)star from
 		      (select studyname,r.num,r.subject,r.content,r.hitcount,r.imagefilename,userName,range
-		        ,to_char(r.created,'yyyy-mm-dd')created,r.s_num,r.userId,cate.subject category
+		        ,to_char(r.created,'yyyy-mm-dd')created,r.s_num,r.userId
 		          from reviewlist r 
 		          join member m on r.userId=m.userId
 		          join study s on r.s_num=s.s_num

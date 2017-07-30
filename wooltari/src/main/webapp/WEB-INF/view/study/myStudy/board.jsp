@@ -152,12 +152,12 @@
     filter:alpha(opacity=0);
     
 }
-.tooltip.in{
+#tooltip.in{
     /*opacity:0;
     filter:alpha(opacity=80);*/
     
 }
-.tooltip.top{
+#tooltip.top{
     margin-top:-2px;
 }
 .tooltip.right{
@@ -319,7 +319,6 @@ $(document).ready(function(){
 });
 
 
-
 var bbs_count =6;
 var dataCount =${dataCount};
 
@@ -408,7 +407,12 @@ function printCheckLike(data){
 	var url ="<%=cp%>/study/myStudy/${s_num}/checkLike";
 	
 }
-
+function readBoard(num){
+	var url="<%=cp%>/study/myStudy/${s_num}/article?num="+num;
+	$("#myModalBody").load(url);
+	$("#myModal").modal("show");
+	
+};
 function printBoard(data){
 	
 	var dataCount=data.dataCount;
@@ -433,15 +437,15 @@ function printBoard(data){
 				out+=" <li  class='timeline-inverted'>";
 			 }
 			else{
-				out+= 	"<li>";
+				out+= 	"<li  >";
 			} 
 			out+=    "<div class='timeline-badge primary'>" ;
-			out+=	"			<a><i  class='glyphicon glyphicon-record' rel='tooltip' title="+created+" id=''></i></a> " ;
+			out+=	"			<a><i  class='glyphicon glyphicon-record' rel='tooltip' title="+created+" id='tooltip'></i></a> " ;
 			out+=	"		</div><div class='timeline-panel'>" ;
 						
 						//이미지
 	 		if(imageFileName!=null){
-				out+=	" <div class='timeline-heading'>";
+				out+=	" <div class='timeline-heading'  onclick='readBoard("+num+");' >";
 				out+=   "<img style='width: 810px; height: 400px;' class='img-responsive' src='<%=cp%>/uploads/study/"+${s_num}+"_Board/"+imageFileName+"'/>";
 				out+=   "</div> " ;
 			}	
@@ -586,15 +590,7 @@ $(document).ready(function () {
 	
 	
 	
- 	$("[data-toggle=tooltip]").tooltip();
-
-	var my_posts = $("[rel=tooltip]");
-
-	var size = $(window).width();
-	for(i=0;i<my_posts.length;i++){
-		the_post = $(my_posts[i]);
-
-	}
+ 
 
 	
 	
@@ -758,3 +754,15 @@ function readURL2(input , idx) {
 
 <div id="image_loading" style="    width: 50px;
     margin: 0 auto;"></div>
+    
+    
+
+<!-- Modal --> 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+  <div class="modal-dialog">
+    <div class="modal-content" style="margin-left: -223px; width: 800px; height: 800px;">
+      <div id="myModalBody" class="modal-body" style="height: 845px; "></div>
+      
+    </div>
+  </div>
+</div>

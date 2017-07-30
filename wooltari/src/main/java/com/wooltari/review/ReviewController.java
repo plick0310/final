@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wooltari.common.MyUtil;
 import com.wooltari.member.SessionInfo;
 import com.wooltari.promote.Promote;
+import com.wooltari.study.StudyCategory;
+import com.wooltari.study.StudyService;
 
 @Controller("study.reviewController")
 public class ReviewController {
@@ -29,7 +31,9 @@ public class ReviewController {
 	
 	@Autowired
 	private MyUtil myUtil;
-
+	
+	@Autowired
+	private StudyService studyService;
 	
 	@RequestMapping("/review/list")
 	public String reviewList(
@@ -68,6 +72,9 @@ public class ReviewController {
 			listNum=dataCount-(start+n-1);
 			dto.setListNum(listNum);
 			n++;
+			List<StudyCategory> categoryList = studyService.readMyCategory(dto.getS_num());
+			dto.setListCategory(categoryList);
+			
 		}
 		
 		String listUrl=cp+"/review/list";
@@ -220,7 +227,7 @@ public class ReviewController {
 	public String cal(){
 		return ".studyboard.review.cal";
 	}
-	
+	  
 	
 	@RequestMapping(value="/keyword/review/article")
 	public String article(

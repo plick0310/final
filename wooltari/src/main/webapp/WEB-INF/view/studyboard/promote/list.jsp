@@ -188,14 +188,22 @@ function search(){
 			             </c:if>
 			             
 						<div class="info" style="">
-							<strong>카테고리| </strong><span>${dto.name }</span>
+							<strong>카테고리| </strong>
+							<c:forEach var="category" items="${dto.listCategory}">
+							<span>${category.subject } </span>
+							</c:forEach>
 							<span class="__dotted"></span>	
-							<strong>작성자| </strong><span>${dto.userName }</span>
-							<span class="__dotted"></span>
+							<strong>지역| </strong>
+							<c:forEach var="local" items="${dto.listLocal}">
+							<span>${local.city } </span>
+							</c:forEach>
+							<span class="__dotted"></span>	
 							<strong>성별| </strong><span>${dto.gender }</span>
 							<span class="__dotted"></span>
-							<strong>대상| </strong><span>${dto.target }</span>
-							<span class="__dotted"></span>	
+							 <%-- <strong>대상| </strong><span>${dto.target }</span> --%>
+							 <span class="__dotted"></span>	
+							 <strong>작성자| </strong><span>${dto.userName }</span>
+							<span class="__dotted"></span>
 							<strong>${dto.ago }</span>		
 						</div>
 						
@@ -204,6 +212,7 @@ function search(){
 						<div style="border: 1px solid #e2e2e2; width: 57px; height: 55px; float: left; text-align: center; padding: 3px;">${dto.hitCount }<br>view</div>
 			             <div style="border: 1px solid #e2e2e2; width: 57px; height: 55px; float: left; margin-left: 10px; text-align: center; padding: 3px;">${dto.replyCount }<br>reply</div>
 			             <div style="border: 1px solid #e2e2e2; width: 57px; height: 55px; float: left; margin-left: 10px; text-align: center; padding: 3px;">${dto.recruit }<br>member</div>
+			             <div style="cursor:pointer;  border: 1px solid #e2e2e2; width: 57px; height: 55px; float: left; margin-left: 10px; text-align: center; padding: 3px;" onclick="location.href='<%=cp%>/study/myStudy/home/${dto.s_num}';"><span class="glyphicon glyphicon-search" aria-hidden="true" style="color: #1abc9c;"></span><br>click!</div>
 					</div>
 					
 		

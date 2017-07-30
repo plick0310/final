@@ -1,6 +1,11 @@
 package com.wooltari.promote;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
+
+import com.wooltari.study.StudyCategory;
+import com.wooltari.study.StudyLocal;
 
 public class Promote {
 	private int num,listNum,s_num,hitCount;
@@ -8,12 +13,12 @@ public class Promote {
 	private String imageFileName;
 	private String userId,userName;
 	private int replyCount;
-	
-	private int choiceCategory;
-	private String name;
-	private int choiceCity;
-	private String cityName;
-	private String target;
+//	
+//	private int choiceCategory;
+//	private String name;
+//	private int choiceCity;
+//	private String cityName;
+//	private String target;
 	
 	private String studyName,gender;
 	private int recruit;
@@ -22,7 +27,14 @@ public class Promote {
 	
 	private String ago;
 	
+	private List<StudyCategory> listCategory; // 카테고리 객체를 저장하는 리스트
+	private List<String> choiceCategory; // JSP에서 카테고리를 리스트로 받음
+	private String category;
 	
+	private List<StudyLocal> listLocal; // 지역 객체를 저장하는 리스트
+	private List<String> choiceCity; // JSP에서 지역을 리스트로 받음
+	private String city;
+
 	
 	
 	public String getAgo() {
@@ -37,36 +49,7 @@ public class Promote {
 	public void setGap(long gap) {
 		this.gap = gap;
 	}
-	public String getTarget() {
-		return target;
-	}
-	public void setTarget(String target) {
-		this.target = target;
-	}
-	public int getChoiceCategory() {
-		return choiceCategory;
-	}
-	public void setChoiceCategory(int choiceCategory) {
-		this.choiceCategory = choiceCategory;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getChoiceCity() {
-		return choiceCity;
-	}
-	public void setChoiceCity(int choiceCity) {
-		this.choiceCity = choiceCity;
-	}
-	public String getCityName() {
-		return cityName;
-	}
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
+	
 	public String getStudyName() {
 		return studyName;
 	}
@@ -158,6 +141,42 @@ public class Promote {
 	}
 	public void setReplyCount(int replyCount) {
 		this.replyCount = replyCount;
+	}
+	public List<StudyCategory> getListCategory() {
+		return listCategory;
+	}
+	public void setListCategory(List<StudyCategory> listCategory) {
+		this.listCategory = listCategory;
+	}
+	public List<String> getChoiceCategory() {
+		return choiceCategory;
+	}
+	public void setChoiceCategory(List<String> choiceCategory) {
+		this.choiceCategory = choiceCategory;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public List<StudyLocal> getListLocal() {
+		return listLocal;
+	}
+	public void setListLocal(List<StudyLocal> listLocal) {
+		this.listLocal = listLocal;
+	}
+	public List<String> getChoiceCity() {
+		return choiceCity;
+	}
+	public void setChoiceCity(List<String> choiceCity) {
+		this.choiceCity = choiceCity;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
 	}
 	
 	

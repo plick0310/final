@@ -38,6 +38,11 @@
 			JOIN member m ON b.userId=m.userId
 	</select>
 	
+	<!-- 글 보기 -->
+	<select id="readBoard" parameterType="map" resultType="com.wooltari.study.board.Board">
+		SELECT num, s_num ,content, hitcount, userName,created, b.userId
+				FROM ${tableName}_board b JOIN member m ON b.userId=m.userId WHERE num=#{num}
+	</select>
 	
 	<!-- 사진다중 첨부 *********************** -->
 	<insert id="insertPhoto" parameterType="map">

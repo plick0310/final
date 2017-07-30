@@ -208,7 +208,7 @@ public class StudyController {
 	        	data.setListLocal(localList);
 	        }
 		
-	        
+
 	   	 Iterator<StudyInfo> it2 = list2.iterator();
 	        while(it2.hasNext()){
 	        	StudyInfo data = it2.next();
