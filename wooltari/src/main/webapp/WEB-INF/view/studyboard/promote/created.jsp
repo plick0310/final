@@ -50,12 +50,7 @@ function insertBoard(){
 	var mode="${mode}";
 
 	if(mode=="created"){
-		if(f.file1.value==""){
-			if(! confirm("기본사진으로 대체합니다.")){
-				return false;
-			}
-			
-		}else if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.file1.value)) {	
+		if(f.file1.value != /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.file1.value) || f.file1.value!="") {	
 			alert('이미지 파일만 가능합니다.');
 			f.upload.focus();
 			return false;

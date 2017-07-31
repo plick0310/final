@@ -241,14 +241,12 @@ line-height: normal;
 			<div style="background: #eee; width: 100%; padding: 10px;line-height: 25px; margin-top: 70px; margin-bottom: -60px;" >
 				<div class="row" >
 					<div class="col-md-12" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-pencil"></i>카테고리 :${dto.name }</span></div>
-				 	<div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-flag"></i>지역 :</span></div>
+				 	<!-- <div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-flag"></i>지역 :</span></div> -->
 				  	<div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-heart"></i>성별 :${dto.gender }</span></div>
+				  	<div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-user"></i> 정원 :${dto.recruit }명</span> </div>
 				</div>
 					
-				<div class="row">
-				 <%-- 	<div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-filter"></i>대상 :${dto.target }</span></div> --%>
-				 	<div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-user"></i> 정원 :${dto.recruit }명</span> </div>
-				</div>
+				
 			</div>
 					
 					<ul class="_read_likesArea" style="margin-top:20px; margin-bottom:0;padding-bottom: 10px;">
