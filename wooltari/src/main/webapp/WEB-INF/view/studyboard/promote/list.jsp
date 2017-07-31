@@ -201,7 +201,7 @@ function search(){
 							<strong>성별| </strong><span>${dto.gender }</span>
 							<span class="__dotted"></span>
 							 <%-- <strong>대상| </strong><span>${dto.target }</span> --%>
-							 <span class="__dotted"></span>	
+							 
 							 <strong>작성자| </strong><span>${dto.userName }</span>
 							<span class="__dotted"></span>
 							<strong>${dto.ago }</span>		
