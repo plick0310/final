@@ -29,6 +29,13 @@
     padding: 0;
     vertical-align: top;
 }
+.body-box .sm-side .user-head {
+    background: none repeat scroll 0 0 #373635;
+
+    color: #fff;
+    min-height: 80px;
+    padding: 10px;
+}
 .body-box .sm-side {
     background: none repeat scroll 0 0 #e5e8ef;
     border-radius: 4px 0 0 4px;
@@ -39,13 +46,7 @@
     border-radius: 0 4px 4px 0;
     width: 75%;
 }
-.body-box .sm-side .user-head {
-    background: none repeat scroll 0 0 #029e81;
-    border-radius: 4px 0 0;
-    color: #fff;
-    min-height: 80px;
-    padding: 10px;
-}
+
 .user-head .inbox-avatar {
     float: left;
     width: 65px;
@@ -82,14 +83,15 @@ a.mail-dropdown {
     padding: 20px;
 }
 .btn-compose {
-    background: none repeat scroll 0 0 #ff6c60;
-    color: #fff;
+    background: none repeat scroll 0 0 #ffffff;
+    color: #373635;
     padding: 12px 0;
     text-align: center;
     width: 100%;
+    border-radius: 0;
 }
 .btn-compose:hover {
-    background: none repeat scroll 0 0 #f5675c;
+    background: none repeat scroll 0 0 #d6d6d6;
     color: #fff;
 }
 ul.inbox-nav {
@@ -154,8 +156,7 @@ ul.labels-info li a i {
     padding: 0 22px;
 }
 .inbox-head {
-    background: none repeat scroll 0 0 #1abc9c;
-    border-radius: 0 4px 0 0;
+
     color: #fff;
     min-height: 80px;
     padding: 20px;
@@ -167,7 +168,7 @@ ul.labels-info li a i {
     padding-top: 6px;
 }
 .inbox-head .sr-input {
-    border: medium none;
+    border: 1px solid #cccccc;
     border-radius: 4px 0 0 4px;
     box-shadow: none;
     color: #8a8a8a;
@@ -176,7 +177,7 @@ ul.labels-info li a i {
     padding: 0 10px;
 }
 .inbox-head .sr-btn {
-    background: none repeat scroll 0 0 #00a6b2;
+    background: none repeat scroll 0 0 #1abc9c;
     border: medium none;
     border-radius: 0 4px 4px 0;
     color: #fff;

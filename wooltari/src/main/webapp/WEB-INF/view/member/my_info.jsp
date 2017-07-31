@@ -6,8 +6,13 @@
 	String cp=request.getContextPath();
 %>
 <style>
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+padding: 6px;
+}
 hr {
-	width: 800px;
+	    width: 800px;
+    height: 1px;
+    background: #eee;;
 }
 .form-horizontal {
 	padding: 10px;
@@ -43,8 +48,8 @@ hr {
     width: 75%;
 }
 .body-box .sm-side .user-head {
-    background: none repeat scroll 0 0 #029e81;
-    border-radius: 4px 0 0;
+    background: none repeat scroll 0 0 #373635;
+ 
     color: #fff;
     min-height: 80px;
     padding: 10px;

@@ -140,7 +140,7 @@ border: 1px solid #EAEAEA;
 	
 		<tbody>
 			<tr>
-				<th style="width: 100px; ">제목</th>
+				<th style="    width: 125px;">제목</th>
 				<td><input type="text" name="subject" value="${dto.subject }"
 					class="subject" maxlength="100" style="width: 450px;" />
 				
@@ -175,24 +175,29 @@ border: 1px solid #EAEAEA;
 			<tr>
 				<th><small>가격</small></th>
 				<td><input type="text" name="price" value="${dto.price }"
-					style="    width: 507px;" />
-					
+					style="    width: 100px;" />원
 					
 					</td>
 			</tr>
 			
 			<tr>
-				<th><small>포인트로 판매</small> <input type="checkbox" name="pointchk" value="1"></th>
-	 <td> <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="포인트판매란?현금과동시에 포인트로도 판매할수있게하여 판매시 포인드를 획득하여 홈페이지에 다양한 서비스를 이용할 수 있습니다.">Tooltip on right</button>
-</td>
+				<th><small>포인트로 판매<button style="     padding: 0px;
+    margin-left: 0px;
+    margin-bottom: 3px;
+    /* border-radius: 50%; */
+    width: 16px;
+    height: 20px;
+    background: none;
+    border: none;" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="포인트판매란?현금과동시에 포인트로도 판매할수있게하여 판매시 포인드를 획득하여 홈페이지에 다양한 서비스를 이용할 수 있습니다.">?</button></small> </th>
+	 <td> <input type="checkbox" name="pointchk" value="1"></td>
 			</tr> 
 			
 			<tr>
 				<th><small>배송비</small></th>
 				<td><input type="text" name="del" value="${dto.del==1?'무료배송':dto.del }"
-					style="    width: 507px;" />
+					style="     width: 100px;" />원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
-					무료배송<input name="delchk" value="1" id="delchk" type="checkbox">
+					<strong>무료배송</strong>&nbsp;&nbsp;<input style="height: 14px;" name="delchk" value="1" id="delchk" type="checkbox">
 					</td>
 			</tr>
 		

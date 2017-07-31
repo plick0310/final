@@ -37,32 +37,51 @@ function myPageLoad() {
 	});
 }
 </script>
+<style>
+.btn-primary{
+background-image: none;
+background-color: #d6d6d6;
+color: #1abc9c;
+}
+.btn-default{
+background-image:none;
+background-color: #eeeeee;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary{
+color: #1abc9c;
+background: #d6d6d6;
+}
+</style>
 <div class="container">
 	
     <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
         <div class="btn-group" role="group">
-            <button type="button" id="my_msg" class="btn btn-default" data-toggle="tab">
+            <button type="button" id="my_msg" class="btn btn-default" data-toggle="tab" style="
+    border: none;">
             	<i class="fa fa-envelope-o" aria-hidden="true"></i>
-                <div class="hidden-xs">쪽지함</div>
+                <div class="hidden-xs"><strong>쪽지함</strong></div>
             </button>
         </div>
         
         <div class="btn-group" role="group">
-            <button type="button" id="my_info" class="btn btn-default" data-toggle="tab">
+            <button type="button" id="my_info" class="btn btn-default" data-toggle="tab" style="
+    border: none;">
             	<i class="fa fa-user-o" aria-hidden="true"></i>
-                <div class="hidden-xs">나의 정보</div>
-            </button>
+                <div class="hidden-xs"><strong>나의 정보</strong></div>
+            </button> 
         </div>
         <div class="btn-group" role="group">
-            <button type="button" id="my_calender" class="btn btn-default" data-toggle="tab">
+            <button type="button" id="my_calender" class="btn btn-default" data-toggle="tab" style="    
+    border: none;">
             	<i class="fa fa-calendar" aria-hidden="true"></i>
-                <div class="hidden-xs">나의 스케줄</div>
+                <div class="hidden-xs"><strong>나의 스케줄</strong></div>
             </button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" id="my_point" class="btn btn-default" data-toggle="tab">
+            <button type="button" id="my_point" class="btn btn-default" data-toggle="tab" style="  
+    border: none;">
             	<i class="fa fa-krw" aria-hidden="true"></i>
-                <div class="hidden-xs">나의 포인트</div>
+                <div class="hidden-xs"><strong>나의 포인트</strong></div>
             </button>
         </div>
     </div>

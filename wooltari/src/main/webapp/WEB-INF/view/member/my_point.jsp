@@ -5,6 +5,14 @@
 <%
 	String cp=request.getContextPath();
 %>
+<style>
+.body-box .sm-side .user-head {
+    background: none repeat scroll 0 0 #373635;
+    color: #fff;
+    min-height: 80px;
+    padding: 10px;
+} 
+</style>
 <script type="text/javascript">
 var mode = "log";
 var page = 1;

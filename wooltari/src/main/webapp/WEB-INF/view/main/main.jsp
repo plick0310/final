@@ -334,7 +334,7 @@ width:  100%;
    </div>
    
    <!-- Achievements Section -->
-   <div id="achievements" class="section dark-bg">
+   <div id="achievements" class="section dark-bg" style="background: #eee;">
       <div class="container">
          <div class="row">
             <div class="col-md-3 col-sm-3">
@@ -366,7 +366,8 @@ width:  100%;
    </div>
    
   
-   <div id="social-section">
+   <div id="social-section" style="    padding: 15px 0; 
+    height: 60px;">
       <div class="container">
          <div class="social">
             <ul>
@@ -384,8 +385,7 @@ width:  100%;
       <div class="container">
          <div class="fnav">
             <p>
-               Copyright &copy; Helios. Designed by <a
-                  href="http://www.templatewire.com" rel="nofollow">TemplateWire</a>
+               Copyright &copy; Wooltari 
             </p>
          </div>
       </div>

@@ -28,10 +28,10 @@ $(function addMarker(){
 	        position: new naver.maps.LatLng('${local.pointy}', '${local.pointx}'),
 	        title: '${dto.studyName}',
 	        icon: {
-	            url: '<%=cp%>/resource/img/marker4.png',
-	            size: new naver.maps.Size(30, 30),
+	            url: '<%=cp%>/resource/images/picpic.png',
+	            size: new naver.maps.Size(30, 45),
 	            origin: new naver.maps.Point(0, 0),
-	            anchor: new naver.maps.Point(25, 25)
+	            anchor: new naver.maps.Point(11, 30)
 	        },
 	        zIndex: 100
 		    });
@@ -90,12 +90,12 @@ $(function addMarker(){
 		    	content: contentString,
 		        maxWidth: 250,
 		        backgroundColor: "#fff",
-		        borderColor: "#1abc9c",
-		        borderWidth: 3,
+		        borderWidth: 0,
 		        anchorSize: new naver.maps.Size(30, 20),
 		        anchorSkew: false,
 		        anchorColor: "#fff",
-		        pixelOffset: new naver.maps.Point(20, 0)
+		        anchorBorderWidth: 0,
+		        pixelOffset: new naver.maps.Point(10, 10)
 		    });
 		
 		    markers.push(marker);

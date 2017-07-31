@@ -29,7 +29,7 @@ textarea {
                 <tbody>
                     <tr>
                         <td>
-							이메일:
+							<strong>이메일:</strong>
                         </td>
                         <td>
                             ${dto.userId}
@@ -37,7 +37,7 @@ textarea {
                     </tr>
                     <tr>
                         <td>
-							닉네임:
+							<strong>닉네임:</strong>
                         </td>
                         <td>
                             ${dto.userName}
@@ -45,7 +45,7 @@ textarea {
                     </tr>
                     <tr>
                         <td>
-							성별:
+							<strong>성별:</strong>
                         </td>
                         <c:if test="${dto.gender==0}">
                             <td>
@@ -69,7 +69,7 @@ textarea {
                     </tr>
                     <tr>
                         <td>
-							포인트:
+							<strong>포인트:</strong>
                         </td>
                         <td>
                             ${dto.point}
@@ -77,7 +77,7 @@ textarea {
                     </tr>
                     <tr>
                         <td>
-							생일:
+							<strong>생일:</strong>
                         </td>
                         <td>
                             ${dto.birth}
@@ -85,7 +85,7 @@ textarea {
                     </tr>
                     <tr>
                         <td>
-							연락처:
+							<strong>연락처:</strong>
                         </td>
                         <td>
                             ${dto.tel}
@@ -93,7 +93,7 @@ textarea {
                     </tr>
                     <tr>
                         <td>
-							주소:
+							<strong>주소:</strong>
                         </td>
                         <td>
                         	<c:if test="${not empty dto.zipcode}">
@@ -103,7 +103,7 @@ textarea {
                     </tr>
                     <tr>
                         <td>
-							자기소개:
+							<strong>자기소개:</strong>
                         </td>
                         <td>
                             <textarea rows="3" cols="65" disabled="disabled" style="resize: none;">${dto.introduce}</textarea>
@@ -112,7 +112,7 @@ textarea {
                     <tr>
                         <tr>
                             <td>
-								회원가입일:
+								<strong>회원가입일:</strong>
                             </td>
                             <td>
                                 ${dto.created_date}
@@ -120,7 +120,7 @@ textarea {
                         </tr>
                         <tr>
                             <td>
-								정보수정일:
+								<strong>정보수정일:</strong>
                             </td>
                             <td>
                                 ${dto.modify_date}
@@ -128,7 +128,7 @@ textarea {
                         </tr>
                         <tr>
                             <td>
-								최근접속일:
+								<strong>최근접속일:</strong>
                             </td>
                             <td>
                                 ${dto.last_login}
@@ -136,7 +136,7 @@ textarea {
                         </tr>
                         <tr>
                             <td>
-								회원상태:
+								<strong>회원상태:</strong>
                             </td>
                             <c:if test="${dto.enabled==0}">
                                 <td>

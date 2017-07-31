@@ -164,11 +164,11 @@ padding: 40px;
 						style="width: 50px; height: 50px; margin: -1px;">
 				</div>
 
-				<div class="caption">
-					<h3 style="font-size: 18px;">${dto.subject}
-						<small style="margin-left: 80px;">추천</small>
-						<span style="font-size: 35px; color: #1abc9c; font-weight: lighter;">${dto.likeCount}</span>
-					</h3>
+				<div class="caption"> 
+					<div style="font-size: 18px; height: 25px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"><strong>${dto.subject}</strong></div>
+						<div style="    text-align: right;"><small style="margin-left: 80px;">추천</small>
+						<span style="font-size: 35px; color: #1abc9c; font-weight: lighter;"><strong>${dto.likeCount}</strong></span></div>
+					
 					<p>강사명  : ${dto.userId}</p>
 					<p style="text-align: right;">
 						<a href="#" style="color: #1abc9c;">+MORE</a>
@@ -194,12 +194,14 @@ padding: 40px;
 <!-- 게시판  --> 
 <c:forEach var="dto" items="${list}">
  <div class="panel panel">
-    <div class="panel-heading" role="tab" id="heading${dto.listNum}">
+    <div class="panel-heading" role="tab" id="heading${dto.listNum}" style="text-align: left;">
       <h4 class="panel-title">
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse${dto.listNum}" aria-expanded="false" aria-controls="collapse${dto.listNum}">
-        <span><small>${dto.listNum}</small></span> &nbsp;&nbsp;&nbsp;<span>${dto.subject}</span> <small>작성자 : ${dto.userId} </small>&nbsp;&nbsp;&nbsp;<small>작성일 : ${dto.created}</small>
-        <small>조회수 : ${dto.hitCount} </small><small class="likes"> 추천 : ${dto.likeCount} </small>
-        <input type="button" class="clickbtn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="float: right;"
+        <span><small>${dto.listNum}</small></span> &nbsp;&nbsp;&nbsp;<span style="    font-size: 15px;
+    font-weight: bold;">${dto.subject}</span> <span><small>작성자 : ${dto.userId} </small>&nbsp;&nbsp;&nbsp;<small>작성일 : ${dto.created}</small>
+        <small>조회수 : ${dto.hitCount} </small><small class="likes"> 추천 : ${dto.likeCount} </small></span>
+        <input type="button" class="clickbtn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" style="    float: right;
+    margin: -4px 0;"
 		 onclick="javascript:location.href='${articleUrl}&num=${dto.num}';" value="동영상 보기">
         </a>
       </h4>
@@ -209,25 +211,17 @@ padding: 40px;
         <div style="width: 150px;height: 150px;background-color: #eee;padding: 30px;float: left; background-size:cover; background-image: url('http://img.youtube.com/vi/${dto.urlContent}/hqdefault.jpg');">
         <!-- <div style="width: 150px;height: 150px;background-color: #eee;padding: 30px;float: left; background-size:cover; background-image: url('<%=cp%>/uploads/member/userImg/${dto.userImg}');"> -->
         </div>
-        <div style="float: left; margin-left: 15px; position: relative; width: 300px;">C O N T E N T : ${dto.content} </div>
         
-        	<div class="tbl_st1" style="position: relative; float: right; width: 300px;">
-			<table>
-				<colgroup>
-					<col width="100px">
-					<col width="100px">
-				</colgroup>
-				<tr>
-					<th>제목</th>
-					<th>작성일</th>
-				</tr>
+        	<div class="tbl_st1" style="position: relative; float: left; width: 700px;">
+			<table style=" text-align: left;     line-height: 26px;"> 
+				
+<tr><td style="    padding-left: 15px;">		        <div style="float:left; position: relative; "><strong>C O N T E N T</Strong> : ${dto.content} </div></td></tr>
 				 <c:forEach var="vo" items="${dto.innerList}"><!--${dto.innerList}에서 dto는 부모 forEach의 var="dto"의 dto   -->
 				<tr>
-					<td class="subject"><a href="${articleUrl}&num=${vo.num}">${vo.subject}</a></td>
-					<td class="created">${vo.created} </td>
-					<%-- <fmt:parseDate value="${vo.created}" var="dateFmt" pattern="yyyyMMddHHmmss"/>
-    				<fmt:formatDate value="${vo.created}"  pattern="yyyy-MM-dd"/>  --%>
+					<td style="    padding-left: 15px;"><strong>작성자의 다른강의</strong>:<small style="color:#d6d6d6"><a href="${articleUrl}&num=${vo.num}">${vo.subject}&nbsp;&nbsp;-${vo.created}</a></small></td>
+					 
 				</tr>
+		
 				</c:forEach>
 				
 			</table>

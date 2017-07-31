@@ -418,11 +418,11 @@ img.img-circle.team-img {
 }
 .achievement-box h4 {
 	font-size: 16px;
-	color: rgba(255,255,255,0.8);
+	color: #686868;
 	text-transform: uppercase;
 }
 .achievement-box span.count {
-	color: #fff;
+	color: #686868;
 	font-size: 50px;
 	font-weight: 500;
 	display: block;

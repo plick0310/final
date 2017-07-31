@@ -5,6 +5,17 @@
 <%
 	String cp=request.getContextPath();
 %>
+<style>
+h2{
+color: #393635;
+}
+.body-box .sm-side .user-head {
+    background: none repeat scroll 0 0 #373635;
+    color: #fff;
+    min-height: 80px;
+    padding: 10px;
+}
+</style>
 <script type="text/javascript">
 var s_num = ${studyList[0].s_num};
 
@@ -34,8 +45,8 @@ function reload(){
 }
 
 
-
 </script>
+
 <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
 <div class="body-box">
 	<aside class="sm-side">

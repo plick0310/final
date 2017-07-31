@@ -109,7 +109,7 @@ function deleteList(){
 				      </h4>
 				    </div>
 				    <div id="collapse${dto.listNum}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading${dto.listNum}">
-				      <div class="panel-body">				        
+				      <div class="panel-body" style="font-size: 15px;">				        
 				        <div style="float: left; margin-left: 15px;">${dto.content} </div>
 				      </div>
 				    </div>
