@@ -150,6 +150,7 @@ function deleteBoard(){
 	var query="num="+num+"&page="+page;
 	
 	var id="${sessionScope.member.userId}";
+
 	if(!id){
 		alert("로그인은 필수입니다.");
 		return;
@@ -157,7 +158,7 @@ function deleteBoard(){
 	
 	var readId=f.userId.value;
 	
-	if(readId!=id){
+	if(readId!=id && id!='admin'){
 		alert("작성자만 삭제할 수 있습니다.");
 		return;
 	}
