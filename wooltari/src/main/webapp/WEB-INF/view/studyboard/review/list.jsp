@@ -74,7 +74,10 @@ function countStar(num){
 		var count=data.countStar;
 		var many=data.manyStar;
 		
-		$("#countStar").html("계산중...");
+		
+		$("#countStar").html("계산중");
+		
+		
 		$("#countMany").html(many);
 	},"json");
 }
@@ -105,17 +108,7 @@ function insertStar() {
 		return;
 	}
 	
-	var query = { "info":"리뷰평점추가", "value":10}
-	$.ajax({
-	   url:"<%=cp%>/point/update",
-	   data:query,
-	   type:"post",
-	   dataType:"json",
-	   success : function(data) {
-	     
-	   }
-	});
-		
+			
 	var url="<%=cp%>/review/insertStar"
 		
 	$.ajax({
@@ -136,6 +129,17 @@ function insertStar() {
 		,error:function(e){
 			console.log(e.responseText);
 		}
+	});
+	
+	var query = { "info":"리뷰평점추가", "value":10}
+	$.ajax({
+	   url:"<%=cp%>/point/update",
+	   data:query,
+	   type:"post",
+	   dataType:"json",
+	   success : function(data) {
+	     
+	   }
 	});
 	
 	
