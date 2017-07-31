@@ -246,7 +246,7 @@ line-height: normal;
 				</div>
 					
 				<div class="row">
-				 	<div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-filter"></i>대상 :${dto.target }</span></div>
+				 <%-- 	<div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-filter"></i>대상 :${dto.target }</span></div> --%>
 				 	<div class="col-md-4" style="width: 30%;"><span class="infobo"><i class="glyphicon glyphicon-user"></i> 정원 :${dto.recruit }명</span> </div>
 				</div>
 			</div>

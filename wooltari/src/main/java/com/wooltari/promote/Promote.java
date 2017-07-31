@@ -13,6 +13,9 @@ public class Promote {
 	private String imageFileName;
 	private String userId,userName;
 	private int replyCount;
+	private String name;
+	
+	
 //	
 //	private int choiceCategory;
 //	private String name;
@@ -20,7 +23,14 @@ public class Promote {
 //	private String cityName;
 //	private String target;
 	
+
 	private String studyName,gender;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	private int recruit;
 	
 	private long gap;
