@@ -69,7 +69,7 @@ $(function(){
 	
 </div>
 
-	<thead>
+<%-- 	<thead>
 		<tr>
 			<th class="informations">
 				제목입니다...
@@ -93,6 +93,6 @@ $(function(){
 			
 			</td>
 		</tr>
-	</tbody>
+	</tbody> --%>
 </table>	
 

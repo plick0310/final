@@ -8,7 +8,7 @@ public class StudyWhere {
 	private String subject,content,created;
 	private int hitCount;
 	private MultipartFile upload; //<input type='file' name='upload'>...
-	
+	  
 	private int likesCount;
 	private String region;
 	private String imageFileName;

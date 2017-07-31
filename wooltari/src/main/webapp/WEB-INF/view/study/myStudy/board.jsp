@@ -10,7 +10,7 @@
 <style>
 .timeline {
   list-style: none;
-  padding: 65px 0 20px;
+  padding: 20px 0 20px;
   position: relative;
 }
 .timeline:before {
@@ -664,8 +664,8 @@ function readURL2(input , idx) {
 
 <div class="container" style="padding: 0">
  <!-- ----------------------------------입력창 ---------------------------------------->
-<div class="row" style="margin-left: 0;">
-	<div class="col-md-10" style="    width: 835px; padding: 0;    padding-left: 0;">
+<div class="row" style="margin-left: 10px;">
+	<div class="col-md-10" style="    width: 810px; padding: 0;    padding-left: 10px;">
 		<div class="widget-area no-padding blank">
 			<div class="status-upload">
 					<form name="createForm" method="post" enctype="multipart/form-data"
@@ -710,8 +710,8 @@ function readURL2(input , idx) {
 
 									<div id="c_photo">
 										<label for="uploadBtn2" class="lable-li" style=" width: 100%; mardisplay: inline-block; overflow: hidden; height: 80px; font-size: 15px; font-weight: 700; color: #999;">
-											<img id="a_image" alt="" src="<%=cp%>/resource/img/camera.png" style="width: 35px; height: 35px;margin-top: 10px;"> <br>
-											<span style="font-size:14px; color: #929393;"><strong>사진 추가하기</strong></span>
+											<img id="a_image" alt="" src="<%=cp%>/resource/img/camera.png" style="width: 50px; height: 50px;"> <br>
+											<span style="color: #1abc9d;">사진 추가하기</span>
 										</label>
 									</div>
 									<input type="file" name="upload2" id="uploadBtn2" class="uploadBtn tts" style="opacity: 0; position: relative;height:30px; width: 0px; margin: -15px;"> 
@@ -760,7 +760,7 @@ function readURL2(input , idx) {
 <!-- Modal --> 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
   <div class="modal-dialog">
-    <div class="modal-content" style="margin-left: -223px; width: 800px; height: 800px;">
+    <div class="modal-content" style="margin-left: -223px; width: 800px; height: 500px;">
       <div id="myModalBody" class="modal-body" style="height: 845px; "></div>
       
     </div>
