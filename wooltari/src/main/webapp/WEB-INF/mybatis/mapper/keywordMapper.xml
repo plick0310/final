@@ -7,7 +7,7 @@
 	<select id="study" resultType="com.wooltari.keyword.StudyInfo">
 		select * from(
 	 		select rownum rnum,tb.* from(
-		  		select s.s_num, s.userId,s.studyName,s. study_Info, to_char(s.created,'YYYY-MM-DD')created, gender,recruit, range,imageFileName,cate.subject category,userName
+		  		select s.s_num, s.userId,s.studyName,s. study_Info, to_char(s.created,'YYYY-MM-DD')created, gender,recruit, range,imageFileName,cate.subject category,userName,userImg
 		   		from study s
 		          join studycategory sc on s.s_num=sc.s_num
 		          join s_category  cate on sc.choicecategory=cate.categorynum
